@@ -1,0 +1,117 @@
+﻿@model List<NibsMVC.Models.ListOfKitchenRawIndent>
+@{
+    ViewBag.Title = "KitchenRawList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-content">
+    <!-- BEGIN PAGE CONTENT-->
+    <div class="row">
+        <div class="col-md-12">
+            <p style="color:red">@TempData["Error"]</p>
+        </div>
+        <div class="page-bar">
+            <ul class="page-breadcrumb">
+                <li>
+                    <i class="fa fa-home"></i>
+                    <a href="@Url.Action("Index","Home")">Home</a>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+                <li>
+                    <a href="@Url.Action("AddIndent","Kitchen")">Add Menu Ingredient</a>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+                <li>
+                    Ingredient Reports
+                </li>
+            </ul>
+
+        </div>
+        <div class="col-md-12" style="padding-left:0px;padding-right:0px;">
+            <!-- BEGIN BORDERED TABLE PORTLET-->
+            <div class="portlet box yellow">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-coffee"></i>Menu Item Ingredient Report
+                    </div>
+
+                </div>
+                <div class="portlet-body">
+                    <table class="table table-bordered table-hover table-full-width" id="sample_2">
+                        <thead>
+                            <tr>
+                                <th>
+                                    S.NO
+                                </th>
+                                <th>
+                                   Category Name
+                                </th>
+                                <th>
+                                    Item Name
+                                </th>
+                                <th>View Raw Materials</th>
+                                @*<th>Action</th>*@
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+
+                                var counter = 1;
+                                foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @counter
+                                        </td>
+                                        <td>
+                                            @item.RawCategoryId
+                                        </td>
+                                        <td>
+                                            @item.ItemId
+                                        </td>
+                                        <td>
+                                            <a class="btn default" data-toggle="modal" href="#@("responsive"+counter)">View Items</a>
+                                            <div id="@("responsive"+counter)" class="modal fade" tabindex="-1" aria-hidden="true">
+                                                
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                            <h4 class="modal-title">Raw Material List Of @item.ItemId</h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="scroller" style="height:300px" data-always-visible="1" data-rail-visible1="1">
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        @foreach (var list in item.ListOfInnerMaterial)
+                                                                        {
+                                                                            <label class="col-md-4 bold">@list.RawMaterialId</label> <label class="col-md-3">@list.Quantity &nbsp; @list.Unit</label>
+                                                                            <div class="clearfix"></div>
+                                                                        }
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" data-dismiss="modal" class="btn default">Close</button>
+
+                                                        </div>
+                                                   
+                                            </div>
+                                        </td>
+                                        @*<td><a href="@Url.Action("DeleteIndent","Kitchen", new { @id = item.ItemId })"><span class="fa fa-trash-o"></span></a></td>*@
+
+                                    </tr>
+                                    counter = counter + 1;
+                                }
+
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- END BORDERED TABLE PORTLET-->
+
+        </div>
+    </div>
+    <!-- END PAGE CONTENT-->
+</div>

@@ -1,0 +1,220 @@
+﻿<li>
+    <a href="javascript:;">
+        <i class="fa fa-gift"></i>
+        <span class="title">
+            Category Master
+        </span>
+        <span class="arrow">
+        </span>
+    </a>
+    <ul class="sub-menu">
+        <li class="">
+            <a href="@Url.Action("AddRawCategory", "Kitchen")">
+                Add Ingredient Category
+            </a>
+        </li>
+
+        <li class="">
+            <a href="@Url.Action("ViewRawCategory", "Kitchen")">
+                Ingredient Category Report
+            </a>
+        </li>
+
+    </ul>
+</li>
+
+<li>
+    <a href="javascript:;">
+        <i class="fa fa-gift"></i>
+        <span class="title">
+            Department Master
+        </span>
+        <span class="arrow">
+        </span>
+    </a>
+    <ul class="sub-menu">
+
+        <li class="">
+            <a href="@Url.Action("Create", "Department")">
+                Add Department
+            </a>
+        </li>
+
+        <li class="">
+            <a href="@Url.Action("index", "Department")">
+                Department Report
+            </a>
+        </li>
+
+
+    </ul>
+</li>
+<li>
+    <a href="javascript:;">
+        <i class="fa fa-gift"></i>
+        <span class="title">
+            Kitchen Raw Master
+        </span>
+        <span class="arrow">
+        </span>
+    </a>
+    <ul class="sub-menu">
+
+       
+
+        <li class="">
+            <a href="@Url.Action("Create", "Kitchen")">
+                Add Ingredient
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("Index", "Kitchen")">
+                Ingredient Report
+            </a>
+        </li>
+      
+
+    </ul>
+</li>
+
+<li>
+    <a href="javascript:;">
+        <i class="fa fa-user"></i>
+        <span class="title">
+            Vendor Master
+        </span>
+        <span class="arrow open">
+        </span>
+        <span class="selected"></span>
+    </a>
+    <ul class="sub-menu">
+        <li class="">
+            <a href="@Url.Action("VenderRegistration", "Outlet")">
+                Vendor Registration
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("AddCategoryVendor", "Outlet")">
+                Add Vendor Category
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("VendorCategoryReport", "Outlet")">
+                Vendor Category Report
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("Vender", "Outlet")">
+                Vendor Details
+            </a>
+        </li>
+
+    </ul>
+</li>
+
+<li>
+    <a href="javascript:;">
+        <i class="fa fa-gift"></i>
+        <span class="title">
+            Purchase Order Master
+        </span>
+        <span class="arrow">
+        </span>
+    </a>
+    <ul class="sub-menu">
+        <li class="">
+            <a href="@Url.Action("Create", "PurchaseOrder")">
+                Add Purchase Order Details
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("PurchaseReport", "PurchaseOrder")">
+                Purchase Order Reports
+            </a>
+        </li>
+
+        
+    </ul>
+</li>
+
+<li>
+    <a href="javascript:;">
+        <i class="fa fa-gift"></i>
+        <span class="title">
+            GRN Master
+        </span>
+        <span class="arrow">
+        </span>
+    </a>
+    <ul class="sub-menu">
+        <li class="">
+            <a href="@Url.Action("Create", "Purchase")">
+                Add GRN Details
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("Report", "Purchase")">
+                GRN Reports
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("ReturnPurchaseReport", "Purchase")">
+                GRN Return
+            </a>
+        </li>
+
+        @*<li class="">
+            <a href="@Url.Action("ReturnPurchaseReport", "Purchase")">
+                Purchase Return Report
+            </a>
+        </li>*@
+    </ul>
+</li>
+<li>
+    <a href="javascript:;">
+        <i class="fa fa-gift"></i>
+        <span class="title">
+            Stock Transfer Master
+        </span>
+        <span class="arrow">
+        </span>
+    </a>
+    <ul class="sub-menu">
+        <li class="">
+            <a href="@Url.Action("Create", "StockTransfer")">
+                Stock Transfer
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("TransferStockReport", "StockTransfer")">
+                Stock Transfer Report
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("CurrentStockReport", "KitchenStock")">
+                Current Stock Report
+            </a>
+        </li>
+
+        <li class="">
+            <a href="@Url.Action("Index", "KitchenStock")">
+               Total Stock Reports
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("ExtraStock", "KitchenStock")">
+                Add Extra Stock 
+            </a>
+        </li>
+        @*<li class="">
+            <a href="@Url.Action("StockRecive", "StockTransfer")">
+                Stock Receive Report
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("ReturnStockReport", "StockTransfer")">
+                Stock Return Report
+            </a>
+        </li>*@
+    </ul>
+</li>

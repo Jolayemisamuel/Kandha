@@ -1,0 +1,396 @@
+﻿@model IEnumerable<NibsMVC.Models.BillingModel>
+
+@{
+    ViewBag.Title = "HomeDelivery";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .form-control {
+        font-size: 11px;
+    }
+
+    .page-content-wrapper .page-content {
+        padding: 8px 20px 10px 20px;
+    }
+</style>
+<div class="page-content">
+    <div class="row">
+        
+        @*<div class="col-md-3">
+            <div class="form-group">
+                <label class="control-label col-md-3">
+                    Name <span class="required">
+                        *
+                    </span>
+                </label>
+                <div class="col-md-4">
+                    <div class="input-icon right">
+                        <i class="fa"></i>
+                        <input type="text" name="name" value=" " id="txthdelivername" class="form-control" style="width:180px;" />
+
+                    </div>
+                </div>
+            </div>
+        </div>
+       <div class="col-md-6">
+           <div class="form-group">
+               <label class="control-label col-md-3">
+                   Address <span class="required">
+                       *
+                   </span>
+               </label>
+               <div class="col-md-4">
+                   <div class="input-icon right">
+                       <i class="fa"></i>
+                       <textarea id="txthomeaddress" style="width:300px;height:85px;"></textarea>
+
+                   </div>
+               </div>
+           </div>
+       </div>
+        <div class="col-md-3">
+            <label>Token No<input type="text" name="name" value="@ViewBag.tokenno" readonly id="hometoken" class="number form-control" /></label>
+        </div>
+        <div class="col-md-3"><a style="float:right" href="@Url.Action("Create", "Billing")"><input type="button" name="name" value="Back" class="btn red-stripe" /></a></div>*@
+
+        <div class="col-md-12">
+            <div class="portlet box blue">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-gift"></i>Home Delivery
+                    </div>
+
+                </div>
+                <div class="portlet-body form">
+                    <!-- BEGIN FORM-->
+                    @using (Html.BeginForm("HomeDelivery", "Billing", FormMethod.Post, new { @id = "form_sample_19", @class = "form-horizontal" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        <input type="hidden" name="name" value=" " id="hiditemvalhdeliver" />
+                        <input type="hidden" name="name" value=" " id="hnamehdeliver" />
+    <input type="hidden" name="homemasterdata" value=" " id="homemasterdata" />
+    <input type="hidden" name="homedetailsitems" value=" " id="homedetailsitems" />
+                         <input type="hidden" name="name" value="@ViewBag.Otype" id="operatortype" />
+                        
+                        <div class="form-body">
+                            <div class="alert alert-danger display-hide">
+                                <button class="close" data-close="alert"></button>
+                                You have some form errors. Please check below.
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="radio-list col-md-6 margin-bottom-10" id="gradiobuttons">
+                                        <label class="radio-inline padding-top-0">
+                                            <input type="radio" name="BillType" value="Graphically" class="radio-item" checked />Graphically
+                                        </label>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 cat-bdr min-height-250 margin-bottom-10">
+                                            @{
+
+                        if (ViewBag.catnames != null)
+                        {
+                            foreach (var item in ViewBag.catnames)
+                            {
+                                            <input type="button" name="CategoryId" value="@item.Name " id="@item.CategoryId" class="BillingCategory btn blue margin-bottom-5 " />
+
+                            }
+                        }
+                                            }
+
+
+                                        </div>
+                                        <div class="col-md-12 cat-bdr min-height-250">
+                                            <div class="clear-fix"></div>
+                                            <div class="radio-list col-md-6 margin-bottom-10" id="gradiobuttons">
+                                                <label class="radio-inline padding-top-0">
+                                                    <input type="radio" name="hradio" id="optionsRadios4" value="Full" class="radio-item" checked> Full
+                                                </label>
+                                                <label class="radio-inline padding-top-0">
+                                                    <input type="radio" name="hradio" id="optionsRadios5" value="Half" class="radio-item"> Half
+                                                </label>
+
+                                            </div>
+                                            <div class="col-md-6 margin-bottom-10">
+                                                <div class="row">
+                                                    <label class="col-md-6">Quantity</label>
+                                                    <div class="col-md-6">
+                                                        <input type="text" name="name" value="1" id="homedelqty" class="form-control" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12" id="tblbilling">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="col-md-7">
+                                        <a href="@Url.Action("Create", "Billing")"><input type="button" name="name" value="Back" class="btn red-stripe" /></a>
+                                    </div>
+                                    <div class="col-md-5 pull-right margin-bottom-10">
+                                        <label class="col-md-5">Token No</label>
+                                        <div class="col-md-4">
+                                            <input type="text" name="name" value="@ViewBag.tokenno" readonly id="hometoken" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div>
+                                                @*<div class="right_mid">
+                                                    <div class="col-md-12 right_mid2">
+                                                            <label class="col-md-3" style="padding-top: 6px;">Customer Name</label>
+                                                            <div class="col-md-6">
+                                                                <input type="text" name="name" class="form-control" value=" " id="txtcname" />
+                                                            </div>
+                                                        </div>
+                                                </div>*@
+                                                <div class="col-md-12 right_mid_bottom margin-bottom-5">
+                                                    <table class="table table-bordered" id="tblhomedilivry" hidden>
+                                                        <thead>
+                                                            <tr>
+                                                                <th></th>
+                                                                <th>Item</th>
+                                                                <th>Full Qty</th>
+                                                                <th>Half Qty</th>
+                                                                <th>Full Price</th>
+                                                                <th>Half Price</th>
+                                                                <th>Amount</th>
+                                                                <th>Vat(%)</th>
+                                                                <th></th>
+                                                                <th>Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                    </table>
+                                                </div>
+                                                <div class="col-md-12 margin-bottom-5">
+                                                    <label class="col-md-2">Name</label>
+                                                    <div class="col-md-4">
+                                                        <input type="text" id="txthdelivername" class="form-control" />
+                                                    </div>
+                                                    <label class="col-md-2">Address</label>
+                                                    <div class="col-md-4">
+                                                        <textarea class="form-control" id="txthomeaddress"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12" style="padding-left:0px;padding-top: 15px;">
+                                                    <div class="col-md-4 form-horizontal">
+                                                        <div class="form-group">
+                                                            <label class="col-md-7">Discount(%)</label>
+                                                            <div class="col-md-5">
+                                                                <input type="text" maxlength="3" name="name" value="" class="form-control" readonly id="htxtdiscount" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-md-7">Vat Amount</label>
+                                                            <div class="col-md-5">
+                                                                <input type="text" name="name" value="0" class="form-control" readonly id="htxtvatamt" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-md-7">Service Charge</label>
+                                                            <div class="col-md-5">
+                                                                <input type="text" name="name" value="0" class="form-control" readonly id="htxtservice" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 form-horizontal">
+                                                        <div class="form-group">
+                                                            <label class="col-md-7">Discount(Price)</label>
+                                                            <div class="col-md-5">
+                                                                <input type="text" name="name" value="0" class="form-control" readonly id="htxtdiscountprice" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-md-7">Amount</label>
+                                                            <div class="col-md-5">
+                                                                <input type="text" name="name" value="" class="form-control" readonly id="htxtsubtotal" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-md-7">Net Amount</label>
+                                                            <div class="col-md-5">
+                                                                <input type="text" name="name" value="" class="form-control" readonly id="htxtnettotal" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 form-horizontal">
+                                                        <input type="button" id="hbtndispatch" name="btndispatch" value="Dispatch Order" class="DispatchClick btn green" target="_blank" />
+                                                       
+                                                        <div class="clear margin-bottom-10"></div>
+                                                        <input type="button" style="width:127px;" name="name" value="Cancel Order" class="btn green canclegorder_Click" id="canclegorder" />
+                                                        <div class="clear margin-bottom-10"></div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @*<div class="form-body">
+                            <div class="alert alert-danger display-hide">
+                                <button class="close" data-close="alert"></button>
+                                You have some form errors. Please check below.
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <div id="homeleft">
+                                        <div id="hometop">
+
+                                            <table>
+
+                                                @{
+
+                        if (ViewBag.catnames != null)
+                        {
+                            foreach (var item in ViewBag.catnames)
+                            {
+                                <tr>
+                                    <td><a><input type="button" name="CategoryId" value="@item.Name " id="@item.CategoryId" class="BillingCategory btn blue margin-bottom-10 btn-category" /></a></td>
+                                </tr>
+                            }
+                        }
+                                                }
+                                            </table>
+                                        </div>
+                                        <div id="middle_bottom">
+
+                                            <div class="radio-list col-md-6 margin-bottom-10" id="gradiobuttons">
+                                                <label class="radio-inline padding-top-0">
+                                                    <input type="radio" name="hradio" id="optionsRadios4" value="Full" class="radio-item" checked> Full
+                                                </label>
+                                                <label class="radio-inline padding-top-0">
+                                                    <input type="radio" name="hradio" id="optionsRadios5" value="Half" class="radio-item"> Half
+                                                </label>
+
+                                            </div>
+                                            <div class="col-md-6 margin-bottom-10">
+                                                <div class="row">
+                                                    <label class="col-md-6">Quantity</label>
+                                                    <div class="col-md-6">
+                                                        <input type="text" name="name" value="1" id="homedelqty" class="number form-control" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <table id="tblbilling" class="table table-bordered"></table>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="right_take_bottom">
+                                        <table class="table table-bordered" id="tblhomedilivry" hidden>
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th>Item</th>
+                                                    <th>Full Qty</th>
+                                                    <th>Half Qty</th>
+                                                    <th>Full Price</th>
+                                                    <th>Half Price</th>
+                                                    <th>Amount</th>
+                                                    <th>Vat(%)</th>
+                                                    <th></th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                  
+                                    <div id="rightakebottoom">
+                                        <p hidden id="msgerror" style="color:red">You are not Authorised to give Discount more than 20 & Can't be empty must fill 0 !</p>
+                                       
+                                        <div class="right_bottom">
+                                            <div class="right_bottom_left">
+                                                '<div class="bottom_left">
+                                                    <div class="bottom_left_content">
+                                                        <label>Discount(%)</label>
+                                                    </div>
+                                                    <div class="bottom_left_content">
+                                                        <label>Vat Amount</label>
+                                                    </div>
+                                                    <div class="bottom_left_content">
+                                                        <label>Service Charge</label>
+                                                    </div>
+                                                </div>
+                                                <div class="bottom_rightp">
+                                                    <div class="bottom_right">
+                                                        <input style="width:90px; height:20px;" type="text" name="name" value="" id="htxtdiscount" readonly />
+                                                    </div>
+                                                    <div class="bottom_right">
+                                                        <input style="width:90px; height:20px;" type="text" name="name" value="0" readonly id="htxtvatamt" />
+                                                    </div>
+                                                    <div class="bottom_right">
+                                                        <input style="width:90px; height:20px;" type="text" name="name" value="0" readonly id="htxtservice" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="right_bottom_mid">
+                                                <div class="bottom_left">
+                                                    <div class="bottom_left_content">
+                                                        <label>Discount(Price)</label>
+                                                    </div>
+                                                    <div class="bottom_left_content">
+                                                        <label>Amount</label>
+                                                    </div>
+                                                    <div class="bottom_left_content">
+                                                        <label>Net Amount</label>
+                                                    </div>
+                                                </div>
+                                                <div class="bottom_rightp">
+                                                    <div class="bottom_right">
+                                                        <input type="text" name="name" value="0" id="htxtdiscountprice" width="50" class="txtbigstyle" readonly />
+                                                    </div>
+                                                    <div class="bottom_right">
+                                                        <input type="text" name="name" value=" " id="htxtsubtotal" width="50" class="txtbigstyle" readonly />
+                                                    </div>
+                                                    <div class="bottom_right">
+                                                        <input type="text" name="name" value=" " id="htxtnettotal" width="50" class="txtbigstyle" readonly />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="right_bottom_right">
+                                                <div class="bottom_rightp">
+                                                    <div class="bottom_right" style="margin-top:10px;">
+
+                                                        <input style="width: 130px; height: 35px;" type="button" id="hbtndispatch" name="btndispatch" value="Dispatch Order" class="DispatchClick" formtarget="_blank" />
+                                                    </div>
+                                                    <div class="bottom_right">
+                                                        <input style="width:130px; height:35px;" type="button" name="name" value="Cancel Order" class="btn green canclegorder_Click" id="canclegorder" />
+                                                    </div>
+                                                    @*<div class="bottom_right">
+                                                            <input style="width:130px; height:35px;" type="button" name="name" value="Print " class="btn green" id="gbtnback" disabled />
+                                                        </div>*@
+                                                @*</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>*@
+
+
+                        @*<div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-9">
+                                    <button type="submit" class="btn green">Submit</button>
+
+                                </div>
+                            </div>
+                        </div>*@
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

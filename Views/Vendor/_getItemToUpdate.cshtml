@@ -1,0 +1,48 @@
+﻿@model NibsMVC.Models.OutletVendorModel
+
+
+@if (!Model.IsRunningBill)
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Item Name</th>
+                <th>Actual Price</th>
+                <th>Base Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.getAllItems)
+            {
+                <tr>
+                    <td>@item.ItemName</td>
+                    <td>@item.ActualPrice</td>
+                    <td>
+                        <input type="hidden" value="@item.MenuOutletId" name="MenuOutletId" />
+                        <input type="text" value="@item.Baseprice" name="Price" class="form-control" style="width:113px;" />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    if (Model.getAllItems.Count > 0)
+    {
+        <div class="form-actions">
+            <div class="row">
+                <div class="col-md-offset-3 col-md-9">
+                    <button type="submit" class="btn green">Submit</button>
+                </div>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div class="row">
+        <div class="col-md-12">
+            <h4 style="color:red;" class="text-center">this vendor has running bill please dispatch bill first to update price </h4>
+        </div>
+    </div>
+   
+}
+

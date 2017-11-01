@@ -1,0 +1,135 @@
+﻿@model IEnumerable< NibsMVC.Models.TableModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using NibsMVC.EDMX;
+<div class="page-content">
+
+    <!-- BEGIN PAGE HEADER-->
+    
+    <div class="page-bar">
+        <ul class="page-breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="@Url.Action("Index","Home")">Home</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <a href="@Url.Action("Create", "Table")">Add Table</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                Table Details
+            </li>
+        </ul>
+
+    </div>
+    <!-- END PAGE HEADER-->
+    <!-- BEGIN PAGE CONTENT-->
+
+    <div class="row">
+        @if (TempData["erortbl"] != null)
+        {
+            if (TempData["erortbl"] == "OK")
+            {
+                <div class="alert alert-success">
+                    <button type="button" class="close" data-dismiss="alert"></button>
+                    <strong>Success!</strong> @TempData["deltbl"]
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-danger">
+                    <button type="button" class="close" data-dismiss="alert"></button>
+                    <strong>Error!</strong> @TempData["deltbl"]
+                </div>
+            }
+        }
+       
+        <div class="col-md-12" style="padding-left:0px;padding-right:0px;">
+            <!-- BEGIN BORDERED TABLE PORTLET-->
+            <div class="portlet box yellow">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-coffee"></i>Table Details
+                    </div>
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse">
+                        </a>
+
+                        <a href="javascript:;" class="reload">
+                        </a>
+
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <table class="table table-bordered table-hover table-full-width" id="sample_2">
+                        <thead>
+                            <tr>
+                                <th>
+                                    S.NO
+                                </th>
+                                @*<th>
+                                    Outlet Name
+                                </th>*@
+                               
+                                
+                                <th>
+                                    Table NO
+                                </th>
+                                <th>
+                                    Type
+                                </th>
+                                <th>Action</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                                                        @{
+                            NIBSEntities db = new NIBSEntities();
+                                var counter = 1;
+                                foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @counter
+                                        </td>
+                                       
+                                        @*<td>
+@{
+                                    var outletname = (from p in db.tblOutlets where item.OutletId.Equals(p.OutletId) select p.Name).SingleOrDefault();
+                                            @outletname
+                                                 }
+                                        </td>*@
+                                       
+                                        
+                                        <td>
+                                            @item.TableNo
+                                        </td>
+                                        <td>
+                                            @item.AcType
+                                        </td>
+                                        <td>
+
+                                            <a data-href="@Url.Action("Delete", "Table", new { id = item.TableId })" data-toggle="confirmation" data-placement="top"><span class="fa fa-trash-o" style="cursor:pointer"></span></a>
+                                           
+                                        </td>
+
+                                    </tr>
+                                    counter = counter + 1;
+                                }
+
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- END BORDERED TABLE PORTLET-->
+
+        </div>
+    </div>
+
+    <!-- END PAGE CONTENT-->
+</div>

@@ -1,0 +1,231 @@
+﻿@model NibsMVC.Models.AdminBillReportModel
+
+@{
+    ViewBag.Title = "RestroBill";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="page-content">
+
+    <!-- BEGIN PAGE HEADER-->
+    <div class="page-bar">
+        <ul class="page-breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="@Url.Action("Index","Home")">Home</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                Restaurant Bills
+            </li>
+        </ul>
+
+    </div>
+    <div class="col-md-12 margin-bottom-15">
+        <div class="form-body form-horizontal">
+            <div class="form-group">
+                <label class="col-md-2"> Search</label>
+                <div class="col-md-4">
+                    <select id="ddl_RestroSearch" name="RestroSearch" class="form-control">
+                        <option value="">--Select--</option>
+                        <option value="Outlet">Outlet Wise</option>
+                        <option value="Date">Date Wise</option>
+                        <option value="Bill">Bill Wise</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="Div_Search" hidden>
+                @using (Html.BeginForm("RestroBill", "Admin", FormMethod.Post, new { @class = "form-horizontal" }))
+                {
+                    <div class="restro_search form-group" id="Div_Outlet" hidden>
+                        <label class="col-md-2"> Select Outlet Name</label>
+                        <div class="col-md-4">
+                            @if (Model.OutletId != null)
+                            {
+                                @Html.DropDownListFor(model => model.OutletId, new SelectList(Model.getAllListOfOutlet, "Value", "Text", Model.OutletId), "--Select--", new { @class = "form-control" })
+                            }
+                            else
+                            {
+                                @Html.DropDownListFor(model => model.OutletId, new SelectList(Model.getAllListOfOutlet, "Value", "Text"), "--Select--", new { @class = "form-control" })
+                            }
+                        </div>
+                    </div>
+                    <div class="restro_search  " id="Div_Date" hidden>
+                        <div class="form-group">
+                            <label class=" col-md-2">Start Date</label>
+                            <div class="col-md-4">
+                                @*@Html.TextBoxFor(model => model.SearchFrom, new { @class = "form-control date-picker", })*@
+                                <input class="form-control date-picker" size="16" type="text" value="" name="SearchFrom" data-date-format="dd-mm-yyyy" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class=" col-md-2">End Date</label>
+                            <div class="col-md-4">
+                                @*@Html.TextBoxFor(model => model.SearchFrom, new { @class = "form-control date-picker", })*@
+                                <input class="form-control date-picker" size="16" type="text" value="" name="SearchTo" data-date-format="dd-mm-yyyy" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="restro_search form-group" id="Div_Bill" hidden>
+                        <label class="col-md-2">Enter Bill No</label>
+                        <div class="col-md-4">
+                            <input class="form-control" type="text" value="" name="BillNo" />
+                            @*@Html.TextBoxFor(model => model.BillNo, new { @class = "form-control" })*@
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-md-offset-2">
+                        <input type="submit" value="Search" class="btn btn-success" />
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <!-- END PAGE HEADER-->
+    <!-- BEGIN PAGE CONTENT-->
+
+    <div class="row">
+        <p style="color:red"> @TempData["error"]</p>
+        <div class="col-md-12" style="padding-left:0px;padding-right:0px;">
+            <!-- BEGIN BORDERED TABLE PORTLET-->
+            <div class="portlet box yellow">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-coffee"></i> Restaurant Bills
+                    </div>
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse">
+                        </a>
+
+                        <a href="javascript:;" class="reload">
+                        </a>
+
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <table class="table table-bordered table-hover table-full-width" id="sample_2">
+                        <thead>
+                            <tr>
+                                <th>Outlet Name</th>
+                                <th>Bill No</th>
+                                <th>Bill Date</th>
+                                <th>Table No</th>
+                                <th>Vat Amount</th>
+                                <th>Service Charges</th>
+                                <th>Discount Amount</th>
+                                <th>Total Amount</th>
+                                <th>Net Amount</th>
+                                <th>Item Details</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @{
+
+                                var counter = 1;
+                                if (Model.getAllBillReports != null)
+                                {
+                                    foreach (var item in Model.getAllBillReports.OrderByDescending(a => a.BillId))
+                                    {
+                                        <tr>
+
+                                            <td>
+
+                                                @item.OutletName
+                                            </td>
+                                            <td>
+                                                @item.BillId
+                                            </td>
+                                            <td>
+                                                @item.BillDate
+                                            </td>
+                                            <td>
+                                                @item.TableNo
+                                            </td>
+                                            <td>
+                                                @item.VatAmount
+                                            </td>
+                                            <td>
+                                                @item.ServicChargeAmt
+                                            </td>
+                                            <td>
+                                                @item.DiscountAmount
+                                            </td>
+                                            <td>
+                                                @item.TotalAmount
+                                            </td>
+                                            <td>
+                                                @item.NetAmount
+                                            </td>
+                                            <td>
+                                                <a class="btn default" data-toggle="modal" href="#@item.BillId">
+                                                    Items
+                                                </a>
+                                                <div class="modal fade" id="@item.BillId" tabindex="-1" role="basic" aria-hidden="true">
+
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                        <h4 class="modal-title">Item Details</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <table class="table table-bordered">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Item Name</th>
+                                                                    <th>Full Quantity</th>
+                                                                    <th>Half Quantity</th>
+                                                                    <th>Amount</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @foreach (var i in item.getBillItemDetails)
+                                                                {
+                                                                    <tr>
+                                                                        <td>@i.ItemName</td>
+                                                                        <td>@i.FullQty</td>
+                                                                        <td>@i.HalfQty</td>
+                                                                        <td>@i.Amount</td>
+                                                                    </tr>
+                                                                }
+
+                                                            </tbody>
+
+
+                                                        </table>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn default" data-dismiss="modal">Close</button>
+
+                                                    </div>
+
+                                                </div>
+                                            </td>
+                                        </tr>
+                                                                counter = counter + 1;
+                                    }
+                                }
+
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- END BORDERED TABLE PORTLET-->
+
+        </div>
+    </div>
+    <!-- END PAGE CONTENT-->
+    <script>
+        $(document).on('change', '#ddl_RestroSearch', function () {
+            var eval = $(this).val();
+            if (eval == "") {
+                $('#Div_Search').hide();
+            }
+            else {
+                $('#Div_Search').show();
+                $('.restro_search').hide();
+                $('#Div_' + eval).show();
+            }
+        });
+    </script>
+</div>

@@ -1,0 +1,173 @@
+﻿@{
+    ViewBag.Title = "ViewBillDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model NibsMVC.EDMX.tblBillMaster
+
+<style>
+    .bold_ {
+        font-weight: bold;
+    }
+</style>
+<div class="page-content">
+
+    <!-- BEGIN PAGE HEADER-->
+    <div class="page-bar">
+        <ul class="page-breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="@Url.Action("Index","Home")">Home</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+
+            <li>
+                Bill Detail
+            </li>
+        </ul>
+
+    </div>
+    <!-- END PAGE HEADER-->
+    <!-- BEGIN PAGE CONTENT-->
+
+    <div class="row">
+        <div class="col-md-12" style="padding-left:0px;padding-right:0px;">
+            <!-- BEGIN BORDERED TABLE PORTLET-->
+            <div class="portlet box yellow">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-coffee"></i>Bill No: @Model.BillId  Details
+                    </div>
+                    <div class="tools">
+                       <button class="btn btn-default" id="btn_print" data-id="@Model.BillId">Print</button>
+
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="row">
+                        <div class="col-md-12 form-horizontal">
+                            <div class="form-group">
+                                <label class="col-md-1">BillId</label>
+                                <label class="col-md-1 bold_">@Model.BillId</label>
+                                <label class="col-md-1">Table No</label>
+                                <label class="col-md-1 bold_">@Model.TableNo</label>
+                                <label class="col-md-2">Billing Type</label>
+                                <label class="col-md-3 bold_">
+                                    @if (Model.BillingType == "R")
+                                    {
+                                        <cite>Billing</cite>
+                                    }
+                                    else if (Model.BillingType == "T")
+                                    {
+                                        <cite>Packing</cite>
+                                    }
+                                    else
+                                    {
+                                        <cite>Home Delivery</cite>
+                                    }
+                                </label>
+                                <label class="col-md-2">Customer Name</label>
+                                <label class="col-md-1 bold_">@Model.CustomerName</label>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2">Contact No</label>
+                                <label class="col-md-2 bold_">@Model.ContactNo</label>
+                                <label class="col-md-2">Address</label>
+                                <label class="col-md-2 bold_">@Model.Address</label>
+                                <label class="col-md-2">Payment Type</label>
+                                <label class="col-md-2 bold_">@Model.PaymentType</label>
+                            </div>
+                            <div class="form-group">
+                                @foreach (var item in Model.tblBillDetails.GroupBy(a => a.Vat))
+                                {
+
+                                    <label class="col-md-2">Vat(@item.Key %)</label>
+                                    <label class="col-md-2 bold_">@item.Sum(a => a.VatAmount)</label>
+
+                                }
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-2">Service Tax(5.6)</label>
+                                <label class="col-md-2 bold_">@Model.ServiceTax</label>
+                                <label class="col-md-2">ServicesCharge</label>
+                                <label class="col-md-2 bold_">@Model.ServicChargesAmount</label>
+                                <label class="col-md-2">Packing Charge</label>
+                                <label class="col-md-2 bold_">@Model.PackingCharges</label>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2">Total Amount</label>
+                                <label class="col-md-2 bold_">@Model.TotalAmount</label>
+                                <label class="col-md-2">Discount Amount</label>
+                                <label class="col-md-2 bold_">@Model.DiscountAmount</label>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-2">Net Amount</label>
+                                <label class="col-md-2 bold_">@Model.NetAmountWithoutDiscount</label>
+                                <label class="col-md-2">Net Amount(after Discount)</label>
+                                <label class="col-md-2 bold_">@Model.NetAmount</label>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table table-bordered table-hover table-full-width margin-bottom-20">
+                        <thead>
+                            <tr>
+                                <th>
+                                    S.NO
+                                </th>
+                                <th>
+                                    Name
+                                </th>
+                                <th>Quantity</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int counter = 1;
+                            }
+                            @foreach (var item in Model.tblBillDetails)
+                            {
+                                <tr>
+                                    <td>@counter</td>
+                                    <td>@item.tblItem.Name</td>
+                                    <td>@item.FullQty</td>
+                                    <td>@item.Amount</td>
+                                </tr>
+                                counter = counter + 1;
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- END BORDERED TABLE PORTLET-->
+
+        </div>
+    </div>
+    <script>
+        $(document).on('click', '#btn_print', function (e) {
+            var ID = $(this).data('id');
+            centeredPopup("/Reports/PrintAgainBill?BillId=" + ID, 'myWindow', '600', '400', 'yes');
+
+            // return false
+
+            e.preventDefault();
+
+
+        });
+        var popupWindow = null;
+        function centeredPopup(url, winName, w, h, scroll) {
+            LeftPosition = (screen.width) ? (screen.width - w) / 2 : 0;
+            TopPosition = (screen.height) ? (screen.height - h) / 2 : 0;
+            settings =
+            'height=' + h + ',width=' + w + ',top=' + TopPosition + ',left=' + LeftPosition + ',scrollbars=' + scroll + ',resizable'
+            popupWindow = window.open(url, winName, settings);
+            popupWindow.onbeforeunload = function () {
+                var RunningTable = $('input[name="TableNo"]').val();
+                ShowBillingItems(RunningTable);
+                return null;
+            }
+
+        }
+    </script>
+</div>

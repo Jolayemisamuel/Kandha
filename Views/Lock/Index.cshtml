@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutLock.cshtml";
+}
+@model NibsMVC.Models.LoginModel
+<div class="page-body">
+    <img class="page-lock-img" src="@ViewBag.ProfileImage" alt="">
+    <div class="page-lock-info">
+        <h1>@ViewBag.Name</h1>
+        <span class="email">
+           @ViewBag.Email
+        </span>
+        <span class="locked">
+            Locked
+        </span>
+        <p style="color:red">@TempData["Error"]</p>
+        @using (Html.BeginForm("LockLogin", "Lock", FormMethod.Post, new { @class = "form-inline" }))
+@*@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl, @class = "form-inline" }))*@
+{
+             @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+            <div class="input-group input-medium form-group">
+                <input type="hidden"  name="UserName" value="@Model.UserName" />
+                <input type="password" class="form-control" name="Password" placeholder="Password">
+                <span class="input-group-btn">
+                    <button type="submit" class="btn blue icn-only"><i class="m-icon-swapright m-icon-white"></i></button>
+                </span>
+            </div>
+            <div class="relogin">
+                <a href="/Account/Login">
+                    Not @ViewBag.Name ?
+                </a>
+            </div>
+        }
+        
+    </div>
+</div>

@@ -1,0 +1,173 @@
+﻿@model NibsMVC.Models.PrintBillModel
+<link href="~/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="~/assets/admin/layout/css/print.css" rel="stylesheet" />
+<style>
+    .table > tbody > tr > td,.table > thead > tr > th{
+        border-bottom:none;
+        border-top:none !important;
+    }
+    .table{
+        margin-bottom:0px !important;
+    }
+    .font-size-12{
+        font-size: 12px !important;
+    }
+
+</style>
+<div class="container font-size-12">
+    <div class="row">
+        <div class="col-md-6">
+            <a href="" onclick="window.print()" class="forscreen btn green" style="background-color: green; width: 100px; color: white; margin-top: 10px;">Print</a>
+            <h3>Hotel Kandha</h3>
+            <!--<h4>A Unit of KGC Enterprises</h4>-->
+            <strong>TIN No: @Model.TinNo </strong>
+            <div class="clear1"></div>
+            <strong>ServiceTax No: @Model.ServiceTaxNo</strong>
+            <div class="clear1"></div>
+            <b>
+                @Model.Address
+
+            </b>
+            <div class="clear1"></div>
+            <p class=" font-size-12">Chennai-600042 <b style='margin-left:10px; font-weight:100'>PH: @Model.ContactA </b></p>
+            <p class="text-left" style="padding-left: 13%;width:300px;">
+                @DateTime.Now
+            </p>
+            @*<p><b style='margin-left:90px;'>Sales Invoice</b></p>*@
+            <table class="table  font-size-12" style="width:300px;">
+                <tbody>
+                    <tr>
+                        <td>
+                            BillNo
+                        </td>
+                        <td><b>@Model.BillId</b></td>
+                        
+                        <td> Table No</td>
+                        <td>@Model.TableNo</td>
+                    </tr>
+                    <tr>
+                        @if (Model.CustomerName != null)
+                        {
+                            <td>Name:</td>
+                            <td> @Model.CustomerName</td>
+                        }
+                       @if (Model.CustomerContactNo != null)
+                       {
+                        <td>
+                            Contact:
+                        </td>
+                        <td><b>@Model.CustomerContactNo</b></td>
+                       }
+                       
+                        
+                    </tr>
+                    @if (Model.CustomerAddress != null)
+                    {
+                        <tr>
+                            <td>
+                                Address
+                            </td>
+                            <td colspan="3"><b>@Model.CustomerAddress</b></td>
+
+                        </tr>
+                    }
+                    
+                </tbody>
+            </table>
+           
+            <table style='width:300px;' class="table font-size-12">
+                <thead>
+                    <tr>
+                        <th style='text-align:left'>Sr</th>
+                        <th style='text-align:left'>Item</th>
+                        <th>Basic</th>
+                        <th style='text-align:left'>F</th>
+
+                        <th style='text-align:left'>Amt</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int Count = 1;
+                    }
+                    @foreach (var item in Model.getAllItem)
+                    {
+                        <tr>
+                            <td>@Count</td>
+                            <td style="font-size: 9px;">@item.ItemName</td>
+                            <td>@item.BasicPrice</td>
+                            <td>@item.FullQty</td>
+
+                            <td>@item.Amount</td>
+                        </tr>
+                        Count = Count + 1;
+                    }
+                </tbody>
+            </table>
+
+            <table class="table font-size-12" style="width:300px;">
+                <tbody>
+                   
+                        @foreach (var item in Model.getAllVat)
+                        {
+                            <tr>
+                                <td><b>Vat Amount(@item.Vat%)</b></td>
+
+                                <td><b>@item.amtCharges</b></td>
+                            </tr>
+                        }
+
+                            
+                </tbody>
+            </table>
+            <table class="table font-size-12" style="width:300px;">
+                <tbody>
+                    <tr>
+                        @*<td><b>Service Tax(4.944)</b></td>*@
+                        <td><b>Service Tax(5.6)</b></td>
+                        <td>@Model.ServiceTax</td>
+                    </tr>
+                    <tr>
+                        <td><b>ServicesCharge</b></td>
+                        <td>@Model.ServicesCharge</td>
+                    </tr>
+                    <tr>
+                        @if (Model.BillType == "H")
+                        {
+                            <td><b>Delivery Charge</b></td>
+                            <td>@Model.PackingCharge</td>
+                        }
+                        else
+                        {
+                            <td><b>Packing Charge</b></td>
+                            <td>@Model.PackingCharge</td>
+                        }
+                    </tr>
+                    <tr>
+                        <td><b>Total Amount</b></td>
+                        <td>@Model.TotalAmount</td>
+                    </tr>
+                    <tr>
+                        <td><b>Discount Amount</b></td>
+                        <td>@Model.DiscountAmount</td>
+                    </tr>
+                   
+                    <tr>
+                        <td><b>Net Amount</b></td>
+                        <td>@Model.NetAmount</td>
+                    </tr>
+                    
+                    <tr>
+                        <td><b>Net Amount(after discount)</b></td>
+                        <td>@Math.Round(Model.NetAmountAfterDiscount,2)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p class="text-left" style="padding-left: 14%; border-top:dashed 1px #000;width:300px;">
+                Thanks for visit !
+            </p>
+            
+        </div>
+    </div>
+</div>

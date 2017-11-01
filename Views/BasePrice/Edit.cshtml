@@ -1,0 +1,79 @@
+﻿@model  NibsMVC.Models.BasePriceEditModel
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="page-content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="portlet box blue">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-gift"></i>Edit Base Price
+                    </div>
+                </div>
+                <div class="portlet-body form">
+                    <!-- BEGIN FORM-->
+                    @using (Html.BeginForm("EditBasePrice", "BasePrice", FormMethod.Post, new { @class = "form-horizontal" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        @Html.HiddenFor(model => model.CategoryId)
+                        <div class="form-body">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Category Name <span class="required">*</span>
+                                </label>
+                                <div class="col-md-4">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        <input type="text" value="@Model.CategoryName " readonly class="form-control"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <table class="table table-bordered table-hover table-full-width">
+                                <thead>
+                                    <tr>
+                                        <th>Item Name</th>
+                                        <th>Full Price</th>
+                                        <th>Half Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.getAllItemList)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <input type="hidden" name="EditItemId" value="@item.ItemId" />
+                                                <input type="text" value="@item.ItemName" class="form-control" readonly />
+                                            </td>
+                                            <td>
+                                                <input type="text" name="EditFullPrice" class="form-control" value="@item.FullPrice" />
+                                            </td>
+                                            <td>
+                                                <input type="text" name="EditHalfPrice" class="form-control" value="@item.HalfPrice" />
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-9">
+                                    @*<input type="submit" id="btnEdit" class="btn green" value="Submit"/>*@
+                                    <input type="submit" class="btn green" value="Submit" />
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+

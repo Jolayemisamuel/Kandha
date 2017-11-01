@@ -1,0 +1,114 @@
+﻿@model  NibsMVC.Models.VendorItemDetails
+
+@{
+    ViewBag.Title = "Vendor Items";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using NibsMVC.EDMX;
+<div class="page-content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="portlet box blue">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-gift"></i>Purchase Return
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    @using (Html.BeginForm("PurchaseReturn", "Purchase", FormMethod.Post, new { @class = "form-horizontal" }))
+                    {
+                        Html.AntiForgeryToken();
+                        @Html.ValidationSummary(true)
+                        @Html.HiddenFor(model => model.RawMaterialId)
+                        <input type="hidden" name="itemsdata" id="itemsdata" value="" />
+                        <div class="form-body">
+                            <div class="alert alert-danger display-hide">
+                                <button class="close" data-close="alert"></button>
+                                You have some form errors. Please check below.
+                            </div>
+                        </div>
+
+                        <div class="col-md-offset-1 col-md-9">
+                        </div>
+
+                        <table class="table table-bordered table-hover table-full-width" id="sample_2">
+                            <thead>
+                                <tr>
+                                    <th>Item Code</th>
+                                    <th>Item Description</th>
+                                    <th>Unit</th>
+                                    <th>Quantity</th>
+                                    <th>Total Amount</th>
+                                    <th>Tax</th>
+
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+                                @{
+                       
+                        var counter = 1;
+                        decimal totval = 0;
+                        NIBSEntities db = new NIBSEntities();
+
+                        foreach (var item in ViewBag.model)
+                        {
+                            totval = totval + @item[4];
+                            <tr>
+
+                                <td>
+                                    @item[0]
+                                </td>
+                                <td>
+                                    @item[1]
+                                </td>
+                                <td>
+                                    @item[2]
+                                </td>
+                                <td>
+                                    @item[3]
+                                </td>
+                                <td>
+                                    @item[4].ToString("0.00")
+                                </td>
+                                <td>
+                                    @item[5]%
+                                </td>
+
+                            </tr>
+                                    
+                                        
+                                        counter = counter + 1;
+                        }
+
+                                }
+                            </tbody>
+                            <tfoot>
+                                @{
+                       
+                            <tr>
+                               
+                                        <td><strong>Total</strong></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <strong>@totval.ToString("0.00") </strong>
+                                        </td>
+                                        <td></td>
+                                    
+                            </tr>
+                            
+                                }
+                            </tfoot>
+
+
+                        </table>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

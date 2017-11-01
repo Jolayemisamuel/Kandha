@@ -1,0 +1,163 @@
+﻿@model IEnumerable<NibsMVC.Models.PurchaseOrderModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using NibsMVC.EDMX;
+<div class="page-content">
+
+    <!-- BEGIN PAGE HEADER-->
+    <div class="page-bar">
+        <ul class="page-breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="@Url.Action("Index","Home")">Home</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <a href="@Url.Action("Create","PurchaseOrder")">Add Purchase Order</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                Purchase Order Details
+            </li>
+        </ul>
+
+    </div>
+    <!-- END PAGE HEADER-->
+    <!-- BEGIN PAGE CONTENT-->
+
+    <div class="row">
+        <p style="color:red">@TempData["Perror"]</p>
+        <div class="col-md-12" style="padding-left:0px;padding-right:0px;">
+            <!-- BEGIN BORDERED TABLE PORTLET-->
+            <div class="portlet box yellow">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-coffee"></i>Purchase Details
+                    </div>
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse">
+                        </a>
+
+                        <a href="javascript:;" class="reload">
+                        </a>
+
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <table class="table table-bordered table-hover table-full-width" id="sample_2">
+                        <thead>
+                            <tr>
+                                @*<th>
+                                        S.NO
+                                    </th>*@
+                                <th>
+                                    PO No
+                                </th>
+                                <th>
+                                    PO Date
+                                </th>
+                                <th>Vendor Name</th>
+                                
+                                <th>Item Details</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+
+                                var counter = 1;
+                                foreach (var item in Model)
+                                {
+                                    <tr>
+                                        @*<td>
+                                                @counter
+                                            </td>*@
+                                        <td>
+                                            @item.PONo 
+                                        </td>
+                                        <td>
+                                            @item.PODate.ToShortDateString()
+                                        </td>
+                                        <td>
+                                            @{
+                                    NIBSEntities db = new NIBSEntities();
+                                    var venderName = (from p in db.tblVendors where p.VendorId == item.VendorId select p.Name).SingleOrDefault();
+
+                                            }
+                                            @venderName
+                                        </td>
+
+                                        <td>
+                                            <a class="btn default" data-toggle="modal" href="#@item.POId">
+                                                Items
+                                            </a>
+                                            <div class="modal fade" id="@item.POId" tabindex="-1" role="basic" aria-hidden="true">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                    <h4 class="modal-title">Item Details</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    @*<div class="row">
+                                                        <div class="col-md-12">
+                                                            <label class="col-md-4">Payment Mode</label>
+                                                            <label class="col-md-2" style="font-weight:bold">@item.PaymentMode</label>
+                                                            <label class="col-md-2">Cheque</label>
+                                                            <label class="col-md-2" style="font-weight:bold">@item.ChequeNo</label>
+                                                        </div>
+                                                    </div>*@
+                                                    <table class="table table-bordered">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Item Name</th>
+                                                                
+                                                                <th>Quantity</th>
+                                                                <th>Unit</th>
+                                                                @*<th>Return</th>*@
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @{
+                                    var Itemdetails = (from q in db.tblPurchaseOrderItems where q.PurchaseOrderId  == @item.POId select q).ToList();
+                                     foreach (var i in Itemdetails)
+                                    {
+                                        <tr>
+                                            <td>@i.tbl_RawMaterials.Name</td>
+                                           
+                                            <td>@i.Quantity</td>
+                                            <td>@i.Unit</td>
+                                            @*<td><a href="@Url.Action("PurchaseReturn", "Purchase", new { purchaseid = item.PurchaseId, purchasdetailId=i.PurchaseDetailId })"><span class="fa fa-repeat"></span></a></td>*@
+                                        </tr>
+                                    }
+                                                            }
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn default" data-dismiss="modal" >Close</button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("DeletepurchaseOrder", "PurchaseOrder", new { @id = item.POId })"><span class="fa fa-trash-o"></span></a>
+                                        </td>
+
+
+                                    </tr>
+                                    counter = counter + 1;
+                                }
+
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- END BORDERED TABLE PORTLET-->
+
+        </div>
+    </div>
+    <!-- END PAGE CONTENT-->
+</div>

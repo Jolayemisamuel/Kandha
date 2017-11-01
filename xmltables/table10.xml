@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Item>
+  <Items>
+    <UserId>81</UserId>
+    <TableNo>10</TableNo>
+    <ItemId>301</ItemId>
+    <ItemName>SAADA DAHI</ItemName>
+    <FullQty>21</FullQty>
+    <HalfQty>0</HalfQty>
+    <Fullprice>69.0000</Fullprice>
+    <HalfPrice>0.0000</HalfPrice>
+    <Amount>1449.0000</Amount>
+    <VatAmt>5</VatAmt>
+    <VatAmountCharges>72.4500</VatAmountCharges>
+    <OfferQty>0</OfferQty>
+  </Items>
+  <Items>
+    <UserId>81</UserId>
+    <TableNo>10</TableNo>
+    <ItemId>302</ItemId>
+    <ItemName>BOONDI RAITA</ItemName>
+    <FullQty>20</FullQty>
+    <HalfQty>0</HalfQty>
+    <Fullprice>79.0000</Fullprice>
+    <HalfPrice>0.0000</HalfPrice>
+    <Amount>1580.0000</Amount>
+    <VatAmt>5</VatAmt>
+    <VatAmountCharges>79.0000</VatAmountCharges>
+    <OfferQty>0</OfferQty>
+  </Items>
+</Item>

@@ -1,0 +1,78 @@
+﻿@model IEnumerable<NibsMVC.Models.BillingModel>
+
+@{
+    Layout = null;
+}
+@using NibsMVC.EDMX;
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>PrintView</title>
+   
+</head>
+
+
+<body onload="window.print();">
+   
+    <div style="margin-left:400px;width:500px;margin-top:100px; height:auto;">
+        <div style="text-align:center;"><h2>Nibs Cafe</h2></div>
+        @*<div style="margin-left:10px; width:500px;"><h3>kuldeep</h3><div style="margin-top:-40px; margin-left:350px;">Table no :8</div></div>*@
+        <table style="margin-left:50px;margin-top:50px;" border="1">
+           
+            <tr>
+                <th>Item Name</th>
+                <th>Full Quantity</th>
+                <th>Half Quantity</th>
+                <th>AMOUNT</th>
+            </tr>
+            <tbody>
+                @{
+                    NIBSEntities db = new NIBSEntities();
+                    foreach (var item in Model)
+                    {
+                        <tr>Name: @item.CustomerName</tr><br />
+                    <tr>Tabel No: @item.TableNo</tr>
+                        var Itemdetails = (from q in db.tblBillDetails where q.BillId == item.BillId select q).ToList();
+                        foreach (var i in Itemdetails)
+                        {
+                            
+                            <tr>
+                                <td>
+                                    @{
+                            var itemname = (from l in db.tblItems where l.ItemId.Equals(i.ItemId) select l.Name).SingleOrDefault();
+                                }
+                                @itemname
+                            </td>
+                            <td>@i.FullQty</td>
+                            <td>@i.HalfQty</td>
+                            <td>@i.Amount</td>
+
+                        </tr>
+                        }
+                       
+                    
+                        <tr>
+
+                            <td>Vat Amount</td>
+                            <td></td>
+                            <td></td>
+                            <td>@item.VatAmount</td>
+                        </tr>
+                        <tr><td>Services Charges</td><td></td><td></td><td>@item.ServicChargeAmt</td></tr>
+                        <tr><td>Discount Amount</td><td></td><td></td><td>@item.DiscountAmount</td></tr>
+                        <tr><td>Total Amount</td><td></td><td></td><td>@item.TotalAmount</td></tr>
+                        <tr><td>Net Amount</td><td></td><td></td><td>@item.NetAmount</td></tr>
+
+
+
+
+                    }
+                }
+            </tbody>
+        </table>
+       
+    </div>
+</body>
+</html>

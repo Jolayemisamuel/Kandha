@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Item>
+  <Items>
+    <UserId>81</UserId>
+    <TableNo>22</TableNo>
+    <ItemId>0</ItemId>
+    <ItemName></ItemName>
+    <FullQty>0</FullQty>
+    <HalfQty>0</HalfQty>
+    <Fullprice>0</Fullprice>
+    <HalfPrice>0</HalfPrice>
+    <Amount>0</Amount>
+    <VatAmt>0</VatAmt>
+    <VatAmountCharges>0</VatAmountCharges>
+    <OfferQty>0</OfferQty>
+  </Items>
+  <Items>
+    <UserId>0</UserId>
+    <TableNo>22</TableNo>
+    <ItemId>373</ItemId>
+    <ItemName>KIWI</ItemName>
+    <FullQty>2</FullQty>
+    <HalfQty>0</HalfQty>
+    <Fullprice>225.00</Fullprice>
+    <HalfPrice>0.00</HalfPrice>
+    <Amount>450.00</Amount>
+    <VatAmt>5.00</VatAmt>
+    <VatAmountCharges>22.5000</VatAmountCharges>
+    <OfferQty>0</OfferQty>
+  </Items>
+</Item>

@@ -1,0 +1,210 @@
+﻿@model IEnumerable<NibsMVC.Models.BillingModel>
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .form-control {
+        font-size:11px;
+    }
+    .page-content-wrapper .page-content {
+        padding: 8px 20px 10px 20px;
+    }
+</style>
+@using NibsMVC.EDMX;
+<div class="page-content">
+    <div class="row">
+        @*<div class="col-md-12 margin-bottom-10">
+            <p id="Record"></p>
+        </div>*@
+        <div class="col-md-12">
+            <div class="portlet box blue">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-gift"></i>Billing Master
+                    </div>
+                </div>
+                <div class="portlet-body form">
+                    <!-- BEGIN FORM-->
+                    @using (Html.BeginForm("Create", "Billing", FormMethod.Post, new { @id = "form_sample_39", @class = "form-horizontal" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        @*@Html.HiddenFor(model => model.CategoryId)*@
+                        <input type="hidden" name="name" value="0" id="itehidden" />
+                        <input type="hidden" name="name" value=" " id="gid" />
+                        <input type="hidden" name="masterdata" value=" " id="masterdata" />
+                        <input type="hidden" name="detailsitems" value=" " id="detailsitems" />
+                        <input type="hidden" name="BillType" value="" id="BillType" />
+                        <input type="hidden" name="name" value=" " id="gname" />
+                        <input type="hidden" name="name" value="@ViewBag.Otype" id="Creteateoperator" />
+    <input type="hidden" name="mergetabledata" value=" " id="mergetabledata" />
+                        <div class="form-body">
+                            <div class="row">
+                               
+                                <div class="col-md-1">
+                                    <div id="left">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th><div><div id="left_heading">T</div></div></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @{
+
+                        foreach (var item in Model)
+                        {
+                                                <tr>
+                                                    @*<td><div id="tabltd"><a class="tableno">@item.TableNo</a></div></td>*@
+                                                    <td><input type="button" name="TableNo" value="@item.TableNo" class="tabltd" id="@item.TableNo" /></td>
+                                                </tr>
+                        }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="radio-list col-md-6 margin-bottom-10" id="gradiobuttons">
+                                        <label class="radio-inline padding-top-0">
+                                            <input type="radio" name="BillType" value="Graphically" class="radio-item" checked />Graphically
+                                        </label>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 cat-bdr min-height-250 margin-bottom-10">
+                                            @{
+
+                        if (ViewBag.catnames != null)
+                        {
+                            foreach (var item in ViewBag.catnames)
+                            {
+                                      <input type="button" name="CategoryId" value="@item.Name " id="@item.CategoryId" class="BillingCategory btn blue margin-bottom-5 " />
+                                       
+                            }
+                        }
+                                            }
+                                           
+                                         
+                                        </div>
+                                        <div class="col-md-12 cat-bdr min-height-250">
+                                            <div class="clear-fix"></div>
+                                            <div class="radio-list col-md-6 margin-bottom-10" id="gradiobuttons">
+                                                <label class="radio-inline padding-top-0">
+                                                    <input type="radio" name="gradio" id="optionsRadios4" value="Full" class="radio-item" checked> Full
+                                                </label>
+                                                <label class="radio-inline padding-top-0">
+                                                    <input type="radio" name="gradio" id="optionsRadios5" value="Half" class="radio-item"> Half
+                                                </label>
+
+                                            </div>
+                                            <div class="col-md-6 margin-bottom-10">
+                                                <div class="row">
+                                                    <label class="col-md-6">Quantity</label>
+                                                    <div class="col-md-6">
+                                                        <input type="text" name="name" value="1" id="graphicquty" class="number form-control" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 margin-bottom-5" id="tblbilling">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="col-md-10">
+                                        <a target="_blank" href="@Url.Action("TakeAway","Billing")"><input type="button" name="name" value="Take Away" id="btntakaway" class="btn red-stripe" /></a>
+                                        <a target="_blank" href="@Url.Action("HomeDelivery", "Billing")"><input type="button" name="name" value="Home Delivery" id="btntakaway" class="btn red-stripe" /></a>
+                                        <a><input type="button" name="name" value="Shift" id="btnsift" class="btn red-stripe" /></a>
+                                        <a><input type="button" name="name" value="Merge" id="btnmerge" class="btn red-stripe" /></a>
+                                        <a><input type="button" name="name" value="Split" id="" class="btn red-stripe" /></a>
+
+                                    </div>
+                                    <div class="col-md-5 pull-right margin-bottom-10">
+                                        <label class="col-md-5">Table No</label>
+                                        <div class="col-md-4">
+                                            <input type="text" name="TableNo" value=" " id="ttblno" readonly class="form-control" />
+                                        </div>
+                                    </div>
+                                   <div class="row">
+                                       <div class="col-md-12">
+                                           <div id="mainbillingdiv">
+
+                                           </div>
+                                           <div hidden id="hiddenprintdiv">
+
+
+                                           </div>
+                                           @* Shift division *@
+                                           <div id="shiftdiv" style="width:300px;height:150px;" hidden>
+                                               <div style="float:left;width:40px;height:100px;">
+                                                     <input type="button" name="" value="" id="Shiftedtable" readonly />  
+                                               </div>
+                                               <div style="float:left;width:200px;height:100px;">
+                                                   <label>Shift Table</label><input type="button" name="" value="" id="Shtable" readonly />
+                                                   <label>Shift By</label><input type="button" name="" value="" id="ShiftedBytable" readonly /> 
+                                               </div>
+                                               <div style="float:left;width:40px;height:100px;">
+                                                   @{
+                        foreach (var item in Model)
+                        {
+                            <input type="button" name="TableNo" value="@item.TableNo" class="shitto" id="shitto" />
+                        }
+}
+                                               </div>
+                                               <input type="button" name="name" value="OK" class="btn red" id="btnok" />
+                                               <input type="button" name="name" value="Cancel" class="btn red" id="btncancle" />
+                                           </div>
+                                           @*End Shift division *@
+                                           @* Merge division *@
+                                           <div id="Mergdivmain" style="width:300px;height:150px;" hidden>
+                                               <div style="float:left;width:100px;height:100px;">
+                                                   <label>Select Merge Table</label>
+                                                   
+                                                   @{
+                        foreach (var item in Model)
+                        {
+                            <input type="button" name="TableNo" value="@item.TableNo" class="mergetblno" id="mergetblno" />
+                        }
+}
+                                                   <input type="button" name="name" value="confirm" class="btn red" id="btnconfirm" />
+                                               </div>
+                                               <div style="float:left;width:50px;height:100px;">
+                                                 <label>Master Table</label> <input type="button" name="" value="" id="master" readonly style="background-color:black;color:white" />
+                                               </div>
+                                               <div style="float:left;width:100px;height:100px;" id="choicemerge" hidden>
+                                                   <label>Select Master Table</label>
+                                                   <div id="btnconfirmclick">
+
+                                                   </div>
+                            
+                                               </div>
+                                               <input type="button" name="name" value="OK" class="btn red" id="btnmergeok" />
+                                           </div>
+                                           @*End Merge division *@
+                                       </div>
+                                   </div>
+                                </div>
+                            </div>
+                            </div>
+
+
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-9">
+
+
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

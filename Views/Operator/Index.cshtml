@@ -1,0 +1,136 @@
+﻿@model IEnumerable<NibsMVC.Models.OperatorModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="page-content">
+
+    <!-- BEGIN PAGE HEADER-->
+    <div class="page-bar">
+        <ul class="page-breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="@Url.Action("Index","Home")">Home</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="@Url.Action("Create","Operator")">Operator Registration</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                Operator Report
+
+            </li>
+
+        </ul>
+
+    </div>
+    <!-- END PAGE HEADER-->
+    <!-- BEGIN PAGE CONTENT-->
+
+    <div class="row">
+       @{
+           if (TempData["optrerror"] != null)
+           {
+               if (TempData["OK"] == "OK")
+               {
+                <div class="alert alert-success">
+                    <button type="button" class="close" data-dismiss="alert"></button>
+                    <strong>Success!</strong> @TempData["optrerror"]
+                </div>
+               }
+               else
+               {
+                <div class="alert alert-danger">
+                    <button type="button" class="close" data-dismiss="alert"></button>
+                    <strong>Error!</strong> @TempData["optrerror"]
+                </div>
+               }
+           }
+    }
+       
+        
+
+
+        <div class="col-md-12" style="padding-left:0px;padding-right:0px;">
+            <!-- BEGIN BORDERED TABLE PORTLET-->
+            <div class="portlet box yellow">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-coffee"></i>Operator Details
+                    </div>
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse">
+                        </a>
+
+                        <a href="javascript:;" class="reload">
+                        </a>
+
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <table class="table table-bordered table-hover table-full-width" id="sample_2">
+                        <thead>
+                            <tr>
+                                <th>
+                                    S.NO
+                                </th>
+                                <th>
+                                    Name
+                                </th>
+                                <th>
+                                    Contact No
+                                </th>
+                                <th>
+                                    Operator Type
+                                </th>
+                                
+                                <th>
+                                    Action
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+
+                                var counter = 1;
+                                foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @counter
+                                        </td>
+                                        <td>
+                                            @item.Name
+                                        </td>
+                                        <td>
+                                            @item.ContactNo
+                                        </td>
+                                        <td>
+                                            @item.Type
+                                        </td>
+                                       
+                                        <td>
+                                            <a href="@Url.Action("Create","Operator", new { @id = item.operatorId })" data-toggle="tooltip" title="Edit" data-placement="top"><span class="fa fa-edit"></span></a>
+                                           
+                                            <a data-href="@Url.Action("Delete", "Operator", new { @id = item.operatorId })" data-toggle="confirmation" data-placement="top"><span class="fa fa-trash-o" style="cursor:pointer"></span></a>
+                                        </td>
+
+                                    </tr>
+                                    counter = counter + 1;
+                                }
+
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- END BORDERED TABLE PORTLET-->
+
+        </div>
+    </div>
+    <!-- END PAGE CONTENT-->
+</div>

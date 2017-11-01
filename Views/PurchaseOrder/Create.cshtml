@@ -1,0 +1,397 @@
+﻿@model NibsMVC.Models.PurchaseOrderModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-content">
+    <div class="row">
+        <p style="color:red">@TempData["Perror"]</p>
+        <div class="col-md-12">
+            <div class="portlet box blue">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-gift"></i>Add Purchase Order Details
+                    </div>
+                </div>
+                <div class="portlet-body form">
+                    <!-- BEGIN FORM-->
+                    @using (Html.BeginForm("Create", "PurchaseOrder", FormMethod.Post, new { @id = "form_sample_6", @class = "form-horizontal" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        @Html.HiddenFor(model => model.OutletId)
+                        <input type="hidden" name="itemsdata" id="itemsdata" value="" />
+                        <div class="form-body">
+                            <div class="alert alert-danger display-hide">
+                                <button class="close" data-close="alert"></button>
+                                You have some form errors. Please check below.
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class=" col-md-5">Outlet</label>
+                                    <div class="col-md-7">
+                                        <input type="text" name="" value="@WebSecurity.CurrentUserName" class="form-control" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label class=" col-md-3">Vendor<span class="required"> *</span></label>
+                                    <div class="col-md-9">
+                                        @Html.DropDownListFor(model => model.VendorId, (SelectList)ViewBag.venderLists, "--Choose Your Vender--", new { @class = "form-control", @id = "Vendor" })
+                                        @*@Html.DropDownList("Vendor", ViewBag.VendorList as List<SelectListItem>, "--Choose Your Vendor --", new { @class = "form-control", @id="Vendor" })*@
+                                        @*<select id="Vendor" class="form-control Keys" name="VendorName"></select>*@
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class=" col-md-5">Due Days</label>
+                                    <div class="col-md-4">
+                                        <input type="text" name="PCD" id="cycledays" class="form-control" readonly />
+                                        @*@Html.TextBoxFor(model => model.cycledays, new { @class = "form-control", @id = "cycledays" })*@
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <table id="tableRoutingData" class="table table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Category</th>
+                                            <th>Item Name</th>
+                                            <th>Quantity</th>
+                                            <th>Unit</th>
+                                            <th>Action</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr menuid="-1">
+                                            <td>
+                                                <select id="cat_0" class="form-control Keys" name="RowCategoryId"></select>
+                                            </td>
+                                            <td>
+                                                <select id="Item_0" class="form-control Keys" name="RowMaterialId"></select>
+                                            </td>
+                                            <td>
+
+                                                <input id="txtQty_0" type="text" class="form-control" name="Quantity" />
+                                            </td>
+                                            <td>
+                                                <select id="Type_0" class="form-control Routing" name="Type">
+                                                    <option value="">Select</option>
+                                                    <option value="Bag">Bag</option>
+                                                    <option value="Box">Box</option>
+                                                    <option value="Bouch">Bouch</option>
+                                                    <option value="Bottle">Bottle</option>
+                                                    <option value="Bulk">Bulk</option>
+                                                    <option value="Can">Can</option>
+                                                    <option value="Gms">Gms</option>
+                                                    <option value="Kgs">Kgs</option>
+                                                    <option value="Ltr">Ltr</option>
+                                                    <option value="Mtr">Mtr</option>
+                                                    <option value="ML">ML</option>
+                                                    <option value="Nos">Nos</option>
+                                                    <option value="Piece">Piece</option>
+                                                    <option value="Packet">Packet</option>
+                                                    <option value="Punch">Punch</option>
+                                                    <option value="Tray">Tray</option>
+
+
+                                                </select>
+                                            </td>
+
+                                            <td>
+
+                                                <button type="button" id="btnadd" class="btn btn-success btn-sm defaults">
+                                                    <span class="fa fa-plus"></span>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    <tbody>
+                                </table>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-5">PO No<span class="required"> *</span></label>
+                                    <div class="col-md-7">
+                                        @if (ViewBag.PoNo == null)
+                                        {
+                                            <input type="text" name="PONo" class="form-control" />
+                                        }
+                                        else
+                                        {
+                                            <input type="text" name="PONo" class="form-control" value=@ViewBag.PoNo />
+                                        }
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-5">PO Date<span class="required"> *</span></label>
+                                    <div class="col-md-7">
+                                        @if (ViewBag.PoDate == null)
+                                        {
+                                            <input class="form-control form-control-inline input-medium date-picker" data-date-format="mm-dd-yyyy" size="16" type="text" id="picker" value="" name="PODate" readonly="readonly" />
+                                        }
+                                        else
+                                        {
+                                            <input class="form-control form-control-inline input-medium date-picker" data-date-format="mm-dd-yyyy" size="16" type="text" id="picker" value=@ViewBag.PoDate name="PODate" readonly="readonly" />
+                                        }
+
+                                        @*<input type="text" name="InvoiceDate" class="form-control" />*@
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-9">
+                                    <button type="submit" class="btn green">Submit</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*<script>
+            $(document).ready(function () {
+
+                $("#Vendor").change(function () {
+                    $("#cat_0").empty();
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '/Purchase/FillDropDownCategories',
+
+                        dataType: 'json',
+
+                        data: { VendorId: $("#Vendor").val() },
+
+
+                        success: function (items) {
+
+                            $("#cat_0").append('<option value="--Select Item--">--Select Item--</option>');
+                            $.each(items, function (i, item) {
+                                $("#cat_0").append('<option value="' + item.Value + '">' + item.Text + '</option>');
+
+                            });
+                        },
+
+                        error: function (ex) {
+                            alert('Failed to retrieve Category and Item.' + ex);
+                        }
+                    });
+                    return false;
+                })
+
+
+                $(document).on('change', 'select[name="VendorId"]', function () {
+                    var id = $(this).attr('id');
+                    var venId = $('#' + id).val();
+                    var FormData = { VendorId: venId };
+                    var pcd = "";
+                    $.get("/PurchaseOrder/getPCD", FormData, function (data) {
+                        pcd = data;
+                        $("#txtPCD").val(pcd);
+
+
+
+                    });
+
+                    var id = $("vendor").attr('id');
+                    var venId = $('#' + id).val();
+                    var FormData = { VendorId: venId };
+                    $.get('/Purchase/FillDropDownCategories', FormData,
+                            function (data) {
+
+                                $("#cat_0").append(data);
+                            });
+
+
+                });
+
+                $(document).on('change', 'select[name="RowMaterialId"]', function () {
+                    var id = $(this).attr('id');
+                    var matid = $('#' + id).val();
+                    var FormData = { MaterialId: matid };
+                    var unit = "";
+                    $.get("/StockTransfer/getTransferMaterialUnit", FormData, function (data) {
+                        unit = data;
+                        var row = id.split('_');
+
+                        $("#Type_" + row[1]).val(unit);
+                    });
+
+
+                });
+
+
+            });
+
+
+        </script>*@
+    <script>
+        $(document).ready(function () {
+
+            $("#Vendor").change(function () {
+                $("#cat_0").empty();
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/Purchase/FillDropDownCategories',
+
+                    dataType: 'json',
+
+                    data: { VendorId: $("#Vendor").val() },
+
+
+                    success: function (items) {
+
+                        $("#cat_0").append('<option value="--Select Item--">--Select Category--</option>');
+                        $.each(items, function (i, item) {
+                            $("#cat_0").append('<option value="' + item.Value + '">' + item.Text + '</option>');
+
+                        });
+                    },
+
+                    error: function (ex) {
+                        alert('Failed to retrieve Category and Item.' + ex);
+                    }
+                });
+                return false;
+            })
+
+
+
+            $(document).on('change', 'select[name="VendorId"]', function () {
+                var id = $(Vendor).attr('id');
+                var vendid = $('#' + id).val();
+                var FormData = { VendorId: vendid };
+                var unit = "";
+                $.get('/Purchase/FillDropDownCategories', FormData, function (data) {
+                    unit = data;
+                    var row = id.split('_');
+
+                    $("#cat_" + row[1]).val(unit);
+                });
+
+
+            });
+
+
+            var counter = 1;
+            $(document).on("click", ".minus", function (e) {
+                var id = $(this).attr('id');
+
+                $(this).parent("td").parent("tr").remove();
+                counter--;
+            });
+
+            $("#Vendor").change(function () {
+                $("#cycledays").empty();
+                
+                $.ajax({
+                    type: 'POST',
+                    
+                    url: '@Url.Action("getPCD")',
+
+                    dataType: 'json',
+
+                    data: { VendorId: $("#Vendor").val() },
+
+                    success: function (items) {
+
+                        $('#cycledays').val(items);
+
+                    },
+
+                    error: function (ex) {
+                        alert('Failed to retrieve Cycle');
+                    }
+                });
+                return false;
+            })
+
+            $(document).on('change', 'select[name="VendorId"]', function () {
+                
+                var id = $(Vendor).attr('id');
+                var venId = $('#' + id).val();
+                var FormData = { VendorId: venId };
+                var pcd = "";
+                $.get("/PurchaseOrder/getPCD", FormData, function (data) {
+                    pcd = data;
+                    $("#txtPCD").val(pcd);
+                });
+
+
+            });
+
+            //$(document).on('change', 'select[name="VendorId"]', function () {
+            //    var id = $(this).attr('id');
+            //    var venId = $('#' + id).val();
+            //    var FormData = { VendorId: venId };
+            //    var pcd = "";
+            //    $.get("/PurchaseOrder/getPCD", FormData, function (data) {
+            //        pcd = data;
+            //        $("#txtPCD").val(pcd);
+            //    });
+
+
+            //});
+
+            $(document).on('change', 'select[name="RowMaterialId"]', function () {
+                var id = $(this).attr('id');
+                var matid = $('#' + id).val();
+                var FormData = { MaterialId: matid };
+                var unit = "";
+                $.get("/StockTransfer/getTransferMaterialUnit", FormData, function (data) {
+                    unit = data;
+                    var row = id.split('_');
+
+                    $("#Type_" + row[1]).val(unit);
+                });
+
+
+            });
+
+            $(document).on('change', 'select[name="RowCategoryId"]', function () {
+                var id = $(this).attr('id');
+                var catid = $('#' + id).val();
+                var FormData = { CategoryId: catid };
+                var unit = "";
+
+                $.get('/Purchase/FillDropDownKeysByCategory', FormData,
+                        function (data) {
+                            var row = id.split('_');
+                            $("#Item_" + row[1]).find('option').remove().end().append(data);
+                        });
+
+
+            });
+
+            $('#btnadd').on('click', function () {
+                $('#tableRoutingData').append('<tr MenuID="-1" class="trEdit" id="tr_' + counter + '"><td><select id="cat_' + counter + '" name="RowCategoryId" class="form-control Keys"/></td><td><select id="Item_' + counter + '" name="RowMaterialId" class="form-control Keys"/></td><td>' +
+                    '<input id="txtQty_' + counter + '" type="text" name="Quantity" class="form-control input-md"  /></td><td><select id="Type_' + counter + '" name="Type" ' +
+                     ' class="form-control Routing"/></td><td>' +
+                      '<button data-val="' + counter + '"' +
+                     ' style="margin-top:10px;" type="button" id="btnminus_' + counter + '" ' +
+                     'class="minus btn btn-danger btn-sm defaults"><span class="fa fa-minus"></span></button></td></tr>');
+                $('#cat_0 option').clone().appendTo('#cat_' + counter);
+                $('#Item_0 option').clone().appendTo('#Item_' + counter);
+                $('#txtQty_0 option').clone().appendTo('#txtQty_' + counter);
+                $('#Type_0 option').clone().appendTo('#Type_' + counter);
+                counter++;
+            });
+        });
+
+
+    </script>
+
+</div>

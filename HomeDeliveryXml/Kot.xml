@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Item>
+  <Items>
+    <UserId>81</UserId>
+    <TokenNo>0</TokenNo>
+    <ItemName>SAY CHEESE PIZZA</ItemName>
+    <FullQty>3</FullQty>
+    <HalfQty>0</HalfQty>
+  </Items>
+  <Items>
+    <UserId>81</UserId>
+    <TokenNo>0</TokenNo>
+    <ItemName>GOURMET GARLIC</ItemName>
+    <FullQty>8</FullQty>
+    <HalfQty>0</HalfQty>
+  </Items>
+  <Items>
+    <UserId>81</UserId>
+    <TokenNo>0</TokenNo>
+    <ItemName>NUTS &amp; BOLT PIZZA</ItemName>
+    <FullQty>1</FullQty>
+    <HalfQty>0</HalfQty>
+  </Items>
+  <Items>
+    <UserId>81</UserId>
+    <TokenNo>0</TokenNo>
+    <ItemName>MULTI GRAIN BREAD</ItemName>
+    <FullQty>13</FullQty>
+    <HalfQty>0</HalfQty>
+  </Items>
+  <Items>
+    <UserId>81</UserId>
+    <TokenNo>0</TokenNo>
+    <ItemName>THE SEVEN BEAUTIES PIZZA</ItemName>
+    <FullQty>3</FullQty>
+    <HalfQty>0</HalfQty>
+  </Items>
+  <Items>
+    <UserId>81</UserId>
+    <TokenNo>0</TokenNo>
+    <ItemName>COUNTRY SIDE PIZZA</ItemName>
+    <FullQty>3</FullQty>
+    <HalfQty>0</HalfQty>
+  </Items>
+  <Items>
+    <UserId>81</UserId>
+    <TokenNo>0</TokenNo>
+    <ItemName>BROWN JUMBO</ItemName>
+    <FullQty>2</FullQty>
+    <HalfQty>0</HalfQty>
+  </Items>
+  <Items>
+    <UserId>81</UserId>
+    <TokenNo>0</TokenNo>
+    <ItemName>WHITE JUMBO</ItemName>
+    <FullQty>4</FullQty>
+    <HalfQty>0</HalfQty>
+  </Items>
+  <Items>
+    <UserId>81</UserId>
+    <TokenNo>1</TokenNo>
+    <ItemName>MULTI GRAIN BREAD</ItemName>
+    <FullQty>1</FullQty>
+    <HalfQty>0</HalfQty>
+  </Items>
+  <Items>
+    <UserId>81</UserId>
+    <TokenNo>1</TokenNo>
+    <ItemName>WHITE JUMBO</ItemName>
+    <FullQty>0</FullQty>
+    <HalfQty>0</HalfQty>
+  </Items>
+  <Items>
+    <UserId>69</UserId>
+    <TokenNo>1</TokenNo>
+    <ItemName>PAALAK PANEER</ItemName>
+    <FullQty>1</FullQty>
+    <HalfQty>0</HalfQty>
+  </Items>
+  <Items>
+    <UserId>69</UserId>
+    <TokenNo>1</TokenNo>
+    <ItemName>RAJASTHANI HANDI PANEER</ItemName>
+    <FullQty>1</FullQty>
+    <HalfQty>0</HalfQty>
+  </Items>
+  <Items>
+    <UserId>69</UserId>
+    <TokenNo>2</TokenNo>
+    <ItemName>EGG SALAD</ItemName>
+    <FullQty>1</FullQty>
+    <HalfQty>0</HalfQty>
+  </Items>
+  <Items>
+    <UserId>69</UserId>
+    <TokenNo>2</TokenNo>
+    <ItemName>BEAN &amp; MUSHROOM SALAD</ItemName>
+    <FullQty>1</FullQty>
+    <HalfQty>0</HalfQty>
+  </Items>
+  <Items>
+    <UserId>69</UserId>
+    <TokenNo>2</TokenNo>
+    <ItemName>LEMON &amp; HERB POTATO SALAD</ItemName>
+    <FullQty>1</FullQty>
+    <HalfQty>0</HalfQty>
+  </Items>
+  <Items>
+    <UserId>69</UserId>
+    <TokenNo>1</TokenNo>
+    <ItemName>TRADITIONAL BRUSCHETTA</ItemName>
+    <FullQty>1</FullQty>
+    <HalfQty>0</HalfQty>
+  </Items>
+  <Items>
+    <UserId>69</UserId>
+    <TokenNo>1</TokenNo>
+    <ItemName>BAKED BRUSCHETTA</ItemName>
+    <FullQty>1</FullQty>
+    <HalfQty>0</HalfQty>
+  </Items>
+  <Items>
+    <UserId>69</UserId>
+    <TokenNo>1</TokenNo>
+    <ItemName>CHEESY WEDGES</ItemName>
+    <FullQty>1</FullQty>
+    <HalfQty>0</HalfQty>
+  </Items>
+  <Items>
+    <UserId>69</UserId>
+    <TokenNo>1</TokenNo>
+    <ItemName>VEGETABLE MAGGIE</ItemName>
+    <FullQty>1</FullQty>
+    <HalfQty>0</HalfQty>
+  </Items>
+  <Items>
+    <UserId>69</UserId>
+    <TokenNo>1</TokenNo>
+    <ItemName>MAGGIE MASALA</ItemName>
+    <FullQty>1</FullQty>
+    <HalfQty>0</HalfQty>
+  </Items>
+  <Items>
+    <UserId>69</UserId>
+    <TokenNo>1</TokenNo>
+    <ItemName>CHILLI JALAPENOS</ItemName>
+    <FullQty>1</FullQty>
+    <HalfQty>0</HalfQty>
+  </Items>
+  <Items>
+    <UserId>69</UserId>
+    <TokenNo>1</TokenNo>
+    <ItemName>LACCHEDAAR PARANTHA</ItemName>
+    <FullQty>1</FullQty>
+    <HalfQty>0</HalfQty>
+  </Items>
+  <Items>
+    <UserId>69</UserId>
+    <TokenNo>1</TokenNo>
+    <ItemName>METHI PARANTHA</ItemName>
+    <FullQty>1</FullQty>
+    <HalfQty>0</HalfQty>
+  </Items>
+  <Items>
+    <UserId>69</UserId>
+    <TokenNo>1</TokenNo>
+    <ItemName>FILLING PARANTHA</ItemName>
+    <FullQty>1</FullQty>
+    <HalfQty>0</HalfQty>
+  </Items>
+  <Items>
+    <UserId>69</UserId>
+    <TokenNo>1</TokenNo>
+    <ItemName>STUFFED NAAN</ItemName>
+    <FullQty>1</FullQty>
+    <HalfQty>0</HalfQty>
+  </Items>
+  <Items>
+    <UserId>69</UserId>
+    <TokenNo>1</TokenNo>
+    <ItemName>GARLIC NAAN</ItemName>
+    <FullQty>1</FullQty>
+    <HalfQty>0</HalfQty>
+  </Items>
+  <Items>
+    <UserId>69</UserId>
+    <TokenNo>1</TokenNo>
+    <ItemName>MISSI ROTI</ItemName>
+    <FullQty>1</FullQty>
+    <HalfQty>0</HalfQty>
+  </Items>
+  <Items>
+    <UserId>69</UserId>
+    <TokenNo>1</TokenNo>
+    <ItemName>BUTTER TANDOORI ROTI</ItemName>
+    <FullQty>1</FullQty>
+    <HalfQty>0</HalfQty>
+  </Items>
+  <Items>
+    <UserId>69</UserId>
+    <TokenNo>1</TokenNo>
+    <ItemName>PANEER PARANTHA</ItemName>
+    <FullQty>1</FullQty>
+    <HalfQty>0</HalfQty>
+  </Items>
+  <Items>
+    <UserId>69</UserId>
+    <TokenNo>5</TokenNo>
+    <ItemName>GOURMET GARLIC</ItemName>
+    <FullQty>1</FullQty>
+    <HalfQty>0</HalfQty>
+  </Items>
+  <Items>
+    <UserId>69</UserId>
+    <TokenNo>5</TokenNo>
+    <ItemName>HAWAIN PIZZA</ItemName>
+    <FullQty>1</FullQty>
+    <HalfQty>0</HalfQty>
+  </Items>
+</Item>

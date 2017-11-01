@@ -1,0 +1,188 @@
+﻿@model NibsMVC.Models.CashierHomeModel
+<div class="row ">
+
+    <div class="col-md-12 col-sm-12">
+        <div class="portlet box blue-steel">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-bell-o"></i>Restaurent Bill Reports
+                </div>
+
+            </div>
+            <div class="portlet-body">
+                <div class="scroller" style="height: 300px;" data-always-visible="1" data-rail-visible="0">
+                    <ul class="feeds">
+                        <li>
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>BillNo</th>
+                                        <th>Bill Date</th>
+                                        <th>Total Amount</th>
+                                        <th>Servic ChargeAmt</th>
+                                        <th>Discount Amount</th>
+                                        <th>VatAmount</th>
+                                        <th>Table No</th>
+                                        <th>Net Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.getRBillList.Count > 0)
+                                    {
+                                        foreach (var item in Model.getRBillList)
+                                        {
+                                            <tr>
+                                                <td>@item.BillId</td>
+                                                <td>@item.BillDate.ToShortDateString()</td>
+                                                <td>@item.TotalAmount</td>
+                                                <td>@item.ServicChargeAmt</td>
+                                                <td>@item.DiscountAmount</td>
+                                                <td>@item.VatAmount</td>
+                                                <td>@item.TableNo</td>
+                                                <td>@item.NetAmount</td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </li>
+                    </ul>
+                </div>
+                @if (Model.getRBillList.Count > 20)
+                {
+                    <div class="scroller-footer">
+                        <div class="btn-arrow-link pull-right">
+                            <a href="#">See All Records</a>
+                            <i class="icon-arrow-right"></i>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    
+
+    
+</div>
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <div class="portlet box blue-steel">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-bell-o"></i>TakeAway Bill Reports
+                </div>
+
+            </div>
+            <div class="portlet-body">
+                <div class="scroller" style="height: 300px;" data-always-visible="1" data-rail-visible="0">
+                    <ul class="feeds">
+                        <li>
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>BillNo</th>
+                                        <th>Bill Date</th>
+                                        <th>Total Amount</th>
+                                        <th>Servic ChargeAmt</th>
+                                        <th>Discount Amount</th>
+                                        <th>VatAmount</th>
+                                        <th>Token No</th>
+                                        <th>Net Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.getTBillList.Count > 0)
+                                    {
+                                        foreach (var item in Model.getTBillList)
+                                        {
+                                            <tr>
+                                                <td>@item.BillId</td>
+                                                <td>@item.BillDate.ToShortDateString()</td>
+                                                <td>@item.TotalAmount</td>
+                                                <td>@item.ServicChargeAmt</td>
+                                                <td>@item.DiscountAmount</td>
+                                                <td>@item.VatAmount</td>
+                                                <td>@item.TokenNo</td>
+                                                <td>@item.NetAmount</td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </li>
+                    </ul>
+                </div>
+                @if (Model.getRBillList.Count > 20)
+                {
+                    <div class="scroller-footer">
+                        <div class="btn-arrow-link pull-right">
+                            <a href="#">See All Records</a>
+                            <i class="icon-arrow-right"></i>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <div class="portlet box blue-steel">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-bell-o"></i>HomeDelivery Bill Reports
+                </div>
+
+            </div>
+            <div class="portlet-body">
+                <div class="scroller" style="height: 300px;" data-always-visible="1" data-rail-visible="0">
+                    <ul class="feeds">
+                        <li>
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>BillNo</th>
+                                        <th>Bill Date</th>
+                                        <th>Total Amount</th>
+                                        <th>Servic ChargeAmt</th>
+                                        <th>Discount Amount</th>
+                                        <th>VatAmount</th>
+                                        <th>Token No</th>
+                                        <th>Net Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.getTBillList.Count > 0)
+                                    {
+                                        foreach (var item in Model.getTBillList)
+                                        {
+                                            <tr>
+                                                <td>@item.BillId</td>
+                                                <td>@item.BillDate.ToShortDateString()</td>
+                                                <td>@item.TotalAmount</td>
+                                                <td>@item.ServicChargeAmt</td>
+                                                <td>@item.DiscountAmount</td>
+                                                <td>@item.VatAmount</td>
+                                                <td>@item.TokenNo</td>
+                                                <td>@item.NetAmount</td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </li>
+                    </ul>
+                </div>
+                @if (Model.getRBillList.Count > 20)
+                {
+                    <div class="scroller-footer">
+                        <div class="btn-arrow-link pull-right">
+                            <a href="#">See All Records</a>
+                            <i class="icon-arrow-right"></i>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

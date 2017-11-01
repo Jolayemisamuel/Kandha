@@ -1,0 +1,103 @@
+﻿@model NibsMVC.Models.AssignMenuModel
+     
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-content">
+    <div class="row">
+        @*<p class="err" style="color:red">@TempData["menuerror"]</p>*@
+        <div class="col-md-12">
+            <div class="portlet box blue">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-gift"></i>Assign Menu
+                    </div>
+                </div>
+                <div class="portlet-body form">
+                    <!-- BEGIN FORM-->
+                    @using (Html.BeginForm("Create", "Menu", FormMethod.Post, new { @id = "menuassign", @class = "form-horizontal" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+
+                        @*@Html.HiddenFor(model => model.CategoryId)*@
+
+                        <input type="hidden" name="assigndata" id="assigndata" value="" />
+                        <div class="form-body">
+                            <div class="alert alert-danger display-hide">
+                                <button class="close" data-close="alert"></button>
+                                You have some form errors. Please check below.
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Outlet Name <span class="required">
+                                        *
+                                    </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        @Html.DropDownListFor(model => model.OutletId, new SelectList(ViewBag.OutletLists, "Value", "Text"), "--Choose Your Outlet--", new { @class = "form-control" })
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Select Category <span class="required">
+                                        *
+                                    </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+
+                                        @Html.DropDownListFor(model => model.CategoryId, new SelectList(ViewBag.Categorylists, "Value", "Text"), "--Choose Your Category--", new { @class = "form-control" })
+                                        @*@Html.DropDownListFor(model => model.CategoryId, new SelectList(ViewBag.cat))*@
+                                        <input type="hidden" id="hidcategoryId" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="from-group" id="table_ItemS">
+                            </div>
+                            @*<button type="submit" class="btn green" id="btnassign" style="margin-left:530px;">Assign</button>*@
+                        </div>
+
+
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-9">
+                                    <button type="submit" class="btn green">Submit</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+    $("select[name='CategoryId']").on('change', function () {
+        var val = $(this).val();
+        var OutletId = $('#OutletId').val();
+        var FormData = { CategoryId: val, OutletId: OutletId };
+        $.post('/Menu/MenuAssignCatItem', FormData, function (data) {
+            $("#table_ItemS").html(data);
+            $('.checkbox').on('click', function () {
+                var chkid = $(this).attr('value');
+                $('input[type="textbox"][Id="' + chkid + '"]').attr("readonly", false);
+            });
+        });
+        
+    });
+</script>
+</div>
+
+
+

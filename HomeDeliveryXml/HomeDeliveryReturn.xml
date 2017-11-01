@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Item>
+  <Items>
+    <UserId>81</UserId>
+    <TokenNo>1</TokenNo>
+    <ItemId>355</ItemId>
+    <ItemName>WHITE JUMBO</ItemName>
+    <FullQty>2</FullQty>
+    <HalfQty>0</HalfQty>
+    <FullPrice>45.0000</FullPrice>
+    <HalfPrice>0.0000</HalfPrice>
+    <TotalAmount>90.0000</TotalAmount>
+    <Vat>5</Vat>
+    <VatAmt>4.5000</VatAmt>
+    <OfferQty>0</OfferQty>
+  </Items>
+  <Items>
+    <UserId>81</UserId>
+    <TokenNo>1</TokenNo>
+    <ItemId>94</ItemId>
+    <ItemName>COUNTRY SIDE PIZZA</ItemName>
+    <FullQty>1</FullQty>
+    <HalfQty>0</HalfQty>
+    <FullPrice>189.0000</FullPrice>
+    <HalfPrice>0.0000</HalfPrice>
+    <TotalAmount>189.0000</TotalAmount>
+    <Vat>5</Vat>
+    <VatAmt>9.450000</VatAmt>
+    <OfferQty>0</OfferQty>
+  </Items>
+</Item>

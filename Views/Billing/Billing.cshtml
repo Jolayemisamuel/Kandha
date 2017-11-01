@@ -1,0 +1,516 @@
+﻿@model NibsMVC.Models.NibsBillingModel
+@{
+    ViewBag.Title = "Billing";
+    Layout = null;
+}
+<link href="~/assets/global/plugins/font-awesome/css/font-awesome.css" rel="stylesheet" />
+<link href="~/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+<link href="~/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="~/assets/global/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css" />
+<link href="~/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+<link href="~/assets/admin/pages/css/Billing.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="~/assets/global/plugins/clockface/css/clockface.css" />
+<link rel="stylesheet" type="text/css" href="~/assets/global/plugins/bootstrap-datepicker/css/datepicker3.css" />
+<link rel="stylesheet" type="text/css" href="~/assets/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" />
+<link rel="stylesheet" type="text/css" href="~/assets/global/plugins/bootstrap-colorpicker/css/colorpicker.css" />
+<link rel="stylesheet" type="text/css" href="~/assets/global/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+<link rel="stylesheet" type="text/css" href="~/assets/global/plugins/bootstrap-datetimepicker/css/datetimepicker.css" />
+<!--css for calendar-->
+<link rel="stylesheet" type="text/css" href="~/assets/global/plugins/bootstrap-select/bootstrap-select.min.css" />
+<link rel="stylesheet" type="text/css" href="~/assets/global/plugins/select2/select2.css" />
+<link rel="stylesheet" type="text/css" href="~/assets/global/plugins/jquery-multi-select/css/multi-select.css" />
+<link href="~/assets/global/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" />
+<link href="~/assets/global/css/components.css" rel="stylesheet" type="text/css" />
+<link href="~/assets/global/css/plugins.css" rel="stylesheet" type="text/css" />
+<link href="~/assets/admin/layout/css/layout.css" rel="stylesheet" type="text/css" />
+<link id="style_color" href="~/assets/admin/layout/css/themes/default.css" rel="stylesheet" type="text/css" />
+<link href="~/assets/admin/layout/css/custom.css" rel="stylesheet" type="text/css" />
+
+
+<style>
+    .datepicker.dropdown-menu {
+        left: 877.5px !important;
+    }
+
+    table {
+        font-size: 10px !important;
+    }
+
+    body {
+        background-color: white !important;
+        padding-top: 5px;
+        font-size: 10px !important;
+    }
+
+    .form-control {
+        font-size: 12px;
+    }
+
+    .padding-5 {
+        padding: 5px !important;
+        border: solid 1px #ddd;
+    }
+
+    a.table_no {
+        text-decoration: none;
+    }
+
+        a.table_no:hover {
+            text-decoration: none;
+        }
+</style>
+<div class="page-container">
+    @{
+        if (Model != null)
+        {
+            <div class="row">
+                <input type="hidden" name="GetCurrentDateTime" id="GetCurrentDateTime" value="@DateTime.Now" />
+                @*@if (ViewBag.servicechargs == 0)
+                    {
+                        <input type="hidden" name="name" value="4.940" id="servictax" />
+                    }
+                    else
+                    {
+                        <input type="hidden" name="name" value="@ViewBag.servicechargs" id="servictax" />
+                    }*@
+                <input type="hidden" name="name" value="@ViewBag.outletaddress" id="outletaddress" />
+                <div class="col-md-5">
+                    <div class="col-md-1 tableno">
+                        <div class="row margin-bottom-5">
+                            <label class="btn btn-danger col-md-12 ">T</label>
+                        </div>
+                        @if (Model.getAllTables != null)
+                        {
+                            foreach (var item in Model.getAllTables)
+                            {
+                                if (item.Current == "current")
+                                {
+                                    @Ajax.ActionLink(item.TableNo, "_CreatePartial", new { Id = item.TableNo }, new AjaxOptions { UpdateTargetId = "Div_Billing_items", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" }, new { @class = "table_no padding-5 margin-bottom-5 current" })
+                                }
+                                else
+                                {
+                                    @Ajax.ActionLink(item.TableNo, "_CreatePartial", new { Id = item.TableNo }, new AjaxOptions { UpdateTargetId = "Div_Billing_items", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" }, new { @class = "table_no padding-5 margin-bottom-5" })
+                                }
+                                <br /><br />
+
+                            }
+                        }
+                    </div>
+                    <div class="col-md-11">
+                        <div class="row">
+                            <div class="col-md-12 DivCategory">
+                                @foreach (var item in Model.getAllItem)
+                                {
+                                    @Ajax.ActionLink(item.CategoryName, "_GetAllItemPartial", new { Id = item.CategoryId }, new AjaxOptions { UpdateTargetId = "Items_Div", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" }, new { @class = "btn btn-blue margin-right-5", @style = "background:" + @item.Color + ";color:" + @item.TextColor })
+                                }
+                            </div>
+                        </div>
+                        <div class="clear-fix"></div>
+                        <div class="row">
+                            @using (Ajax.BeginForm("UpdateBillingXml", "Billing", new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "Div_Billing_items" }))
+                            {
+
+                                <div class="col-md-12" style="border-bottom:solid 1.5px #808080; padding-bottom:5px;">
+
+
+                                    <div class="clear-fix"></div>
+                                    <div class="radio-list col-md-5 margin-bottom-10" id="gradiobuttons">
+                                        <label class="radio-inline padding-top-0">
+                                            <input type="radio" name="Type" id="optionsRadios4" value="Full" class="radio-item" checked> Full
+                                        </label>
+                                        <label class="radio-inline padding-top-0">
+                                            <input type="radio" name="Type" id="optionsRadios5" value="Half" class="radio-item"> Half
+                                        </label>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <label class="col-md-2">Qty</label>
+                                            <div class="col-md-6 form-horizontal">
+                                                <input type="number" name="Qty" value="1" class="form-control" id="Qty" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span id="ErrorTableNo" style="color:red; display:none;">Please Select Table No !</span>
+                                <div class="col-md-12 DivItems" id="Items_Div">
+
+                                </div>
+
+
+                            }
+                        </div>
+                        <a class="btn btn-danger" data-toggle="modal" href="#OpenFood" id="open_food_a">
+                            Open Food
+                        </a>
+                        <span id="open_span" style="display:none;color:red;">please select table no !</span>
+                        <div id="OpenFood" class="modal fade" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <form class="form-horizontal" id="Form_OpenFood">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                            <h4 class="modal-title">Open Food Item</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="scroller" style="height:300px" data-always-visible="1" data-rail-visible1="1">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-body">
+                                                            <input type="hidden" name="TableNo" value="" id="OpenFoodTable" />
+
+                                                            <div class="form-group">
+                                                                <label class="col-md-3">Item Name</label>
+                                                                <div class="col-md-5">
+                                                                    <input type="text" name="Name" value="" class="form-control" id="open_foodName" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="col-md-3">Item Price</label>
+                                                                <div class="col-md-5">
+                                                                    <input type="text" name="Price" value="" class="form-control" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="col-md-3">Item Quantity</label>
+                                                                <div class="col-md-5">
+                                                                    <input type="text" name="Quantity" value="" class="form-control" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="col-md-3">Item Vat</label>
+                                                                <div class="col-md-5">
+                                                                    <input type="text" name="Vat" value="" class="form-control" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" data-dismiss="modal" class="btn default">Close</button>
+                                            <button type="submit" class="btn green">Save </button>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-12 margin-bottom-10">
+                                <a target="_blank" href="@Url.Action("Index", "TakeAway")"><input type="button" value="Take Away" id="btntakaway" class="btn red-stripe" /></a>
+                                <a target="_blank" href="@Url.Action("Index", "HomeDelivery")"><input type="button" value="Home Delivery" id="btntakaway" class="btn red-stripe" /></a>
+                                <a class="btn red" data-toggle="modal" href="#MergerTable">
+                                    Merge Tables
+                                </a>
+                                <div class="modal fade" id="MergerTable" tabindex="-1" role="dialog" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                <h4 class="modal-title">Merge Tables</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="col-md-3">
+                                                            <h6>Tables</h6>
+                                                            <div class="row">
+                                                                <div class="col-md-12" id="TableForMerged"></div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <h6> Merged Tables</h6>
+                                                            <div class="row">
+                                                                <div class="col-md-12" id="MergedTable">
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <h6> Master Table</h6>
+                                                            <div class="row">
+                                                                <div class="col-md-12" id="MasterTable">
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <div class="row">
+                                                    <div class="col-md-10">
+                                                        <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                                                    </div>
+                                                    <div class="col-md-2">
+
+                                                        @using (Html.BeginForm("MergedTable", "Billing", FormMethod.Post, new { @id = "form-merged" }))
+                                                        {@Html.AntiForgeryToken()
+                                                        <input type="hidden" name="MergedTable" value="" id="MergedT" />
+                                                        <input type="hidden" name="MasterTable" value="" id="MasterT" />
+                                                        <input type="submit" value="Merge" id="btn-merge" class="btn green" />
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <a class="btn red" data-toggle="modal" id="btnshiftclickpopup" href="#Shift">
+                                    Shift Table
+                                </a>
+                                <div class="modal fade" id="Shift" tabindex="-1" role="dialog" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                <h4 class="modal-title">Shift Table</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="col-md-3">
+                                                            <h6>Tables</h6>
+                                                            <div class="row">
+                                                                <div class="col-md-12" id="TableForShift"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <h6> Table To Shift</h6>
+                                                            <div class="row">
+                                                                <div class="col-md-12" id="shiftedTable">
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <h6> Shifted Table</h6>
+                                                            <div class="row">
+                                                                <div class="col-md-12" id="shifted">
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <h6> Master Table</h6>
+                                                            <div class="row">
+                                                                <div class="col-md-12" id="ShiftMasterTable">
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <div class="row">
+                                                    <div class="col-md-10">
+                                                        <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        @using (Html.BeginForm("ShiftTable", "ShiftTable", FormMethod.Post, new { @id = "form-shift" }))
+                                                        {
+                                                        <input type="hidden" name="TableForShift" value="" id="ShiftT" />
+                                                        <input type="hidden" name="MasterTable" value="" id="ShiftMasterT" />
+                                                        <input type="submit" value="Shift" id="btn-shift" class="btn green" />
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!--table split start-->
+                                <a class="btn red" data-toggle="modal" href="#Split" id="Tabsplit">
+                                    Split
+                                </a>
+                                <div class="modal fade" id="Split" tabindex="-1" role="dialog" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                <h4 class="modal-title">Spliting</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row">
+                                                    <div class="col-md-12 form-horizontal">
+
+                                                        <div class="form-body">
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-3">Default</label>
+                                                                <div class="col-md-9" id="current_items">
+                                                                    <select multiple="multiple" class="multi-select" id="my_multi_select1" name="my_multi_select1[]"></select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="col-md-3">TableNo</label>
+                                                                <label class="col-md-4 bold" id="SplitTableNo"></label>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="col-md-3">Total Amount</label>
+                                                                <label class="col-md-4 bold" id="SplitTotal"></label>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="col-md-3">Select Type</label>
+                                                                <div class="col-md-4">
+                                                                    <select class="form-control" id="ddl_split">
+                                                                        <option>--Select--</option>
+                                                                        <option value="Manually">Manually</option>
+                                                                        <option value="Divide">Divide</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div id="Manual" hidden>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-3">No of Persion</label>
+                                                                    <div class="col-md-4">
+                                                                        <input type="text" class="form-control" id="Manul_No_of_Persion" />
+                                                                    </div>
+                                                                </div>
+                                                                <div id="manul_content"></div>
+
+                                                            </div>
+                                                            <div id="Divide" class="col-md-12" hidden>
+                                                                <div class="form-group">
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-3">No of Persion</label>
+                                                                        <div class="col-md-4">
+                                                                            <input type="text" class="form-control" id="Divide_No_of_Persion" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div id="divide_content"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                                                <a href="#" class="btn blue" id="btn_split">Split</a>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <!--table split end-->
+                                <a class="btn red" href="@Url.Action("Index", "Home")">Dashboard</a>
+                                <a href="@Url.Action("Login", "Account")">
+                                    <img src="~/Images/exit.png" width="18" height="20" />
+                                </a>
+                            </div>
+                        </div>
+                        <div id="Div_Billing_items"></div>
+
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
+<script src="~/assets/global/plugins/jquery-1.11.0.min.js" type="text/javascript"></script>
+<script src="~/assets/global/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<!-- IMPORTANT! Load jquery-ui-1.10.3.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+<script src="~/assets/global/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
+<script src="~/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="~/assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+<script src="~/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="~/assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+<script src="~/assets/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
+<script src="~/assets/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+<script src="~/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+<script src="~/assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
+<script src="~/assets/global/plugins/jquery-validation/js/additional-methods.min.js"></script>
+<script src="~/assets/global/plugins/select2/select2.min.js"></script>
+<!--js for calendar-->
+<script type="text/javascript" src="~/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="~/assets/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+<script type="text/javascript" src="~/assets/global/plugins/clockface/js/clockface.js"></script>
+<script type="text/javascript" src="~/assets/global/plugins/bootstrap-daterangepicker/moment.min.js"></script>
+<script type="text/javascript" src="~/assets/global/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+<script type="text/javascript" src="~/assets/global/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+<script type="text/javascript" src="~/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<!--js for calendar-->
+<script src="~/assets/global/plugins/gritter/js/jquery.gritter.js" type="text/javascript"></script>
+<script type="text/javascript" src="~/assets/global/plugins/bootstrap-select/bootstrap-select.min.js"></script>
+<script type="text/javascript" src="~/assets/global/plugins/jquery-multi-select/js/jquery.multi-select.js"></script>
+<!-- END CORE PLUGINS -->
+<script src="~/assets/global/scripts/metronic.js" type="text/javascript"></script>
+<script src="~/assets/admin/layout/scripts/layout.js" type="text/javascript"></script>
+<script src="~/assets/admin/layout/scripts/quick-sidebar.js" type="text/javascript"></script>
+<script src="~/assets/admin/layout/scripts/demo.js" type="text/javascript"></script>
+<script src="~/assets/admin/pages/scripts/custom-jquery.js"></script>
+<script src="~/assets/admin/pages/scripts/xmlbilling.js"></script>
+<script src="~/assets/admin/pages/scripts/components-pickers.js"></script>
+<script src="~/assets/admin/pages/scripts/components-dropdowns.js"></script>
+<script src="~/assets/admin/pages/scripts/TableSpliting.js"></script>
+<script src="~/assets/admin/pages/scripts/form-validation.js"></script>
+<script>
+    jQuery(document).ready(function () {
+        Metronic.init(); // init metronic core components
+        Layout.init(); // init current layout
+        QuickSidebar.init(); // init quick sidebar
+        Demo.init(); // init demo features
+        ComponentsPickers.init();
+        ComponentsDropdowns.init();
+        FormValidation.init();
+    });
+</script>
+<script>
+    $(document).on('click', '#btn_Call_Dispatch', function (e) {
+        var pay = $('#Payment_Type').val();
+        if (pay == "") {
+            $('.modal').modal('hide');
+            alert("select Payment Type first");
+            return false;
+        }
+        else {
+            var table = $('#RunningTable').val();
+            $('#T_No').html(table);
+            var net = $('#txtnettotal').val();
+            $('#Net_amount').text(net);
+            e.preventDefault();
+        }
+    });
+    $(document).on('change', '#Cash_amt', function () {
+        var val = $(this).val();
+        var total = $('#Net_amount').text();
+        if (parseFloat(total) > parseFloat(val)) {
+            $("#Amt_warning").show();
+        }
+        else {
+            $("#Amt_warning").hide();
+        }
+        var returnamt = (parseFloat(val) - parseFloat(total)).toFixed(2);
+        $('#Cash_Exchange').val(returnamt);
+    });
+    $(document).on('click', '#open_food_a', function (e) {
+        var Tabl = $('#RunningTable').val();
+        if (Tabl == "") {
+            $('.modal').modal('hide');
+            $('#open_span').show();
+            return false;
+        }
+        else {
+            $('#OpenFoodTable').val(Tabl);
+            $('#open_span').hide();
+        }
+
+        e.preventDefault();
+    });
+</script>

@@ -1,0 +1,542 @@
+﻿@model NibsMVC.Models.OutletHomeModel
+
+
+<div class="row">
+    <div class="col-md-12">
+        @if (Model.AutoInventory)
+        {
+            <div class="note note-success">
+                <p>
+                    NOTE: <strong>Auto Inventory is On  </strong> <a href="@Url.Action("ChangeInventory", "Home")" class="btn green pull-right" style="margin-top: -7px;">Change</a>
+                </p>
+               
+            </div>
+        }
+        else
+        {
+            <div class="note note-danger">
+                <p>
+                    NOTE: <strong>Auto Inventory is Off</strong><a href="@Url.Action("ChangeInventory", "Home")" class="btn green pull-right" style="margin-top: -7px;">Change</a>
+                </p>
+               
+            </div>
+        }
+        
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 margin-bottom-10">
+
+        <div class="dashboard-stat purple-plum">
+            <a href="@Url.Action("Index","Nibs")">
+                
+
+                <div class="details">
+                    <div class="number">
+                        Order
+                    </div>
+                    <div class="desc">
+                        Create new order
+                    </div>
+                </div>
+                <div class="visual">
+                    <i class="fa fa fa-cutlery"></i>
+                </div>
+                <span class="more">
+                    Order Now <i class="m-icon-swapright m-icon-white"></i>
+                </span>
+            </a>
+
+
+        </div>
+
+    </div>
+    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+        <div class="dashboard-stat blue">
+            <a href="@Url.Action("Index","Today")">
+                <div class="details">
+                    <div class="number">
+                        Today Report
+                    </div>
+                    <div class="desc">
+                        Check out today statistics
+                    </div>
+                </div>
+                <div class="visual">
+                    <i class="fa fa fa-sliders"></i>
+                </div>
+                <span class="more">
+                    Check Now <i class="m-icon-swapright m-icon-white"></i>
+                </span>
+            </a>
+
+
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+        <div class="dashboard-stat green">
+            <a href="@Url.Action("Index","Reports")">
+                <div class="details">
+                    <div class="number">
+                        Bill Report
+                    </div>
+                    <div class="desc">
+                        Check out bill report
+                    </div>
+                </div>
+                <div class="visual">
+                    <i class="fa fa fa-sliders"></i>
+                </div>
+                <span class="more">
+                    Check Now <i class="m-icon-swapright m-icon-white"></i>
+                </span>
+
+            </a>
+
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+        <div class="dashboard-stat yellow">
+            <a href="@Url.Action("Index", "Purchase")">
+                <div class="details">
+                    <div class="number">
+                        Purchase Report
+                    </div>
+                    <div class="desc">
+                        Check out purchase report
+                    </div>
+                </div>
+                <div class="visual">
+                    <i class="fa fa fa-sliders"></i>
+                </div>
+                <span class="more">
+                    Check Now <i class="m-icon-swapright m-icon-white"></i>
+                </span>
+
+            </a>
+
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 margin-bottom-10">
+        <a class="btn default" data-toggle="modal" href="#ComboOffer">
+            View Combo Offers Details
+        </a>
+        <div id="ComboOffer" class="modal fade" tabindex="-1" data-width="760">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Combo Offers Details</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        @if (Model.gettodayoffers != null)
+                        {
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>S.No</th>
+                                        <th>Days</th>
+                                        <th>Buy Items</th>
+                                        <th>Base Amount</th>
+                                       
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @{
+                            int sno = 1;
+                                    }
+                                    @foreach (var i in Model.gettodayoffers)
+                                    {
+                                        if (i.ComboOfferList != null)
+                                        {
+                                            foreach (var item in i.ComboOfferList)
+                                            {
+                                                <tr>
+                                                    <td>@sno</td>
+                                                    <td>@item.Days</td>
+                                                    <td>@item.BuyItems</td>
+                                                    <td>@item.BaseAmount</td>
+                                                    
+                                                </tr>sno++;
+                                            }
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        }
+                        else
+                        {
+                            <p>No Offer Found</p>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+            </div>
+        </div>
+
+        <a class="btn default" data-toggle="modal" href="#AmountBasis">
+            View Amount Basis Offers Details
+        </a>
+        <div id="AmountBasis" class="modal fade" tabindex="-1" data-width="760">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Amount Basis Offer Detail</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        @if (Model != null)
+                        {
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>S.No</th>
+                                        <th>Item Name</th>
+                                        <th>Discount</th>
+                                        <th>Amount</th>
+                                        <th>Quantity</th>
+                                      
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @{
+                            int sno = 1;
+                                    }
+                                    @foreach (var i in Model.gettodayoffers)
+                                    {
+                                        if (i.BaseAmountList != null)
+                                        {
+                                            foreach (var item in i.BaseAmountList)
+                                            {
+                                                <tr>
+                                                    <td>@sno</td>
+                                                    <td>@item.ItemId</td>
+                                                    <td>@item.Discount</td>
+                                                    <td>@item.Amount</td>
+                                                    <td>@item.Quantity</td>
+                                                </tr>
+                                                sno++;
+                                            }
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        }
+                        else
+                        {
+                            <p>No Offer Found</p>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+
+            </div>
+        </div>
+        <a class="btn default" data-toggle="modal" href="#HappyHours">
+            View Happy Hours Offers Details
+        </a>
+        <div id="HappyHours" class="modal fade" tabindex="-1" data-width="760">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Happy Hours Offer Detail</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        @if (Model != null)
+                        {
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>S.No</th>
+                                        <th>Period</th>
+                                        <th>Timing</th>
+                                        <th>Item Name</th>
+                                        <th>Discount</th>
+                                        <th>Item Index</th>
+                                       
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @{
+                            int sno = 1;
+                                    }
+                                    @foreach (var i in Model.gettodayoffers)
+                                    {
+                                        if (i.HappyHoursList != null)
+                                        {
+                                            foreach (var item in i.HappyHoursList)
+                                            {
+
+                                                <tr>
+                                                    <td>@sno</td>
+                                                    <td>@item.from To @item.To</td>
+                                                    <td>@item.TimeFrom To @item.TimeEnd</td>
+                                                    <td>@item.ItemName</td>
+                                                    <td>@item.Discount</td>
+                                                    <td>@item.ItemIndex</td>
+                                                </tr>
+                                                sno++;
+                                            }
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        }
+                        else
+                        {
+                            <p>No Offer Found</p>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <!-- BEGIN BORDERED TABLE PORTLET-->
+        <div class="portlet box yellow">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-coffee"></i>Buy One Get One & Buy Two Get One Offer Details
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+
+                    <a href="javascript:;" class="reload">
+                    </a>
+
+                </div>
+            </div>
+            <div class="portlet-body">
+                <table class="table table-bordered table-hover table-full-width" id="sample_2">
+                    <thead>
+                        <tr>
+                            <th>
+                                S.NO
+                            </th>
+                            <th>
+                                OfferType
+                            </th>
+                            <th>
+                                Buy Items
+                            </th>
+                            <th>
+                                Free Items
+                            </th>
+                            <th>Days</th>
+                            <th>Discount</th>
+                            <th>Quantity</th>
+                          
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            int counter = 1;
+                        }
+                        @if (Model != null)
+                        {
+                            foreach (var i in Model.gettodayoffers)
+                            {
+                                if (i.BuyOfferList != null)
+                                {
+                                    foreach (var item in i.BuyOfferList)
+                                    {
+                                        <tr>
+                                            <td>@counter</td>
+                                            <td>@item.OfferName</td>
+                                            <td>@item.BuyItems</td>
+                                            <td>@item.FreeItems</td>
+                                            <td>@item.Days</td>
+                                            <td>@item.Discount</td>
+                                            <td>@item.Quantity</td>
+                                            
+                                        </tr>
+                                        counter++;
+                                    }
+                                }
+                            }
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="row ">
+    <div class="col-md-6">
+        <div class="portlet box green-haze">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-calendar"></i>Running Tables
+                </div>
+
+            </div>
+            <div class="portlet-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        @if (ViewBag.RunningTable != null)
+                        {
+                            foreach (var item in ViewBag.RunningTable)
+                            {
+                                <button class="btn blue">@item.TableNo</button>
+                                <div class="margin-bottom-10 visible-sm">
+                                </div>
+
+                            }
+                        }
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*<div class="col-md-6 col-sm-6">
+            <div class="portlet box blue-steel">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-bell-o"></i>Registered Vendors
+                    </div>
+
+                </div>
+                <div class="portlet-body">
+                    <div class="scroller" style="height: 300px;" data-always-visible="1" data-rail-visible="0">
+                        <ul class="feeds">
+                            @if (Model.getAllVendorList.Count > 0)
+                            {
+                                foreach (var item in Model.getAllVendorList)
+                                {
+                                    <li>
+                                        <div class="col1">
+                                            <div class="cont">
+                                                <div class="cont-col1">
+                                                    @if (item.Active == true)
+                                                    {
+                                                        <div class="label label-sm label-success">
+                                                            <i class="fa fa-user"></i>
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="label label-sm label-danger">
+                                                            <i class="fa fa-user"></i>
+                                                        </div>
+                                                    }
+                                                </div>
+                                                <div class="cont-col2">
+                                                    <div class="desc">
+                                                        @item.Name
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col2">
+                                            <div class="date">
+                                                @item.Date
+                                            </div>
+                                        </div>
+
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                    @if (Model.getAllVendorList.Count > 20)
+                    {
+                        <div class="scroller-footer">
+                            <div class="btn-arrow-link pull-right">
+                                <a href="#">See All Records</a>
+                                <i class="icon-arrow-right"></i>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>*@
+    <div class="col-md-6 col-sm-6">
+        <div class="portlet box blue-steel">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-bell-o"></i>Menu Item Report
+                </div>
+
+            </div>
+            <div class="portlet-body">
+                <div class="scroller" style="height: 300px;" data-always-visible="1" data-rail-visible="0">
+                    <ul class="feeds">
+                        <li>
+                            @if (Model.getAllMenuList.Count > 0)
+                            {
+
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+
+                                            <th>Item Name</th>
+                                            <th>Category  Name</th>
+                                            <th>Full Price</th>
+                                            <th>Half Price</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.getAllMenuList)
+                                        {
+                                            <tr>
+
+                                                <td>
+                                                    @item.Name
+                                                </td>
+                                                <td>
+                                                    @item.CategoryName
+                                                </td>
+                                                <td>
+                                                    @item.FullPrice
+                                                </td>
+                                                <td>
+                                                    @item.HalfPrice
+                                                </td>
+                                            </tr>
+
+                                        }
+                                    </tbody>
+                                </table>
+
+                            }
+                        </li>
+
+
+
+
+
+
+
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

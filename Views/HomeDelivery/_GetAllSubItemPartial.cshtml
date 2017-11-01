@@ -1,0 +1,29 @@
+﻿@model List<NibsMVC.Models.GetBillingSubItemModel>
+
+<div class="col-md-12" style="border-bottom:solid 1.5px #808080; padding-bottom:5px;">
+    <div class="clear-fix"></div>
+    <div class="radio-list col-md-4 margin-bottom-10" id="gradiobuttons">
+        <label class="radio-inline padding-top-0">
+            <input type="radio" name="Type" id="optionsRadios4" value="Full" class="radio-item" checked> Full
+        </label>
+        @*<label class="radio-inline padding-top-0">
+            <input type="radio" name="Type" id="optionsRadios5" value="Half" class="radio-item"> Half
+        </label>*@
+
+    </div>
+    <div class="col-md-6">
+        <div class="row">
+            <label class="col-md-2">Qty</label>
+            <div class="col-md-6 form-horizontal">
+                <input type="text" name="Qty" value="1" class="form-control" id="Qty" min="1" maxlength="2" size="20" pattern="\d+" />
+                @*<input type="number" value="1" class="form-control" id="Qty" name="Qty" min="1" pattern="\d+" />*@
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-12 DivItems">
+    @foreach (var item in Model)
+    {
+        <input type="button" value="@item.Name" class="ajax_btn btn btn-blue margin-right-5" style="background:@item.Color;color:@item.TextColor;" id="@item.ItemId" />
+    }
+</div>

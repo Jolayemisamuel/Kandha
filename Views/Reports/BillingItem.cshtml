@@ -1,0 +1,79 @@
+﻿@{
+    ViewBag.Title = "BillingItem";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model NibsMVC.Models.searchBillingItemModel
+
+<div class="page-content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="portlet  box blue">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-gift"></i>Bill Report
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="form-horizontal">
+                        @using (Html.BeginForm("BillingItem", "Reports", FormMethod.Post, new { @class = "" }))
+                        {
+                            <div class="form-body">
+                                <div class="form-group">
+                                    <label class="col-md-3">Bill No</label>
+                                    <div class="col-md-3">
+                                        @Html.TextBoxFor(a => a.BillId, new {@class="form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-6 col-md-offset-3">
+                                    <input type="submit" value="Search" class="btn btn-warning" />
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                    @if (Model.getItems != null)
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="sample_2">
+                                <thead>
+                                    <tr>
+                                        <th>Sno</th>
+                                        <th>Item Name</th>
+                                        <th>Quantity</th>
+                                        <th>Amount</th>
+                                        <th>Vat</th>
+                                        <th>VatAmount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                        int counter = 1;
+                                    }
+                                    @foreach (var item in Model.getItems)
+                                    {
+                                        <tr>
+                                            <td>@counter</td>
+                                            <td>@item.ItemName</td>
+                                            <td>@item.FullQty</td>
+                                            <td>@item.Amount</td>
+                                            <td>@item.Vat</td>
+                                            <td>@item.VatAmount</td>
+                                        </tr>
+                                        counter = counter + 1;
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    
+</div>

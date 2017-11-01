@@ -1,0 +1,201 @@
+﻿@model NibsMVC.Models.SearchReportsModel
+
+@{
+    ViewBag.Title = "STakeAwayBill";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using NibsMVC.EDMX;
+<div class="page-content">
+    <div class="row">
+        <p class="err" style="color:red">@TempData["takerror"]</p>
+        <div class="col-md-12">
+            <div class="portlet box blue">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-gift"></i>Take Away Bill Search Report
+                    </div>
+                </div>
+                <div class="portlet-body form">
+                    <!-- BEGIN FORM-->
+                    @using (Html.BeginForm("STakeAwayBill", "Reports", FormMethod.Post, new { @class = "form-horizontal" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+
+                        <div class="form-body">
+                            <div class="alert alert-danger display-hide">
+                                <button class="close" data-close="alert"></button>
+                                You have some form errors. Please check below.
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    From <span class="required">*</span>
+                                </label>
+                                <div class="col-md-4">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        @Html.TextBoxFor(a => a.FromDate, new { @class = "form-control form-control-inline date-picker", @size = "16", @readonly = "readonly" })
+                                        @Html.ValidationMessageFor(a => a.FromDate)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    To <span class="required">*</span>
+                                </label>
+                                <div class="col-md-4">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        @Html.TextBoxFor(a => a.ToDate, new { @class = "form-control form-control-inline date-picker", @size = "16", @readonly = "readonly" })
+                                        @Html.ValidationMessageFor(a => a.ToDate)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @*<label class="control-label col-md-3">
+                                    Token no 
+                                </label>
+                                <div class="col-md-4">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        @Html.TextBoxFor(a => a.TokenNo, new {@class="form-control" })
+                                    </div>
+                                </div>*@
+                                <div class="col-md-offset-3">
+                                   <div class="col-md-12">
+                                       <button type="submit" class="btn green">Show</button>
+                                   </div>
+                                </div>
+                            </div>
+
+
+                            @{
+                        if (Model != null)
+                        {
+                            var counter = 1;
+
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Sr</th>
+                                        <th>Date</th>
+                                        <th>Vat Amount</th>
+                                        <th>Token no</th>
+                                        <th>Servic Charges</th>
+                                        <th>Discount</th>
+                                        <th>Total</th>
+                                        <th>Net Amount</th>
+                                        <th>Items</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+
+                                @foreach (var item in Model.getbills)
+                                {
+
+                                    <tr>
+                                        <td>@counter</td>
+                                        <td>@item.BillDate.ToShortDateString()</td>
+                                        <td>@Math.Round(item.VatAmount, 2)</td>
+                                        <td>@item.TokenNo</td>
+                                       
+                                        <td>@Math.Round(item.ServicChargesAmount, 2)</td>
+                                        <td>@Math.Round(item.DiscountAmount, 2)</td>
+                                        <td>@Math.Round(item.TotalAmount, 2)</td>
+                                        <td>@Math.Round(item.NetAmount, 2)</td>
+                                        <td>
+                                            <a class="btn default" data-toggle="modal" href="#@item.BillId">
+                                                Items
+                                            </a>
+                                            <div class="modal fade" id="@item.BillId" tabindex="-1" role="basic" aria-hidden="true">
+
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                    <h4 class="modal-title">Item Details</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <table class="table table-bordered">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Item Name</th>
+                                                                <th>Full Quantity</th>
+                                                                <th>Half Quantity</th>
+                                                                <th>Amount</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var items in item.tblBillDetails)
+                                                            {
+
+                                                                <tr>
+                                                                    <td>
+                                                                        @{
+                                                                NIBSEntities db = new NIBSEntities();
+                                                                var Name = db.tblItems.Find(items.ItemId).Name;
+                                                                        }
+                                                                        @Name
+                                                                    </td>
+                                                                    <td>
+                                                                        @items.FullQty
+                                                                    </td>
+                                                                    <td>
+                                                                        @items.HalfQty
+                                                                    </td>
+                                                                    <td>
+                                                                        @Math.Round(items.Amount, 2)
+                                                                    </td>
+                                                                </tr>
+                                                            }
+                                                        </tbody>
+
+
+
+
+
+                                                    </table>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn default" data-dismiss="modal">Close</button>
+
+                                                </div>
+
+                                            </div>
+                                        </td>
+                                        <td>
+                                        
+                                            <a data-href="@Url.Action("Delete", "Reports", new { id = item.BillId })" data-toggle="confirmation" data-placement="top"><span class="fa fa-trash-o" style="cursor:pointer"></span></a>
+                                        
+                                        </td>
+                                    </tr>
+                                    counter++;
+                                }
+                            </table>
+                        }
+
+                            }
+
+                        </div>
+                        @*<div class="form-actions">
+                                <div class="row">
+                                    <div class="col-md-offset-3 col-md-9">
+                                        <button type="submit" class="btn green">Show</button>
+
+                                    </div>
+                                </div>
+                            </div>*@
+                    }
+
+                </div>
+            </div>
+        </div>
+        <script>
+        $(document).ready(function () {
+            $('#FromDate').attr("data-date-format", "dd-mm-yyyy");
+            $('#ToDate').attr("data-date-format", "dd-mm-yyyy");
+        });
+        </script>
+    </div>
+
+
+</div>

@@ -1,0 +1,193 @@
+﻿@model NibsMVC.Models.LoginModel
+
+@{
+    ViewBag.Title = "Log in";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+@*@using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "login-form", ReturnUrl = ViewBag.ReturnUrl  }))*@
+@using (Html.BeginForm("Login","Account",FormMethod.Post, new {@class = "login-form", ReturnUrl = ViewBag.ReturnUrl }))
+{
+   
+    @Html.ValidationSummary(true)
+    <h3 class="form-title">Login to your account</h3>
+    if (TempData["logout"]!=null)
+    {
+        <p style="color:#b200ff">@TempData["logout"]</p>
+    }
+    <div class="alert alert-danger display-hide">
+        <button class="close" data-close="alert"></button>
+        <span>
+            Enter any username and password.
+        </span>
+    </div>
+    <div class="form-group">
+        <label class="control-label visible-ie8 visible-ie9">Username</label>
+        <div class="input-icon">
+            <i class="fa fa-user"></i>
+            <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Username" name="UserName" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label visible-ie8 visible-ie9">Password</label>
+        <div class="input-icon">
+            <i class="fa fa-lock"></i>
+            <input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="Password" name="Password" />
+        </div>
+    </div>
+
+    <div class="form-actions">
+        <label class="checkbox">
+            <input type="checkbox" name="remember" value="1" /> Remember me
+        </label>
+        <input type="submit" class="btn green pull-right" value="Login"  />
+        @*<button type="submit" class="btn green pull-right">
+            Login <i class="m-icon-swapright m-icon-white"></i>
+        </button>*@
+    </div>
+
+    <div class="forget-password">
+        <h4>Forgot your password ?</h4>
+        <p>
+            no worries, click <a href="javascript:;" id="forget-password">
+                here
+            </a>
+            to reset your password.
+        </p>
+    </div>
+    if (ViewBag.Register == true)
+    {
+        <div class="create-account">
+            <p>
+                Don't have an account yet ?&nbsp; <a href="javascript:;" id="register-btn">
+                    Create an account
+                </a>
+            </p>
+        </div>
+    }
+}
+
+@using (Html.BeginForm("ForgotPassword", "Account", FormMethod.Post, new { @class = "forget-form" }))
+{@Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <h3>Forgot Password ?</h3>
+    <p>
+        Enter your User Name below to reset your password.
+    </p>
+    <div class="form-group">
+        <div class="input-icon">
+            <i class="fa fa-user"></i>
+            <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="UserName" name="UserName" />
+        </div>
+    </div>
+    <div class="form-actions">
+        <button type="button" id="back-btn" class="btn">
+            <i class="m-icon-swapleft"></i> Back
+        </button>
+        <button type="submit" class="btn green pull-right">
+            Submit <i class="m-icon-swapright m-icon-white"></i>
+        </button>
+    </div>
+}
+
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "register-form" }))
+{
+@Html.AntiForgeryToken()
+@Html.ValidationSummary(true)
+<h3>Sign Up</h3>
+<p>
+    Enter your personal details below:
+</p>
+<div class="form-group">
+    <label class="control-label visible-ie8 visible-ie9">Full Name</label>
+    <div class="input-icon">
+        <i class="fa fa-font"></i>
+        <input class="form-control placeholder-no-fix" type="text" placeholder="Full Name" name="Name" />
+    </div>
+</div>
+
+<div class="form-group">
+    <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+    <label class="control-label visible-ie8 visible-ie9">Email</label>
+    <div class="input-icon">
+        <i class="fa fa-envelope"></i>
+        <input class="form-control placeholder-no-fix" type="text" placeholder="Email" name="Email" />
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label visible-ie8 visible-ie9">Address</label>
+    <div class="input-icon">
+        <i class="fa fa-check"></i>
+        <input class="form-control placeholder-no-fix" type="text" placeholder="Address" name="Address" />
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label visible-ie8 visible-ie9">City/Town</label>
+    <div class="input-icon">
+        <i class="fa fa-location-arrow"></i>
+        <input class="form-control placeholder-no-fix" type="text" placeholder="City/Town" name="City" />
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label visible-ie8 visible-ie9">Contact A</label>
+    <div class="input-icon">
+        <i class="fa fa-phone"></i>
+        <input class="form-control placeholder-no-fix" type="text" placeholder="ContactA" name="ContactA" />
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label visible-ie8 visible-ie9">ContactB</label>
+    <div class="input-icon">
+        <i class="fa fa-phone"></i>
+        <input class="form-control placeholder-no-fix" type="text" placeholder="ContactB" name="ContactB" />
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label visible-ie8 visible-ie9">Tin No</label>
+    <div class="input-icon">
+        <i class="fa fa-navicon"></i>
+        <input class="form-control placeholder-no-fix" type="text" placeholder="TinNo" name="TinNo" />
+    </div>
+</div>
+<p>
+    Enter your account details below:
+</p>
+<div class="form-group">
+    <label class="control-label visible-ie8 visible-ie9">Username</label>
+    <div class="input-icon">
+        <i class="fa fa-user"></i>
+        <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Username" name="UserName" />
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label visible-ie8 visible-ie9">Password</label>
+    <div class="input-icon">
+        <i class="fa fa-lock"></i>
+        <input class="form-control placeholder-no-fix" type="password" autocomplete="off" id="register_password" placeholder="Password" name="Password" />
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label visible-ie8 visible-ie9">Re-type Your Password</label>
+    <div class="controls">
+        <div class="input-icon">
+            <i class="fa fa-check"></i>
+            <input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="Re-type Your Password" name="rpassword" />
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <label>
+        <input type="checkbox" name="Active" /> Is Active
+    </label>
+    <div id="register_tnc_error">
+    </div>
+</div>
+<div class="form-actions">
+    <button id="register-back-btn" type="button" class="btn">
+        <i class="m-icon-swapleft"></i> Back
+    </button>
+    <button type="submit" id="register-submit-btn" class="btn green pull-right">
+        Sign Up <i class="m-icon-swapright m-icon-white"></i>
+    </button>
+</div>
+}

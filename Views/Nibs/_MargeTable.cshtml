@@ -1,0 +1,51 @@
+﻿@model List<NibsMVC.Models.BillTableModel>
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+        <h4 class="modal-title">Merge Tables</h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-3">
+                    <h6>Tables</h6>
+                    <div class="row">
+                        <div class="col-md-12" id="TableForMerged">
+                            @foreach (var item in Model)
+                            {
+                                <input type="button" value="@item.TableNo" class="_table_for_merged" />
+                            }
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-3">
+                    <h6> Merged Tables</h6>
+                    <div class="row">
+                        <div class="col-md-12" id="MergedTable">
+                            @foreach (var item in Model)
+                            {
+                                <input type="button" value="@item.TableNo" class="_table_merged" style="display:none" />
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <h6> Master Table</h6>
+                    <div class="row">
+                        <div class="col-md-12" id="MasterTable">
+                            @foreach (var item in Model)
+                            {
+                                <input type="button" value="@item.TableNo" class="_table_master_merged" style="display:none" />
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn default" data-dismiss="modal">Close</button>
+        <input type="submit" value="Merge" id="btn-merge" class="btn green" />
+    </div>
+</div>

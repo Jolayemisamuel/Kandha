@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "ChangeInventory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model NibsMVC.Models.ChangeInventoryModel
+<div class="page-content">
+    <h3 class="page-title">
+        Change <small>Auto Inventory</small>
+    </h3>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="portlet box blue-steel">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-thumb-tack"></i>Change Auto Inventory
+                    </div>
+
+                </div>
+                <div class="portlet-body">
+                    <div class="row">
+                        <div class="form-horizontal">
+                            @using (Html.BeginForm("ChangeInventory", "Home", FormMethod.Post))
+                            {
+                                @Html.HiddenFor(a => a.OutletId)
+                                
+                                <div class="form-group">
+                                    <label class="col-md-3">Auto Inventory</label>
+                                    <div class="radio-list">
+                                        <label class="radio-inline">
+                                            @Html.RadioButtonFor(a => a.IsInventory, true) On
+                                        </label>
+                                        <label class="radio-inline">
+                                            @Html.RadioButtonFor(a => a.IsInventory, false) Off
+                                        </label>
+                                        
+                                    </div>
+                                </div>
+                                <div class="form-actions">
+                                    <div class="row">
+                                        <div class="col-md-offset-3 col-md-9">
+                                            <button type="submit" class="btn green">Update</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

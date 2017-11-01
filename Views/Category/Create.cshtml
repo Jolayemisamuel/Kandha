@@ -1,0 +1,104 @@
+﻿@model NibsMVC.Models.AddCategoryModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-content">
+    <div class="row">
+        <div class="col-md-12 margin-bottom-10">
+            <p style="color:red;">@TempData["Crecategroy"]</p>
+        </div>
+        <div class="col-md-12">
+            <div class="portlet box blue">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-gift"></i>Add Category
+                    </div>
+                  
+                </div>
+                <div class="portlet-body form">
+                    <!-- BEGIN FORM-->
+                    @using (Html.BeginForm("Create", "Category", FormMethod.Post, new { @id = "form_sample_3", @class = "form-horizontal" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        @Html.HiddenFor(model => model.CategoryId)
+                        <div class="form-body">
+                            <div class="alert alert-danger display-hide">
+                                <button class="close" data-close="alert"></button>
+                                You have some form errors. Please check below.
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2">
+                                    Name <span class="required">
+                                        *
+                                    </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2">Choose Color</label>
+                                <div class="col-md-4">
+                                    <div class="input-group color colorpicker-default" data-color="#3865a8" data-color-format="rgba">
+                                        @Html.TextBoxFor(model => model.Color, new { @class = "form-control", @value = "#3865a8" })
+                                        <span class="input-group-btn">
+                                            <button class="btn default" type="button"><i style="background-color: #3865a8;"></i>&nbsp;</button>
+                                        </span>
+                                    </div>
+                                    <span class="help-block">For example #330000</span>
+                                    <!-- /input-group -->
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2">Choose Text Color</label>
+                                <div class="col-md-4">
+                                    <div class="input-group color colorpicker-default" data-color="#3865a8" data-color-format="rgba">
+                                        @Html.TextBoxFor(model => model.TextColor, new { @class = "form-control", @value = "#3865a8" })
+                                        <span class="input-group-btn">
+                                            <button class="btn default" type="button"><i style="background-color: #3865a8;"></i>&nbsp;</button>
+                                        </span>
+                                       
+                                    </div>
+                                    <span class="help-block">please choose text color according to background color !</span>
+                                    <!-- /input-group -->
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2">
+                                    Active <span class="required">
+                                        *
+                                    </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        @Html.CheckBoxFor(model => model.Active)
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-9">
+                                    <button type="submit" class="btn green">Submit</button>
+                                   
+                                </div>
+                            </div>
+                        </div>
+                    }
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

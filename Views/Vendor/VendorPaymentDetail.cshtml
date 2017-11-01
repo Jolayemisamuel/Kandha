@@ -1,0 +1,123 @@
+﻿@{
+    ViewBag.Title = "VendorPaymentDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model List<NibsMVC.Models.VendorPaymentModel>
+
+<div class="page-content">
+
+    <!-- BEGIN PAGE HEADER-->
+    <div class="page-bar">
+        <ul class="page-breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="@Url.Action("Index","Home")">Home</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <a href="@Url.Action("AddVendorPay", "Vendor")">Add Payment</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                Vendor Payment Detail
+            </li>
+        </ul>
+
+    </div>
+    <!-- END PAGE HEADER-->
+    <!-- BEGIN PAGE CONTENT-->
+
+    <div class="row">
+        <div class="col-md-12">
+            <p style="color:green;font-weight:bold">@TempData["paymentStatus"]</p>
+            <!-- BEGIN BORDERED TABLE PORTLET-->
+            <div class="portlet box yellow">
+
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-coffee"></i>Vendor Payment Detail
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Vendor Name</th>
+                                        <th>Purchase Amount</th>
+                                        <th>Deposit Amount</th>
+                                        <th>Status Balance</th>
+                                        <th>View</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        int index = 1;
+                                    }
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@index</td>
+                                            <td>@item.VendorName</td>
+                                            <td>@item.PurchaseAmount</td>
+                                            <td>@item.DepositAmount
+                                            </td>
+                                            @if (item.DepositAmount > item.PurchaseAmount)
+                                            {
+                                                <td><label style="color:green"><strong>@(item.DepositAmount - item.PurchaseAmount)</strong></label></td>
+                                            }
+                                            else
+                                            {
+                                                <td><label style="color:red"><strong>@(item.DepositAmount - item.PurchaseAmount)</strong></label></td>
+                                            }
+                                            <td>
+                                                <a class="btn default" data-toggle="modal" href="#@index">
+                                                    View Details
+                                                </a>
+                                                <div class="modal fade" id="@index" tabindex="-1" role="basic" aria-hidden="true">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                        <h4 class="modal-title">Amount Details</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <table class="table table-bordered">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Amount</th>
+                                                                    <th>Date</th>
+
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @foreach (var i in item.getAllAmount)
+                                                                {
+                                                                    <tr>
+                                                                        <td>@i.Amout</td>
+                                                                        <td>@i.DepositDate.ToShortDateString()</td>
+
+                                                                    </tr>
+                                                                }
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        index++;
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END PAGE CONTENT-->
+</div>

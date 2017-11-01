@@ -1,0 +1,145 @@
+﻿@model List<NibsMVC.Models.OutletModel>
+@{
+    ViewBag.Title = "Home Page";
+}
+<div class="page-content">
+
+    <!-- BEGIN PAGE HEADER-->
+    <div class="page-bar">
+        <ul class="page-breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="@Url.Action("Index","Home")">Home</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="@Url.Action("CreateOutlet", "Outlet")">Create New Outlet</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                Outlet Report
+
+            </li>
+
+        </ul>
+
+    </div>
+    <!-- END PAGE HEADER-->
+    <!-- BEGIN PAGE CONTENT-->
+
+    <div class="row">
+        <p style="color:red">@TempData["Outlet"]</p>
+        <div class="col-md-12" style="padding-left:0px;padding-right:0px;">
+            <!-- BEGIN BORDERED TABLE PORTLET-->
+            <div class="portlet box yellow">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-coffee"></i>Blocked Outlet Reports
+                    </div>
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse">
+                        </a>
+
+                        <a href="javascript:;" class="reload">
+                        </a>
+
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <table class="table table-bordered table-hover table-full-width" id="sample_2">
+                        <thead>
+                            <tr>
+                                <th>
+                                    S.NO
+                                </th>
+                                <th>
+                                    Name
+                                </th>
+                                <th>
+                                    User Name
+                                </th>
+                                <th>
+                                    Email
+                                </th>
+                                <th>
+                                    City
+                                </th>
+
+                                <th>
+                                    Address
+                                </th>
+                                <th>
+                                    Phone No 1
+                                </th>
+                                <th>
+                                    Registration Date
+                                </th>
+                                <th>
+                                    Tin No
+                                </th>
+                                <th>
+                                    Password
+                                </th>
+                                <th>
+                                    Action
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+
+                                var counter = 1;
+                                foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @counter
+                                        </td>
+                                        <td>
+                                            @item.Name
+                                        </td>
+                                        <td>
+                                            @item.UserName
+                                        </td>
+                                        <td>
+                                            @item.Email
+                                        </td>
+                                        <td>
+                                            @item.City
+                                        </td>
+                                        <td>
+                                            @item.Address
+                                        </td>
+                                        <td>
+                                            @item.ContactA
+                                        </td>
+
+                                        <td>
+                                            @item.RegistrationDate.Day-@item.RegistrationDate.Month-@item.RegistrationDate.Year
+                                        </td>
+                                        <td>
+                                            @item.TinNo
+                                        </td>
+                                        <td>@item.Password</td>
+                                        <td>
+                                                <a href="@Url.Action("Unblock", "Outlet", new { @id = item.OutletId })">UnBlock</a>
+                                          
+                                        </td>
+
+                                    </tr>
+                                    counter = counter + 1;
+                                }
+
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- END BORDERED TABLE PORTLET-->
+
+        </div>
+    </div>
+    <!-- END PAGE CONTENT-->
+</div>

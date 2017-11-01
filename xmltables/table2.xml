@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Item>
+  <Items>
+    <UserId>88</UserId>
+    <TableNo>2</TableNo>
+    <ItemId>404</ItemId>
+    <ItemName>item1</ItemName>
+    <FullQty>1</FullQty>
+    <HalfQty>0</HalfQty>
+    <Fullprice>100.00</Fullprice>
+    <HalfPrice>60.00</HalfPrice>
+    <Amount>100.00</Amount>
+    <VatAmt>1.50</VatAmt>
+    <VatAmountCharges>1.5000</VatAmountCharges>
+    <OfferQty>0</OfferQty>
+  </Items>
+  <Items>
+    <UserId>88</UserId>
+    <TableNo>2</TableNo>
+    <ItemId>405</ItemId>
+    <ItemName>Item2</ItemName>
+    <FullQty>1</FullQty>
+    <HalfQty>0</HalfQty>
+    <Fullprice>200.00</Fullprice>
+    <HalfPrice>120.00</HalfPrice>
+    <Amount>200.00</Amount>
+    <VatAmt>3.00</VatAmt>
+    <VatAmountCharges>6.0000</VatAmountCharges>
+    <OfferQty>0</OfferQty>
+  </Items>
+</Item>

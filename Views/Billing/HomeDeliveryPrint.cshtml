@@ -1,0 +1,94 @@
+﻿@model IEnumerable<NibsMVC.Models.BillingModel>
+
+@{
+    Layout = null;
+}
+@using NibsMVC.EDMX;
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>HomeDeliveryPrint</title>
+</head>
+<body onload="window.print();">
+    @{
+        NIBSEntities db = new NIBSEntities();
+        foreach (var item in Model)
+        {
+            <div style="margin-left:100px;width:350px;margin-top:100px; height:auto;">
+
+                <div class="logo" style="border-bottom:1px dashed">
+                    <a href="#">
+                        <h2 style="margin-left:125px; padding-top:20px;">Nibs Cafe</h2>
+                    </a>
+                    <div>
+                        <b style="margin-left:85px; font-weight:100">Near Friends Colony,Lalkothi</b><br />
+                        <b style="margin-left: 125px; font-weight: 100; font-size:15px;">Jaipur-302029</b><br />
+                        <b style="margin-left: 125px; font-weight: 100; font-size:13px;"> PH:9680625173</b><br />
+                        <b style="margin-left:100px;">Home Delivery Prints</b>
+                    </div>
+                </div>
+
+                <div style="width: 350px; float:left; height: auto; border-bottom: 1px dashed">
+                    <div style="width:250px;height:auto;float:left; padding-top:9px;">Name:<b>@item.CustomerName</b></div>
+                    <div style="width:250px;height:auto;float:left; padding-top:9px;">Address:<b>@item.Address</b></div>
+                    <div style="width:100px;height:35px;float:left;padding-top:9px;">Token No:<b>@item.TokenNo</b></div>
+                </div>
+                <div style="width:350px;height:auto; float:left;">
+                    <table style="width:350px;">
+                        <tr>
+                            <th>Sr</th>
+                            <th>Item</th>
+                            <th>Full</th>
+                            <th>Half</th>
+                            <th>Amount</th>
+                        </tr>
+                        <tbody>
+
+                            @{
+            var counter = 1;
+            var Itemdetails = (from q in db.tblBillDetails where q.BillId == item.BillId select q).ToList();
+            foreach (var i in Itemdetails)
+            {
+                <tr>
+                    <td>@counter</td>
+                    <td>
+                        @{
+                var itemname = (from l in db.tblItems where l.ItemId.Equals(i.ItemId) select l.Name).SingleOrDefault();
+                        }
+                        @itemname
+                    </td>
+                    <td>@i.FullQty</td>
+                    <td>@i.HalfQty</td>
+                    <td>@i.Amount</td>
+                </tr>
+                counter++;
+            }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div style="width: 350px; border-top: 1px dashed; float:left;">
+                    <div style="width:280px;float:left; height:100px; margin-top:20px;line-height:20px;">
+                        <b>Vat Amount</b><br />
+                        <b>Servic Amount</b><br />
+                        <b>Total Amount</b><br />
+                        <b>Discount Amount</b><br />
+                        <b>Net Amount</b><br />
+                    </div>
+                    <div style="width: 70px; margin-top: 20px; line-height: 20px; float: left; height: 100px;">
+                        @item.VatAmount<br />
+                        @item.ServicChargeAmt<br />
+                        @item.TotalAmount<br />
+                        <b>@item.DiscountAmount</b><br />
+                        <b>@item.NetAmount</b>
+                    </div>
+                </div>
+                <div style="width:350px;text-align:center; height:20px; margin-top:15px;border-top:1px dashed; float:left">@item.BillDate</div>
+            </div>
+
+        }
+    }
+</body>
+</html>

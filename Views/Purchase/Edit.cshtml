@@ -1,0 +1,187 @@
+﻿@model NibsMVC.Models.PurchaseModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>PurchaseModel</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PurchaseId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PurchaseId)
+            @Html.ValidationMessageFor(model => model.PurchaseId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.InvoiceNo)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.InvoiceNo)
+            @Html.ValidationMessageFor(model => model.InvoiceNo)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.InvoiceDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.InvoiceDate)
+            @Html.ValidationMessageFor(model => model.InvoiceDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TotalAmount)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TotalAmount)
+            @Html.ValidationMessageFor(model => model.TotalAmount)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Tax)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Tax)
+            @Html.ValidationMessageFor(model => model.Tax)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.NetAmount)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.NetAmount)
+            @Html.ValidationMessageFor(model => model.NetAmount)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Amount)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Amount)
+            @Html.ValidationMessageFor(model => model.Amount)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ExtraCharge)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ExtraCharge)
+            @Html.ValidationMessageFor(model => model.ExtraCharge)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ExtraChargeDetail)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ExtraChargeDetail)
+            @Html.ValidationMessageFor(model => model.ExtraChargeDetail)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Unit)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Unit)
+            @Html.ValidationMessageFor(model => model.Unit)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.OutletId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.OutletId)
+            @Html.ValidationMessageFor(model => model.OutletId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.VendorId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.VendorId)
+            @Html.ValidationMessageFor(model => model.VendorId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PurchaseDetailsId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PurchaseDetailsId)
+            @Html.ValidationMessageFor(model => model.PurchaseDetailsId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ItemId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ItemId)
+            @Html.ValidationMessageFor(model => model.ItemId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DepositeAmount)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DepositeAmount)
+            @Html.ValidationMessageFor(model => model.DepositeAmount)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RemainingAmount)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.RemainingAmount)
+            @Html.ValidationMessageFor(model => model.RemainingAmount)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Quantity)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Quantity)
+            @Html.ValidationMessageFor(model => model.Quantity)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PaymentMode)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PaymentMode)
+            @Html.ValidationMessageFor(model => model.PaymentMode)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ChequeNo)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ChequeNo)
+            @Html.ValidationMessageFor(model => model.ChequeNo)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.itemsdata)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.itemsdata)
+            @Html.ValidationMessageFor(model => model.itemsdata)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+

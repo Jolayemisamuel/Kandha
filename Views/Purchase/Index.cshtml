@@ -1,0 +1,246 @@
+﻿@model IEnumerable<NibsMVC.Models.PurchaseModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using NibsMVC.EDMX;
+<div class="page-content">
+
+    <!-- BEGIN PAGE HEADER-->
+    <div class="page-bar">
+        <ul class="page-breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="@Url.Action("Index","Home")">Home</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <a href="@Url.Action("Create","Purchase")">Add GRN Details</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                GRN Details
+            </li>
+        </ul>
+
+    </div>
+    <!-- END PAGE HEADER-->
+    <!-- BEGIN PAGE CONTENT-->
+
+    <div class="row">
+        <p style="color:red">@TempData["Perror"]</p>
+        <div class="col-md-12" style="padding-left:0px;padding-right:0px;">
+            <!-- BEGIN BORDERED TABLE PORTLET-->
+            <div class="portlet box yellow">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-coffee"></i>Purchase Details
+                    </div>
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse">
+                        </a>
+
+                        <a href="javascript:;" class="reload">
+                        </a>
+
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    @using (Html.BeginForm("Index", "Purchase", FormMethod.Post, new { @id = "form_sample_6", @class = "form-horizontal" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+
+                        <input type="hidden" name="itemsdata" id="itemsdata" value="" />
+                        <div class="form-body">
+                            <div class="alert alert-danger display-hide">
+                                <button class="close" data-close="alert"></button>
+                                You have some form errors. Please check below.
+                            </div>
+                        </div>
+                        @*<div class="form-group">
+                            <label class="col-md-2">From Date</label>
+                            <div class="col-md-4">
+                                <input class="form-control form-control-inline input-medium date-picker" data-date-format="dd-M-yyyy" size="16" type="text" value=@Model.FromDate name="FromDate" readonly="readonly" />
+                                @*<input type="text" name="InvoiceDate" class="form-control" />*@
+
+                        @*</div>
+
+                            <label class="col-md-1">To Date</label>
+                            <div class="col-md-3">*@
+                        @*<input class="form-control form-control-inline input-medium date-picker" data-date-format="dd-M-yyyy" size="16" type="text" value=@Model.ToDate name="ToDate" readonly="readonly" />*@
+                        @*<input type="text" name="InvoiceDate" class="form-control" />*@
+
+                        @*</div>
+                            </div>*@
+                        <div class="form-group">
+                            @*@{ NIBSEntities db1 = new NIBSEntities();}*@
+                            <label class="col-md-1">From Date</label>
+                            <div class="col-md-3">
+                                <input class="form-control form-control-inline input-medium date-picker" data-date-format="dd-M-yyyy" size="10" type="text" name="FromDate" readonly="readonly" />
+                            </div>
+                            <label class="col-md-1">To Date</label>
+                            <div class="col-md-3">
+                                <input class="form-control form-control-inline input-medium date-picker" data-date-format="dd-M-yyyy" size="10" type="text" name="FromDate" readonly="readonly" />
+                            </div>
+                            <label class=" col-md-1">Vendor</label>
+                            <div class="col-md-2">
+
+                                @Html.DropDownList("Vendor", (SelectList)ViewBag.vend, "--Choose Vendor--", new { @class = "form-control",@id="VendorList" })
+
+                            </div>
+                            <div class="col-md-1"><button type="submit" class="btn green">Search</button></div>
+
+                        </div>
+
+                        <div class="col-md-offset-1 col-md-9">
+
+                        </div>
+                        <table class="table table-bordered table-hover table-full-width" id="sample_2">
+                            <thead>
+                                <tr>
+                                    @*<th>
+                                            S.NO
+                                        </th>*@
+                                    <th>
+                                        Invoice No
+                                    </th>
+                                    <th>
+                                        Invoice Date
+                                    </th>
+                                    <th>Vendor Name</th>
+                                    <th>Total Amount</th>
+                                    <th>Tax</th>
+                                    <th>Extra Charges</th>
+                                    <th> Description</th>
+                                    <th>Net Amount</th>
+                                    <th>Deposite Amount</th>
+                                    <th>Remaining Amount</th>
+                                    <th>Remarks</th>
+                                    <th>Item Details</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+
+                        var counter = 1;
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                @*<td>
+                                        @counter
+                                    </td>*@
+                                <td>
+                                    @item.InvoiceNo
+                                </td>
+                                <td>
+                                    @item.InvoiceDate.ToShortDateString()
+                                </td>
+                                <td>
+                                    @{
+                            NIBSEntities db = new NIBSEntities();
+                            var venderName = (from p in db.tblVendors where p.VendorId == item.VendorId select p.Name).SingleOrDefault();
+
+                                    }
+                                    @venderName
+                                </td>
+
+                                <td>
+                                    @item.TotalAmount
+                                </td>
+
+                                <td>
+                                    @item.Tax
+                                </td>
+                                <td>
+                                    @item.ExtraCharge
+                                </td>
+                                <td>
+                                    @item.ExtraChargeDetail
+                                </td>
+                                <td>
+                                    @item.NetAmount
+                                </td>
+                                <td>
+                                    @item.DepositeAmount
+                                </td>
+                                <td>
+                                    @item.RemainingAmount
+                                </td>
+                                <td>
+                                    @item.Remarks
+                                </td>
+                                <td>
+                                    <a class="btn default" data-toggle="modal" href="#@item.PurchaseId">
+                                        Items
+                                    </a>
+                                    <div class="modal fade" id="@item.PurchaseId" tabindex="-1" role="basic" aria-hidden="true">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                            <h4 class="modal-title">Item Details</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <label class="col-md-4">Payment Mode</label>
+                                                    <label class="col-md-2" style="font-weight:bold">@item.PaymentMode</label>
+                                                    <label class="col-md-2">Cheque</label>
+                                                    <label class="col-md-2" style="font-weight:bold">@item.ChequeNo</label>
+                                                </div>
+                                            </div>
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Item Name</th>
+                                                        <th>Amount</th>
+                                                        <th>Quantity</th>
+                                                        <th>Unit</th>
+                                                        <th>Return</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @{
+                            var Itemdetails = (from q in db.tblPurchasedItems where q.PurchaseId == item.PurchaseId select q).ToList();
+                            foreach (var i in Itemdetails)
+                            {
+                                <tr>
+                                    <td>@i.tbl_RawMaterials.Name</td>
+                                    <td>@i.Amount</td>
+                                    <td>@i.Quantity</td>
+                                    <td>@i.Unit</td>
+                                    <td><a href="@Url.Action("PurchaseReturn", "Purchase", new { purchaseid = item.PurchaseId, purchasdetailId=i.PurchaseDetailId })"><span class="fa fa-repeat"></span></a></td>
+                                </tr>
+                            }
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("Deletepurchase", "Purchase", new { @id = item.PurchaseId })"><span class="fa fa-trash-o"></span></a>
+                                </td>
+
+
+                            </tr>
+                            counter = counter + 1;
+                        }
+
+                                }
+                            </tbody>
+                        </table>
+                    }
+                </div>
+            </div>
+            <!-- END BORDERED TABLE PORTLET-->
+
+        </div>
+    </div>
+    <!-- END PAGE CONTENT-->
+</div>

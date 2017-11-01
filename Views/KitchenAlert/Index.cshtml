@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model List<NibsMVC.Models.KitchenAlertsModel>
+<div class="page-content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="portlet box blue-steel">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-bell-o"></i>Kitchen Stock Alerts
+                    </div>
+
+                </div>
+                <div class="portlet-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @if (Model.Count>0)
+                            {
+                                <table class="table table-bordered table-hover table-full-width">
+                                <thead>
+                                    <tr>
+                                        <th>Item Name</th>
+                                        <th>Remaining Quantity</th>
+                                        <th>Unit</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@item.ItemName</td>
+                                            <td>@item.Qty</td>
+                                            <td>@item.Unit</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            }
+                            else
+                            {
+                                <p>Your All Items are <label style="color: #45b6af;font-weight:bold">In Stock</label></p>
+                            }
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

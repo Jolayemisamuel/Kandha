@@ -1,0 +1,165 @@
+﻿@model IEnumerable<NibsMVC.Models.MenuModel>
+
+@{
+    ViewBag.Title = "MenuReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using NibsMVC.EDMX;
+<div class="page-content">
+
+    <!-- BEGIN PAGE HEADER-->
+    <div class="page-bar">
+        <ul class="page-breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="@Url.Action("Index","Home")">Home</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <a href="@Url.Action("Create","Menu")">Assign Menu Master</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                Assign Menu Details
+            </li>
+        </ul>
+
+    </div>
+    <!-- END PAGE HEADER-->
+    <!-- BEGIN PAGE CONTENT-->
+
+    <div class="row">
+
+        <div class="col-md-12" style="padding-left:0px;padding-right:0px;">
+            <!-- BEGIN BORDERED TABLE PORTLET-->
+            <div class="portlet box yellow">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-coffee"></i> Assign Menu Details
+                    </div>
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse">
+                        </a>
+
+                        <a href="javascript:;" class="reload">
+                        </a>
+
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <p class="err" style="color:red;"> @TempData["aerror"]</p>
+                    <table class="table table-bordered table-hover table-full-width" id="sample_2">
+                        <thead>
+                            <tr>
+                                <th>Outlet Name</th>
+                                <th>Details</th>
+                                <th>Delete All</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                NIBSEntities db = new NIBSEntities();
+                                var counter = 1;
+                                foreach (var item in Model.GroupBy(a=>a.OutletId))
+                                {
+                                    <tr>
+                                        <td>
+                                            @{
+
+                                    var outletname = (from q in db.tblOutlets where q.OutletId == item.Key select q.Name).SingleOrDefault();
+                                    @outletname
+                                            }
+                                        </td>
+
+                                        <td>
+                                            <a class="btn default" data-toggle="modal" href="#@item.Key">
+                                                Details
+                                            </a>
+                                            <div class="modal fade" id="@item.Key" tabindex="-1" aria-hidden="true">
+                                              
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                            <h4 class="modal-title">Assign Items Details</h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <table class="table table-bordered">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Category Name</th>
+                                                                        <th>Item Name</th>
+                                                                        <th>Full Price</th>
+                                                                        <th>Half Price</th>
+                                                                        <th>Delete Item</th>
+
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    @{
+                                    var Itemdetails = (from q in db.tblMenuOutlets where q.OutletId == item.Key select q).ToList();
+                                    foreach (var i in Itemdetails)
+                                    {
+                                                        <tr>
+                                                            <td>
+                                                                @{
+
+                                        var Categoryname = (from p in db.tblCategories where p.CategoryId == i.CategoryId select p.Name).SingleOrDefault();
+
+                                                                }
+                                                                @Categoryname
+
+                                                            </td>
+
+                                                            <td>@i.tblItem.Name</td>
+                                                            <td>@i.FullPrice</td>
+                                                            <td>@i.HalfPrice</td>
+                                                            <td><a href="@Url.Action("Delete","Admin", new { @id = i.MenuOutletId })" class="delete_menu"><span class="fa fa-trash-o"></span></a></td>
+
+                                                        </tr>
+                                    }
+                                                                    }
+                                                                </tbody>
+
+
+                                                            </table>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn default" data-dismiss="modal">Close</button>
+
+                                                        </div>
+                                                    
+                                            </div>
+                                        </td>
+
+
+
+
+                                        <td>
+                                            <a href="@Url.Action("DeleteAllMenu", "Admin", new { @id = item.Key })" class="delete_menu"><span class="fa fa-trash-o"></span></a>
+                                            </td>
+                                        @*<td>
+                                                <a href="@Url.Action("Create", "Category", new { @id = item.CategoryId })" class="btn btn-xs red">Edit</a>
+                                                <a href="@Url.Action("Delete", "Category", new { @id = item.CategoryId })" class="btn btn-xs red">Delete</a>
+                                            </td>*@
+
+                                    </tr>
+                                    counter = counter + 1;
+                                }
+
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- END BORDERED TABLE PORTLET-->
+            <script>
+                $(document).on('click', '.delete_menu', function (e) {
+                    if (!confirm("Do you want to delete")) {
+                        return false;
+                    }
+                });
+            </script>
+        </div>
+    </div>
+    <!-- END PAGE CONTENT-->
+</div>

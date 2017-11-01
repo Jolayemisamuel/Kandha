@@ -1,0 +1,680 @@
+﻿@model NibsMVC.Models.OfferCreationModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .red {
+        color: red;
+    }
+</style>
+<div class="page-content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="portlet box blue">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-gift"></i>Offer Creation
+                    </div>
+                </div>
+                <div class="portlet-body form">
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <div class="form-body">
+                                <div class="form-group" style="margin-bottom:20px;">
+                                    <label class="col-md-2">Select Offer Type</label>
+                                    <div class="col-md-3">
+                                        <select class="form-control" id="Offer_Type" name="OfferType">
+                                            <option value="">--Select--</option>
+                                            <option value="b1g1">Buy One Get One</option>
+                                            <option value="b2g1">Buy Two Get One</option>
+                                            <option value="hh">Happy Hours</option>
+                                            <option value="co">Combo Offer</option>
+                                            <option value="amt">Amount Basis</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div id="Div_b1g1" class="show_offers_detail" style="display:none;">
+                                            @using (Html.BeginForm("Create", "OfferCreation", FormMethod.Post, new { @class = "form-horizontal", @id = "form_Offer_sample_1" }))
+                                            {
+                                                <div class="alert alert-danger display-hide">
+                                                    <button class="close" data-close="alert"></button>
+                                                    You have some form errors. Please check below.
+                                                </div>
+                                                @*<h4 class="red">Buy One Get One Free Offer</h4>*@
+                                                <input type="hidden" name="OfferType" class="Offer_Type_Id" value="" />
+                                                <div class="form-body">
+                                                    <div class="form-group">
+                                                        <label class="col-md-2">Days</label>
+                                                        <div class="col-md-3">
+                                                            <input type="hidden" id="b1g1_days" name="Days" class="form-control select2" value="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class=" col-md-2">Select Buy Item</label>
+                                                        <div class="col-md-3">
+                                                            <select class="form-control  select2me" name="BuyItemId" id="BuyItemId" data-placeholder="Select Free Item..."></select>
+                                                            <span class="help-block">
+                                                                select buy item
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class=" col-md-2">Select Free Item</label>
+                                                        <div class="col-md-3">
+                                                            <select class="form-control  select2me" name="FreeItemId" id="FreeItemId" data-placeholder="Select Free Item..."></select>
+                                                            <span class="help-block">
+                                                                select free item
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-2"> Buy Quantity</label>
+                                                        <div class="col-md-3">
+                                                            <input type="text" class="form-control" name="BuyQuantity" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-2"> free Quantity</label>
+                                                        <div class="col-md-3">
+                                                            <input type="text" class="form-control" name="FreeQuantity" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-2">Enter Discount(%)</label>
+                                                        <div class="col-md-3">
+                                                            <input type="text" class="form-control" name="Discount" />
+                                                        </div>
+                                                        <span class="help-block"> Enter 100% discount for free</span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-actions">
+                                                    <div class="col-md-6 col-md-offset-2">
+                                                        <input type="submit" value="Save" class="btn btn-success" />
+                                                    </div>
+                                                </div>
+                                            }
+
+                                        </div>
+                                        <div id="Div_b2g1" class="show_offers_detail" style="display:none;">
+                                            @*<h4 class="red">Buy Two Get One Offer</h4>*@
+                                            @using (Html.BeginForm("Create", "OfferCreation", FormMethod.Post, new { @class = "form-horizontal", @id = "form_Offer_sample_2" }))
+                                            {
+                                                <div class="alert alert-danger display-hide">
+                                                    <button class="close" data-close="alert"></button>
+                                                    You have some form errors. Please check below.
+                                                </div>
+                                                <input type="hidden" name="OfferType" class="Offer_Type_Id" value="" />
+                                                <div class="form-body">
+                                                    <div class="form-group">
+                                                        <label class="col-md-2">Days</label>
+                                                        <div class="col-md-3">
+                                                            <input type="hidden" id="b2g1_days" name="Days" class="form-control select2" value="">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-md-2">Select Buy Item</label>
+                                                        <div class="col-md-3">
+                                                            <select id="select2_sample2" name="select2buy" class="form-control select2" multiple="multiple"></select>
+                                                            <input type="hidden" id="BuyTwoGetOneItemId" name="BuyItemId" value="">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class=" col-md-2">Select Free Item</label>
+                                                        <div class="col-md-3">
+                                                            <select class="form-control  select2me" name="FreeItemId" id="FreeItemIdBuy" data-placeholder="Select Free Item..."></select>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-2"> Buy Quantity</label>
+                                                        <div class="col-md-3">
+                                                            <input type="text" class="form-control" name="BuyQuantity" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-2"> Free Quantity</label>
+                                                        <div class="col-md-3">
+                                                            <input type="text" class="form-control" name="FreeQuantity" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-2">Enter Discount(%)</label>
+                                                        <div class="col-md-3">
+                                                            <input type="text" class="form-control" name="Discount" />
+                                                        </div>
+                                                        <span class="help-block"> Enter 100% discount for free</span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-actions">
+                                                    <div class="col-md-6 col-md-offset-2">
+                                                        <input type="submit" value="Save" class="btn btn-success" />
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                        <div id="Div_hh" class="show_offers_detail" style="display:none;">
+                                            @*<h4 class="red">Happy Hours Offers</h4>*@
+
+                                            <div class="form-group">
+                                                <label class="col-md-2">Select Type</label>
+                                                <div class="col-md-3">
+                                                    <select class="form-control" id="happy_hours_type">
+                                                        <option value="">--select--</option>
+                                                        <option value="BetweenDays">Between Days</option>
+                                                        <option value="BetweenDate">Between Date</option>
+                                                        <option value="OneDay">One Day</option>
+                                                        <option value="OneDate">One Date</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="happy_hours_show" id="Div_BetweenDays" style="display:none;">
+                                                        @using (Html.BeginForm("SaveHappyHoursDays", "OfferCreation", FormMethod.Post, new { @class = "form-horizontal", @id = "form_Offer_sample_3" }))
+                                                        {
+                                                            <div class="form-body">
+                                                                <div class="alert alert-danger display-hide">
+                                                                    <button class="close" data-close="alert"></button>
+                                                                    You have some form errors. Please check below.
+                                                                </div>
+                                                                <input type="hidden" name="OfferType" class="Offer_Type_Id" value="" />
+                                                                <input type="hidden" name="HHOfferType" class="HHOfferType_Id" value="" />
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2">Select From Day</label>
+                                                                    <div class="col-md-3">
+                                                                        <select class="form-control select2me" id="From_happy_Days" name="StartDay">
+                                                                            <option value="">--select--</option>
+                                                                            <option value="Sunday">Sunday</option>
+                                                                            <option value="Monday">Monday</option>
+                                                                            <option value="Tuesday">Tuesday</option>
+                                                                            <option value="Wednesday">Wednesday</option>
+                                                                            <option value="Thursday">Thursday</option>
+                                                                            <option value="Friday">Friday</option>
+                                                                            <option value="Saturday">Saturday</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2">Select To Day</label>
+                                                                    <div class="col-md-3">
+                                                                        <select class="form-control select2me" id="To_happy_Days" name="EndDay">
+                                                                            <option value="">--select--</option>
+                                                                            <option value="Sunday">Sunday</option>
+                                                                            <option value="Monday">Monday</option>
+                                                                            <option value="Tuesday">Tuesday</option>
+                                                                            <option value="Wednesday">Wednesday</option>
+                                                                            <option value="Thursday">Thursday</option>
+                                                                            <option value="Friday">Friday</option>
+                                                                            <option value="Saturday">Saturday</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class=" col-md-2">Select  Item</label>
+                                                                    <div class="col-md-3">
+                                                                        <select class="form-control select2me" id="FreeItemIdDays" name="FreeItemId" data-placeholder="Select Free Item..."></select>
+                                                                        <span class="help-block">
+                                                                            select free item
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2">Enter Discount(%)</label>
+                                                                    <div class="col-md-3">
+                                                                        <input type="text" class="form-control" name="Discount" />
+                                                                    </div>
+                                                                    <span class="help-block"> Enter 100% discount for free</span>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2">Enter ItemIndex</label>
+                                                                    <div class="col-md-3">
+                                                                        <input type="number" class="form-control" name="ItemIndex" />
+                                                                    </div>
+                                                                    <span class="help-block">Enter Only Digits</span>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class=" col-md-2">Time From</label>
+                                                                    <div class="col-md-3">
+                                                                        <div class="input-group">
+                                                                            <input type="text" class="form-control timepicker timepicker-no-seconds" name="TimeStart">
+                                                                            <span class="input-group-btn">
+                                                                                <button class="btn default" type="button"><i class="fa fa-clock-o"></i></button>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2">Time To</label>
+                                                                    <div class="col-md-3">
+                                                                        <div class="input-group">
+                                                                            <input type="text" class="form-control timepicker timepicker-no-seconds" name="TimeEnd">
+                                                                            <span class="input-group-btn">
+                                                                                <button class="btn default" type="button"><i class="fa fa-clock-o"></i></button>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-actions">
+                                                                    <div class="col-md-6 col-md-offset-2">
+                                                                        <input type="submit" value="Save" class="btn btn-success" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                    </div>
+                                                    <div class="happy_hours_show" id="Div_BetweenDate" style="display:none;">
+                                                        @using (Html.BeginForm("SaveHappyHoursDates", "OfferCreation", FormMethod.Post, new { @class = "form-horizontal", @id = "form_Offer_sample_4" }))
+                                                        {
+                                                            <div class="form-body">
+                                                                <input type="hidden" name="OfferType" class="Offer_Type_Id" value="" />
+                                                                <input type="hidden" name="HHOfferType" class="HHOfferType_Id" value="" />
+                                                                <div class="alert alert-danger display-hide">
+                                                                    <button class="close" data-close="alert"></button>
+                                                                    You have some form errors. Please check below.
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class=" col-md-2">Offer Date Range</label>
+                                                                    <div class="col-md-3">
+                                                                        <div class="input-group input-large date-picker input-daterange" data-date="10/11/2012" @*data-date-format="dd-mm-yyyy"*@>
+                                                                            <input type="text" class="form-control" name="StartDate" id="start">
+                                                                            <span class="input-group-addon">
+                                                                                to
+                                                                            </span>
+                                                                            <input type="text" class="form-control" name="EndDate">
+                                                                        </div>
+                                                                        <!-- /input-group -->
+                                                                        <span class="help-block">
+                                                                            Select date range
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class=" col-md-2">Select  Item</label>
+                                                                    <div class="col-md-3">
+                                                                        <select class="form-control  select2me" id="FreeItemIdDates" name="FreeItemId" data-placeholder="Select Free Item..."></select>
+                                                                        <span class="help-block">
+                                                                            select free item
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2">Enter Discount(%)</label>
+                                                                    <div class="col-md-3">
+                                                                        <input type="text" class="form-control" name="Discount" />
+                                                                    </div>
+                                                                    <span class="help-block"> Enter 100% discount for free</span>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2">Enter ItemIndex</label>
+                                                                    <div class="col-md-3">
+                                                                        <input type="number" class="form-control" name="ItemIndex" />
+                                                                    </div>
+                                                                    <span class="help-block">Enter Only Digits</span>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class=" col-md-2">Time From</label>
+                                                                    <div class="col-md-3">
+                                                                        <div class="input-group">
+                                                                            <input type="text" class="form-control timepicker timepicker-no-seconds" name="TimeStart">
+                                                                            <span class="input-group-btn">
+                                                                                <button class="btn default" type="button"><i class="fa fa-clock-o"></i></button>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2">Time To</label>
+                                                                    <div class="col-md-3">
+                                                                        <div class="input-group">
+                                                                            <input type="text" class="form-control timepicker timepicker-no-seconds" name="TimeEnd">
+                                                                            <span class="input-group-btn">
+                                                                                <button class="btn default" type="button"><i class="fa fa-clock-o"></i></button>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-actions">
+                                                                    <div class="col-md-6 col-md-offset-2">
+                                                                        <input type="submit" value="Save" class="btn btn-success" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        }
+
+                                                    </div>
+                                                    <div class="happy_hours_show" id="Div_OneDay" style="display:none;">
+                                                        @using (Html.BeginForm("SaveHappyHoursDay", "OfferCreation", FormMethod.Post, new { @class = "form-horizontal", @id = "form_Offer_sample_5" }))
+                                                        {
+                                                            <div class="form-body">
+                                                                <input type="hidden" name="OfferType" class="Offer_Type_Id" value="" />
+                                                                <input type="hidden" name="HHOfferType" class="HHOfferType_Id" value="" />
+                                                                <div class="alert alert-danger display-hide">
+                                                                    <button class="close" data-close="alert"></button>
+                                                                    You have some form errors. Please check below.
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2">Select Day</label>
+                                                                    <div class="col-md-3">
+                                                                        <select class="form-control select2me" name="Day">
+                                                                            <option value="">--select--</option>
+                                                                            <option value="Sunday">Sunday</option>
+                                                                            <option value="Monday">Monday</option>
+                                                                            <option value="Tuesday">Tuesday</option>
+                                                                            <option value="Wednesday">Wednesday</option>
+                                                                            <option value="Thursday">Thursday</option>
+                                                                            <option value="Friday">Friday</option>
+                                                                            <option value="Saturday">Saturday</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class=" col-md-2">Select  Item</label>
+                                                                    <div class="col-md-3">
+                                                                        <select class="form-control select2me" id="FreeItemIdDay" name="FreeItemId" data-placeholder="Select Free Item..."></select>
+                                                                        <span class="help-block">
+                                                                            select free item
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2">Enter Discount(%)</label>
+                                                                    <div class="col-md-3">
+                                                                        <input type="text" class="form-control" name="Discount" />
+                                                                    </div>
+                                                                    <span class="help-block"> Enter 100% discount for free</span>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2">Enter ItemIndex</label>
+                                                                    <div class="col-md-3">
+                                                                        <input type="number" class="form-control" name="ItemIndex" />
+                                                                    </div>
+                                                                    <span class="help-block">Enter Only Digits</span>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class=" col-md-2">Time From</label>
+                                                                    <div class="col-md-3">
+                                                                        <div class="input-group">
+                                                                            <input type="text" class="form-control timepicker timepicker-no-seconds" name="TimeStart">
+                                                                            <span class="input-group-btn">
+                                                                                <button class="btn default" type="button"><i class="fa fa-clock-o"></i></button>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2">Time To</label>
+                                                                    <div class="col-md-3">
+                                                                        <div class="input-group">
+                                                                            <input type="text" class="form-control timepicker timepicker-no-seconds" name="TimeEnd">
+                                                                            <span class="input-group-btn">
+                                                                                <button class="btn default" type="button"><i class="fa fa-clock-o"></i></button>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-actions">
+                                                                    <div class="col-md-6 col-md-offset-2">
+                                                                        <input type="submit" value="Save" class="btn btn-success" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                    </div>
+                                                    <div class="happy_hours_show" id="Div_OneDate" style="display:none;">
+                                                        @using (Html.BeginForm("SaveHappyHoursDate", "OfferCreation", FormMethod.Post, new { @class = "form-horizontal", @id = "form_Offer_sample_6" }))
+                                                        {
+                                                            <div class="form-body">
+                                                                <input type="hidden" name="OfferType" class="Offer_Type_Id" value="" />
+                                                                <input type="hidden" name="HHOfferType" class="HHOfferType_Id" value="" />
+                                                                <div class="alert alert-danger display-hide">
+                                                                    <button class="close" data-close="alert"></button>
+                                                                    You have some form errors. Please check below.
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class=" col-md-2">Select Date</label>
+                                                                    <div class="col-md-3">
+                                                                        <div class="input-group input-medium date date-picker" @*data-date-format="dd-mm-yyyy"*@ style="width:100% !important;">
+                                                                            <input type="text" class="form-control" readonly name="Date">
+                                                                            <span class="input-group-btn">
+                                                                                <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                                                                            </span>
+                                                                        </div>
+                                                                        <!-- /input-group -->
+                                                                        <span class="help-block">
+                                                                            Select date
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class=" col-md-2">Select  Item</label>
+                                                                    <div class="col-md-3">
+                                                                        <select class="form-control select2me" name="FreeItemId" id="FreeItemIdDate" data-placeholder="Select Free Item..."></select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2">Enter Discount(%)</label>
+                                                                    <div class="col-md-3">
+                                                                        <input type="text" class="form-control" name="Discount" />
+                                                                    </div>
+                                                                    <span class="help-block"> Enter 100% discount for free</span>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2">Enter ItemIndex</label>
+                                                                    <div class="col-md-3">
+                                                                        <input type="number" class="form-control" name="ItemIndex" />
+                                                                    </div>
+                                                                    <span class="help-block">Enter Only Digits</span>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class=" col-md-2">Time From</label>
+                                                                    <div class="col-md-3">
+                                                                        <div class="input-group">
+                                                                            <input type="text" class="form-control timepicker timepicker-no-seconds" name="TimeStart">
+                                                                            <span class="input-group-btn">
+                                                                                <button class="btn default" type="button"><i class="fa fa-clock-o"></i></button>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2">Time To</label>
+                                                                    <div class="col-md-3">
+                                                                        <div class="input-group">
+                                                                            <input type="text" class="form-control timepicker timepicker-no-seconds" name="TimeEnd">
+                                                                            <span class="input-group-btn">
+                                                                                <button class="btn default" type="button"><i class="fa fa-clock-o"></i></button>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-actions">
+                                                                    <div class="col-md-6 col-md-offset-2">
+                                                                        <input type="submit" value="Save" class="btn btn-success" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <div id="Div_co" class="show_offers_detail" style="display:none;">
+                                            @using (Html.BeginForm("ComboOffer", "OfferCreation", FormMethod.Post, new { @class = "form-horizontal", @id = "form_Offer_sample_7" }))
+                                            {
+                                                <input type="hidden" name="OfferType" class="Offer_Type_Id" value="" />
+                                                <div class="alert alert-danger display-hide">
+                                                    <button class="close" data-close="alert"></button>
+                                                    You have some form errors. Please check below.
+                                                </div>
+                                                @*<h4 class="red">Combo Offers</h4>*@
+                                                <div class="form-group">
+                                                    <label class="col-md-2">Days</label>
+                                                    <div class="col-md-3">
+                                                        <input type="hidden" id="al_days" name="Days" class="form-control select2" value="">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-2">Select Buy Item</label>
+                                                    <div class="col-md-3">
+                                                        <input type="hidden" id="BuyCombo" name="ComboItemId" class="form-control select2" value="">
+                                                        <select id="select2_sample2Co" name="select2Combo" class="form-control select2" multiple></select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-2">Quantity</label>
+                                                    <div class="col-md-3">
+                                                        <input type="text" class="form-control" name="FreeQuantity" />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-2">Enter Base Amount</label>
+                                                    <div class="col-md-3">
+                                                        <input type="text" class="form-control" name="BaseAmount" />
+                                                    </div>
+                                                </div>
+                                                <div class="form-actions">
+                                                    <div class="col-md-6 col-md-offset-2">
+                                                        <input type="submit" value="Save" class="btn btn-success" />
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                        <div id="Div_amt" class="show_offers_detail" style="display:none;">
+                                            @using (Html.BeginForm("AmountBasis", "OfferCreation", FormMethod.Post, new { @class = "form-horizontal", @id = "form_Offer_sample_8" }))
+                                            {<input type="hidden" name="OfferType" class="Offer_Type_Id" value="" />
+                                                @*<h4 class="red">Amount Basis Offer</h4>*@
+                                                <div class="alert alert-danger display-hide">
+                                                    <button class="close" data-close="alert"></button>
+                                                    You have some form errors. Please check below.
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-2">Days</label>
+                                                    <div class="col-md-3">
+                                                        <input type="hidden" id="amt_days" name="Days" class="form-control select2" value="">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-2">Enter Amount</label>
+                                                    <div class="col-md-3">
+                                                        <input type="text" class="form-control" name="Amount" />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class=" col-md-2">Select free Item</label>
+                                                    <div class="col-md-3">
+                                                        <select class="form-control select2me" name="ItemId" id="FreeItemIdAmount" data-placeholder="Select Free Item..."></select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-2">Enter Discount(%)</label>
+                                                    <div class="col-md-3">
+                                                        <input type="text" class="form-control" name="Discount" />
+                                                    </div>
+                                                    <span class="help-block"> Enter 100% discount for free</span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-2">Enter Quantity</label>
+                                                    <div class="col-md-3">
+                                                        <input type="text" class="form-control" name="Quantity" />
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-actions">
+                                                    <div class="col-md-6 col-md-offset-2">
+                                                        <input type="submit" value="Save" class="btn btn-success" />
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<script src="~/assets/admin/pages/scripts/Admin_Offers.js"></script>
+<script type="text/javascript" src="~/assets/global/plugins/bootstrap-select/bootstrap-select.min.js"></script>
+<script type="text/javascript" src="~/assets/global/plugins/select2/select2.min.js"></script>
+<script type="text/javascript" src="~/assets/global/plugins/jquery-multi-select/js/jquery.multi-select.js"></script>
+<script src="~/assets/admin/pages/scripts/components-dropdowns.js"></script>
+<script>
+    $("#b1g1_days").select2({
+        tags: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+    });
+    $("#b2g1_days").select2({
+        tags: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+    });
+    $("#al_days").select2({
+        tags: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+    });
+    $("#amt_days").select2({
+        tags: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+    });
+    $(document).on('change', '#Offer_Type', function () {
+        var val = $(this).val();
+        $('.show_offers_detail').hide();
+        $('#Div_' + val).show();
+        $('#Div_' + val).css('opacity', '1');
+        $('.Offer_Type_Id').val(val);
+        var FormData = { Id: val };
+        $.post("/OfferCreation/getRemaingItems", FormData, function (data) {
+            var itemmulti = '<option value=""> "--select--" </option>';;
+            if (data != "") {
+                var result = data.split('#');
+
+                for (var i = 0; i < result.length; i++) {
+                    var eVal = result[i].split('^');
+                    itemmulti += '<option value=' + eVal[0] + '>' + eVal[1] + '</option>';
+                }
+            }
+            else {
+                itemmulti += '<option value="">No Pending Item </option>';
+            }
+            $('#BuyItemId').html(itemmulti);
+            $('#FreeItemId').html(itemmulti);
+            $('#select2_sample2').html(itemmulti);
+            $('#select2_sample2Co').html(itemmulti);
+            $('#FreeItemIdBuy').html(itemmulti);
+            $('#FreeItemIdDays').html(itemmulti);
+            $('#FreeItemIdDates').html(itemmulti);
+            $('#FreeItemIdDay').html(itemmulti);
+            $('#FreeItemIdDate').html(itemmulti);
+            $('#FreeItemIdAmount').html(itemmulti);
+            $('#select2_sample2').select2({
+                maximumSelectionSize: 2,
+                placeholder: "Select a Item",
+                allowClear: true
+            });
+            $('#select2_sample2Co').select2({
+                placeholder: "Select a Item",
+                allowClear: true
+            });
+        });
+    });
+    $(document).on('change', '#select2_sample2', function () {
+        var Eval = $(this).val();
+        $('#BuyTwoGetOneItemId').val(Eval);
+    });
+    $(document).on('change', '#select2_sample2Co', function () {
+        var Eval = $(this).val();
+        $('#BuyCombo').val(Eval);
+    });
+</script>

@@ -1,0 +1,11 @@
+﻿@media screen {
+    .forscreen {
+        display: block;
+    }
+}
+
+@media print {
+    .forscreen {
+        display: none;
+    }
+}

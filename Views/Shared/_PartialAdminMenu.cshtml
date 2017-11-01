@@ -1,0 +1,597 @@
+﻿<li class="start">
+    <a href="javascript:;">
+        <i class="fa fa-cogs"></i>
+        <span class="title">
+            Outlet Details
+        </span>
+        <span class="arrow open">
+        </span>
+        <span class="selected"></span>
+    </a>
+    <ul class="sub-menu">
+        <li class="">
+
+            <a href="@Url.Action("CreateOutlet","Outlet")">
+                Create Outlet
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("Index","Outlet")">
+                Outlet Report
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("Blocked", "Outlet")">
+               Blocked Outlet Report
+            </a>
+        </li>
+    </ul>
+</li>
+<li>
+    <a href="javascript:;">
+        <i class="fa fa-gift"></i>
+        <span class="title">
+            Reports Master
+        </span>
+        <span class="arrow">
+        </span>
+    </a>
+    <ul class="sub-menu">
+        <li class="">
+            <a href="@Url.Action("Index","Outlet")">
+                Outlet Report
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("Index","Category")">
+                Category Report
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("ItemDetails","Category")">
+                Items Report
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("VenderReport", "Admin")">
+                Vendor Report
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("Index", "BasePrice")">
+                Base Price Reports
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("MenuReport", "Admin")">
+                Assign Menu Reports
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("StockTransfers", "Admin")">
+                Stock Transfer Reports
+            </a>
+        </li>
+        
+            <li class="">
+                <a href="@Url.Action("Index", "KitchenStock")">
+                    Stock Reports
+                </a>
+            </li>
+            
+
+        
+        <li class="">
+            <a href="@Url.Action("ReturnsReport", "Admin")">
+                Stock Returns Reports
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("RestroBill", "Admin")">
+                Restaurant Bill Reports
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("TakeBills", "Admin")">
+                Take Away Reports
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("AllHomeDelivery", "Admin")">
+                Home Delivery Reports
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("OperatorReports", "Admin")">
+                Operator Reports
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("DOutletBills", "Admin")">
+                Delete Bill Reports
+            </a>
+        </li>
+    </ul>
+</li>
+<li>
+    <a href="javascript:;">
+        <i class="fa fa-gift"></i>
+        <span class="title">
+            Category Master
+        </span>
+        <span class="arrow">
+        </span>
+    </a>
+    <ul class="sub-menu">
+        <li class="">
+            <a href="@Url.Action("Create", "Category")">
+                Add Category
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("Index","Category")">
+                Category Report
+            </a>
+        </li>
+    </ul>
+</li>
+<li>
+    <a href="javascript:;">
+        <i class="fa fa-gift"></i>
+        <span class="title">
+           Menu Item Master
+        </span>
+        <span class="arrow">
+        </span>
+    </a>
+    <ul class="sub-menu">
+        <li class="">
+            <a href="@Url.Action("AddItem", "Category")">
+                Add Items
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("ItemDetails","Category")">
+                Menu Items Report
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("BlockedItem", "Category")">
+                BlockItem Reports
+            </a>
+        </li>
+        @*<li class="">
+            <a href="@Url.Action("KitchenItemReport", "Category")">
+                Kitchen Items Report
+            </a>
+        </li>*@
+    </ul>
+</li>
+<li>
+    <a href="javascript:;">
+        <i class="fa fa-gift"></i>
+        <span class="title">
+            Department Master
+        </span>
+        <span class="arrow">
+        </span>
+    </a>
+    <ul class="sub-menu">
+
+        <li class="">
+            <a href="@Url.Action("Create", "Department")">
+                Add Department
+            </a>
+        </li>
+
+        <li class="">
+            <a href="@Url.Action("index", "Department")">
+                Department Report
+            </a>
+        </li>
+
+
+    </ul>
+</li>
+<li>
+    <a href="javascript:;">
+        <i class="fa fa-gift"></i>
+        <span class="title">
+            Kitchen Raw Master
+        </span>
+        <span class="arrow">
+        </span>
+    </a>
+    <ul class="sub-menu">
+
+        <li class="">
+            <a href="@Url.Action("AddRawCategory", "Kitchen")">
+                Add Ingredient Category
+            </a>
+        </li>
+
+        <li class="">
+            <a href="@Url.Action("ViewRawCategory", "Kitchen")">
+                 Ingredient Category Report
+            </a>
+        </li>
+
+
+        <li class="">
+            <a href="@Url.Action("Create", "Kitchen")">
+                Add Ingredient
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("Index", "Kitchen")">
+                Ingredient Report
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("AddIndent", "Kitchen")">
+                Add Menu Item Ingredient
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("KitchenRawList", "Kitchen")">
+                Menu Item Ingredient Report
+            </a>
+        </li>
+
+    </ul>
+</li>
+<li>
+    <a href="javascript:;">
+        <i class="fa fa-gift"></i>
+        <span class="title">
+            Base Prics Master
+        </span>
+        <span class="arrow">
+        </span>
+    </a>
+    <ul class="sub-menu">
+        <li class="">
+            <a href="@Url.Action("Create", "BasePrice")">
+                Set Base Price
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("Index", "BasePrice")">
+                Base Price Reports
+            </a>
+        </li>
+    </ul>
+</li>
+<li>
+    <a href="javascript:;">
+        <i class="fa fa-gift"></i>
+        <span class="title">
+            Menu Assign Master
+        </span>
+        <span class="arrow">
+        </span>
+    </a>
+    <ul class="sub-menu">
+        <li class="">
+            <a href="@Url.Action("Create", "Menu")">
+                Assign Menu
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("MenuReport", "Admin")">
+                Assign Menu Reports
+            </a>
+        </li>
+    </ul>
+</li>
+<li>
+    <a href="javascript:;">
+        <i class="fa fa-gift"></i>
+        <span class="title">
+            Offer Master
+        </span>
+        <span class="arrow">
+        </span>
+    </a>
+    <ul class="sub-menu">
+        <li class="">
+            <a href="@Url.Action("Create","OfferCreation")">
+                Offer Creation
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("Index","OfferCreation")">
+                Offer Reports
+            </a>
+        </li>
+
+    </ul>
+</li>
+<li>
+    <a href="javascript:;">
+        <i class="fa fa-gift"></i>
+        <span class="title">
+            Assign  Offer Master
+        </span>
+        <span class="arrow">
+        </span>
+    </a>
+    <ul class="sub-menu">
+        <li class="">
+            <a href="@Url.Action("Create","AssignOffer")">
+                Assign  Offer
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("Index", "AssignOffer")">
+                Assign Offer Reports
+            </a>
+        </li>
+
+    </ul>
+</li>
+<li>
+    <a href="javascript:;">
+        <i class="fa fa-gift"></i>
+        <span class="title">
+            Service Master
+        </span>
+        <span class="arrow">
+        </span>
+    </a>
+    <ul class="sub-menu">
+        <li class="">
+            <a href="@Url.Action("Create", "ServicCharges")">
+                Add Service
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("Index", "ServicCharges")">
+                Service Charges Details
+            </a>
+        </li>
+
+    </ul>
+</li>
+<li>
+    <a href="javascript:;">
+        <i class="fa fa-gift"></i>
+        <span class="title">
+            Service Tax
+        </span>
+        <span class="arrow">
+        </span>
+    </a>
+    <ul class="sub-menu">
+        <li class="">
+            <a href="@Url.Action("Create", "ServicTax")">
+                Add Service Tax
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("Index", "ServicTax")">
+                Service Tax Details
+            </a>
+        </li>
+
+    </ul>
+</li>
+<li>
+    <a href="javascript:;">
+        <i class="fa fa-gift"></i>
+        <span class="title">
+            Operator Master
+        </span>
+        <span class="arrow">
+        </span>
+    </a>
+    <ul class="sub-menu">
+        <li class="">
+            <a href="@Url.Action("Create", "Operator")">
+                Operator Registration
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("OperatorReports", "Admin")">
+                Operator Reports
+            </a>
+        </li>
+    </ul>
+</li>
+
+
+
+<li>
+    <a href="javascript:;">
+        <i class="fa fa-user"></i>
+        <span class="title">
+            Vendor Master
+        </span>
+        <span class="arrow open">
+        </span>
+        <span class="selected"></span>
+    </a>
+    <ul class="sub-menu">
+        <li class="">
+            <a href="@Url.Action("VenderRegistration", "Outlet")">
+                Vendor Registration
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("AddCategoryVendor", "Outlet")">
+                Add Vendor Category
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("VendorCategoryReport", "Outlet")">
+                Vendor Category Report
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("Vender", "Outlet")">
+                Vendor Report
+            </a>
+        </li>
+
+    </ul>
+</li>
+<li class="start">
+    <a href="javascript:;">
+        <i class="fa fa-users"></i>
+        <span class="title">
+            Sales Vendor Master
+        </span>
+        <span class="arrow open">
+        </span>
+        <span class="selected"></span>
+    </a>
+    <ul class="sub-menu">
+        <li class="">
+            <a href="@Url.Action("Create", "Vendor")">
+                Add Vendor
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("Index", "Vendor")">
+                Vendor List
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("setPrice", "Vendor")">
+                Set Price
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("CreateBilling", "Vendor")">
+                Vendor Billing
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("BillReport", "Vendor")">
+                Billing Report
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("AddVendorPay", "Vendor")">
+                Update Balance
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("VendorPaymentDetail", "Vendor")">
+                Vendor Balance Report
+            </a>
+        </li>
+
+    </ul>
+</li>
+<li>
+    <a href="javascript:;">
+        <i class="fa fa-gift"></i>
+        <span class="title">
+            Purchase Master
+        </span>
+        <span class="arrow">
+        </span>
+    </a>
+    <ul class="sub-menu">
+        <li class="">
+            <a href="@Url.Action("Create", "Purchase")">
+                Add Purchase Details
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("Index", "Purchase")">
+                Purchase Reports
+            </a>
+        </li>
+
+        <li class="">
+            <a href="@Url.Action("ReturnPurchaseReport", "Purchase")">
+                Purchase Return Report
+            </a>
+        </li>
+    </ul>
+</li>
+<li>
+    <a href="javascript:;">
+        <i class="fa fa-gift"></i>
+        <span class="title">
+            Stock Transfer Master
+        </span>
+        <span class="arrow">
+        </span>
+    </a>
+    <ul class="sub-menu">
+        <li class="">
+            <a href="@Url.Action("Create", "StockTransfer")">
+                Stock Transfer
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("Index", "StockTransfer")">
+                Stock Transfer Report
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("StockRecive", "StockTransfer")">
+                Stock Receive Report
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("ReturnStockReport", "StockTransfer")">
+                Stock Return Report
+            </a>
+        </li>
+    </ul>
+</li>
+<li>
+    <a href="javascript:;">
+        <i class="fa fa-gift"></i>
+        <span class="title">
+            Table Master
+        </span>
+        <span class="arrow">
+        </span>
+    </a>
+    <ul class="sub-menu">
+        <li class="">
+            <a href="@Url.Action("Create","Table")">
+                Add Table
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("Index", "Table")">
+                Table Master Reports
+            </a>
+        </li>
+    </ul>
+</li>
+<li>
+    <a href="javascript:;">
+        <i class="fa fa-gift"></i>
+        <span class="title">
+            Billing Master
+        </span>
+        <span class="arrow">
+        </span>
+    </a>
+    <ul class="sub-menu">
+        <li class="">
+            <a href="@Url.Action("Index", "Nibs")">
+                Create Billing
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("Index", "Today")">
+                Today Billing Reports
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("Index", "Date")">
+                Date Wise Billing Reports
+            </a>
+        </li>
+    </ul>
+</li>
+
+

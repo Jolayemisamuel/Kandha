@@ -1,0 +1,1080 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model NibsMVC.Models.TodayBillReportModel
+<style>
+    label {
+        font-size: 13px;
+    }
+
+    .DTTT_button_print {
+        display: none;
+    }
+</style>
+<div class="page-content">
+    <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 margin-bottom-10">
+            <div class="dashboard-stat blue-madison">
+                <div class="visual">
+                    <i class="fa fa-rupee"></i>
+                </div>
+                <div class="details">
+                    <div class="number">
+                        @Model.TotalCashAmount
+                    </div>
+                    <div class="desc">
+                        Total Cash Amount
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+            <div class="dashboard-stat blue-madison">
+                <div class="visual">
+                    <i class="fa fa-rupee"></i>
+                </div>
+                <div class="details">
+                    <div class="number">
+                        @Model.TotalCardAmount
+                    </div>
+                    <div class="desc">
+                        Total Card Amount
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row margin-bottom-10">
+        <div class="col-md-6">
+            <!-- Begin: life time stats -->
+            <div class="portlet box blue-chambray">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-thumb-tack"></i>Today(@DateTime.Now.Date.ToShortDateString()) Restro Bill Report
+                    </div>
+                    <div class="tools">
+                        @if (Model.TotalRestroNetAmount > 0)
+                        {
+                            <input type="button" class="btn btn-warning" id="btnExportBilling" value="Export" />
+                            <button class="btn btn-default" id="ToolTables_sample_1_3">Print</button>
+                        }
+                        
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="tabbable-line">
+
+                        <div class="table-responsive">
+
+
+                            <table class="table table-striped table-hover table-bordered table-overflow" id="sample_1">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Product Name
+                                        </th>
+                                        <th>
+                                            Price
+                                        </th>
+                                        <th>
+                                            Qty
+                                        </th>
+                                        <th>
+                                            Amount
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.getAllRestroBill != null)
+                                    {
+                                        foreach (var item in Model.getAllRestroBill)
+                                        {
+                                            <tr>
+                                                <td>
+
+                                                    @item.Name
+
+                                                </td>
+                                                <td>
+                                                    @item.Price/-
+                                                </td>
+                                                <td>
+                                                    @item.Qty
+                                                </td>
+                                                <td>
+                                                    @item.TotalAmount/-
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 form-horizontal">
+                                @if (Model.getAllRestroVat != null)
+                                {
+                                    foreach (var item in Model.getAllRestroVat)
+                                    {
+                                        <div class="form-group">
+                                            <label class="col-md-8"> Vat(@item.Vat%)</label>
+                                            <label class="col-md-4">@item.Amount/-</label>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                            <div class="col-md-6  form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-md-8">Total Amount</label>
+                                    <label class="col-md-4"><strong>@Model.RestroTotalAmount/-</strong></label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-8">Total ServiceTax</label>
+                                    <label class="col-md-4"><strong>@Model.RestroTotalServiceTaxAmount/-</strong></label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-8">Total ServiceCharge</label>
+                                    <label class="col-md-4"><strong>@Model.RestroTotalServiceChargeAmount/-</strong></label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-8">Total Vat</label>
+                                    <label class="col-md-4"><strong>@Model.RestroTotalVatAmount/-</strong></label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-8">Total Discount</label>
+                                    <label class="col-md-4"><strong>@Model.RestroTotalDiscountAmount/-</strong></label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-8">Total Net Amount</label>
+                                    <label class="col-md-4"><strong>@Model.TotalRestroNetAmount/-</strong></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="_printRestro" hidden>
+                            <h4 style="text-align:center">Nibs Restro Report</h4>
+                            <table class="table table-striped table-hover table-bordered table-overflow" id="table_export">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Product Name
+                                        </th>
+                                        <th>
+                                            Price
+                                        </th>
+                                        <th>
+                                            Qty
+                                        </th>
+                                        <th>
+                                            Amount
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.getAllRestroBill != null)
+                                    {
+                                        foreach (var item in Model.getAllRestroBill)
+                                        {
+                                            <tr>
+                                                <td>
+
+                                                    @item.Name
+
+                                                </td>
+                                                <td>
+                                                    @item.Price/-
+                                                </td>
+                                                <td>
+                                                    @item.Qty
+                                                </td>
+                                                <td>
+                                                    @item.TotalAmount/-
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+
+                                </tbody>
+                            </table>
+                            <div class="row">
+                                <div class="col-md-4 form-horizontal">
+                                    @if (Model.getAllRestroVat != null)
+                                    {
+                                        foreach (var item in Model.getAllRestroVat)
+                                        {
+                                            <div class="form-group">
+                                                <label class="col-md-8"> Vat(@item.Vat%)</label>
+                                                <label class="col-md-4 pull-right">@item.Amount/-</label>
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                                <div class="col-md-6  form-horizontal">
+                                    <div class="form-group">
+                                        <label class="col-md-8">Total Amount</label>
+                                        <label class="col-md-4 pull-right"><strong>@Model.RestroTotalAmount/-</strong></label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-8">Total ServiceTax</label>
+                                        <label class="col-md-4 pull-right"><strong>@Model.RestroTotalServiceTaxAmount/-</strong></label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-8">Total ServiceCharge</label>
+                                        <label class="col-md-4 pull-right"><strong>@Model.RestroTotalServiceChargeAmount/-</strong></label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-8">Total Vat</label>
+                                        <label class="col-md-4 pull-right"><strong>@Model.RestroTotalVatAmount/-</strong></label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-8">Total Discount</label>
+                                        <label class="col-md-4 pull-right"><strong>@Model.RestroTotalDiscountAmount/-</strong></label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-8">Total Net Amount</label>
+                                        <label class="col-md-4 pull-right"><strong>@Model.TotalRestroNetAmount/-</strong></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End: life time stats -->
+        </div>
+
+
+        <div class="col-md-6">
+            <div class="portlet box purple-wisteria">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-thumb-tack"></i>Today(@DateTime.Now.Date.ToShortDateString()) Home Delivery Report
+                    </div>
+                    <div class="tools">
+                        @if (Model.TotalHomeNetAmount > 0)
+                        {
+                            <input type="button" class="btn btn-warning" id="btnExportHome" value="Export" />
+                            <button class="btn btn-default" id="Home_sample_1_3">Print</button>
+                        }
+
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="tabbable-line">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover table-bordered table-overflow" id="sample_11">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Product Name
+                                        </th>
+                                        <th>
+                                            Price
+                                        </th>
+                                        <th>
+                                            Qty
+                                        </th>
+                                        <th>
+                                            Amount
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.getAllHomeBill != null)
+                                    {
+                                        foreach (var item in Model.getAllHomeBill)
+                                        {
+                                    <tr>
+                                        <td>
+                                            @item.Name
+                                        </td>
+                                        <td>
+                                            @item.Price/-
+                                        </td>
+                                        <td>
+                                            @item.Qty
+                                        </td>
+                                        <td>
+                                            @item.Amount/-
+                                        </td>
+                                    </tr>
+                                        }
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 form-horizontal">
+                                @if (Model.getAllHomeVat != null)
+                                {
+                                    foreach (var item in Model.getAllHomeVat)
+                                    {
+                                <div class="form-group">
+                                    <label class="col-md-8"> Vat(@item.Vat%)</label>
+                                    <label class="col-md-4">@item.Amount/-</label>
+                                </div>
+                                    }
+                                }
+                            </div>
+                            <div class="col-md-6  form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-md-8">Total Amount</label>
+                                    <label class="col-md-4"><strong>@Model.HomeTotalAmount/-</strong></label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-8">Total ServiceTax</label>
+                                    <label class="col-md-4"><strong>@Model.HomeTotalServiceTaxAmount/-</strong></label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-8">Total ServiceCharge</label>
+                                    <label class="col-md-4"><strong>@Model.HomeTotalServiceChargeAmount/-</strong></label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-8">Total Vat</label>
+                                    <label class="col-md-4"><strong>@Model.HomeTotalVatAmount/-</strong></label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-8">Total Discount</label>
+                                    <label class="col-md-4"><strong>@Model.HomeTotalDiscountAmount/-</strong></label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-8">Total Net Amount</label>
+                                    <label class="col-md-4"><strong>@Model.TotalHomeNetAmount/-</strong></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="_printHome" hidden>
+                            <h4 style="text-align:center">Nibs Home Delivery Report</h4>
+                            <table class="table table-striped table-hover table-bordered table-overflow">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Product Name
+                                        </th>
+                                        <th>
+                                            Price
+                                        </th>
+                                        <th>
+                                            Qty
+                                        </th>
+                                        <th>
+                                            Amount
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.getAllHomeBill != null)
+                                    {
+                                        foreach (var item in Model.getAllHomeBill)
+                                        {
+                                    <tr>
+                                        <td>
+                                            @item.Name
+                                        </td>
+                                        <td>
+                                            @item.Price/-
+                                        </td>
+                                        <td>
+                                            @item.Qty
+                                        </td>
+                                        <td>
+                                            @item.Amount/-
+                                        </td>
+                                    </tr>
+                                        }
+                                    }
+
+                                </tbody>
+                            </table>
+                            <div class="row">
+                                <div class="col-md-4 form-horizontal">
+                                    @if (Model.getAllHomeVat != null)
+                                    {
+                                        foreach (var item in Model.getAllHomeVat)
+                                        {
+                                    <div class="form-group">
+                                        <label class="col-md-8"> Vat(@item.Vat%)</label>
+                                        <label class="col-md-4">@item.Amount/-</label>
+                                    </div>
+                                        }
+                                    }
+                                </div>
+                                <div class="col-md-6  form-horizontal">
+                                    <div class="form-group">
+                                        <label class="col-md-8">Total Amount</label>
+                                        <label class="col-md-4"><strong>@Model.HomeTotalAmount/-</strong></label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-8">Total ServiceTax</label>
+                                        <label class="col-md-4"><strong>@Model.HomeTotalServiceTaxAmount/-</strong></label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-8">Total ServiceCharge</label>
+                                        <label class="col-md-4"><strong>@Model.HomeTotalServiceChargeAmount/-</strong></label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-8">Total Vat</label>
+                                        <label class="col-md-4"><strong>@Model.HomeTotalVatAmount/-</strong></label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-8">Total Discount</label>
+                                        <label class="col-md-4"><strong>@Model.HomeTotalDiscountAmount/-</strong></label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-8">Total Net Amount</label>
+                                        <label class="col-md-4"><strong>@Model.TotalHomeNetAmount/-</strong></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End: life time stats -->
+        </div>
+
+
+
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <!-- Begin: life time stats -->
+            <div class="portlet box red-intense">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-thumb-tack"></i>Today(@DateTime.Now.Date.ToShortDateString()) Take Away Bill Report
+                    </div>
+                    <div class="tools">
+                        @if (Model.TotalTakeNetAmount > 0)
+                        {
+                            <input type="button" class="btn btn-warning" id="btnExportTake" value="Export" />
+                            <button class="btn btn-default" id="Take_sample_1_3">Print</button>
+                        }
+                        
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="tabbable-line">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover table-bordered table-overflow" id="sample_12">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Product Name
+                                        </th>
+                                        <th>
+                                            Price
+                                        </th>
+                                        <th>
+                                            Qty
+                                        </th>
+                                        <th>
+                                            Amount
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.getAllTakeBill != null)
+                                    {
+                                        foreach (var item in Model.getAllTakeBill)
+                                        {
+                                    <tr>
+                                        <td>
+                                            @item.Name
+                                        </td>
+                                        <td>
+                                            @item.Price/-
+                                        </td>
+                                        <td>
+                                            @item.Qty
+                                        </td>
+                                        <td>
+                                            @item.Amount/-
+                                        </td>
+                                    </tr>
+                                        }
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 form-horizontal">
+                                @if (Model.getAllTakeVat != null)
+                                {
+                                    foreach (var item in Model.getAllTakeVat)
+                                    {
+                                <div class="form-group">
+                                    <label class="col-md-8"> Vat(@item.Vat%)</label>
+                                    <label class="col-md-4">@item.Amount/-</label>
+                                </div>
+                                    }
+                                }
+                            </div>
+                            <div class="col-md-6  form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-md-8">Total Amount</label>
+                                    <label class="col-md-4"><strong>@Model.TakeTotalAmount/-</strong></label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-8">Total ServiceTax</label>
+                                    <label class="col-md-4"><strong>@Model.TakeTotalServiceTaxAmount/-</strong></label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-8">Total ServiceCharge</label>
+                                    <label class="col-md-4"><strong>@Model.TakeTotalServiceChargeAmount/-</strong></label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-8">Total Vat</label>
+                                    <label class="col-md-4"><strong>@Model.TakeTotalVatAmount/-</strong></label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-8">Total Discount</label>
+                                    <label class="col-md-4"><strong>@Model.TakeTotalDiscountAmount/-</strong></label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-8">Total Net Amount</label>
+                                    <label class="col-md-4"><strong>@Model.TotalTakeNetAmount/-</strong></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div hidden id="_TakePrint">
+                            <h4 style="text-align:center">Nibs Packing Report</h4>
+                            <table class="table table-striped table-hover table-bordered table-overflow">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Product Name
+                                        </th>
+                                        <th>
+                                            Price
+                                        </th>
+                                        <th>
+                                            Qty
+                                        </th>
+                                        <th>
+                                            Amount
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.getAllTakeBill != null)
+                                    {
+                                        foreach (var item in Model.getAllTakeBill)
+                                        {
+                                    <tr>
+                                        <td>
+                                            @item.Name
+                                        </td>
+                                        <td>
+                                            @item.Price/-
+                                        </td>
+                                        <td>
+                                            @item.Qty
+                                        </td>
+                                        <td>
+                                            @item.Amount/-
+                                        </td>
+                                    </tr>
+                                        }
+                                    }
+
+                                </tbody>
+                            </table>
+                            <div class="row">
+                                <div class="col-md-4 form-horizontal">
+                                    @if (Model.getAllTakeVat != null)
+                                    {
+                                        foreach (var item in Model.getAllTakeVat)
+                                        {
+                                    <div class="form-group">
+                                        <label class="col-md-8"> Vat(@item.Vat%)</label>
+                                        <label class="col-md-4">@item.Amount/-</label>
+                                    </div>
+                                        }
+                                    }
+                                </div>
+                                <div class="col-md-6  form-horizontal">
+                                    <div class="form-group">
+                                        <label class="col-md-8">Total Amount</label>
+                                        <label class="col-md-4"><strong>@Model.TakeTotalAmount/-</strong></label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-8">Total ServiceTax</label>
+                                        <label class="col-md-4"><strong>@Model.TakeTotalServiceTaxAmount/-</strong></label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-8">Total ServiceCharge</label>
+                                        <label class="col-md-4"><strong>@Model.TakeTotalServiceChargeAmount/-</strong></label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-8">Total Vat</label>
+                                        <label class="col-md-4"><strong>@Model.TakeTotalVatAmount/-</strong></label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-8">Total Discount</label>
+                                        <label class="col-md-4"><strong>@Model.TakeTotalDiscountAmount/-</strong></label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-8">Total Net Amount</label>
+                                        <label class="col-md-4"><strong>@Model.TotalTakeNetAmount/-</strong></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End: life time stats -->
+        </div>
+
+        <div class="col-md-6">
+            <!-- Begin: life time stats -->
+            <div class="portlet box green-jungle">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-print"></i>Today(@DateTime.Now.Date.ToShortDateString()) Total Bill Amount
+                    </div>
+                    <div class="tools">
+                        @if (Model.NetAmount > 0)
+                        {
+                            <input type="button" class="btn btn-warning" id="btnExportTotal" value="Export" />
+                            <button class="btn btn-default" id="Total_sample_1_3">Print</button>
+                        }
+                       
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="tabbable-line">
+                        <div class="row">
+                            <div class="col-md-6  form-horizontal" id="_totalPrint">
+                                <h4 class="_h4_print" style="display:none;">Total Bill Amount Report</h4>
+                                <div class="form-group">
+                                    <label class="col-md-8">Total Amount</label>
+                                    <label class="col-md-4"><strong>@Model.TotalAmount/-</strong></label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-8">Total ServiceTax</label>
+                                    <label class="col-md-4"><strong>@Model.TotalServiceTax/-</strong></label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-8">Total ServiceCharge</label>
+                                    <label class="col-md-4"><strong>@Model.TotalServiceCharge/-</strong></label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-8">Total Vat</label>
+                                    <label class="col-md-4"><strong>@Model.TotalVatAmount/-</strong></label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-8">Total Discount</label>
+                                    <label class="col-md-4"><strong>@Model.TotalDiscount/-</strong></label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-8">Total Net Amount</label>
+                                    <label class="col-md-4"><strong>@Model.NetAmount/-</strong></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="dv" hidden>
+        <table id="tblExport_billing" class="table table-bordered" style="border:1px solid black; ">
+            <thead>
+                <tr>
+
+                    <th>Product Name</th>
+                    <th>Price </th>
+                    <th>Quantity</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.getAllRestroBill)
+                {
+                    <tr>
+
+                        <td>@item.Name</td>
+                        <td>@item.Price</td>
+                        <td>@item.Qty</td>
+                        <td>@item.TotalAmount</td>
+                    </tr>
+                }
+                <tr>
+                    <td colspan="4"></td>
+                </tr>
+                @foreach (var item in Model.getAllRestroVat)
+                {
+                    <tr>
+
+                        <td>Vat(@item.Vat%)</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>@item.Amount</td>
+
+                    </tr>
+                }
+                <tr>
+                    <td>
+                        Total Amount
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>@Model.RestroTotalAmount</td>
+                </tr>
+                <tr>
+                    <td>
+                        Total Service Tax
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>@Model.RestroTotalServiceTaxAmount</td>
+                </tr>
+                <tr>
+                    <td>
+                        Total Service Charge
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>@Model.RestroTotalServiceChargeAmount</td>
+                </tr>
+                <tr>
+                    <td>
+                        Total Vat
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>@Model.RestroTotalVatAmount</td>
+                </tr>
+                <tr>
+                    <td>
+                        Total Discount
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>@Model.RestroTotalDiscountAmount</td>
+                </tr>
+                <tr>
+                    <td>
+                        Total NetAmount
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>@Model.TotalRestroNetAmount</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="dv_home" hidden>
+        <table id="tblExport_Home" class="table table-bordered" style="border:1px solid black; ">
+            <thead>
+                <tr>
+
+                    <th>Product Name</th>
+                    <th>Price </th>
+                    <th>Quantity</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.getAllHomeBill)
+                {
+                    <tr>
+
+                        <td>@item.Name</td>
+                        <td>@item.Price</td>
+                        <td>@item.Qty</td>
+                        <td>@item.TotalAmount</td>
+                    </tr>
+                }
+                <tr>
+                    <td colspan="4"></td>
+                </tr>
+                @foreach (var item in Model.getAllHomeVat)
+                {
+                    <tr>
+
+                        <td>Vat(@item.Vat%)</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>@item.Amount</td>
+
+                    </tr>
+                }
+                <tr>
+                    <td>
+                        Total Amount
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>@Model.HomeTotalAmount</td>
+                </tr>
+                <tr>
+                    <td>
+                        Total Service Tax
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>@Model.HomeTotalServiceTaxAmount</td>
+                </tr>
+                <tr>
+                    <td>
+                        Total Service Charge
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>@Model.HomeTotalServiceChargeAmount</td>
+                </tr>
+                <tr>
+                    <td>
+                        Total Vat
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>@Model.HomeTotalVatAmount</td>
+                </tr>
+                <tr>
+                    <td>
+                        Total Discount
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>@Model.HomeTotalDiscountAmount</td>
+                </tr>
+                <tr>
+                    <td>
+                        Total NetAmount
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>@Model.TotalHomeNetAmount</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div id="dv_take" hidden>
+        <table id="tblExport_Take" class="table table-bordered" style="border:1px solid black; ">
+            <thead>
+                <tr>
+
+                    <th>Product Name</th>
+                    <th>Price </th>
+                    <th>Quantity</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.getAllTakeBill)
+                {
+                    <tr>
+
+                        <td>@item.Name</td>
+                        <td>@item.Price</td>
+                        <td>@item.Qty</td>
+                        <td>@item.TotalAmount</td>
+                    </tr>
+                }
+                <tr>
+                    <td colspan="4"></td>
+                </tr>
+                @foreach (var item in Model.getAllTakeVat)
+                {
+                    <tr>
+
+                        <td>Vat(@item.Vat%)</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>@item.Amount</td>
+
+                    </tr>
+                }
+                <tr>
+                    <td>
+                        Total Amount
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>@Model.TakeTotalAmount</td>
+                </tr>
+                <tr>
+                    <td>
+                        Total Service Tax
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>@Model.TakeTotalServiceTaxAmount</td>
+                </tr>
+                <tr>
+                    <td>
+                        Total Service Charge
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>@Model.TakeTotalServiceChargeAmount</td>
+                </tr>
+                <tr>
+                    <td>
+                        Total Vat
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>@Model.TakeTotalVatAmount</td>
+                </tr>
+                <tr>
+                    <td>
+                        Total Discount
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>@Model.TakeTotalDiscountAmount</td>
+                </tr>
+                <tr>
+                    <td>
+                        Total NetAmount
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>@Model.TotalTakeNetAmount</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="dv_total" hidden>
+        <table id="tblExport_Total" class="table table-bordered" style="border:1px solid black; ">
+           
+            <tbody>
+                <tr>
+                    <td>
+                        Total Amount
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>@Model.TotalAmount</td>
+                </tr>
+                <tr>
+                    <td>
+                        Total Service Tax
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>@Model.TotalServiceTax</td>
+                </tr>
+                <tr>
+                    <td>
+                        Total Service Charge
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>@Model.TotalServiceCharge</td>
+                </tr>
+                <tr>
+                    <td>
+                        Total Vat
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>@Model.TotalVatAmount</td>
+                </tr>
+                <tr>
+                    <td>
+                        Total Discount
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>@Model.TotalDiscount</td>
+                </tr>
+                <tr>
+                    <td>
+                        Total NetAmount
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>@Model.NetAmount</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script type="text/javascript">
+        $("#ToolTables_sample_1_3").live("click", function () {
+            printPartOfPage('_printRestro', "Restro Bill Report");
+        });
+        $("#Home_sample_1_3").live("click", function () {
+            printPartOfPage('_printHome', "Home delivery Bill Report Report");
+        });
+        $("#Take_sample_1_3").live("click", function () {
+            printPartOfPage('_TakePrint', "Take Away Bill Report");
+        });
+        $("#Total_sample_1_3").live("click", function () {
+            printPartOfPage('_totalPrint', "Total Bill Amount Biil Reort");
+        });
+    </script>
+    <script lang="javascript" type="text/javascript">
+        function printPartOfPage(elementId, message) {
+            var printContent = document.getElementById(elementId);
+            
+            $('._h4_print').show();
+            var divContents = $("#" + elementId).html();
+            
+            var windowUrl = 'about:blank';
+            var uniqueName = new Date();
+            var windowName = 'Print' + uniqueName.getTime();
+            var printWindow = window.open(windowUrl, windowName, '');
+            printWindow.document.write('<html><head><title>' + message + '</title><link href="/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" /></head><body>');
+            printWindow.document.write(divContents);
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+            printWindow.focus();
+            printWindow.print();
+            printWindow.close();
+            $('._h4_print').hide();
+        }
+
+
+    </script>
+    <script src="~/assets/jquery.btechco.excelexport.js"></script>
+    <script src="~/assets/jquery.base64.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $(document).on('click', '#btnExportBilling', function () {
+                $("#tblExport_billing").btechco_excelexport({
+                    containerid: "tblExport_billing"
+              , datatype: $datatype.Table
+                });
+
+            });
+            $(document).on('click', '#btnExportHome', function () {
+                $("#tblExport_Home").btechco_excelexport({
+                    containerid: "tblExport_Home"
+              , datatype: $datatype.Table
+                });
+
+            });
+            $(document).on('click', '#btnExportTake', function () {
+                $("#tblExport_Take").btechco_excelexport({
+                    containerid: "tblExport_Take"
+              , datatype: $datatype.Table
+                });
+
+            });
+            $(document).on('click', '#btnExportTotal', function () {
+                $("#tblExport_Total").btechco_excelexport({
+                    containerid: "tblExport_Total"
+              , datatype: $datatype.Table
+                });
+
+            });
+        });
+    </script>
+</div>

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Item>
+  <Items>
+    <UserId>81</UserId>
+    <ItemId>122</ItemId>
+    <ItemName>THE SEVEN BEAUTIES PIZZA</ItemName>
+    <FullQty>1</FullQty>
+    <HalfQty>0</HalfQty>
+    <FullPrice>209.0000</FullPrice>
+    <HalfPrice>0.0000</HalfPrice>
+    <TotalAmount>209.0000</TotalAmount>
+    <Vat>14.5</Vat>
+    <VatAmt>30.3050000</VatAmt>
+    <OfferQty>0</OfferQty>
+  </Items>
+</Item>

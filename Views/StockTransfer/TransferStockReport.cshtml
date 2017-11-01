@@ -1,0 +1,196 @@
+﻿@model NibsMVC.Models.SearchModel
+
+
+@{
+    ViewBag.Title = "TransferStockReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using NibsMVC.EDMX;
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $("#Category").change(function () {
+            $("#RawId").empty();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("getitems")',
+
+                dataType: 'json',
+
+                data: { id: $("#Category").val() },
+
+
+                success: function (items) {
+
+                    $("#RawId").append('<option value=""></option>');
+                    $.each(items, function (i, item) {
+                        $("#RawId").append('<option value="' + item.Text + '">' +
+                             item.Text + '</option>');
+
+                    });
+                },
+                error: function (ex) {
+                    alert('Failed to retrieve Category and Item.');
+                }
+            });
+            return false;
+        })
+    });
+
+</script>
+
+
+<div class="page-content">
+
+    <!-- BEGIN PAGE HEADER-->
+    <div class="page-bar">
+        <ul class="page-breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="@Url.Action("Index","Home")">Home</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+
+            <li>
+                Stock Transfer Report
+            </li>
+        </ul>
+
+    </div>
+    <!-- END PAGE HEADER-->
+    <!-- BEGIN PAGE CONTENT-->
+
+    <div class="row">
+        <div class="col-md-12" style="padding-left:0px;padding-right:0px;">
+            <!-- BEGIN BORDERED TABLE PORTLET-->
+            <div class="portlet box yellow">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-coffee"></i>Stock Transfer Report
+                    </div>
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse">
+                        </a>
+
+                        <a href="javascript:;" class="reload">
+                        </a>
+
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    @using (Html.BeginForm("TransferStockReport", "StockTransfer", FormMethod.Post, new { @id = "form_sample_6", @class = "form-horizontal" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+
+                        <input type="hidden" name="itemsdata" id="itemsdata" value="" />
+                        <div class="form-body">
+                            <div class="alert alert-danger display-hide">
+                                <button class="close" data-close="alert"></button>
+                                You have some form errors. Please check below.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2">From Date</label>
+                            <div class="col-md-4">
+                                <input class="form-control form-control-inline input-medium date-picker" data-date-format="dd-M-yyyy" size="16" type="text" value=@Model.FromDate name="FromDate" readonly="readonly" />
+                                @*<input type="text" name="InvoiceDate" class="form-control" />*@
+
+                            </div>
+
+                            <label class="col-md-1">To Date</label>
+                            <div class="col-md-3">
+                                <input class="form-control form-control-inline input-medium date-picker" data-date-format="dd-M-yyyy" size="16" type="text" value=@Model.ToDate name="ToDate" readonly="readonly" />
+                                @*<input type="text" name="InvoiceDate" class="form-control" />*@
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            <label class=" col-md-1">Department</label>
+                            <div class="col-md-3">
+                                @Html.DropDownListFor(model => model.Department, (SelectList)ViewBag.Depts, "--Choose Department--", new { @class = "form-control" })
+                            </div>
+
+                            <label class=" col-md-1">Category</label>
+                            <div class="col-md-3">
+                                @Html.DropDownListFor(model => model.Category, (SelectList)ViewBag.catg, "--Choose Category--", new { @class = "form-control", @id = "Category" })
+                                @*@Html.DropDownListFor(model => model.Category, ViewBag.catg as List<SelectListItem>, "--Choose Your Category--", new { @class = "form-control", @id = "Category" })*@
+                            </div>
+
+                            <label class=" col-md-1">Item</label>
+                            <div class="col-md-2">
+                                @*@Html.DropDownListFor(model => model.Item, (SelectList)ViewBag.Items, "--Choose Item--", new { @class = "form-control" })*@
+                                @*@Html.DropDownListFor(model=>model.Item, new SelectList(string.Empty, "Value", "Text"), new { @class = "form-control", @id = "RawId" })*@
+                                @Html.DropDownListFor(model => model.Item, (SelectList)ViewBag.Items, "--Choose Item--", new { @class = "form-control", @id = "RawId" })
+                                
+                            </div>
+                            <div class="col-md-1"><button type="submit" class="btn green">Search</button></div>
+
+                        </div>
+
+                        <div class="col-md-offset-1 col-md-9">
+
+
+                        </div>
+                        <table class="table table-bordered table-hover table-full-width" id="sample_2">
+                            <thead>
+                                <tr>
+                                    <th>Transfer Date</th>
+                                    <th>Department</th>
+                                    <th>Category</th>
+                                    <th>Item Description</th>
+                                    <th>Unit</th>
+                                    <th>Issued Quantity</th>
+                                    <th>Retrun</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+
+                        var counter = 1;
+                        NIBSEntities db = new NIBSEntities();
+                        foreach (var item in ViewBag.List)
+                        {
+
+                            <tr>
+                                <td>
+                                    @item[0].Day-@item[0].Month-@item[0].Year
+                                </td>
+                                <td>
+                                    @item[1]
+                                </td>
+                                <td>
+                                    @item[2]
+                                </td>
+                                <td>
+                                    @item[3]
+                                </td>
+                                <td>
+                                    @item[4]
+                                </td>
+                                <td>
+                                    @item[5].ToString("0.00")
+                                </td>
+                                @*<td>
+                                <a href="@Url.Action("stockReturn", "StockTransfer", new { Transferid = @item[6], RawMaterialId= @item[7], Quantity=@item[5] })"><span class="fa fa-repeat"></span></a></td>*@
+                                <td><a href="@Url.Action("PurchaseReturn", "Purchase", new { Transferid = @item[6], RawMaterialId = @item[7], Quantity = @item[5] })"><span class="fa fa-repeat"></span></a></td>
+                            </tr>
+                            counter = counter + 1;
+                        }
+
+                                }
+                            </tbody>
+                        </table>
+                    }
+                </div>
+            </div>
+            <!-- END BORDERED TABLE PORTLET-->
+
+        </div>
+    </div>
+    <!-- END PAGE CONTENT-->
+</div>

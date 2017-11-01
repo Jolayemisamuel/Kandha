@@ -1,0 +1,6 @@
+﻿@model List<NibsMVC.Models.GetBillingSubItemModel>
+
+@foreach (var item in Model)
+{
+    @Ajax.ActionLink(item.Name, "_CreatePartial", new { Id = 1, }, new AjaxOptions { UpdateTargetId = "Div_Billing_items", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" }, new { @class = "btn btn-blue margin-right-5", @style = "background:" + @item.Color + ";color:" + @item.TextColor })
+}

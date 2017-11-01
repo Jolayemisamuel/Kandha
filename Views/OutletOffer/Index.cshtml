@@ -1,0 +1,281 @@
+﻿@model List<NibsMVC.Models.GetAllOfferListModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="page-content">
+    
+    <div class="row">
+        <div class="col-md-12 margin-bottom-10">
+            <p style="color:red;">@TempData["result"]</p>
+
+        </div>
+
+        <div class="col-md-12 margin-bottom-10">
+            <a class="btn default" data-toggle="modal" href="#ComboOffer">
+                View Combo Offers Details
+            </a>
+            <div id="ComboOffer" class="modal fade" tabindex="-1" data-width="760">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Combo Offers Details</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @if (Model != null)
+                            {
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>S.No</th>
+                                            <th>Days</th>
+                                            <th>Buy Items</th>
+                                            <th>Base Amount</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @{
+                                int sno = 1;
+                                        }
+                                        @foreach (var i in Model)
+                                        {
+                                            if (i.ComboOfferList != null)
+                                            {
+                                                foreach (var item in i.ComboOfferList)
+                                                {
+                                                    <tr>
+                                                        <td>@sno</td>
+                                                        <td>@item.Days</td>
+                                                        <td>@item.BuyItems</td>
+                                                        <td>@item.BaseAmount</td>
+                                                        
+                                                    </tr>sno++;
+                                                }
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            }
+                            else
+                            {
+                                <p>No Offer Found</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+                </div>
+            </div>
+
+            <a class="btn default" data-toggle="modal" href="#AmountBasis">
+                View Amount Basis Offers Details
+            </a>
+            <div id="AmountBasis" class="modal fade" tabindex="-1" data-width="760">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Amount Basis Offer Detail</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @if (Model != null)
+                            {
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>S.No</th>
+                                            <th>Item Name</th>
+                                            <th>Discount</th>
+                                            <th>Amount</th>
+                                            <th>Quantity</th>
+                                           
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @{
+                                int sno = 1;
+                                        }
+                                        @foreach (var i in Model)
+                                        {
+                                            if (i.BaseAmountList != null)
+                                            {
+                                                foreach (var item in i.BaseAmountList)
+                                                {
+                                                    <tr>
+                                                        <td>@sno</td>
+                                                        <td>@item.ItemId</td>
+                                                        <td>@item.Discount</td>
+                                                        <td>@item.Amount</td>
+                                                        <td>@item.Quantity</td>
+                                                        
+                                                    </tr>
+                                                    sno++;
+                                                }
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            }
+                            else
+                            {
+                                <p>No Offer Found</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+
+                </div>
+            </div>
+            <a class="btn default" data-toggle="modal" href="#HappyHours">
+                View Happy Hours Offers Details
+            </a>
+            <div id="HappyHours" class="modal fade" tabindex="-1" data-width="760">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Happy Hours Offer Detail</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @if (Model != null)
+                            {
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>S.No</th>
+                                            <th>Period</th>
+                                            <th>Timing</th>
+                                            <th>Item Name</th>
+                                            <th>Discount</th>
+                                            <th>Item Index</th>
+                                           
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @{
+                                int sno = 1;
+                                        }
+                                        @foreach (var i in Model)
+                                        {
+                                            if (i.HappyHoursList != null)
+                                            {
+                                                foreach (var item in i.HappyHoursList)
+                                                {
+
+                                                    <tr>
+                                                        <td>@sno</td>
+                                                        <td>@item.from To @item.To</td>
+                                                        <td>@item.TimeFrom To @item.TimeEnd</td>
+                                                        <td>@item.ItemName</td>
+                                                        <td>@item.Discount</td>
+                                                        <td>@item.ItemIndex</td>
+                                                        
+                                                    </tr>
+                                                    sno++;
+                                                }
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            }
+                            else
+                            {
+                                <p>No Offer Found</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <!-- BEGIN BORDERED TABLE PORTLET-->
+            <div class="portlet box yellow">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-coffee"></i>Buy One Get One & Buy Two Get One Offer Details
+                    </div>
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse">
+                        </a>
+
+                        <a href="javascript:;" class="reload">
+                        </a>
+
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <table class="table table-bordered table-hover table-full-width" id="sample_2">
+                        <thead>
+                            <tr>
+                                <th>
+                                    S.NO
+                                </th>
+                                <th>
+                                    OfferType
+                                </th>
+                                <th>
+                                    Buy Items
+                                </th>
+                                <th>
+                                    Free Items
+                                </th>
+                                <th>Days</th>
+                                <th>Discount</th>
+                                <th>Quantity</th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int counter = 1;
+                            }
+                            @if (Model != null)
+                            {
+                                foreach (var i in Model)
+                                {
+                                    if (i.BuyOfferList != null)
+                                    {
+                                        foreach (var item in i.BuyOfferList)
+                                        {
+                                            <tr>
+                                                <td>@counter</td>
+                                                <td>@item.OfferName</td>
+                                                <td>@item.BuyItems</td>
+                                                <td>@item.FreeItems</td>
+                                                <td>@item.Days</td>
+                                                <td>@item.Discount</td>
+                                                <td>@item.Quantity</td>
+                                               
+                                            </tr>
+                                            counter++;
+                                        }
+                                    }
+                                }
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+            <!-- END BORDERED TABLE PORTLET-->
+
+        </div>
+    </div>
+    <!-- END PAGE CONTENT-->
+</div>

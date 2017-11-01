@@ -1,0 +1,94 @@
+﻿@{
+    ViewBag.Title = "AddVendorPay";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model NibsMVC.Models.AddVendorPayment
+
+
+<div class="page-content">
+
+    <!-- BEGIN PAGE HEADER-->
+    <div class="page-bar">
+        <ul class="page-breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="@Url.Action("Index","Home")">Home</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            
+            <li>
+                Add Vendor Payment
+            </li>
+        </ul>
+
+    </div>
+    <!-- END PAGE HEADER-->
+    <!-- BEGIN PAGE CONTENT-->
+
+    <div class="row">
+        <div class="col-md-12">
+            <!-- BEGIN BORDERED TABLE PORTLET-->
+            <div class="portlet box yellow">
+
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-coffee"></i>Vendor
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-horizontal">
+                                @using (Html.BeginForm("AddVendorPay", "Vendor", FormMethod.Post, new { @id = "form_addBalance" }))
+                                {
+                                    <div class="form-group">
+                                        <label class="col-md-2">Select Vendor</label>
+                                        <div class="col-md-4">
+                                            @Html.DropDownListFor(a => a.VendorId, new SelectList(Model.getAllVendors, "Value", "Text"), "Select", new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    if (Model.VendorId > 0)
+                                    {
+                                        <div class="form-group">
+                                            <label class="col-md-2">Status Balance</label>
+                                            <label class="col-md-2">
+                                                @if (Model.Ispending)
+                                                {
+                                                    <strong style="color:red">@Model.StatusAmount</strong>
+                                                }
+                                                else
+                                                {
+                                                    <strong style="color:green">@Model.StatusAmount</strong>
+                                                }
+                                            </label>
+                                        </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2">Add Balance</label>
+                                        <div class="col-md-4">
+                                            @Html.TextBoxFor(a => a.PaidAmount, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-offset-2">
+                                            <input type="submit"  value="Update" class="btn btn-success" />
+                                        </div>
+                                    </div>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          <script>
+              $(document).on('change', '#VendorId', function () {
+                  var value = $(this).val();
+                  if (value!="") {
+                      $('#form_addBalance').submit();
+                  }
+              });
+          </script>
+        </div>
+    </div>
+    <!-- END PAGE CONTENT-->
+</div>

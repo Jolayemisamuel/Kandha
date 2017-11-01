@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Item>
+  <Items>
+    <UserId>69</UserId>
+    <TableNo>122</TableNo>
+    <ItemId>162</ItemId>
+    <ItemName>WHITE SHAKE</ItemName>
+    <FullQty>1</FullQty>
+    <HalfQty>0</HalfQty>
+    <Fullprice>109.00</Fullprice>
+    <HalfPrice>0.00</HalfPrice>
+    <Amount>109.00</Amount>
+    <VatAmt>14.50</VatAmt>
+    <VatAmountCharges>15.8050</VatAmountCharges>
+    <OfferQty>0</OfferQty>
+  </Items>
+</Item>

@@ -1,0 +1,176 @@
+﻿@model IEnumerable<NibsMVC.Models.StockTransferModel>
+
+@{
+    ViewBag.Title = "StockRecive";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using NibsMVC.EDMX;
+<div class="page-content">
+
+    <!-- BEGIN PAGE HEADER-->
+    <div class="page-bar">
+        <ul class="page-breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="@Url.Action("Index","Home")">Home</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+           
+            <li>
+                Stock Recive Details
+            </li>
+        </ul>
+
+    </div>
+    <!-- END PAGE HEADER-->
+    <!-- BEGIN PAGE CONTENT-->
+
+    <div class="row">
+        <p style="color:red">@TempData["sterror"]</p>
+        <p style="color:red">@TempData["streciveerr"]</p>
+        <div class="col-md-12" style="padding-left:0px;padding-right:0px;">
+            <!-- BEGIN BORDERED TABLE PORTLET-->
+            <div class="portlet box yellow">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-coffee"></i>Stock Recive Details
+                    </div>
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse">
+                        </a>
+
+                        <a href="javascript:;" class="reload">
+                        </a>
+
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <table class="table table-bordered table-hover table-full-width" id="sample_2">
+                        <thead>
+                            <tr>
+                                @*<th>
+                        S.NO
+                    </th>*@
+                                <th>Send By</th>
+                                <th>Recive By</th>
+                                <th>Recived Details</th>
+                                @*<th>Action</th>*@
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                NIBSEntities db = new NIBSEntities();
+                                var curntuser = WebSecurity.CurrentUserName;
+
+                                var counter = 1;
+                                foreach (var item in Model)
+                                {
+                                    <tr>
+
+                                        <td>
+                                            @{
+                                    var outletname = (from p in db.tblOutlets where p.OutletId == item.SenderOutletId select p.Name).FirstOrDefault();
+                                            }
+                                            @outletname
+                                        </td>
+                                        <td>
+                                            @{
+
+                                    var reciveoutlet = (from p in db.tblOutlets where p.OutletId == item.ReciverOutletId select p.Name).SingleOrDefault();
+                                            }
+                                            @reciveoutlet
+                                        </td>
+                                        @*<td>
+                                    @{
+                            var recivedate = (from p in db.tblTransfers where p.TransferId == item.TransferId select p.TransferDate).SingleOrDefault();
+                                    }
+                                    @recivedate
+                                </td>*@
+
+                                        <td>
+                                            <a class="btn default" data-toggle="modal" href="#@item.SenderOutletId">
+                                                View Transfer
+                                            </a>
+                                            <div class="modal fade" id="@item.SenderOutletId" tabindex="-1" role="basic" aria-hidden="true">
+                                                
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                            <h4 class="modal-title">Transfer Details</h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <table class="table table-bordered">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Item Name</th>
+                                                                        <th>Transfer Quantity</th>
+                                                                        <th>Transfer Date</th>
+                                                                        <th>Action</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    @{
+                                    var Itemdetails = (from q in db.tblTransfers where q.ReciverOutletId == WebSecurity.CurrentUserId select q).ToList();
+                                    foreach (var i in Itemdetails)
+                                    {
+                                        <tr id="@i.TransferId">
+                                           
+                                           
+                                            <td>
+                                                @{
+                                        var itemname = (from q in db.tbl_RawMaterials where q.RawMaterialId == i.RawMaterialId select q.Name).SingleOrDefault();
+                                                }
+                                                @itemname
+                                            </td>
+                                            <td>
+                                                @i.TransferQuantity
+
+                                            </td>
+                                            <td>
+                                                @i.TransferDate.ToShortDateString()
+                                            </td>
+                                            <td>
+                                                <a href="@Url.Action("stockReturn", "StockTransfer", new {id=i.TransferId,Itemid=i.RawMaterialId })"><span class="fa fa-repeat"></span></a>
+                                               
+                                            </td>
+                                        </tr>
+                                    }
+                                                                    }
+                                                                </tbody>
+
+
+                                                            </table>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn default" data-dismiss="modal">Close</button>
+
+                                                        </div>
+                                                   
+                                            </div>
+                                        </td>
+                                        @*<td>
+                                            <a href="@Url.Action("DeleteStockRecive","StockTransfer", new { id = item.TransferId })"><span class="fa fa-trash-o"></span></a>
+                                           
+                                        </td>*@
+                                        @*<td>
+                                <a href="@Url.Action("Create", "Category", new { @id = item.CategoryId })" class="btn btn-xs red">Edit</a>
+                                <a href="@Url.Action("Delete", "Category", new { @id = item.CategoryId })" class="btn btn-xs red">Delete</a>
+                            </td>*@
+
+                                    </tr>
+                                    counter = counter + 1;
+                                }
+
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+            <!-- END BORDERED TABLE PORTLET-->
+
+        </div>
+    </div>
+    <!-- END PAGE CONTENT-->
+</div>

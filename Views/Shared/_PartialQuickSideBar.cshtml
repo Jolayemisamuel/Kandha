@@ -1,0 +1,513 @@
+﻿@using NibsMVC.Repository;
+@using NibsMVC.Models;
+@using NibsMVC.EDMX;
+@{
+    //QuickSideBarRepository obj = new QuickSideBarRepository();
+    //obj.getAllManagerList();
+    NIBSEntities entities = new NIBSEntities();
+    List<QuickSideBarManagerModel> lst = new List<QuickSideBarManagerModel>();
+    List<QuickSideBarOperatorModel> lstoperator = new List<QuickSideBarOperatorModel>();
+    QuickSideBarModel model = new QuickSideBarModel();
+    var data = entities.tblOperators.Where(x => x.Type.Equals("Manager") && x.UserId!=WebSecurity.CurrentUserId).ToList();
+    foreach (var item in data)
+    {
+        QuickSideBarManagerModel mo = new QuickSideBarManagerModel();
+        mo.UserId = item.UserId.Value;
+        mo.Name = item.Name;
+        mo.OutletName = item.tblOutlet.Name;
+        lst.Add(mo);
+    }
+    var data1 = entities.tblOperators.Where(x => x.Type.Equals("Cashier") && x.UserId != WebSecurity.CurrentUserId).ToList();
+    foreach (var item in data1)
+    {
+        QuickSideBarOperatorModel mo = new QuickSideBarOperatorModel();
+        mo.UserId = item.UserId.Value;
+        mo.Name = item.Name;
+        mo.OutletName = item.tblOutlet.Name;
+        lstoperator.Add(mo);
+    }
+    model.getmanagerlist = lst;
+    model.getoperatorlist = lstoperator;
+    //return model;
+}
+@*@model NibsMVC.Models.QuickSideBarModel*@
+          
+<div class="nav-justified">
+    <ul class="nav nav-tabs nav-justified">
+        <li class="active">
+            <a href="#quick_sidebar_tab_1" data-toggle="tab">
+                Users <span class="badge badge-danger">2</span>
+            </a>
+        </li>
+        <li>
+            <a href="#quick_sidebar_tab_2" data-toggle="tab">
+                Alerts <span class="badge badge-success">7</span>
+            </a>
+        </li>
+        
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane active page-quick-sidebar-chat" id="quick_sidebar_tab_1">
+            <div class="page-quick-sidebar-chat-users" data-rail-color="#ddd" data-wrapper-class="page-quick-sidebar-list">
+                <h3 class="list-heading">Managers</h3>
+                <ul class="media-list list-items">
+                    @{
+                        
+                        if (model.getmanagerlist!=null)
+                        {
+                            foreach (var item in model.getmanagerlist)
+                            {
+                                <li class="media">
+                                    <div class="media-status">
+                                        <span class="badge badge-success">8</span>
+                                    </div>
+                                    <img class="media-object" src="~/assets/admin/layout/img/avatar3.jpg" alt="...">
+                                    <div class="media-body">
+                                        <h4 class="media-heading">@item.Name</h4>
+                                        <div class="media-heading-sub" id="@item.UserId">
+                                            @item.OutletName
+                                           
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                        }
+                        else
+                        {
+                            <li>No Record Found</li>
+                        }
+                    }
+
+
+                </ul>
+                <h3 class="list-heading">Cashiers</h3>
+                <ul class="media-list list-items">
+                    
+                    @{
+                        if (model.getoperatorlist != null)
+                        {
+                            foreach (var item in model.getoperatorlist)
+                            {
+                                <li class="media">
+                                    <div class="media-status">
+                                        <span class="badge badge-success">8</span>
+                                    </div>
+                                    <img class="media-object" src="~/assets/admin/layout/img/avatar3.jpg" alt="...">
+                                    <div class="media-body">
+                                        <h4 class="media-heading">@item.Name</h4>
+                                        <div class="media-heading-sub">
+                                            @item.OutletName
+                                            <input type="hidden" name="SenderUserId" value="@item.UserId" />
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                        }
+                        else
+                        {
+                            <li>No Record Found</li>
+                        }
+                    }
+                    
+                </ul>
+            </div>
+            <div class="page-quick-sidebar-item">
+                <div class="page-quick-sidebar-chat-user">
+                    <div class="page-quick-sidebar-nav">
+                        <a href="javascript:;" class="page-quick-sidebar-back-to-list"><i class="icon-arrow-left"></i>Back</a>
+                        
+                    </div>
+                    <div class="page-quick-sidebar-chat-user-messages">
+                        <input type="hidden" name="OutUserId" value="@WebSecurity.CurrentUserId" />
+                        <input type="hidden" name="SenderUserId" value="" />
+                        <input type="hidden" name="LastMessId" value="" />
+                        <input type="hidden" name="LastRecieveId" value="" />
+                        <input type="hidden" name="MeName" value="@WebSecurity.CurrentUserName" />
+                        <input type="hidden" name="ChaterName" value="" />
+                        
+                    </div>
+                    <div class="page-quick-sidebar-chat-user-form">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Type a message here...">
+                            <div class="input-group-btn">
+                                <button type="button" class="btn blue"><i class="icon-paper-clip"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane page-quick-sidebar-alerts" id="quick_sidebar_tab_2">
+            <div class="page-quick-sidebar-alerts-list">
+                <h3 class="list-heading">General</h3>
+                <ul class="feeds list-items">
+                    <li>
+                        <div class="col1">
+                            <div class="cont">
+                                <div class="cont-col1">
+                                    <div class="label label-sm label-info">
+                                        <i class="fa fa-check"></i>
+                                    </div>
+                                </div>
+                                <div class="cont-col2">
+                                    <div class="desc">
+                                        You have 4 pending tasks. <span class="label label-sm label-warning ">
+                                            Take action <i class="fa fa-share"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col2">
+                            <div class="date">
+                                Just now
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <div class="col1">
+                                <div class="cont">
+                                    <div class="cont-col1">
+                                        <div class="label label-sm label-success">
+                                            <i class="fa fa-bar-chart-o"></i>
+                                        </div>
+                                    </div>
+                                    <div class="cont-col2">
+                                        <div class="desc">
+                                            Finance Report for year 2013 has been released.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col2">
+                                <div class="date">
+                                    20 mins
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <div class="col1">
+                            <div class="cont">
+                                <div class="cont-col1">
+                                    <div class="label label-sm label-danger">
+                                        <i class="fa fa-user"></i>
+                                    </div>
+                                </div>
+                                <div class="cont-col2">
+                                    <div class="desc">
+                                        You have 5 pending membership that requires a quick review.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col2">
+                            <div class="date">
+                                24 mins
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="col1">
+                            <div class="cont">
+                                <div class="cont-col1">
+                                    <div class="label label-sm label-info">
+                                        <i class="fa fa-shopping-cart"></i>
+                                    </div>
+                                </div>
+                                <div class="cont-col2">
+                                    <div class="desc">
+                                        New order received with <span class="label label-sm label-success">
+                                            Reference Number: DR23923
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col2">
+                            <div class="date">
+                                30 mins
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="col1">
+                            <div class="cont">
+                                <div class="cont-col1">
+                                    <div class="label label-sm label-success">
+                                        <i class="fa fa-user"></i>
+                                    </div>
+                                </div>
+                                <div class="cont-col2">
+                                    <div class="desc">
+                                        You have 5 pending membership that requires a quick review.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col2">
+                            <div class="date">
+                                24 mins
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="col1">
+                            <div class="cont">
+                                <div class="cont-col1">
+                                    <div class="label label-sm label-info">
+                                        <i class="fa fa-bell-o"></i>
+                                    </div>
+                                </div>
+                                <div class="cont-col2">
+                                    <div class="desc">
+                                        Web server hardware needs to be upgraded. <span class="label label-sm label-warning">
+                                            Overdue
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col2">
+                            <div class="date">
+                                2 hours
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <div class="col1">
+                                <div class="cont">
+                                    <div class="cont-col1">
+                                        <div class="label label-sm label-default">
+                                            <i class="fa fa-briefcase"></i>
+                                        </div>
+                                    </div>
+                                    <div class="cont-col2">
+                                        <div class="desc">
+                                            IPO Report for year 2013 has been released.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col2">
+                                <div class="date">
+                                    20 mins
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+                <h3 class="list-heading">System</h3>
+                <ul class="feeds list-items">
+                    <li>
+                        <div class="col1">
+                            <div class="cont">
+                                <div class="cont-col1">
+                                    <div class="label label-sm label-info">
+                                        <i class="fa fa-check"></i>
+                                    </div>
+                                </div>
+                                <div class="cont-col2">
+                                    <div class="desc">
+                                        You have 4 pending tasks. <span class="label label-sm label-warning ">
+                                            Take action <i class="fa fa-share"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col2">
+                            <div class="date">
+                                Just now
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <div class="col1">
+                                <div class="cont">
+                                    <div class="cont-col1">
+                                        <div class="label label-sm label-danger">
+                                            <i class="fa fa-bar-chart-o"></i>
+                                        </div>
+                                    </div>
+                                    <div class="cont-col2">
+                                        <div class="desc">
+                                            Finance Report for year 2013 has been released.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col2">
+                                <div class="date">
+                                    20 mins
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <div class="col1">
+                            <div class="cont">
+                                <div class="cont-col1">
+                                    <div class="label label-sm label-default">
+                                        <i class="fa fa-user"></i>
+                                    </div>
+                                </div>
+                                <div class="cont-col2">
+                                    <div class="desc">
+                                        You have 5 pending membership that requires a quick review.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col2">
+                            <div class="date">
+                                24 mins
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="col1">
+                            <div class="cont">
+                                <div class="cont-col1">
+                                    <div class="label label-sm label-info">
+                                        <i class="fa fa-shopping-cart"></i>
+                                    </div>
+                                </div>
+                                <div class="cont-col2">
+                                    <div class="desc">
+                                        New order received with <span class="label label-sm label-success">
+                                            Reference Number: DR23923
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col2">
+                            <div class="date">
+                                30 mins
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="col1">
+                            <div class="cont">
+                                <div class="cont-col1">
+                                    <div class="label label-sm label-success">
+                                        <i class="fa fa-user"></i>
+                                    </div>
+                                </div>
+                                <div class="cont-col2">
+                                    <div class="desc">
+                                        You have 5 pending membership that requires a quick review.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col2">
+                            <div class="date">
+                                24 mins
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="col1">
+                            <div class="cont">
+                                <div class="cont-col1">
+                                    <div class="label label-sm label-warning">
+                                        <i class="fa fa-bell-o"></i>
+                                    </div>
+                                </div>
+                                <div class="cont-col2">
+                                    <div class="desc">
+                                        Web server hardware needs to be upgraded. <span class="label label-sm label-default ">
+                                            Overdue
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col2">
+                            <div class="date">
+                                2 hours
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <div class="col1">
+                                <div class="cont">
+                                    <div class="cont-col1">
+                                        <div class="label label-sm label-info">
+                                            <i class="fa fa-briefcase"></i>
+                                        </div>
+                                    </div>
+                                    <div class="cont-col2">
+                                        <div class="desc">
+                                            IPO Report for year 2013 has been released.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col2">
+                                <div class="date">
+                                    20 mins
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="tab-pane page-quick-sidebar-settings" id="quick_sidebar_tab_3">
+            <div class="page-quick-sidebar-settings-list">
+                <h3 class="list-heading">General Settings</h3>
+                <ul class="list-items borderless">
+                    <li>
+                        Enable Notifications <input type="checkbox" class="make-switch" checked data-size="small" data-on-color="success" data-on-text="ON" data-off-color="default" data-off-text="OFF">
+                    </li>
+                    <li>
+                        Allow Tracking <input type="checkbox" class="make-switch" data-size="small" data-on-color="info" data-on-text="ON" data-off-color="default" data-off-text="OFF">
+                    </li>
+                    <li>
+                        Log Errors <input type="checkbox" class="make-switch" checked data-size="small" data-on-color="danger" data-on-text="ON" data-off-color="default" data-off-text="OFF">
+                    </li>
+                    <li>
+                        Auto Sumbit Issues <input type="checkbox" class="make-switch" data-size="small" data-on-color="warning" data-on-text="ON" data-off-color="default" data-off-text="OFF">
+                    </li>
+                    <li>
+                        Enable SMS Alerts <input type="checkbox" class="make-switch" checked data-size="small" data-on-color="success" data-on-text="ON" data-off-color="default" data-off-text="OFF">
+                    </li>
+                </ul>
+                <h3 class="list-heading">System Settings</h3>
+                <ul class="list-items borderless">
+                    <li>
+                        Security Level
+                        <select class="form-control input-inline input-sm input-small">
+                            <option value="1">Normal</option>
+                            <option value="2" selected>Medium</option>
+                            <option value="e">High</option>
+                        </select>
+                    </li>
+                    <li>
+                        Failed Email Attempts <input class="form-control input-inline input-sm input-small" value="5" />
+                    </li>
+                    <li>
+                        Secondary SMTP Port <input class="form-control input-inline input-sm input-small" value="3560" />
+                    </li>
+                    <li>
+                        Notify On System Error <input type="checkbox" class="make-switch" checked data-size="small" data-on-color="danger" data-on-text="ON" data-off-color="default" data-off-text="OFF">
+                    </li>
+                    <li>
+                        Notify On SMTP Error <input type="checkbox" class="make-switch" checked data-size="small" data-on-color="warning" data-on-text="ON" data-off-color="default" data-off-text="OFF">
+                    </li>
+                </ul>
+                <div class="inner-content">
+                    <button class="btn btn-success"><i class="icon-settings"></i> Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

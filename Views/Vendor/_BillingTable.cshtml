@@ -1,0 +1,219 @@
+﻿@model NibsMVC.Models.VendorBillingModel
+
+
+@using (Html.BeginForm("DispatchOrder", "Vendor", FormMethod.Post, new {@id="form_vendor_bill" }))
+{
+    @Html.HiddenFor(a => a.VendorId)
+    @Html.HiddenFor(a => a.NetAmount)
+    @Html.HiddenFor(a => a.ServiceChargeAmount)
+    @Html.HiddenFor(a => a.ServicTaxAmount)
+    @Html.HiddenFor(a => a.Totalamount)
+    @Html.HiddenFor(a => a.VatAmount)
+<div class="col-md-12 DivItemsDisplay table-responsive">
+
+    @Html.HiddenFor(a => a.IsPrinted)
+    <table class="table table-bordered" style="font-size:14px;">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Item Name</th>
+                <th>Actual Price</th>
+                <th>Base Price</th>
+                <th>Qty</th>
+                <th>Total Price</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+    int counter = 1;
+            }
+            @foreach (var item in Model.getAllItems)
+            {
+                <tr>
+                    <td>@counter</td>
+                    <td>@item.ItemName</td>
+                    <td>@item.ActualPrice</td>
+                    <td>@item.BasePrice</td>
+
+                    <td>@item.Qty</td>
+                    <td>@item.TotalPrice</td>
+                    <td>
+                        @Ajax.ActionLink("delete", "_delete", "Vendor", new { Id = item.Id, VendorID = item.VendorId }, new AjaxOptions { UpdateTargetId = "Billing_table", OnBegin = "return checkBillPrint();" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+<div class="col-md-12 margin-bottom-20">
+    <div class="form-group">
+        <label class="col-md-3">Payment Method</label>
+        <div class="col-md-4">
+            @Html.DropDownListFor(a => a.PaymentMethod, new SelectList(Model.getPaymentMethd, "Value", "Text"), "--Select--", new { @class = "form-control" })
+        </div>
+        <div class="col-md-2">
+            <a class="btn green" data-toggle="modal" href="#basic">
+                Kot
+            </a>
+            <div class="modal fade" id="basic" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title">Last KOT</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-12" id="KotDiv">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>SNo</th>
+                                                <th>Item Name</th>
+                                                <th>F</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @{
+            int KotCount = 1;
+                                            }
+                                            @if (Model.getAllItems != null)
+                                            {
+                                                foreach (var item in Model.getAllItems)
+                                                {
+                                                    if (item.KotQty > 0)
+                                                    {
+                                                        <tr>
+                                                            <td>@KotCount</td>
+                                                            <td>@item.ItemName</td>
+                                                            <td>@item.KotQty</td>
+                                                        </tr>
+                                                    }
+
+                                                    KotCount = KotCount + 1;
+                                                }
+                                            }
+
+                                        </tbody>
+                                    </table>
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                            @if (Model.getAllItems.Count() > 0)
+                            {<a href="#" class="_clear_kot btn btn-success"> Clear</a>
+
+                            }
+                            else
+                            {
+                                <a href="#" class="_clear_kot btn btn-success disabled"> Clear</a>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-12 margin-bottom-20" id="_div_check" hidden>
+   
+    <label class="col-md-2">Cheque Date</label>
+    <div class="col-md-4">
+        <div class="input-group  date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
+            <input type="text" class="form-control" readonly id="chequedate" name="ChequeDate">
+            <span class="input-group-btn">
+                <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+            </span>
+        </div>
+        @*@Html.TextBoxFor(a => a.ChequeDate, new { @class = "form-control" })*@
+    </div>
+    <label class="col-md-2">Cheque No</label>
+    <div class="col-md-4">
+        @Html.TextBoxFor(a => a.ChequeNo, new { @class = "form-control" })
+    </div>
+</div>
+
+
+<div class="col-md-12 margin-bottom-20" id="_div_due" hidden>
+    <label class="col-md-2">Diposit Amount</label>
+    <div class="col-md-4">
+        @Html.TextBoxFor(a => a.DepositAmount, new { @class = "form-control" })
+    </div>
+    <label class="col-md-2">Reamining Amount</label>
+    <div class="col-md-4">
+       
+        @Html.TextBoxFor(a => a.remainingAmount, new { @class = "form-control" })
+    </div>
+</div>
+
+<div class="row form-horizontal" style="margin-left:0px;margin-right:0px;">
+    
+    <div class="col-md-2">
+        <div class="form-group">
+            <label>Vat Amount</label>
+            <div>
+                @Html.TextBoxFor(a => a.VatAmount, new { @class = "form-control", @disabled = "disabled" })
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-group">
+            <label>Service Charge</label>
+            <div>
+                @Html.TextBoxFor(a => a.ServiceChargeAmount, new { @class = "form-control", @disabled = "disabled" })
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-group">
+            <label>Service Tax</label>
+            <div>
+                @Html.TextBoxFor(a => a.ServicTaxAmount, new { @class = "form-control", @disabled = "disabled" })
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-group">
+            <label>Total Amount</label>
+            <div>
+                @Html.TextBoxFor(a => a.Totalamount, new { @class = "form-control", @disabled = "disabled" })
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-group">
+            <label>Net Amount</label>
+            <div>
+                @Html.TextBoxFor(a => a.NetAmount, new { @class = "form-control", @disabled = "disabled" })
+            </div>
+        </div>
+    </div>
+   
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-2">
+            <input type="button" value="Print" class="btn btn-success" id="print" />
+        </div>
+       <div class="col-md-2">
+           @if (Model.IsPrinted)
+           {
+            <input type="submit" value="Dispatch" id="_dispatch" class="btn btn-success" />
+           }
+           else
+           {
+            <input type="submit" value="Dispatch" id="_dispatch" class="btn btn-success disabled" />
+           }
+       </div>
+    </div>
+</div>
+
+}

@@ -1,0 +1,283 @@
+/* here you can put your own css to customize and override the theme */
+
+/***
+Rounded Portlets
+***/
+/*
+.portlet {
+	border-radius: 4px !important;
+}
+
+.portlet .portlet-title {
+	border-radius: 4px 4px 0px 0px !important;
+}
+
+.portlet .portlet-body,
+.portlet .portlet-body .form-actions  {
+	border-radius: 0px 0px 4px 4px !important;
+}
+*/
+
+dashboard-stat a:hover{
+    text-decoration:none;
+}
+.page-sidebar-closed .hor-menu{
+    margin-left: 79px !important;
+}
+body {
+    /*background-color: #ffffff !important;
+    padding-top:10px !important;*/
+}
+
+.create {
+    margin-bottom: 20px;
+}
+
+#main {
+    width: 1024px;
+    height: auto;
+    float: left;
+}
+
+.mainli {
+    width: 500px;
+    height: 60px;
+    float: left;
+}
+
+.labelli {
+    width: 150px;
+    height: 50px;
+}
+
+.textboxmain {
+    width: 180px;
+    margin-top: -13px;
+    height: 30px;
+}
+
+.new-Purchase-item {
+    width: 1024px;
+    float: left;
+    height: auto;
+    margin-bottom: 12px;
+}
+
+.item-purchase {
+    width: 230px;
+    float: left;
+}
+
+.item-purchase-label {
+    float: left;
+    margin-top: 2px;
+    margin-left: 10px;
+}
+
+.item-texbox {
+    width: 120px;
+    height: 37px;
+    float: left;
+    margin-top: -20px;
+}
+
+.form-des {
+    height: 100px;
+    width: 320px;
+    color: #555;
+    border: 1px solid #e5e5e5;
+}
+
+.txthalf {
+    width: 60px;
+    margin-left: 10px;
+}
+
+.form-des:focus {
+    border-color: #ccc;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+}
+
+.DTTT_button_pdf, .DTTT_button_csv, .DTTT_button_xls, .DTTT_button_copy {
+    display: inline-block ;
+}
+
+.min-height-250 {
+    min-height: 250px;
+    max-height: 250px;
+    overflow-y: scroll;
+}
+
+.tableno {
+    height: 600px !important;
+    overflow-y: scroll !important;
+    overflow-x: hidden !important;
+    padding-left: 6px !important;
+}
+.padding-left-right-0{
+    padding-left:0px;
+    padding-right:0px;
+}
+.margin-bottom-5 {
+    margin-bottom: 5px !important;
+}
+
+.current {
+    background: #ff6a00 !important;
+    border: 2px outset #ff6a00 !important;
+    color: white !important;
+}
+.printed {
+    background: green !important;
+    border: 2px outset green !important;
+    color: white !important;
+}
+
+.DivCategory {
+    height: 300px !important;
+      max-height: 300px !important;
+    overflow-y: auto;
+    overflow-x: hidden !important;
+}
+
+._delete_item {
+    margin-right: 10px;
+}
+
+.DivItems {
+    height: 200px !important;
+     max-height: 200px !important;
+    overflow-y: auto;
+    overflow-x: hidden !important;
+    margin-top: 5px;
+    padding-top: 5px;
+}
+.form-horizontal .form-group{
+        margin-left:0px;
+        margin-right:0px;
+    }
+.DivItemsDisplay {
+    height: 280px !important;
+     max-height: 280px !important;
+    overflow-y: auto;
+    overflow-x: hidden !important;
+    margin-top: 5px;
+    padding-top: 5px;
+}
+
+.margin-right-5 {
+    margin-right: 5px !important;
+    margin-bottom: 5px !important;
+}
+.table-overflow{
+    max-height:350px;
+    overflow-y:auto;
+}
+span.required{
+    color:red;
+}
+.validation-summary-errors ul{
+    list-style-type:none;
+}
+.field-validation-error{
+    color:red;
+}
+.validation-summary-errors ul li{
+    color:red;
+}
+.merge_table {
+    background: #ff0000 !important;
+    border: 2px outset #ff0000 !important;
+    color: white !important;
+}
+
+.disablemerge {
+    background: #0094ff !important;
+    border: 2px outset #0094ff !important;
+    color: white !important;
+}
+
+.table_dispaly_none {
+    display: none !important;
+}
+
+.toast-message {
+    font-size: 17px;
+}
+
+.toast-title {
+    font-size: 17px;
+}
+
+table.nibs_billing tr th:nth-of-type(1) {
+    width: 30px;
+}
+
+table.nibs_billing tr th:nth-of-type(2) {
+    width: 282px;
+}
+
+table.nibs_billing tr th:nth-of-type(3) {
+    width: 46px;
+}
+
+table.nibs_billing tr th:nth-of-type(4) {
+    width: 51px;
+}
+
+table.nibs_billing tr th:nth-of-type(5) {
+    width: 60px;
+}
+
+table.nibs_billing tr th:nth-of-type(6) {
+    width: 30px;
+}
+
+table.nibs_billing tr th:nth-of-type(7) {
+    width: 50px;
+}
+
+table.nibs_billing tr th:nth-of-type(8) {
+    width: 70px;
+}
+
+table.nibs_billing tr td:nth-of-type(2) {
+    font-size: 15px;
+}
+
+table.nibs_billing tr td:nth-of-type(3) {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+table.nibs_billing tr td:nth-of-type(4) {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+table.nibs_billing tr td:nth-of-type(5) {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.run_table {
+    color: white !important;
+    font-weight: bold !important;
+    width: 50px !important;
+    background-color: #D84A38 !important;
+}
+
+#tbl_cnt{
+border-collapse: collapse; width: 100%;word-break:break-all;
+}
+#tbl_cnt thead, #tbl_cnt tbody{
+display: block;
+}
+#tbl_cnt thead tr{
+background-color: #8C8787; text-align: center;width:100%;display:block;
+}
+#tbl_cnt tbody {
+height: 100px;overflow-y: auto;overflow-x: hidden;
+}

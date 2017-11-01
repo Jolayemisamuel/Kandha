@@ -1,0 +1,161 @@
+﻿@model IEnumerable<NibsMVC.Models.AddItemModel>
+
+@{
+    ViewBag.Title = "ItemDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using NibsMVC.EDMX;
+<div class="page-content">
+
+    <!-- BEGIN PAGE HEADER-->
+    
+    <div class="page-bar">
+        <ul class="page-breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="@Url.Action("Index","Home")">Home</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <a href="@Url.Action("AddItem", "Category")">Add Item</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                Items Details
+            </li>
+        </ul>
+
+    </div>
+    <!-- END PAGE HEADER-->
+    <!-- BEGIN PAGE CONTENT-->
+
+    <div class="row">
+        <p style="color:red; font-size:14px;">@TempData["Message"]</p>
+        <p style="color:red; font-size:14px;">@TempData["item"]</p>
+        
+        <div class="col-md-12" style="padding-left:0px;padding-right:0px;">
+            <!-- BEGIN BORDERED TABLE PORTLET-->
+            <div class="portlet box yellow">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-coffee"></i>Items Details
+                    </div>
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse">
+                        </a>
+
+                        <a href="javascript:;" class="reload">
+                        </a>
+
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    @using (Html.BeginForm("ItemDetails", "Category", FormMethod.Post, new { @id = "SearchRetrobill", @class = "form-horizontal" }))
+                    {
+                        <div class="form-body">
+                            <div class="alert alert-danger display-hide">
+                                <button class="close" data-close="alert"></button>
+                                You have some form errors. Please check below.
+                            </div>
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Choose Category <span class="required">
+                                        *
+                                    </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        @Html.DropDownListFor(model => model.FirstOrDefault().SearchCategoryId, new SelectList(ViewBag.categoryLIsts, "Value", "Text"), "--Choose Your Category--", new { @class = "form-control", @id = "serchcat" })
+
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <button type="submit" class="btn green">Show</button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <table class="table table-bordered table-hover table-full-width" id="sample_2">
+                        <thead>
+                            <tr>
+                                <th>
+                                    S.NO
+                                </th>
+                                <th>
+                                    Category Name
+                                </th>
+                                <th>
+                                   Item Name
+                                </th>
+                                <th>
+                                    Description
+                                </th>
+                                <th>
+                                    Item Code
+                                </th>
+                                <th>
+                                    Image
+                                </th>
+                                <th>Action</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                NIBSEntities db=new NIBSEntities();
+                                var counter = 1;
+                                foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @counter
+                                        </td>
+                                        <td>
+                                            @{
+                                    var catname = (from p in db.tblCategories.Where(o => o.CategoryId == item.ItemCategoryId) select p.Name).FirstOrDefault();
+                                            }
+                                            @catname
+                                        </td>
+                                        <td>
+                                            @item.Name
+                                        </td>
+                                        <td>
+                                            @item.Description
+                                        </td>
+                                        <td>
+                                            @item.ItemCode
+                                        </td>
+                                        <td>
+                                            <img src="@item.ItemImage " class="img-rounded" style="width:50px; height:50px;" />
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("EditItem", "Category", new { @id = item.ItemId })"><span class="fa fa-edit"></span></a>
+                                            <a href="@Url.Action("Deleteitem", "Category", new { @id = item.ItemId })" class="block_item"><span class="fa fa-trash-o"></span></a>
+                                        </td>
+
+                                    </tr>
+                                    counter = counter + 1;
+                                }
+
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- END BORDERED TABLE PORTLET-->
+
+        </div>
+    </div>
+    <script>
+        $(document).on('click', '.block_item', function (e) {
+            if (!confirm("Do you want to delete")) {
+                return false;
+            }
+        });
+    </script>
+    <!-- END PAGE CONTENT-->
+</div>
+

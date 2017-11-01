@@ -1,0 +1,410 @@
+﻿@model NibsMVC.Models.PurchaseModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-content">
+    <div class="row">
+        <p style="color:red">@TempData["Perror"]</p>
+        <div class="col-md-12">
+            <div class="portlet box blue">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-gift"></i>Add Purchase Details
+                    </div>
+                </div>
+                <div class="portlet-body form">
+                    <!-- BEGIN FORM-->
+                    @using (Html.BeginForm("Create", "Purchase", FormMethod.Post, new { @id = "form_sample_6", @class = "form-horizontal" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        @Html.HiddenFor(model => model.OutletId)
+                        <input type="hidden" name="itemsdata" id="itemsdata" value="" />
+                        <div class="form-body">
+                            <div class="alert alert-danger display-hide">
+                                <button class="close" data-close="alert"></button>
+                                You have some form errors. Please check below.
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class=" col-md-3">Outlet</label>
+                                    <div class="col-md-7">
+                                        <input type="text" name="" value="@WebSecurity.CurrentUserName" class="form-control" readonly>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class=" col-md-4">PO No<span class="required"> *</span></label>
+                                    <div class="col-md-7">
+                                        @Html.DropDownListFor(model => model.PurchaseOrderId, (SelectList)ViewBag.poLists, "--Choose Your PO No--", new { @class = "form-control", @id = "PurchaseOrder" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class=" col-md-4">Vendor<span class="required"> *</span></label>
+                                    <div class="col-md-7">
+                                        @Html.DropDownListFor(model => model.VendorId, (SelectList)ViewBag.venderLists, "--Choose Your Vendor--", new { @class = "form-control", @id = "Vendor",@readonly="true" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <table id="tableRoutingData" class="table table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Item Name</th>
+                                            <th>Qty</th>
+                                            <th>Type</th>
+                                            <th>Amount</th>
+                                            <th>Tax(%)</th>
+                                            <th>Action</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr menuid="-1">
+                                            <td>
+                                                <input id="Item_0" type="text" class="form-control" name="RowMaterial" />
+                                                <input id="hItem_0" type="hidden" class="form-control" name="RowMaterialId" />
+                                            </td>
+                                            <td>
+
+                                                <input id="txtQty_0" type="text" class="form-control" name="Quantity" />
+                                            </td>
+                                            <td>
+                                                <select id="Type_0" class="form-control Routing" name="Type">
+                                                    <option value="">Select</option>
+                                                    <option value="Bag">Bag</option>
+                                                    <option value="Box">Box</option>
+                                                    <option value="Bouch">Bouch</option>
+                                                    <option value="Bottle">Bottle</option>
+                                                    <option value="Bulk">Bulk</option>
+                                                    <option value="Can">Can</option>
+                                                    <option value="Gms">Gms</option>
+                                                    <option value="Kgs">Kgs</option>
+                                                    <option value="Ltr">Ltr</option>
+                                                    <option value="Mtr">Mtr</option>
+                                                    <option value="ML">ML</option>
+                                                    <option value="Nos">Nos</option>
+                                                    <option value="Piece">Piece</option>
+                                                    <option value="Packet">Packet</option>
+                                                    <option value="Punch">Punch</option>
+                                                    <option value="Tray">Tray</option>
+
+                                                    @*<option value="Pieces">Pieces</option>
+                                                        <option value="Gm">Gm</option>
+                                                        <option value="Packets">Packets</option>
+                                                        <option value="Boxes">Boxes</option>
+                                                        <option value="Litter">Litter</option>
+                                                        <option value="kg">Kg</option>*@
+
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <input type="text" id="txtAmt_0" name="txt_Amount" class="form-control" />
+                                            </td>
+                                            <td>
+                                                <input type="text" id="txtTaxPer_0" name="TaxPer" class="form-control" />
+                                            </td>
+                                            <td>
+
+                                                <button type="button" id="btnadd" class="btn btn-success btn-sm defaults">
+                                                    <span class="fa fa-plus"></span>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    <tbody>
+                                </table>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-5">Invoice No<span class="required"> *</span></label>
+                                    <div class="col-md-7">
+                                        <input type="text" name="InvoiceNo" class="form-control number required" />
+                                        @Html.ValidationMessageFor(m => m.InvoiceNo)
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-5">InvoiceDate<span class="required"> *</span></label>
+                                    <div class="col-md-7">
+                                        <input class="form-control form-control-inline input-medium date-picker" data-date-format="mm-dd-yyyy" size="16" type="text" value=@DateTime.Now.ToShortDateString() name="InvoiceDate" readonly="readonly" />
+                                        @*<input type="text" name="InvoiceDate" class="form-control" />*@
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-5">Total Amount</label>
+                                    <div class="col-md-7">
+                                        <input type="text" name="TotalAmount" class="form-control" id="tamt" value="0" readonly />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-5">Tax<span class="required"> *</span></label>
+                                    <div class="col-md-7">
+                                        <input type="text" name="Tax" class="form-control number" id="txtTax" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-5">Extra Charge</label>
+                                    <div class="col-md-7">
+                                        <input type="text" name="ExtraCharge" class="form-control number" id="extchrg" value="0" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-5">Extra Charge Description</label>
+                                    <div class="col-md-7">
+                                        <textarea name="ExtraChargeDetail" class="form-control"></textarea>
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-5">Net Amount</label>
+                                    <div class="col-md-7">
+                                        <input type="text" name="NetAmount" class="form-control" id="netamt" value="0" readonly />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class=" col-md-5">
+                                        Payment Mode
+                                    </label>
+                                    <div class="radio-list col-md-7">
+                                        <label class="radio-inline">
+                                            <input type="radio" name="PaymentMode" id="rbtcash" value="Cash" class="radio-item" checked> Cash
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="PaymentMode" id="rbtcredit" value="Credit" class="radio-item"> Credit
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="PaymentMode" id="rbtcheque" value="Cheque" class="radio-item"> Cheque
+                                        </label>
+
+                                    </div>
+                                </div>
+                                <div id="CashDiv">
+                                    <div class="form-group">
+                                        <label class=" col-md-5">
+                                            Deposit Amount
+                                        </label>
+                                        <div class="col-md-7">
+                                            <div class="input-icon right">
+                                                <i class="fa"></i>
+                                                <input type="text" name="DepositeAmount" value="0" id="txtcashdeposite" class="form-control" />
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class=" col-md-5">
+                                            Remaning Amount
+                                        </label>
+                                        <div class="col-md-7">
+                                            <div class="input-icon right">
+                                                <i class="fa"></i>
+                                                <input type="text" name="RemainingAmount" value="0" id="txtcashremaing" class="form-control" readonly />
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="ChequeDiv" style="display:none">
+                                    <div class="form-group">
+                                        <label class=" col-md-5">
+                                            Cheque No
+                                        </label>
+                                        <div class="col-md-7">
+                                            <div class="input-icon right">
+
+                                                <input type="text" name="ChequeNo" id="txtchequedeposite" class="form-control" />
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div id="CreditDiv" style="display:none">
+                                    <div class="form-group">
+                                        <label class=" col-md-5">
+                                            Remaining Amount
+                                        </label>
+                                        <div class="col-md-7">
+                                            <div class="input-icon right">
+
+                                                <input type="text" name="RemainingAmount" value="0" id="txtcreditdeposite" class="form-control" readonly />
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-5">Remarks</label>
+                                    <div class="col-md-7">
+                                        <textarea name="Remarks" class="form-control"></textarea>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-9">
+                                    <button type="submit" class="btn green">Submit</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+
+
+        $(document).ready(function () {
+
+            var counter = 1;
+            $(document).on("click", ".minus", function (e) {
+                var id = $(this).attr('id');
+                //var esplit = id.split("_");
+                //var Amount = $("#txtAmt" + esplit[1]).val();
+                //var TotalAmount = $('#tamt').val();
+                //var RemainingAmount = parseFloat(TotalAmount) - parseFloat(Amount);
+                //$('#tamt').val(RemainingAmount);
+                $(this).parent("td").parent("tr").remove();
+                counter--;
+
+                var totAmount = 0;
+                var taxAmount = 0;
+                $("table#tableRoutingData > tbody > tr").each(function (i) {
+                    var txtAmt = $("#txtAmt_" + i).val();
+                    var txtTaxPer = $("#txtTaxPer_" + i).val();
+                    totAmount = totAmount + parseFloat(txtAmt);
+                    taxAmount = taxAmount + ((parseFloat(txtAmt) * parseFloat(txtTaxPer)) / 100);
+                });
+                $('#tamt').val(totAmount);
+                $('#txtTax').val(taxAmount);
+                $('#netamt').val(totAmount + taxAmount);
+
+            });
+
+            $(document).on('change', '#PurchaseOrder', function () {
+
+                $("tr.trEdit").remove();
+
+                var val = $(this).val();
+                var FormData = { Id: val };
+                $.post("/Purchase/getVendor", FormData, function (data) {
+                    $("#Vendor").val(data);
+                });
+                $.post("/Purchase/getPoItems", FormData, function (data) {
+                    count = 0;
+                    var obj = jQuery.parseJSON(data);
+                    $.each(obj, function (key, value) {
+
+                        if (count == 0) {
+                            $("#Item_0").val(value.Name);
+                            $("#Item_0").val = value.Name;
+                            $("#txtQty_0").val(value.Quantity);
+                            $("#Type_0").val(value.Unit);
+                            $("#hItem_" + count).val(value.RawMaterialId)
+                        }
+                        else {
+
+                            $('#tableRoutingData').append('<tr MenuID="-1" class="trEdit" id="tr_' + count + '"><td><input id="Item_' + count + '" name="RowMaterial" class="form-control"/><input id="hItem_' + count + '" type="hidden" name="RowMaterialId" class="form-control"/></td><td>' +
+                 '<input id="txtQty_' + count + '" type="text" name="Quantity" class="form-control input-md"  /></td><td><select id="Type_' + count + '" name="Type" ' +
+                  ' class="form-control Routing"/></td><td>' +
+                  '<input id="txtAmt_' + count + '" type="text" name="txt_Amount"  class="form-control input-md"  /></td><td><input id="txtTaxPer_' + count + '" type="text" name="TaxPer"  class="form-control input-md" /></td><td><button data-val="' + count + '"' +
+                  ' style="margin-top:10px;" type="button" id="btnminus_' + count + '" ' +
+                  'class="minus btn btn-danger btn-sm defaults"><span class="fa fa-minus"></span></button></td></tr>');
+                            $('#Item_0 option').clone().appendTo('#Item_' + count);
+                            $('#hItem_0 option').clone().appendTo('#hItem_' + count);
+                            $('#txtQty_0 option').clone().appendTo('#txtQty_' + count);
+                            $('#Type_0 option').clone().appendTo('#Type_' + count);
+                            $('#txtAmt_0 option').clone().appendTo('#txtAmt_' + count);
+                            $('#txtTaxPer_0 option').clone().appendTo('#txtTaxPer_' + count);
+
+                            $("#Item_" + count).val(value.Name);
+                            $("#hItem_" + count).val(value.RawMaterialId);
+                            $("#txtQty_" + count).val(value.Quantity);
+                            $("#Type_" + count).val(value.Unit);
+
+                        }
+                        count++;
+                    });
+
+
+                });
+            });
+
+            $('#btnadd').on('click', function () {
+                $('#tableRoutingData').append('<tr MenuID="-1" class="trEdit" id="tr_' + counter + '"><td><input id="Item_' + counter + '" name="RowMaterial" class="form-control"/><input id="hItem_' + count + '" type="hidden" name="RowMaterialId" class="form-control"/></td><td>' +
+                    '<input id="txtQty_' + counter + '" type="text" name="Quantity" class="form-control input-md"  /></td><td><select id="Type_' + counter + '" name="Type" ' +
+                     ' class="form-control Routing"/></td><td>' +
+                     '<input id="txtAmt_' + counter + '" type="text" name="txt_Amount"  class="form-control input-md"  /></td><td><input id="txtTaxPer_' + counter + '" type="text" name="TaxPer"  class="form-control input-md" /></td><td><button data-val="' + counter + '"' +
+                     ' style="margin-top:10px;" type="button" id="btnminus_' + counter + '" ' +
+                     'class="minus btn btn-danger btn-sm defaults"><span class="fa fa-minus"></span></button></td></tr>');
+                $('#Item_0 option').clone().appendTo('#Item_' + counter);
+                $('#hItem_0 option').clone().appendTo('#hItem_' + counter);
+                $('#txtQty_0 option').clone().appendTo('#txtQty_' + counter);
+                $('#Type_0 option').clone().appendTo('#Type_' + counter);
+                $('#txtAmt_0 option').clone().appendTo('#txtAmt_' + counter);
+                $('#txtTaxPer_0 option').clone().appendTo('#txtTaxPer_' + counter);
+                counter++;
+            });
+        });
+
+
+        $(document).on('change', 'input[name="txt_Amount"]', function () {
+            var totAmount = 0;
+            var taxAmount = 0;
+            $("table#tableRoutingData > tbody > tr").each(function (i) {
+                var txtAmt = $("#txtAmt_" + i).val();
+                var txtTaxPer = $("#txtTaxPer_" + i).val();
+                totAmount = totAmount + parseFloat(txtAmt);
+                taxAmount = taxAmount + ((parseFloat(txtAmt) * parseFloat(txtTaxPer)) / 100);
+            });
+            $('#tamt').val(totAmount);
+            $('#txtTax').val(taxAmount);
+            $('#netamt').val(totAmount + taxAmount);
+            //var val=  $(this).val();
+            //  var Amonut = $('#tamt').val();
+            //  var TotalAmount = parseFloat(Amonut) + parseFloat(val);
+            //  $('#tamt').val(TotalAmount);
+        });
+
+        $(document).on('change', 'input[name="TaxPer"]', function () {
+            var totAmount = 0;
+            var taxAmount = 0;
+            $("table#tableRoutingData > tbody > tr").each(function (i) {
+                var txtAmt = $("#txtAmt_" + i).val();
+                var txtTaxPer = $("#txtTaxPer_" + i).val();
+                totAmount = totAmount + parseFloat(txtAmt);
+                taxAmount = taxAmount + ((parseFloat(txtAmt) * parseFloat(txtTaxPer)) / 100);
+            });
+            $('#tamt').val(totAmount);
+            $('#txtTax').val(taxAmount);
+            $('#netamt').val(totAmount + taxAmount);
+            //var val = $(this).val();
+            //var Amonut = $('#tamt').val();
+            //var TotalAmount = parseFloat(Amonut) + ((parseFloat(Amonut) * parseFloat(val)) / 100);
+            //$('#tamt').val(TotalAmount);
+        });
+
+
+
+
+    </script>
+</div>
+
+

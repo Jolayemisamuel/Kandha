@@ -1,0 +1,48 @@
+﻿
+@model List<NibsMVC.Models.GetBillingSubItemModel>
+
+@using (Ajax.BeginForm("_BillingTable", "Vendor", new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "Billing_table", OnBegin = "return checkBillPrint();" }, new { @id = "_ajax_form" }))
+{
+    if (Model.Count > 0)
+    {
+        @Html.Hidden("VendorId", @Model.FirstOrDefault().VendorId)
+        @Html.Hidden("ItemId")
+    }
+
+    <div class="col-md-12" style="border-bottom:solid 1.5px #808080; padding-bottom:5px;">
+        <div class="col-md-6">
+            <div class="row">
+                <label class="col-md-2">Qty</label>
+                <div class="col-md-6 form-horizontal">
+                    <input type="text" name="Qty" value="1" class="form-control" id="Qty" min="1" maxlength="2" size="20" pattern="\d+" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 DivItems">
+        @if (Model.Count>0)
+        {
+            foreach (var item in Model)
+            {
+                if (!item.Outstock)
+                {
+                    <input type="submit" onclick="return checkQty(this.id)" value="@item.Name" class="ajax_btn btn btn-blue margin-right-5 disabled" style="background:@item.Color;color:@item.TextColor;" id="@item.ItemId" />
+
+                }
+                else
+                {
+                    <input type="submit" onclick="return checkQty(this.id)" value="@item.Name" class="ajax_btn btn btn-blue margin-right-5" style="background:@item.Color;color:@item.TextColor;" id="@item.ItemId" />
+
+                }
+
+            }
+        }
+        else
+        {
+            <h4 style="color:red">please update seles vendor price to create bill</h4>
+        }
+    </div>
+
+
+}
+

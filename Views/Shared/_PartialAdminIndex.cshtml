@@ -1,0 +1,285 @@
+﻿@model NibsMVC.Models.AdminHomeModel
+
+<div class="row">
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 margin-bottom-10">
+        <div class="dashboard-stat blue-madison">
+            <div class="visual">
+                <i class="fa fa-briefcase fa-icon-medium"></i>
+            </div>
+            <div class="details">
+                <div class="number">
+                    @Model.TotalPurchage
+                </div>
+                <div class="desc">
+                    Total Purchage
+                </div>
+            </div>
+            <a class="more" href="#">
+                View more <i class="m-icon-swapright m-icon-white"></i>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+        <div class="dashboard-stat blue-madison">
+            <div class="visual">
+                <i class="fa fa-shopping-cart"></i>
+            </div>
+            <div class="details">
+                <div class="number">
+                    @Model.TotalSale
+                </div>
+                <div class="desc">
+                    Total Sale
+                </div>
+            </div>
+            <a class="more" href="#">
+                View more <i class="m-icon-swapright m-icon-white"></i>
+            </a>
+        </div>
+    </div>
+    @*<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+        <div class="dashboard-stat green-haze">
+            <div class="visual">
+                <i class="fa fa-group fa-icon-medium"></i>
+            </div>
+            <div class="details">
+                <div class="number">
+                    @Model.TotalProfit
+                </div>
+                <div class="desc">
+                    Total Profit
+                </div>
+            </div>
+            <a class="more" href="#">
+                View more <i class="m-icon-swapright m-icon-white"></i>
+            </a>
+        </div>
+    </div>*@
+
+</div>
+<div class="row ">
+    <div class="col-md-6 col-sm-6">
+        <div class="portlet box blue-steel">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-bell-o"></i>Registered Outlets
+                </div>
+
+            </div>
+            <div class="portlet-body">
+                <div class="scroller" style="height: 300px;" data-always-visible="1" data-rail-visible="0">
+                    <ul class="feeds">
+                        @if (Model.getAllOutletList.Count > 0)
+                        {
+                            foreach (var item in Model.getAllOutletList)
+                            {
+                                <li>
+
+                                    <div class="col1">
+                                        <div class="cont">
+                                            <div class="cont-col1">
+                                                @if (item.Active == true)
+                                                {
+                                                    <div class="label label-sm label-success">
+                                                        <i class="fa fa-user"></i>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="label label-sm label-danger">
+                                                        <i class="fa fa-user"></i>
+                                                    </div>
+                                                }
+                                            </div>
+                                            <div class="cont-col2">
+                                                <div class="desc">
+                                                    @item.Name
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col2">
+                                        <div class="date">
+                                            @item.Date
+                                        </div>
+                                    </div>
+
+                                </li>
+                            }
+                        }
+
+
+
+
+                    </ul>
+                </div>
+                @if (Model.getAllOutletList.Count > 20)
+                {
+                    <div class="scroller-footer">
+                        <div class="btn-arrow-link pull-right">
+                            <a href="#">See All Records</a>
+                            <i class="icon-arrow-right"></i>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-6">
+        <div class="portlet box blue-steel">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-bell-o"></i>Registered Vendors
+                </div>
+
+            </div>
+            <div class="portlet-body">
+                <div class="scroller" style="height: 300px;" data-always-visible="1" data-rail-visible="0">
+                    <ul class="feeds">
+                        @if (Model.getAllOutletList.Count > 0)
+                        {
+                            foreach (var item in Model.getAllVendorList)
+                            {
+                                <li>
+                                    <div class="col1">
+                                        <div class="cont">
+                                            <div class="cont-col1">
+                                                @if (item.Active == true)
+                                                {
+                                                    <div class="label label-sm label-success">
+                                                        <i class="fa fa-user"></i>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="label label-sm label-danger">
+                                                        <i class="fa fa-user"></i>
+                                                    </div>
+                                                }
+                                            </div>
+                                            <div class="cont-col2">
+                                                <div class="desc">
+                                                    @item.Name
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col2">
+                                        <div class="date">
+                                            @item.Date
+                                        </div>
+                                    </div>
+
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
+                @if (Model.getAllVendorList.Count > 20)
+                {
+                    <div class="scroller-footer">
+                        <div class="btn-arrow-link pull-right">
+                            <a href="#">See All Records</a>
+                            <i class="icon-arrow-right"></i>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <div class="portlet grey-cascade box">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-trash-o"></i>Deleted Bill Report
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Outlet Name
+                                </th>
+                                <th>
+                                    Item Name
+                                </th>
+                                <th>
+                                    Bill Date
+                                </th>
+                                <th>
+                                    Bill No
+                                </th>
+                                <th>
+                                    Delete Date
+                                </th>
+                                <th>
+                                    Total Amount
+                                </th>
+                                <th>
+                                    Vat Amount
+                                </th>
+                                <th>
+                                    Net Amount
+                                </th>
+                                <th>
+                                    View Details
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.getalldeletedbillReport.Count > 0)
+                            {
+                                foreach (var item in Model.getalldeletedbillReport)
+                                {
+                                    <tr>
+                                        <td>
+                                            <a href="#">
+                                                @item.OutLetName
+                                            </a>
+                                        </td>
+                                        <td>
+                                            @item.ItemName
+                                        </td>
+                                        <td>
+                                            @item.BillDate
+                                        </td>
+                                        <td>
+                                            @item.BillNo
+                                        </td>
+                                        <td>
+                                            @item.DeleteDate
+                                        </td>
+                                        <td>
+                                            @item.TotalAmount
+                                        </td>
+                                        <td>
+                                            @item.VatAmount
+                                        </td>
+                                        <td>
+                                            @item.NetAmount
+                                        </td>
+                                        <td>
+                                            691.00$
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="9">No Record Found</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

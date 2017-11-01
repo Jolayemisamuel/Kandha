@@ -1,0 +1,62 @@
+﻿
+@model NibsMVC.Models.shiftBillModel
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+        <h4 class="modal-title">Shift Table</h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-3">
+                    <h6>Tables</h6>
+                    <div class="row">
+                        <div class="col-md-12" id="TableForShift">
+                            @foreach (var item in Model.getAllBooktable)
+                            {
+                                <input type="button" value="@item.TableNo" class="_table_for_shift" />
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <h6> Table To Shift</h6>
+                    <div class="row">
+                        <div class="col-md-12" id="shiftedTable">
+                            @foreach (var item in Model.getAllfreetable)
+                            {
+                                <input type="button" value="@item.TableNo" class="_table_to_shift" />
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <h6> Shifted Table</h6>
+                    <div class="row">
+                        <div class="col-md-12" id="shifted">
+                            @foreach (var item in Model.getAllBooktable)
+                            {
+                                <input type="button" value="@item.TableNo" class="_table_for_shifted" style="display:none" />
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <h6> Master Table</h6>
+                    <div class="row">
+                        <div class="col-md-12" id="ShiftMasterTable">
+                            @foreach (var item in Model.getAllfreetable)
+                            {
+                                <input type="button" value="@item.TableNo" class="_table_to_shifted" style="display:none" />
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+            <button type="button" class="btn default" data-dismiss="modal">Close</button>
+            <input type="submit" value="Shift" id="btn-shift" class="btn green" />
+    </div>
+</div>

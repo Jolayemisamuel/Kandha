@@ -1,0 +1,101 @@
+﻿@model  NibsMVC.Models.OutletPurchageReturnModel
+
+@{
+    ViewBag.Title = "PurchaseReturn";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using NibsMVC.EDMX;
+<div class="page-content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="portlet box blue">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-gift"></i>Purchase Return
+                    </div>
+                </div>
+                <div class="portlet-body form">
+                    @using (Html.BeginForm("PurchaseReturn", "Purchase", FormMethod.Post, new { @class = "form-horizontal" }))
+                    {
+                        Html.AntiForgeryToken();
+                        @Html.ValidationSummary(true)
+                        @Html.HiddenFor(model => model.VendorId)
+                        @Html.HiddenFor(model => model.RowMaterialId)
+                        @Html.HiddenFor(model => model.Purchasedetailid)
+                        @Html.HiddenFor(model => model.Purchaseid)
+                        <div class="form-body">
+                            @*<div class="form-group">
+                                    <label class="col-md-3">Vender Name</label>
+                                    <div class="col-md-4">
+                                        <input type="text" name="VenderName" value="@Model.VenderName" readonly class="form-control" />
+                                    </div>
+                                </div>*@
+                            @*<div class="form-group">
+                                    <label class="col-md-3">Item Id</label>
+                                    <div class="col-md-4">
+                                        <input type="text" name="RowMaterialName" value="@Model.Purchasedetailid" readonly class="form-control" />
+                                    </div>
+                                </div>*@
+                            <div class="form-group">
+                                <label class="col-md-3">Item Name</label>
+                                <div class="col-md-4">
+                                    <input type="text" name="RowMaterialName" value="@Model.RowMaterialName" readonly class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3">Quantity</label>
+                                <div class="col-md-4">
+                                    <input type="text" name="Quantity" value="@Model.Quantity" readonly class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3">Unit</label>
+                                <div class="col-md-4">
+                                    <input type="text" name="Type" value="@Model.Type" readonly class="form-control" />
+                                </div>
+                            </div>
+                            @*<div class="form-group">
+                                    <label class="col-md-3">Quantity</label>
+                                    <div class="col-md-4">
+                                        <input type="text" name="Quantity" value="@Model.Amount" readonly class="form-control" />
+                                    </div>
+                                </div>*@
+                            <div class="form-group">
+                                <label class="col-md-3">Return Quantity</label>
+                                <div class="col-md-4">
+                                    <input type="text" name="ReturnQuantity" value="" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3">Reasion</label>
+                                <div class="col-md-4">
+                                    <input type="text" name="Reasion" value="" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-9">
+                                    <input type="submit" class="btn green" value="Submit" />
+
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).on('change', 'input[name="ReturnQuantity"]', function () {
+            var qty = $('input[name="Quantity"]').val();
+            var rtqty = $('input[name="ReturnQuantity"]').val();
+            if (parseFloat(rtqty) > parseFloat(qty)) {
+                alert("Return Quantity must be less then Quantity");
+
+            }
+        });
+    </script>
+</div>

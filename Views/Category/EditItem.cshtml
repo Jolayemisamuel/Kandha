@@ -1,0 +1,163 @@
+﻿@model NibsMVC.Models.AddItemModel
+
+@{
+    ViewBag.Title = "AddItem";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using NibsMVC.EDMX;
+<div class="page-content">
+    <div class="row">
+        <div class="col-md-12 margin-bottom-10">
+            <p style="color:red;">@TempData["itemCreate"]</p>
+        </div>
+        <div class="col-md-12">
+            <div class="portlet box blue">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-gift"></i>Add Item
+                    </div>
+
+                </div>
+
+
+                <div class="portlet-body form">
+                    <!-- BEGIN FORM-->
+                    @using (Html.BeginForm("EditItem", "Category", FormMethod.Post, new { @id = "form_sample_4", @class = "form-horizontal", @enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        @Html.HiddenFor(model => model.ItemId)
+                        <div class="form-body">
+                            <div class="alert alert-danger display-hide">
+                                <button class="close" data-close="alert"></button>
+                                You have some form errors. Please check below.
+                            </div>
+                            <div style="height:10px;"><span class="errmsg"></span></div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Category <span class="required">
+                                        *
+                                    </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        @if (Model.ItemCategoryId > 0)
+                                        {
+                                            @Html.DropDownList("ItemCategoryId", new SelectList(Model.lstofCategory, "Value", "Text", Model.ItemCategoryId), "--Select--", new { @class = "form-control" })
+                                        }
+                                        else
+                                        {
+                                            @Html.DropDownList("ItemCategoryId", new SelectList(Model.lstofCategory, "Value", "Text"), "--Select--", new { @class = "form-control" })
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Name <span class="required">
+                                        *
+                                    </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Description <span class="required">
+                                        *
+                                    </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group last">
+                                <label class="control-label col-md-3">Item Image</label>
+                                <div class="col-md-9">
+                                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                                        <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
+                                            @if (Model.ItemImage != null)
+                                            {
+                                                <img src="@Model.ItemImage" alt="" />
+                                            }
+                                            else
+                                            {
+                                                <img src="~/Images/No_image_available.jpg" alt="" />
+                                            }
+                                        </div>
+                                        <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;">
+                                        </div>
+                                        <div>
+                                            <span class="btn default btn-file">
+                                                <span class="fileinput-new">
+                                                    Select image
+                                                </span>
+                                                <span class="fileinput-exists">
+                                                    Change
+                                                </span>
+                                                @Html.TextBoxFor(model => model.ItemImage, new { @type = "file" })
+                                              
+                                            </span>
+                                            <a href="#" class="btn red fileinput-exists" data-dismiss="fileinput">
+                                                Remove
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Item Code <span class="required">
+                                        *
+                                    </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        @Html.TextBoxFor(model => model.ItemCode, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Active <span class="required">
+                                        *
+                                    </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        @Html.CheckBoxFor(model => model.Active)
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-9">
+                                    <button type="submit" class="btn green">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

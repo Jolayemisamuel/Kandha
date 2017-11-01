@@ -1,0 +1,6 @@
+﻿@model List<NibsMVC.Models.GetBillingSubItemModel>
+
+@foreach (var item in Model)
+{
+    <input type="button" value="@item.Name" class="ajax_btn btn btn-blue margin-right-5" id="@item.ItemId" />
+}

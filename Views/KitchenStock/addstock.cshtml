@@ -1,0 +1,102 @@
+﻿@Model NibsMVC.Models.KitchenStockAddModel
+
+@{
+    ViewBag.Title = "Add Stock";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Model NibsMVC.EDMX.add_stock;
+<div class="page-content">
+    <div class="row">
+        <div class="col-md-12 margin-bottom-10">
+        </div>
+        <div class="col-md-12">
+            <div class="portlet box blue">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-gift"></i>Add Stock Details
+                    </div>
+
+                </div>
+                <div class="portlet-body form">
+                    @using (Html.BeginForm("add", "KitchenStock", FormMethod.Post, new { @id = "form_sample_vendor_4", @class = "form-horizontal" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        @*@Html.HiddenFor(model => model.bill_number)*@
+
+                        <div class="form-body">
+                            <div class="alert alert-danger display-hide">
+                                <button class="close" data-close="alert"></button>
+                                You have some form errors. Please check below.
+                            </div>
+                            <div style="height:10px;"><span class="errmsg"></span></div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Item Description <span class="required">
+                                        *
+                                    </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>    
+                                        @Html.TextBox("Item_Description", null,new { @class="form-control"})                                    
+                                        @*@Html.TextBoxFor(model => model.Item_Description, new { @class = "form-control" })*@
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Product Category <span class="required">
+                                        *
+                                    </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        @Html.TextBox("Purchase_Category", null, new { @class = "form-control" })                                        
+                                        @*@Html.TextBoxFor(model => model.Purchase_Category, new { @class = "form-control" })*@
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Units <span class="required">
+                                        *
+                                    </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        @Html.TextBox("UMO", null, new { @class = "form-control" })                                        
+                                        @*@Html.TextBoxFor(model => model.UMO, new { @class = "form-control" })*@
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Available Stocks <span class="required">* </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        @Html.TextBox("available_stock", null, new { @class = "form-control" })                                        
+                                        @*@Html.TextBoxFor(model => model.available_stock, new { @class = "form-control" })*@
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-9">
+                                    <button type="submit" class="btn green">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

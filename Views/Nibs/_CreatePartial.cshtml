@@ -1,0 +1,403 @@
+﻿@model NibsMVC.Models.GetBillingModel
+<link href="~/assets/global/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" />
+
+@using (Html.BeginForm("DispatchOrder", "Nibs", FormMethod.Post, new { @id = "_ajax_Bill_form" }))
+{
+    @Html.HiddenFor(m => m.BillId)
+    <input type="hidden" name="GetTotalAmount" value="@Model.TotalAmount" />
+    <input type="hidden" name="GetTotalVatAmount" value="@Model.VatAmount" />
+    <input type="hidden" name="GetTotalServiceAmount" value="@Model.ServicesCharge" />
+    <input type="hidden" name="GetTotalServiceTaxAmount" value="@Model.ServiceTax" />
+    <input type="hidden" id="GetOrderStatus" value="@Model.OrderDispatch" />
+    <input type="hidden" id="Label_netAmount" value="@Model.NetAmount"/>
+    <input type="hidden" id="Get_OrderType" value="@Model.OrderType" />
+    <input type="hidden" id="Get_CustomerAddress" value="@Model.CustomerAddress" />
+    <input type="hidden" id="Get_packingCharges" value="@Model.PackingCharges" />
+    <div class="col-md-12">
+
+        <div class="col-md-3 form-horizontal">
+            <label>Customer Name</label>
+            @Html.TextBoxFor(m => m.CustomerName, new { @class = "form-control", @tabindex = "1", @accesskey = "e" })
+        </div>
+
+        <div class="col-md-3 form-horizontal">
+            <label>Contact No</label>
+            @Html.TextBoxFor(m => m.ContactNo, new { @class = "form-control", @tabindex = "1", @maxlength = "10" })
+        </div>
+        <div class="col-md-1 form-horizontal">
+            <label>T No</label>
+            @Html.TextBoxFor(m => m.TableNo, new { @class = "run_table form-control", @readonly = "readonly" })
+        </div>
+        <div class="col-md-3 form-horizontal" hidden id="_customer_address">
+            <label>Address</label>
+            @Html.TextBoxFor(m => m.CustomerAddress, new { @class = "form-control", @tabindex = "1" })
+        </div>
+        <div class="col-md-2 form-horizontal" hidden id="_Customer_charges">
+            <label>Charge</label>
+            @Html.TextBoxFor(m => m.PackingCharges, new { @class = " form-control" })
+        </div>
+
+    </div>
+    <div class="clear-fix"></div>
+    <div class="col-md-12 DivItemsDisplay table-responsive">
+        <table class="table table-bordered table-responsive nibs_billing">
+            <thead>
+                <tr>
+                    <th>SNo</th>
+                    <th>Item Name</th>
+                    <th>Full Qty</th>
+                    <th>Full Price</th>
+                    <th>Amount</th>
+                    <th>Vat</th>
+                    <th>OfferQty</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="_items_table">
+                @{
+    int Counter = 1;
+                }
+                @if (Model._getbillingItems != null)
+                {
+                    foreach (var item in Model._getbillingItems)
+                    {
+
+                        <tr>
+                            <td>@Counter</td>
+                            <td>@item.ItemName</td>
+                            <td>@item.FullQty</td>
+                            <td>@item.FullPrice</td>
+                            <td>@item.Amount</td>
+                            <td>@item.Vat</td>
+                            <td>@item.OfferQty</td>
+                            <td>
+                                @if (item.ItemId > 0)
+                                {
+                                    <a href="#" id="@item.ItemId" data-itemname="@item.ItemName" class="_delete_item" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="delete"><i class="fa fa-trash-o"></i></a>
+                                    <a href="#" id="@item.ItemId" data-itemname="@item.ItemName" class="_return_item" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="return"><i class="fa fa-repeat"></i></a>
+
+                                }
+                            </td>
+                        </tr>
+                                Counter = Counter + 1;
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="clear"></div>
+    <div class="col-md-12">
+        <label class="col-md-3  margin-bottom-10">Payment Type</label>
+        <div class="col-md-4 form-horizontal  margin-bottom-10">
+            @Html.DropDownListFor(m => m.PaymentType, new SelectList(Model.getPaymentType, "Value", "Text"), "--Select--", new { @class = "form-control", @tabindex = "2" })
+
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="col-md-7">Net Amount</label>
+                <div class="col-md-5">
+                    <label class="bold" id="Label_netAmount_text">@Model.NetAmountWithoutDiscount</label>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div class="col-md-12 form-horizontal" id="cheque_detail" hidden>
+
+            <div class="form-group">
+                <label class="col-md-3">Date</label>
+                <div class="col-md-5">
+                    <div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
+                        <input type="text" class="form-control" readonly id="chequedate" name="CheckDate">
+                        <span class="input-group-btn">
+                            <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="col-md-3">Cheque No</label>
+                <div class="col-md-5">
+                    <input type="text" class="form-control" id="chequeno" name="ChequeNo" />
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="clear"></div>
+
+
+    <div class="row form-horizontal" style="margin-left:0px;margin-right:0px; padding-top: 15px;">
+        <div class="form-horizontal">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>Discount(%)</label>
+                    <div>
+                        @Html.TextBoxFor(m => m.Discount, new { @class = "form-control", @min = "0", @max = "100" })
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>Vat Amount</label>
+                    <div>
+                        @Html.TextBoxFor(m => m.VatAmount, new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>Service Tax</label>
+                    <div>
+                        @Html.TextBoxFor(m => m.ServiceTax, new { @class = "form-control", @readonly = "readonly" })
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>Service Charge</label>
+                    <div>
+                        @Html.TextBoxFor(m => m.ServicesCharge, new { @class = "form-control", @readonly = "readonly" })
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row form-horizontal" style="margin-left:0px;margin-right:0px;">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>(Discount(Price)</label>
+                <div>
+                    @Html.TextBoxFor(m => m.DiscountAmount, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Amount</label>
+                <div>
+                    @Html.TextBoxFor(m => m.TotalAmount, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Net Amount(after discount)</label>
+                <div>
+                    @Html.TextBoxFor(m => m.NetAmount, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-md-12">
+        <a class="btn green" data-toggle="modal" href="#basic">
+            Kot
+        </a>
+        <div class="modal fade" id="basic" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                        <h4 class="modal-title">Last KOT</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12" id="KotDiv">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>SNo</th>
+                                            <th>Item Name</th>
+                                            <th>TNo</th>
+                                            <th>F</th>
+                                            <th>H</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+    int KotCount = 1;
+                                        }
+                                        @if (Model._getKotitems != null)
+                                        {
+                                            foreach (var item in Model._getKotitems)
+                                            {
+                                                <tr>
+                                                    <td>@KotCount</td>
+                                                    <td>@item.ItemName</td>
+                                                    <td>@item.TNo</td>
+                                                    <td>@item.FullQty</td>
+                                                    <td>@item.HalfQty</td>
+                                                </tr>
+                                                KotCount = KotCount + 1;
+                                            }
+                                        }
+
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                        @if (Model._getKotitems.Count() > 0)
+                        {<a href="#" class="_clear_kot btn btn-success"> Clear</a>
+
+                        }
+                        else
+                        {
+                            <a href="#" class="_clear_kot btn btn-success disabled"> Clear</a>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        @if (Model._getbillingItems.Count() > 0)
+        {
+            <a style="width:127px;" href="#" class="btn green" id="_bill_print">Print Order</a>
+
+            if (Model.BillId > 0)
+            {
+                <a class="btn green" data-toggle="modal" id="btn_Call_Dispatch">
+                    Dispatch Order
+                </a>
+            }
+            else
+            {
+                <a class="btn green disabled" data-toggle="modal"  id="btn_Call_Dispatch">
+                    Dispatch Order
+                </a>
+            }
+
+
+            <div class="modal fade" id="d" tabindex="-1" role="basic" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title">Dispatch Order from Table No <span id="T_No"></span></h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row form-horizontal">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="col-md-3">Total Amount</label>
+                                        <label class="col-md-4" id="Net_amount"></label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3">Cash</label>
+                                        <div class="col-md-4">
+                                            <input type="text" class="form-control" id="Cash_amt" />
+                                        </div>
+                                        <span class="help-block" id="Amt_warning" style="color:#ff6a00;display:none">You have entered less amount for change</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3">Exchange</label>
+                                        <div class="col-md-4">
+                                            <input type="text" class="form-control" id="Cash_Exchange" readonly />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-7 checkbox-inline"><input type="checkbox" name="PrintOrNot" id="PrintOrNot" /> Please Check if you want to print bill again</label>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                            <button type="submit" id="_Bill_dispatch" class="btn green">Dispatch Order</button>
+
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            if (Model.IsPrinted)
+            {
+                <input type="button" style="width:127px;" value="Cancel Order" class="btn green canclegorder_Click disabled" id="canclegorder">
+            }
+            else
+            {
+                <input type="button" style="width:127px;" value="Cancel Order" class="btn green canclegorder_Click " id="canclegorder">
+            }
+
+
+        }
+        else
+        {
+            <a style="width:127px;" href="#" class="btn green disabled" id="_bill_print">Print Order</a>
+
+            <a class="btn green disabled" data-toggle="modal" id="btn_Call_Dispatch">
+                Dispatch Order
+            </a>
+
+            <div class="modal fade" id="d" tabindex="-1" role="basic" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title">Dispatch Order from Table No <span id="T_No"></span></h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row form-horizontal">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="col-md-3">Total Amount</label>
+                                        <label class="col-md-4" id="Net_amount"></label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3">Cash</label>
+                                        <div class="col-md-4">
+                                            <input type="text" class="form-control" id="Cash_amt" />
+                                        </div>
+                                        <span class="help-block" id="Amt_warning" style="color:#ff6a00;display:none">You have entered less amount for change</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3">Exchange</label>
+                                        <div class="col-md-4">
+                                            <input type="text" class="form-control" id="Cash_Exchange" readonly />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-7 checkbox-inline"><input type="checkbox" name="PrintOrNot" id="PrintOrNot" /> Please Check if you want to print bill again</label>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                            <input type="submit" id="_Bill_dispatch" value="Dispatch Order" class="btn green">
+
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <input type="button" style="width:127px;" value="Cancel Order" class="btn green canclegorder_Click disabled" id="canclegorder">
+
+        }
+
+        <div class="clear margin-bottom-10">
+        </div>
+    </div>
+
+
+
+}

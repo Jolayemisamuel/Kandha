@@ -1,0 +1,106 @@
+﻿@model NibsMVC.Models.PrintBillModel
+<link href="~/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<style>
+    .table > tbody > tr > td, .table > thead > tr > th {
+        border-bottom: none;
+        border-top: none !important;
+    }
+
+    .table {
+        margin-bottom: 0px !important;
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <a href="" onclick="window.print()">Print</a>
+            <h3>Nibs Cafe</h3>
+            <h4>A Unit of KGC Enterprises</h4>
+            <strong>TIN No: @Model.TinNo </strong>
+            <div class="clear1"></div>
+            <strong>ServiceTax No: @Model.ServiceTaxNo</strong>
+            <div class="clear1"></div>
+            <b>
+                @Model.Address
+
+            </b>
+            <div class="clear1"></div>
+            <p>Jaipur-302029 <b style='margin-left:10px; font-weight:100'>PH: @Model.ContactA </b></p>
+            <p><b style='margin-left:90px;'>Sales Invoice</b></p>
+            <table class="table" style="width:300px;">
+                <tbody>
+                    <tr>
+                        <td>Name:</td>
+                        <td> @Model.CustomerName<br />
+                       <small>@Model.CustomerAddress</small>
+                        </td>
+                        <td> Token No</td>
+                        <td>@Model.TableNo</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table style='width:300px;' class="table">
+                <thead>
+                    <tr>
+                        <th style='text-align:left'>Sr</th>
+                        <th style='text-align:left'>Item</th>
+                        <th style='text-align:left'>F</th>
+                        <th style='text-align:left'>H</th>
+                        <th style='text-align:left'>Amt</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int Count = 1;
+                    }
+                    @foreach (var item in Model.getAllItem)
+                    {
+                        <tr>
+                            <td>@Count</td>
+                            <td>@item.ItemName</td>
+                            <td>@item.FullQty</td>
+                            <td>@item.HalfQty</td>
+                            <td>@item.Amount</td>
+                        </tr>
+                        Count = Count + 1;
+                    }
+                </tbody>
+            </table>
+            <table class="table" style="width:300px;">
+                <tbody>
+                    <tr>
+                        @foreach (var item in Model.getAllVat)
+                        {
+                            <td><b>Vat Amount(@item.Vat%)</b></td>
+
+                            <td><b>@item.amtCharges</b></td>
+                        }
+
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table" style="width:300px;">
+                <tbody>
+                    <tr>
+                        @*<td><b>Service Tax(4.94)</b></td>*@
+                        <td><b>Service Tax(5.6)</b></td>
+                        <td>@Model.ServiceCharge</td>
+                    </tr>
+                    <tr>
+                        <td><b>Total Amount</b></td>
+                        <td>@Model.TotalAmount</td>
+                    </tr>
+                    <tr>
+                        <td><b>Discount Amount</b></td>
+                        <td>@Model.DiscountAmount</td>
+                    </tr>
+                    <tr>
+                        <td><b>Net Amount</b></td>
+                        <td>@Model.NetAmount</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

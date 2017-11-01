@@ -1,0 +1,179 @@
+﻿@model NibsMVC.Models.OperatorModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-content">
+    <div class="row">
+        <p class="err" style="color:red">@TempData["error"]</p>
+        <div class="col-md-12">
+            <div class="portlet box blue">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-gift"></i>Add Operator
+                    </div>
+
+                </div>
+                <div class="portlet-body form">
+                    <!-- BEGIN FORM-->
+                    @using (Html.BeginForm("Create", "Operator", FormMethod.Post, new { @id = "form_sample_3", @class = "form-horizontal" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                       @Html.HiddenFor(model => model.operatorId)
+                        @Html.HiddenFor(a=>a.UserId)
+                        <div class="form-body">
+                            <div class="alert alert-danger display-hide">
+                                <button class="close" data-close="alert"></button>
+                                You have some form errors. Please check below.
+                            </div>
+                            @if (Model.operatorId == 0)
+                            {
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">
+                                        User Name <span class="required">
+                                            *
+                                        </span>
+                                    </label>
+                                    <div class="col-md-4">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @onkeypress = "return IsAlphaNumeric(event);", @ondrop = "return false;", @onpaste = "return false;" })
+                                            @Html.ValidationMessageFor(a => a.UserName)
+                                            <span id="error" style="color: Red; display: none">* Special Characters not allowed</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                @Html.HiddenFor(a=>a.UserName)
+                            }
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Email <span class="required">
+                                        *
+                                    </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(a => a.Email)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Name <span class="required">
+                                        *
+                                    </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @onkeypress = "return IsAlphaNumeric(event);", @ondrop = "return false;", @onpaste = "return false;" })
+                                        @Html.ValidationMessageFor(a => a.Name)
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Contact No <span class="required">
+                                        *
+                                    </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        @Html.TextBoxFor(model => model.ContactNo, new { @class = "form-control number", @onkeypress = "return IsAlphaNumeric(event);", @ondrop = "return false;", @onpaste = "return false;" })
+                                        @Html.ValidationMessageFor(a => a.ContactNo)
+                                    </div>
+                                </div>
+                            </div>
+                            @if (Model.operatorId == 0)
+                            {
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">
+                                        Password <span class="required">
+                                            *
+                                        </span>
+                                    </label>
+                                    <div class="col-md-4">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            @Html.TextBoxFor(model => model.Password, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(a => a.Password)
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Operator Type <span class="required">
+                                        *
+                                    </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        @Html.DropDownListFor(model => model.Type, new List<SelectListItem> {
+                                        new SelectListItem { Text = "-- select a type --", Value = "" },
+                                         new SelectListItem { Text = "Manager", Value = "Manager" },
+                                         new SelectListItem { Text = "Cashier", Value = "Cashier" },
+                                        new SelectListItem { Text = "Waiter", Value = "Waiter" },
+                                    new SelectListItem { Text = "Store", Value = "Store" }}, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(a => a.Type)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Active <span class="required">
+                                        *
+                                    </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        @Html.CheckBoxFor(model => model.Active)
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-9">
+                                    <button type="submit" class="btn green">Submit</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var specialKeys = new Array();
+        specialKeys.push(8); //Backspace
+        specialKeys.push(9); //Tab
+        specialKeys.push(46); //Delete
+        specialKeys.push(36); //Home
+        specialKeys.push(35); //End
+        specialKeys.push(37); //Left
+        specialKeys.push(39); //Right
+        function IsAlphaNumeric(e) {
+            var keyCode = e.keyCode == 0 ? e.charCode : e.keyCode;
+            var ret = ((keyCode >= 48 && keyCode <= 57) || (keyCode >= 65 && keyCode <= 90) || (keyCode >= 97 && keyCode <= 122) || (specialKeys.indexOf(e.keyCode) != -1 && e.charCode != e.keyCode));
+            document.getElementById("error").style.display = ret ? "none" : "inline";
+            return ret;
+        }
+    </script>
+</div>

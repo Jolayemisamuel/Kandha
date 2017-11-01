@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Item>
+  <Items>
+    <UserId>81</UserId>
+    <ItemId>354</ItemId>
+    <ItemName>MULTI GRAIN BREAD</ItemName>
+    <FullQty>1</FullQty>
+    <HalfQty>0</HalfQty>
+    <HalfPrice>0.0000</HalfPrice>
+    <FullPrice>50.0000</FullPrice>
+    <Vat>5</Vat>
+    <TotalAmount>50.0000</TotalAmount>
+    <VatAmt>2.500000</VatAmt>
+    <OfferQty>0</OfferQty>
+  </Items>
+</Item>

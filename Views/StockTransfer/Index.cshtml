@@ -1,0 +1,227 @@
+﻿@model IEnumerable<NibsMVC.Models.OutletStockTransferIndexModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using NibsMVC.EDMX;
+<div class="page-content">
+
+    <!-- BEGIN PAGE HEADER-->
+    <div class="page-bar">
+        <ul class="page-breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="@Url.Action("Index","Home")">Home</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+
+            <li>
+                Stock Transfer Details
+            </li>
+        </ul>
+
+    </div>
+    <!-- END PAGE HEADER-->
+    <!-- BEGIN PAGE CONTENT-->
+
+    <div class="row">
+
+        <div class="col-md-12" style="padding-left:0px;padding-right:0px;">
+            <!-- BEGIN BORDERED TABLE PORTLET-->
+            <div class="portlet box yellow">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-coffee"></i>Stock Transfer Details
+                    </div>
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse">
+                        </a>
+
+                        <a href="javascript:;" class="reload">
+                        </a>
+
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    @using (Html.BeginForm("Index", "StockTransfer", FormMethod.Post, new { @id = "form_sample_6", @class = "form-horizontal" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+
+                        <input type="hidden" name="itemsdata" id="itemsdata" value="" />
+                        <div class="form-body">
+                            <div class="alert alert-danger display-hide">
+                                <button class="close" data-close="alert"></button>
+                                You have some form errors. Please check below.
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            <label class=" col-md-1">Department</label>
+                            <div class="col-md-3">
+                                @*@Html.DropDownList("Department", ViewBag.Departmentlist as List<SelectListItem>, "--Choose Department--", new { @class = "form-control" })*@
+                            </div>
+
+                            <label class=" col-md-1">Category</label>
+                            <div class="col-md-3">
+                                @*@Html.DropDownList("Category", ViewBag.CategoryList as List<SelectListItem>, "--Choose Your Category --", new { @class = "form-control" })*@ 
+                            </div>
+
+                            <label class=" col-md-1">Item</label>
+                            <div class="col-md-2">
+                                @*@Html.DropDownList("RawMaterialId", ViewBag.Items as List<SelectListItem>, "--Choose Your Category --", new { @class = "form-control", @id = "RawMaterialId" })*@  
+                            </div>
+                            <div class="col-md-1"><button type="submit" class="btn green">Search</button></div>
+
+                        </div>
+                        <div class="portlet-body">
+                            <table class="table table-bordered table-hover table-full-width" id="sample_2">
+                                <thead>
+                                    <tr>
+                                        @*<th>Transfer From</th>
+                                <th>Transfer To</th>*@
+                                        <th>Transfer Date</th>
+                                        <th>Department</th>
+                                        <th>Item</th>
+                                        @*<th>Category</th>*@
+                                        <th>Unit</th>
+                                        <th>Issued Qty</th>
+                                        @*<th>Action</th>*@
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                        NIBSEntities db = new NIBSEntities();
+                        var counter = 1;
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                @*<td>
+                                @{
+                        var name = (from p in db.tblOutlets where p.OutletId == item.SenderOutletName select p.Name).SingleOrDefault();
+                                }
+                                @name
+
+                            </td>
+                            <td>
+                                @{
+                        var transfername = (from p in db.tblOutlets where p.OutletId == item.RecieverOutletName select p.Name).SingleOrDefault();
+                                }
+                                @transfername
+                            </td>*@
+
+                                <td>
+
+                                    @item.TransferDate
+                                </td>
+                                <td>
+
+                                    @item.Department
+                                </td>
+
+                                <td>
+
+                                    @item.RawMaterial
+                                </td>
+
+                                @*<td>
+
+                            @item.RawCategory
+                        </td>*@
+
+                                <td>
+
+                                    @{
+                            var unit = (from p in db.tbl_KitchenStock where p.RawMaterialId == item.RawMaterialId select p.Unit).SingleOrDefault(); //p.OutletId == item.RecieverOutletName &&
+                                    }
+                                    @if (unit == "Gms")
+                                    {
+                                        unit = "Kgs";
+                                    }
+                                    else if (unit == "ML")
+                                    {
+                                        unit = "Ltr";
+                                    }
+                                    @unit
+                                </td>
+                                <td>
+                                    @{
+                            if (unit == "Kgs")
+                            {
+                                item.TransferQty = item.TransferQty / 1000;
+                            }
+                            else if (unit == "Ltr")
+                            {
+                                item.TransferQty = item.TransferQty / 1000;
+                            }
+
+
+                                    }
+                                    @item.TransferQty
+
+                                </td>
+
+
+
+                                @*<td>
+                            <a class="btn default" data-toggle="modal" href="#@item.RecieverOutletName">
+                                Transfer Stock
+                            </a>
+                            <div class="modal fade" id="@item.RecieverOutletName" tabindex="-1" role="basic" aria-hidden="true">
+
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                    <h4 class="modal-title">Transfer Details</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Item Name</th>
+                                                <th>Date</th>
+                                                <th>Transfer Quantity</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                           @foreach (var i in item.getStockTransferItemList)
+                                            {
+                                                <tr>
+                                                    <td>@i.RowMaterialName</td>
+                                                    <td>@i.TransferDate</td>
+                                                    <td>@i.TranferQuantity</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+
+
+                                    </table>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn default" data-dismiss="modal">Close</button>
+
+                                </div>
+
+                            </div>
+                        </td>*@
+
+
+                            </tr>
+                            counter = counter + 1;
+                        }
+
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                </div>
+
+        </div>
+        <!-- END BORDERED TABLE PORTLET-->
+
+    </div>
+</div>
+<!-- END PAGE CONTENT-->
+</div>

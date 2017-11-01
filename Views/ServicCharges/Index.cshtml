@@ -1,0 +1,119 @@
+﻿@model IEnumerable<NibsMVC.Models.ServiceChargesModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-content">
+
+    <!-- BEGIN PAGE HEADER-->
+    <div class="page-bar">
+        <ul class="page-breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="@Url.Action("Index","Home")">Home</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <a href="@Url.Action("Create", "ServicCharges")">Add Service Charges</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                Service Details
+            </li>
+        </ul>
+
+    </div>
+    <!-- END PAGE HEADER-->
+    <!-- BEGIN PAGE CONTENT-->
+
+    <div class="row">
+        <p style="color:red; font-size:14px;">@TempData["servicecharg"]</p>
+        <div class="col-md-12" style="padding-left:0px;padding-right:0px;">
+            <!-- BEGIN BORDERED TABLE PORTLET-->
+            <div class="portlet box yellow">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-coffee"></i> Service Details
+                    </div>
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse">
+                        </a>
+
+                        <a href="javascript:;" class="reload">
+                        </a>
+
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <table class="table table-bordered table-hover table-full-width" id="sample_2">
+                        <thead>
+                            <tr>
+                                <th>
+                                    S.NO
+                                </th>
+                                <th>
+                                    Name
+                                </th>
+                                <th>
+                                    Charges Amount
+                                </th>
+                                <th>Action</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+
+                                var counter = 1;
+                                foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @counter
+                                        </td>
+                                        <td>
+                                            
+                                            @{
+                                    var service="";
+                                    if (item.ServicName=="R")
+                                    {
+                                        service = "Restaurent"; 
+                                    }
+                                    else if (item.ServicName == "T")
+                                    {
+                                        service = "Take Away";
+                                    }
+                                    else
+                                    {
+                                        service = "Home Delivery";
+                                    }
+                                                
+                                            }
+                                            @service
+                                        </td>
+                                        <td>
+                                            @item.ServiceCharges
+                                        </td>
+
+                                        <td>
+                                            <a href="@Url.Action("Create", "ServicCharges", new { @id = item.ServiceId })"><span class="fa fa-edit"></span></a>
+                                            <a href="@Url.Action("DeleteService", "ServicCharges", new { @id = item.ServiceId })"><span class="fa fa-trash-o"></span></a>
+                                        </td>
+
+                                    </tr>
+                                    counter = counter + 1;
+                                }
+
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- END BORDERED TABLE PORTLET-->
+
+        </div>
+    </div>
+    <!-- END PAGE CONTENT-->
+</div>

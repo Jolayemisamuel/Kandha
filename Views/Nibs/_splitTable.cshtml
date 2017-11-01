@@ -1,0 +1,63 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+    <h4 class="modal-title">Spliting</h4>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-md-12 form-horizontal">
+
+            <div class="form-body">
+                @*<div class="form-group">
+                    <label class="control-label col-md-3">Default</label>
+                    <div class="col-md-9" id="current_items">
+                        <select multiple="multiple" class="multi-select" id="my_multi_select1" name="my_multi_select1[]"></select>
+                    </div>
+                </div>*@
+                <div class="form-group">
+                    <label class="col-md-3">TableNo</label>
+                    <label class="col-md-4 bold" id="SplitTableNo"></label>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3">Total Amount</label>
+                    <label class="col-md-4 bold" id="SplitTotal"></label>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3">Select Type</label>
+                    <div class="col-md-4">
+                        <select class="form-control" id="ddl_split">
+                            <option>--Select--</option>
+                            <option value="Manually">Manually</option>
+                            <option value="Divide">Divide</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="Manual" hidden>
+                    <div class="form-group">
+                        <label class="col-md-3">No of Persion</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" id="Manul_No_of_Persion" />
+                        </div>
+                    </div>
+                    <div id="manul_content"></div>
+
+                </div>
+                <div id="Divide" class="col-md-12" hidden>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label class="col-md-3">No of Persion</label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" id="Divide_No_of_Persion" />
+                            </div>
+                        </div>
+                        <div id="divide_content"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn default" data-dismiss="modal">Close</button>
+    <a href="#" class="btn blue" id="btn_split">Split</a>
+</div>

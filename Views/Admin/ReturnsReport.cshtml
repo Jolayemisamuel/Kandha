@@ -1,0 +1,135 @@
+﻿@model IEnumerable<NibsMVC.Models.StockReturnModel>
+
+@{
+    ViewBag.Title = "ReturnsReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using NibsMVC.EDMX;
+<div class="page-content">
+
+    <!-- BEGIN PAGE HEADER-->
+    <div class="page-bar">
+        <ul class="page-breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="@Url.Action("Index","Home")">Home</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+          
+            <li>
+                Stock Return Details
+            </li>
+        </ul>
+
+    </div>
+    <!-- END PAGE HEADER-->
+    <!-- BEGIN PAGE CONTENT-->
+
+    <div class="row">
+     <p style="color:red">@TempData["adminerror"]</p>
+        <div class="col-md-12" style="padding-left:0px;padding-right:0px;">
+            <!-- BEGIN BORDERED TABLE PORTLET-->
+            <div class="portlet box yellow">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-coffee"></i>Stock Return
+                    </div>
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse">
+                        </a>
+
+                        <a href="javascript:;" class="reload">
+                        </a>
+
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <table class="table table-bordered table-hover table-full-width">
+                        <thead>
+                            <tr>
+                                @*<th>
+                                        S.NO
+                                    </th>*@
+                                <th>Return By</th>
+                                <th>Recive By</th>
+                                <th>Item Name</th>
+                                <th>Return Quantity</th>
+                                <th>Return Description</th>
+                                <th>Return Status</th>
+                                <th>Return Date</th>
+                                @*<th>Action</th>*@
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                NIBSEntities db = new NIBSEntities();
+                                var outltname = WebSecurity.CurrentUserName;
+                                var counter = 1;
+                                foreach (var item in Model)
+                                {
+                                    <tr>
+                                        @*<td>
+                                                @counter
+                                            </td>*@
+
+                                        <td>
+                                            @{
+
+                                    var mainoutlet = (from p in db.tblOutlets where p.OutletId == item.SenderOutId select p.Name).SingleOrDefault();
+
+                                            }
+                                            @mainoutlet
+
+                                        </td>
+                                        <td>
+                                            @{
+                                    var outletname = (from p in db.tblOutlets where p.OutletId == item.ReciverOutId select p.Name).SingleOrDefault();
+                                            }
+                                            @outletname
+                                        </td>
+                                       
+                                        
+                                        <td>
+                                            @{
+                                    var itemname = (from q in db.tbl_RawMaterials where q.RawMaterialId == item.RawMaterialId select q.Name).SingleOrDefault();
+                                            }
+                                            @itemname
+                                        </td>
+                                        <td>
+                                            @item.ReturnQuantity
+                                        </td>
+                                        <td>
+                                            @item.ReturnDescription
+                                        </td>
+                                        <td style="color:red">
+                                            @item.RStatus
+                                        </td>
+                                        <td>
+                                            @item.ReturnDate
+                                        </td>
+                                        @*<td>
+
+                                            <a href="@Url.Action("Delete", "StockTransfer", new { id=item.ReturnId})"><span class="fa fa-trash-o"></span></a>
+
+                                        </td>*@
+                                        @*<td>
+                                                <a href="@Url.Action("Create", "Category", new { @id = item.CategoryId })" class="btn btn-xs red">Edit</a>
+                                                <a href="@Url.Action("Delete", "Category", new { @id = item.CategoryId })" class="btn btn-xs red">Delete</a>
+                                            </td>*@
+
+                                    </tr>
+                                    counter = counter + 1;
+                                }
+
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- END BORDERED TABLE PORTLET-->
+
+        </div>
+    </div>
+    <!-- END PAGE CONTENT-->
+</div>

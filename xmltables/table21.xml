@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Item>
+  <Items>
+    <UserId>81</UserId>
+    <TableNo>21</TableNo>
+    <ItemId>0</ItemId>
+    <ItemName></ItemName>
+    <FullQty>0</FullQty>
+    <HalfQty>0</HalfQty>
+    <Fullprice>0</Fullprice>
+    <HalfPrice>0</HalfPrice>
+    <Amount>0</Amount>
+    <VatAmt>0</VatAmt>
+    <VatAmountCharges>0</VatAmountCharges>
+    <OfferQty>0</OfferQty>
+  </Items>
+  <Items>
+    <UserId>81</UserId>
+    <TableNo>21</TableNo>
+    <ItemId>92</ItemId>
+    <ItemName>GOURMET GARLIC</ItemName>
+    <FullQty>1</FullQty>
+    <HalfQty>0</HalfQty>
+    <Fullprice>159.0000</Fullprice>
+    <HalfPrice>0.0000</HalfPrice>
+    <Amount>159.0000</Amount>
+    <VatAmt>5</VatAmt>
+    <VatAmountCharges>7.9500</VatAmountCharges>
+    <OfferQty>0</OfferQty>
+  </Items>
+</Item>

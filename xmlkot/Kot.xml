@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Item>
+  <Items>
+    <UserId>81</UserId>
+    <TableNo>10</TableNo>
+    <ItemName>SAADA DAHI</ItemName>
+    <FullQty>21</FullQty>
+    <HalfQty>0</HalfQty>
+  </Items>
+  <Items>
+    <UserId>81</UserId>
+    <TableNo>10</TableNo>
+    <ItemName>BOONDI RAITA</ItemName>
+    <FullQty>20</FullQty>
+    <HalfQty>0</HalfQty>
+  </Items>
+  <Items>
+    <UserId>81</UserId>
+    <TableNo>1</TableNo>
+    <ItemName>SAY CHEESE PIZZA</ItemName>
+    <FullQty>7</FullQty>
+    <HalfQty>0</HalfQty>
+  </Items>
+  <Items>
+    <UserId>81</UserId>
+    <TableNo>1</TableNo>
+    <ItemName>OCT PIZZA</ItemName>
+    <FullQty>7</FullQty>
+    <HalfQty>0</HalfQty>
+  </Items>
+  <Items>
+    <UserId>81</UserId>
+    <TableNo>1</TableNo>
+    <ItemName>GOURMET GARLIC</ItemName>
+    <FullQty>5</FullQty>
+    <HalfQty>0</HalfQty>
+  </Items>
+  <Items>
+    <UserId>81</UserId>
+    <TableNo>1</TableNo>
+    <ItemName>THE SEVEN BEAUTIES PIZZA</ItemName>
+    <FullQty>2</FullQty>
+    <HalfQty>0</HalfQty>
+  </Items>
+  <Items>
+    <UserId>81</UserId>
+    <TableNo>1</TableNo>
+    <ItemName>PITA BREAD</ItemName>
+    <FullQty>1</FullQty>
+    <HalfQty>0</HalfQty>
+  </Items>
+  <Items>
+    <UserId>81</UserId>
+    <TableNo>1</TableNo>
+    <ItemName>GARLIC INFUSE LOAF</ItemName>
+    <FullQty>1</FullQty>
+    <HalfQty>0</HalfQty>
+  </Items>
+  <Items>
+    <UserId>81</UserId>
+    <TableNo>1</TableNo>
+    <ItemName>WHITE JUMBO</ItemName>
+    <FullQty>1</FullQty>
+    <HalfQty>0</HalfQty>
+  </Items>
+  <Items>
+    <UserId>81</UserId>
+    <TableNo>1</TableNo>
+    <ItemName>MARGRITA PIZZA</ItemName>
+    <FullQty>3</FullQty>
+    <HalfQty>0</HalfQty>
+  </Items>
+  <Items>
+    <UserId>81</UserId>
+    <TableNo>1</TableNo>
+    <ItemName>COUNTRY SIDE PIZZA</ItemName>
+    <FullQty>2</FullQty>
+    <HalfQty>0</HalfQty>
+  </Items>
+  <Items>
+    <UserId>0</UserId>
+    <TableNo>22</TableNo>
+    <ItemName>KIWI</ItemName>
+    <FullQty>2</FullQty>
+    <HalfQty>0</HalfQty>
+  </Items>
+  <Items>
+    <UserId>88</UserId>
+    <TableNo>1</TableNo>
+    <ItemName>item1</ItemName>
+    <FullQty>2</FullQty>
+    <HalfQty>0</HalfQty>
+  </Items>
+  <Items>
+    <UserId>88</UserId>
+    <TableNo>1</TableNo>
+    <ItemName>Item2</ItemName>
+    <FullQty>2</FullQty>
+    <HalfQty>0</HalfQty>
+  </Items>
+  <Items>
+    <UserId>88</UserId>
+    <TableNo>2</TableNo>
+    <ItemName>item1</ItemName>
+    <FullQty>1</FullQty>
+    <HalfQty>0</HalfQty>
+  </Items>
+  <Items>
+    <UserId>88</UserId>
+    <TableNo>2</TableNo>
+    <ItemName>Item2</ItemName>
+    <FullQty>1</FullQty>
+    <HalfQty>0</HalfQty>
+  </Items>
+</Item>

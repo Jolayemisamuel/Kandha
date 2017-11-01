@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="87f1ccec998e49a5b6cea1d388114733" Name="Diagram1" ZoomLevel="87">
+        <EntityTypeShape EntityType="NIBSModel.NIbs_AssignOffer" Width="1.5" PointX="16.5" PointY="18.5" />
+        <EntityTypeShape EntityType="NIBSModel.NIbs_ComboOffer" Width="1.5" PointX="8.25" PointY="12.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="NIBSModel.Nibs_HappyHours_Date" Width="1.5" PointX="11.25" PointY="27.875" />
+        <EntityTypeShape EntityType="NIBSModel.Nibs_HappyHours_Day" Width="1.5" PointX="5.25" PointY="32.875" />
+        <EntityTypeShape EntityType="NIBSModel.Nibs_HappyHours_Days" Width="1.5" PointX="11.25" PointY="23.75" />
+        <EntityTypeShape EntityType="NIBSModel.Nibs_HappyHoursDates" Width="1.5" PointX="8.25" PointY="32.75" />
+        <EntityTypeShape EntityType="NIBSModel.Nibs_Offer" Width="1.5" PointX="6" PointY="16.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="NIBSModel.Nibs_Offer_Amount" Width="1.5" PointX="8.25" PointY="21.125" IsExpanded="false" />
+        <EntityTypeShape EntityType="NIBSModel.Nibs_Offer_Buy_Items" Width="1.5" PointX="11.25" PointY="32.375" />
+        <EntityTypeShape EntityType="NIBSModel.Nibs_Offer_Days" Width="1.5" PointX="8.25" PointY="16.25" IsExpanded="false" />
+        <EntityTypeShape EntityType="NIBSModel.Nibs_Offer_Free_Items" Width="1.5" PointX="8.25" PointY="29.25" />
+        <EntityTypeShape EntityType="NIBSModel.OpenFood" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="NIBSModel.tbl_KitchenRawIndent" Width="1.5" PointX="5.25" PointY="25.125" IsExpanded="false" />
+        <EntityTypeShape EntityType="NIBSModel.tbl_KitchenStock" Width="1.5" PointX="5.25" PointY="37.375" />
+        <EntityTypeShape EntityType="NIBSModel.tbl_OutletReturnItem" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="NIBSModel.tbl_RawMaterials" Width="1.5" PointX="3" PointY="23.25" IsExpanded="false" />
+        <EntityTypeShape EntityType="NIBSModel.tbl_ServiceTax" Width="1.5" PointX="2.75" PointY="3.75" />
+        <EntityTypeShape EntityType="NIBSModel.tblBasePriceItem" Width="1.5" PointX="8.25" PointY="25.125" IsExpanded="false" />
+        <EntityTypeShape EntityType="NIBSModel.tblCategory" Width="1.5" PointX="0.75" PointY="21" IsExpanded="false" />
+        <EntityTypeShape EntityType="NIBSModel.tblDeleteBillMaster" Width="1.5" PointX="3" PointY="16.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="NIBSModel.tblDeletedetail" Width="1.5" PointX="5.25" PointY="21" IsExpanded="false" />
+        <EntityTypeShape EntityType="NIBSModel.tblItem" Width="1.5" PointX="3" PointY="26.875" />
+        <EntityTypeShape EntityType="NIBSModel.tblMenuOutlet" Width="1.5" PointX="13.5" PointY="25" />
+        <EntityTypeShape EntityType="NIBSModel.tblOperator" Width="1.5" PointX="13.5" PointY="17.25" />
+        <EntityTypeShape EntityType="NIBSModel.tblOutlet" Width="1.5" PointX="11.25" PointY="16.875" IsExpanded="false" />
+        <EntityTypeShape EntityType="NIBSModel.tblPurchasedItem" Width="1.5" PointX="18" PointY="27.25" />
+        <EntityTypeShape EntityType="NIBSModel.tblPurchaseReturn" Width="1.5" PointX="5.25" PointY="40.375" />
+        <EntityTypeShape EntityType="NIBSModel.tblReturn" Width="1.5" PointX="5.25" PointY="12.875" IsExpanded="false" />
+        <EntityTypeShape EntityType="NIBSModel.tblServiceCharge" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="NIBSModel.tblTableMaster" Width="1.5" PointX="13.5" PointY="22.125" />
+        <EntityTypeShape EntityType="NIBSModel.tblTransfer" Width="1.5" PointX="16.5" PointY="22" />
+        <EntityTypeShape EntityType="NIBSModel.tblVendor" Width="1.5" PointX="13.5" PointY="30" IsExpanded="true" />
+        <AssociationConnector Association="NIBSModel.FK_NIbs_AssignOffer_Nibs_Offer" />
+        <AssociationConnector Association="NIBSModel.FK_NIbs_AssignOffer_tblOutlet" />
+        <AssociationConnector Association="NIBSModel.FK_NIbs_ComboOffer_Nibs_Offer" />
+        <AssociationConnector Association="NIBSModel.FK_Nibs_HappyHours_Date_Nibs_Offer" />
+        <AssociationConnector Association="NIBSModel.FK_Nibs_HappyHours_Date_tblItem" />
+        <AssociationConnector Association="NIBSModel.FK_Nibs_HappyHours_Day_Nibs_Offer" />
+        <AssociationConnector Association="NIBSModel.FK_Nibs_HappyHours_Day_tblItem" />
+        <AssociationConnector Association="NIBSModel.FK_Nibs_HappyHours_Days_Nibs_Offer" />
+        <AssociationConnector Association="NIBSModel.FK_Nibs_HappyHours_Days_tblItem" />
+        <AssociationConnector Association="NIBSModel.FK_Nibs_HappyHoursDays_Nibs_Offer" />
+        <AssociationConnector Association="NIBSModel.FK_Nibs_HappyHoursDays_tblItem" />
+        <AssociationConnector Association="NIBSModel.FK_Nibs_Offer_Amount_Nibs_Offer" />
+        <AssociationConnector Association="NIBSModel.FK_Nibs_Offer_Buy_Items_Nibs_Offer" />
+        <AssociationConnector Association="NIBSModel.FK_Nibs_Offer_Days_Nibs_Offer" />
+        <AssociationConnector Association="NIBSModel.FK_Nibs_Offer_Free_Items_Nibs_Offer" />
+        <AssociationConnector Association="NIBSModel.FK_Nibs_Offer_Amount_tblItem" />
+        <AssociationConnector Association="NIBSModel.FK_Nibs_Offer_Buy_Items_tblItem" />
+        <AssociationConnector Association="NIBSModel.FK_Nibs_Offer_Free_Items_Nibs_Offer_Free_Items" />
+        <AssociationConnector Association="NIBSModel.FK_tbl_KitchenRawIndent_tbl_RawMaterials" />
+        <AssociationConnector Association="NIBSModel.FK_tbl_KitchenRawIndent_tblCategory" />
+        <AssociationConnector Association="NIBSModel.FK_tbl_KitchenRawIndent_tblItem" />
+        <AssociationConnector Association="NIBSModel.FK_tbl_KitchenStock_tbl_RawMaterials" />
+        <AssociationConnector Association="NIBSModel.FK_tblPurchasedItem_tbl_RawMaterials" />
+        <AssociationConnector Association="NIBSModel.FK_tblPurchaseReturn_tbl_RawMaterials" />
+        <AssociationConnector Association="NIBSModel.FK_tblReturn_tbl_RawMaterials" />
+        <AssociationConnector Association="NIBSModel.FK_tblTransfer_tbl_RawMaterials" />
+        <AssociationConnector Association="NIBSModel.FK_tblBasePriceItems_tblCategory" />
+        <AssociationConnector Association="NIBSModel.FK_tblBasePriceItems_tblItem" />
+        <AssociationConnector Association="NIBSModel.FK_tblMenuOutlet_tblBasePriceItems" />
+        <AssociationConnector Association="NIBSModel.FK_AddItem_AddCategory" />
+        <AssociationConnector Association="NIBSModel.FK_tblMenuOutlet_tblCategory" />
+        <AssociationConnector Association="NIBSModel.FK_tblDeleteBillMaster_tblOutlet" />
+        <AssociationConnector Association="NIBSModel.FK_tblDeletedetails_tblDeleteBillMaster" />
+        <AssociationConnector Association="NIBSModel.FK_tblDeletedetails_tblItem" />
+        <AssociationConnector Association="NIBSModel.FK_tblMenuOutlet_tblItem" />
+        <AssociationConnector Association="NIBSModel.FK_tblMenuOutlet_tblOutlet" />
+        <AssociationConnector Association="NIBSModel.FK_tblOperator_tblOutlet" />
+        <AssociationConnector Association="NIBSModel.FK_tblTableMaster_tblOutlet" />
+        <AssociationConnector Association="NIBSModel.FK_tblTransfer_tblOutlet" />
+        <AssociationConnector Association="NIBSModel.FK_tblVendor_tblOutlet" />
+        <EntityTypeShape EntityType="NIBSModel.AutoInventory" Width="1.5" PointX="5.375" PointY="3.75" />
+        <EntityTypeShape EntityType="NIBSModel.tblBillDetail" Width="1.5" PointX="18.75" PointY="19.625" />
+        <EntityTypeShape EntityType="NIBSModel.tblBillMaster" Width="1.5" PointX="13.5" PointY="10.25" />
+        <AssociationConnector Association="NIBSModel.FK_tblBillDetails_tblBillDetails" />
+        <AssociationConnector Association="NIBSModel.FK_tblBillDetails_tblItem" />
+        <AssociationConnector Association="NIBSModel.FK_tblBillMaster_tblOutlet" />
+        <EntityTypeShape EntityType="NIBSModel.VendorPrice" Width="1.5" PointX="15.75" PointY="15.5" />
+        <AssociationConnector Association="NIBSModel.FK_VendorPrice_tblMenuOutlet" />
+        <EntityTypeShape EntityType="NIBSModel.Temp_VendorBilling" Width="1.5" PointX="19" PointY="14.625" />
+        <AssociationConnector Association="NIBSModel.FK_Temp_VendorBilling_tblItem" />
+        <AssociationConnector Association="NIBSModel.FK_Temp_VendorBilling_tblOutlet" />
+        <AssociationConnector Association="NIBSModel.FK_Temp_VendorBilling_VendorPrice" />
+        <EntityTypeShape EntityType="NIBSModel.VendorBillingItem" Width="1.5" PointX="21" PointY="19.875" />
+        <EntityTypeShape EntityType="NIBSModel.VendorBillingMaster" Width="1.5" PointX="15.75" PointY="9.875" />
+        <AssociationConnector Association="NIBSModel.FK_VendorBillingItem_tblItem" />
+        <AssociationConnector Association="NIBSModel.FK_VendorBillingMaster_tblOutlet" />
+        <AssociationConnector Association="NIBSModel.FK_VendorBillingItem_VendorBillingMaster" />
+        <EntityTypeShape EntityType="NIBSModel.SelesVendorAmount" Width="1.5" PointX="18.75" PointY="10.875" />
+        <AssociationConnector Association="NIBSModel.FK_SelesVendorAmount_tblOutlet" />
+        <EntityTypeShape EntityType="NIBSModel.SelesVendorAmountDetail" Width="1.5" PointX="15.75" PointY="6.5" />
+        <EntityTypeShape EntityType="NIBSModel.OutletVendor" Width="1.5" PointX="13.5" PointY="5.375" />
+        <AssociationConnector Association="NIBSModel.FK_OutletVendor_tblOutlet" />
+        <AssociationConnector Association="NIBSModel.FK_SelesVendorAmount_OutletVendor" />
+        <AssociationConnector Association="NIBSModel.FK_SelesVendorAmountDetail_OutletVendor" />
+        <AssociationConnector Association="NIBSModel.FK_Temp_VendorBilling_OutletVendor" />
+        <AssociationConnector Association="NIBSModel.FK_VendorBillingMaster_OutletVendor" />
+        <AssociationConnector Association="NIBSModel.FK_VendorPrice_OutletVendor" />
+        <EntityTypeShape EntityType="NIBSModel.RawCategory" Width="1.5" PointX="0.75" PointY="6.75" />
+        <AssociationConnector Association="NIBSModel.FK_tbl_RawMaterials_RawCategory" />
+        <EntityTypeShape EntityType="NIBSModel.tbl_Department" Width="1.5" PointX="3.375" PointY="6.75" />
+        <AssociationConnector Association="NIBSModel.FK_tblTransfer_tbl_Department" />
+        <EntityTypeShape EntityType="NIBSModel.tblPurchaseOrderMaster" Width="1.5" PointX="18.75" PointY="23.75" />
+        <AssociationConnector Association="NIBSModel.FK_tblPurchaseOrderMaster_tblOutlet" />
+        <AssociationConnector Association="NIBSModel.FK_tblPurchaseOrderMaster_tblVendor" />
+        <EntityTypeShape EntityType="NIBSModel.tblPurchaseOrderItem" Width="1.5" PointX="5.25" PointY="26.375" />
+        <AssociationConnector Association="NIBSModel.FK_tblPurchaseOrderItem_tbl_RawMaterials" />
+        <EntityTypeShape EntityType="NIBSModel.tblOpStckRate" Width="1.5" PointX="5.25" PointY="29.5" />
+        <EntityTypeShape EntityType="NIBSModel.Unit" Width="1.5" PointX="5.375" PointY="6.75" />
+        <AssociationConnector Association="NIBSModel.FK_tblOpStckRate_tbl_RawMaterials" />
+        <AssociationConnector Association="NIBSModel.FK_tbl_RawMaterials_tbl_RawMaterials" />
+        <AssociationConnector Association="NIBSModel.FK_tbl_RawMaterials_tbl_RawMaterials1" />
+        <AssociationConnector Association="NIBSModel.FK_tbl_RawMaterials_tbl_RawMaterials4" />
+        <AssociationConnector Association="NIBSModel.FK_Units_Units1" />
+        <EntityTypeShape EntityType="NIBSModel.AddCategoryVendor" Width="1.5" PointX="15.75" PointY="26.125" />
+        <AssociationConnector Association="NIBSModel.FK_AddCategoryVendor_RawCategory" />
+        <AssociationConnector Association="NIBSModel.FK_AddCategoryVendor_tblVendor" />
+        <EntityTypeShape EntityType="NIBSModel.tblPurchaseMaster" Width="1.5" PointX="15.75" PointY="30.625" />
+        <AssociationConnector Association="NIBSModel.FK_tblPurchaseMaster_tblVendor" />
+        <AssociationConnector Association="NIBSModel.FK_tblPurchasedItem_tblPurchasedItem" />
+        <EntityTypeShape EntityType="NIBSModel.tblGRNStock" Width="1.5" PointX="5.25" PointY="44.25" />
+        <AssociationConnector Association="NIBSModel.FK_tblGRNStock_tbl_RawMaterials" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,272 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+@model List<NibsMVC.Models.TakeAwayModel>
+<link href="~/assets/global/plugins/font-awesome/css/font-awesome.css" rel="stylesheet" />
+<link href="~/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+<link href="~/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="~/assets/global/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css" />
+<link href="~/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+<!-- END GLOBAL MANDATORY STYLES -->
+<link href="~/assets/admin/pages/css/Billing.css" rel="stylesheet" />
+<!-- BEGIN THEME STYLES -->
+<link href="~/assets/global/css/components.css" rel="stylesheet" type="text/css" />
+<link href="~/assets/global/css/plugins.css" rel="stylesheet" type="text/css" />
+<link href="~/assets/admin/layout/css/layout.css" rel="stylesheet" type="text/css" />
+<link id="style_color" href="~/assets/admin/layout/css/themes/default.css" rel="stylesheet" type="text/css" />
+<link href="~/assets/admin/layout/css/custom.css" rel="stylesheet" type="text/css" />
+<style>
+    table {
+        font-size: 14px;
+    }
+
+    body {
+        background: #fff !important;
+        padding-top: 5px;
+    }
+</style>
+<div class="page-container">
+    <div class="row">
+        <input type="hidden" name="GetCurrentDateTime" id="GetCurrentDateTime" value="@DateTime.Now" />
+        <input type="hidden" name="name" value="@ViewBag.taksrvicechargs" id="servictax" />
+        <input type="hidden" name="name" value="@ViewBag.outletaddress " id="outletaddress" />
+        <div class="col-md-5">
+            <div class="row">
+                <div class="col-md-12 DivCategory">
+                    @if (Model != null)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <input type="button" value="@item.CategoryName" id="@item.CategoryId" name="CategoryName" class="btn blue" style="background:@item.Color;color:@item.TextColor;" />
+                        }
+                    }
+                </div>
+            </div>
+            <div class="clear-fix"></div>
+            <div class="row" id="_show_subItems">
+                
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12">
+                    <label class="col-md-3">Customer Name</label>
+                    <div class="col-md-4 form-horizontal">
+                        <input type="text" value="" class="form-control" id="CustomerName" />
+                        <span id="NameError" style="color:red; display:none"></span>
+                    </div>
+                    <label class="col-md-2">Token No</label>
+                    <div class="col-md-2 form-horizontal">
+                        <input type="text" value="@ViewBag.tokenno" class="form-control" readonly id="RunningTable" />
+                    </div>
+                </div>
+                <div class="col-md-12 DivItemsDisplay" id="BindXmlData">
+
+                </div>
+                <div class="clear"></div>
+                @using (Html.BeginForm("Dispatch", "TakeAway", FormMethod.Post, new { @id = "form-dispatch" }))
+                {
+                    <input type="hidden" value="" name="CustomerName" id="Customer" />
+                    <input type="hidden" value="" name="TokenNo" id="TokenNo" />
+                    <div class="row form-horizontal" style="margin-left:0px;margin-right:0px; padding-top: 15px;">
+                        <div class="form-horizontal">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="col-md-7">Discount(%)</label>
+                                    <div class="col-md-5">
+                                        <input type="text" maxlength="3" value="0" class="form-control" id="txtdiscount">
+                                        <span id="discounterrmsg" style="color:red;"></span>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="col-md-7">Vat Amount</label><div class="col-md-5">
+                                        <input type="text" name="VatAmount" value="" class="form-control" readonly="" id="txtvatamt">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="col-md-7">Service Charge</label>
+                                    <div class="col-md-5">
+                                        <input type="text" name="ServiceCharge" value="@ViewBag.servicechargs" class="form-control" readonly="" id="txtservice">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row form-horizontal" style="margin-left:0px;margin-right:0px;">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-md-7">Discount(Price)</label>
+                                <div class="col-md-5">
+                                    <input type="text" name="DiscountAmount" value="" class="form-control" readonly="" id="txtdiscountprice">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-md-7">Amount</label>
+                                <div class="col-md-5">
+                                    <input type="text" name="TotalAmount" value="" class="form-control" readonly="" id="txtsubtotal">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-md-7">Net Amount</label>
+                                <div class="col-md-5">
+                                    <input type="text" name="NetAmount" value="" class="form-control" readonly="" id="txtnettotal">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-12">
+                        <a class="btn green" data-toggle="modal" href="#basic">
+                            Kot
+                        </a>
+                        <div class="modal fade" id="basic" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                        <h4 class="modal-title">Last KOT</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-md-12" id="KotDiv">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                                        <input type="button" value="Token" id="btnPrint" class="btn green" />
+                                    </div>
+                                </div>
+                                <!-- /.modal-content -->
+                            </div>
+                            <!-- /.modal-dialog -->
+                        </div>
+                        @*<input type="submit" id="btndispatch" value="Dispatch Order" class="btn green" disabled>*@
+                        <a class="btn green" data-toggle="modal" href="#d" id="btn_Call_Dispatch">
+                            Dispatch Order
+                        </a>
+                        <div class="modal fade" id="d" tabindex="-1" role="basic" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                        <h4 class="modal-title">Dispatch Order from Table No <span id="T_No"></span></h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row form-horizontal">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="col-md-3">Total Amount</label>
+                                                    <label class="col-md-4" id="Net_amount"></label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-3">Cash</label>
+                                                    <div class="col-md-4">
+                                                        <input type="text" class="form-control" id="Cash_amt" />
+                                                    </div>
+                                                    <span class="help-block" id="Amt_warning" style="color:#ff6a00;display:none">You have entered less amount for change</span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-3">Exchange</label>
+                                                    <div class="col-md-4">
+                                                        <input type="text" class="form-control" id="Cash_Exchange" readonly />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                                        <input type="submit" id="btndispatch" value="Dispatch Now" class="btn green">
+
+                                    </div>
+                                </div>
+                                <!-- /.modal-content -->
+                            </div>
+                            <!-- /.modal-dialog -->
+                        </div>
+                        <input type="button" style="width:127px;" value="Cancel Order" class="btn green canclegorder_Click" id="canclegorder">
+                        <div class="clear margin-bottom-10">
+                        </div>
+                    </div>
+
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="~/assets/global/plugins/jquery-1.11.0.min.js"></script>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="~/assets/admin/pages/scripts/Takeaway.js"></script>
+<script src="~/assets/global/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+<!-- IMPORTANT! Load jquery-ui-1.10.3.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+<script src="~/assets/global/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
+<script src="~/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="~/assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+<script src="~/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="~/assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+<script src="~/assets/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
+<script src="~/assets/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+<script src="~/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+<!-- END CORE PLUGINS -->
+<script src="~/assets/global/scripts/metronic.js" type="text/javascript"></script>
+<script src="~/assets/admin/layout/scripts/layout.js" type="text/javascript"></script>
+<script src="~/assets/admin/layout/scripts/quick-sidebar.js" type="text/javascript"></script>
+<script src="~/assets/admin/layout/scripts/demo.js" type="text/javascript"></script>
+
+<script src="~/assets/admin/pages/scripts/custom-jquery.js"></script>
+
+
+<script>
+    jQuery(document).ready(function () {
+        Metronic.init(); // init metronic core components
+        Layout.init(); // init current layout
+        QuickSidebar.init(); // init quick sidebar
+        Demo.init(); // init demo features
+    });
+</script>
+<script>
+    $(document).on('click', '#btn_Call_Dispatch', function (e) {
+        var net = $('#txtnettotal').val();
+        $('#Net_amount').text(net);
+        e.preventDefault();
+    });
+    $(document).on('change', '#Cash_amt', function () {
+        var val = $(this).val();
+        var total = $('#Net_amount').text();
+        if (parseFloat(total) > parseFloat(val)) {
+            $("#Amt_warning").show();
+        }
+        else {
+            $("#Amt_warning").hide();
+        }
+        var returnamt = (parseFloat(val) - parseFloat(total)).toFixed(2);
+        $('#Cash_Exchange').val(returnamt);
+    });
+    $(document).ready(function () {
+        $(window).keydown(function (event) {
+            if ((event.keyCode == 13)) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+</script>

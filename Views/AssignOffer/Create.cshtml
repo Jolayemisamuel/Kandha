@@ -1,0 +1,103 @@
+﻿@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model NibsMVC.Models.AssignOfferOutletModel
+<link rel="stylesheet" type="text/css" href="~/assets/global/plugins/select2/select2.css" />
+<link rel="stylesheet" type="text/css" href="~/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css" />
+<div class="page-content">
+    <div class="row">
+        <div class="col-md-12 margin-bottom-10">
+            <p style="color:red;">@TempData["result"]</p>
+        </div>
+        <div class="col-md-12">
+            <div class="portlet box blue">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-gift"></i>Assign Offer 
+                    </div>
+
+                </div>
+                <div class="portlet-body form">
+                    <!-- BEGIN FORM-->
+                    @using (Html.BeginForm("AssignOffer", "AssignOffer", FormMethod.Post, new { @id = "form_sample_3", @class = "form-horizontal" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                       
+                        <div class="form-body">
+                            <div class="alert alert-danger display-hide">
+                                <button class="close" data-close="alert"></button>
+                                You have some form errors. Please check below.
+                            </div>
+                            <div class="form-group">
+                                <label class=" col-md-3">
+                                    Choose Outlet <span class="required">
+                                        *
+                                    </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        @Html.DropDownList("UserId", new SelectList(Model.getOutletList, "Value", "Text"), "--Select--", new {@class="form-control" })
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" id="Offer_Show" style="display:none">
+                                <div class="col-md-10 col-sm-12">
+                                    <!-- BEGIN EXAMPLE TABLE PORTLET-->
+                                    <div class="portlet box yellow">
+                                        <div class="portlet-title">
+                                            <div class="caption">
+                                                <i class="fa fa-user "></i>Available Offers For <span id="User_Name"></span>
+                                            </div>
+                                        </div>
+                                        <div class="portlet-body">
+                                            <table class="add_class table table-striped table-bordered table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="table-checkbox">
+                                                            <input type="checkbox" class="group-checkable" data-set="#sample_2 .checkboxes" name="OfferAll" />
+                                                        </th>
+                                                        <th>
+                                                            Offer Name
+                                                        </th>
+                                                        <th>
+                                                            Buy Items
+                                                        </th>
+                                                        <th>
+                                                            Duration
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="offerData">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <!-- END EXAMPLE TABLE PORTLET-->
+                                </div>
+                                
+                            </div>
+                            
+                           
+                        </div>
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-9">
+                                    <button type="submit" class="btn green" id="btn_Assign_Offer">Submit</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="~/assets/admin/pages/scripts/Admin_Offers.js"></script>

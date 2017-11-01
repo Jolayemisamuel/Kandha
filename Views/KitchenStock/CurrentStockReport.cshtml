@@ -1,0 +1,225 @@
+﻿@model NibsMVC.Models.SearchModel
+
+@{
+    ViewBag.Title = "CurrentStockReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using NibsMVC.EDMX;
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $("#Category").change(function () {
+            $("#Item").empty();
+            
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("getitems")',
+                @*url: '@Url.Action("/StockTransfer/getitem")',*@
+                //url: '/StockTransfer/getitem',
+                dataType: 'json',
+
+                data: { id: $("#Category").val() },
+
+
+                success: function (items) {
+                    $("#Item").append('<option value=""></option>');
+                    $.each(items, function (i, item) {
+                        $("#Item").append('<option value="' + item.Text + '">' +
+                             item.Text + '</option>');
+
+                    });
+                },
+                error: function (ex) {
+                    alert('Failed to retrieve Item.');
+                }
+            });
+            return false;
+        })
+    });
+
+</script>
+
+
+
+<div class="page-content">
+
+    <!-- BEGIN PAGE HEADER-->
+    <div class="page-bar">
+        <ul class="page-breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="@Url.Action("Index","Home")">Home</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+
+            <li>
+                Kitchen Current Stock Details
+            </li>
+        </ul>
+
+    </div>
+    <!-- END PAGE HEADER-->
+    <!-- BEGIN PAGE CONTENT-->
+
+    <div class="row">
+        <div class="col-md-12" style="padding-left:0px;padding-right:0px;">
+            <!-- BEGIN BORDERED TABLE PORTLET-->
+            <div class="portlet box yellow">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-coffee"></i>Kitchen Current Stock Details
+                    </div>
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse">
+                        </a>
+
+                        <a href="javascript:;" class="reload">
+                        </a>
+
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    @using (Html.BeginForm("CurrentStockReport", "KitchenStock", FormMethod.Post, new { @id = "form_sample_6", @class = "form-horizontal" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+
+                        <input type="hidden" name="itemsdata" id="itemsdata" value="" />
+                        <div class="form-body">
+                            <div class="alert alert-danger display-hide">
+                                <button class="close" data-close="alert"></button>
+                                You have some form errors. Please check below.
+                            </div>
+                        </div>
+                        @*<div class="form-group">
+                            <label class="col-md-2">From Date</label>
+                            <div class="col-md-4">
+                                <input class="form-control form-control-inline input-medium date-picker" data-date-format="dd-M-yyyy" size="16" type="text" value=@Model.FromDate name="FromDate" readonly="readonly" />
+                                @*<input type="text" name="InvoiceDate" class="form-control" />*@
+
+                        @*</div>
+
+                            <label class="col-md-1">To Date</label>
+                            <div class="col-md-3">
+                                <input class="form-control form-control-inline input-medium date-picker" data-date-format="dd-M-yyyy" size="16" type="text" value=@Model.ToDate name="ToDate" readonly="readonly" />*@
+                        @*<input type="text" name="InvoiceDate" class="form-control" />*@
+
+                        @*</div>
+                            </div>*@
+                        <div class="form-group">
+
+                            @*<label class=" col-md-1">Department</label>
+                                <div class="col-md-3">
+                                    @Html.DropDownListFor(model => model.Department, (SelectList)ViewBag.Depts, "--Choose Department--", new { @class = "form-control" })
+                                </div>*@
+
+                            <label class=" col-md-1">Category</label>
+                            <div class="col-md-4">
+                                @Html.DropDownListFor(model => model.Category, (SelectList)ViewBag.catg, "--Choose Category--", new { @class = "form-control" , @id="Category" })
+                            </div>
+
+                            <label class=" col-md-1">Item</label>
+                            <div class="col-md-4">
+                                @Html.DropDownListFor(model => model.Item, (SelectList)ViewBag.Items, "--Choose Item--", new { @class = "form-control" , @id="Item" })
+                                @*@Html.DropDownListFor(model => model.Item, new SelectList(string.Empty, "Value", "Text"), new { @class = "form-control", @id = "Item" })*@
+                            </div>
+                            <div class="col-md-2"><button type="submit" class="btn green">Search</button></div>
+
+                        </div>
+
+                        <div class="col-md-offset-1 col-md-9">
+
+
+                        </div>
+                        <table class="table table-bordered table-hover table-full-width" id="sample_2">
+
+                            <thead>
+                                <tr>
+
+                                    <th>Item Description</th>
+                                    <th>Category</th>
+                                    <th>Unit</th>
+                                    <th>Available Stock</th>
+                                    <th>Available Stock Value</th>
+                                    <th>Old Stock</th>
+                                    <th>Old Stock Value</th>
+                                    <th>New Stock</th>
+                                    <th>New Stock Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+
+                        var counter = 1;
+                        decimal cstval = 0, ostval = 0, nstval = 0;
+                        NIBSEntities db = new NIBSEntities();
+                        foreach (var item in ViewBag.List)
+                        {
+                            //var dCount = 5;
+                            cstval = cstval + item[8];
+                            ostval = ostval + item[4];
+                            nstval = nstval + item[6];
+                            <tr>
+                                <td>
+                                    @item[0]
+                                </td>
+                                <td>
+                                    @item[1]
+                                </td>
+                                <td>
+                                    @item[2]
+                                </td>
+                                <td>
+                                    @item[7]
+                                </td>
+                                <td>
+                                    @item[8].ToString("0.00")
+                                </td>
+                                <td>
+                                    @item[3]
+                                </td>
+                                <td>
+                                    @item[4].ToString("0.00")
+                                </td>
+                                <td>
+                                    @item[5]
+                                </td>
+                                <td>
+                                    @item[6].ToString("0.00")
+                                </td>
+                            </tr>
+                            counter = counter + 1;
+                        }
+                                }
+                            </tbody>
+                            <tfoot>
+                                @{
+                                    <tr>
+                                        <td>Total</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>@cstval.ToString("0.00")</td>
+                                        <td></td>
+                                        <td>@ostval.ToString("0.00")</td>
+                                        <td></td>
+                                        <td>@nstval.ToString("0.00")</td>
+                                    </tr>
+                                }
+
+
+                            </tfoot>
+                        </table>
+                    }
+                </div>
+            </div>
+            <!-- END BORDERED TABLE PORTLET-->
+
+        </div>
+    </div>
+    <!-- END PAGE CONTENT-->
+</div>

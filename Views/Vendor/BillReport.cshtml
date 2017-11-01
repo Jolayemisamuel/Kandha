@@ -1,0 +1,185 @@
+﻿@{
+    ViewBag.Title = "BillReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model NibsMVC.Models.BillReportModel
+
+<style>
+    .DTTT_button_print{
+        display:none !important;
+    }
+</style>
+<div class="page-content">
+
+    <!-- BEGIN PAGE HEADER-->
+    <div class="page-bar">
+        <ul class="page-breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="@Url.Action("Index","Home")">Home</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <a href="@Url.Action("BillReport", "Vendor")">New Billing</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+               Billing Detail
+            </li>
+        </ul>
+
+    </div>
+    <!-- END PAGE HEADER-->
+    <!-- BEGIN PAGE CONTENT-->
+
+    <div class="row">
+        <p class="err" style="color:red">@TempData["perror"]</p>
+        <div class="col-md-12" style="padding-left:0px;padding-right:0px;">
+            <!-- BEGIN BORDERED TABLE PORTLET-->
+            <div class="portlet box yellow">
+
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-coffee"></i>Billing Detail
+                    </div>
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse">
+                        </a>
+
+                        <a href="javascript:;" class="reload">
+                        </a>
+
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-horizontal">
+                                @using (Html.BeginForm("", "", FormMethod.Get))
+                                {
+                                    <div class="form-group">
+                                        <label class="col-md-2">Select Vendor </label>
+                                        <div class="col-md-4">
+                                            @Html.DropDownListFor(a => a.VendorId, new SelectList(Model.getAllVendor, "Value", "Text"), "--Select--", new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    @if (Model.getAllBill.Count > 0)
+                    {
+                        <table class="table table-bordered table-hover table-full-width" id="sample_2">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Vendor Name
+                                    </th>
+                                    <td>Bill Date</td>
+                                    <th>Bill No</th>
+                                    <th>Total Amount</th>
+                                    <th>Vat Amount</th>
+                                    <th>Net Amount</th>
+                                    <th>Payment Method</th>
+                                    <th>Diposit Amount</th>
+                                    <th>Remaining Amount</th>
+                                    <th>View Detail</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.getAllBill)
+                                {
+                                    <tr>
+                                        <td>@item.OutletVendor.VenderName</td>
+                                        <td>@item.BillDate.ToShortDateString()</td>
+                                        <td>@item.OrderId</td>
+                                        <td>
+                                            @item.TotalAmount
+                                        </td>
+                                        <td>@item.VatAmount</td>
+                                        <td>@item.NetAmount</td>
+                                        <td>@item.PaymentMethod</td>
+                                        <td>@item.DepositAmount</td>
+                                        <td>@item.remainingAmount</td>
+                                        <td>
+                                            <a class="btn default" data-toggle="modal" href="#@item.OrderId">
+                                                Items
+                                            </a>
+                                            <a href="@Url.Action("_printBillAgain", "Vendor", new {Id=item.OrderId })" class="_print_billagain btn btn-warning">Print</a>
+                                            <div class="modal fade" id="@item.OrderId" tabindex="-1" role="basic" aria-hidden="true">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                    <h4 class="modal-title">Item Details</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <table class="table table-bordered">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Item Name</th>
+                                                                <th>Quantity</th>
+                                                                <th>Amount</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var i in item.VendorBillingItems)
+                                                            {
+                                                                <tr>
+                                                                    <td>@i.tblItem.Name</td>
+                                                                    <td>@i.Amount</td>
+                                                                    <td>@i.Quantity</td>
+                                                                </tr>
+                                                            }
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+
+
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+
+                </div>
+            </div>
+            <!-- END BORDERED TABLE PORTLET-->
+            <script>
+                $(document).on('change', '#VendorId', function (e) {
+                    var $val = $(this).val();
+                    if ($val != "") {
+                        window.location = "/Vendor/BillReport?VendorId=" + $val;
+                    }
+                   
+                });
+            </script>
+            <script>
+                $(document).on('click', '._print_billagain', function (e) {
+                    e.preventDefault();
+        var val = $(this).attr('href');
+        if (val != "") {
+            centeredPopup(val, 'myWindow', '600', '400', 'yes');
+
+        }
+    });
+
+    var popupWindow = null;
+    function centeredPopup(url, winName, w, h, scroll) {
+        LeftPosition = (screen.width) ? (screen.width - w) / 2 : 0;
+        TopPosition = (screen.height) ? (screen.height - h) / 2 : 0;
+        settings =
+        'height=' + h + ',width=' + w + ',top=' + TopPosition + ',left=' + LeftPosition + ',scrollbars=' + scroll + ',resizable'
+        popupWindow = window.open(url, winName, settings);
+        
+
+    }
+            </script>
+
+        </div>
+    </div>
+    <!-- END PAGE CONTENT-->
+</div>

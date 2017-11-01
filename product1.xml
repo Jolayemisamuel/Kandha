@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Table1>
+  <ItemId />
+  <ItemName />
+  <FullQty />
+  <HalfQty />
+  <Fullprice />
+  <HalfPrice />
+  <Amount />
+  <VatAmt />
+</Table1>

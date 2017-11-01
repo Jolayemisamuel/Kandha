@@ -1,0 +1,136 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+@model List<NibsMVC.Models.TakeAwayModel>
+<link href="~/assets/global/plugins/font-awesome/css/font-awesome.css" rel="stylesheet" />
+<link href="~/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+<link href="~/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="~/assets/global/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css" />
+<link href="~/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="~/assets/global/plugins/bootstrap-datepicker/css/datepicker3.css" />
+<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/smoothness/jquery-ui.css">
+<!-- END GLOBAL MANDATORY STYLES -->
+<link href="~/assets/admin/pages/css/Billing.css" rel="stylesheet" />
+<link href="~/assets/global/plugins/bootstrap-toastr/toastr.min.css" rel="stylesheet" />
+
+<!-- BEGIN THEME STYLES -->
+<link href="~/assets/global/css/components.css" rel="stylesheet" type="text/css" />
+<link href="~/assets/global/css/plugins.css" rel="stylesheet" type="text/css" />
+<link href="~/assets/admin/layout/css/layout.css" rel="stylesheet" type="text/css" />
+<link id="style_color" href="~/assets/admin/layout/css/themes/default.css" rel="stylesheet" type="text/css" />
+<link href="~/assets/admin/layout/css/custom.css" rel="stylesheet" type="text/css" />
+
+<style>
+    body {
+        font-family: calibri;
+    }
+
+    input[type="button"]:disabled {
+        background: #000;
+        color: white;
+    }
+
+    .datepicker.dropdown-menu {
+        left: 877.5px !important;
+    }
+
+    table {
+        font-size: 10px !important;
+    }
+
+    input[name="table"].table_merge {
+        background: #0094ff !important;
+    }
+
+    body {
+        background-color: white !important;
+        padding-top: 5px;
+        font-size: 10px !important;
+    }
+
+    .form-control {
+        font-size: 12px;
+    }
+
+    .padding-5 {
+        padding: 5px !important;
+        border: solid 1px #ddd;
+    }
+
+    a.table_no {
+        text-decoration: none;
+    }
+
+        a.table_no:hover {
+            text-decoration: none;
+        }
+
+    .hello {
+        display: none !important;
+    }
+</style>
+
+<div class="page-container">
+    <input type="hidden" value="@ViewBag.TokenNo" id="_TokenNo" />
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-5">
+                <div class="row">
+                    <div class="col-md-12 DivCategory">
+                        @if (Model != null)
+                        {
+                            foreach (var item in Model)
+                            {
+                                <input type="button" value="@item.CategoryName" id="@item.CategoryId" name="CategoryName" class="_sub_item btn blue" style="background:@item.Color;color:@item.TextColor;" />
+                            }
+                        }
+                    </div>
+                </div>
+                <div class="clear-fix"></div>
+                
+                <div id="dialog-confirm"></div>
+                <div class="row" id="_show_subItems">
+
+                </div>
+            </div>
+            <div class="col-md-7" id="_show_take_billingItems">
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/assets/global/plugins/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="~/assets/global/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+<!-- IMPORTANT! Load jquery-ui-1.10.3.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+<script src="~/assets/global/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
+<script src="~/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="~/assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+<script src="~/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="~/assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+<script src="~/assets/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
+<script src="~/assets/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+<script src="~/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+<!-- END CORE PLUGINS -->
+<script type="text/javascript" src="~/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+
+<script src="~/assets/global/plugins/bootstrap-toastr/toastr.min.js"></script>
+<script src="~/assets/global/scripts/metronic.js" type="text/javascript"></script>
+<script src="~/assets/admin/layout/scripts/layout.js" type="text/javascript"></script>
+<script src="~/assets/admin/layout/scripts/quick-sidebar.js" type="text/javascript"></script>
+<script src="~/assets/admin/layout/scripts/demo.js" type="text/javascript"></script>
+<script src="~/assets/NibsHomeDelivery.js"></script>
+<script>
+    $(document).ready(function () {
+        $(window).keydown(function (event) {
+            if ((event.keyCode == 13)) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+</script>
+
+

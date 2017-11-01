@@ -1,0 +1,96 @@
+﻿@{
+    ViewBag.Title = "setPrice";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model NibsMVC.Models.OutletVendorModel
+
+<div class="page-content">
+    <div class="row">
+        <div class="col-md-12 margin-bottom-10">
+        </div>
+        <div class="col-md-12">
+            <div class="portlet box blue">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-gift"></i>Add Vendor
+                    </div>
+
+                </div>
+
+
+                <div class="portlet-body form">
+                    <!-- BEGIN FORM-->
+                    @using (Html.BeginForm("UpdatePrice", "Vendor", FormMethod.Post, new { @id = "form_sample_vendor_4", @class = "form-horizontal" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        
+                        <div class="form-body">
+                            <div style="height:10px;"><span class="errmsg"></span></div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                   Select Vendor <span class="required">
+                                        *
+                                    </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        @Html.DropDownListFor(model => model.VendorId,new SelectList(Model.getAllVendor,"Value","Text"),"--Select--", new { @class = "form-control" })
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Select Category <span class="required">
+                                        *
+                                    </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        @Html.DropDownListFor(model => model.CategoryId, new SelectList(Model.getAllCategory, "Value", "Text"), "--Select--", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="_items_vendor" hidden>
+
+                            </div>
+                        </div>
+                       
+                        
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).on('change', '#CategoryId', function () {
+            var val = $(this).val();
+            var $vendor = $('#VendorId').val();
+            if (val!=""&& $vendor!="") {
+                var Data = { CategoryId: val,VendorId:$vendor };
+                $.post("/Vendor/_getItemToUpdate", Data, function (result) {
+                    $('#_items_vendor').show();
+                    $('#_items_vendor').html(result);
+                });
+            }
+           
+        });
+        $(document).on('change', '#VendorId', function () {
+            var val = $(this).val();
+            var $vendor = $('#CategoryId').val();
+            if (val != "" && $vendor != "") {
+                var Data = { CategoryId: $vendor, VendorId: val };
+                $.post("/Vendor/_getItemToUpdate", Data, function (result) {
+                    $('#_items_vendor').show();
+                    $('#_items_vendor').html(result);
+                });
+            }
+
+        });
+    </script>
+</div>
