@@ -57,7 +57,8 @@
                                 <th>
                                     Category Name
                                 </th>
-                                <th>Item Details</th>
+                                <th>Item Name</th>
+                                <th>Rate Details</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -65,7 +66,7 @@
                             @{
 
                                 var counter = 1;
-                                foreach (var item in Model.GroupBy(a => a.CategoryIds))
+                                foreach (var item in Model.GroupBy(a => new { a.CategoryIds, a.ItemId }))
                                 {
                                     <tr>
                                         @*<td>
@@ -74,47 +75,70 @@
 
                                         <td>
                                             @{
-                                    NIBSEntities db = new NIBSEntities();
-                                    var Categoryname = (from p in db.tblCategories where p.CategoryId == item.Key select p.Name).SingleOrDefault();
+                                                NIBSEntities db = new NIBSEntities();
+                                                var Categoryname = (from p in db.tblCategories where p.CategoryId == item.Key.CategoryIds select p.Name).SingleOrDefault();
 
                                             }
                                             @Categoryname
 
                                         </td>
-
                                         <td>
-                                            <a class="btn default" data-toggle="modal" href="#@item.Key">
-                                                Items
+                                            @{
+
+                                                var Itemname = (from p in db.tblItems where p.CategoryId == item.Key.CategoryIds && p.ItemId == item.Key.ItemId select p.Name).SingleOrDefault();
+
+                                            }
+                                            @Itemname
+
+                                        </td>
+                                     
+                                        <td>
+                                            @{
+                                                var id = item.Key.CategoryIds + "_" + item.Key.ItemId;
+
+                                            }
+                                            <a class="btn default" data-toggle="modal" href="#@id">
+                                                Rates
                                             </a>
-                                            <div class="modal fade" id="@item.Key" tabindex="-1" aria-hidden="true">
+                                            <div class="modal fade" id="@id" tabindex="-1" aria-hidden="true">
                                                 
                                                         <div class="modal-header">
                                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                                             <h4 class="modal-title">Items Base Price Details</h4>
                                                         </div>
                                                         <div class="modal-body">
+
                                                             <table class="table table-bordered">
                                                                 <thead>
                                                                     <tr>
-                                                                        <th>Item Name</th>
+                                                                        @{
+                                                                            int catid = Convert.ToInt32(id.Split('_')[0]);
+                                                                            int itemid = Convert.ToInt32(id.Split('_')[1]);
+                                                                            var Category = (from p in db.tblCategories where p.CategoryId == catid   select p.Name).SingleOrDefault();
+                                                                            var Itemn = (from p in db.tblItems where p.CategoryId == catid  && p.ItemId == itemid  select p.Name).SingleOrDefault();
+                                                                        }
+                                                                        @Category >>>  @Itemn 
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>Type</th>
                                                                         <th>Price</th>
                                                                         @*<th>Half Price</th>*@
                                                                         <th>GST</th>
-                                                                        <th>Type</th>
+                                                                      
 
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
                                                                     @{
-                                    var Itemdetails = (from q in db.tblBasePriceItems where q.CategoryId == item.Key select q).ToList();
+                                    var Itemdetails = (from q in db.tblBasePriceItems where q.CategoryId == item.Key.CategoryIds && q.ItemId==item.Key.ItemId select q).ToList();
                                     foreach (var i in Itemdetails)
                                     {
                                         <tr>
-                                            <td>@i.tblItem.Name</td>
+                                            <td>@i.Type</td>
                                             <td>@i.FullPrice</td>
                                             @*<td>@i.HalfPrice</td>*@
                                             <td>@i.Vat</td>
-                                            <td>@i.Type</td>
+                                           
                                         </tr>
                                     }
                                                                     }
@@ -138,7 +162,7 @@
                                         <td>
 
                                             <a href="@Url.Action("Edit", "BasePrice", new { id=item.Key})"><span class="fa fa-edit"></span></a>
-                                           <a href="@Url.Action("Delete", "BasePrice", new { @id = item.FirstOrDefault().BasePriceId })" class="delete_base"><span class="fa fa-trash-o"></span></a>
+                                          <a href="@Url.Action("Delete", "BasePrice", new { @id = item.FirstOrDefault().BasePriceId })" class="delete_base"><span class="fa fa-trash-o"></span></a>
                                         </td>
                                         @*<td>
         <a href="@Url.Action("Create", "Category", new { @id = item.CategoryId })" class="btn btn-xs red">Edit</a>

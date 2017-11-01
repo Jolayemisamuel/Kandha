@@ -36,7 +36,7 @@ namespace NibsMVC.Models
         public string DeleteDate { get; set; }
         public string BillDate { get; set; }
         public decimal NetAmount { get; set; }
-        public int TableNo { get; set; }
+        public string TableNo { get; set; }
         public int TokenNO { get; set; }
         public int FullQty { get; set; }
         public int HalfQty { get; set; }
@@ -98,7 +98,7 @@ namespace NibsMVC.Models
         public decimal ServicChargeAmt { get; set; }
         public decimal DiscountAmount { get; set; }
         public decimal NetAmount { get; set; }
-        public int TableNo { get; set; }
+        public string TableNo { get; set; }
     }
     public class CashierTHomeModel
     {

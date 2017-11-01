@@ -2214,6 +2214,12 @@
     <Compile Include="EDMX\VwAccTransDetail.cs">
       <DependentUpon>KOTDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="EDMX\vwBillDet.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\vwBillMst.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="EDMX\vwMasters_Documents.cs">
       <DependentUpon>KOTDB.tt</DependentUpon>
     </Compile>

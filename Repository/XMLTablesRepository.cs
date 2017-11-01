@@ -166,7 +166,7 @@ namespace NibsMVC.Repository
             model.getPaymentType = getPaymentMode();
             model.TableNo = TableNo;
             int tableno = Convert.ToInt32(model.TableNo);
-            var billId = _entities.tblBillMasters.Where(a => a.TableNo == tableno && a.OutletId == oulte && a.Isprinted == true).FirstOrDefault();
+            var billId = _entities.tblBillMasters.Where(a => a.TableNo == model.TableNo && a.OutletId == oulte && a.Isprinted == true).FirstOrDefault();
             if (billId != null)
             {
                 model.BillId = billId.BillId;
@@ -466,7 +466,7 @@ namespace NibsMVC.Repository
                 //tb.VatAmount = model.VatAmount;
                 tb.VatAmount = totalVat;
                 tb.ServiceTax = model.ServiceTax;
-                tb.TableNo = Convert.ToInt32(model.TableNo);
+                tb.TableNo = (model.TableNo);
                 tb.PaymentType = model.PaymentType;
                 tb.ChequeNo = model.ChequeNo;
                 tb.ChequeDate = model.CheckDate;

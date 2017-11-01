@@ -25,7 +25,8 @@ namespace NibsMVC.Controllers
             var today=(from p in entites.tblBillMasters
                        where p.BillDate.Day==dd.Day && p.BillDate.Month==dd.Month
                        &&p.BillDate.Year==dd.Year && p.OutletId==OutletId
-                       && p.BillingType.Equals("R") select p).ToList();
+                       && (p.BillingType == "Ac Hall" || p.BillingType == "Dine In Hall")
+                       select p).ToList();
             //var demo=entites.tblBillMasters.Where(a=>a.BillDate.Day==dd.Day)
             model.RestroTotalAmount = today.Sum(a=>a.TotalAmount);
             model.RestroTotalServiceChargeAmount = today.Sum(a => a.ServicChargesAmount);
@@ -37,7 +38,7 @@ namespace NibsMVC.Controllers
             // Home Delivery Today Report
             var Home = entites.tblBillMasters.Where(a => a.BillDate.Day == dd.Day
                 && a.BillDate.Month == dd.Month && a.BillDate.Year == dd.Year &&
-                a.OutletId == OutletId && a.BillingType.Equals("H")).ToList();
+                a.OutletId == OutletId && a.BillingType.Equals("Door Delivery Hall")).ToList();
             model.HomeTotalAmount = Home.Sum(a => a.TotalAmount);
             model.HomeTotalDiscountAmount = Home.Sum(a => a.DiscountAmount);
             model.HomeTotalServiceTaxAmount = Home.Sum(a => a.ServiceTax.Value);
@@ -50,7 +51,7 @@ namespace NibsMVC.Controllers
             // Takeaway Today Report
             var Take = entites.tblBillMasters.Where(a => a.BillDate.Day == dd.Day
                && a.BillDate.Month == dd.Month && a.BillDate.Year == dd.Year &&
-               a.OutletId == OutletId && a.BillingType.Equals("T")).ToList();
+               a.OutletId == OutletId && a.BillingType.Equals("Take Away Hall")).ToList();
             model.TakeTotalAmount = Take.Sum(a => a.TotalAmount);
             model.TakeTotalDiscountAmount = Take.Sum(a => a.DiscountAmount);
             model.TakeTotalServiceTaxAmount = Take.Sum(a => a.ServiceTax.Value);
@@ -92,7 +93,7 @@ namespace NibsMVC.Controllers
                           join q in entites.tblBillDetails on p.BillId equals q.BillId
                           join t in entites.tblItems on q.ItemId equals t.ItemId
                           join b in entites.tblBasePriceItems on t.ItemId equals b.ItemId
-                          where p.BillDate.Day == dd.Day && p.BillDate.Month == dd.Month && p.BillDate.Year == dd.Year && p.BillingType == "R" && p.OutletId == OutletId
+                          where p.BillDate.Day == dd.Day && p.BillDate.Month == dd.Month && p.BillDate.Year == dd.Year && (p.BillingType == "Ac Hall" || p.BillingType == "Dine In Hall") && p.OutletId == OutletId
                           select new
                           {
                               ItemName = t.Name,
@@ -124,7 +125,7 @@ namespace NibsMVC.Controllers
             var dd = Convert.ToDateTime(Date);
             var result = (from p in entites.tblBillMasters
                           join q in entites.tblBillDetails on p.BillId equals q.BillId
-                          where p.BillDate.Day == dd.Day && p.BillDate.Month == dd.Month && p.BillDate.Year == dd.Year && p.BillingType == "R" && p.OutletId == OutletId
+                          where p.BillDate.Day == dd.Day && p.BillDate.Month == dd.Month && p.BillDate.Year == dd.Year && (p.BillingType == "Ac Hall" || p.BillingType == "Dine In Hall") && p.OutletId == OutletId
                           select new
                           {
                               Vat = q.Vat,
@@ -163,7 +164,7 @@ namespace NibsMVC.Controllers
                           join q in entites.tblBillDetails on p.BillId equals q.BillId
                           join t in entites.tblItems on q.ItemId equals t.ItemId
                           join b in entites.tblBasePriceItems on t.ItemId equals b.ItemId
-                          where p.BillDate.Day == dd.Day && p.BillDate.Month == dd.Month && p.BillDate.Year == dd.Year && p.BillingType == "H" && p.OutletId == OutletId
+                          where p.BillDate.Day == dd.Day && p.BillDate.Month == dd.Month && p.BillDate.Year == dd.Year && p.BillingType == "Door Delivery Hall" && p.OutletId == OutletId
                           select new
                           {
                               ItemName = t.Name,
@@ -194,7 +195,7 @@ namespace NibsMVC.Controllers
             var dd = Convert.ToDateTime(Date);
             var result = (from p in entites.tblBillMasters
                           join q in entites.tblBillDetails on p.BillId equals q.BillId
-                          where p.BillDate.Day == dd.Day && p.BillDate.Month == dd.Month && p.BillDate.Year == dd.Year && p.BillingType == "H" && p.OutletId == OutletId
+                          where p.BillDate.Day == dd.Day && p.BillDate.Month == dd.Month && p.BillDate.Year == dd.Year && p.BillingType == "Door Delivery Hall" && p.OutletId == OutletId
                           select new
                           {
                               Vat = q.Vat,
@@ -227,7 +228,7 @@ namespace NibsMVC.Controllers
                           join q in entites.tblBillDetails on p.BillId equals q.BillId
                           join t in entites.tblItems on q.ItemId equals t.ItemId
                           join b in entites.tblBasePriceItems on t.ItemId equals b.ItemId
-                          where p.BillDate.Day == dd.Day && p.BillDate.Month == dd.Month && p.BillDate.Year == dd.Year && p.BillingType == "T" && p.OutletId == OutletId
+                          where p.BillDate.Day == dd.Day && p.BillDate.Month == dd.Month && p.BillDate.Year == dd.Year && p.BillingType == "Take Away Hall" && p.OutletId == OutletId
                           select new
                           {
                               ItemName = t.Name,
@@ -258,7 +259,7 @@ namespace NibsMVC.Controllers
             var dd = Convert.ToDateTime(Date);
             var result = (from p in entites.tblBillMasters
                           join q in entites.tblBillDetails on p.BillId equals q.BillId
-                          where p.BillDate.Day == dd.Day && p.BillDate.Month == dd.Month && p.BillDate.Year == dd.Year && p.BillingType == "H" && p.OutletId == OutletId
+                          where p.BillDate.Day == dd.Day && p.BillDate.Month == dd.Month && p.BillDate.Year == dd.Year && p.BillingType == "Door Delivery Hall" && p.OutletId == OutletId
                           select new
                           {
                               Vat = q.Vat,

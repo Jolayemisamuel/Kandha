@@ -17,10 +17,83 @@ namespace NibsMVC.Controllers
     {
         AdminHomeRepository repo = new AdminHomeRepository();
         NIBSEntities entities = new NIBSEntities();
+        KOTEntities kot_entities = new KOTEntities();
         OutletHomeRepository outrepo = new OutletHomeRepository();
         [Authorize(Roles = "admin,Outlet,Operator")]
         public ActionResult Index()
         {
+            DateTime dt = Convert.ToDateTime("01-Oct-2017");
+            var billsKOT = (from p in kot_entities.vwBillMsts where p.BillDate >= dt select p).ToList();
+            var billsCount = (from p in entities.tblBillMasters select p).ToList().Count;
+            if (billsKOT.Count > billsCount)
+            {
+                foreach (var item in billsKOT)
+                {
+                    var itemcheck = (from p in entities.tblBillMasters where p.TokenNo == item.BillNo && p.BillingType == item.Description && p.BillDate == item.BillDate  select p).FirstOrDefault();
+
+                    
+                    if (itemcheck == null)
+                    {
+                        tblBillMaster tb = new tblBillMaster();
+                        tb.BillDate = item.BillDate;
+                        tb.TotalAmount = item.Total;
+                        tb.VatAmount = Convert.ToDecimal (item.taxamount);
+                        tb.ServicChargesAmount = item.serviceChrge;
+                        tb.DiscountAmount = item.Discount;
+                        tb.NetAmount = item.NettValue;
+                        tb.TableNo = item.tableNo==null?"": item.tableNo;
+                        tb.CustomerName = "";
+                        tb.OutletId = item.outlet;
+                        tb.BillingType = item.Description;
+                        tb.TokenNo = Convert .ToInt32 ( item.BillNo);
+                        tb.Address = item.address;
+                        tb.PaymentType = item.paymenttype;
+                        tb.ChequeNo = item.chqno;
+                        tb.ChequeDate = Convert.ToDateTime ("01-Jan-1900");// item.chqdate
+                        tb.Discount = item.disPer;
+                        tb.ContactNo = item.contactNo;
+                        tb.PackingCharges = item.packingChags;
+                        tb.ServiceTax = item.Servicetax;
+                        tb.Isprinted = Convert.ToBoolean (item.isprnt);
+                        tb.NetAmountWithoutDiscount = item.befDisc;
+                        entities.tblBillMasters.Add(tb);
+                        entities.SaveChanges();
+
+                        var billsDetKOT = (from p in kot_entities.vwBillDets where p.BillTrans_UID.Equals(item.UID)  select p).ToList();
+                        foreach (var itemDet in billsDetKOT)
+                        {
+                            tblBillDetail tbDet = new tblBillDetail();
+                            int billid = (from p in entities.tblBillMasters select p.BillId).Max();
+                            var itemid = (from p in entities.tblItems where p.Name == itemDet .ItemName  && p.ItemCode  == itemDet.ItemCode  select p.ItemId ).SingleOrDefault();
+                            tbDet.BillId = billid;
+                            tbDet.ItemId = itemid;
+                            tbDet.FullQty = (Int32)itemDet.Qty;
+                            tbDet.HalfQty = 0;
+                            tbDet.Amount = itemDet.Value;
+
+                            if (item.Description == "Ac Hall")
+                                tbDet.VatAmount = itemDet.Value + (itemDet.Value * (decimal)0.18);
+                            else
+                                tbDet.VatAmount = itemDet.Value + (itemDet.Value * (decimal)0.12);
+
+                            if (item.Description == "Ac Hall")
+                                tbDet.Vat = Convert.ToDecimal("18");
+                            else
+                                tbDet.Vat = Convert.ToDecimal("12");
+
+                            entities.tblBillDetails.Add(tbDet);
+                            entities.SaveChanges();
+
+                        }
+
+                    }
+
+                }
+            }
+
+           
+
+
             string[] roles = Roles.GetRolesForUser();
             foreach (var role in roles)
             {
@@ -42,7 +115,7 @@ namespace NibsMVC.Controllers
 
         }
 
-        
+
         public List<GetRunningTable> getRunningTable()
         {
             List<GetRunningTable> lst = new List<GetRunningTable>();
@@ -65,7 +138,7 @@ namespace NibsMVC.Controllers
                     }
                 }
 
-                
+
             }
             return lst;
         }
@@ -92,7 +165,7 @@ namespace NibsMVC.Controllers
         public ActionResult ChangeInventory(ChangeInventoryModel model)
         {
             outrepo.UpdateInventory(model);
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

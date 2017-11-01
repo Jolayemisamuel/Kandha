@@ -41,25 +41,59 @@ namespace NibsMVC.Repository
                           select p).ToList(); ;
             if (model.BillNo>0)
             {
-                result = (from p in entities.tblBillMasters
-                          where p.BillId == model.BillNo
-                          && p.BillingType==type
-                          select p).ToList();
+                if (type=="R")
+                {
+                    result = (from p in entities.tblBillMasters
+                              where p.BillId == model.BillNo
+                              &&  (p.BillingType == "Ac Hall" || p.BillingType == "Dine In Hall")
+                              select p).ToList();
+                }
+                else
+                {
+                    result = (from p in entities.tblBillMasters
+                              where p.BillId == model.BillNo
+                              && p.BillingType == type
+                              select p).ToList();
+                }
             }
             else if (model.OutletId>0)
             {
-                result = (from p in entities.tblBillMasters
-                          where p.OutletId == model.OutletId
-                          && p.BillingType == type
-                          select p).ToList();
+                if (type == "R")
+                {
+                    result = (from p in entities.tblBillMasters
+                              where p.OutletId == model.OutletId
+                              && (p.BillingType == "Ac Hall" || p.BillingType == "Dine In Hall")
+                              select p).ToList();
+                }
+                else
+                {
+                    result = (from p in entities.tblBillMasters
+                              where p.OutletId == model.OutletId
+                              && p.BillingType == type
+                              select p).ToList();
+                }
+              
             }
             else
             {
-                result = (from p in entities.tblBillMasters
-                          where p.BillDate >= model.SearchFrom
-                          && p.BillDate<=model.SearchTo
-                          && p.BillingType == type
-                          select p).ToList();
+                if (type == "R")
+                {
+                    result = (from p in entities.tblBillMasters
+                              where p.BillDate >= model.SearchFrom
+                              && p.BillDate <= model.SearchTo
+                              &&  (p.BillingType == "Ac Hall" || p.BillingType == "Dine In Hall")
+                              select p).ToList();
+                  
+                }
+                else
+                {
+                    result = (from p in entities.tblBillMasters
+                              where p.BillDate >= model.SearchFrom
+                              && p.BillDate <= model.SearchTo
+                              && p.BillingType == type
+                              select p).ToList();
+                }
+               
             }
             foreach (var item in result)
             {

@@ -46,7 +46,7 @@ namespace NibsMVC.Repository
         }
         public int GetTokenNo()
         {
-            var tokencount = (from q in _entities.tblBillMasters where q.BillingType.Equals("T") select new { BillId = q.BillId, Date = q.BillDate }).ToList();
+            var tokencount = (from q in _entities.tblBillMasters where q.BillingType.Equals("Take Away Hall") select new { BillId = q.BillId, Date = q.BillDate }).ToList();
             var Curentdate = DateTime.Now.Date;
             int no;
             if (tokencount.Count() > 0)

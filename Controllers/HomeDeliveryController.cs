@@ -25,7 +25,7 @@ namespace NibsMVC.Controllers
         #region Old
         public ActionResult Index()
         {
-            var tokencount = (from q in db.tblBillMasters where q.BillingType.Equals("H") select new { BillId = q.BillId, Date = q.BillDate }).ToList();
+            var tokencount = (from q in db.tblBillMasters where q.BillingType.Equals("Door Delivery Hall") select new { BillId = q.BillId, Date = q.BillDate }).ToList();
             var Curentdate = DateTime.Now.Date;
             int no;
             if (tokencount.Count() > 0)

@@ -280,10 +280,10 @@
           <Property Name="ServicChargesAmount" Type="numeric" Precision="18" Scale="2" Nullable="false" />
           <Property Name="DiscountAmount" Type="numeric" Precision="18" Scale="2" Nullable="false" />
           <Property Name="NetAmount" Type="numeric" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="TableNo" Type="int" Nullable="false" />
+          <Property Name="TableNo" Type="varchar" MaxLength="10" />
           <Property Name="CustomerName" Type="varchar" MaxLength="100" />
           <Property Name="OutletId" Type="int" Nullable="false" />
-          <Property Name="BillingType" Type="char" MaxLength="1" />
+          <Property Name="BillingType" Type="varchar" MaxLength="20" />
           <Property Name="TokenNo" Type="int" />
           <Property Name="Address" Type="nvarchar" MaxLength="300" />
           <Property Name="PaymentType" Type="nvarchar" MaxLength="50" />
@@ -317,7 +317,7 @@
           <Property Name="ServiceCharAmt" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="DiscountAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="NetAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="TableNo" Type="int" />
+          <Property Name="TableNo" Type="varchar" MaxLength="10" />
           <Property Name="CustomerName" Type="varchar" MaxLength="15" />
           <Property Name="OutletId" Type="int" Nullable="false" />
           <Property Name="BillingType" Type="varchar" MaxLength="15" Nullable="false" />
@@ -2482,7 +2482,7 @@
           <Property Name="ServiceCharAmt" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="DiscountAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="NetAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="TableNo" Type="Int32" />
+          <Property Name="TableNo" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
           <Property Name="CustomerName" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="OutletId" Type="Int32" Nullable="false" />
           <Property Name="BillingType" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
@@ -3229,10 +3229,10 @@
           <Property Name="ServicChargesAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="DiscountAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="NetAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="TableNo" Type="Int32" Nullable="false" />
+          <Property Name="TableNo" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
           <Property Name="CustomerName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="OutletId" Type="Int32" Nullable="false" />
-          <Property Name="BillingType" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="BillingType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="TokenNo" Type="Int32" />
           <Property Name="Address" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="PaymentType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -4360,6 +4360,7 @@
           <EntitySetMapping Name="tblBillMasters">
             <EntityTypeMapping TypeName="NIBSModel.tblBillMaster">
               <MappingFragment StoreEntitySet="tblBillMaster">
+                <ScalarProperty Name="TableNo" ColumnName="TableNo" />
                 <ScalarProperty Name="NetAmountWithoutDiscount" ColumnName="NetAmountWithoutDiscount" />
                 <ScalarProperty Name="Isprinted" ColumnName="Isprinted" />
                 <ScalarProperty Name="ServiceTax" ColumnName="ServiceTax" />
@@ -4374,7 +4375,6 @@
                 <ScalarProperty Name="BillingType" ColumnName="BillingType" />
                 <ScalarProperty Name="OutletId" ColumnName="OutletId" />
                 <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
-                <ScalarProperty Name="TableNo" ColumnName="TableNo" />
                 <ScalarProperty Name="NetAmount" ColumnName="NetAmount" />
                 <ScalarProperty Name="DiscountAmount" ColumnName="DiscountAmount" />
                 <ScalarProperty Name="ServicChargesAmount" ColumnName="ServicChargesAmount" />

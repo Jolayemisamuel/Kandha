@@ -629,6 +629,8 @@ namespace NibsMVC.EDMX
         public virtual DbSet<vwMasters_TransactionsDocuments> vwMasters_TransactionsDocuments { get; set; }
         public virtual DbSet<VwRawMaterialItemCategory> VwRawMaterialItemCategories { get; set; }
         public virtual DbSet<VwRawMaterialItemGroup> VwRawMaterialItemGroups { get; set; }
+        public virtual DbSet<vwBillDet> vwBillDets { get; set; }
+        public virtual DbSet<vwBillMst> vwBillMsts { get; set; }
     
         [DbFunction("KOTEntities", "ED_GetComboList")]
         public virtual IQueryable<ED_GetComboList_Result> ED_GetComboList(Nullable<decimal> itemsM_UID, Nullable<decimal> qty)

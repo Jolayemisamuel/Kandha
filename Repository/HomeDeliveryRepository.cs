@@ -335,7 +335,7 @@ namespace NibsMVC.Repository
                 int oulte = getOutletId();
                 tblBillMaster tb = new tblBillMaster();
                 tb.BillDate = DateTime.Now.Date;
-                tb.BillingType = "H";
+                tb.BillingType = "Door Delivery Hall";
                 tb.CustomerName = model.CustomerName;
                 tb.DiscountAmount = model.DiscountAmount;
                 tb.NetAmount = model.NetAmount;
@@ -347,7 +347,7 @@ namespace NibsMVC.Repository
                 tb.TokenNo = model.TokenNo;
                 _entities.tblBillMasters.Add(tb);
                 _entities.SaveChanges();
-                var Id = _entities.tblBillMasters.Where(o => o.OutletId == oulte && o.BillingType == "H").Select(x => x.BillId).Max();
+                var Id = _entities.tblBillMasters.Where(o => o.OutletId == oulte && o.BillingType == "Door Delivery Hall").Select(x => x.BillId).Max();
                 XDocument xd = XDocument.Load(Path);
                
                 var result = from item in xd.Descendants("Items")

@@ -223,10 +223,10 @@
         <EntityTypeShape EntityType="KOTModel.KotTrans_TaxLink" Width="1.5" PointX="50.75" PointY="17.75" IsExpanded="true" />
         <EntityTypeShape EntityType="KOTModel.KotTrans_TaxLinkList" Width="1.5" PointX="50.75" PointY="21.75" IsExpanded="true" />
         <EntityTypeShape EntityType="KOTModel.KOTTransList" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="KOTModel.KOTTransList_AddOnsList" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.KOTTransList_AddOnsList" Width="2.25" PointX="3" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="KOTModel.KOTTransList_DeliveryStatus" Width="1.5" PointX="25.75" PointY="50.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="KOTModel.KOTTransList_DiscountList" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="KOTModel.KOTTransList_Extn" Width="1.5" PointX="3" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.KOTTransList_DiscountList" Width="2.125" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.KOTTransList_Extn" Width="2.375" PointX="3" PointY="8.375" IsExpanded="true" />
         <EntityTypeShape EntityType="KOTModel.KOTTransListCancellation" Width="1.5" PointX="50.75" PointY="26.75" IsExpanded="true" />
         <EntityTypeShape EntityType="KOTModel.KOTTransListPreference" Width="1.5" PointX="50.75" PointY="30.75" IsExpanded="true" />
         <EntityTypeShape EntityType="KOTModel.LodgingPaymentType" Width="1.5" PointX="50.75" PointY="33.75" IsExpanded="true" />
@@ -702,6 +702,8 @@
         <AssociationConnector Association="KOTModel.FK_ServiceTaxMaster_List_ServiceTaxMaster" ManuallyRouted="false" />
         <AssociationConnector Association="KOTModel.FK_Shift_Waiter_TableLink_ShiftM" ManuallyRouted="false" />
         <AssociationConnector Association="KOTModel.FK_Shift_Waiter_TableLink_TableM" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="KOTModel.vwBillDet" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="KOTModel.vwBillMst" Width="1.5" PointX="7.375" PointY="58.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

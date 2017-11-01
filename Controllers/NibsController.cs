@@ -57,7 +57,7 @@ namespace NibsMVC.Controllers
                                  select p).ToList();
                     if (items.Count > 0)
                     {
-                        bool printed = db.tblBillMasters.Where(a => a.OutletId == oulte && a.TableNo == item.TableNo && a.Isprinted == true).Any();
+                        bool printed = db.tblBillMasters.Where(a => a.OutletId == oulte && a.TableNo == item.TableNo.ToString() && a.Isprinted == true).Any();
                         if (printed)
                         {
                             mo.Current = "printed";

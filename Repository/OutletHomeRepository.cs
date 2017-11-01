@@ -138,8 +138,8 @@ namespace NibsMVC.Repository
         public List<CashierRHomeModel> getRBillingData()
         {
             List<CashierRHomeModel> List = new List<CashierRHomeModel>();
-            var outltId = (from q in entities.tblOperators where q.UserId == WebSecurity.CurrentUserId select q.OutletId).FirstOrDefault();
-            var billdata = (from p in entities.tblBillMasters where p.OutletId == outltId && p.BillingType == "R" select p).ToList();
+            var outltId = 99; //(from q in entities.tblOperators where q.UserId == WebSecurity.CurrentUserId select q.OutletId).FirstOrDefault();
+            var billdata = (from p in entities.tblBillMasters where p.OutletId == outltId && (p.BillingType == "Ac Hall" || p.BillingType == "Dine In Hall")  select p).ToList();
             foreach (var item in billdata)
             {
                 CashierRHomeModel model = new CashierRHomeModel();
@@ -158,8 +158,8 @@ namespace NibsMVC.Repository
         public List<CashierTHomeModel> getTBillingData()
         {
             List<CashierTHomeModel> List = new List<CashierTHomeModel>();
-            var outltId = (from q in entities.tblOperators where q.UserId == WebSecurity.CurrentUserId select q.OutletId).FirstOrDefault();
-            var billdata = (from p in entities.tblBillMasters where p.OutletId == outltId && p.BillingType == "T" select p).ToList();
+            var outltId = 99;//(from q in entities.tblOperators where q.UserId == WebSecurity.CurrentUserId select q.OutletId).FirstOrDefault();
+            var billdata = (from p in entities.tblBillMasters where p.OutletId == outltId && p.BillingType == "Take Away Hall" select p).ToList();
             foreach (var item in billdata)
             {
                 CashierTHomeModel model = new CashierTHomeModel();
@@ -174,7 +174,7 @@ namespace NibsMVC.Repository
                 }
                 else
                 {
-                    model.TokenNo = item.TableNo;
+                    model.TokenNo = (int)item.TokenNo;//item.TableNo;
                 }
                 model.TotalAmount = item.TotalAmount;
                 model.VatAmount = item.VatAmount;
@@ -185,8 +185,8 @@ namespace NibsMVC.Repository
         public List<CashierHHomeModel> getHBillingData()
         {
             List<CashierHHomeModel> List = new List<CashierHHomeModel>();
-            var outltId = (from q in entities.tblOperators where q.UserId == WebSecurity.CurrentUserId select q.OutletId).FirstOrDefault();
-            var billdata = (from p in entities.tblBillMasters where p.OutletId == outltId && p.BillingType == "H" select p).ToList();
+            var outltId = 99;// (from q in entities.tblOperators where q.UserId == WebSecurity.CurrentUserId select q.OutletId).FirstOrDefault();
+            var billdata = (from p in entities.tblBillMasters where p.OutletId == outltId && p.BillingType == "Door Delivery Hall" select p).ToList();
             foreach (var item in billdata)
             {
                 CashierHHomeModel model = new CashierHHomeModel();
@@ -201,7 +201,7 @@ namespace NibsMVC.Repository
                 }
                 else
                 {
-                    model.TokenNo = item.TableNo;
+                    model.TokenNo = (int)item.TokenNo ;//item.TableNo;
                 }
                 model.TotalAmount = item.TotalAmount;
                 model.VatAmount = item.VatAmount;

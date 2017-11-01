@@ -52,11 +52,11 @@
                                 <label class="col-md-1 bold_">@Model.TableNo</label>
                                 <label class="col-md-2">Billing Type</label>
                                 <label class="col-md-3 bold_">
-                                    @if (Model.BillingType == "R")
+                                    @if ((Model.BillingType == "Ac Hall" || Model.BillingType == "Dine In Hall"))
                                     {
                                         <cite>Billing</cite>
                                     }
-                                    else if (Model.BillingType == "T")
+                                    else if (Model.BillingType == "Take Away Hall")
                                     {
                                         <cite>Packing</cite>
                                     }

@@ -32,7 +32,7 @@ namespace NibsMVC.Models
         public decimal ServiceTax { get; set; }
         public decimal DiscountAmount { get; set; }
         public decimal NetAmount { get; set; }
-        public int TableNo { get; set; }
+        public string TableNo { get; set; }
         public string CustomerName { get; set; }
         public int BillDetailsId { get; set; }
         public int CategoryId { get; set; }

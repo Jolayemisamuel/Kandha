@@ -37,7 +37,7 @@ namespace NibsMVC.Controllers
             var restroBill = entites.tblBillMasters.Where(a => System.Data.Entity.DbFunctions.TruncateTime(a.BillDate) >= datefrom.Date
                 && System.Data.Entity.DbFunctions.TruncateTime(a.BillDate) <= dateto.Date && a.OutletId == OutletId).ToList();
 
-            var today = restroBill.Where(a => a.BillingType.Equals("R")).ToList();
+            var today = restroBill.Where(a => ((a.BillingType == "Ac Hall" || a.BillingType == "Dine In Hall"))).ToList();
             //var demo=entites.tblBillMasters.Where(a=>a.BillDate.Day==dd.Day)
             model.RestroTotalAmount = today.Sum(a => a.TotalAmount);
             model.RestroTotalDiscountAmount = today.Sum(a => a.DiscountAmount);
@@ -47,7 +47,7 @@ namespace NibsMVC.Controllers
             model.TotalRestroNetAmount = today.Sum(a => a.NetAmount);
 
             // Home Delivery Today Report
-            var Home = restroBill.Where(a => a.BillingType.Equals("H")).ToList();
+            var Home = restroBill.Where(a => a.BillingType.Equals("Door Delivery Hall")).ToList();
             model.HomeTotalAmount = Home.Sum(a => a.TotalAmount);
             model.HomeTotalDiscountAmount = Home.Sum(a => a.DiscountAmount);
             model.HomeTotalServiceTaxAmount = Home.Sum(a => a.ServiceTax.Value);
@@ -58,7 +58,7 @@ namespace NibsMVC.Controllers
             model.getAllHomeVat = getAllVatHomeAmount(datefrom, dateto);
 
             // Takeaway Today Report
-            var Take = restroBill.Where(a => a.BillingType.Equals("T")).ToList();
+            var Take = restroBill.Where(a => a.BillingType.Equals("Take Away Hall")).ToList();
             model.TakeTotalAmount = Take.Sum(a => a.TotalAmount);
             model.TakeTotalDiscountAmount = Take.Sum(a => a.DiscountAmount);
             model.TakeTotalServiceTaxAmount = Take.Sum(a => a.ServiceTax.Value);
@@ -99,7 +99,7 @@ namespace NibsMVC.Controllers
             var result = (from p in entites.tblBillDetails
                           where System.Data.Entity.DbFunctions.TruncateTime(p.tblBillMaster.BillDate) >= datefrom.Date &&
                            System.Data.Entity.DbFunctions.TruncateTime(p.tblBillMaster.BillDate) >= dateto.Date
-                           && p.tblBillMaster.BillingType.Equals("R") && p.tblBillMaster.OutletId == OutletId
+                           &&  ((p.tblBillMaster.BillingType == "Ac Hall" || p.tblBillMaster.BillingType == "Dine In Hall"))  && p.tblBillMaster.OutletId == OutletId
                           select new
                           {
                               ItemName = p.tblItem.Name,
@@ -133,7 +133,7 @@ namespace NibsMVC.Controllers
             var result = (from p in entites.tblBillDetails
                           where System.Data.Entity.DbFunctions.TruncateTime(p.tblBillMaster.BillDate) >= datefrom.Date &&
                            System.Data.Entity.DbFunctions.TruncateTime(p.tblBillMaster.BillDate) >= dateto.Date
-                           && p.tblBillMaster.BillingType.Equals("R") && p.tblBillMaster.OutletId == OutletId
+                           && ((p.tblBillMaster.BillingType == "Ac Hall" || p.tblBillMaster.BillingType == "Dine In Hall")) && p.tblBillMaster.OutletId == OutletId
                           select new
                           {
                               Vat = p.Vat,
@@ -169,7 +169,7 @@ namespace NibsMVC.Controllers
             var result = (from p in entites.tblBillDetails
                           where System.Data.Entity.DbFunctions.TruncateTime(p.tblBillMaster.BillDate) >= datefrom.Date &&
                            System.Data.Entity.DbFunctions.TruncateTime(p.tblBillMaster.BillDate) >= dateto.Date
-                           && p.tblBillMaster.BillingType.Equals("H") && p.tblBillMaster.OutletId == OutletId
+                           && p.tblBillMaster.BillingType.Equals("Door Delivery Hall") && p.tblBillMaster.OutletId == OutletId
                           select new
                           {
                               ItemName = p.tblItem.Name,
@@ -203,7 +203,7 @@ namespace NibsMVC.Controllers
             var result = (from p in entites.tblBillDetails
                           where System.Data.Entity.DbFunctions.TruncateTime(p.tblBillMaster.BillDate) >= datefrom.Date &&
                            System.Data.Entity.DbFunctions.TruncateTime(p.tblBillMaster.BillDate) >= dateto.Date
-                           && p.tblBillMaster.BillingType.Equals("H") && p.tblBillMaster.OutletId == OutletId
+                           && p.tblBillMaster.BillingType.Equals("Door Delivery Hall") && p.tblBillMaster.OutletId == OutletId
                           select new
                           {
                               Vat = p.Vat,
@@ -233,7 +233,7 @@ namespace NibsMVC.Controllers
             var result = (from p in entites.tblBillDetails
                           where System.Data.Entity.DbFunctions.TruncateTime(p.tblBillMaster.BillDate) >= datefrom.Date &&
                            System.Data.Entity.DbFunctions.TruncateTime(p.tblBillMaster.BillDate) >= dateto.Date
-                           && p.tblBillMaster.BillingType.Equals("H") && p.tblBillMaster.OutletId == OutletId
+                           && p.tblBillMaster.BillingType.Equals("Door Delivery Hall") && p.tblBillMaster.OutletId == OutletId
                           select new
                           {
                               ItemName = p.tblItem.Name,
@@ -267,7 +267,7 @@ namespace NibsMVC.Controllers
             var result = (from p in entites.tblBillDetails
                           where System.Data.Entity.DbFunctions.TruncateTime(p.tblBillMaster.BillDate) >= datefrom.Date &&
                            System.Data.Entity.DbFunctions.TruncateTime(p.tblBillMaster.BillDate) >= dateto.Date
-                           && p.tblBillMaster.BillingType.Equals("H") && p.tblBillMaster.OutletId == OutletId
+                           && p.tblBillMaster.BillingType.Equals("Door Delivery Hall") && p.tblBillMaster.OutletId == OutletId
                           select new
                           {
                               Vat = p.Vat,

@@ -105,7 +105,7 @@ namespace NibsMVC.Repository
                 model.NetAmount = item.NetAmount;
                 model.OutLetName = item.OutLetName;
                 model.ServiceCharge = item.ServiceCharge;
-                model.TableNo=item.TableNo.Value;
+                model.TableNo=item.TableNo;
                 if (item.TokenNO==null)
                 {
                     model.TokenNO =0;

@@ -469,7 +469,7 @@ namespace NibsMVC.Controllers
             List<OpenFood> openfood = new List<OpenFood>();
             int OutletId = xml.getOutletId();
             var billdata = (from p in db.tblBillMasters
-                            where p.BillingType == "R"
+                            where (p.BillingType == "Ac Hall" || p.BillingType == "Dine In Hall")
                             && p.OutletId == OutletId
                             select p).Take(30).OrderByDescending(a => a.BillId).ToList();
             foreach (var item in billdata)
@@ -551,7 +551,7 @@ namespace NibsMVC.Controllers
             foreach (var item in numbers)
             {
                 BillingModel model = new BillingModel();
-                model.TableNo = item.TableNo;
+                model.TableNo = item.TableNo.ToString();
 
                 list.Add(model);
             }
@@ -689,7 +689,7 @@ namespace NibsMVC.Controllers
             int oulte = getOutletId();
             var category = (from q in db.tblCategories where (from p in db.tblMenuOutlets where p.OutletId == oulte select p.CategoryId).Contains(q.CategoryId) select q).ToList();
             ViewBag.catnames = category;
-            var token = (from p in db.tblBillMasters where p.BillingType.Equals("T") select p.BillId).Max();
+            var token = (from p in db.tblBillMasters where p.BillingType.Equals("Take Away Hall") select p.BillId).Max();
             var tokendatas = (from q in db.tblBillMasters where q.BillId.Equals(token) select q).FirstOrDefault();
             var Curentdate = DateTime.Now.Date;
             int no;
@@ -740,7 +740,7 @@ namespace NibsMVC.Controllers
                                 tb.DiscountAmount = Convert.ToDecimal(mainitems[3]);
                             }
                             tb.NetAmount = Convert.ToDecimal(mainitems[4]);
-                            tb.TableNo = Convert.ToInt32(mainitems[5]);
+                            tb.TableNo = (mainitems[5]);
                             tb.CustomerName = mainitems[6].ToString();
                             tb.OutletId = Convert.ToInt32(oulte);
                             tb.BillingType = "R";
@@ -749,7 +749,7 @@ namespace NibsMVC.Controllers
                         }
                     }
                 }
-                int bilid = (from p in db.tblBillMasters where p.OutletId == oulte && p.BillingType.Equals("R") select p.BillId).Max();
+                int bilid = (from p in db.tblBillMasters where p.OutletId == oulte && (p.BillingType == "Ac Hall" || p.BillingType == "Dine In Hall") select p.BillId).Max();
                 string[] arr1 = model.detailsitems.Split(';');
                 string[] detaildata;
                 if (arr1.ToString() != string.Empty)
@@ -784,7 +784,7 @@ namespace NibsMVC.Controllers
 
         public ActionResult HomeDeliveryPrint(int id = 0)
         {
-            var data = (from p in db.tblBillMasters where p.BillId.Equals(id) && p.BillingType.Equals("H") select p).ToList();
+            var data = (from p in db.tblBillMasters where p.BillId.Equals(id) && p.BillingType.Equals("Door Delivery Hall") select p).ToList();
             List<BillingModel> list = new List<BillingModel>();
             foreach (var item in data)
             {
@@ -815,7 +815,7 @@ namespace NibsMVC.Controllers
                 if (role == "Outlet")
                 {
                     var billdata = (from p in db.tblBillMasters
-                                    where p.BillingType == "T"
+                                    where p.BillingType == "Take Away Hall"
                                     && p.OutletId == WebSecurity.CurrentUserId
                                     select p).ToList();
                     foreach (var item in billdata)
@@ -855,7 +855,7 @@ namespace NibsMVC.Controllers
                 {
                     var outltId = (from q in db.tblOperators where q.UserId == WebSecurity.CurrentUserId select q.OutletId).FirstOrDefault();
                     var billdata = (from p in db.tblBillMasters
-                                    where p.BillingType == "R"
+                                    where (p.BillingType == "Ac Hall" || p.BillingType == "Dine In Hall")
                                     && p.OutletId == outltId
                                     select p).ToList();
                     foreach (var item in billdata)
@@ -914,7 +914,7 @@ namespace NibsMVC.Controllers
         }
         public ActionResult TakePrint(int id = 0)
         {
-            var data = (from p in db.tblBillMasters where p.BillId.Equals(id) && p.BillingType.Equals("T") select p).ToList();
+            var data = (from p in db.tblBillMasters where p.BillId.Equals(id) && p.BillingType.Equals("Take Away Hall") select p).ToList();
             List<BillingModel> list = new List<BillingModel>();
             foreach (var item in data)
             {
@@ -1000,7 +1000,7 @@ namespace NibsMVC.Controllers
             int oulte = getOutletId();
             var category = (from q in db.tblCategories where (from p in db.tblMenuOutlets where p.OutletId == oulte select p.CategoryId).Contains(q.CategoryId) select q).ToList();
             ViewBag.catnames = category;
-            var token = (from p in db.tblBillMasters where p.BillingType.Equals("H") select p.BillId).Max();
+            var token = (from p in db.tblBillMasters where p.BillingType.Equals("Door Delivery Hall") select p.BillId).Max();
             var tokendatas = (from q in db.tblBillMasters where q.BillId.Equals(token) select q).FirstOrDefault();
             var Curentdate = DateTime.Now.Date;
             int no;
@@ -1046,14 +1046,14 @@ namespace NibsMVC.Controllers
                             tb.CustomerName = mainitems[6].ToString();
                             tb.Address = mainitems[7].ToString();
                             tb.OutletId = Convert.ToInt32(oulte);
-                            tb.TableNo = 0;
+                            tb.TableNo = "0";
                             tb.BillingType = "H";
                             db.tblBillMasters.Add(tb);
                             db.SaveChanges();
                         }
                     }
                 }
-                int bilid = (from p in db.tblBillMasters where p.BillingType == "H" select p.BillId).Max();
+                int bilid = (from p in db.tblBillMasters where p.BillingType == "Door Delivery Hall" select p.BillId).Max();
                 string[] arr1 = model.homedetailsitems.Split(';');
                 string[] detaildata;
                 if (arr1.ToString() != string.Empty)
@@ -1078,7 +1078,7 @@ namespace NibsMVC.Controllers
 
             }
             catch { }
-            var takebillid = (from p in db.tblBillMasters where p.OutletId == oulte && p.BillingType.Equals("H") select p.BillId).Max();
+            var takebillid = (from p in db.tblBillMasters where p.OutletId == oulte && p.BillingType.Equals("Door Delivery Hall") select p.BillId).Max();
             return RedirectToAction("HomeDeliveryPrint", "Billing", new { id = takebillid });
         }
 
@@ -1112,7 +1112,7 @@ namespace NibsMVC.Controllers
                 if (role == "Outlet")
                 {
                     var billdata = (from p in db.tblBillMasters
-                                    where p.BillingType == "H"
+                                    where p.BillingType == "Door Delivery Hall"
                                     && p.OutletId == WebSecurity.CurrentUserId
                                     select p).ToList();
                     foreach (var item in billdata)
@@ -1151,7 +1151,7 @@ namespace NibsMVC.Controllers
                 {
                     var outltId = (from q in db.tblOperators where q.UserId == WebSecurity.CurrentUserId select q.OutletId).FirstOrDefault();
                     var billdata = (from p in db.tblBillMasters
-                                    where p.BillingType == "R"
+                                    where (p.BillingType == "Ac Hall" || p.BillingType == "Dine In Hall")
                                     && p.OutletId == outltId
                                     select p).ToList();
                     foreach (var item in billdata)

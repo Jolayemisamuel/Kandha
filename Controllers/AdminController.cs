@@ -119,7 +119,7 @@ namespace NibsMVC.Controllers
         public ActionResult RestroBill()
         {
             AdminBillReportModel m = new AdminBillReportModel();
-            var billdata = (from p in db.tblBillMasters where  p.BillingType == "R" && p.OutletId !=0 select p).ToList();
+            var billdata = (from p in db.tblBillMasters where (p.BillingType == "Ac Hall" || p.BillingType == "Dine In Hall") && p.OutletId !=0 && p.BillDate == DateTime.Today select p).ToList();
             List<BillingModel> list = new List<BillingModel>();
             foreach (var item in billdata)
             {
@@ -132,7 +132,7 @@ namespace NibsMVC.Controllers
                 model.ServicChargeAmt = item.ServicChargesAmount;
                 model.DiscountAmount = item.DiscountAmount;
                 model.NetAmount = item.NetAmount;
-                model.TableNo = item.TableNo;
+                model.TableNo = item.TableNo.ToString();
                 model.Outletid = item.OutletId;
                 model.OutletName = (from p in db.tblOutlets where p.OutletId == item.OutletId select p.Name).FirstOrDefault();
                 foreach (var i in db.tblBillDetails.Where(a=>a.BillId==item.BillId).ToList())
@@ -164,7 +164,7 @@ namespace NibsMVC.Controllers
         public ActionResult TakeBills()
         {
             AdminBillReportModel m = new AdminBillReportModel();
-            var billdata = (from p in db.tblBillMasters where p.BillingType == "T" && p.OutletId != 0 select p).ToList();
+            var billdata = (from p in db.tblBillMasters where p.BillingType == "Take Away Hall" && p.OutletId != 0 && p.BillDate==DateTime.Today  select p).ToList();
             ViewBag.alloutletList = search.GetlistOfOutlets();
             List<BillingModel> list = new List<BillingModel>();
             foreach (var item in billdata)
@@ -204,7 +204,7 @@ namespace NibsMVC.Controllers
         [HttpPost]
         public ActionResult TakeBills(AdminBillReportModel model)
         {
-            return View(search.getSearchData(model, "T"));
+            return View(search.getSearchData(model, "Take Away Hall"));
         }
         //--------------------------Home Delivery Bills Reports of all Outlets------------//
 
@@ -232,7 +232,7 @@ namespace NibsMVC.Controllers
 
             //return View(list);
             AdminBillReportModel m = new AdminBillReportModel();
-            var billdata = (from p in db.tblBillMasters where p.BillingType == "H" && p.OutletId != 0 select p).ToList();
+            var billdata = (from p in db.tblBillMasters where p.BillingType == "Door Delivery Hall" && p.OutletId != 0 && p.BillDate == DateTime.Today select p).ToList();
             ViewBag.alloutletList = search.GetlistOfOutlets();
             List<BillingModel> list = new List<BillingModel>();
             foreach (var item in billdata)
@@ -274,7 +274,7 @@ namespace NibsMVC.Controllers
         [HttpPost]
         public ActionResult AllHomeDelivery(AdminBillReportModel model)
         {
-            return View(search.getSearchData(model,"H"));
+            return View(search.getSearchData(model, "Door Delivery Hall"));
         }
         //-------------------Operator Reports------------------------//
 

@@ -351,7 +351,7 @@ namespace NibsMVC.Repository
                 tb.OutletId = oulte;
                 _entities.tblBillMasters.Add(tb);
                 _entities.SaveChanges();
-                var Id = _entities.tblBillMasters.Where(o => o.OutletId == oulte && o.BillingType == "T").Select(x => x.BillId).Max();
+                var Id = _entities.tblBillMasters.Where(o => o.OutletId == oulte && o.BillingType == "Take Away Hall").Select(x => x.BillId).Max();
                 XDocument xd = XDocument.Load(Path);
                 var result = from item in xd.Descendants("Items")
                              where item.Element("UserId").Value == oulte.ToString()

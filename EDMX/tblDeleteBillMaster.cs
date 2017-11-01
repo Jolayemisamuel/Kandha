@@ -26,7 +26,7 @@ namespace NibsMVC.EDMX
         public decimal ServiceCharAmt { get; set; }
         public decimal DiscountAmount { get; set; }
         public decimal NetAmount { get; set; }
-        public Nullable<int> TableNo { get; set; }
+        public string TableNo { get; set; }
         public string CustomerName { get; set; }
         public int OutletId { get; set; }
         public string BillingType { get; set; }

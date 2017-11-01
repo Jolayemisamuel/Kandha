@@ -32,38 +32,37 @@ namespace NibsMVC.Controllers
         }
         public ActionResult Index()
         {
-            ///****** Script for SelectTopNRows command from SSMS  ******/
-//            SELECT*
-//            FROM[KOT].[dbo].[PriceListEntry]
-//        p
-//inner join AccountM a on  a.UID = p.AccountM_UID
-//inner join AccountMItems i on i.AccountM_UID = p.AccountMItems_UID
-//order by 1
-
-
-
-
-
-           var itemsKOT = (from p in dbKOT.VM_PAOItemsFood select p).ToList();
-            var itemsCount = (from p in db.tblItems select p).ToList().Count;
+            
+            var itemsKOT = (from p in dbKOT.PriceListEntries 
+                           join a in dbKOT.AccountMs  on p.AccountM_UID equals a.UID
+                           join i in dbKOT.AccountMItems on p.AccountMItems_UID equals i.AccountM_UID 
+                           select new {
+                               i.ItemCode ,
+                               i.ItemName,
+                               p.Price ,
+                               a.Description
+                           }
+                           ).ToList();
+            var itemsCount = (from p in db.tblBasePriceItems  select p).ToList().Count;
             if (itemsKOT.Count > itemsCount)
             {
                 foreach (var item in itemsKOT)
                 {
-                    var itemCategoryId = (from p in db.tblCategories where p.Name == item.ItemSubGroup select p.CategoryId).FirstOrDefault();
+                    var items = (from p in db.tblItems where p.Name  == item.ItemName && p.ItemCode ==item.ItemCode  select p).FirstOrDefault();
 
-                    var itemcheck = (from p in db.tblItems where p.Name == item.ItemName && p.CategoryId == itemCategoryId select p).SingleOrDefault();
+                    var itemcheck = (from p in db.tblBasePriceItems  where p.ItemId  == items.ItemId  && p.CategoryId == items.CategoryId && p.Type == item.Description   select p).SingleOrDefault();
                     if (itemcheck == null)
                     {
-                        tblItem tb = new tblItem();
-                        tb.CategoryId = itemCategoryId;
-                        tb.DepartmentId = 2;
-                        tb.Description = item.AdditionalDetails;
-                        tb.ItemCode = item.ItemCode;
-                        tb.ItemImage = "";
-                        tb.Name = item.ItemName;
-                        tb.Active = true;
-                        db.tblItems.Add(tb);
+                        tblBasePriceItem tb = new tblBasePriceItem();
+                        tb.CategoryId = items.CategoryId;
+                        tb.ItemId  = items.ItemId ;
+                        tb.FullPrice  = item.Price ;
+                        tb.Type  = item.Description ;
+                        if (item.Description == "Ac Hall")
+                            tb.Vat = 18;
+                        else
+                            tb.Vat = 12;
+                        db.tblBasePriceItems.Add(tb);
                         db.SaveChanges();
                     }
 

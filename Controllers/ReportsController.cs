@@ -170,7 +170,7 @@ namespace NibsMVC.Controllers
                 List<tblBillMaster> list = new List<tblBillMaster>();
                 if (model.TokenNo == null)
                 {
-                    list = db.tblBillMasters.Where(a => System.Data.Entity.DbFunctions.TruncateTime(a.BillDate) >= from.Date && System.Data.Entity.DbFunctions.TruncateTime(a.BillDate) <= to.Date && a.OutletId == OutletId && a.BillingType == "H").ToList();
+                    list = db.tblBillMasters.Where(a => System.Data.Entity.DbFunctions.TruncateTime(a.BillDate) >= from.Date && System.Data.Entity.DbFunctions.TruncateTime(a.BillDate) <= to.Date && a.OutletId == OutletId && a.BillingType == "Door Delivery Hall").ToList();
                 }
                 else
                 {
@@ -178,7 +178,7 @@ namespace NibsMVC.Controllers
                         && System.Data.Entity.DbFunctions.TruncateTime(a.BillDate) <= to.Date
                         && a.OutletId == OutletId
                         && a.TokenNo == model.TokenNo
-                        && a.BillingType == "H").ToList();
+                        && a.BillingType == "Door Delivery Hall").ToList();
                 }
 
                 m.getbills = list;
@@ -203,7 +203,7 @@ namespace NibsMVC.Controllers
                 List<tblBillMaster> list = new List<tblBillMaster>();
                 if (model.TokenNo == null)
                 {
-                    list = db.tblBillMasters.Where(a => EntityFunctions.TruncateTime(a.BillDate) >= from.Date && EntityFunctions.TruncateTime(a.BillDate) <= to.Date && a.OutletId == OutletId && a.BillingType == "T").ToList();
+                    list = db.tblBillMasters.Where(a => EntityFunctions.TruncateTime(a.BillDate) >= from.Date && EntityFunctions.TruncateTime(a.BillDate) <= to.Date && a.OutletId == OutletId && a.BillingType == "Take Away Hall").ToList();
                 }
                 else
                 {
@@ -211,7 +211,7 @@ namespace NibsMVC.Controllers
                         && EntityFunctions.TruncateTime(a.BillDate) <= to.Date
                         && a.OutletId == OutletId
                         && a.TokenNo == model.TokenNo
-                        && a.BillingType == "T").ToList();
+                        && a.BillingType == "Take Away Hall").ToList();
                 }
 
                 m.getbills = list;
@@ -237,7 +237,7 @@ namespace NibsMVC.Controllers
                 //var Billdata = (from p in db.tblBillMasters where p.BillDate.Date >= model.FromDate && p.BillDate.Date <= model.ToDate && p.OutletId == Outletids && p.BillingType == "R" select p).ToList();
                 //var Billdata = db.tblBillMasters.Where(a => EntityFunctions.TruncateTime(a.BillDate) >= from.Date && EntityFunctions.TruncateTime(a.BillDate) <= to.Date && a.OutletId == Outletids && a.BillingType == "R").ToList();
                 SearchReportsModel m = new SearchReportsModel();
-                List<tblBillMaster> list = db.tblBillMasters.Where(a => System.Data.Entity.DbFunctions.TruncateTime(a.BillDate) >= from.Date && System.Data.Entity.DbFunctions.TruncateTime(a.BillDate) <= to.Date && a.OutletId == Outletids && a.BillingType == "R").ToList();
+                List<tblBillMaster> list = db.tblBillMasters.Where(a => System.Data.Entity.DbFunctions.TruncateTime(a.BillDate) >= from.Date && System.Data.Entity.DbFunctions.TruncateTime(a.BillDate) <= to.Date && a.OutletId == Outletids && (a.BillingType == "Ac Hall" || a.BillingType == "Dine In Hall")).ToList();
 
                 m.getbills = list;
                 return View(m);
