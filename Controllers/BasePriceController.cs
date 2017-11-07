@@ -15,6 +15,7 @@ namespace NibsMVC.Controllers
         //
         // GET: /BasePrice/
         NIBSEntities db = new NIBSEntities();
+        KOTEntities dbKOT = new KOTEntities();
         AddItemRepository dis = new AddItemRepository();
 
         
@@ -31,6 +32,45 @@ namespace NibsMVC.Controllers
         }
         public ActionResult Index()
         {
+            ///****** Script for SelectTopNRows command from SSMS  ******/
+//            SELECT*
+//            FROM[KOT].[dbo].[PriceListEntry]
+//        p
+//inner join AccountM a on  a.UID = p.AccountM_UID
+//inner join AccountMItems i on i.AccountM_UID = p.AccountMItems_UID
+//order by 1
+
+
+
+
+
+           var itemsKOT = (from p in dbKOT.VM_PAOItemsFood select p).ToList();
+            var itemsCount = (from p in db.tblItems select p).ToList().Count;
+            if (itemsKOT.Count > itemsCount)
+            {
+                foreach (var item in itemsKOT)
+                {
+                    var itemCategoryId = (from p in db.tblCategories where p.Name == item.ItemSubGroup select p.CategoryId).FirstOrDefault();
+
+                    var itemcheck = (from p in db.tblItems where p.Name == item.ItemName && p.CategoryId == itemCategoryId select p).SingleOrDefault();
+                    if (itemcheck == null)
+                    {
+                        tblItem tb = new tblItem();
+                        tb.CategoryId = itemCategoryId;
+                        tb.DepartmentId = 2;
+                        tb.Description = item.AdditionalDetails;
+                        tb.ItemCode = item.ItemCode;
+                        tb.ItemImage = "";
+                        tb.Name = item.ItemName;
+                        tb.Active = true;
+                        db.tblItems.Add(tb);
+                        db.SaveChanges();
+                    }
+
+                }
+            }
+
+
             var BaseData = (from p in db.tblBasePriceItems select p).ToList();
             List<BasePriceModel> list = new List<BasePriceModel>();
             foreach (var item in BaseData)
@@ -38,8 +78,8 @@ namespace NibsMVC.Controllers
                 BasePriceModel model = new BasePriceModel();
                 model.CategoryIds = item.CategoryId;
                 model.ItemId = item.ItemId;
-                model.FullPrice = item.HalfPrice;
-                model.HalfPrice = item.HalfPrice;
+                model.FullPrice = item.FullPrice ;
+                //model.HalfPrice = item.HalfPrice;
                 model.BasePriceId = item.BasePriceId;
                 model.Vat = item.Vat;
                 list.Add(model);
@@ -52,12 +92,15 @@ namespace NibsMVC.Controllers
 
             IEnumerable<SelectListItem> list = new SelectList(new[] 
                                       {
-                                        new { Value = "AC", Text = "AC" },
-                                        new { Value = "Non AC", Text = "Non AC" },
-   
-                                      }, "Value", "Text", "AC");
+                                        new { Value = "Ac Hall", Text = "Ac Hall" },
+                                        new { Value = "Dine In Hall", Text = "Dine In Hall" },
+                                         new { Value = "Door Delivery Hall", Text = "Door Delivery Hall" },
+                                          new { Value = "Take Away Hall", Text = "Take Away Hall" },
+                                            new { Value = "Door Delivery Hall", Text = "Door Delivery Hall" },
+                                               new { Value = "Counter Hall", Text = "Counter Hall" },
+                                      }, "Value", "Text", "Ac Hall");
 
-            ViewBag.AcType = new SelectList(list, "Value", "Text"); ;
+            ViewBag.AcType = new SelectList(list, "Value", "Text"); 
 
             IEnumerable<SelectListItem> Categorylist = (from q in db.tblCategories where q.Active == true select q).AsEnumerable().Select(q => new SelectListItem() { Text = q.Name, Value = q.CategoryId.ToString() });
             ViewBag.Categorylists = new SelectList(Categorylist, "Value", "Text");
@@ -67,7 +110,7 @@ namespace NibsMVC.Controllers
             if (Id != 0 && AcType != null)
             {
                 model.CategoryId = Id;
-                model.AcType = AcType;
+                model.Type = AcType;
                 List<GetAllItemList> lst = dis.BaseItemwise(Id, AcType);
                 model.getAllItemList = lst;
             }
@@ -94,7 +137,7 @@ namespace NibsMVC.Controllers
             {
                 GetAllItemList list = new GetAllItemList();
                 list.FullPrice = item.FullPrice;
-                list.HalfPrice = item.HalfPrice;
+                //list.HalfPrice = item.HalfPrice;
                 list.ItemId = item.ItemId;
                 list.ItemName = item.tblItem.Name;
                 lst.Add(list);
@@ -132,7 +175,7 @@ namespace NibsMVC.Controllers
                                            p.CategoryId == model.CategoryId
                                            select p).SingleOrDefault();
                     tb.FullPrice = model.EditFullPrice[i];
-                    tb.HalfPrice = model.EditHalfPrice[i];
+                    //tb.HalfPrice = model.EditHalfPrice[i];
                     db.SaveChanges();
                     TempData["perror"] = "Record Updated Successfully.....";
                 }
@@ -154,30 +197,30 @@ namespace NibsMVC.Controllers
                 {
                     int ItemId = model.EditItemId[i];
 
-                    var tb = (from p in db.tblBasePriceItems where p.ItemId == ItemId && p.CategoryId == model.CategoryId && p.AcType==model.AcType select p).SingleOrDefault();
+                    var tb = (from p in db.tblBasePriceItems where p.ItemId == ItemId && p.CategoryId == model.CategoryId && p.Type==model.Type select p).SingleOrDefault();
                     if (tb == null)
                     {
-                        if (model.AcType == "AC")
+                        if (model.Type == "Ac Hall")
                         {
                             tblBasePriceItem tbl = new tblBasePriceItem();
                             tbl.ItemId = model.EditItemId[i];
                             tbl.FullPrice = model.EditFullPrice[i];
-                            tbl.HalfPrice = model.EditHalfPrice[i];
+                            //tbl.HalfPrice = model.EditHalfPrice[i];
                             tbl.Vat = 18;//Convert.ToDecimal(model.EditVat[i]);
                             tbl.CategoryId = model.CategoryId;
-                            tbl.AcType = "AC";
+                            tbl.Type = model.Type;
                             db.tblBasePriceItems.Add(tbl);
                             db.SaveChanges();
                         }
-                        else if (model.AcType == "Non AC")
+                        else 
                         {
                             tblBasePriceItem tblnon = new tblBasePriceItem();
                             tblnon.ItemId = model.EditItemId[i];
                             tblnon.FullPrice = model.EditFullPrice[i];
-                            tblnon.HalfPrice = model.EditHalfPrice[i];
+                            //tblnon.HalfPrice = model.EditHalfPrice[i];
                             tblnon.Vat = 12;//Convert.ToDecimal(model.EditVat[i]);
                             tblnon.CategoryId = model.CategoryId;
-                            tblnon.AcType = "Non AC";
+                            tblnon.Type = model.Type ;
                             db.tblBasePriceItems.Add(tblnon);
                             db.SaveChanges();
                         }
@@ -185,21 +228,21 @@ namespace NibsMVC.Controllers
                     else
                     {
 
-                        if (model.AcType == "AC")
+                        if (model.Type == "Ac Hall")
                         {
-                            var tbAC = (from p in db.tblBasePriceItems where p.ItemId == ItemId && p.CategoryId == model.CategoryId && p.AcType == "AC" select p).SingleOrDefault();
-                            tbAC.AcType = model.AcType;
+                            var tbAC = (from p in db.tblBasePriceItems where p.ItemId == ItemId && p.CategoryId == model.CategoryId && p.Type == model.Type select p).SingleOrDefault();
+                            tbAC.Type = model.Type;
                             tbAC.FullPrice = model.EditFullPrice[i];
-                            tbAC.HalfPrice = model.EditHalfPrice[i];
+                            //tbAC.HalfPrice = model.EditHalfPrice[i];
                             tbAC.Vat = 18;//Convert.ToDecimal(model.EditVat[i]);
                             db.SaveChanges();
                         }
                         else
                         {
-                            var tbNonAC = (from p in db.tblBasePriceItems where p.ItemId == ItemId && p.CategoryId == model.CategoryId && p.AcType == "Non AC" select p).SingleOrDefault();
-                            tbNonAC.AcType = model.AcType;
+                            var tbNonAC = (from p in db.tblBasePriceItems where p.ItemId == ItemId && p.CategoryId == model.CategoryId && p.Type == model.Type select p).SingleOrDefault();
+                            tbNonAC.Type = model.Type;
                             tbNonAC.FullPrice = model.EditFullPrice[i];
-                            tbNonAC.HalfPrice = model.EditHalfPrice[i];
+                            //tbNonAC.HalfPrice = model.EditHalfPrice[i];
                             tbNonAC.Vat = 12;//Convert.ToDecimal(model.EditVat[i]);
                             db.SaveChanges();
                         }
@@ -233,7 +276,7 @@ namespace NibsMVC.Controllers
                     int id = Convert.ToInt32(arr[0]);
                     tblBasePriceItem tbl = db.tblBasePriceItems.Where(a => a.BasePriceId == id).FirstOrDefault();
                     tbl.FullPrice = Convert.ToDecimal(arr[1].Replace('^', '.'));
-                    tbl.HalfPrice = Convert.ToDecimal(arr[2].Replace('^', '.'));
+                   // tbl.HalfPrice = Convert.ToDecimal(arr[2].Replace('^', '.'));
                     db.SaveChanges();
                 }
                 TempData["perror"] = "Edit Successfully !!";

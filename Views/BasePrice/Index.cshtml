@@ -97,9 +97,10 @@
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Item Name</th>
-                                                                        <th>Full Price</th>
-                                                                        <th>Half Price</th>
-                                                                        <th>Vat</th>
+                                                                        <th>Price</th>
+                                                                        @*<th>Half Price</th>*@
+                                                                        <th>GST</th>
+                                                                        <th>Type</th>
 
                                                                     </tr>
                                                                 </thead>
@@ -111,9 +112,9 @@
                                         <tr>
                                             <td>@i.tblItem.Name</td>
                                             <td>@i.FullPrice</td>
-                                            <td>@i.HalfPrice</td>
+                                            @*<td>@i.HalfPrice</td>*@
                                             <td>@i.Vat</td>
-
+                                            <td>@i.Type</td>
                                         </tr>
                                     }
                                                                     }

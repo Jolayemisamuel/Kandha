@@ -190,9 +190,9 @@ namespace NibsMVC.Repository
                            new XElement("FullQty", "0"),
                            new XElement("HalfQty", "0"),
                            new XElement("Fullprice", Prices.FullPrice),
-                           new XElement("HalfPrice", Prices.HalfPrice),
+                          // new XElement("HalfPrice", Prices.HalfPrice),
                             new XElement("Amount", RemainingAmount),
-                           new XElement("VatAmt", Item.Vat),
+                           //new XElement("VatAmt", Item.Vat),
                             new XElement("VatAmountCharges", remaingvatamtchrg),
                              new XElement("OfferQty", Qty));
                             xd.Element("Item").Add(newElement);
@@ -395,7 +395,7 @@ namespace NibsMVC.Repository
                                new XElement("FullQty", "0"),
                                new XElement("HalfQty", "0"),
                                new XElement("Fullprice", Prices.FullPrice),
-                               new XElement("HalfPrice", Prices.HalfPrice),
+                              // new XElement("HalfPrice", Prices.HalfPrice),
                                 new XElement("Amount", RemainingAmount),
                                new XElement("VatAmt", Item.Vat),
                                 new XElement("VatAmountCharges", remaingvatamtchrg2),

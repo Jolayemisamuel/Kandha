@@ -22,7 +22,7 @@
         <EntityTypeShape EntityType="NIBSModel.tbl_OutletReturnItem" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="NIBSModel.tbl_RawMaterials" Width="1.5" PointX="3" PointY="23.25" IsExpanded="false" />
         <EntityTypeShape EntityType="NIBSModel.tbl_ServiceTax" Width="1.5" PointX="2.75" PointY="3.75" />
-        <EntityTypeShape EntityType="NIBSModel.tblBasePriceItem" Width="1.5" PointX="8.25" PointY="25.125" IsExpanded="false" />
+        <EntityTypeShape EntityType="NIBSModel.tblBasePriceItem" Width="1.5" PointX="8.25" PointY="25.125" IsExpanded="true" />
         <EntityTypeShape EntityType="NIBSModel.tblCategory" Width="1.5" PointX="0.75" PointY="21" IsExpanded="false" />
         <EntityTypeShape EntityType="NIBSModel.tblDeleteBillMaster" Width="1.5" PointX="3" PointY="16.625" IsExpanded="false" />
         <EntityTypeShape EntityType="NIBSModel.tblDeletedetail" Width="1.5" PointX="5.25" PointY="21" IsExpanded="false" />

@@ -38,14 +38,14 @@ namespace NibsMVC.Controllers
                     {
                         sb.Append("<tr><td><input type='checkbox' id='" + item.ItemId + "' name='ItemId' checked value='" + item.ItemId + "' class='checkbox'>" + item.ItemName + "</td>");
                         sb.Append("<td><input type='textbox' class='form-control'name='FullPrice' style='margin:2px 6px'value='" + item.FullPrice + "' id='" + item.ItemId + "' ></td>");
-                        sb.Append("<td><input type='textbox' class='form-control' name='HalfPrice' style='margin:2px 6px' value='" + item.HalfPrice + "'  id='" + item.ItemId + "' >");
+                        //sb.Append("<td><input type='textbox' class='form-control' name='HalfPrice' style='margin:2px 6px' value='" + item.HalfPrice + "'  id='" + item.ItemId + "' >");
                         sb.Append("<input type='hidden' name='BasePriceId' value='" + item.BasePriceId + "'/></td></tr>");
                     }
                     else
                     {
                         sb.Append("<tr><td><input type='checkbox' id='" + item.ItemId + "' name='ItemId' value='" + item.ItemId + "' class='checkbox'>" + item.ItemName + "</td>");
                         sb.Append("<td><input type='textbox' class='form-control'name='FullPrice' style='margin:2px 6px'value='" + item.FullPrice + "' id='" + item.ItemId + "' readonly></td>");
-                        sb.Append("<td><input type='textbox' class='form-control' name='HalfPrice' style='margin:2px 6px' value='" + item.HalfPrice + "'  id='" + item.ItemId + "' readonly>");
+                        //sb.Append("<td><input type='textbox' class='form-control' name='HalfPrice' style='margin:2px 6px' value='" + item.HalfPrice + "'  id='" + item.ItemId + "' readonly>");
                         sb.Append("<input type='hidden' name='BasePriceId' value='" + item.BasePriceId + "'/></td></tr>");
                     }
 

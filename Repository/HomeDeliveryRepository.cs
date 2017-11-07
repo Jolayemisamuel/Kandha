@@ -67,45 +67,45 @@ namespace NibsMVC.Repository
                         select item;
             if (Type == "Half")
             {
-                if (items.Count() > 0)
-                {
-                    foreach (XElement itemElement in items)
-                    {
-                        int Half = Convert.ToInt32(Qty) + Convert.ToInt32(itemElement.Element("HalfQty").Value);
-                        decimal TotalAmount = Convert.ToDecimal(itemElement.Element("TotalAmount").Value) + Convert.ToDecimal(result.HalfPrice);
-                        var vatamtchrg = (TotalAmount * Convert.ToDecimal(Convert.ToDecimal(result.Vat)) / 100);
-                        itemElement.SetElementValue("UserId", oulte);
-                        itemElement.SetElementValue("ItemId", result.ItemId);
-                        itemElement.SetElementValue("ItemName", itemElement.Element("ItemName").Value);
-                        itemElement.SetElementValue("FullQty", itemElement.Element("FullQty").Value);
-                        itemElement.SetElementValue("HalfQty", Half);
-                        itemElement.SetElementValue("HalfPrice", result.HalfPrice);
-                        itemElement.SetElementValue("FullPrice", result.FullPrice);
-                        itemElement.SetElementValue("Vat", result.Vat);
-                        itemElement.SetElementValue("TotalAmount", TotalAmount);
-                        itemElement.SetElementValue("VatAmt", vatamtchrg);
-                        itemElement.SetElementValue("OfferQty", "0");
-                        xd.Save(Path);
-                    }
-                }
-                else
-                {
-                    var newElement = new XElement("Items",
-                         new XElement("UserId", oulte),
-                          new XElement("ItemId", result.ItemId),
-                         new XElement("ItemName", result.tblItem.Name),
-                         new XElement("FullQty", "0"),
-                         new XElement("HalfQty", Qty),
-                          new XElement("HalfPrice", result.HalfPrice),
-                           new XElement("FullPrice", result.FullPrice),
-                            new XElement("Vat", result.Vat),
-                            new XElement("TotalAmount", result.HalfPrice*(Convert.ToDecimal(Qty))),
-                              new XElement("VatAmt", Convert.ToDecimal(result.HalfPrice) * Convert.ToDecimal(result.Vat) / 100),
-                              new XElement("OfferQty", "0"));
-                    xd.Element("Item").Add(newElement);
-                    xd.Save(Path);
-                }
-                UpdateKotXmlData(Path, KotFilePath, TokenNo, result.tblItem.Name, "0", Qty);
+                //if (items.Count() > 0)
+                //{
+                //    foreach (XElement itemElement in items)
+                //    {
+                //        int Half = Convert.ToInt32(Qty) + Convert.ToInt32(itemElement.Element("HalfQty").Value);
+                //        decimal TotalAmount = Convert.ToDecimal(itemElement.Element("TotalAmount").Value);// + Convert.ToDecimal(result.HalfPrice);
+                //        var vatamtchrg = (TotalAmount * Convert.ToDecimal(Convert.ToDecimal(result.Vat)) / 100);
+                //        itemElement.SetElementValue("UserId", oulte);
+                //        itemElement.SetElementValue("ItemId", result.ItemId);
+                //        itemElement.SetElementValue("ItemName", itemElement.Element("ItemName").Value);
+                //        itemElement.SetElementValue("FullQty", itemElement.Element("FullQty").Value);
+                //        itemElement.SetElementValue("HalfQty", Half);
+                //        //itemElement.SetElementValue("HalfPrice", result.HalfPrice);
+                //        itemElement.SetElementValue("FullPrice", result.FullPrice);
+                //        itemElement.SetElementValue("Vat", result.Vat);
+                //        itemElement.SetElementValue("TotalAmount", TotalAmount);
+                //        itemElement.SetElementValue("VatAmt", vatamtchrg);
+                //        itemElement.SetElementValue("OfferQty", "0");
+                //        xd.Save(Path);
+                //    }
+                //}
+                //else
+                //{
+                //    var newElement = new XElement("Items",
+                //         new XElement("UserId", oulte),
+                //          new XElement("ItemId", result.ItemId),
+                //         new XElement("ItemName", result.tblItem.Name),
+                //         new XElement("FullQty", "0"),
+                //         new XElement("HalfQty", Qty),
+                //          //new XElement("HalfPrice", result.HalfPrice),
+                //           new XElement("FullPrice", result.FullPrice),
+                //            //new XElement("Vat", result.Vat),
+                //            new XElement("TotalAmount", result.HalfPrice * (Convert.ToDecimal(Qty))),//
+                //              new XElement("VatAmt", Convert.ToDecimal(result.HalfPrice) * Convert.ToDecimal(result.Vat) / 100),// //
+                //              new XElement("OfferQty", "0"));
+                //    xd.Element("Item").Add(newElement);
+                //    xd.Save(Path);
+                //}
+                //UpdateKotXmlData(Path, KotFilePath, TokenNo, result.tblItem.Name, "0", Qty);
             }
             else
             {
@@ -123,7 +123,7 @@ namespace NibsMVC.Repository
                         itemElement.SetElementValue("ItemName", itemElement.Element("ItemName").Value);
                         itemElement.SetElementValue("FullQty", Full);
                         itemElement.SetElementValue("HalfQty", itemElement.Element("HalfQty").Value);
-                        itemElement.SetElementValue("HalfPrice", result.HalfPrice);
+                       // itemElement.SetElementValue("HalfPrice", result.HalfPrice);
                         itemElement.SetElementValue("FullPrice", result.FullPrice);
                         itemElement.SetElementValue("Vat", result.Vat);
                         itemElement.SetElementValue("TotalAmount", TotalAmount);
@@ -140,11 +140,11 @@ namespace NibsMVC.Repository
                          new XElement("ItemName", result.tblItem.Name),
                          new XElement("FullQty", Qty),
                          new XElement("HalfQty", "0"),
-                          new XElement("HalfPrice", result.HalfPrice),
+                          //new XElement("HalfPrice", result.HalfPrice),
                            new XElement("FullPrice", result.FullPrice),
                             new XElement("Vat", result.Vat),
                              new XElement("TotalAmount", result.FullPrice * (Convert.ToDecimal(Qty))),
-                              new XElement("VatAmt", Convert.ToDecimal(result.FullPrice) * Convert.ToDecimal(result.Vat) / 100),
+                              new XElement("VatAmt", Convert.ToDecimal(result.FullPrice) * Convert.ToDecimal(result.Vat) / 100), 
                               new XElement("OfferQty", "0"));
 
                     xd.Element("Item").Add(newElement);

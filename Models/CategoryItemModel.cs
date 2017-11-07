@@ -60,7 +60,7 @@ namespace NibsMVC.Models
     {
         public int ItemId { get; set; }
         public string ItemName { get; set; }
-        public decimal HalfPrice { get; set; }
+        //public decimal HalfPrice { get; set; }
         public decimal FullPrice { get; set; }
         public bool Assigned { get; set; }
         public int BasePriceId { get; set; }

@@ -23,9 +23,8 @@ namespace NibsMVC.EDMX
         public int CategoryId { get; set; }
         public int ItemId { get; set; }
         public decimal FullPrice { get; set; }
-        public decimal HalfPrice { get; set; }
+        public string Type { get; set; }
         public decimal Vat { get; set; }
-        public string AcType { get; set; }
     
         public virtual tblCategory tblCategory { get; set; }
         public virtual tblItem tblItem { get; set; }

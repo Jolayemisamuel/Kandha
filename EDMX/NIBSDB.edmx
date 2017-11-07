@@ -253,9 +253,8 @@
           <Property Name="CategoryId" Type="int" Nullable="false" />
           <Property Name="ItemId" Type="int" Nullable="false" />
           <Property Name="FullPrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="HalfPrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="Vat" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="AcType" Type="varchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="tblBillDetails">
           <Key>
@@ -2452,12 +2451,11 @@
           <Property Name="CategoryId" Type="Int32" Nullable="false" />
           <Property Name="ItemId" Type="Int32" Nullable="false" />
           <Property Name="FullPrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="HalfPrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Vat" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <NavigationProperty Name="tblCategory" Relationship="NIBSModel.FK_tblBasePriceItems_tblCategory" FromRole="tblBasePriceItem" ToRole="tblCategory" />
           <NavigationProperty Name="tblItem" Relationship="NIBSModel.FK_tblBasePriceItems_tblItem" FromRole="tblBasePriceItem" ToRole="tblItem" />
           <NavigationProperty Name="tblMenuOutlets" Relationship="NIBSModel.FK_tblMenuOutlet_tblBasePriceItems" FromRole="tblBasePriceItem" ToRole="tblMenuOutlet" />
-          <Property Name="AcType" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Vat" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="tblCategory">
           <Key>
@@ -4113,9 +4111,8 @@
           <EntitySetMapping Name="tblBasePriceItems">
             <EntityTypeMapping TypeName="NIBSModel.tblBasePriceItem">
               <MappingFragment StoreEntitySet="tblBasePriceItems">
-                <ScalarProperty Name="AcType" ColumnName="AcType" />
                 <ScalarProperty Name="Vat" ColumnName="Vat" />
-                <ScalarProperty Name="HalfPrice" ColumnName="HalfPrice" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="FullPrice" ColumnName="FullPrice" />
                 <ScalarProperty Name="ItemId" ColumnName="ItemId" />
                 <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />

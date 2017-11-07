@@ -125,10 +125,10 @@ namespace NibsMVC.Repository
                           {
                               ItemId = p.ItemId,
                               Name = p.Name,
-                              Vat = (q.AcType == null) ? 0 : (q.AcType == "AC") ? 18 : 12 , //(q.Vat == null) ? 0 : q.Vat,
+                              //Vat = (q.AcType == null) ? 0 : (q.AcType == "AC") ? 18 : 12 , //(q.Vat == null) ? 0 : q.Vat,
                               FullPrice = (q.FullPrice == null) ? 0 : q.FullPrice,
-                              HalfPrice = (q.HalfPrice == null) ? 0 : q.HalfPrice,
-                              AcType = (q.AcType == null) ? "" : q.AcType,
+                              //HalfPrice = (q.HalfPrice == null) ? 0 : q.HalfPrice,
+                              AcType = (q.Type == null) ? "" : q.Type,
                           });
             List<GetAllItemList> lst = new List<GetAllItemList>();
             foreach (var item in result)
@@ -137,10 +137,10 @@ namespace NibsMVC.Repository
                 {
                 GetAllItemList model = new GetAllItemList();
                 model.FullPrice = item.FullPrice;
-                model.HalfPrice = item.HalfPrice;
+                //model.HalfPrice = item.HalfPrice;
                 model.ItemId = item.ItemId;
                 model.ItemName = item.Name;
-                model.Vat = Convert.ToDecimal(item.Vat);
+                //model.Vat = Convert.ToDecimal(item.Vat);
                 lst.Add(model);
                 }
             }
@@ -158,7 +158,7 @@ namespace NibsMVC.Repository
                          {
                              ItemId=q.ItemId,
                              ItemName=q.Name,
-                             Half=p.HalfPrice,
+                             //Half=p.HalfPrice,
                              Full=p.FullPrice,
                              BasePriceId=p.BasePriceId
                          }).ToList();
@@ -170,7 +170,7 @@ namespace NibsMVC.Repository
                               && p.OutletId == OutletId select p.ItemId).ToList();
                 MenuAssignItemsModel model = new MenuAssignItemsModel();
                 model.FullPrice = item.Full;
-                model.HalfPrice = item.Half;
+                //model.HalfPrice = item.Half;
                 model.ItemId = item.ItemId;
                 model.ItemName = item.ItemName;
                 if (ItemId.Count>0)
@@ -212,7 +212,7 @@ namespace NibsMVC.Repository
         public string GetListofpriceitems(int id)
         {
             var priceitem = (from q in db.tblBasePriceItems where q.ItemId.Equals(id) select q).FirstOrDefault();
-            string price = priceitem.FullPrice + "-" + priceitem.HalfPrice;
+            string price = priceitem.FullPrice.ToString ();//+ "-" + priceitem.HalfPrice;
             return price;
         }
 
@@ -240,7 +240,7 @@ namespace NibsMVC.Repository
         public string billscollectin(int id)
         {
             var bilitems = (from p in db.tblBasePriceItems where p.ItemId.Equals(id) select p).FirstOrDefault();
-            string items = bilitems.FullPrice + "-" + bilitems.HalfPrice + "-" + bilitems.Vat;
+            string items = bilitems.FullPrice.ToString() ;// + "-" + bilitems.HalfPrice + "-" + bilitems.Vat;
             return items;
         }
 

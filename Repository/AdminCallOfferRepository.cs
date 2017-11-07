@@ -292,7 +292,7 @@ namespace NibsMVC.Repository
                          new XElement("FullQty", Free),
                          new XElement("HalfQty", "0"),
                          new XElement("Fullprice", Prices.FullPrice),
-                         new XElement("HalfPrice", Prices.HalfPrice),
+                         //new XElement("HalfPrice", Prices.HalfPrice),
                           new XElement("Amount", "0"),
                          new XElement("VatAmt", "0"),
                           new XElement("VatAmountCharges", "0"),
@@ -313,9 +313,9 @@ namespace NibsMVC.Repository
                          new XElement("FullQty", Free),
                          new XElement("HalfQty", "0"),
                          new XElement("Fullprice", Prices.FullPrice),
-                         new XElement("HalfPrice", Prices.HalfPrice),
+                         //new XElement("HalfPrice", Prices.HalfPrice),
                           new XElement("Amount", RemainingAmount),
-                         new XElement("VatAmt", Item.Vat),
+                         //new XElement("VatAmt", Item.Vat),
                           new XElement("VatAmountCharges", remaingvatamtchrg),
                            new XElement("OfferQty", freeqty));
                             xd.Element("Item").Add(newElement);
@@ -614,7 +614,7 @@ namespace NibsMVC.Repository
                                  where p.ItemId == freeItemId.ItemID
                                  select new
                                  {
-                                     HalfPrice = p.HalfPrice,
+                                     //HalfPrice = p.HalfPrice,
                                      FullPrice = p.FullPrice
                                  }).FirstOrDefault();
                     var freeitem = (from item in xd.Descendants("Items")
@@ -717,9 +717,9 @@ namespace NibsMVC.Repository
                      new XElement("FullQty", "0"),
                      new XElement("HalfQty", "0"),
                      new XElement("Fullprice", Price.FullPrice),
-                     new XElement("HalfPrice", Price.HalfPrice),
+                    // new XElement("HalfPrice", Price.HalfPrice),
                       new XElement("Amount", RemainingAmount),
-                     new XElement("VatAmt", Item.Vat),
+                     //new XElement("VatAmt", Item.Vat),
                       new XElement("VatAmountCharges", remaingvatamtchrg),
                        new XElement("OfferQty", freeItemId.ItemQty));
                     xd.Element("Item").Add(newElement);
