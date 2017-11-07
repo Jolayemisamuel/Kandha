@@ -35,6 +35,7 @@ namespace NibsMVC.Repository
                 //             select p.Element("TableNo").Value;
                 BillTableModel model = new BillTableModel();
                 model.TableNo = item.TableNo.ToString();
+                model.AcType = item.AcType.ToString();
                 List.Add(model);
             }
             return List;
@@ -170,14 +171,14 @@ namespace NibsMVC.Repository
             {
                 model.BillId = billId.BillId;
                 model.IsPrinted = billId.Isprinted.Value;
-                model.Discount = Math.Truncate(billId.Discount.Value*100)/100;
-                model.DiscountAmount = Math.Truncate(billId.DiscountAmount*100)/100;
-                model.VatAmount = Math.Truncate(billId.VatAmount*100)/100;
-                model.TotalAmount = Math.Truncate(billId.TotalAmount*100)/100;
-                model.ServicesCharge = Math.Truncate(billId.ServicChargesAmount*100)/100;
-                model.ServiceTax = Math.Truncate(billId.ServiceTax.Value*100)/100;
-                model.NetAmount = Math.Truncate(billId.NetAmount*100)/100;
-                model.NetAmountWithoutDiscount = Math.Truncate(billId.NetAmountWithoutDiscount.Value*100)/100;
+                model.Discount = Math.Truncate(billId.Discount.Value * 100) / 100;
+                model.DiscountAmount = Math.Truncate(billId.DiscountAmount * 100) / 100;
+                model.VatAmount = Math.Truncate(billId.VatAmount * 100) / 100;
+                model.TotalAmount = Math.Truncate(billId.TotalAmount * 100) / 100;
+                model.ServicesCharge = Math.Truncate(billId.ServicChargesAmount * 100) / 100;
+                model.ServiceTax = Math.Truncate(billId.ServiceTax.Value * 100) / 100;
+                model.NetAmount = Math.Truncate(billId.NetAmount * 100) / 100;
+                model.NetAmountWithoutDiscount = Math.Truncate(billId.NetAmountWithoutDiscount.Value * 100) / 100;
                 model.OrderType = billId.BillingType;
                 model.CustomerAddress = billId.Address;
                 model.PackingCharges = Convert.ToInt32(billId.PackingCharges.Value);
@@ -186,8 +187,8 @@ namespace NibsMVC.Repository
             }
             else
             {
-                model.VatAmount = Math.Truncate(result.Sum(a => Convert.ToDecimal(a.Element("VatAmountCharges").Value))*100)/100;
-                model.TotalAmount = Math.Truncate(result.Sum(a => Convert.ToDecimal(a.Element("Amount").Value))*100)/100;
+                model.VatAmount = Math.Truncate(result.Sum(a => Convert.ToDecimal(a.Element("VatAmountCharges").Value)) * 100) / 100;
+                model.TotalAmount = Math.Truncate(result.Sum(a => Convert.ToDecimal(a.Element("Amount").Value)) * 100) / 100;
                 var ServicesCharge = _entities.tblServiceCharges.FirstOrDefault();
                 decimal serviceChargeAmount = 0;
                 if (ServicesCharge != null)
@@ -195,8 +196,8 @@ namespace NibsMVC.Repository
                     serviceChargeAmount = (model.TotalAmount * ServicesCharge.Charges) / 100;
                 }
                 decimal ServiceTaxAmount = (model.TotalAmount * ServiceTax) / 100;
-                model.ServiceTax = Math.Truncate(ServiceTaxAmount*100)/100;
-                model.ServicesCharge = Math.Truncate(serviceChargeAmount*100)/100;
+                model.ServiceTax = Math.Truncate(ServiceTaxAmount * 100) / 100;
+                model.ServicesCharge = Math.Truncate(serviceChargeAmount * 100) / 100;
                 model.NetAmount = Math.Round(model.TotalAmount + model.VatAmount + model.ServiceTax + serviceChargeAmount, 2);
                 model.NetAmountWithoutDiscount = Math.Round(model.TotalAmount + model.VatAmount + model.ServiceTax + serviceChargeAmount, 2);
             }
@@ -512,7 +513,7 @@ namespace NibsMVC.Repository
                         {
                             VatAmt = Convert.ToDecimal(item.Element("VatAmountCharges").Value);
                         }
-                        bill.VatAmount = Math.Truncate(VatAmt*100)/100;
+                        bill.VatAmount = Math.Truncate(VatAmt * 100) / 100;
                         bill.BillId = tb.BillId;
                         _entities.tblBillDetails.Add(bill);
                         _entities.SaveChanges();

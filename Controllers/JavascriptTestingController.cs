@@ -61,6 +61,7 @@ namespace NibsMVC.Controllers
                     }
                 }
                 mo.TableNo = item.TableNo.ToString();
+                mo.AcType = item.AcType.ToString();
                 List.Add(mo);
             }
             nibs.getAllTables = List;

@@ -86,6 +86,9 @@
                         <div class="row margin-bottom-5">
                             <label class="btn btn-warning col-md-12 ">Table</label>
                         </div>
+                        <div class="row margin-bottom-5">
+                            <label class="btn btn-success col-md-12 ">AC</label>
+                        </div>
                         <ul style="list-style:none">
                             <li>
                                 @if (Model.getAllTables != null)
@@ -93,20 +96,51 @@
 
                                     foreach (var item in Model.getAllTables)
                                     {
+                                        if (item.AcType == "AC")
+                                        {
+                                            if (item.Current == "current")
+                                            {
+                                                <input type="button" value="@item.TableNo" id="@item.TableNo" name="table" class="margin-bottom-6 current" />
+                                            }
+                                            else if (item.Current == "printed")
+                                            {
+                                                <input type="button" value="@item.TableNo" id="@item.TableNo" name="table" class="margin-bottom-6 printed" />
+                                            }
+                                            else
+                                            {
+                                                <input type="button" value="@item.TableNo" id="@item.TableNo" name="table" class="margin-bottom-6" />
+                                            }
+                                        }
+                                    }
+                                }
+                            </li>
+                        </ul>
+                        <div class="row margin-bottom-5">
+                            <label class="btn btn-success col-md-12 ">Non AC</label>
+                        </div>
+                        <ul style="list-style:none">
+                            <li>
+                                @if (Model.getAllTables != null)
+                                {
 
-                                        if (item.Current == "current")
+                                    foreach (var item in Model.getAllTables)
+                                    {
+                                        if (item.AcType == "Non AC")
                                         {
-                                            <input type="button" value="@item.TableNo" id="@item.TableNo" name="table" class="margin-bottom-6 current" />
-                                        }
-                                        else if (item.Current == "printed")
-                                        {
-                                            <input type="button" value="@item.TableNo" id="@item.TableNo" name="table" class="margin-bottom-6 printed" />
-                                        }
-                                        else
-                                        {
-                                            <input type="button" value="@item.TableNo" id="@item.TableNo" name="table" class="margin-bottom-6" />
-                                        }
+                                            if (item.Current == "current")
+                                            {
+                                                <input type="button" value="@item.TableNo" id="@item.TableNo" name="table" class="margin-bottom-6 current" />
+                                            }
+                                            else if (item.Current == "printed")
+                                            {
+                                                <input type="button" value="@item.TableNo" id="@item.TableNo" name="table" class="margin-bottom-6 printed" />
+                                            }
+                                            else
+                                            {
+                                                <input type="button" value="@item.TableNo" id="@item.TableNo" name="table" class="margin-bottom-6" />
+                                            }
 
+                                        }
                                     }
                                 }
                             </li>

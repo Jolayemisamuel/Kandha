@@ -29,6 +29,7 @@ namespace NibsMVC.EDMX
             this.SelesVendorAmounts = new HashSet<SelesVendorAmount>();
             this.OutletVendors = new HashSet<OutletVendor>();
             this.tblPurchaseOrderMasters = new HashSet<tblPurchaseOrderMaster>();
+            this.tblTransferReturnReports = new HashSet<tblTransferReturnReport>();
         }
     
         public int OutletId { get; set; }
@@ -59,5 +60,6 @@ namespace NibsMVC.EDMX
         public virtual ICollection<SelesVendorAmount> SelesVendorAmounts { get; set; }
         public virtual ICollection<OutletVendor> OutletVendors { get; set; }
         public virtual ICollection<tblPurchaseOrderMaster> tblPurchaseOrderMasters { get; set; }
+        public virtual ICollection<tblTransferReturnReport> tblTransferReturnReports { get; set; }
     }
 }

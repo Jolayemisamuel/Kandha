@@ -19,8 +19,8 @@ namespace NibsMVC.Controllers
         StringBuilder sb = new StringBuilder();
         XMLTablesRepository xml = new XMLTablesRepository();
         NIbsBillingRepository nibsrepo = new NIbsBillingRepository();
-       AdminSearchRepository search = new AdminSearchRepository();
-       CheckStockItemRepository outstock = new CheckStockItemRepository();
+        AdminSearchRepository search = new AdminSearchRepository();
+        CheckStockItemRepository outstock = new CheckStockItemRepository();
         public ActionResult Index()
         {
             NibsBillingModel nibs = new NibsBillingModel();
@@ -66,10 +66,11 @@ namespace NibsMVC.Controllers
                         {
                             mo.Current = "current";
                         }
-                        
+
                     }
                 }
                 mo.TableNo = item.TableNo.ToString();
+                mo.AcType = item.AcType.ToString();
                 List.Add(mo);
             }
             nibs.getAllTables = List;
@@ -85,7 +86,7 @@ namespace NibsMVC.Controllers
 
             }
             nibs.getAllAutoCompleteItem = getAllAutocompleteItems(oulte);
-            
+
             return View(nibs);
         }
         public List<SelectListItem> getAllAutocompleteItems(int oulte)
@@ -104,11 +105,11 @@ namespace NibsMVC.Controllers
             lst = xml.GetAllItems(Id);
             return PartialView("_GetAllItemPartial", lst);
         }
-        public bool checkOutStock(int ItemId,int Qty,string TableNo)
+        public bool checkOutStock(int ItemId, int Qty, string TableNo)
         {
             var Path = Server.MapPath("/xmltables/table" + TableNo + ".xml");
-           
-            bool status = outstock.CheckOutStockItemWithQty(ItemId,Qty,TableNo,Path);
+
+            bool status = outstock.CheckOutStockItemWithQty(ItemId, Qty, TableNo, Path);
             return status;
         }
         public PartialViewResult _CreatePartial(int Id)
@@ -158,23 +159,23 @@ namespace NibsMVC.Controllers
             }
 
 
-            return PartialView("_CreatePartial",model);
+            return PartialView("_CreatePartial", model);
         }
-        public ActionResult DeleteItem(string ItemName, int Id=0,int TableNo=0)
+        public ActionResult DeleteItem(string ItemName, int Id = 0, int TableNo = 0)
         {
             var Path = Server.MapPath("~/xmltables/table" + TableNo + ".xml");
             var KotFilePath = Server.MapPath("~/xmlkot/Kot.xml");
             GetBillingModel model = new GetBillingModel();
-            bool Update = xml.DeleteNode(Id.ToString(), TableNo.ToString(), Path, KotFilePath,ItemName);
+            bool Update = xml.DeleteNode(Id.ToString(), TableNo.ToString(), Path, KotFilePath, ItemName);
             if (Update)
             {
                 model = xml.GetBillingItem(TableNo.ToString(), Path, KotFilePath);
             }
-           
-            
+
+
             return PartialView("_CreatePartial", model);
         }
-        public ActionResult ClearKotItem(int Id=0)
+        public ActionResult ClearKotItem(int Id = 0)
         {
             var KotFilePath = Server.MapPath("~/xmlkot/Kot.xml");
             var Path = Server.MapPath("~/xmltables/table" + Id + ".xml");
@@ -184,26 +185,26 @@ namespace NibsMVC.Controllers
             {
                 model = xml.GetBillingItem(Id.ToString(), Path, KotFilePath);
             }
-            
+
             return PartialView("_CreatePartial", model);
         }
         public ActionResult PrintOrder(GetBillingModel model)
         {
             var Path = Server.MapPath("~/xmltables/table" + model.TableNo + ".xml");
             PrintBillModel m = new PrintBillModel();
-            if (model.BillId==0)
+            if (model.BillId == 0)
             {
-               
+
                 var ReturnXml = Server.MapPath("~/xmlkot/ReturnXML.xml");
                 var KotFilePath = Server.MapPath("~/xmlkot/Kot.xml");
                 nibsrepo.SaveReturnItem(ReturnXml);
                 int BillId = xml.DispatchOrder(model, Path);
                 model.BillId = BillId;
-                
+
             }
             m = nibsrepo.GetBill(Path, model);
             m.BillType = model.OrderType;
-            return PartialView("PrintOrder",m);
+            return PartialView("PrintOrder", m);
 
         }
         public ActionResult PrintOrderAgain()
@@ -222,7 +223,7 @@ namespace NibsMVC.Controllers
             var ReturnXml = Server.MapPath("~/xmlkot/ReturnXML.xml");
             var KotFilePath = Server.MapPath("~/xmlkot/Kot.xml");
             nibsrepo.SaveReturnItem(ReturnXml);
-            xml.updateBillOnDispatch(model,Path);
+            xml.updateBillOnDispatch(model, Path);
             //bool status = xml.DispatchOrder(model, Path);
             var tableNo = model.TableNo;
             ModelState.Clear();
@@ -240,7 +241,7 @@ namespace NibsMVC.Controllers
             food.OutletId = oulte;
             food.Price = model.OpenFoodPrice;
             food.Quantity = model.OpenFoodQuantity;
-            food.Amount = model.OpenFoodPrice*model.OpenFoodQuantity;
+            food.Amount = model.OpenFoodPrice * model.OpenFoodQuantity;
             food.Vat = model.OpenFoodVat;
             db.OpenFoods.Add(food);
             db.SaveChanges();
@@ -252,7 +253,7 @@ namespace NibsMVC.Controllers
             return PartialView("_CreatePartial", m);
         }
         [HttpPost]
-        public ActionResult CancelOrder(int TableNo=0)
+        public ActionResult CancelOrder(int TableNo = 0)
         {
             int oulte = xml.getOutletId();
             GetBillingModel model = new GetBillingModel();
@@ -269,7 +270,7 @@ namespace NibsMVC.Controllers
             {
                 model = xml.GetBillingItem(TableNo.ToString(), Path, KotFilePath);
             }
-            
+
             return PartialView("_CreatePartial", model);
         }
 
@@ -291,12 +292,13 @@ namespace NibsMVC.Controllers
                     if (items.Count == 0)
                     {
                         mo.TableNo = item.TableNo.ToString();
+                        mo.AcType = item.AcType.ToString();
                         List.Add(mo);
                     }
 
-                    
+
                 }
-               
+
             }
 
             return PartialView("_MargeTable", List);
@@ -322,11 +324,13 @@ namespace NibsMVC.Controllers
                     if (items.Count == 0)
                     {
                         mo.TableNo = item.TableNo.ToString();
+                        mo.AcType = item.AcType.ToString();
                         free.Add(mo);
                     }
                     else
                     {
                         mo.TableNo = item.TableNo.ToString();
+                        mo.AcType = item.AcType.ToString();
                         book.Add(mo);
                     }
 
@@ -338,13 +342,13 @@ namespace NibsMVC.Controllers
             model.getAllfreetable = free;
             return PartialView("_shiftTable", model);
         }
-        public bool ShiftTable(int Shiftfrom=0,int ShiftTo=0)
+        public bool ShiftTable(int Shiftfrom = 0, int ShiftTo = 0)
         {
-             int oulte = nibsrepo.getOutletId();
+            int oulte = nibsrepo.getOutletId();
             var Path = Server.MapPath("~/xmltables/table" + ShiftTo + ".xml");
             if (!System.IO.File.Exists(Path))
             {
-               
+
                 XmlTextWriter writer = new XmlTextWriter(Server.MapPath("~/xmltables/table" + ShiftTo + ".xml"), System.Text.Encoding.UTF8);
                 writer.WriteStartDocument(true);
                 writer.Formatting = Formatting.Indented;
@@ -357,27 +361,27 @@ namespace NibsMVC.Controllers
             }
             var shiftfrompath = Server.MapPath("~/xmltables/table" + Shiftfrom + ".xml");
             var shiftTopath = Server.MapPath("~/xmltables/table" + ShiftTo + ".xml");
-            bool status = nibsrepo.ShiftTable(shiftfrompath, shiftTopath, oulte, Shiftfrom.ToString(),ShiftTo.ToString());
+            bool status = nibsrepo.ShiftTable(shiftfrompath, shiftTopath, oulte, Shiftfrom.ToString(), ShiftTo.ToString());
             return status;
         }
-        public PartialViewResult _splitTable(int TableNo,decimal NetAmount)
+        public PartialViewResult _splitTable(int TableNo, decimal NetAmount)
         {
             return PartialView("_splitTable");
         }
 
-        public PartialViewResult _Return(int TableNo=0,int ItemId=0)
+        public PartialViewResult _Return(int TableNo = 0, int ItemId = 0)
         {
             var Path = Server.MapPath("~/xmltables/table" + TableNo + ".xml");
             var ReturnXml = Server.MapPath("~/xmlkot/ReturnXML.xml");
             var KotFilePath = Server.MapPath("~/xmlkot/Kot.xml");
             GetBillingModel model = new GetBillingModel();
-            bool status = nibsrepo._TransferToReturnXML(Path, ReturnXml, TableNo,ItemId);
+            bool status = nibsrepo._TransferToReturnXML(Path, ReturnXml, TableNo, ItemId);
             if (status)
             {
-                model=xml.GetBillingItem(TableNo.ToString(), Path, KotFilePath);
+                model = xml.GetBillingItem(TableNo.ToString(), Path, KotFilePath);
             }
             return PartialView("_CreatePartial", model);
         }
-        
+
     }
 }

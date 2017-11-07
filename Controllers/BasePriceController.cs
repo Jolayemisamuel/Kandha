@@ -9,13 +9,16 @@ using System.Web.Mvc;
 
 namespace NibsMVC.Controllers
 {
-    [Authorize(Roles = "admin")]
+    //[Authorize(Roles = "admin")]
     public class BasePriceController : Controller
     {
         //
         // GET: /BasePrice/
         NIBSEntities db = new NIBSEntities();
         AddItemRepository dis = new AddItemRepository();
+
+        
+
         public JsonResult BaseItem(int id, string AcType)
         {
             //DistributorRepository dis = new DistributorRepository();
@@ -154,25 +157,30 @@ namespace NibsMVC.Controllers
                     var tb = (from p in db.tblBasePriceItems where p.ItemId == ItemId && p.CategoryId == model.CategoryId && p.AcType==model.AcType select p).SingleOrDefault();
                     if (tb == null)
                     {
-                        tblBasePriceItem tbl = new tblBasePriceItem();
-                        tbl.ItemId = model.EditItemId[i];
-                        tbl.FullPrice = model.EditFullPrice[i];
-                        tbl.HalfPrice = model.EditHalfPrice[i];
-                        tbl.Vat = 18;//Convert.ToDecimal(model.EditVat[i]);
-                        tbl.CategoryId = model.CategoryId;
-                        tbl.AcType = "AC";
-                        db.tblBasePriceItems.Add(tbl);
-                        db.SaveChanges();
-
-                        tblBasePriceItem tblnon = new tblBasePriceItem();
-                        tblnon.ItemId = model.EditItemId[i];
-                        tblnon.FullPrice = model.EditFullPrice[i];
-                        tblnon.HalfPrice = model.EditHalfPrice[i];
-                        tblnon.Vat = 12;//Convert.ToDecimal(model.EditVat[i]);
-                        tblnon.CategoryId = model.CategoryId;
-                        tblnon.AcType = "Non AC";
-                        db.tblBasePriceItems.Add(tblnon);
-                        db.SaveChanges();
+                        if (model.AcType == "AC")
+                        {
+                            tblBasePriceItem tbl = new tblBasePriceItem();
+                            tbl.ItemId = model.EditItemId[i];
+                            tbl.FullPrice = model.EditFullPrice[i];
+                            tbl.HalfPrice = model.EditHalfPrice[i];
+                            tbl.Vat = 18;//Convert.ToDecimal(model.EditVat[i]);
+                            tbl.CategoryId = model.CategoryId;
+                            tbl.AcType = "AC";
+                            db.tblBasePriceItems.Add(tbl);
+                            db.SaveChanges();
+                        }
+                        else if (model.AcType == "Non AC")
+                        {
+                            tblBasePriceItem tblnon = new tblBasePriceItem();
+                            tblnon.ItemId = model.EditItemId[i];
+                            tblnon.FullPrice = model.EditFullPrice[i];
+                            tblnon.HalfPrice = model.EditHalfPrice[i];
+                            tblnon.Vat = 12;//Convert.ToDecimal(model.EditVat[i]);
+                            tblnon.CategoryId = model.CategoryId;
+                            tblnon.AcType = "Non AC";
+                            db.tblBasePriceItems.Add(tblnon);
+                            db.SaveChanges();
+                        }
                     }
                     else
                     {

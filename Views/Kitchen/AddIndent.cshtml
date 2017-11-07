@@ -30,7 +30,7 @@
                                 You have some form errors. Please check below.
                             </div>
                             <div class="form-group">
-                                <label class=" col-md-3">
+                                <label class="col-md-3">
                                     Category <span class="required">
                                         *
                                     </span>
@@ -44,7 +44,7 @@
                                 </div>
                             </div>
                             <div class="form-group" id="Show_Items" style="display:none;">
-                                <label class=" col-md-3">
+                                <label class="col-md-3">
                                     Items <span class="required">
                                         *
                                     </span>
@@ -57,21 +57,48 @@
                                     </div>
                                 </div>
                             </div>
+
+
                             <div class="form-group">
+                                <label class="col-md-3">
+                                    Raw Category <span class="required">
+                                        *
+                                    </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        @Html.DropDownListFor(m => m.RawMaterialCategoryId, new SelectList(Model.lstofRawCategories, "Value", "Text"), "--Select--", new { @class = "form-control" })
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" id="Show_RawItems" style="display:none;">
+                                <label class="col-md-3">
+                                    Select Raw Material <span class="required">
+                                        *
+                                    </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        <select name="RawMaterialId" id="tags" class="form-control"></select>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            @*<div class="form-group">
                                 <label class="col-md-3 ">Select Raw Material</label>
                                 <div class="col-sm-4">
                                     <input id="tags" class="form-control" name="RawMaterialId">
                                 </div>
-                            </div>
+                            </div>*@
                             <div class="form-group">
                                 <label class="col-md-3 ">Unit</label>
                                 <div class="col-sm-4">
-                                   <select class="form-control" name="Unit">
-                                       <option value="ml">ML</option>
-                                       <option value="gm">GM</option>
-                                       <option value="ltr">Ltr</option>
-                                       <option value="kg">Kg</option>
-                                   </select>
+                                   @Html.DropDownListFor(m => m.Unit, new SelectList(Model.lstofUnits, "Value", "Text"), "--Select--", new { @class = "form-control" })
                                 </div>
                             </div>
                             <div class="form-group">
@@ -128,6 +155,14 @@
         $.post("/Kitchen/ListOfItems", FormData, function (data) {
             $('#Show_Items').show();
             $('#ItemId').html(data);
+        });
+    });
+    $(document).on('change', '#RawMaterialCategoryId', function () {
+        var val = $(this).val();
+        var FormData = { Id: val };
+        $.post("/Kitchen/ListOfRawItems", FormData, function (data) {
+            $('#Show_RawItems').show();
+            $('#tags').html(data);
         });
     });
     $(document).on('click', '#btn_Add_Raw', function () {

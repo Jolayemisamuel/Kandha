@@ -40,6 +40,7 @@ namespace NibsMVC.EDMX
         public string ItemCode { get; set; }
         public Nullable<int> BasePriceId { get; set; }
         public bool Active { get; set; }
+        public int DepartmentId { get; set; }
     
         public virtual ICollection<Nibs_HappyHours_Date> Nibs_HappyHours_Date { get; set; }
         public virtual ICollection<Nibs_HappyHours_Day> Nibs_HappyHours_Day { get; set; }
@@ -56,5 +57,8 @@ namespace NibsMVC.EDMX
         public virtual ICollection<tblBillDetail> tblBillDetails { get; set; }
         public virtual ICollection<Temp_VendorBilling> Temp_VendorBilling { get; set; }
         public virtual ICollection<VendorBillingItem> VendorBillingItems { get; set; }
+        public virtual tbl_Department tbl_Department { get; set; }
+        public virtual tblItem tblItem1 { get; set; }
+        public virtual tblItem tblItem2 { get; set; }
     }
 }

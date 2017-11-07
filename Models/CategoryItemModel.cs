@@ -9,7 +9,7 @@ namespace NibsMVC.Models
     public class CategoryItemModel
     {
     }
-    public class AddCategoryModel
+    public class GetUnitCategory
     {
         public int CategoryId { get; set; }
         public string Name { get; set; }
@@ -26,15 +26,20 @@ namespace NibsMVC.Models
         //public int MinimumQuantity { get; set; }
         //public string Unit { get; set; }
         public int ItemCategoryId { get; set; }
+        public int DepartmentId { get; set; }
         public string ItemImage { get; set; }
         public string ItemCode { get; set; }
         public bool Active { get; set; }
         public int SearchCategoryId { get; set; }
-       public List<SelectListItem> lstofCategory { get; set; }
+        public int SearchDepartmentId { get; set; }
+        public List<SelectListItem> lstofCategory { get; set; }
+
+        public List<SelectListItem> lstofDepartment { get; set; }
     }
     public class AdminBlockItemModel
     {
         public List<SelectListItem> lstofCategory { get; set; }
+        public List<SelectListItem> lstofDepartment { get; set; }
         public List<lstOfBlockItems> lstOfItems { get; set; }
         public int CategoryId { get; set; }
     }
@@ -45,6 +50,9 @@ namespace NibsMVC.Models
         public bool Active { get; set; }
         public string CategoryName { get; set; }
         public int CategoryId { get; set; }
+
+        public string Department { get; set; }
+        public int DepartmentId { get; set; }
         public string ItemImage { get; set; }
         public string ItemCode { get; set; }
     }
@@ -56,5 +64,11 @@ namespace NibsMVC.Models
         public decimal FullPrice { get; set; }
         public bool Assigned { get; set; }
         public int BasePriceId { get; set; }
+    }
+    public class UnitModel1
+    {
+        public int Unitid { get; set; }
+        public string UnitName { get; set; }
+        public bool Active { get; set; }
     }
 }

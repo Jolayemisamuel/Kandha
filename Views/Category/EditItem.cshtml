@@ -36,6 +36,30 @@
 
                             <div class="form-group">
                                 <label class="control-label col-md-3">
+                                    Department <span class="required">
+                                        *
+                                    </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        @if (Model.DepartmentId > 0)
+                                        {
+                                            @Html.DropDownList("DepartmentId", new SelectList(Model.lstofDepartment, "Value", "Text", Model.ItemCategoryId), "--Select--", new { @class = "form-control" })
+                                        }
+                                        else
+                                        {
+                                            @Html.DropDownList("DepartmentId", new SelectList(Model.lstofDepartment, "Value", "Text"), "--Select--", new { @class = "form-control" })
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
                                     Category <span class="required">
                                         *
                                     </span>

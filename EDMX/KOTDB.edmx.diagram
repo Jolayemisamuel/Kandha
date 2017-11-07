@@ -1,0 +1,708 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a9318231718743b4a2c7324a9200a17a" Name="Diagram1">
+        <EntityTypeShape EntityType="KOTModel.AccCashSettlement" Width="1.5" PointX="5.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.AccountClosing" Width="1.5" PointX="0.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.AccountHeadsLevel" Width="1.5" PointX="2.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.AccountM" Width="1.5" PointX="0.75" PointY="44.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.AccountM_CardDetails" Width="1.5" PointX="9.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.AccountM_CardDetails_History" Width="1.5" PointX="0.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.AccountM_CardDetailsList" Width="1.5" PointX="2.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.AccountMConfiguration" Width="1.5" PointX="20.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.AccountMCustomerLink" Width="1.5" PointX="25.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.AccountMGroup" Width="1.5" PointX="3" PointY="26.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.AccountMGroups_Branch" Width="1.5" PointX="9.75" PointY="28.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.AccountMItem" Width="1.5" PointX="3" PointY="34" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.AccountMItems_CommissionM" Width="1.5" PointX="28.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.AccountMItems_ContainerMapping" Width="1.5" PointX="30.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.AccountMItems_DiscountMapping" Width="1.5" PointX="5.25" PointY="31.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.AccountmItems_FoodType" Width="1.5" PointX="30.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.AccountMItems_ImageMapping" Width="1.5" PointX="11.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.AccountMItems_RelationList" Width="1.5" PointX="5.25" PointY="34.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.AccountMItems_ServiceChargeMapping" Width="1.5" PointX="30.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.AccountMItems_ServiceTaxMapping" Width="1.5" PointX="30.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.AccountMItems_UsageRatio" Width="1.5" PointX="30.75" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.AccountMItems_VatMapping" Width="1.5" PointX="30.75" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.AccountMItemsBOM" Width="1.5" PointX="30.75" PointY="31.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.AccountMItemsBrand" Width="1.5" PointX="32.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.AccountMItemsFGBOM" Width="1.5" PointX="32.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.AccountMItemsList" Width="1.5" PointX="32.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.AccountMItemsMultiUOM" Width="1.5" PointX="5.25" PointY="39.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.AccountMItemsPartnersLink" Width="1.5" PointX="32.75" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.AccountMItemsSalesUOM" Width="1.5" PointX="32.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.AccountMPartner" Width="1.5" PointX="3" PointY="56" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.AccountMPartners_CardMaster" Width="1.5" PointX="5.25" PointY="58.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.AccountMPartners_Extn" Width="1.5" PointX="5.25" PointY="62.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.AccountMPartnersAddress" Width="1.5" PointX="27.75" PointY="32.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.AccountMPartnersContact" Width="1.5" PointX="32.75" PointY="28.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.AccountMPartnersTD" Width="1.5" PointX="32.75" PointY="31.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.AccountMPartnerTerm" Width="1.5" PointX="33.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.AccountType" Width="1.5" PointX="34.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.AccTran" Width="1.5" PointX="3" PointY="21.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.AccTrans_BillTrans_Link" Width="1.5" PointX="34.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.AccTrans_BranchAccountTrans_Link" Width="1.5" PointX="34.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.AccTrans_PaymentTrans_Link" Width="1.5" PointX="12.75" PointY="34.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.AccTrans_SqlLiteLink" Width="1.5" PointX="34.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.AccTrans_StockTrans_Link" Width="1.5" PointX="34.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.AccTransDocument" Width="1.5" PointX="34.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.AccTransLink" Width="1.5" PointX="34.75" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.AccTransList" Width="1.5" PointX="5.25" PointY="25.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.AccTransListBranchList" Width="1.5" PointX="7.5" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.AccTransListCostCentre" Width="1.5" PointX="7.5" PointY="30" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.AccTransListMatch" Width="1.5" PointX="34.75" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.AreaMaster" Width="1.5" PointX="34.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.BarAtGlanceAbstract" Width="1.5" PointX="32.75" PointY="34.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.BillPrintingQueue" Width="1.5" PointX="34.75" PointY="33.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.BillPrintMemoQueue1" Width="1.5" PointX="35.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.BillProduct_DeliveredStatus_Sqlite" Width="1.5" PointX="14.75" PointY="35.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.BillTran" Width="1.5" PointX="10.25" PointY="55.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.BillTrans_BranchMapping" Width="1.5" PointX="29.75" PointY="35.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.BillTrans_CalculationSQLite" Width="1.5" PointX="36.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.BillTrans_EmployeeXferDetails" Width="1.5" PointX="12.5" PointY="52.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.BillTrans_Extn" Width="1.5" PointX="36.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.BillTrans_Extn_SQlite" Width="1.5" PointX="23" PointY="23.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.BillTrans_FoodPreparation_Status" Width="1.5" PointX="36.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.BillTrans_SQLite" Width="1.5" PointX="20.75" PointY="33.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.BillTrans_SQLite_Status" Width="1.5" PointX="36.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.BillTrans_SqlLiteLink" Width="1.5" PointX="36.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.BillTrans_TaxLink" Width="1.5" PointX="36.75" PointY="28.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.BillTrans_TaxLink_SQlite" Width="1.5" PointX="23" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.BillTrans_TaxLinkList" Width="1.5" PointX="36.75" PointY="31.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.BillTrans_TransactionSlNos" Width="1.5" PointX="34.75" PointY="36.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.BillTransList" Width="1.5" PointX="12.5" PointY="58.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.BillTransList_AddOnsList" Width="1.5" PointX="14.75" PointY="57.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.BillTransList_AddOnsList_SQLite" Width="1.5" PointX="25.25" PointY="36.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.BillTransList_DiscountList" Width="1.5" PointX="14.75" PointY="61.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.BillTransList_DiscountList_SQLite" Width="1.5" PointX="36.75" PointY="36.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.BillTransList_IsDeliveredList" Width="1.5" PointX="31.75" PointY="37.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.BillTransList_SQLite" Width="1.5" PointX="23" PointY="34.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.BillTransList_StockTransList_Link" Width="1.5" PointX="37.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.BillTransList_TransactionSlNos" Width="1.5" PointX="38.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.BillTransOrderInfo_SQLite" Width="1.5" PointX="23" PointY="43.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.BranchAccountTran" Width="1.5" PointX="38.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.BranchAccountTrans_BillTrans_Link" Width="1.5" PointX="10.75" PointY="38.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.BranchHallMapping" Width="1.5" PointX="38.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.BranchLogoMapping" Width="1.5" PointX="38.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.BranchwiseHallMapping" Width="1.5" PointX="38.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.BuyerInfo" Width="1.5" PointX="17.75" PointY="38.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.BuyerInfoConfig" Width="1.5" PointX="38.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.CalendarM" Width="1.5" PointX="38.75" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.CancelledBill" Width="1.5" PointX="38.75" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.CancelledBillTransList" Width="1.5" PointX="12.5" PointY="64.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.CancelledStockListLink" Width="1.5" PointX="38.75" PointY="31.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.CancelledTransList" Width="1.5" PointX="38.75" PointY="36.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.Captain_TableMapping" Width="1.5" PointX="39.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.CashierCollectionInfo" Width="1.5" PointX="12.75" PointY="39.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.CashierMapping" Width="1.5" PointX="33.75" PointY="39.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.CashInOutDetail" Width="1.5" PointX="40.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.CashInOutDetailsDenomination" Width="1.5" PointX="40.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.CategoryAccountMLink" Width="1.5" PointX="40.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.ChequeM" Width="1.5" PointX="40.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.ChequeMList" Width="1.5" PointX="40.75" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.CloudOrderDownloadStatu" Width="1.5" PointX="40.75" PointY="26.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.CollectionTran" Width="1.5" PointX="28.75" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.CollectionTransLink" Width="1.5" PointX="31" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.CommissionM" Width="1.5" PointX="27.75" PointY="40.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.CommodityM" Width="1.5" PointX="6" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.CommodityM_AccountM_Mapping" Width="1.5" PointX="3" PointY="47.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.CommodityM_AccountMItems_Mapping" Width="1.5" PointX="8.25" PointY="38.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.CommodityM_Hall_Mapping" Width="1.5" PointX="6" PointY="49.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.CommodityM_ServiceTaxMaster_Mapping" Width="1.5" PointX="3" PointY="50.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.CompanyLogoMapping" Width="1.5" PointX="40.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.Configuration" Width="1.5" PointX="40.75" PointY="33.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.ConfigurationM" Width="1.5" PointX="0.75" PointY="31.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.ConfigurationsM" Width="1.5" PointX="35.75" PointY="40.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.ContainerM" Width="1.5" PointX="40.75" PointY="36.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.CouponCodeM" Width="1.5" PointX="20.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.CouponCodeM_CustomerMapping" Width="1.5" PointX="23" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.CouponCodeM_PromoMapping" Width="1.5" PointX="23" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.CreditBillPayment" Width="1.5" PointX="40.75" PointY="40.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.CreditBillPaymentDetail" Width="1.5" PointX="41.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.CreditBillTran" Width="1.5" PointX="19.75" PointY="41.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.CreditBillTransList" Width="1.5" PointX="42.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.Criterion" Width="1.5" PointX="42.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.CurrencyM" Width="1.5" PointX="27.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.CurrencyMList" Width="1.5" PointX="30" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.Customer_Loyalty" Width="1.5" PointX="42.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.Customer_LoyaltyHistory" Width="1.5" PointX="42.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.CustomerFeedBack" Width="1.5" PointX="17.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.CustomerFeedBackList" Width="1.5" PointX="20" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.CustomerM" Width="1.5" PointX="14.75" PointY="42.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.CustomerServiceRequest" Width="1.5" PointX="42.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.DailyAccount" Width="1.5" PointX="42.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.DailyItemPurchase" Width="1.5" PointX="42.75" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.DailyStockClosing" Width="1.5" PointX="42.75" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.DashboardMenu" Width="1.5" PointX="42.75" PointY="34.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.DataUploadLog" Width="1.5" PointX="42.75" PointY="37.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.DeliveryTran" Width="1.5" PointX="37.75" PointY="42.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.DeviceInformation" Width="1.5" PointX="42.75" PointY="40.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.DevicePrintConfigurationM" Width="1.5" PointX="25.75" PointY="43.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.DineGroup_ImageMapping" Width="1.5" PointX="27.75" PointY="43.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.DineGroup_InstructionMapping" Width="1.5" PointX="43.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.DiscountM" Width="1.5" PointX="29.75" PointY="43.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.DocNoGeneration" Width="1.5" PointX="31.75" PointY="43.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.DocumentHistory" Width="1.5" PointX="33.75" PointY="43.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.DocumentTypeM" Width="1.5" PointX="44.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.DocumentTypeMBranch" Width="1.5" PointX="44.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.DocumentTypeMList" Width="1.5" PointX="44.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.EasyOrderBillPayment" Width="1.5" PointX="44.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.EasyOrderBill" Width="1.5" PointX="44.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.EasyOrderBillsResponse" Width="1.5" PointX="44.75" PointY="26.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.EazyStoreHallDetail" Width="1.5" PointX="44.75" PointY="29.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.EDI_DC40" Width="1.5" PointX="44.75" PointY="36.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.Emailconfiguration" Width="1.5" PointX="44.75" PointY="39.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.Employee_LeaveDetails" Width="1.5" PointX="42.75" PointY="44.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.Employee_WorkAllocation" Width="1.5" PointX="44.75" PointY="44.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.EmployeeList" Width="1.5" PointX="45.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.EmployeeM" Width="1.5" PointX="25.75" PointY="27.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.EmployeeM_BranchMapping" Width="1.5" PointX="28" PointY="28.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.EmployeeM_WagesDetails" Width="1.5" PointX="16.75" PointY="45.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.ExceptionalGroupForEmp" Width="1.5" PointX="18.75" PointY="45.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.ExeMaster" Width="1.5" PointX="46.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.ExeScheduler_Mapping" Width="1.5" PointX="46.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.EXP_AccountM" Width="1.5" PointX="3" PointY="69.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.EXP_AccountMItems" Width="1.5" PointX="5.25" PointY="45.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.EXP_MasterM" Width="1.5" PointX="9" PointY="70.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.EXP_Payment" Width="1.5" PointX="46.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.EXP_Sales" Width="1.5" PointX="46.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.FacilityMaster" Width="1.5" PointX="46.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.FeedBackAnswerMapping" Width="1.5" PointX="46.75" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.FeedBackAnswer" Width="1.5" PointX="46.75" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.FeedBackAnswersTemplate" Width="1.5" PointX="46.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.FeedBackMaster" Width="1.5" PointX="17.75" PointY="36" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.FeedBackMasterTemplate" Width="1.5" PointX="46.75" PointY="33.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.FGIssueStoresMapping" Width="1.5" PointX="35.75" PointY="46.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.FinancialYearM" Width="1.5" PointX="46.75" PointY="36.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.FoodAvaialabilityTemplateM" Width="1.5" PointX="37.75" PointY="46.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.FoodAvailability" Width="1.5" PointX="46.75" PointY="39.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.Form_RegionalFontMapping" Width="1.5" PointX="46.75" PointY="42.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.FreeIssueTran" Width="1.5" PointX="46.75" PointY="45.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.FreeIssueTransList" Width="1.5" PointX="47.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.GSTSplitPercentage" Width="1.5" PointX="27.75" PointY="47.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.GuestM" Width="1.5" PointX="13.5" PointY="22.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.GuestMList" Width="1.5" PointX="15.75" PointY="39.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.Hall_DuplicatePrintMapping" Width="1.5" PointX="29.75" PointY="47.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.HallCharge" Width="1.5" PointX="31.75" PointY="47.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.HallGroupBillno_List" Width="1.5" PointX="28" PointY="22.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.HallGroupBillnoHeader" Width="1.5" PointX="25.75" PointY="23" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.HallItemsGroupMapping" Width="1.5" PointX="48.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.HallTimeMappingHeader" Width="1.5" PointX="25.75" PointY="19.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.HallTimeMappingList" Width="1.5" PointX="28" PointY="19.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.HappyhoursM" Width="1.5" PointX="48.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.HolidayM" Width="1.5" PointX="48.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.IdentificationMaster" Width="1.5" PointX="11.75" PointY="48.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.IsCloudServer" Width="1.5" PointX="48.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.Item_PrintMapping" Width="1.5" PointX="16.75" PointY="48.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.ItemBarcode_Settings" Width="1.5" PointX="48.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.ItemCategoryGroupAccountMapping" Width="1.5" PointX="18.75" PointY="48.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.ItemCategoryGroupMapping" Width="1.5" PointX="48.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.ItemGroupAccountMLink" Width="1.5" PointX="48.75" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.ItemGroupTaxMapping" Width="1.5" PointX="48.75" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.ItemGroupVATMapping" Width="1.5" PointX="48.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.ItemPriceMapping" Width="1.5" PointX="48.75" PointY="33.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.ItemsTemplate" Width="1.5" PointX="48.75" PointY="36.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.ItemTimeMapping" Width="1.5" PointX="39.75" PointY="48.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.ItemTimeUpdate" Width="1.5" PointX="48.75" PointY="40.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.JuiceAvailability" Width="1.5" PointX="41.75" PointY="48.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.KitchenWisePrintM" Width="1.5" PointX="48.75" PointY="43.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.KMPOSStockTransList" Width="1.5" PointX="43.75" PointY="48.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.KMRightsM" Width="1.5" PointX="48.75" PointY="46.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.KMUserright" Width="1.5" PointX="49.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.KOTItemSentDetail" Width="1.5" PointX="13.75" PointY="49.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.KOTMemoQueue" Width="1.5" PointX="33.75" PointY="49.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.KOTMemoQueueLink" Width="1.5" PointX="48.75" PointY="49.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.KOTTableGrouping" Width="1.5" PointX="50.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.KOTTouch_ButtonConfig" Width="1.5" PointX="50.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.KOTTran" Width="1.5" PointX="8" PointY="42.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.KOTTrans_EmployeeXferDetails" Width="1.5" PointX="10.25" PointY="43.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.KOTTrans_Extn" Width="1.5" PointX="50.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.KotTrans_TaxLink" Width="1.5" PointX="50.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.KotTrans_TaxLinkList" Width="1.5" PointX="50.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.KOTTransList" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.KOTTransList_AddOnsList" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.KOTTransList_DeliveryStatus" Width="1.5" PointX="25.75" PointY="50.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.KOTTransList_DiscountList" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.KOTTransList_Extn" Width="1.5" PointX="3" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.KOTTransListCancellation" Width="1.5" PointX="50.75" PointY="26.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.KOTTransListPreference" Width="1.5" PointX="50.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.LodgingPaymentType" Width="1.5" PointX="50.75" PointY="33.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.LodgingRightsM" Width="1.5" PointX="35.75" PointY="50.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.LoginBranchName" Width="1.5" PointX="50.75" PointY="39.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.LoginChecking" Width="1.5" PointX="50.75" PointY="42.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.LoginDepartmentMapping" Width="1.5" PointX="50.75" PointY="45.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.LoginDetail" Width="1.5" PointX="50.75" PointY="48.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.LoginStoresMapping" Width="1.5" PointX="51.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.MasterM" Width="1.5" PointX="6.75" PointY="70.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.MasterSlNo" Width="1.5" PointX="15.75" PointY="51.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.MasterTemplate" Width="1.5" PointX="27.75" PointY="51.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.MerchantDetail" Width="1.5" PointX="25.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.MonthlyTaxPaidChallanDetail" Width="1.5" PointX="29.75" PointY="51.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.Month" Width="1.5" PointX="37.75" PointY="51.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.MultiTemplateLink" Width="1.5" PointX="39.75" PointY="51.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.Online_StoresSettings" Width="1.5" PointX="52.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.Onlineorder_MachineInfo" Width="1.5" PointX="52.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.OrderTran" Width="1.5" PointX="52.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.OrderTrans_MultiTemplateLink" Width="1.5" PointX="17.75" PointY="52.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.OrderTrans_SqlLiteLink" Width="1.5" PointX="7.75" PointY="52.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.OrderTrans_TemplateMLink" Width="1.5" PointX="9.75" PointY="52.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.OrderTransAdvance" Width="1.5" PointX="52.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.OrderTransAttachment" Width="1.5" PointX="31.75" PointY="52.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.OrderTransBooking" Width="1.5" PointX="52.75" PointY="34.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.OrderTransCharge" Width="1.5" PointX="52.75" PointY="41.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.OrderTransHallDetail" Width="1.5" PointX="52.75" PointY="44.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.OrderTransLink" Width="1.5" PointX="52.75" PointY="48.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.OrderTransList" Width="1.5" PointX="52.75" PointY="51.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.OrderTransListLink" Width="1.5" PointX="53.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.OrderTransListProcess" Width="1.5" PointX="23.75" PointY="53.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.OrderTransListSample" Width="1.5" PointX="33.75" PointY="53.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.OrderTransTerm" Width="1.5" PointX="48.75" PointY="53.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.OtherConfiguration" Width="1.5" PointX="54.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.OtherConfiguration_Extn" Width="1.5" PointX="54.75" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.OtherConfiguration_ExtnHistory" Width="1.5" PointX="25.75" PointY="54.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.OtherConfigurationHistory" Width="1.5" PointX="27.75" PointY="54.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.OtherEmailconfiguration" Width="1.5" PointX="54.75" PointY="34.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.OtherSetting" Width="1.5" PointX="35.75" PointY="54.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.OtherSettings_Extn" Width="1.5" PointX="54.75" PointY="40.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.OtherSettings_ExtnHistory" Width="1.5" PointX="45.75" PointY="54.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.OtherSettingshistory" Width="1.5" PointX="37.75" PointY="55.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.OutletDetail" Width="1.5" PointX="28" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.PAOCUnderAccountMapping" Width="1.5" PointX="54.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.ParcelChargeConfig" Width="1.5" PointX="14.75" PointY="54.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.PartyAccountGroup" Width="1.5" PointX="55.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.PaymentGatewayM" Width="1.5" PointX="39.75" PointY="55.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.PaymentSerialNo" Width="1.5" PointX="5.75" PointY="55.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.PaymentType" Width="1.5" PointX="56.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.PaymentType_History" Width="1.5" PointX="56.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.PaymentTypeM" Width="1.5" PointX="56.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.PendingPOConfig" Width="1.5" PointX="16.75" PointY="56.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.PettyCashInfo" Width="1.5" PointX="18.75" PointY="56.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.POSItemBatchStock" Width="1.5" PointX="20.75" PointY="56.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.POSReplicationLog" Width="1.5" PointX="56.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.POSStockTransList" Width="1.5" PointX="22.75" PointY="56.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.POSStockTransListLink" Width="1.5" PointX="56.75" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.Preference_ItemM_Link" Width="1.5" PointX="56.75" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.PriceGroupMapping" Width="1.5" PointX="9" PointY="48.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.PriceListEntry" Width="1.5" PointX="22.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.PriceListEntryHistory" Width="1.5" PointX="25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.PriceListM" Width="1.5" PointX="29.75" PointY="56.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.PriceListM_AccountMGroups_Link" Width="1.5" PointX="56.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.PriceListMList" Width="1.5" PointX="56.75" PointY="33.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.PrinterConfiguration" Width="1.5" PointX="56.75" PointY="37.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.PrinterSetting" Width="1.5" PointX="56.75" PointY="40.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.PrintM" Width="1.5" PointX="41.75" PointY="56.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.Promo_BOGO_Header" Width="1.5" PointX="8.25" PointY="34.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.Promo_BOGO_List" Width="1.5" PointX="10.5" PointY="34.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.Promo_Header" Width="1.5" PointX="6" PointY="19.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.Promo_Items" Width="1.5" PointX="8.25" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.Promo_Items_Price" Width="1.5" PointX="8.25" PointY="18.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.Promo_Validity" Width="1.5" PointX="8.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.Promo_Value" Width="1.5" PointX="8.25" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.PromoOfferTypeM" Width="1.5" PointX="56.75" PointY="43.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.PromoPriceListHistory" Width="1.5" PointX="56.75" PointY="46.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.QueueTracking" Width="1.5" PointX="47.75" PointY="56.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.Reconciliation" Width="1.5" PointX="49.75" PointY="56.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.ReconciliationList" Width="1.5" PointX="56.75" PointY="50.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.ReconciliationTypeM" Width="1.5" PointX="56.75" PointY="54.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.RemoveOldDataTran" Width="1.5" PointX="57.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.ReplicationLog" Width="1.5" PointX="31.75" PointY="57.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.ReportBill" Width="1.5" PointX="23.75" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.ReportBillList" Width="1.5" PointX="26" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.ReportGenerationType" Width="1.5" PointX="56.75" PointY="57.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.RestaurantTypeTemplate" Width="1.5" PointX="58.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.RightsM" Width="1.5" PointX="58.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.RoomAdditionalCharge" Width="1.5" PointX="58.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.RoomAllocation_Dine" Width="1.5" PointX="58.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.RoomAllocationAdvance" Width="1.5" PointX="18" PointY="30.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.RoomAllocationList" Width="1.5" PointX="18" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.RoomAllocationTran" Width="1.5" PointX="15.75" PointY="23.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.RoomBillAdvance" Width="1.5" PointX="21" PointY="52.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.RoomBillTran" Width="1.5" PointX="18.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.RoomBillTransList" Width="1.5" PointX="21" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.RoomMaster_Dine" Width="1.5" PointX="58.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.RoomReservationAdvance" Width="1.5" PointX="18" PointY="26.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.RoomReservationList" Width="1.5" PointX="18" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.RoomReservationTran" Width="1.5" PointX="15.75" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.RoomsM" Width="1.5" PointX="15.75" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.RoomsMFacilityLink" Width="1.5" PointX="58.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.RoomTariffMapping" Width="1.5" PointX="58.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SAP_E1KOMG" Width="1.5" PointX="11" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SAP_E1KONH" Width="1.5" PointX="13.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SAP_E1KONP" Width="1.5" PointX="15.5" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SAP_E1WPA01" Width="1.5" PointX="11" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SAP_E1WPA02" Width="1.5" PointX="13.25" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SAP_E1WPA03" Width="1.5" PointX="13.25" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SAP_E1WPW01" Width="1.5" PointX="11" PointY="18.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SAP_E1WPW02" Width="1.5" PointX="13.25" PointY="19.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SAP_E1WXX01" Width="1.5" PointX="13.25" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SAP_EDI_DC40" Width="1.5" PointX="8.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SAP_SettingsM" Width="1.5" PointX="58.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SAPAdvancePayment" Width="1.5" PointX="58.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SAPBranchSubgroupMapping" Width="1.5" PointX="58.75" PointY="33.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SAPItemMapping" Width="1.5" PointX="5.25" PointY="52.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SAPItemSubGroupDineGroupMapping" Width="1.5" PointX="3" PointY="97.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.ServerConfig" Width="1.5" PointX="58.75" PointY="36.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.ServiceBillList" Width="1.5" PointX="18" PointY="20.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.ServiceBillTran" Width="1.5" PointX="15.75" PointY="29.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.ServiceOrderPayment" Width="1.5" PointX="58.75" PointY="39.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.ServiceOrderPrintingOption" Width="1.5" PointX="58.75" PointY="46.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.ServiceOrderPrintingOptionHistory" Width="1.5" PointX="58.75" PointY="49.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.ServiceOrderPrintingQueue" Width="1.5" PointX="58.75" PointY="52.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.ServiceOrderTran" Width="1.5" PointX="58.75" PointY="55.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.ServiceOrderTrans_TaxLink" Width="1.5" PointX="59.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.ServiceOrderTrans_TaxLinkList" Width="1.5" PointX="16.75" PointY="59.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.ServiceOrderTransList" Width="1.5" PointX="39.75" PointY="59.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.ServiceRequestM" Width="1.5" PointX="41.75" PointY="59.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.ServiceTaxMaster" Width="1.5" PointX="0.75" PointY="50.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.ServiceTaxMaster_List" Width="1.5" PointX="3" PointY="53" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SettingsM" Width="1.5" PointX="60.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SettlementDetail" Width="1.5" PointX="18.75" PointY="60.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SettlementInfo" Width="1.5" PointX="60.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SettlementLog" Width="1.5" PointX="60.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.Shift_Waiter_TableLink" Width="1.5" PointX="8" PointY="66.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.ShiftM" Width="1.5" PointX="5.75" PointY="74.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.ShiftM_Current" Width="1.5" PointX="60.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.ShiftMConfiguration" Width="1.5" PointX="60.75" PointY="29.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.ShiftMConfigurationHistory" Width="1.5" PointX="29.75" PointY="60.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.ShiftTemplate" Width="1.5" PointX="31.75" PointY="60.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SMSMessageList" Width="1.5" PointX="60.75" PointY="44.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SpecialItemtimeMapping" Width="1.5" PointX="60.75" PointY="47.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SpecialTimeMaster" Width="1.5" PointX="47.75" PointY="60.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SqlpatchUpdatestatu" Width="1.5" PointX="49.75" PointY="60.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SQLUpdate" Width="1.5" PointX="27.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.Sqlupdatestatu" Width="1.5" PointX="60.75" PointY="50.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.StockAdjustment" Width="1.5" PointX="60.75" PointY="54.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.StockCheckTran" Width="1.5" PointX="60.75" PointY="58.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.StockCheckTransList" Width="1.5" PointX="54.75" PointY="61.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.StockClosing" Width="1.5" PointX="62.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.StockReceiptIssueMatch" Width="1.5" PointX="62.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.StockTran" Width="1.5" PointX="62.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.StockTrans_BillTransLink" Width="1.5" PointX="62.75" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.StockTrans_OrderTransList_Link" Width="1.5" PointX="62.75" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.StockTrans_SqlLiteLink" Width="1.5" PointX="62.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.StockTransAdvance" Width="1.5" PointX="62.75" PointY="33.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.StockTransAttachment" Width="1.5" PointX="62.75" PointY="37.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.StockTransCharge" Width="1.5" PointX="62.75" PointY="41.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.StockTransContainer" Width="1.5" PointX="41.75" PointY="62.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.StockTransForm" Width="1.5" PointX="62.75" PointY="44.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.StockTransHallDetail" Width="1.5" PointX="62.75" PointY="47.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.StockTransLink" Width="1.5" PointX="62.75" PointY="51.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.StockTransList" Width="1.5" PointX="62.75" PointY="54.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.StockTransList_MaterialIssueDetails" Width="1.5" PointX="20.75" PointY="63.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.StockTransList_OrderTransList_Link" Width="1.5" PointX="22.75" PointY="63.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.StockTransListBatch" Width="1.5" PointX="31.75" PointY="63.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.StockTransListContainer" Width="1.5" PointX="64.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.StockTransListContainerOld" Width="1.5" PointX="64.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.StockTransListHistory" Width="1.5" PointX="64.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.StockTransListLink" Width="1.5" PointX="14.75" PointY="64.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.StockTransListProcess" Width="1.5" PointX="24.75" PointY="64.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.StockTransListRejection" Width="1.5" PointX="64.75" PointY="29.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.StockTransOrderTransLink" Width="1.5" PointX="64.75" PointY="33.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.StockTransReceivedItem" Width="1.5" PointX="64.75" PointY="36.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.StockTransReceivedItemsProcess" Width="1.5" PointX="64.75" PointY="40.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.StockTransTerm" Width="1.5" PointX="64.75" PointY="43.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.StockValuationList" Width="1.5" PointX="64.75" PointY="46.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.StockValuationType" Width="1.5" PointX="49.75" PointY="64.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SubGroup_ImageMapping" Width="1.5" PointX="64.75" PointY="51.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SubGroupIsAddon" Width="1.5" PointX="64.75" PointY="55.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SurchargeM" Width="1.5" PointX="64.75" PointY="58.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncAccountHeadsLevel" Width="1.5" PointX="64.75" PointY="61.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncAccountM" Width="1.5" PointX="64.75" PointY="64.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncAccountMGroup" Width="1.5" PointX="39.75" PointY="65.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncAccountMItem" Width="1.5" PointX="41.75" PointY="65.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncAccountMitems_Imagemapping" Width="1.5" PointX="66.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncAccountMItems_VatMapping" Width="1.5" PointX="66.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncAccountMItemsBOM" Width="1.5" PointX="66.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncAccountMItemsMultiUOM" Width="1.5" PointX="66.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncAccountMItemsPartnersLink" Width="1.5" PointX="66.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncAccountMItemsSalesUOM" Width="1.5" PointX="66.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncAccountMPartner" Width="1.5" PointX="66.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncAccountType" Width="1.5" PointX="20.75" PointY="66.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncBillTran" Width="1.5" PointX="66.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncBillTrans_Extn" Width="1.5" PointX="66.75" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncBillTrans_TaxLink" Width="1.5" PointX="66.75" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncBillTrans_TaxLinkList" Width="1.5" PointX="66.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncBillTransList" Width="1.5" PointX="66.75" PointY="33.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncBillTransList_DiscountList" Width="1.5" PointX="66.75" PointY="36.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncBranchHallMapping" Width="1.5" PointX="66.75" PointY="39.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncCAccountM" Width="1.5" PointX="66.75" PointY="42.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncCAccountMGroup" Width="1.5" PointX="66.75" PointY="45.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncCAccountMPartner" Width="1.5" PointX="66.75" PointY="48.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncCancelledBill" Width="1.5" PointX="66.75" PointY="51.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncCancelledBillTransList" Width="1.5" PointX="51.75" PointY="66.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncCancelledTransList" Width="1.5" PointX="53.75" PointY="66.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncCollectionTran" Width="1.5" PointX="66.75" PointY="54.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncCollectionTransLink" Width="1.5" PointX="55.75" PointY="66.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncConfig_SQLite" Width="1.5" PointX="66.75" PointY="57.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncCustomerFeedBack" Width="1.5" PointX="66.75" PointY="60.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncCustomerFeedBackList" Width="1.5" PointX="66.75" PointY="63.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncCustomerM" Width="1.5" PointX="66.75" PointY="66.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncDineGroup_ImageMapping" Width="1.5" PointX="14.75" PointY="67.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncDocumentTypeM" Width="1.5" PointX="22.75" PointY="67.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncDocumentTypeMBranch" Width="1.5" PointX="24.75" PointY="67.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncEmployeeM" Width="1.5" PointX="31.75" PointY="67.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncFeedBackMaster" Width="1.5" PointX="47.75" PointY="67.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncFinancialYearM" Width="1.5" PointX="57.75" PointY="67.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncHallTimeMapping_SQLite" Width="1.5" PointX="59.75" PointY="67.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncHolidayM" Width="1.5" PointX="68.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncKMPOSStockTransList" Width="1.5" PointX="68.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncKOTTableGrouping" Width="1.5" PointX="68.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncKotTran" Width="1.5" PointX="68.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncKotTrans_Extn" Width="1.5" PointX="68.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncKotTrans_TaxLink" Width="1.5" PointX="68.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncKotTrans_TaxLinkList" Width="1.5" PointX="16.75" PointY="68.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncKotTransList" Width="1.5" PointX="68.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncKOTTransList_DiscountList" Width="1.5" PointX="68.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncKotTransList_Extn" Width="1.5" PointX="68.75" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncMasterM" Width="1.5" PointX="68.75" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncMonth" Width="1.5" PointX="68.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncPartner_SQLite" Width="1.5" PointX="68.75" PointY="33.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncPaymentType" Width="1.5" PointX="68.75" PointY="36.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncPOSStockTransList" Width="1.5" PointX="68.75" PointY="39.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncPriceListEntry" Width="1.5" PointX="39.75" PointY="68.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncPrinterSetting" Width="1.5" PointX="41.75" PointY="68.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncProduct_SQLite" Width="1.5" PointX="68.75" PointY="42.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncRightsM" Width="1.5" PointX="68.75" PointY="45.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncServiceTaxMaster" Width="1.5" PointX="68.75" PointY="48.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncShiftM" Width="1.5" PointX="68.75" PointY="51.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncShiftMConfiguration" Width="1.5" PointX="68.75" PointY="54.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncSpecialItemtimeMapping" Width="1.5" PointX="68.75" PointY="57.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncSpecialTimeMaster" Width="1.5" PointX="68.75" PointY="60.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncSyncProduct_SQLite" Width="1.5" PointX="68.75" PointY="63.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncTableList" Width="1.5" PointX="68.75" PointY="66.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncTableM" Width="1.5" PointX="11.75" PointY="69.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncTableReservationTran" Width="1.5" PointX="18.75" PointY="69.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncUserRight" Width="1.5" PointX="49.75" PointY="69.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.SyncVATConfiguration" Width="1.5" PointX="51.75" PointY="69.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.TableAllocation" Width="1.5" PointX="53.75" PointY="69.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.TableListM" Width="1.5" PointX="64.75" PointY="69.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.TableM" Width="1.5" PointX="5.75" PointY="66.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.TableM_Clean" Width="1.5" PointX="66.75" PointY="69.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.TableReservationTran" Width="1.5" PointX="68.75" PointY="69.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.TableTransferMemoQueue" Width="1.5" PointX="70.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.TakeAwayCustomerInfo" Width="1.5" PointX="70.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.TakeAwayMemoQueue" Width="1.5" PointX="70.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.TakeAwayMemoQueue1" Width="1.5" PointX="13.75" PointY="70.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.TaxMaster" Width="1.5" PointX="70.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.TaxTypeMaster" Width="1.5" PointX="70.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.TBTran" Width="1.5" PointX="20.75" PointY="70.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.TDSMasterM" Width="1.5" PointX="70.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.TemplateM" Width="1.5" PointX="22.75" PointY="70.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.TemplateMList" Width="1.5" PointX="24.75" PointY="70.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.Timemaster" Width="1.5" PointX="70.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.TimeZone" Width="1.5" PointX="70.75" PointY="29.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.TokenMemoQueue" Width="1.5" PointX="31.75" PointY="70.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.TokenMemoQueueLink" Width="1.5" PointX="70.75" PointY="32.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.TokenNoGeneration" Width="1.5" PointX="70.75" PointY="37.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.TransactionSlNo" Width="1.5" PointX="70.75" PointY="41.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.UploadDataM" Width="1.5" PointX="70.75" PointY="44.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.UploadEmployeeM" Width="1.5" PointX="70.75" PointY="48.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.UserHallMapping" Width="1.5" PointX="70.75" PointY="52.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.UserRight" Width="1.5" PointX="70.75" PointY="55.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VATConfiguration" Width="1.5" PointX="55.75" PointY="70.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VatConfiguration_List" Width="1.5" PointX="57.75" PointY="70.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.Waiter_Dept_MappingOption" Width="1.5" PointX="70.75" PointY="58.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.WrokFlowM" Width="1.5" PointX="59.75" PointY="70.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.ZReport_Config" Width="1.5" PointX="70.75" PointY="62.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.ZReportInfo" Width="1.5" PointX="70.75" PointY="65.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.ZReportInfo_AcccTrans_Link" Width="1.5" PointX="70.75" PointY="68.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.ZReportMailHistory" Width="1.5" PointX="15.75" PointY="71.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.BillMemoQueue_LocalMachine" Width="1.5" PointX="39.75" PointY="71.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.CurrencyMHistory" Width="1.5" PointX="41.75" PointY="71.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.IsAdmin" Width="1.5" PointX="27.75" PointY="26.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.ItemTemp" Width="1.5" PointX="61.75" PointY="71.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.KitchenModuleConfig" Width="1.5" PointX="70.75" PointY="71.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.KOTMemoQueue_LocalMachine" Width="1.5" PointX="72.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.TakeAwayMemoQueue_LocalMachine" Width="1.5" PointX="72.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.TakeAwayMemoQueue_SQLite" Width="1.5" PointX="72.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.ED_GetServiceOrderAdvanceInfo" Width="1.5" PointX="72.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.HSNItem" Width="1.5" PointX="72.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.V_FormIssuedDetails" Width="1.5" PointX="72.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.V_ItemCosting" Width="1.5" PointX="17.75" PointY="72.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.vBilllingData" Width="1.5" PointX="72.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.vBilllingTableData" Width="1.5" PointX="26.75" PointY="72.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.vBilllingWaiterData" Width="1.5" PointX="72.75" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VM_AccountHeads" Width="1.5" PointX="72.75" PointY="31.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VM_AdditionalCharges" Width="1.5" PointX="72.75" PointY="34.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VM_Container" Width="1.5" PointX="72.75" PointY="37.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VM_Customers" Width="1.5" PointX="72.75" PointY="41.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.Vm_CustomersDetails" Width="1.5" PointX="72.75" PointY="45.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VM_Department" Width="1.5" PointX="47.75" PointY="72.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VM_GetFoodItems" Width="1.5" PointX="49.75" PointY="72.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VM_GetFuelItems" Width="1.5" PointX="72.75" PointY="51.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VM_GetItems" Width="1.5" PointX="72.75" PointY="55.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VM_ItemBrand" Width="1.5" PointX="72.75" PointY="58.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VM_ItemCategory" Width="1.5" PointX="72.75" PointY="61.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VM_ItemGroups" Width="1.5" PointX="72.75" PointY="64.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VM_ItemsFood" Width="1.5" PointX="72.75" PointY="67.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VM_ItemsRawMaterials" Width="1.5" PointX="72.75" PointY="72.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VM_ItemsRawMaterialsItems" Width="1.5" PointX="0.75" PointY="73.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VM_ItemSubGroups" Width="1.5" PointX="2.75" PointY="73.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VM_PAOItemsFood" Width="1.5" PointX="11.75" PointY="73.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VM_RejectionReasons" Width="1.5" PointX="31.75" PointY="73.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VM_SingleDepartment" Width="1.5" PointX="51.75" PointY="73.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VM_SingleStores" Width="1.5" PointX="57.75" PointY="73.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VM_Status" Width="1.5" PointX="63.75" PointY="73.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VM_StoreDetails" Width="1.5" PointX="65.75" PointY="73.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VM_Stores" Width="1.5" PointX="74.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VM_SubStore" Width="1.5" PointX="74.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VM_SubStores" Width="1.5" PointX="74.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VM_Terms" Width="1.5" PointX="7.75" PointY="74.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VM_Transport" Width="1.5" PointX="74.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VM_UOM" Width="1.5" PointX="74.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VM_Vendors" Width="1.5" PointX="13.75" PointY="74.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VM_VendorsDetail" Width="1.5" PointX="74.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VM_VendorsDetails" Width="1.5" PointX="74.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VT_BillAccounting" Width="1.5" PointX="19.75" PointY="74.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VT_GoodsReceipt" Width="1.5" PointX="21.75" PointY="74.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VT_GoodsReceiptInspection" Width="1.5" PointX="23.75" PointY="74.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VT_GoodsReceiptInspectionOpen" Width="1.5" PointX="74.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VT_GoodsReceiptOpen" Width="1.5" PointX="33.75" PointY="74.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VT_MaterialIndent" Width="1.5" PointX="74.75" PointY="43.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VT_MaterialIndentDraft" Width="1.5" PointX="74.75" PointY="50.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VT_MaterialIndentPending" Width="1.5" PointX="53.75" PointY="74.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VT_MaterialRequest" Width="1.5" PointX="74.75" PointY="57.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VT_MaterialRequestDraft" Width="1.5" PointX="59.75" PointY="74.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VT_MaterialRequestPending" Width="1.5" PointX="74.75" PointY="63.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VT_PurchaseOrder" Width="1.5" PointX="74.75" PointY="69.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VT_PurchaseOrderDraft" Width="1.5" PointX="28.75" PointY="75.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VT_PurchaseOrderOpen" Width="1.5" PointX="35.75" PointY="75.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.Vw_BillPendingDelivery" Width="1.5" PointX="37.75" PointY="75.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.Vw_BillPendingDelivery_Windows" Width="1.5" PointX="43.75" PointY="75.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.Vw_BranchMaster" Width="1.5" PointX="45.75" PointY="75.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.Vw_DocumentBillType" Width="1.5" PointX="67.75" PointY="75.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.Vw_DocumentBillType_Advance" Width="1.5" PointX="69.75" PointY="75.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.Vw_GetAllBillType" Width="1.5" PointX="76.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VW_GetDevicePrintConfiguration" Width="1.5" PointX="2.75" PointY="76.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VW_GetDocumentType" Width="1.5" PointX="76.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VW_GetEmployee" Width="1.5" PointX="76.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VW_GetLastBillDetails" Width="1.5" PointX="76.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VW_GetLastOrderDetails" Width="1.5" PointX="76.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VW_GetLastOrderDetails_Reprint" Width="1.5" PointX="76.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VW_GetPayMentDetails" Width="1.5" PointX="15.75" PointY="76.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VW_GetTransAvailTables" Width="1.5" PointX="76.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VW_GetVatDetails" Width="1.5" PointX="76.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.Vw_KOTPendingDelivery" Width="1.5" PointX="76.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.Vw_KOTPendingDelivery_Windows" Width="1.5" PointX="25.75" PointY="76.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.Vw_MISBilllingData" Width="1.5" PointX="30.75" PointY="76.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.Vw_MISBilllingData_BillNo" Width="1.5" PointX="76.75" PointY="34.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.Vw_MISBilllingData_BillNumber" Width="1.5" PointX="39.75" PointY="76.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.Vw_MISBilllingData_CancelledBillNumber" Width="1.5" PointX="76.75" PointY="43.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.Vw_MISBilllingData_ServiceBillNo" Width="1.5" PointX="76.75" PointY="52.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.Vw_MISBilllingData_TaxBillNo" Width="1.5" PointX="55.75" PointY="76.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.Vw_MISBilllingData_TaxServiceBillNo" Width="1.5" PointX="76.75" PointY="58.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.Vw_MISHomeDelivery_BillNumber" Width="1.5" PointX="61.75" PointY="76.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.Vw_MISPartyOrderData_BillNumber" Width="1.5" PointX="76.75" PointY="67.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.Vw_MISSalesData_ByItem" Width="1.5" PointX="76.75" PointY="75.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.Vw_MISSalesData_ByServiceItem" Width="1.5" PointX="7.75" PointY="77.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.Vw_MISServiceChargeData_ByBillNo" Width="1.5" PointX="47.75" PointY="77.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.Vw_MISServiceChargeData_ByServiceBillNo" Width="1.5" PointX="49.75" PointY="77.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VwAccountGroupLevel" Width="1.5" PointX="71.75" PointY="77.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VwAccTransDetail" Width="1.5" PointX="78.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.vwMasters_Documents" Width="1.5" PointX="4.75" PointY="78.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.vwMasters_Transactions" Width="1.5" PointX="78.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.vwMasters_TransactionsDocuments" Width="1.5" PointX="9.75" PointY="78.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VwRawMaterialItemCategory" Width="1.5" PointX="78.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KOTModel.VwRawMaterialItemGroup" Width="1.5" PointX="11.75" PointY="78.75" IsExpanded="true" />
+        <AssociationConnector Association="KOTModel.FK_AccountMGroups_AccountM" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_AccountMItems_AccountM" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_AccountMPartners_AccountM" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_CommodityM_AccountM_Mapping_AccountM" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_CommodityM_Hall_Mapping_AccountM" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_CommodityM_ServiceTaxMaster_Mapping_AccountM" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_EXP_AccountM_AccountM" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_KOTTrans_AccountM" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_KOTTrans_AccountM1" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_PriceGroupMapping_AccountM" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_SAPItemSubGroupDineGroupMapping_AccountM" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_SAPItemSubGroupDineGroupMapping_AccountM1" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_AccTransList_AccountMGroups" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_AccTransListBranchList_AccountMGroups" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_AccountMItems_DiscountMapping_AccountMItems_DiscountMapping" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_AccountMItems_RelationList_AccountMItems" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_AccountMItems_RelationList_AccountMItems1" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_AccountMItemsMultiUOM_AccountMItems" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_CommodityM_AccountMItems_Mapping_AccountMItems" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_EXP_AccountMItems_EXP_AccountMItems" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_Promo_BOGO_Header_AccountMItems" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_SAPItemMapping_AccountMItems" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_AccountMPartners_CardMaster_AccountMPartners" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_AccountMPartners_Extn" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_AccTransList_AccTrans" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_AccTransListBranchList_AccTransList" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_AccTransListCostCentre_AccTransList" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_BillTrans_EmployeeXferDetails_BillTrans" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_BillTrans_KOTTrans" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_BillTransList_BillTrans" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_CancelledBillTransList_BillTrans" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_BillTrans_Extn_SQlite_BillTrans_SQLite" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_BillTrans_TaxLink_SQlite_BillTrans_SQLite" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_BillTransList_SQLite" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_BillTransOrderInfo_SQLite_BillTrans_SQLite" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_BillTransList_AddOnsList_BillTransList" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_BillTransList_DiscountList_BillTransList_DiscountList" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_BillTransList_AddOnsList_SQLite_BillTransList" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_CollectionTransLink_CollectionTrans" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_CommodityM_AccountM_Mapping_CommodityM" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_CommodityM_AccountMItems_Mapping_CommodityM" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_CommodityM_Hall_Mapping_CommodityM" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_CommodityM_ServiceTaxMaster_Mapping_ServiceTaxMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_CouponCodeM_CustomerMapping" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_CouponCodeM_PromoMapping" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_CurrencyMList" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_CustomerFeedBackList_CustomerFeedBack" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_CustomerFeedBackList_FeedBackMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_EmployeeM_BranchMapping" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_EXP_MasterM_MasterM" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_GuestMList_GuestM" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_RoomAllocationTrans_GuestM" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_RoomBillTrans_GuestM" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_HallGroupBillno_List_HallGroupBillnoHeader" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_HallTimeMappingList_HallTimeMappingHeader" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_KOTTrans_EmployeeXferDetails_KOTTrans" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_KOTTrans_TableM" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_KOTTransList_AddOnsList_KOTTransList" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_KOTTransList_DiscountList_KOTTransList_DiscountList" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_KOTTransList_Extn_KOTTransList" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_PriceGroupMapping_MasterM" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_OutletDetails_MerchantDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_PriceListEntryHistory" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_Promo_BOGO_Header" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_Promo_BOGO_List" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_Promo_Header" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_Promo_Items_Price_Promo_Header" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_Promo_Items_Promo_Items" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_Promo_Validity_Promo_Header" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_Promo_Value_Promo_Header" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_ReportBillList_ReportBill" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_RoomAllocationAdvance_RoomAllocationTrans" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_RoomAllocationList_RoomAllocationTrans" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_RoomAllocationList_RoomsM" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_RoomBillTrans_RoomAllocationTrans" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_RoomBillAdvance_RoomBillTrans" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_RoomBillTransList_RoomBillTrans" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_RoomBillTransList_RoomsM" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_RoomReservationAdvance_RoomReservationTrans" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_RoomReservationList_RoomReservationTrans" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_RoomReservationList_RoomsM" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_ServiceBillList_RoomsM" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_SAP_E1KOMG_SAP_EDI_DC40" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_SAP_E1KONH_SAP_E1KOMG" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_SAP_E1KONP_SAP_E1KONH" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_SAP_E1WPA01_SAP_EDI_DC40" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_SAP_E1WPA02_SAP_E1WPA01" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_SAP_E1WPA03_SAP_E1WPA01" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_SAP_E1WXX01_SAP_E1WPA01" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_SAP_E1WPW01_SAP_EDI_DC40" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_SAP_E1WPW02_SAP_E1WPW02" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_ServiceBillList_ServiceBillTrans" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_ServiceTaxMaster_List_ServiceTaxMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_Shift_Waiter_TableLink_ShiftM" ManuallyRouted="false" />
+        <AssociationConnector Association="KOTModel.FK_Shift_Waiter_TableLink_TableM" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

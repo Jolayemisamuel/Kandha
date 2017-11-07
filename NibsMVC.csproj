@@ -51,12 +51,17 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.3.1.7705, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\WebGrease.1.3.0\lib\Antlr3.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="DotNetOpenAuth.AspNet, Version=4.3.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\DotNetOpenAuth.AspNet.dll</HintPath>
     </Reference>
-    <Reference Include="DotNetOpenAuth.Clients">
-      <HintPath>..\packages\DotNetOpenAuth.Clients.1.0.2\lib\DotNetOpenAuth.Clients.dll</HintPath>
+    <Reference Include="DotNetOpenAuth.Clients, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\DotNetOpenAuth.Clients.1.0.2\lib\DotNetOpenAuth.Clients.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="DotNetOpenAuth.Core, Version=4.3.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -87,8 +92,20 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Data.Edm, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Data.Edm.5.2.0\lib\net40\Microsoft.Data.Edm.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Data.OData, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Data.OData.5.2.0\lib\net40\Microsoft.Data.OData.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.AspNet.WebHelpers.3.2.3\lib\net45\Microsoft.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Web.WebPages.OAuth, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -153,26 +170,27 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.IO">
-      <HintPath>..\packages\Microsoft.Bcl.1.1.10\lib\net40\System.IO.dll</HintPath>
-    </Reference>
     <Reference Include="System.IO.Compression" />
-    <Reference Include="System.Net.Http, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net40\System.Net.Http.dll</HintPath>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Extensions, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Extensions.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="System.Net.Http.Extensions">
-      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net40\System.Net.Http.Extensions.dll</HintPath>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="System.Net.Http.Primitives">
-      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net40\System.Net.Http.Primitives.dll</HintPath>
+    <Reference Include="System.Net.Http.Primitives, Version=4.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Primitives.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="System.Net.Http.WebRequest, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
-    </Reference>
+    <Reference Include="System.Net.Http.WebRequest" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Spatial, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\System.Spatial.5.2.0\lib\net40\System.Spatial.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -183,8 +201,24 @@
       <HintPath>packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.OData, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebApi.OData.4.0.30506\lib\net40\System.Web.Http.OData.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.Web.Optimization.1.0.0\lib\net40\System.Web.Optimization.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -209,46 +243,10 @@
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
-    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.30506.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.30506.0\lib\net40\System.Web.Http.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.30506.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Optimization">
-      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.0.0\lib\net40\System.Web.Optimization.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http.OData, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.OData.4.0.30506\lib\net40\System.Web.Http.OData.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Data.Edm, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.Data.Edm.5.2.0\lib\net40\Microsoft.Data.Edm.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Data.OData, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.Data.OData.5.2.0\lib\net40\Microsoft.Data.OData.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Spatial, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\System.Spatial.5.2.0\lib\net40\System.Spatial.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="WebGrease">
+    <Reference Include="WebGrease, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\WebGrease.1.3.0\lib\WebGrease.dll</HintPath>
       <Private>True</Private>
-      <HintPath>..\packages\WebGrease.1.3.0\lib\WebGrease.dll</HintPath>
-    </Reference>
-    <Reference Include="Antlr3.Runtime">
-      <Private>True</Private>
-      <HintPath>..\packages\WebGrease.1.3.0\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="WebMatrix.Data, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.AspNet.WebPages.Data.3.2.3\lib\net45\WebMatrix.Data.dll</HintPath>
@@ -302,11 +300,815 @@
     <Compile Include="Controllers\TodayController.cs" />
     <Compile Include="Controllers\VendorController.cs" />
     <Compile Include="Controllers\X_ReadingReportController.cs" />
+    <Compile Include="EDMX\AccCashSettlement.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\AccountClosing.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\AccountHeadsLevel.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\AccountM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\AccountMConfiguration.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\AccountMCustomerLink.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\AccountMGroup.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\AccountMGroups_Branch.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\AccountMItem.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\AccountMItemsBOM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\AccountMItemsBrand.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\AccountMItemsFGBOM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\AccountMItemsList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\AccountMItemsMultiUOM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\AccountMItemsPartnersLink.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\AccountMItemsSalesUOM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\AccountMItems_CommissionM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\AccountMItems_ContainerMapping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\AccountMItems_DiscountMapping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\AccountmItems_FoodType.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\AccountMItems_ImageMapping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\AccountMItems_RelationList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\AccountMItems_ServiceChargeMapping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\AccountMItems_ServiceTaxMapping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\AccountMItems_UsageRatio.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\AccountMItems_VatMapping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\AccountMPartner.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\AccountMPartnersAddress.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\AccountMPartnersContact.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\AccountMPartnersTD.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\AccountMPartners_CardMaster.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\AccountMPartners_Extn.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\AccountMPartnerTerm.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\AccountM_CardDetails.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\AccountM_CardDetailsList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\AccountM_CardDetails_History.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\AccountType.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\AccTran.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\AccTransDocument.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\AccTransLink.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\AccTransList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\AccTransListBranchList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\AccTransListCostCentre.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\AccTransListMatch.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\AccTrans_BillTrans_Link.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\AccTrans_BranchAccountTrans_Link.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\AccTrans_PaymentTrans_Link.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\AccTrans_SqlLiteLink.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\AccTrans_StockTrans_Link.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="EDMX\AddCategoryVendor.cs">
       <DependentUpon>NIBSDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="EDMX\AreaMaster.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="EDMX\AutoInventory.cs">
       <DependentUpon>NIBSDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\BarAtGlanceAbstract.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\BillMemoQueue_LocalMachine.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\BillPrintingQueue.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\BillPrintMemoQueue1.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\BillProduct_DeliveredStatus_Sqlite.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\BillTran.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\BillTransList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\BillTransList_AddOnsList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\BillTransList_AddOnsList_SQLite.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\BillTransList_DiscountList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\BillTransList_DiscountList_SQLite.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\BillTransList_IsDeliveredList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\BillTransList_SQLite.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\BillTransList_StockTransList_Link.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\BillTransList_TransactionSlNos.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\BillTransOrderInfo_SQLite.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\BillTrans_BranchMapping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\BillTrans_CalculationSQLite.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\BillTrans_EmployeeXferDetails.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\BillTrans_Extn.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\BillTrans_Extn_SQlite.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\BillTrans_FoodPreparation_Status.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\BillTrans_SQLite.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\BillTrans_SQLite_Status.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\BillTrans_SqlLiteLink.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\BillTrans_TaxLink.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\BillTrans_TaxLinkList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\BillTrans_TaxLink_SQlite.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\BillTrans_TransactionSlNos.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\BranchAccountTran.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\BranchAccountTrans_BillTrans_Link.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\BranchHallMapping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\BranchLogoMapping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\BranchwiseHallMapping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\BuyerInfo.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\BuyerInfoConfig.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\CalendarM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\CancelledBill.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\CancelledBillTransList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\CancelledStockListLink.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\CancelledTransList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\Captain_TableMapping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\CashierCollectionInfo.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\CashierMapping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\CashInOutDetail.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\CashInOutDetailsDenomination.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\CategoryAccountMLink.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ChequeM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ChequeMList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\CloudOrderDownloadStatu.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\CollectionTran.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\CollectionTransLink.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\CommissionM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\CommodityM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\CommodityM_AccountMItems_Mapping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\CommodityM_AccountM_Mapping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\CommodityM_Hall_Mapping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\CommodityM_ServiceTaxMaster_Mapping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\CompanyLogoMapping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\Configuration.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ConfigurationM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ConfigurationsM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ContainerM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\CouponCodeM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\CouponCodeM_CustomerMapping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\CouponCodeM_PromoMapping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\CreditBillPayment.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\CreditBillPaymentDetail.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\CreditBillTran.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\CreditBillTransList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\Criterion.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\CurrencyM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\CurrencyMHistory.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\CurrencyMList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\CustomerFeedBack.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\CustomerFeedBackList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\CustomerM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\CustomerServiceRequest.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\Customer_Loyalty.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\Customer_LoyaltyHistory.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\DailyAccount.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\DailyItemPurchase.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\DailyStockClosing.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\DashboardMenu.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\DataUploadLog.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\DeliveryTran.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\DeviceInformation.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\DevicePrintConfigurationM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\DineGroup_ImageMapping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\DineGroup_InstructionMapping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\DiscountM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\DocNoGeneration.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\DocumentHistory.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\DocumentTypeM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\DocumentTypeMBranch.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\DocumentTypeMList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\EasyOrderBill.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\EasyOrderBillPayment.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\EasyOrderBillsResponse.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\EazyStoreHallDetail.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\EDI_DC40.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ED_GetComboList_Result.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ED_GetContainerPriceby_ItemUID_Result.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ED_GetContainerPriceby_KOTID_Result.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ED_GetFGItemList_Result.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ED_GetGroupedTables_Result.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ED_GetHappyHourDiscount_Result.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ED_GetServiceOrderAdvanceInfo.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ED_GetSOVatInfo_Result.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ED_GetVatInfo_Result.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\EHM_GetFIFO_Result.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\EHM_GetWAMForISSUE_Result.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\EHM_GetWAM_Counter_Result.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\EHM_GetWAM_Result.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\Emailconfiguration.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\EmployeeList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\EmployeeM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\EmployeeM_BranchMapping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\EmployeeM_WagesDetails.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\Employee_LeaveDetails.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\Employee_WorkAllocation.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ExceptionalGroupForEmp.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ExeMaster.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ExeScheduler_Mapping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\EXP_AccountM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\EXP_AccountMItems.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\EXP_MasterM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\EXP_Payment.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\EXP_Sales.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\FacilityMaster.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\FeedBackAnswer.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\FeedBackAnswerMapping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\FeedBackAnswersTemplate.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\FeedBackMaster.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\FeedBackMasterTemplate.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\FGIssueStoresMapping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\FinancialYearM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\FN_Date_Result.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\FN_GetEazyMasterPartnerInfo_Result.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\FN_GetTotalDeductionForItemWiseST_Result.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\FN_StringToTable_Result.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\FN_WithoutKOTTableForTableGroup_Result.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\FoodAvaialabilityTemplateM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\FoodAvailability.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\Form_RegionalFontMapping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\FreeIssueTran.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\FreeIssueTransList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\GSTSplitPercentage.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\GuestM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\GuestMList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\HallCharge.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\HallGroupBillnoHeader.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\HallGroupBillno_List.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\HallItemsGroupMapping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\HallTimeMappingHeader.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\HallTimeMappingList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\Hall_DuplicatePrintMapping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\HappyhoursM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\HolidayM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\HSNItem.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\IdentificationMaster.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\IsAdmin.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\IsCloudServer.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ItemBarcode_Settings.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ItemCategoryGroupAccountMapping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ItemCategoryGroupMapping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ItemGroupAccountMLink.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ItemGroupTaxMapping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ItemGroupVATMapping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ItemPriceMapping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ItemsTemplate.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ItemTemp.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ItemTimeMapping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ItemTimeUpdate.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\Item_PrintMapping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\JuiceAvailability.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\KitchenModuleConfig.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\KitchenWisePrintM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\KMPOSStockTransList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\KMRightsM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\KMUserright.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\KOTDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>KOTDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\KOTDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\KOTDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>KOTDB.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\KOTItemSentDetail.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\KOTMemoQueue.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\KOTMemoQueueLink.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\KOTMemoQueue_LocalMachine.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\KOTTableGrouping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\KOTTouch_ButtonConfig.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\KOTTran.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\KOTTransList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\KOTTransListCancellation.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\KOTTransListPreference.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\KOTTransList_AddOnsList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\KOTTransList_DeliveryStatus.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\KOTTransList_DiscountList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\KOTTransList_Extn.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\KOTTrans_EmployeeXferDetails.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\KOTTrans_Extn.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\KotTrans_TaxLink.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\KotTrans_TaxLinkList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\LodgingPaymentType.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\LodgingRightsM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\LoginBranchName.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\LoginChecking.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\LoginDepartmentMapping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\LoginDetail.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\LoginStoresMapping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\MasterM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\MasterSlNo.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\MasterTemplate.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\MerchantDetail.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\Month.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\MonthlyTaxPaidChallanDetail.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\MultiTemplateLink.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
     </Compile>
     <Compile Include="EDMX\NIBSDB.Context.cs">
       <AutoGen>True</AutoGen>
@@ -356,20 +1158,761 @@
     <Compile Include="EDMX\Nibs_Offer_Free_Items.cs">
       <DependentUpon>NIBSDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="EDMX\Onlineorder_MachineInfo.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\Online_StoresSettings.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="EDMX\OpenFood.cs">
       <DependentUpon>NIBSDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\OrderTran.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\OrderTransAdvance.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\OrderTransAttachment.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\OrderTransBooking.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\OrderTransCharge.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\OrderTransHallDetail.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\OrderTransLink.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\OrderTransList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\OrderTransListLink.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\OrderTransListProcess.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\OrderTransListSample.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\OrderTransTerm.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\OrderTrans_MultiTemplateLink.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\OrderTrans_SqlLiteLink.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\OrderTrans_TemplateMLink.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\OtherConfiguration.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\OtherConfigurationHistory.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\OtherConfiguration_Extn.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\OtherConfiguration_ExtnHistory.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\OtherEmailconfiguration.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\OtherSetting.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\OtherSettingshistory.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\OtherSettings_Extn.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\OtherSettings_ExtnHistory.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\OutletDetail.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
     </Compile>
     <Compile Include="EDMX\OutletVendor.cs">
       <DependentUpon>NIBSDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="EDMX\PAOCUnderAccountMapping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ParcelChargeConfig.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\PartyAccountGroup.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\PaymentGatewayM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\PaymentSerialNo.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\PaymentType.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\PaymentTypeM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\PaymentType_History.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\PendingPOConfig.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\PettyCashInfo.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\POSItemBatchStock.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\POSReplicationLog.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\POSStockTransList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\POSStockTransListLink.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\Preference_ItemM_Link.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\PriceGroupMapping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\PriceListEntry.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\PriceListEntryHistory.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\PriceListM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\PriceListMList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\PriceListM_AccountMGroups_Link.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\PrinterConfiguration.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\PrinterSetting.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\PrintM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\PromoOfferTypeM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\PromoPriceListHistory.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\Promo_BOGO_Header.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\Promo_BOGO_List.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\Promo_Header.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\Promo_Items.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\Promo_Items_Price.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\Promo_Validity.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\Promo_Value.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\QueueTracking.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="EDMX\RawCategory.cs">
       <DependentUpon>NIBSDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\Reconciliation.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ReconciliationList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ReconciliationTypeM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\RemoveOldDataTran.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ReplicationLog.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ReportBill.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ReportBillList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ReportGenerationType.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\RestaurantTypeTemplate.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\RightsM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\RoomAdditionalCharge.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\RoomAllocationAdvance.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\RoomAllocationList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\RoomAllocationTran.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\RoomAllocation_Dine.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\RoomBillAdvance.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\RoomBillTran.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\RoomBillTransList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\RoomMaster_Dine.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\RoomReservationAdvance.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\RoomReservationList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\RoomReservationTran.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\RoomsM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\RoomsMFacilityLink.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\RoomTariffMapping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SAPAdvancePayment.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SAPBranchSubgroupMapping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SAPItemMapping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SAPItemSubGroupDineGroupMapping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SAP_E1KOMG.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SAP_E1KONH.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SAP_E1KONP.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SAP_E1WPA01.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SAP_E1WPA02.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SAP_E1WPA03.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SAP_E1WPW01.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SAP_E1WPW02.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SAP_E1WXX01.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SAP_EDI_DC40.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SAP_SettingsM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
     </Compile>
     <Compile Include="EDMX\SelesVendorAmount.cs">
       <DependentUpon>NIBSDB.tt</DependentUpon>
     </Compile>
     <Compile Include="EDMX\SelesVendorAmountDetail.cs">
       <DependentUpon>NIBSDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ServerConfig.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ServiceBillList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ServiceBillTran.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ServiceOrderPayment.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ServiceOrderPrintingOption.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ServiceOrderPrintingOptionHistory.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ServiceOrderPrintingQueue.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ServiceOrderTran.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ServiceOrderTransList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ServiceOrderTrans_TaxLink.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ServiceOrderTrans_TaxLinkList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ServiceRequestM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ServiceTaxMaster.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ServiceTaxMaster_List.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SettingsM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SettlementDetail.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SettlementInfo.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SettlementLog.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ShiftM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ShiftMConfiguration.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ShiftMConfigurationHistory.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ShiftM_Current.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ShiftTemplate.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\Shift_Waiter_TableLink.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SMSMessageList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SpecialItemtimeMapping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SpecialTimeMaster.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SqlpatchUpdatestatu.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SQLUpdate.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\Sqlupdatestatu.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\StockAdjustment.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\StockCheckTran.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\StockCheckTransList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\StockClosing.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\StockReceiptIssueMatch.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\StockTran.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\StockTransAdvance.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\StockTransAttachment.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\StockTransCharge.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\StockTransContainer.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\StockTransForm.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\StockTransHallDetail.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\StockTransLink.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\StockTransList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\StockTransListBatch.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\StockTransListContainer.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\StockTransListContainerOld.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\StockTransListHistory.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\StockTransListLink.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\StockTransListProcess.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\StockTransListRejection.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\StockTransList_MaterialIssueDetails.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\StockTransList_OrderTransList_Link.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\StockTransOrderTransLink.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\StockTransReceivedItem.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\StockTransReceivedItemsProcess.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\StockTransTerm.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\StockTrans_BillTransLink.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\StockTrans_OrderTransList_Link.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\StockTrans_SqlLiteLink.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\StockValuationList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\StockValuationType.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SubGroupIsAddon.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SubGroup_ImageMapping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SurchargeM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncAccountHeadsLevel.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncAccountM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncAccountMGroup.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncAccountMItem.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncAccountMItemsBOM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncAccountMItemsMultiUOM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncAccountMItemsPartnersLink.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncAccountMItemsSalesUOM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncAccountMitems_Imagemapping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncAccountMItems_VatMapping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncAccountMPartner.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncAccountType.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncBillTran.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncBillTransList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncBillTransList_DiscountList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncBillTrans_Extn.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncBillTrans_TaxLink.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncBillTrans_TaxLinkList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncBranchHallMapping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncCAccountM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncCAccountMGroup.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncCAccountMPartner.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncCancelledBill.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncCancelledBillTransList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncCancelledTransList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncCollectionTran.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncCollectionTransLink.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncConfig_SQLite.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncCustomerFeedBack.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncCustomerFeedBackList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncCustomerM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncDineGroup_ImageMapping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncDocumentTypeM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncDocumentTypeMBranch.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncEmployeeM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncFeedBackMaster.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncFinancialYearM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncHallTimeMapping_SQLite.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncHolidayM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncKMPOSStockTransList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncKOTTableGrouping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncKotTran.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncKotTransList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncKOTTransList_DiscountList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncKotTransList_Extn.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncKotTrans_Extn.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncKotTrans_TaxLink.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncKotTrans_TaxLinkList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncMasterM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncMonth.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncPartner_SQLite.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncPaymentType.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncPOSStockTransList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncPriceListEntry.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncPrinterSetting.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncProduct_SQLite.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncRightsM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncServiceTaxMaster.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncShiftM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncShiftMConfiguration.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncSpecialItemtimeMapping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncSpecialTimeMaster.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncSyncProduct_SQLite.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncTableList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncTableM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncTableReservationTran.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncUserRight.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\SyncVATConfiguration.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\TableAllocation.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\TableListM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\TableM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\TableM_Clean.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\TableReservationTran.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\TableTransferMemoQueue.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\TakeAwayCustomerInfo.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\TakeAwayMemoQueue.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\TakeAwayMemoQueue1.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\TakeAwayMemoQueue_LocalMachine.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\TakeAwayMemoQueue_SQLite.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\TaxMaster.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\TaxTypeMaster.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
     </Compile>
     <Compile Include="EDMX\tblBasePriceItem.cs">
       <DependentUpon>NIBSDB.tt</DependentUpon>
@@ -434,6 +1977,9 @@
     <Compile Include="EDMX\tblTransfer.cs">
       <DependentUpon>NIBSDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="EDMX\tblTransferReturnReport.cs">
+      <DependentUpon>NIBSDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="EDMX\tblVendor.cs">
       <DependentUpon>NIBSDB.tt</DependentUpon>
     </Compile>
@@ -455,11 +2001,68 @@
     <Compile Include="EDMX\tbl_ServiceTax.cs">
       <DependentUpon>NIBSDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="EDMX\TBTran.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\TDSMasterM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\TemplateM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\TemplateMList.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="EDMX\Temp_VendorBilling.cs">
       <DependentUpon>NIBSDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="EDMX\Timemaster.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\TimeZone.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\TokenMemoQueue.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\TokenMemoQueueLink.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\TokenNoGeneration.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\TransactionSlNo.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="EDMX\Unit.cs">
       <DependentUpon>NIBSDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\UploadDataM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\UploadEmployeeM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\UserHallMapping.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\UserRight.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VATConfiguration.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VatConfiguration_List.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\vBilllingData.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\vBilllingTableData.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\vBilllingWaiterData.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
     </Compile>
     <Compile Include="EDMX\VendorBillingItem.cs">
       <DependentUpon>NIBSDB.tt</DependentUpon>
@@ -469,6 +2072,276 @@
     </Compile>
     <Compile Include="EDMX\VendorPrice.cs">
       <DependentUpon>NIBSDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VM_AccountHeads.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VM_AdditionalCharges.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VM_Container.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VM_Customers.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\Vm_CustomersDetails.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VM_Department.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VM_GetFoodItems.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VM_GetFuelItems.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VM_GetItems.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VM_ItemBrand.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VM_ItemCategory.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VM_ItemGroups.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VM_ItemsFood.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VM_ItemsRawMaterials.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VM_ItemsRawMaterialsItems.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VM_ItemSubGroups.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VM_PAOItemsFood.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VM_RejectionReasons.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VM_SingleDepartment.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VM_SingleStores.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VM_Status.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VM_StoreDetails.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VM_Stores.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VM_SubStore.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VM_SubStores.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VM_Terms.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VM_Transport.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VM_UOM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VM_Vendors.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VM_VendorsDetail.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VM_VendorsDetails.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VT_BillAccounting.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VT_GoodsReceipt.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VT_GoodsReceiptInspection.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VT_GoodsReceiptInspectionOpen.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VT_GoodsReceiptOpen.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VT_MaterialIndent.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VT_MaterialIndentDraft.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VT_MaterialIndentPending.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VT_MaterialRequest.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VT_MaterialRequestDraft.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VT_MaterialRequestPending.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VT_PurchaseOrder.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VT_PurchaseOrderDraft.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VT_PurchaseOrderOpen.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VwAccountGroupLevel.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VwAccTransDetail.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\vwMasters_Documents.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\vwMasters_Transactions.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\vwMasters_TransactionsDocuments.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VwRawMaterialItemCategory.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VwRawMaterialItemGroup.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\Vw_BillPendingDelivery.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\Vw_BillPendingDelivery_Windows.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\Vw_BranchMaster.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\Vw_DocumentBillType.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\Vw_DocumentBillType_Advance.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\Vw_GetAllBillType.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VW_GetDevicePrintConfiguration.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VW_GetDocumentType.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VW_GetEmployee.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VW_GetLastBillDetails.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VW_GetLastOrderDetails.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VW_GetLastOrderDetails_Reprint.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VW_GetPayMentDetails.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VW_GetTransAvailTables.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\VW_GetVatDetails.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\Vw_KOTPendingDelivery.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\Vw_KOTPendingDelivery_Windows.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\Vw_MISBilllingData.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\Vw_MISBilllingData_BillNo.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\Vw_MISBilllingData_BillNumber.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\Vw_MISBilllingData_CancelledBillNumber.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\Vw_MISBilllingData_ServiceBillNo.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\Vw_MISBilllingData_TaxBillNo.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\Vw_MISBilllingData_TaxServiceBillNo.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\Vw_MISHomeDelivery_BillNumber.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\Vw_MISPartyOrderData_BillNumber.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\Vw_MISSalesData_ByItem.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\Vw_MISSalesData_ByServiceItem.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\Vw_MISServiceChargeData_ByBillNo.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\Vw_MISServiceChargeData_ByServiceBillNo.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\V_FormIssuedDetails.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\V_ItemCosting.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\Waiter_Dept_MappingOption.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\WrokFlowM.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ZReportInfo.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ZReportInfo_AcccTrans_Link.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ZReportMailHistory.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ZReport_Config.cs">
+      <DependentUpon>KOTDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -1041,6 +2914,16 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="EDMX\KOTDB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>KOTDB.edmx</DependentUpon>
+      <LastGenOutput>KOTDB.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="EDMX\KOTDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>KOTDB.edmx</DependentUpon>
+      <LastGenOutput>KOTDB.cs</LastGenOutput>
+    </Content>
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="assets\global\plugins\simple-line-icons\fonts\Simple-Line-Icons.eot" />
@@ -1051,16 +2934,25 @@
     <Content Include="HomeDeliveryXml\Kot.xml" />
     <Content Include="Images\exit.png" />
     <Content Include="Images\No_image_available.jpg" />
+    <EntityDeploy Include="EDMX\KOTDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>KOTDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="EDMX\KOTDB.edmx.diagram">
+      <DependentUpon>KOTDB.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
     <Content Include="Scripts\jquery-ui-1.11.4.js" />
     <Content Include="Scripts\jquery-ui-1.11.4.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\json-to-table.js" />
     <Content Include="Scripts\knockout-3.3.0.debug.js" />
     <Content Include="Scripts\knockout-3.3.0.js" />
@@ -1117,12 +3009,10 @@
     <Content Include="assets\global\plugins\font-awesome\scss\_stacked.scss" />
     <Content Include="assets\global\plugins\font-awesome\scss\_variables.scss" />
     <Content Include="assets\global\plugins\bootstrap-toastr\toastr.min.js.map" />
+    <Content Include="packages.config" />
     <None Include="Properties\PublishProfiles\NibsMVC.pubxml" />
     <None Include="Properties\PublishProfiles\PublishNibs.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
-    <Content Include="Scripts\jquery-2.1.4.min.map" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -1312,15 +3202,16 @@
     <Content Include="Views\StockTransfer\AddStock.cshtml" />
     <Content Include="Views\KitchenStock\ExtraStock.cshtml" />
     <Content Include="Views\PurchaseOrder\POBillReport.cshtml" />
+    <Content Include="Views\StockTransfer\TransferReturn.cshtml" />
+    <Content Include="Views\StockTransfer\TransferStockReturnReport.cshtml" />
+    <Content Include="Scripts\jquery-2.1.4.min.map" />
+    <Content Include="Views\Shared\_PartialSalesMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="ItemImages\" />
     <Folder Include="Views\OutletReturn\" />
     <Folder Include="xmltables\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -1356,12 +3247,12 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
-  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
-    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
-    <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
-  </Target>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Import Project="packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
+    <Error Condition="!Exists('packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

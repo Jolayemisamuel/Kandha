@@ -16,7 +16,7 @@ namespace NibsMVC.EDMX
     //using System.Data.Objects;
     //using System.Data.Objects.DataClasses;
     using System.Linq;
-    
+
     public partial class NIBSEntities : DbContext
     {
         public NIBSEntities()
@@ -80,6 +80,7 @@ namespace NibsMVC.EDMX
         public DbSet<AddCategoryVendor> AddCategoryVendors { get; set; }
         public DbSet<tblPurchaseMaster> tblPurchaseMasters { get; set; }
         public DbSet<tblGRNStock> tblGRNStocks { get; set; }
+        public DbSet<tblTransferReturnReport> tblTransferReturnReports { get; set; }
     
         public virtual int BillReportGenerate(string orderType, string paymentType, Nullable<System.DateTime> datefrom, Nullable<System.DateTime> dateto, Nullable<int> billNo, string newsql)
         {

@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="87f1ccec998e49a5b6cea1d388114733" Name="Diagram1" ZoomLevel="87">
+      <Diagram DiagramId="87f1ccec998e49a5b6cea1d388114733" Name="Diagram1" ZoomLevel="67">
         <EntityTypeShape EntityType="NIBSModel.NIbs_AssignOffer" Width="1.5" PointX="16.5" PointY="18.5" />
         <EntityTypeShape EntityType="NIBSModel.NIbs_ComboOffer" Width="1.5" PointX="8.25" PointY="12.75" IsExpanded="false" />
         <EntityTypeShape EntityType="NIBSModel.Nibs_HappyHours_Date" Width="1.5" PointX="11.25" PointY="27.875" />
@@ -128,6 +128,11 @@
         <AssociationConnector Association="NIBSModel.FK_tblPurchasedItem_tblPurchasedItem" />
         <EntityTypeShape EntityType="NIBSModel.tblGRNStock" Width="1.5" PointX="5.25" PointY="44.25" />
         <AssociationConnector Association="NIBSModel.FK_tblGRNStock_tbl_RawMaterials" />
+        <EntityTypeShape EntityType="NIBSModel.tblTransferReturnReport" Width="1.5" PointX="21.5" PointY="16" />
+        <AssociationConnector Association="NIBSModel.FK_tblTransferReturnReport_tbl_RawMaterials" />
+        <AssociationConnector Association="NIBSModel.FK_tblTransferReturnReport_tblOutlet" />
+        <AssociationConnector Association="NIBSModel.FK_AddItem_Department" />
+        <AssociationConnector Association="NIBSModel.FK_tblItem_tblItem" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

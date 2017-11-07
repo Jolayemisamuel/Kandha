@@ -222,6 +222,28 @@ namespace NibsMVC.Repository
                 return "something Wrong try Agian !";
             }
         }
+        public string DeleteRawIndent(int Id)
+        {
+            try
+            {
+                var data = _entities.tblItems.Where(x => x.ItemId == Id).SingleOrDefault();         
+                
+                _entities.tblItems.Remove(data);
+                var dataindent = (from p in _entities.tbl_KitchenRawIndent where p.ItemId.Equals(Id) select p).ToList();
+                foreach (var item in dataindent)
+                {
+                    _entities.tbl_KitchenRawIndent.Remove(item);
+                    //_entities.SaveChanges();
+
+                }
+                _entities.SaveChanges();
+                return "Record deleted Successfully...";
+            }
+            catch
+            {
+                return "something Wrong try Agian !";
+            }
+        }
         public AddRawCategoryModel EditRawCategory(int Id)
         {
             AddRawCategoryModel model = new AddRawCategoryModel();
@@ -377,6 +399,8 @@ namespace NibsMVC.Repository
             model.lstofCategorirs = GetListofCategories();
             model.GetListOfKitchenRawIndents = GetListOfRawIndents();
             model.GetAllAutocomplete = GetList();
+            model.lstofUnits = GetListofUnits();
+            model.lstofRawCategories = GetListofRawCategories();
             return model;
         }
         public List<ListOfRawIndent> GetListOfRawIndents()
@@ -419,17 +443,27 @@ namespace NibsMVC.Repository
             }
             return sb.ToString();
         }
-        
+        public string GetListofRawItems(int Id)
+        {
+            var data = _entities.tbl_RawMaterials.Where(x => x.RawCategory.RawCategoryID == Id).ToList();
+            StringBuilder sb = new StringBuilder();
+            foreach (var item in data)
+            {
+                sb.Append("<option value=" + item.RawMaterialId + ">" + item.Name + "</option>");
+            }
+            return sb.ToString();
+        }
+
         public List<SelectListItem> GetListofCategories()
         {
             
             var selList = new List<SelectListItem>();
-            List<AddCategoryModel> lst = (from item in _entities.tblCategories.Where(x => x.Active == true ).ToList()
-                                          select new AddCategoryModel()
+            List<GetUnitCategory> lst = (from item in _entities.tblCategories.Where(x => x.Active == true ).ToList()
+                                          select new GetUnitCategory()
                                           {
                                               CategoryId = item.CategoryId,
                                               Name = item.Name
-                                          }).ToList<AddCategoryModel>();
+                                          }).ToList<GetUnitCategory>();
             foreach (var item in lst)
             {
                 selList.Add(new SelectListItem
@@ -440,11 +474,54 @@ namespace NibsMVC.Repository
             }
             return selList;
         }
+        public List<SelectListItem> GetListofRawCategories()
+        {
+
+            var selRawList = new List<SelectListItem>();
+            List<GetUnitCategory> lst = (from item in _entities.RawCategories.Where(x => x.Active == true).ToList()
+                                         select new GetUnitCategory()
+                                         {
+                                             CategoryId = item.RawCategoryID,
+                                             Name = item.Name
+                                         }).ToList<GetUnitCategory>();
+            foreach (var item in lst)
+            {
+                selRawList.Add(new SelectListItem
+                {
+                    Text = item.Name.ToString(),
+                    Value = item.CategoryId.ToString()
+                });
+            }
+            return selRawList;
+        }
+
+        public List<SelectListItem> GetListofUnits()
+        {
+
+            var selList1 = new List<SelectListItem>();
+            List<UnitModel1> lst1 = (from item1 in _entities.Units.Where(x => x.Active == true).ToList()
+                                          select new UnitModel1()
+                                          {
+                                              Unitid = item1.UnitId,
+                                              UnitName = item1.UnitName
+                                          }).ToList<UnitModel1>();
+            foreach (var item1 in lst1)
+            {
+                selList1.Add(new SelectListItem
+                {
+                    Text = item1.UnitName.ToString(),
+                    Value = item1.Unitid.ToString()
+                });
+            }
+            return selList1;
+        }
         public string UpdateKitchenRawMaterail(KitchenRawIndentModel model,string path)
         {
-            int oulte = WebSecurity.CurrentUserId;
+            int oulte = 99; //WebSecurity.CurrentUserId;
+            int unitid = Convert.ToInt32(model.Unit);
             XDocument xd = XDocument.Load(path);
-            var RawId = _entities.tbl_RawMaterials.Where(x => x.Name.Equals(model.RawMaterialId)).Select(x => x.RawMaterialId).SingleOrDefault();
+            var unit = _entities.Units.Where(x => x.UnitId == unitid ).SingleOrDefault();
+ 
             //var items = from item in xd.Descendants("Items")
             //            where item.Element("UserId").Value == oulte.ToString() 
             //            && item.Element("RawCategoryId").Value == model.RawCategoryId.ToString() &&
@@ -472,8 +549,8 @@ namespace NibsMVC.Repository
                          new XElement("UserId", oulte),
                          new XElement("RawCategoryId", model.RawCategoryId),
                          new XElement("ItemId", model.ItemId),
-                         new XElement("RawMaterialId", RawId),
-                         new XElement("Unit", model.Unit),
+                         new XElement("RawMaterialId", model.RawMaterialId ),
+                         new XElement("Unit", unit.UnitName ),
                          new XElement("Quantity", model.Quantity));
                  xd.Element("Item").Add(newElement);
                  xd.Save(path);
@@ -484,13 +561,13 @@ namespace NibsMVC.Repository
         {
             XDocument xd = XDocument.Load(path);
 
-            int oulte = WebSecurity.CurrentUserId;
+            int oulte = 99; //WebSecurity.CurrentUserId;
             var result = from item in xd.Descendants("Items")
                          where item.Element("UserId").Value == oulte.ToString() 
                          select item;
             StringBuilder sb = new StringBuilder();
             int counter = 1;
-            sb.Append("<table class='table'><thead><tr><th>S.No</th><th>Category Name</th><th>ItemName</th><th>RawMaterial Name</th><th>Unit</th><th>Qyantity</th></tr></thead>");
+            sb.Append("<table class='table'><thead><tr><th>S.No</th><th>Category Name</th><th>ItemName</th><th>RawMaterial Name</th><th>Unit</th><th>Quantity</th></tr></thead>");
             sb.Append("<tbody>");
             foreach (var item in result)
             {
@@ -515,7 +592,7 @@ namespace NibsMVC.Repository
             {
                 XDocument xd = XDocument.Load(path);
 
-                int oulte = WebSecurity.CurrentUserId;
+                int oulte = 99; //WebSecurity.CurrentUserId;
                 var result = (from item in xd.Descendants("Items")
                               where item.Element("UserId").Value == oulte.ToString()
 
@@ -525,7 +602,7 @@ namespace NibsMVC.Repository
                     tbl_KitchenRawIndent tb = new tbl_KitchenRawIndent();
                     tb.CategoryId = Convert.ToInt32(item.Element("RawCategoryId").Value);
                     tb.ItemId = Convert.ToInt32(item.Element("ItemId").Value);
-                    tb.Quantity = Convert.ToInt32(item.Element("Quantity").Value);
+                    tb.Quantity = Convert.ToDecimal(item.Element("Quantity").Value);
                     tb.RawMaterialId = Convert.ToInt32(item.Element("RawMaterialId").Value);
                     tb.Unit = item.Element("Unit").Value;
                     _entities.tbl_KitchenRawIndent.Add(tb);
@@ -554,15 +631,16 @@ namespace NibsMVC.Repository
             {
                 ListOfKitchenRawIndent model = new ListOfKitchenRawIndent();
                 model.ItemId = item.FirstOrDefault().tblItem.Name;
+                model.Item = item.FirstOrDefault().tblItem.ItemId;
                 model.RawCategoryId = item.FirstOrDefault().tblCategory.Name;
                 var items = _entities.tbl_KitchenRawIndent.Where(x=> x.ItemId == item.Key).ToList();
                 List<InnerKitchenRawIndent> l = new List<InnerKitchenRawIndent>();
-                foreach (var it in items)
+                foreach (var it in  items)
                 {
                     InnerKitchenRawIndent m = new InnerKitchenRawIndent();
                     m.Quantity = it.Quantity;
                     m.RawMaterialId = it.tbl_RawMaterials.Name;
-                    m.Unit = it.Unit;
+                    m.Unit = it.tbl_RawMaterials.units;
                     l.Add(m);
                 }
                 model.ListOfInnerMaterial = l;
@@ -578,7 +656,7 @@ namespace NibsMVC.Repository
             var RawMaterialId=ids[1];
             var ItemId=ids[0];
             var result = (from item in xd.Descendants("Items")
-                          where item.Element("UserId").Value == WebSecurity.CurrentUserId.ToString() &&
+                          where item.Element("UserId").Value == "99" &&
                           item.Element("ItemId").Value == ItemId &&
                           item.Element("RawMaterialId").Value == RawMaterialId
                           select item);

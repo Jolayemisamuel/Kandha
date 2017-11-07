@@ -57,6 +57,7 @@ namespace NibsMVC.Models
     {
         public int Id { get; set; }
         public int RawCategoryId { get; set; }
+        public int RawMaterialCategoryId { get; set; }
         public int ItemId { get; set; }
         public string RawMaterialId { get; set; }
         public decimal Quantity { get; set; }
@@ -64,7 +65,8 @@ namespace NibsMVC.Models
         public List<SelectListItem> lstofCategorirs { get; set; }
         public List<ListOfRawIndent> GetListOfKitchenRawIndents { get; set; }
         public List<RawAutocompleteModel> GetAllAutocomplete { get; set; }
-
+        public List<SelectListItem> lstofUnits { get; set; }
+        public List<SelectListItem> lstofRawCategories { get; set; }
     }
     public class ListOfRawIndent
     {
@@ -84,6 +86,7 @@ namespace NibsMVC.Models
     {
         public string RawCategoryId { get; set; }
         public string ItemId { get; set; }
+        public int Item { get; set; }
         public List<InnerKitchenRawIndent> ListOfInnerMaterial { get; set; }
     }
     public class InnerKitchenRawIndent

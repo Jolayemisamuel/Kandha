@@ -6,9 +6,10 @@ using System.Web.Mvc;
 using NibsMVC.Models;
 using NibsMVC.EDMX;
 
+
 namespace NibsMVC.Controllers
 {
-    [Authorize(Roles = "admin")]
+    //[Authorize(Roles = "admin")]
     public class ServicTaxController : Controller
     {
         //
@@ -35,7 +36,7 @@ namespace NibsMVC.Controllers
         public ActionResult Create(ServicTaxModel model)
         {
             tbl_ServiceTax tb = new tbl_ServiceTax();
-            
+
             try
             {
                 var data = (from p in db.tbl_ServiceTax select p).SingleOrDefault();
@@ -45,7 +46,8 @@ namespace NibsMVC.Controllers
                     db.tbl_ServiceTax.Add(tb);
                     db.SaveChanges();
                 }
-                else {
+                else
+                {
                     db.tbl_ServiceTax.Remove(data);
                     db.SaveChanges();
                     tb.ServiceCharge = model.ServicTax;
@@ -55,7 +57,8 @@ namespace NibsMVC.Controllers
                 TempData["servicetax"] = "Insert Record Successfully..";
                 return RedirectToAction("Index");
             }
-            catch(Exception ex) {
+            catch (Exception ex)
+            {
                 TempData["servicetax"] = ex.Message;
                 return RedirectToAction("Create");
             }

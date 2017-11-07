@@ -1,0 +1,94 @@
+﻿@model NibsMVC.Models.outeltStockReturnModel
+
+@{
+    ViewBag.Title = "stockReturn";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using NibsMVC.EDMX;
+<div class="page-content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="portlet box blue">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-gift"></i>Stock Return
+                    </div>
+                </div>
+                <div class="portlet-body form">
+                    @using (Html.BeginForm("TransferReturn", "StockTransfer", FormMethod.Post, new { @class = "form-horizontal", @id = "form_stock_return" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        @Html.HiddenFor(model => model.TransferId);
+                        @Html.HiddenFor(model => model.RawMaterialId);
+                        @Html.HiddenFor(model => model.RecieveroutletId);
+                        @Html.HiddenFor(model => model.senderOutletId);
+                        <div class="form-body">
+                            <div class="form-group">
+                                <label class="col-md-3">Item Code</label>
+                                <div class="col-md-4">
+                                    <input type="text" name="MaterialId" value="@Model.TransferId" readonly class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3">Item Name</label>
+                                <div class="col-md-4">
+                                    <input type="text" name="RawMaterialName" value="@Model.RawMaterialName" readonly class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3">Quantity</label>
+                                <div class="col-md-4">
+                                    <input type="text" name="TransferQuantity" value="@Model.TransferQuantity" readonly class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3">Unit</label>
+                                <div class="col-md-4">
+                                    <input type="text" name="Unit" value="@Model.Unit" readonly class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3">Return Quantity</label>
+                                <div class="col-md-4">
+                                    <input type="text" name="ReturnQuantity" value="" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3">Reasion</label>
+                                <div class="col-md-4">
+                                    <input type="text" name="Reasion" value="" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-9">
+                                    <input type="submit" class="btn green" value="Submit" />
+
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    @*<script>
+                            $(document).on('click', '#btn_stock_return', function () {
+                                var transferQty = $('input[name="TransferQuantity"]').val();
+                                var returnQty = $('input[name="StockReturnQuantity"]').val();
+                                if (parseFloat(returnQty) <= parseFloat(transferQty)) {
+                                    $('#form_stock_return').submit();
+                                    return true
+                                }
+                                else {
+                                    $('#serror').html("return qty must be less or equal transfer qty").fadeIn("slow").fadeOut("slow");
+                                    $('input[name="StockReturnQuantity"]').focus();
+                                    return false;
+                                }
+                            });
+                        </script>*@
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

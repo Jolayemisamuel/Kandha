@@ -92,8 +92,8 @@ namespace NibsMVC.Models
         public string RawMaterialName { get; set; }
         public decimal TransferQuantity { get; set; }
         public DateTime StockReturnDate { get; set; }
-        public decimal StockReturnQuantity { get; set; }
-        public string ReturnReasion { get; set; }
+        public decimal ReturnQuantity { get; set; }
+        public string Reasion { get; set; }
         public string Unit { get; set; }
     }
 }

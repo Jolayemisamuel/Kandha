@@ -65,6 +65,7 @@ namespace NibsMVC.Controllers
                     }
                 }
                 mo.TableNo = item.TableNo.ToString();
+                mo.AcType = item.AcType.ToString();
                 List.Add(mo);
             }
             nibs.getAllTables = List;
@@ -113,17 +114,17 @@ namespace NibsMVC.Controllers
         {
             List<GetBillingSubItemModel> lst = new List<GetBillingSubItemModel>();
             lst = xml.GetAllItems(Id);
-            return PartialView("_GetAllItemPartial",lst);
+            return PartialView("_GetAllItemPartial", lst);
         }
         public PartialViewResult _CreatePartial(int Id)
         {
-            
-             GetBillingModel model=new GetBillingModel();
-             var Path = Server.MapPath("/xmltables/table" + Id + ".xml");
+
+            GetBillingModel model = new GetBillingModel();
+            var Path = Server.MapPath("/xmltables/table" + Id + ".xml");
             var KotFilePath = Server.MapPath("/xmlkot/Kot.xml");
             if (System.IO.File.Exists(Path))
             {
-               model=xml.GetBillingItem(Id.ToString(),Path,KotFilePath);
+                model = xml.GetBillingItem(Id.ToString(), Path, KotFilePath);
             }
             else
             {
@@ -138,10 +139,10 @@ namespace NibsMVC.Controllers
                 writer.WriteEndDocument();
                 writer.Close();
                 // MessageBox.Show("XML File created ! ");
-                model=xml.GetBillingItem(Id.ToString(),Path,KotFilePath);
+                model = xml.GetBillingItem(Id.ToString(), Path, KotFilePath);
             }
-           
-            return PartialView("_CreatePartial",model);
+
+            return PartialView("_CreatePartial", model);
         }
         //public ActionResult _
         public string CreateXml(string Id)
@@ -470,22 +471,22 @@ namespace NibsMVC.Controllers
             var billdata = (from p in db.tblBillMasters
                             where p.BillingType == "R"
                             && p.OutletId == OutletId
-                            select p).Take(30).OrderByDescending(a=>a.BillId).ToList();
+                            select p).Take(30).OrderByDescending(a => a.BillId).ToList();
             foreach (var item in billdata)
             {
                 BillingModel model = new BillingModel();
                 List<AdminBillDetailsReportModel> lstBill = new List<AdminBillDetailsReportModel>();
                 model.BillId = item.BillId;
                 model.BillDate = item.BillDate;
-                model.TotalAmount = Math.Round(item.TotalAmount,2);
-                model.VatAmount = Math.Round(item.VatAmount,2);
+                model.TotalAmount = Math.Round(item.TotalAmount, 2);
+                model.VatAmount = Math.Round(item.VatAmount, 2);
                 if (item.ServiceTax.HasValue)
                 {
                     model.ServiceTax = item.ServiceTax.Value;
                 }
-                model.ServicChargeAmt = Math.Round(item.ServicChargesAmount,2);
-                model.DiscountAmount = Math.Round(item.DiscountAmount,2);
-                model.NetAmount = Math.Round(item.NetAmount,2);
+                model.ServicChargeAmt = Math.Round(item.ServicChargesAmount, 2);
+                model.DiscountAmount = Math.Round(item.DiscountAmount, 2);
+                model.NetAmount = Math.Round(item.NetAmount, 2);
                 model.TableNo = item.TableNo;
                 model.Outletid = item.OutletId;
                 model.PaymentType = item.PaymentType;
@@ -510,7 +511,7 @@ namespace NibsMVC.Controllers
                 open.Price = item.Price;
                 open.Quantity = item.Quantity;
                 open.Vat = item.Vat;
-                open.Amount = Math.Round(item.Amount.Value,2);
+                open.Amount = Math.Round(item.Amount.Value, 2);
                 open.Date = item.Date;
                 openfood.Add(open);
             }
@@ -830,7 +831,7 @@ namespace NibsMVC.Controllers
                         {
                             model.ServiceTax = item.ServiceTax.Value;
                         }
-                       
+
                         model.DiscountAmount = item.DiscountAmount;
                         model.NetAmount = item.NetAmount;
                         model.TableNo = item.TableNo;

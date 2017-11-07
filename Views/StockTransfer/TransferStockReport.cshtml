@@ -126,7 +126,7 @@
                                 @*@Html.DropDownListFor(model => model.Item, (SelectList)ViewBag.Items, "--Choose Item--", new { @class = "form-control" })*@
                                 @*@Html.DropDownListFor(model=>model.Item, new SelectList(string.Empty, "Value", "Text"), new { @class = "form-control", @id = "RawId" })*@
                                 @Html.DropDownListFor(model => model.Item, (SelectList)ViewBag.Items, "--Choose Item--", new { @class = "form-control", @id = "RawId" })
-                                
+
                             </div>
                             <div class="col-md-1"><button type="submit" class="btn green">Search</button></div>
 
@@ -146,46 +146,51 @@
                                     <th>Unit</th>
                                     <th>Issued Quantity</th>
                                     <th>Retrun</th>
+                                    
                                 </tr>
                             </thead>
                             <tbody>
                                 @{
 
-                        var counter = 1;
-                        NIBSEntities db = new NIBSEntities();
-                        foreach (var item in ViewBag.List)
-                        {
+                                    var counter = 1;
+                                    NIBSEntities db = new NIBSEntities();
+                                    foreach (var item in ViewBag.List)
+                                    {
 
-                            <tr>
-                                <td>
-                                    @item[0].Day-@item[0].Month-@item[0].Year
-                                </td>
-                                <td>
-                                    @item[1]
-                                </td>
-                                <td>
-                                    @item[2]
-                                </td>
-                                <td>
-                                    @item[3]
-                                </td>
-                                <td>
-                                    @item[4]
-                                </td>
-                                <td>
-                                    @item[5].ToString("0.00")
-                                </td>
-                                @*<td>
-                                <a href="@Url.Action("stockReturn", "StockTransfer", new { Transferid = @item[6], RawMaterialId= @item[7], Quantity=@item[5] })"><span class="fa fa-repeat"></span></a></td>*@
-                                <td><a href="@Url.Action("PurchaseReturn", "Purchase", new { Transferid = @item[6], RawMaterialId = @item[7], Quantity = @item[5] })"><span class="fa fa-repeat"></span></a></td>
-                            </tr>
-                            counter = counter + 1;
-                        }
+                                        <tr>
+                                            <td>
+                                                @item[0].Day-@item[0].Month-@item[0].Year
+                                            </td>
+                                            <td>
+                                                @item[1]
+                                            </td>
+                                            <td>
+                                                @item[2]
+                                            </td>
+                                            <td>
+                                                @item[3]
+                                            </td>
+                                            <td>
+                                                @item[4]
+                                            </td>
+                                            <td>
+                                                @item[5].ToString("0.00")
+                                            </td>
+                                            <td>
+                                                <a href="@Url.Action("TransferReturn", "StockTransfer", new { Transferid = @item[6], RawMaterialId = @item[7], Quantity = @item[5] })"><span class="fa fa-repeat"></span></a>
+                                            </td>
+                                            @*<td>
+                                                <a href="@Url.Action("stockReturn", "StockTransfer", new { Transferid = @item[6], RawMaterialId= @item[7], Quantity=@item[5] })"><span class="fa fa-repeat"></span></a>
+                                            </td>*@
+                                            @*<td><a href="@Url.Action("PurchaseReturn", "Purchase", new { Transferid = @item[6], RawMaterialId = @item[7], Quantity = @item[5] })"><span class="fa fa-repeat"></span></a></td>*@
+                                        </tr>
+                                        counter = counter + 1;
+                                    }
 
                                 }
                             </tbody>
                         </table>
-                    }
+                                    }
                 </div>
             </div>
             <!-- END BORDERED TABLE PORTLET-->

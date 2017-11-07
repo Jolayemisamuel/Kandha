@@ -370,6 +370,7 @@
           <Property Name="ItemCode" Type="varchar" MaxLength="10" />
           <Property Name="BasePriceId" Type="int" />
           <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="DepartmentId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tblMenuOutlet">
           <Key>
@@ -534,6 +535,17 @@
           <Property Name="OutletId" Type="int" Nullable="false" />
           <Property Name="DepartmentId" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="tblTransferReturnReport">
+          <Key>
+            <PropertyRef Name="TransferReturnId" />
+          </Key>
+          <Property Name="TransferReturnId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RawMaterialId" Type="int" Nullable="false" />
+          <Property Name="ReturnQuantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ReturnDescription" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ReturnDate" Type="date" Nullable="false" />
+          <Property Name="OutletId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="tblVendor">
           <Key>
             <PropertyRef Name="VendorId" />
@@ -645,15 +657,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_AddItem_AddCategory">
-          <End Role="tblCategory" Type="Self.tblCategory" Multiplicity="1" />
+        <Association Name="FK_AddItem_Department">
+          <End Role="tbl_Department" Type="Self.tbl_Department" Multiplicity="1" />
           <End Role="tblItem" Type="Self.tblItem" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tblCategory">
-              <PropertyRef Name="CategoryId" />
+            <Principal Role="tbl_Department">
+              <PropertyRef Name="DepartmentID" />
             </Principal>
             <Dependent Role="tblItem">
-              <PropertyRef Name="CategoryId" />
+              <PropertyRef Name="DepartmentId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1113,6 +1125,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblItem_tblItem">
+          <End Role="tblItem" Type="Self.tblItem" Multiplicity="1" />
+          <End Role="tblItem1" Type="Self.tblItem" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tblItem">
+              <PropertyRef Name="ItemId" />
+            </Principal>
+            <Dependent Role="tblItem1">
+              <PropertyRef Name="ItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblMenuOutlet_tblBasePriceItems">
           <End Role="tblBasePriceItems" Type="Self.tblBasePriceItems" Multiplicity="0..1" />
           <End Role="tblMenuOutlet" Type="Self.tblMenuOutlet" Multiplicity="*" />
@@ -1302,6 +1326,30 @@
             </Principal>
             <Dependent Role="tblTransfer">
               <PropertyRef Name="ReciverOutletId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTransferReturnReport_tbl_RawMaterials">
+          <End Role="tbl_RawMaterials" Type="Self.tbl_RawMaterials" Multiplicity="1" />
+          <End Role="tblTransferReturnReport" Type="Self.tblTransferReturnReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_RawMaterials">
+              <PropertyRef Name="RawMaterialId" />
+            </Principal>
+            <Dependent Role="tblTransferReturnReport">
+              <PropertyRef Name="RawMaterialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTransferReturnReport_tblOutlet">
+          <End Role="tblOutlet" Type="Self.tblOutlet" Multiplicity="1" />
+          <End Role="tblTransferReturnReport" Type="Self.tblTransferReturnReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblOutlet">
+              <PropertyRef Name="OutletId" />
+            </Principal>
+            <Dependent Role="tblTransferReturnReport">
+              <PropertyRef Name="OutletId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1503,6 +1551,7 @@
           <EntitySet Name="tblServiceCharges" EntityType="Self.tblServiceCharges" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblTableMaster" EntityType="Self.tblTableMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblTransfer" EntityType="Self.tblTransfer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblTransferReturnReport" EntityType="Self.tblTransferReturnReport" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblVendor" EntityType="Self.tblVendor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Temp_VendorBilling" EntityType="Self.Temp_VendorBilling" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Units" EntityType="Self.Units" Schema="dbo" store:Type="Tables" />
@@ -1517,8 +1566,8 @@
             <End Role="tblVendor" EntitySet="tblVendor" />
             <End Role="AddCategoryVendor" EntitySet="AddCategoryVendor" />
           </AssociationSet>
-          <AssociationSet Name="FK_AddItem_AddCategory" Association="Self.FK_AddItem_AddCategory">
-            <End Role="tblCategory" EntitySet="tblCategory" />
+          <AssociationSet Name="FK_AddItem_Department" Association="Self.FK_AddItem_Department">
+            <End Role="tbl_Department" EntitySet="tbl_Department" />
             <End Role="tblItem" EntitySet="tblItem" />
           </AssociationSet>
           <AssociationSet Name="FK_NIbs_AssignOffer_Nibs_Offer" Association="Self.FK_NIbs_AssignOffer_Nibs_Offer">
@@ -1673,6 +1722,10 @@
             <End Role="tblItem" EntitySet="tblItem" />
             <End Role="tblDeletedetails" EntitySet="tblDeletedetails" />
           </AssociationSet>
+          <AssociationSet Name="FK_tblItem_tblItem" Association="Self.FK_tblItem_tblItem">
+            <End Role="tblItem" EntitySet="tblItem" />
+            <End Role="tblItem1" EntitySet="tblItem" />
+          </AssociationSet>
           <AssociationSet Name="FK_tblMenuOutlet_tblBasePriceItems" Association="Self.FK_tblMenuOutlet_tblBasePriceItems">
             <End Role="tblBasePriceItems" EntitySet="tblBasePriceItems" />
             <End Role="tblMenuOutlet" EntitySet="tblMenuOutlet" />
@@ -1736,6 +1789,14 @@
           <AssociationSet Name="FK_tblTransfer_tblOutlet" Association="Self.FK_tblTransfer_tblOutlet">
             <End Role="tblOutlet" EntitySet="tblOutlet" />
             <End Role="tblTransfer" EntitySet="tblTransfer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTransferReturnReport_tbl_RawMaterials" Association="Self.FK_tblTransferReturnReport_tbl_RawMaterials">
+            <End Role="tbl_RawMaterials" EntitySet="tbl_RawMaterials" />
+            <End Role="tblTransferReturnReport" EntitySet="tblTransferReturnReport" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTransferReturnReport_tblOutlet" Association="Self.FK_tblTransferReturnReport_tblOutlet">
+            <End Role="tblOutlet" EntitySet="tblOutlet" />
+            <End Role="tblTransferReturnReport" EntitySet="tblTransferReturnReport" />
           </AssociationSet>
           <AssociationSet Name="FK_tblVendor_tblOutlet" Association="Self.FK_tblVendor_tblOutlet">
             <End Role="tblOutlet" EntitySet="tblOutlet" />
@@ -2138,6 +2199,23 @@
             <End Role="tbl_RawMaterials" EntitySet="tbl_RawMaterials" />
             <End Role="tblGRNStock" EntitySet="tblGRNStocks" />
           </AssociationSet>
+          <EntitySet Name="tblTransferReturnReports" EntityType="NIBSModel.tblTransferReturnReport" />
+          <AssociationSet Name="FK_tblTransferReturnReport_tbl_RawMaterials" Association="NIBSModel.FK_tblTransferReturnReport_tbl_RawMaterials">
+            <End Role="tbl_RawMaterials" EntitySet="tbl_RawMaterials" />
+            <End Role="tblTransferReturnReport" EntitySet="tblTransferReturnReports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTransferReturnReport_tblOutlet" Association="NIBSModel.FK_tblTransferReturnReport_tblOutlet">
+            <End Role="tblOutlet" EntitySet="tblOutlets" />
+            <End Role="tblTransferReturnReport" EntitySet="tblTransferReturnReports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AddItem_Department" Association="NIBSModel.FK_AddItem_Department">
+            <End Role="tbl_Department" EntitySet="tbl_Department" />
+            <End Role="tblItem" EntitySet="tblItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblItem_tblItem" Association="NIBSModel.FK_tblItem_tblItem">
+            <End Role="tblItem" EntitySet="tblItems" />
+            <End Role="tblItem1" EntitySet="tblItems" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="NIbs_AssignOffer">
           <Key>
@@ -2357,6 +2435,7 @@
           <NavigationProperty Name="tbl_RawMaterials12" Relationship="NIBSModel.FK_tbl_RawMaterials_tbl_RawMaterials4" FromRole="tbl_RawMaterials" ToRole="tbl_RawMaterials1" />
           <NavigationProperty Name="tbl_RawMaterials4" Relationship="NIBSModel.FK_tbl_RawMaterials_tbl_RawMaterials4" FromRole="tbl_RawMaterials1" ToRole="tbl_RawMaterials" />
           <NavigationProperty Name="tblGRNStocks" Relationship="NIBSModel.FK_tblGRNStock_tbl_RawMaterials" FromRole="tbl_RawMaterials" ToRole="tblGRNStock" />
+          <NavigationProperty Name="tblTransferReturnReports" Relationship="NIBSModel.FK_tblTransferReturnReport_tbl_RawMaterials" FromRole="tbl_RawMaterials" ToRole="tblTransferReturnReport" />
         </EntityType>
         <EntityType Name="tbl_ServiceTax">
           <Key>
@@ -2465,6 +2544,10 @@
           <NavigationProperty Name="tblBillDetails" Relationship="NIBSModel.FK_tblBillDetails_tblItem" FromRole="tblItem" ToRole="tblBillDetail" />
           <NavigationProperty Name="Temp_VendorBilling" Relationship="NIBSModel.FK_Temp_VendorBilling_tblItem" FromRole="tblItem" ToRole="Temp_VendorBilling" />
           <NavigationProperty Name="VendorBillingItems" Relationship="NIBSModel.FK_VendorBillingItem_tblItem" FromRole="tblItem" ToRole="VendorBillingItem" />
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbl_Department" Relationship="NIBSModel.FK_AddItem_Department" FromRole="tblItem" ToRole="tbl_Department" />
+          <NavigationProperty Name="tblItem1" Relationship="NIBSModel.FK_tblItem_tblItem" FromRole="tblItem" ToRole="tblItem1" />
+          <NavigationProperty Name="tblItem2" Relationship="NIBSModel.FK_tblItem_tblItem" FromRole="tblItem1" ToRole="tblItem" />
         </EntityType>
         <EntityType Name="tblMenuOutlet">
           <Key>
@@ -2527,6 +2610,7 @@
           <NavigationProperty Name="SelesVendorAmounts" Relationship="NIBSModel.FK_SelesVendorAmount_tblOutlet" FromRole="tblOutlet" ToRole="SelesVendorAmount" />
           <NavigationProperty Name="OutletVendors" Relationship="NIBSModel.FK_OutletVendor_tblOutlet" FromRole="tblOutlet" ToRole="OutletVendor" />
           <NavigationProperty Name="tblPurchaseOrderMasters" Relationship="NIBSModel.FK_tblPurchaseOrderMaster_tblOutlet" FromRole="tblOutlet" ToRole="tblPurchaseOrderMaster" />
+          <NavigationProperty Name="tblTransferReturnReports" Relationship="NIBSModel.FK_tblTransferReturnReport_tblOutlet" FromRole="tblOutlet" ToRole="tblTransferReturnReport" />
         </EntityType>
         <EntityType Name="tblPurchasedItem">
           <Key>
@@ -2550,7 +2634,7 @@
           <Property Name="PurchaseReturnId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="vendorId" Type="Int32" Nullable="false" />
           <Property Name="RawMaterialId" Type="Int32" Nullable="false" />
-          <Property Name="ReturnQuantity" Type="Decimal" Nullable="false" />
+          <Property Name="ReturnQuantity" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="ReturnStatuss" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="ReturnDescription" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="ReturnDate" Type="DateTime" Nullable="false" Precision="0" />
@@ -3505,6 +3589,7 @@
           <Property Name="Department" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="tblTransfers" Relationship="NIBSModel.FK_tblTransfer_tbl_Department" FromRole="tbl_Department" ToRole="tblTransfer" />
+          <NavigationProperty Name="tblItems" Relationship="NIBSModel.FK_AddItem_Department" FromRole="tbl_Department" ToRole="tblItem" />
         </EntityType>
         <Association Name="FK_tblTransfer_tbl_Department">
           <End Type="NIBSModel.tbl_Department" Role="tbl_Department" Multiplicity="1" />
@@ -3760,6 +3845,67 @@
             </Principal>
             <Dependent Role="tblGRNStock">
               <PropertyRef Name="MaterialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblTransferReturnReport">
+          <Key>
+            <PropertyRef Name="TransferReturnId" />
+          </Key>
+          <Property Name="TransferReturnId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RawMaterialId" Type="Int32" Nullable="false" />
+          <Property Name="ReturnQuantity" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ReturnDescription" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ReturnDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="OutletId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbl_RawMaterials" Relationship="NIBSModel.FK_tblTransferReturnReport_tbl_RawMaterials" FromRole="tblTransferReturnReport" ToRole="tbl_RawMaterials" />
+          <NavigationProperty Name="tblOutlet" Relationship="NIBSModel.FK_tblTransferReturnReport_tblOutlet" FromRole="tblTransferReturnReport" ToRole="tblOutlet" />
+        </EntityType>
+        <Association Name="FK_tblTransferReturnReport_tbl_RawMaterials">
+          <End Type="NIBSModel.tbl_RawMaterials" Role="tbl_RawMaterials" Multiplicity="1" />
+          <End Type="NIBSModel.tblTransferReturnReport" Role="tblTransferReturnReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_RawMaterials">
+              <PropertyRef Name="RawMaterialId" />
+            </Principal>
+            <Dependent Role="tblTransferReturnReport">
+              <PropertyRef Name="RawMaterialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTransferReturnReport_tblOutlet">
+          <End Type="NIBSModel.tblOutlet" Role="tblOutlet" Multiplicity="1" />
+          <End Type="NIBSModel.tblTransferReturnReport" Role="tblTransferReturnReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblOutlet">
+              <PropertyRef Name="OutletId" />
+            </Principal>
+            <Dependent Role="tblTransferReturnReport">
+              <PropertyRef Name="OutletId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AddItem_Department">
+          <End Type="NIBSModel.tbl_Department" Role="tbl_Department" Multiplicity="1" />
+          <End Type="NIBSModel.tblItem" Role="tblItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Department">
+              <PropertyRef Name="DepartmentID" />
+            </Principal>
+            <Dependent Role="tblItem">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblItem_tblItem">
+          <End Type="NIBSModel.tblItem" Role="tblItem" Multiplicity="1" />
+          <End Type="NIBSModel.tblItem" Role="tblItem1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tblItem">
+              <PropertyRef Name="ItemId" />
+            </Principal>
+            <Dependent Role="tblItem1">
+              <PropertyRef Name="ItemId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4033,6 +4179,7 @@
           <EntitySetMapping Name="tblItems">
             <EntityTypeMapping TypeName="NIBSModel.tblItem">
               <MappingFragment StoreEntitySet="tblItem">
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="BasePriceId" ColumnName="BasePriceId" />
                 <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
@@ -4434,6 +4581,18 @@
                 <ScalarProperty Name="Rate" ColumnName="Rate" />
                 <ScalarProperty Name="MaterialId" ColumnName="MaterialId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblTransferReturnReports">
+            <EntityTypeMapping TypeName="NIBSModel.tblTransferReturnReport">
+              <MappingFragment StoreEntitySet="tblTransferReturnReport">
+                <ScalarProperty Name="OutletId" ColumnName="OutletId" />
+                <ScalarProperty Name="ReturnDate" ColumnName="ReturnDate" />
+                <ScalarProperty Name="ReturnDescription" ColumnName="ReturnDescription" />
+                <ScalarProperty Name="ReturnQuantity" ColumnName="ReturnQuantity" />
+                <ScalarProperty Name="RawMaterialId" ColumnName="RawMaterialId" />
+                <ScalarProperty Name="TransferReturnId" ColumnName="TransferReturnId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

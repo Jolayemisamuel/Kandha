@@ -25,6 +25,7 @@ namespace NibsMVC.EDMX
             this.tblPurchaseOrderItems = new HashSet<tblPurchaseOrderItem>();
             this.tblOpStckRates = new HashSet<tblOpStckRate>();
             this.tblGRNStocks = new HashSet<tblGRNStock>();
+            this.tblTransferReturnReports = new HashSet<tblTransferReturnReport>();
         }
     
         public int RawMaterialId { get; set; }
@@ -49,5 +50,6 @@ namespace NibsMVC.EDMX
         public virtual tbl_RawMaterials tbl_RawMaterials12 { get; set; }
         public virtual tbl_RawMaterials tbl_RawMaterials4 { get; set; }
         public virtual ICollection<tblGRNStock> tblGRNStocks { get; set; }
+        public virtual ICollection<tblTransferReturnReport> tblTransferReturnReports { get; set; }
     }
 }

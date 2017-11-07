@@ -16,12 +16,12 @@ namespace NibsMVC.Repository
         {
 
             var selList = new List<SelectListItem>();
-            List<AddCategoryModel> lst = (from item in db.tblCategories.ToList()
-                                          select new AddCategoryModel()
+            List<GetUnitCategory> lst = (from item in db.tblCategories.ToList()
+                                          select new GetUnitCategory()
                                           {
                                               CategoryId = item.CategoryId,
                                               Name = item.Name
-                                          }).ToList<AddCategoryModel>();
+                                          }).ToList<GetUnitCategory>();
             foreach (var item in lst)
             {
                 selList.Add(new SelectListItem
@@ -32,6 +32,34 @@ namespace NibsMVC.Repository
             }
             return selList;
         }
+
+        public List<SelectListItem> GetListofDepartment()
+        {
+
+            var selList = new List<SelectListItem>();
+            List<DepartmentModel > lst = (from item in db.tbl_Department.ToList()
+                                          where item .Active == true 
+                                         select new DepartmentModel()
+                                         {
+                                             DepartmentId = item.DepartmentID,
+                                             Department  = item.Department 
+                                         }).ToList<DepartmentModel>();
+            foreach (var item in lst)
+            {
+                selList.Add(new SelectListItem
+                {
+                    Text = item.Department .ToString(),
+                    Value = item.DepartmentId.ToString()
+                });
+            }
+            return selList;
+        }
+
+        internal List<GetAllItemList> BaseItemwise(int id, string acType, object editItemId)
+        {
+            throw new NotImplementedException();
+        }
+
         //public List<SelectListItem> GetListofItems()
         //{
 

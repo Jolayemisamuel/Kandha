@@ -14,20 +14,48 @@ namespace NibsMVC.Controllers
     public class CategoryController : Controller
     {
         NIBSEntities db = new NIBSEntities();
+        KOTEntities dbKOT = new KOTEntities();
+
+
         AddItemRepository obj = new AddItemRepository();
         #region Category
         public ActionResult Index()
         {
+
+            var subgrpKOT = (from p in dbKOT.VM_ItemSubGroups select p).ToList();
+            foreach (var item in subgrpKOT)
+            {
+
+                var table = db.tblCategories.Where(a => a.Name == item.ItemSubGroup).FirstOrDefault();
+                if (table == null)
+                {
+                    tblCategory tb = new tblCategory();
+                    tb.Name = item.ItemSubGroup;
+                    tb.Active = true;
+                    var random = new Random();
+                    var color = String.Format("#{0:X6}", random.Next(0x1000000));
+                    tb.Color = color;
+                    var forerandom = new Random();
+                    color = String.Format("#{0:X6}", forerandom.Next(0x1000000));
+                    tb.TextColor = color;
+                    db.tblCategories.Add(tb);
+                    db.SaveChanges();
+
+                }
+            }
+
+
+
             var data = (from p in db.tblCategories where p.Active == true select p).ToList();
-            List<AddCategoryModel> List = new List<AddCategoryModel>();
+            List<GetUnitCategory> List = new List<GetUnitCategory>();
             foreach (var item in data)
             {
-                AddCategoryModel model = new AddCategoryModel();
-                model.CategoryId = item.CategoryId;
-                model.Name = item.Name;
-                model.Color = item.Color;
+                GetUnitCategory model1 = new GetUnitCategory();
+                model1.CategoryId = item.CategoryId;
+                model1.Name = item.Name;
+                model1.Color = item.Color;
                 // model.Type = item.Type;
-                List.Add(model);
+                List.Add(model1);
             }
             return View(List);
         }
@@ -36,7 +64,7 @@ namespace NibsMVC.Controllers
             if (id > 0)
             {
                 var data = (from p in db.tblCategories where p.CategoryId == id select p).SingleOrDefault();
-                AddCategoryModel model = new AddCategoryModel();
+                GetUnitCategory model = new GetUnitCategory();
                 model.CategoryId = data.CategoryId;
                 model.Name = data.Name;
                 model.Active = data.Active;
@@ -52,56 +80,56 @@ namespace NibsMVC.Controllers
             }
         }
         [HttpPost]
-        public ActionResult Create(AddCategoryModel model)
+        public ActionResult Create(GetUnitCategory model)
         {
             tblCategory tb = new tblCategory();
-           
-            
-                try
+
+
+            try
+            {
+                if (model.CategoryId > 0)
                 {
-                    if (model.CategoryId > 0)
+                    tb = (from p in db.tblCategories.Where(o => o.CategoryId == model.CategoryId) select p).SingleOrDefault();
+                    tb.Name = model.Name;
+                    tb.Active = model.Active;
+                    tb.Color = model.Color;
+                    tb.TextColor = model.TextColor;
+                    db.SaveChanges();
+                    TempData["categroy"] = "Record Edit Successfully..!";
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    var cattableid = (from p in db.tblCategories where p.Name == model.Name select p).SingleOrDefault();
+                    if (cattableid == null)
                     {
-                        tb = (from p in db.tblCategories.Where(o => o.CategoryId == model.CategoryId) select p).SingleOrDefault();
                         tb.Name = model.Name;
                         tb.Active = model.Active;
                         tb.Color = model.Color;
                         tb.TextColor = model.TextColor;
+                        db.tblCategories.Add(tb);
                         db.SaveChanges();
-                        TempData["categroy"] = "Record Edit Successfully..!";
+                        TempData["categroy"] = "Record Insert Successfully..!";
                         return RedirectToAction("Index");
                     }
                     else
                     {
-                        var cattableid = (from p in db.tblCategories where p.Name == model.Name select p).SingleOrDefault();
-                        if (cattableid==null)
-                        {
-                            tb.Name = model.Name;
-                            tb.Active = model.Active;
-                            tb.Color = model.Color;
-                            tb.TextColor = model.TextColor;
-                            db.tblCategories.Add(tb);
-                            db.SaveChanges();
-                            TempData["categroy"] = "Record Insert Successfully..!";
-                            return RedirectToAction("Index");
-                        }
-                        else
-                        {
-                            TempData["Crecategroy"] = "This Category is Already exist..!";
-                            return RedirectToAction("Create");
-                        }
+                        TempData["Crecategroy"] = "This Category is Already exist..!";
+                        return RedirectToAction("Create");
                     }
-                    
-                    
-                }
-                catch (Exception ex)
-                {
-                    TempData["categroy"] = ex.Message;
-                    return RedirectToAction("Create");
                 }
 
-                
 
-            
+            }
+            catch (Exception ex)
+            {
+                TempData["categroy"] = ex.Message;
+                return RedirectToAction("Create");
+            }
+
+
+
+
         }
         public ActionResult Delete(int id)
         {
@@ -120,12 +148,53 @@ namespace NibsMVC.Controllers
         }
         #endregion
         #region Items
+
+       
+
+
+
         public ActionResult ItemDetails()
         {
-            IEnumerable<SelectListItem> CategoryList = (from m in db.tblCategories where m.Active == true select m).AsEnumerable().Select(m => new SelectListItem() { Text = m.Name, Value = m.CategoryId.ToString() });
+            var itemsKOT = (from p in dbKOT.VM_PAOItemsFood select p).ToList();
+            var itemsCount = (from p in db.tblItems select p).ToList().Count ;
+            if (itemsKOT.Count > itemsCount)
+            {
+                foreach (var item in itemsKOT)
+                {
+                    var itemCategoryId = (from p in db.tblCategories where p.Name == item.ItemSubGroup select p.CategoryId).FirstOrDefault();
+
+                    var itemcheck = (from p in db.tblItems where p.Name == item.ItemName && p.CategoryId == itemCategoryId select p).SingleOrDefault();
+                    if (itemcheck == null)
+                    {
+                        tblItem tb = new tblItem();
+                        tb.CategoryId = itemCategoryId;
+                        tb.DepartmentId = 2;
+                        tb.Description = item.AdditionalDetails;
+                        tb.ItemCode = item.ItemCode;
+                        tb.ItemImage = "";
+                        tb.Name = item.ItemName;
+                        tb.Active = true;
+                        db.tblItems.Add(tb);
+                        db.SaveChanges();
+                    }
+
+                }
+            }
+
+            List <SelectListItem> CategoryList = (from m in db.tblCategories where m.Active == true select m).AsEnumerable().Select(m => new SelectListItem() { Text = m.Name, Value = m.CategoryId.ToString() }).ToList ();
+            CategoryList.Add(new SelectListItem() {  Text ="--Select Category-- ",Value ="0" });
+            CategoryList = CategoryList.OrderBy(o => o.Value ).ToList();
+           //CategoryList.Sort();
             ViewBag.categoryLIsts = new SelectList(CategoryList, "Value", "Text", "CategoryId");
-            var data = (from p in db.tblItems where p.Active==true select p ).ToList();
-            var rotiya = (from p in db.tblItems where p.Active == true && p.CategoryId==73 select p).ToList();
+
+            List<SelectListItem> DepartmentList = (from m in db.tbl_Department where m.Active == true select m).AsEnumerable().Select(m => new SelectListItem() { Text = m.Department, Value = m.DepartmentID.ToString() }).ToList ();
+            DepartmentList.Add(new SelectListItem() { Text = "--Select Department-- ", Value = "0" });
+            DepartmentList = DepartmentList.OrderBy(o => o.Value).ToList();
+
+            ViewBag.departmentLists = new SelectList(DepartmentList, "Value", "Text", "DepartmentId");
+
+            var data = (from p in db.tblItems where p.Active == true select p).ToList();
+            //var rotiya = (from p in db.tblItems where p.Active == true && p.CategoryId==73 select p).ToList();
             List<AddItemModel> List = new List<AddItemModel>();
             foreach (var item in data)
             {
@@ -136,6 +205,8 @@ namespace NibsMVC.Controllers
                 model.ItemCode = item.ItemCode;
                 model.ItemId = item.ItemId;
                 model.ItemImage = item.ItemImage;
+                model.DepartmentId = item.DepartmentId;
+
                 //model.MinimumQuantity = item.MinimumQuantity;
                 model.Name = item.Name;
                 //model.Unit = item.Unit;
@@ -147,14 +218,37 @@ namespace NibsMVC.Controllers
         [HttpPost]
         public ActionResult ItemDetails(AddItemModel model)
         {
-            IEnumerable<SelectListItem> CategoryList = (from m in db.tblCategories where m.Active == true select m).AsEnumerable().Select(m => new SelectListItem() { Text = m.Name, Value = m.CategoryId.ToString() });
+
+           List<SelectListItem> CategoryList = (from m in db.tblCategories where m.Active == true select m).AsEnumerable().Select(m => new SelectListItem() { Text = m.Name, Value = m.CategoryId.ToString() }).ToList();
+            CategoryList.Add(new SelectListItem() { Text = "--Select Category-- ", Value = "0" });
+            CategoryList = CategoryList.OrderBy(o => o.Value).ToList();
+            //CategoryList.Sort();
             ViewBag.categoryLIsts = new SelectList(CategoryList, "Value", "Text", "CategoryId");
-            var data = (from p in db.tblItems where p.Active == true && p.CategoryId == model.SearchCategoryId select p).ToList();
+
+            List<SelectListItem> DepartmentList = (from m in db.tbl_Department where m.Active == true select m).AsEnumerable().Select(m => new SelectListItem() { Text = m.Department, Value = m.DepartmentID.ToString() }).ToList();
+            DepartmentList.Add(new SelectListItem() { Text = "--Select Department-- ", Value = "0" });
+            DepartmentList = DepartmentList.OrderBy(o => o.Value).ToList();
+
+            ViewBag.departmentLists = new SelectList(DepartmentList, "Value", "Text", "DepartmentId");
+
+            var  data = (from p in db.tblItems where p.Active == true  select p).ToList();
+            if (model.SearchCategoryId > 0 && model.SearchDepartmentId == 0)
+                data = (from p in db.tblItems where p.Active == true && p.CategoryId == model.SearchCategoryId select p).ToList();
+            else if (model.SearchCategoryId == 0 && model.SearchDepartmentId > 0)
+                data = (from p in db.tblItems where p.Active == true && p.DepartmentId  == model.SearchDepartmentId select p).ToList();
+            else if (model.SearchCategoryId > 0 && model.SearchDepartmentId > 0)
+                data = (from p in db.tblItems where p.Active == true && p.CategoryId == model.SearchCategoryId && p.DepartmentId == model.SearchDepartmentId  select p).ToList();
+            else
+              data = (from p in db.tblItems where p.Active == true  select p).ToList();
+
+
+
             List<AddItemModel> List = new List<AddItemModel>();
             foreach (var item in data)
             {
                 AddItemModel emodel = new AddItemModel();
                 emodel.ItemCategoryId = item.CategoryId;
+                emodel.DepartmentId  = item.DepartmentId;
                 emodel.Name = item.Name;
                 emodel.Description = item.Description;
                 emodel.ItemCode = item.ItemCode;
@@ -175,7 +269,7 @@ namespace NibsMVC.Controllers
             if (id > 0)
             {
                 var data = (from p in db.tblItems where p.ItemId == id select p).SingleOrDefault();
-               
+
                 model.ItemCategoryId = data.CategoryId;
                 model.Description = data.Description;
                 model.ItemCode = data.ItemCode;
@@ -183,6 +277,7 @@ namespace NibsMVC.Controllers
                 model.ItemImage = data.ItemImage;
                 model.Name = data.Name;
                 model.lstofCategory = obj.GetListofcategory();
+                model.lstofDepartment = obj.GetListofDepartment();
                 return View(model);
             }
             else
@@ -191,6 +286,7 @@ namespace NibsMVC.Controllers
                 //ViewBag.categoryLIsts = new SelectList(CategoryList, "Value", "Text", "CategoryId");
                 //ViewBag.lstofCategory = new AddItemRepository().GetListofcategory();
                 model.lstofCategory = obj.GetListofcategory();
+                model.lstofDepartment = obj.GetListofDepartment();
                 return View(model);
             }
             // var modellist = new AddItemModel();
@@ -218,6 +314,7 @@ namespace NibsMVC.Controllers
                     tb.ItemImage = Image();
                     tb.Name = model.Name;
                     tb.Active = model.Active;
+                    tb.DepartmentId = model.DepartmentId;
                     if (model.ItemId > 0)
                     {
                         db.SaveChanges();
@@ -254,12 +351,14 @@ namespace NibsMVC.Controllers
                 var data = (from p in db.tblItems where p.ItemId == id select p).SingleOrDefault();
 
                 model.ItemCategoryId = data.CategoryId;
+                model.DepartmentId = data.DepartmentId;
                 model.Description = data.Description;
                 model.ItemCode = data.ItemCode;
                 model.ItemId = data.ItemId;
                 model.ItemImage = data.ItemImage;
                 model.Name = data.Name;
                 model.lstofCategory = obj.GetListofcategory();
+                model.lstofDepartment = obj.GetListofDepartment();
                 model.Active = data.Active;
                 return View(model);
             }
@@ -269,29 +368,31 @@ namespace NibsMVC.Controllers
                 //ViewBag.categoryLIsts = new SelectList(CategoryList, "Value", "Text", "CategoryId");
                 //ViewBag.lstofCategory = new AddItemRepository().GetListofcategory();
                 model.lstofCategory = obj.GetListofcategory();
+                model.lstofDepartment = obj.GetListofDepartment();
                 return View(model);
             }
         }
         [HttpPost]
-         public ActionResult EditItem(AddItemModel model)
+        public ActionResult EditItem(AddItemModel model)
         {
             try
             {
                 tblItem tb = db.tblItems.Where(a => a.ItemId == model.ItemId).SingleOrDefault();
                 tb.CategoryId = model.ItemCategoryId;
+                tb.DepartmentId = model.DepartmentId;
                 tb.Description = model.Description;
                 tb.ItemCode = model.ItemCode;
                 tb.ItemImage = Image();
                 tb.Name = model.Name;
                 tb.Active = model.Active;
                 db.SaveChanges();
-                TempData["item"]="Record Updated Successfully...";
+                TempData["item"] = "Record Updated Successfully...";
                 return RedirectToAction("ItemDetails");
             }
             catch
             {
                 TempData["item"] = "Record Not Updated  !";
-                return RedirectToAction("AddItem", new { id=model.ItemId});
+                return RedirectToAction("AddItem", new { id = model.ItemId });
             }
         }
         #endregion
@@ -310,35 +411,38 @@ namespace NibsMVC.Controllers
             }
             return RedirectToAction("ItemDetails");
         }
-        
+
         //code for add/edit/ delete items in Category
         public ActionResult BlockedItem()
         {
             List<lstOfBlockItems> lst = new List<lstOfBlockItems>();
             AdminBlockItemModel mo = new AdminBlockItemModel();
-           try
-           {
-               
-               foreach (var item in db.tblItems.Where(x=>x.Active==false).ToList())
-               {
-                   lstOfBlockItems model = new lstOfBlockItems();
-                   model.CategoryId = item.CategoryId;
-                   model.Name = item.Name;
-                   model.ItemCode = item.ItemCode;
-                   model.ItemId = item.ItemId;
-                   model.ItemImage = item.ItemImage;
-                   model.CategoryName = item.tblCategory.Name;
-                   lst.Add(model);
+            try
+            {
 
-               }
-               mo.lstOfItems = lst;
-               mo.lstofCategory = obj.GetListofcategory();
-               return View(mo);
-           }
-           catch
-           {
-               return View(lst);
-           }
+                foreach (var item in db.tblItems.Where(x => x.Active == false).ToList())
+                {
+                    lstOfBlockItems model = new lstOfBlockItems();
+                    model.CategoryId = item.CategoryId;
+                    model.Name = item.Name;
+                    model.ItemCode = item.ItemCode;
+                    model.ItemId = item.ItemId;
+                    model.ItemImage = item.ItemImage;
+                    model.CategoryName = item.tblCategory.Name;
+                    model.DepartmentId = item.DepartmentId;
+                    model.Department = item.tbl_Department.Department;
+                    lst.Add(model);
+
+                }
+                mo.lstOfItems = lst;
+                mo.lstofCategory = obj.GetListofcategory();
+                mo.lstofDepartment = obj.GetListofDepartment();
+                return View(mo);
+            }
+            catch
+            {
+                return View(lst);
+            }
         }
         [HttpPost]
         public ActionResult BlockedItem(int CategoryId = 0)
@@ -357,11 +461,15 @@ namespace NibsMVC.Controllers
                     model.ItemId = item.ItemId;
                     model.ItemImage = item.ItemImage;
                     model.CategoryName = item.tblCategory.Name;
+                    model.DepartmentId = item.DepartmentId;
+                    model.Department = item.tbl_Department.Department;
+
                     lst.Add(model);
 
                 }
                 mo.lstOfItems = lst;
                 mo.lstofCategory = obj.GetListofcategory();
+                mo.lstofDepartment = obj.GetListofDepartment();
                 mo.CategoryId = CategoryId;
                 return View(mo);
             }
@@ -370,7 +478,7 @@ namespace NibsMVC.Controllers
                 return View(lst);
             }
         }
-        public ActionResult Unblock(int id=0)
+        public ActionResult Unblock(int id = 0)
         {
             try
             {
@@ -383,7 +491,7 @@ namespace NibsMVC.Controllers
             {
                 return RedirectToAction("BlockedItem");
             }
-           
+
         }
         public string Image()
         {
@@ -406,15 +514,29 @@ namespace NibsMVC.Controllers
             else
                 return null;
         }
-        
-        
+
+
         public ActionResult KitchenItemReport()
         {
             KitchenItemRepository obj = new KitchenItemRepository();
-            
+
             return View(obj.ShowListofKitchenItems());
         }
+        public void updateDepartment(string ItemId, string DeptId)
+        {
+            int itemid = Convert.ToInt32(ItemId);
+            int deptid = Convert.ToInt32(DeptId);
+            tblItem tb = db.tblItems.Where(a => a.ItemId == itemid).SingleOrDefault();
+            tb.DepartmentId = deptid;
+            //tb.CategoryId = tb.CategoryId;
+            //tb.Description = tb.Description;
+            //tb.ItemCode = tb.ItemCode;
+            //tb.ItemImage = tb.ItemImage;
+            //tb.Name = model.Name;
+            //tb.Active = model.Active;
+            db.SaveChanges();
+            TempData["item"] = "Record Updated Successfully...";
+        }
 
-       
     }
 }

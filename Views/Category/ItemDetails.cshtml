@@ -60,19 +60,28 @@
                             @Html.AntiForgeryToken()
                             @Html.ValidationSummary(true)
                             <div class="form-group">
-                                <label class="control-label col-md-3">
-                                    Choose Category <span class="required">
-                                        *
-                                    </span>
+                                <label class="control-label col-md-2">
+                                    Choose Category 
                                 </label>
-                                <div class="col-md-4">
-                                    <div class="input-icon right">
-                                        <i class="fa"></i>
-                                        @Html.DropDownListFor(model => model.FirstOrDefault().SearchCategoryId, new SelectList(ViewBag.categoryLIsts, "Value", "Text"), "--Choose Your Category--", new { @class = "form-control", @id = "serchcat" })
-
-                                    </div>
-                                </div>
                                 <div class="col-md-3">
+                                    @*<div class="input-icon right">*@
+                                        @*<i class="fa"></i>*@
+                                        @Html.DropDownListFor(model => model.FirstOrDefault().SearchCategoryId, new SelectList(ViewBag.categoryLIsts, "Value", "Text"), null , new { @class = "form-control", @id = "serchcat",@name = "serchcat" })
+
+                                    @*</div>*@
+                                </div>
+                                
+                                <label class="control-label col-md-2">
+                                    Choose Department
+                                </label>
+                                <div class="col-md-3">
+                                    @*<div class="input-icon right">*@
+                                        @*<i class="fa"></i>*@
+                                        @Html.DropDownListFor(model => model.FirstOrDefault().SearchDepartmentId, new SelectList(ViewBag.departmentLists, "Value", "Text"), null , new { @class = "form-control", @id = "serchdept" })
+
+                                    @*</div>*@
+                                </div>
+                                <div class="col-md-2">
                                     <button type="submit" class="btn green">Show</button>
                                 </div>
                             </div>
@@ -83,6 +92,9 @@
                             <tr>
                                 <th>
                                     S.NO
+                                </th>
+                                <th>
+                                    Department
                                 </th>
                                 <th>
                                     Category Name
@@ -112,6 +124,13 @@
                                     <tr>
                                         <td>
                                             @counter
+                                        </td>
+                                        <td>
+                                            @{
+                                                @Html.DropDownListFor(model => model.FirstOrDefault().DepartmentId , new SelectList(ViewBag.departmentLists, "Value", "Text",item.DepartmentId ), null, new { @class = "form-control", @id = item.ItemId   })
+                                                var deptname = (from p in db.tbl_Department.Where(o => o.DepartmentID == item.DepartmentId) select p.Department).FirstOrDefault();
+                                            }
+                                            @*@deptname*@
                                         </td>
                                         <td>
                                             @{
@@ -150,6 +169,20 @@
         </div>
     </div>
     <script>
+
+        $(document).on('change', 'select[name="DepartmentId"]', function () {
+            var id = $(this).attr('id');
+            
+            var deptid = $('#' + id).val();
+            var FormData = { ItemId: id, DeptId:deptid };
+            $.get("/Category/updateDepartment", FormData, function (data) {
+              
+            });
+
+
+        });
+
+        
         $(document).on('click', '.block_item', function (e) {
             if (!confirm("Do you want to delete")) {
                 return false;

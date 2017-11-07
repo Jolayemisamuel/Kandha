@@ -1,27 +1,2 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Item>
-  <Items>
-    <UserId>67</UserId>
-    <RawCategoryId>61</RawCategoryId>
-    <ItemId>190</ItemId>
-    <RawMaterialId>0</RawMaterialId>
-    <Unit>ml</Unit>
-    <Quantity>5</Quantity>
-  </Items>
-  <Items>
-    <UserId>67</UserId>
-    <RawCategoryId>56</RawCategoryId>
-    <ItemId>95</ItemId>
-    <RawMaterialId>0</RawMaterialId>
-    <Unit>kg</Unit>
-    <Quantity>10</Quantity>
-  </Items>
-  <Items>
-    <UserId>67</UserId>
-    <RawCategoryId>59</RawCategoryId>
-    <ItemId>353</ItemId>
-    <RawMaterialId>0</RawMaterialId>
-    <Unit>gm</Unit>
-    <Quantity>5</Quantity>
-  </Items>
-</Item>
+<Item />

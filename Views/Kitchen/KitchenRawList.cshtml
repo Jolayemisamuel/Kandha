@@ -50,7 +50,7 @@
                                     Item Name
                                 </th>
                                 <th>View Raw Materials</th>
-                                @*<th>Action</th>*@
+                                <th>Action</th>
 
                             </tr>
                         </thead>
@@ -98,7 +98,8 @@
                                                    
                                             </div>
                                         </td>
-                                        @*<td><a href="@Url.Action("DeleteIndent","Kitchen", new { @id = item.ItemId })"><span class="fa fa-trash-o"></span></a></td>*@
+                                        
+                                        <td><a href="@Url.Action("DeleteIndent","Kitchen", new { @id = item.Item })"><span class="fa fa-trash-o"></span></a></td>
 
                                     </tr>
                                     counter = counter + 1;

@@ -41,6 +41,12 @@ namespace NibsMVC.Controllers
             TempData["Error"] = data;
             return RedirectToAction("ViewRawCategory");
         }
+        public ActionResult DeleteIndent(int Id = 0)
+        {
+            var data = obj.DeleteRawIndent(Id);
+            TempData["Error"] = data;
+            return RedirectToAction("KitchenRawList");
+        }
 
         #endregion
 
@@ -83,6 +89,7 @@ namespace NibsMVC.Controllers
         #region
         public ActionResult AddIndent()
         {
+
             return View(obj.AddKitchenRawIndent());
         }
         public string ListOfItems(string Id)
@@ -91,6 +98,13 @@ namespace NibsMVC.Controllers
             string result = obj.GetListofItems(ItemId);
             return result;
             
+        }
+        public string ListOfRawItems(string Id)
+        {
+            int ItemId = Convert.ToInt32(Id);
+            string result = obj.GetListofRawItems(ItemId);
+            return result;
+
         }
         public string UpdateKitchenRawMaterial(KitchenRawIndentModel model)
         {

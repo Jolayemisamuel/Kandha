@@ -10,11 +10,11 @@ namespace NibsMVC.Models
 
     public class SearchReportsModel
     {
-        [Required (ErrorMessage="please select date from")]
+        [Required(ErrorMessage = "please select date from")]
         public string FromDate { get; set; }
-       [Required(ErrorMessage = "please select date to")]
+        [Required(ErrorMessage = "please select date to")]
         public string ToDate { get; set; }
-       public int? TokenNo { get; set; }
+        public int? TokenNo { get; set; }
         public List<tblBillMaster> getbills { get; set; }
     }
 
@@ -23,7 +23,7 @@ namespace NibsMVC.Models
 
     public class BillingModel
     {
-       
+
         public int BillId { get; set; }
         public DateTime BillDate { get; set; }
         public decimal TotalAmount { get; set; }
@@ -56,7 +56,7 @@ namespace NibsMVC.Models
         public string mergetabledata { get; set; }
         public string OutletName { get; set; }
         public string PaymentType { get; set; }
-        public List<AdminBillDetailsReportModel> getBillItemDetails { get;set; }
+        public List<AdminBillDetailsReportModel> getBillItemDetails { get; set; }
     }
     // for searching 
     public class AdminBillReportModel
@@ -66,7 +66,7 @@ namespace NibsMVC.Models
         public DateTime SearchFrom { get; set; }
         public DateTime SearchTo { get; set; }
         public int BillNo { get; set; }
-        public int OutletId { get;set;}
+        public int OutletId { get; set; }
         public DateTime Today { get; set; }
         public List<BillingModel> getAllBillReports { get; set; }
     }
@@ -83,9 +83,9 @@ namespace NibsMVC.Models
         public List<BillTableModelList> getAllItem { get; set; }
         public List<BillTableModel> getAllTables { get; set; }
         public List<SelectListItem> getAllAutoCompleteItem { get; set; }
-        public decimal ServiceCharge { get;set;}
+        public decimal ServiceCharge { get; set; }
     }
-    
+
     public class BillTableModelList
     {
         public int UserId { get; set; }
@@ -94,12 +94,14 @@ namespace NibsMVC.Models
         public string CategoryName { get; set; }
         public string Color { get; set; }
         public string TextColor { get; set; }
-       
+
     }
     public class BillTableModel
     {
         public string TableNo { get; set; }
         public string Current { get; set; }
+
+        public string AcType { get; set; }
     }
     public class shiftBillModel
     {
@@ -109,7 +111,7 @@ namespace NibsMVC.Models
     public class OrderDispatchModel
     {
         public int TableNo { get; set; }
-        public string  CustomerName { get; set; }
+        public string CustomerName { get; set; }
         public decimal VatAmount { get; set; }
         public decimal ServiceCharge { get; set; }
         public decimal DiscountAmount { get; set; }
@@ -126,58 +128,58 @@ namespace NibsMVC.Models
         public string MasterTable { get; set; }
     }
     /// models for ajax call
-   public class GetBillingSubItemModel
-   {
-       public int ItemId { get; set; }
-       public string Name { get; set; }
-       public string Color { get; set; }
-       public string TextColor { get; set; }
-     public bool Outstock { get; set; }
-       // vendor id for vendor billing
-     public int VendorId { get; set; }
-       
-       
-   }
-   public class GetBillingModel
-   {
-       public int BillId { get; set; }
-       public bool IsPrinted { get; set; }
-       public string CustomerName { get; set; }
-       public string CustomerAddress { get; set; }
-       public string TableNo { get; set; }
-       public List<GetBillingItemModel> _getbillingItems { get; set; }
-       public List<SelectListItem> getPaymentType { get; set; }
-       public List<SelectListItem> getAllAutoCompleteItem { get; set; }
-       public string PaymentType { get; set; }
-       public DateTime? CheckDate { get; set; }
-       public string ChequeNo { get; set; }
-       public decimal Discount { get; set; }
-       public decimal VatAmount { get; set; }
-       public decimal ServiceTax { get; set; }
-       public decimal DiscountAmount { get; set; }
-       public decimal TotalAmount { get; set; }
-       public decimal NetAmount { get; set; }
-       public decimal NetAmountWithoutDiscount { get; set; }
-       public List<GetKotItemModel> _getKotitems { get; set; }
-       public string OrderDispatch { get; set; }
-       public string CurrentTables { get; set; }
-       public decimal ServicesCharge { get; set; }
-       public string OrderType { get; set; }
-       public int PackingCharges { get; set; }
-       public string ContactNo { get; set; }
-      
-   }
-   public class GetBillingItemModel
-   {
-       public int ItemId { get; set; }
-       public string ItemName { get; set; }
-       public int FullQty { get; set; }
-       public decimal FullPrice { get; set; }
-       public decimal Amount { get; set; }
-       public decimal Vat { get; set; }
-       public int OfferQty { get; set; }
-      
-   }
+    public class GetBillingSubItemModel
+    {
+        public int ItemId { get; set; }
+        public string Name { get; set; }
+        public string Color { get; set; }
+        public string TextColor { get; set; }
+        public bool Outstock { get; set; }
+        // vendor id for vendor billing
+        public int VendorId { get; set; }
+
+
+    }
+    public class GetBillingModel
+    {
+        public int BillId { get; set; }
+        public bool IsPrinted { get; set; }
+        public string CustomerName { get; set; }
+        public string CustomerAddress { get; set; }
+        public string TableNo { get; set; }
+        public List<GetBillingItemModel> _getbillingItems { get; set; }
+        public List<SelectListItem> getPaymentType { get; set; }
+        public List<SelectListItem> getAllAutoCompleteItem { get; set; }
+        public string PaymentType { get; set; }
+        public DateTime? CheckDate { get; set; }
+        public string ChequeNo { get; set; }
+        public decimal Discount { get; set; }
+        public decimal VatAmount { get; set; }
+        public decimal ServiceTax { get; set; }
+        public decimal DiscountAmount { get; set; }
+        public decimal TotalAmount { get; set; }
+        public decimal NetAmount { get; set; }
+        public decimal NetAmountWithoutDiscount { get; set; }
+        public List<GetKotItemModel> _getKotitems { get; set; }
+        public string OrderDispatch { get; set; }
+        public string CurrentTables { get; set; }
+        public decimal ServicesCharge { get; set; }
+        public string OrderType { get; set; }
+        public int PackingCharges { get; set; }
+        public string ContactNo { get; set; }
+
+    }
+    public class GetBillingItemModel
+    {
+        public int ItemId { get; set; }
+        public string ItemName { get; set; }
+        public int FullQty { get; set; }
+        public decimal FullPrice { get; set; }
+        public decimal Amount { get; set; }
+        public decimal Vat { get; set; }
+        public int OfferQty { get; set; }
+
+    }
     public class GetKotItemModel
     {
         public int TNo { get; set; }
@@ -191,7 +193,7 @@ namespace NibsMVC.Models
         public int RunningTable { get; set; }
         public int Qty { get; set; }
         public string Type { get; set; }
-       
+
     }
     public class PrintBillModel
     {

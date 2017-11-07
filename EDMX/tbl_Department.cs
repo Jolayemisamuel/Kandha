@@ -17,6 +17,7 @@ namespace NibsMVC.EDMX
         public tbl_Department()
         {
             this.tblTransfers = new HashSet<tblTransfer>();
+            this.tblItems = new HashSet<tblItem>();
         }
     
         public int DepartmentID { get; set; }
@@ -24,5 +25,6 @@ namespace NibsMVC.EDMX
         public bool Active { get; set; }
     
         public virtual ICollection<tblTransfer> tblTransfers { get; set; }
+        public virtual ICollection<tblItem> tblItems { get; set; }
     }
 }
