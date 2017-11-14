@@ -58,6 +58,9 @@
                                 <th>
                                     Re-Order Level
                                 </th>
+                                <th>
+                                    <a href="@Url.Action("genBarcode", "Kitchen")" > Generate Barcode </a>
+                                </th>
                                 <th>Action</th>
 
                             </tr>
@@ -84,7 +87,14 @@
                                         <td>
                                             @item.reorder
                                         </td>
-                                       
+                                       <td>
+                                           @{
+                                               var path = "~/Barcodes/" + item.Barcode + ".png";
+                                            }
+                                          
+                                           <img src=@Url.Content("~/Barcodes/" + item.Barcode + ".png") /> 
+                                          
+                                           </td> 
                                         <td>
                                             <a href="@Url.Action("Create", "Kitchen", new { @id = item.RawMaterialId })"><span class="fa fa-edit"></span></a>
                                             <a href="@Url.Action("Delete", "Kitchen", new { @id = item.RawMaterialId })" class="block_Category"><span class="fa fa-trash-o"></span></a>

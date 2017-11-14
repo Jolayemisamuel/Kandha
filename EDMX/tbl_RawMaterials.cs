@@ -33,6 +33,8 @@ namespace NibsMVC.EDMX
         public int rawcategoryId { get; set; }
         public string units { get; set; }
         public Nullable<decimal> reorder { get; set; }
+        public string barcode { get; set; }
+        public byte[] barcodeImage { get; set; }
     
         public virtual ICollection<tbl_KitchenRawIndent> tbl_KitchenRawIndent { get; set; }
         public virtual ICollection<tbl_KitchenStock> tbl_KitchenStock { get; set; }

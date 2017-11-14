@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using System.Text;
 using WebMatrix.WebData;
 using System.Xml.Linq;
+
 namespace NibsMVC.Repository
 {
     public class KitchenItemRepository
@@ -49,7 +50,8 @@ namespace NibsMVC.Repository
                 model.RawCategoryName = item.RawCategory.Name ;
                 model.Units = item.units;
                 model.reorder = Convert.ToDecimal(item.reorder);
-
+                model.Barcode = item.barcode;
+              
                 List.Add(model);
 
             }
@@ -188,6 +190,42 @@ namespace NibsMVC.Repository
             catch
             {
                 return "something Wrong try Agian !";
+            }
+        }
+
+        public byte[] GenerateBarcode(string valueToEncode)
+        {
+            byte[] imgBuffer =null ;
+            try
+            {
+                
+                //    public void GetBarcodeImage(string valueToEncode)
+                //{
+                //Create an instance of BarcodeProfessional class
+                using (Neodynamic.Web.MVC.Barcode.BarcodeProfessional bcp = new
+                 Neodynamic.Web.MVC.Barcode.BarcodeProfessional())
+                {
+                    //Set the desired barcode type or symbology
+                    bcp.Symbology = Neodynamic.Web.MVC.Barcode.Symbology.Code93;
+                    //Set value to encode
+                    bcp.Code = valueToEncode;
+                    bcp.Text = "dndklsf";
+                    //Generate barcode image
+                     imgBuffer = bcp.GetBarcodeImage(
+                                 System.Drawing.Imaging.ImageFormat.Png);
+
+                    //Write image buffer to Response obj
+                    //System.Web.HttpContext.Current.Response.ContentType = "image/png";
+                    //System.Web.HttpContext.Current.Response.BinaryWrite(imgBuffer);
+
+
+                }
+                //}
+                return imgBuffer;
+            }
+            catch
+            {
+                return imgBuffer;
             }
         }
         #endregion

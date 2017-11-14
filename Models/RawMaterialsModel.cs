@@ -26,6 +26,11 @@ namespace NibsMVC.Models
         public string Name { get; set; }
         public string Units { get; set; }        
         public decimal reorder { get; set; }
+
+        public string Barcode { get; set; }
+
+       
+
     }
     public class AddRawCategoryModel
     {

@@ -10,6 +10,10 @@ using NibsMVC.Filters;
 using WebMatrix.WebData;
 using NibsMVC.EDMX;
 using System.Xml.Linq;
+using System.Drawing;
+using System.IO;
+using System.Drawing.Imaging;
+
 namespace NibsMVC.Controllers
 {
 
@@ -22,7 +26,10 @@ namespace NibsMVC.Controllers
         [Authorize(Roles = "admin,Outlet,Operator")]
         public ActionResult Index()
         {
-            DateTime dt = Convert.ToDateTime("01-Oct-2017");
+           
+
+
+                DateTime dt = Convert.ToDateTime("01-Oct-2017");
             var billsKOT = (from p in kot_entities.vwBillMsts where p.BillDate >= dt select p).ToList();
             var billsCount = (from p in entities.tblBillMasters select p).ToList().Count;
             if (billsKOT.Count > billsCount)

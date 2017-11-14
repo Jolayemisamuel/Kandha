@@ -237,6 +237,8 @@
           <Property Name="rawcategoryId" Type="int" Nullable="false" />
           <Property Name="units" Type="nvarchar" MaxLength="50" />
           <Property Name="reorder" Type="decimal" Precision="10" Scale="0" />
+          <Property Name="barcode" Type="nvarchar" MaxLength="30" />
+          <Property Name="barcodeImage" Type="image" />
         </EntityType>
         <EntityType Name="tbl_ServiceTax">
           <Key>
@@ -529,7 +531,7 @@
           <Property Name="SenderOutletId" Type="int" Nullable="false" />
           <Property Name="RawMaterialId" Type="int" Nullable="false" />
           <Property Name="TransferQuantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="TransferDate" Type="date" Nullable="false" />
+          <Property Name="TransferDate" Type="datetime" Nullable="false" />
           <Property Name="ReciverOutletId" Type="int" Nullable="false" />
           <Property Name="OutletId" Type="int" Nullable="false" />
           <Property Name="DepartmentId" Type="int" Nullable="false" />
@@ -2435,6 +2437,7 @@
           <NavigationProperty Name="tbl_RawMaterials4" Relationship="NIBSModel.FK_tbl_RawMaterials_tbl_RawMaterials4" FromRole="tbl_RawMaterials1" ToRole="tbl_RawMaterials" />
           <NavigationProperty Name="tblGRNStocks" Relationship="NIBSModel.FK_tblGRNStock_tbl_RawMaterials" FromRole="tbl_RawMaterials" ToRole="tblGRNStock" />
           <NavigationProperty Name="tblTransferReturnReports" Relationship="NIBSModel.FK_tblTransferReturnReport_tbl_RawMaterials" FromRole="tbl_RawMaterials" ToRole="tblTransferReturnReport" />
+          <Property Name="barcode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tbl_ServiceTax">
           <Key>
@@ -2679,7 +2682,7 @@
           <Property Name="SenderOutletId" Type="Int32" Nullable="false" />
           <Property Name="RawMaterialId" Type="Int32" Nullable="false" />
           <Property Name="TransferQuantity" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="TransferDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="TransferDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ReciverOutletId" Type="Int32" Nullable="false" />
           <Property Name="OutletId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tbl_RawMaterials" Relationship="NIBSModel.FK_tblTransfer_tbl_RawMaterials" FromRole="tblTransfer" ToRole="tbl_RawMaterials" />
@@ -4092,6 +4095,7 @@
           <EntitySetMapping Name="tbl_RawMaterials">
             <EntityTypeMapping TypeName="NIBSModel.tbl_RawMaterials">
               <MappingFragment StoreEntitySet="tbl_RawMaterials">
+                <ScalarProperty Name="barcode" ColumnName="barcode" />
                 <ScalarProperty Name="reorder" ColumnName="reorder" />
                 <ScalarProperty Name="units" ColumnName="units" />
                 <ScalarProperty Name="rawcategoryId" ColumnName="rawcategoryId" />
