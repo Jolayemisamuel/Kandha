@@ -32,6 +32,20 @@ namespace NibsMVC.Models
        
 
     }
+    public class BarcodeGenerateModel
+    {
+        public int Id { get; set; }
+        public int RawMaterialsId { get; set; }
+
+        public int RawCategoryId { get; set; }
+
+        public string RawCategoryName { get; set; }
+        public string Name { get; set; }
+       
+        public int NoOfBarcode { get; set; }
+
+
+    }
     public class AddRawCategoryModel
     {
         public int RawCategoryId { get; set; }

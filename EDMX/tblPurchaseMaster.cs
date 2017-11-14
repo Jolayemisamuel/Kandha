@@ -30,6 +30,7 @@ namespace NibsMVC.EDMX
         public string ChequeNo { get; set; }
         public int PurchaseOrderId { get; set; }
         public string Remarks { get; set; }
+        public System.DateTime Date { get; set; }
     
         public virtual tblVendor tblVendor { get; set; }
     }

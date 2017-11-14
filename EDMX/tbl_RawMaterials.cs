@@ -26,6 +26,7 @@ namespace NibsMVC.EDMX
             this.tblOpStckRates = new HashSet<tblOpStckRate>();
             this.tblGRNStocks = new HashSet<tblGRNStock>();
             this.tblTransferReturnReports = new HashSet<tblTransferReturnReport>();
+            this.tblGenBarcodes = new HashSet<tblGenBarcode>();
         }
     
         public int RawMaterialId { get; set; }
@@ -34,7 +35,6 @@ namespace NibsMVC.EDMX
         public string units { get; set; }
         public Nullable<decimal> reorder { get; set; }
         public string barcode { get; set; }
-        public byte[] barcodeImage { get; set; }
     
         public virtual ICollection<tbl_KitchenRawIndent> tbl_KitchenRawIndent { get; set; }
         public virtual ICollection<tbl_KitchenStock> tbl_KitchenStock { get; set; }
@@ -53,5 +53,6 @@ namespace NibsMVC.EDMX
         public virtual tbl_RawMaterials tbl_RawMaterials4 { get; set; }
         public virtual ICollection<tblGRNStock> tblGRNStocks { get; set; }
         public virtual ICollection<tblTransferReturnReport> tblTransferReturnReports { get; set; }
+        public virtual ICollection<tblGenBarcode> tblGenBarcodes { get; set; }
     }
 }

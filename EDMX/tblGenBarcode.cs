@@ -12,20 +12,14 @@ namespace NibsMVC.EDMX
     using System;
     using System.Collections.Generic;
     
-    public partial class tblTransfer
+    public partial class tblGenBarcode
     {
-        public int TransferId { get; set; }
-        public int SenderOutletId { get; set; }
+        public int Id { get; set; }
         public int RawMaterialId { get; set; }
-        public decimal TransferQuantity { get; set; }
-        public System.DateTime TransferDate { get; set; }
-        public int ReciverOutletId { get; set; }
-        public int OutletId { get; set; }
-        public int DepartmentId { get; set; }
-        public System.DateTime date { get; set; }
+        public int NoOfBarcode { get; set; }
+        public System.DateTime CreateDateTime { get; set; }
+        public int UserId { get; set; }
     
         public virtual tbl_RawMaterials tbl_RawMaterials { get; set; }
-        public virtual tblOutlet tblOutlet { get; set; }
-        public virtual tbl_Department tbl_Department { get; set; }
     }
 }

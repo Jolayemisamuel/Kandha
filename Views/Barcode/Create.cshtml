@@ -1,0 +1,128 @@
+﻿@model NibsMVC.Models.BarcodeGenerateModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $("#Category").change(function () {
+            $("#RawMateriallId").empty();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("getitem")',
+
+                dataType: 'json',
+
+                data: { id: $("#Category").val() },
+
+
+                success: function (items) {
+
+                    $("#RawMateriallId").append('<option value="--Select Item--">--Select Item--</option>');
+                    $.each(items, function (i, item) {
+                        $("#RawMateriallId").append('<option value="' + item.Value + '">' +
+                             item.Text + '</option>');
+
+                    });
+                },
+                error: function (ex) {
+                    alert('Failed to retrieve Category and Item.' + ex);
+                }
+            });
+            return false;
+        })
+    });
+
+</script>
+
+<div class="page-content">
+    <div class="row">
+        <div class="col-md-12 margin-bottom-10">
+        </div>
+        <div class="col-md-12">
+            <div class="portlet box blue">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-gift"></i>Generate Barcode
+                    </div>
+
+                </div>
+                <div class="portlet-body form">
+                    <!-- BEGIN FORM-->
+                    @using (Html.BeginForm("Create", "Barcode", FormMethod.Post, new { @id = "Rawmaterials", @class = "form-horizontal" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        @*@Html.HiddenFor(model => model.RawMaterialsId)*@
+                        <div class="form-body">
+                            <div class="alert alert-danger display-hide">
+                                <button class="close" data-close="alert"></button>
+                                You have some form errors. Please check below.
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Select Category <span class="required">
+                                        *
+                                    </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+
+                                        @Html.DropDownListFor(model => model.RawCategoryId, new SelectList(ViewBag.Categorylists, "Value", "Text"), "--Choose Your Category--", new { @class = "form-control" , @id = "Category" })
+                                        @*@Html.DropDownListFor(model => model.CategoryId, new SelectList(ViewBag.cat))*@
+                                        <input type="hidden" id="hidcategoryId" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Name <span class="required">
+                                        *
+                                    </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        @Html.DropDownListFor(model => model.RawMaterialsId , new SelectList(string.Empty, "Value", "Text"), new { @class = "form-control", @id = "RawMateriallId" })
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                            
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    No of Barcode <span class="required">
+                                        *
+                                    </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        @Html.TextBoxFor(model => model.NoOfBarcode, new { @class = "form-control" })
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-9">
+                                    <button type="submit" class="btn green">Generate</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

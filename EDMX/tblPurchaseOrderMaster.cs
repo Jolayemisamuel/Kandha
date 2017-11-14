@@ -19,6 +19,7 @@ namespace NibsMVC.EDMX
         public System.DateTime PODate { get; set; }
         public int OutletId { get; set; }
         public int VendorId { get; set; }
+        public System.DateTime Date { get; set; }
     
         public virtual tblOutlet tblOutlet { get; set; }
         public virtual tblVendor tblVendor { get; set; }

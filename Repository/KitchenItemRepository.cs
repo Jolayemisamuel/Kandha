@@ -57,6 +57,24 @@ namespace NibsMVC.Repository
             }
             return List;
         }
+        public List<BarcodeGenerateModel> ShowAllBarcodeGenList()
+        {
+            List<BarcodeGenerateModel> List = new List<BarcodeGenerateModel>();
+            var data = _entities.tblGenBarcodes.ToList();
+            foreach (var item in data)
+            {
+                BarcodeGenerateModel model = new BarcodeGenerateModel();
+                model.RawMaterialsId = item.RawMaterialId;
+                model.Name = item.tbl_RawMaterials.Name ;
+                model.RawCategoryId = item.tbl_RawMaterials.rawcategoryId ;
+                model.RawCategoryName = item.tbl_RawMaterials.RawCategory.Name ;
+                model.NoOfBarcode = item.NoOfBarcode;
+                model.Id = item.Id;
+                List.Add(model);
+
+            }
+            return List;
+        }
         public RawMaterialsModel EditRawMaterial(int Id)
         {
             RawMaterialsModel model = new RawMaterialsModel();
@@ -136,6 +154,30 @@ namespace NibsMVC.Repository
 
         }
 
+        public string SaveBarcodeGen(BarcodeGenerateModel  model)
+        {
+            tblGenBarcode tb = new tblGenBarcode();
+                try
+                {
+           
+                        tb.CreateDateTime  = DateTime.Now ;
+                        tb.UserId  = WebSecurity .CurrentUserId ;
+                        tb.RawMaterialId  = model.RawMaterialsId ;
+                        tb.NoOfBarcode  = model.NoOfBarcode ;
+                        _entities.tblGenBarcodes.Add(tb);
+                        _entities.SaveChanges();
+                        return "Record Saved Successfully...";
+                    
+
+                }
+                catch
+                {
+                    return "something Wrong try Agian !";
+
+                }
+            
+        }
+
         public string SaveStock(AddExtraStock Model1)
         {
             tbl_KitchenStock tb = new tbl_KitchenStock();
@@ -184,6 +226,21 @@ namespace NibsMVC.Repository
                 _entities.tbl_RawMaterials.Remove(data);
                 _entities.tbl_KitchenStock.Remove(data1);
                 _entities.tblOpStckRates.Remove(data2);
+                _entities.SaveChanges();
+                return "Record deleted Successfully...";
+            }
+            catch
+            {
+                return "something Wrong try Agian !";
+            }
+        }
+
+        public string DeleteBarcodeGen(int Id)
+        {
+            try
+            {
+                var data = _entities.tblGenBarcodes.Where(x => x.Id == Id).SingleOrDefault();
+                _entities.tblGenBarcodes.Remove(data);
                 _entities.SaveChanges();
                 return "Record deleted Successfully...";
             }

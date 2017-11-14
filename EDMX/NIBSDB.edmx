@@ -238,7 +238,6 @@
           <Property Name="units" Type="nvarchar" MaxLength="50" />
           <Property Name="reorder" Type="decimal" Precision="10" Scale="0" />
           <Property Name="barcode" Type="nvarchar" MaxLength="30" />
-          <Property Name="barcodeImage" Type="image" />
         </EntityType>
         <EntityType Name="tbl_ServiceTax">
           <Key>
@@ -347,6 +346,16 @@
           <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="VatAmount" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Vat" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="tblGenBarcode">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RawMaterialId" Type="int" Nullable="false" />
+          <Property Name="NoOfBarcode" Type="int" Nullable="false" />
+          <Property Name="CreateDateTime" Type="datetime" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tblGRNStock">
           <Key>
@@ -459,6 +468,7 @@
           <Property Name="ChequeNo" Type="nvarchar" MaxLength="50" />
           <Property Name="PurchaseOrderId" Type="int" Nullable="false" />
           <Property Name="Remarks" Type="nvarchar(max)" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="tblPurchaseOrderItem">
           <Key>
@@ -479,6 +489,7 @@
           <Property Name="PODate" Type="datetime" Nullable="false" />
           <Property Name="OutletId" Type="int" Nullable="false" />
           <Property Name="VendorId" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="tblPurchaseReturn">
           <Key>
@@ -535,6 +546,7 @@
           <Property Name="ReciverOutletId" Type="int" Nullable="false" />
           <Property Name="OutletId" Type="int" Nullable="false" />
           <Property Name="DepartmentId" Type="int" Nullable="false" />
+          <Property Name="date" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="tblTransferReturnReport">
           <Key>
@@ -1126,6 +1138,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblGenBarcode_tblGenBarcode">
+          <End Role="tbl_RawMaterials" Type="Self.tbl_RawMaterials" Multiplicity="1" />
+          <End Role="tblGenBarcode" Type="Self.tblGenBarcode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_RawMaterials">
+              <PropertyRef Name="RawMaterialId" />
+            </Principal>
+            <Dependent Role="tblGenBarcode">
+              <PropertyRef Name="RawMaterialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblItem_tblItem">
           <End Role="tblItem" Type="Self.tblItem" Multiplicity="1" />
           <End Role="tblItem1" Type="Self.tblItem" Multiplicity="0..1" />
@@ -1537,6 +1561,7 @@
           <EntitySet Name="tblCategory" EntityType="Self.tblCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblDeleteBillMaster" EntityType="Self.tblDeleteBillMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblDeletedetails" EntityType="Self.tblDeletedetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblGenBarcode" EntityType="Self.tblGenBarcode" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblGRNStock" EntityType="Self.tblGRNStock" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblItem" EntityType="Self.tblItem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblMenuOutlet" EntityType="Self.tblMenuOutlet" Schema="dbo" store:Type="Tables" />
@@ -1722,6 +1747,10 @@
           <AssociationSet Name="FK_tblDeletedetails_tblItem" Association="Self.FK_tblDeletedetails_tblItem">
             <End Role="tblItem" EntitySet="tblItem" />
             <End Role="tblDeletedetails" EntitySet="tblDeletedetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblGenBarcode_tblGenBarcode" Association="Self.FK_tblGenBarcode_tblGenBarcode">
+            <End Role="tbl_RawMaterials" EntitySet="tbl_RawMaterials" />
+            <End Role="tblGenBarcode" EntitySet="tblGenBarcode" />
           </AssociationSet>
           <AssociationSet Name="FK_tblItem_tblItem" Association="Self.FK_tblItem_tblItem">
             <End Role="tblItem" EntitySet="tblItem" />
@@ -2217,6 +2246,11 @@
             <End Role="tblItem" EntitySet="tblItems" />
             <End Role="tblItem1" EntitySet="tblItems" />
           </AssociationSet>
+          <EntitySet Name="tblGenBarcodes" EntityType="NIBSModel.tblGenBarcode" />
+          <AssociationSet Name="FK_tblGenBarcode_tblGenBarcode" Association="NIBSModel.FK_tblGenBarcode_tblGenBarcode">
+            <End Role="tbl_RawMaterials" EntitySet="tbl_RawMaterials" />
+            <End Role="tblGenBarcode" EntitySet="tblGenBarcodes" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="NIbs_AssignOffer">
           <Key>
@@ -2438,6 +2472,7 @@
           <NavigationProperty Name="tblGRNStocks" Relationship="NIBSModel.FK_tblGRNStock_tbl_RawMaterials" FromRole="tbl_RawMaterials" ToRole="tblGRNStock" />
           <NavigationProperty Name="tblTransferReturnReports" Relationship="NIBSModel.FK_tblTransferReturnReport_tbl_RawMaterials" FromRole="tbl_RawMaterials" ToRole="tblTransferReturnReport" />
           <Property Name="barcode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblGenBarcodes" Relationship="NIBSModel.FK_tblGenBarcode_tblGenBarcode" FromRole="tbl_RawMaterials" ToRole="tblGenBarcode" />
         </EntityType>
         <EntityType Name="tbl_ServiceTax">
           <Key>
@@ -2689,6 +2724,7 @@
           <NavigationProperty Name="tblOutlet" Relationship="NIBSModel.FK_tblTransfer_tblOutlet" FromRole="tblTransfer" ToRole="tblOutlet" />
           <Property Name="DepartmentId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tbl_Department" Relationship="NIBSModel.FK_tblTransfer_tbl_Department" FromRole="tblTransfer" ToRole="tbl_Department" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="tblVendor">
           <Key>
@@ -3615,6 +3651,7 @@
           <Property Name="VendorId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tblOutlet" Relationship="NIBSModel.FK_tblPurchaseOrderMaster_tblOutlet" FromRole="tblPurchaseOrderMaster" ToRole="tblOutlet" />
           <NavigationProperty Name="tblVendor" Relationship="NIBSModel.FK_tblPurchaseOrderMaster_tblVendor" FromRole="tblPurchaseOrderMaster" ToRole="tblVendor" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <Association Name="FK_tblPurchaseOrderMaster_tblOutlet">
           <End Type="NIBSModel.tblOutlet" Role="tblOutlet" Multiplicity="1" />
@@ -3800,6 +3837,7 @@
           <Property Name="PurchaseOrderId" Type="Int32" Nullable="false" />
           <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tblVendor" Relationship="NIBSModel.FK_tblPurchaseMaster_tblVendor" FromRole="tblPurchaseMaster" ToRole="tblVendor" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <Association Name="FK_tblPurchaseMaster_tblVendor">
           <End Type="NIBSModel.tblVendor" Role="tblVendor" Multiplicity="0..1" />
@@ -3907,6 +3945,29 @@
             </Principal>
             <Dependent Role="tblItem1">
               <PropertyRef Name="ItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblGenBarcode">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RawMaterialId" Type="Int32" Nullable="false" />
+          <Property Name="NoOfBarcode" Type="Int32" Nullable="false" />
+          <Property Name="CreateDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbl_RawMaterials" Relationship="NIBSModel.FK_tblGenBarcode_tblGenBarcode" FromRole="tblGenBarcode" ToRole="tbl_RawMaterials" />
+        </EntityType>
+        <Association Name="FK_tblGenBarcode_tblGenBarcode">
+          <End Type="NIBSModel.tbl_RawMaterials" Role="tbl_RawMaterials" Multiplicity="1" />
+          <End Type="NIBSModel.tblGenBarcode" Role="tblGenBarcode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_RawMaterials">
+              <PropertyRef Name="RawMaterialId" />
+            </Principal>
+            <Dependent Role="tblGenBarcode">
+              <PropertyRef Name="RawMaterialId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4301,6 +4362,7 @@
           <EntitySetMapping Name="tblTransfers">
             <EntityTypeMapping TypeName="NIBSModel.tblTransfer">
               <MappingFragment StoreEntitySet="tblTransfer">
+                <ScalarProperty Name="date" ColumnName="date" />
                 <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
                 <ScalarProperty Name="OutletId" ColumnName="OutletId" />
                 <ScalarProperty Name="ReciverOutletId" ColumnName="ReciverOutletId" />
@@ -4502,6 +4564,7 @@
           <EntitySetMapping Name="tblPurchaseOrderMasters">
             <EntityTypeMapping TypeName="NIBSModel.tblPurchaseOrderMaster">
               <MappingFragment StoreEntitySet="tblPurchaseOrderMaster">
+                <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="VendorId" ColumnName="VendorId" />
                 <ScalarProperty Name="OutletId" ColumnName="OutletId" />
                 <ScalarProperty Name="PODate" ColumnName="PODate" />
@@ -4554,6 +4617,7 @@
           <EntitySetMapping Name="tblPurchaseMasters">
             <EntityTypeMapping TypeName="NIBSModel.tblPurchaseMaster">
               <MappingFragment StoreEntitySet="tblPurchaseMaster">
+                <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
                 <ScalarProperty Name="PurchaseOrderId" ColumnName="PurchaseOrderId" />
                 <ScalarProperty Name="ChequeNo" ColumnName="ChequeNo" />
@@ -4594,6 +4658,17 @@
                 <ScalarProperty Name="ReturnQuantity" ColumnName="ReturnQuantity" />
                 <ScalarProperty Name="RawMaterialId" ColumnName="RawMaterialId" />
                 <ScalarProperty Name="TransferReturnId" ColumnName="TransferReturnId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblGenBarcodes">
+            <EntityTypeMapping TypeName="NIBSModel.tblGenBarcode">
+              <MappingFragment StoreEntitySet="tblGenBarcode">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+                <ScalarProperty Name="NoOfBarcode" ColumnName="NoOfBarcode" />
+                <ScalarProperty Name="RawMaterialId" ColumnName="RawMaterialId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

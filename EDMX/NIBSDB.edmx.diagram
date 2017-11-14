@@ -133,6 +133,8 @@
         <AssociationConnector Association="NIBSModel.FK_tblTransferReturnReport_tblOutlet" />
         <AssociationConnector Association="NIBSModel.FK_AddItem_Department" />
         <AssociationConnector Association="NIBSModel.FK_tblItem_tblItem" />
+        <EntityTypeShape EntityType="NIBSModel.tblGenBarcode" Width="1.5" PointX="5.25" PointY="18" />
+        <AssociationConnector Association="NIBSModel.FK_tblGenBarcode_tblGenBarcode" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

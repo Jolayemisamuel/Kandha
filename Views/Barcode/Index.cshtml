@@ -1,0 +1,118 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model List<NibsMVC.Models.BarcodeGenerateModel>
+  
+<div class="page-content">
+
+    <!-- BEGIN PAGE HEADER-->
+    <div class="page-bar">
+        <ul class="page-breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="@Url.Action("Index","Home")">Home</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <a href="@Url.Action("Create","Barcode")">Generate Barcode</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                Barcode Generate Reports
+            </li>
+        </ul>
+
+    </div>
+    <!-- END PAGE HEADER-->
+    <!-- BEGIN PAGE CONTENT-->
+
+    <div class="row">
+        <div class="col-md-12">
+            <p style="color:red">@TempData["Error"]</p>
+        </div>
+        <div class="col-md-12" style="padding-left:0px;padding-right:0px;">
+            <!-- BEGIN BORDERED TABLE PORTLET-->
+            <div class="portlet box yellow">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-coffee"></i> Barcode Generate Reports
+                    </div>
+
+                </div>
+                <div class="portlet-body">
+                    <table class="table table-bordered table-hover table-full-width" id="sample_2">
+                        <thead>
+                            <tr>
+                                <th>
+                                    S.NO
+                                </th>
+                                <th>
+                                    Category
+                                </th>
+                                <th>
+                                    Raw Material
+                                </th>
+                                <th>
+                                    No of Barcodes
+                                </th>
+                               
+                                <th>Action</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+
+                                var counter = 1;
+                                foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @counter
+                                        </td>
+                                        <td>
+                                            @item.RawCategoryName 
+                                            
+                                        </td>
+
+                                        <td>
+                                            @item.Name 
+                                        
+                                            @*@{
+                                                NibsMVC.EDMX.NIBSEntities db = new NibsMVC.EDMX.NIBSEntities ();
+                                                var rawmataname = (from p in db.tbl_RawMaterials where p.RawMaterialId == item.RawMaterialsId select p.Name).SingleOrDefault();
+                                            }
+                                            @rawmataname*@ 
+                                        </td>
+                                        
+                                        <td>
+                                            @item.NoOfBarcode 
+                                        </td>
+                                        
+                                        <td>
+                                         <a href="@Url.Action("Delete", "Barcode", new { @id = item.Id  })" class="block_Category"><span class="fa fa-trash-o"></span></a>
+                                        </td>
+
+                                    </tr>
+                                                    counter = counter + 1;
+                                                }
+
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- END BORDERED TABLE PORTLET-->
+            <script>
+                $(document).on('click', '.block_Category', function (e) {
+                    if (!confirm("Do you want to delete")) {
+                        return false;
+                    }
+                });
+            </script>
+        </div>
+    </div>
+    <!-- END PAGE CONTENT-->
+</div>
