@@ -212,6 +212,10 @@
                                 {
                                     @Html.Partial("_PartialSalesMenu")
                                 }
+                                else if (type == "Finance")
+                                {
+                                    @Html.Partial("_PartialFinanceMenu")
+                                }
                                 else
                                 {
                                     @Html.Partial("_PartialOutletMenu")
@@ -252,6 +256,10 @@
                                 else if (type == "Sales")
                                 {
                                     @Html.Partial("_PartialSalesMenu")
+                                }
+                                else if (type == "Finance")
+                                {
+                                    @Html.Partial("_PartialFinanceMenu")
                                 }
                                 else
                                 {

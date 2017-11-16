@@ -150,14 +150,30 @@ namespace NibsMVC.Models
     }
     public class VendorItemDetails
     {
+        public int PurchaseId { get; set; }
         public int RawMaterialId { get; set; }
         public string Rawname { get; set; }
         public string unit { get; set; }
         public decimal quantity { get; set; }
+        public int InvoiceNo { get; set; }
+        public DateTime InvoiceDate { get; set; }
         public decimal amount { get; set; }
         public decimal tax { get; set; }
         public decimal total { get; set; }
+        public string VendorName { get; set; }
+        public string Address { get; set; }
+        public string Contact { get; set; }
+        public string GSTNO { get; set; }
         public int OutletId { get; set; }
+        public decimal Purchasequantity { get; set; }
+        public decimal rate { get; set; }
+        public decimal totalamount { get; set; }
+        public decimal netamount { get; set; }
+
+        public string Accountnumber { get; set; }
+        public string bank { get; set; }
+        public string branch { get; set; }
+        public string ifsc { get; set; }
     }
 
     public class PurchaseItemDetails
@@ -169,5 +185,14 @@ namespace NibsMVC.Models
         public decimal Quantity { get; set; }
         public string PONo { get; set; }
         public DateTime PODate { get; set; }
+        public string VendorName { get; set; }
+        public string Address { get; set; }
+        public string Contact { get; set; }
+        public string GSTNO { get; set; }
+        public string TINNO { get; set; }
+        public string Accountnumber { get; set; }
+        public string bank { get; set; }
+        public string branch { get; set; }
+        public string ifsc { get; set; }
     }
 }

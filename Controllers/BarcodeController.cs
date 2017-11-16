@@ -50,7 +50,7 @@ namespace NibsMVC.Controllers
 
         public JsonResult getitem(int id)
         {
-          
+             
             List<SelectListItem> list = new List<SelectListItem>();
             var li = (from p in db.tbl_RawMaterials where p.rawcategoryId == id select p);
 
@@ -70,10 +70,6 @@ namespace NibsMVC.Controllers
 
             string imgPath = Server.MapPath("~/barcodes/" + img.barcode  + ".png");
 
-
-            
-            
-         
             Font Font15 = FontFactory.GetFont("Verdana", 12, Font.BOLDITALIC);
             string str_pdffilename = "barcode.pdf";
             string str_pdfpath = Server.MapPath("~/barcodes/") + str_pdffilename; 

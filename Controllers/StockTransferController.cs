@@ -73,7 +73,7 @@ namespace NibsMVC.Controllers
         {
 
             Id = Id.Replace("dot", ".");
-            string[] remaingdata = Id.Split(';');
+            string[] remaingdata =Id.Split(';');
             string[] remaingdatas;
             if (remaingdata.ToString() != string.Empty)
             {
@@ -92,19 +92,19 @@ namespace NibsMVC.Controllers
                                          select p.units).SingleOrDefault();
                         if ((remaingdatas[3] == "Kgs" || result == "Gms") || (remaingdatas[3] == "Ltr" || remaingdatas[3] == "ML"))
                         {
-                            amount = Convert.ToDecimal(remaingdatas[5]);
+                            amount = Convert.ToDecimal(remaingdatas[4]);
                             sendquatity = Convert.ToDecimal(remaingdatas[1]);
                         }
                         else
                         {
-                            amount = Convert.ToDecimal(remaingdatas[5]);
+                            amount = Convert.ToDecimal(remaingdatas[4]);
                             sendquatity = Convert.ToDecimal(remaingdatas[1]);
 
                         }
 
 
                         var Reciverout = Convert.ToInt32(remaingdatas[2]);
-
+                        var date = Convert.ToDateTime(remaingdatas[6]);
                         var Kitchenstock = (from p in db.tbl_KitchenStock where p.RawMaterialId == id select p).First(); //&& p.OutletId == WebSecurity.CurrentUserId
                         Kitchenstock.Quantity = amount;
 
@@ -131,13 +131,15 @@ namespace NibsMVC.Controllers
                         {
 
                             tblTransfer tbl = new tblTransfer();
-                            tbl.OutletId = WebSecurity.CurrentUserId;
+
+                            tbl.date = DateTime.Now;
+                            tbl.OutletId = obj.getOutletId();
                             //tbl.PurchaseDate = Convert.ToDateTime(remaingdatas[5]);
                             tbl.RawMaterialId = id;
                             tbl.ReciverOutletId = Reciverout;
                             tbl.SenderOutletId = WebSecurity.CurrentUserId;
-                            tbl.TransferDate = DateTime.Now.Date;
-                            string departmrnt = remaingdatas[4].ToString();
+                            tbl.TransferDate = date;
+                            string departmrnt = remaingdatas[5].ToString();
                             var dept = (from p in db.tbl_Department where p.Department == departmrnt select p).FirstOrDefault();
                             tbl.DepartmentId = dept.DepartmentID;
                             decimal IssQty = Convert.ToDecimal(remaingdatas[1]);
@@ -370,6 +372,7 @@ namespace NibsMVC.Controllers
             sda.Fill(dt);
             List<SelectListItem> list = new List<SelectListItem>();
             //list.Add(new SelectListItem { Text = "--Choose The Item--", Value = "0" }); 
+            
             foreach (DataRow row in dt.Rows)
             {
 
@@ -401,6 +404,24 @@ namespace NibsMVC.Controllers
 
             }
             return Json(new SelectList(list, "Value", "Text", JsonRequestBehavior.AllowGet));
+
+
+        }
+        public JsonResult getCat(string barcode)
+        {
+            int categoryId = ( from p in db.tbl_RawMaterials where p.barcode == barcode select p.rawcategoryId ).SingleOrDefault(); 
+
+            
+            return Json(categoryId);
+
+
+        }
+        public JsonResult getRaw(string barcode)
+        {
+            int rawId = (from p in db.tbl_RawMaterials where p.barcode == barcode select p.RawMaterialId).SingleOrDefault(); 
+
+
+            return Json(rawId);
 
 
         }

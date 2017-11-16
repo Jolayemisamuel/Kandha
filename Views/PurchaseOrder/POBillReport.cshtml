@@ -6,6 +6,11 @@
 }
 
 @using NibsMVC.EDMX;
+<script>
+    function showDialogfile(fileid) {
+        window.open("/" + fileid, '_blank', 'width=850px,height=600px,left=100,top=0,resizable=yes');
+    }
+</script>
 <div class="page-content">
     <div class="row">
         <div class="col-md-12">
@@ -32,49 +37,59 @@
                         <div class="col-md-offset-1 col-md-9">
                         </div>
                         var po = "";
+                        int p = 0;
                         DateTime podate = DateTime.Now;
                         foreach (var item in ViewBag.model)
                         {
+                            p = item[0];
                             po = item[1];
                             podate = item[2];
 
-
                         }
-                        <table class="table table-bordered table-hover table-full-width" id="sample_2">
+                        <div class="col-md-10"></div>
+
+                        <div class="col-md-1" >
+                            <a href="@Url.Action("printexcel", "PurchaseOrder", new { PurchaseOrderId = p })">Excel</a>
+                            
+                            <a href="@Url.Action("printpdf", "PurchaseOrder", new { PurchaseOrderId = p })">PDF</a>
+                        </div>
+                        <div class="col-md-1">
+                            
+                        </div>
+                        <table class="table table-bordered table-hover table-full-width">
                             <thead>
-                                @*<tr>
-                                    <th align="left" colspan="2" style="border-right: 0px;">
-                                        <img src="~/Content/Logo/Kandha-Logo-200x87.png" />
-                                    </th>
-                                    <th align="right" style="border-left: 0px">
-                                        <strong> 434,Trichy Rd,</strong><br />
-                                        <strong>Agraharam,</strong> <br />
-                                        <strong>Singanallur,</strong> <br />
-                                        <strong>Coimbatore,Tamil Nadu, 641005</strong> <br />
-                                    </th>
-                                </tr>*@
+                               
                                 <tr>
-                                    <th colspan="3" >
+                                    <th style="border-right:0px">
                                         <strong>
                                             PO No : @po
                                         </strong>
                                     </th>
+                                    <th style="border-right:0px;border-left:0px"></th>
+                                    <th style="text-align:right">
+                                        @*<a href="@Url.Action("printexcel", "PurchaseOrder", new { PurchaseOrderId = p })">Excel</a>
+                                        <a href="@Url.Action("printpdf", "PurchaseOrder", new { PurchaseOrderId = p,@class="padding-left:10px;" })">PDF</a>*@
+                                    </th>
+                                    
                                 </tr>
-                                <tr>
-                                    <th colspan="3">
+                                <tr style="border-bottom:1px">
+                                    <th style="border-right:0px">
                                         <strong>
                                         PO Date : @podate.ToString("dd-MMM-yyyy")
                                         </strong>
                                     </th>
-                                </tr>
-                               
-                                <tr>
+                                    <th style="border-right:0px;border-left:0px"></th>
+                                    <th></th>
+                                </tr>                         
+                                    p
+                                <tr style="border-bottom:1px">
                                     @*<th>Item Code</th>
                                         <th>Purchase Date</th>*@
-                                    <th><strong>Item Description</strong></th>
+                                    <th style="border-top:1px"><strong>Item Description</strong></th>
 
-                                    <th><strong>Quantity</strong></th>
-                                    <th><strong>Unit</strong></th>
+                                    <th style="border-top:1px"><strong>Quantity</strong></th>
+                                    <th style="border-top:1px"><strong>Unit</strong></th>
+                                    
                                 </tr>
                                
                             </thead>
@@ -104,7 +119,7 @@
                                 <td>
                                     @item[5]
                                 </td>
-
+                                
                             </tr>
 
 

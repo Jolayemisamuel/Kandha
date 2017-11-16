@@ -11,6 +11,88 @@
 
     $(document).ready(function () {
 
+        $("#barcode").change(function () {
+            $("#RawMaterialId").empty();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("getCat")',
+
+                dataType: 'json',
+
+                data: { barcode: $("#barcode").val() },
+                success: function (categoryId) {
+
+                    $("#Category").val(categoryId);
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '@Url.Action("getitem")',
+
+                        dataType: 'json',
+
+                        data: { id: $("#Category").val() },
+
+
+                        success: function (items) {
+
+                            $("#RawMaterialId").append('<option value="--Select Item--">--Select Item--</option>');
+                            $.each(items, function (i, item) {
+                                $("#RawMaterialId").append('<option value="' + item.Value + '">' +
+                                     item.Text + '</option>');
+                            });
+
+                                $.ajax({
+                                    type: 'POST',
+                                    url: '@Url.Action("getRaw")',
+
+                                    dataType: 'json',
+
+                                    data: { barcode: $("#barcode").val() },
+
+
+                                    success: function (rawId) {
+
+                                        $("#RawMaterialId").val(rawId);
+
+                                        var stmd = rawId;
+
+                                        $.getJSON('/StockTransfer/Stockavailability/' + stmd, function (data) {
+                                            var res = data.split('^');
+                                            $("#stock").val(res[0]);
+                                            $("#Type_0").val(res[1])
+                                            var stckvalue = $("#stock").val();
+                                            if (stckvalue == 0) {
+                                                $("#transferstock").val(0);
+                                                $("#transferstock").attr('readonly', true);
+                                            }
+                                            else {
+                                                $("#transferstock").attr('readonly', false);
+                                            }
+                                        });
+                                      
+                                    },
+                                    error: function (ex) {
+                                        alert('Failed to retrieve Category and Item.' + ex);
+                                    }
+                                });
+
+
+                            
+                        },
+                        error: function (ex) {
+                            alert('Failed to retrieve Category and Item.' + ex);
+                        }
+                    });
+                },
+                error: function (ex) {
+                    alert('Failed to retrieve Category and Item.' + ex);
+                }
+            });
+            return false;
+        })
+
+
+
         $("#Category").change(function () {
             $("#RawMaterialId").empty();
             $.ajax({
@@ -40,8 +122,17 @@
     });
 
 </script>
+<script>
+    $(function () {
+        $('#TransferDate').datepicker({
+            startDate: '-1d',
+            endDate: '0d',
+            autoclose: true,
+            format: "mm-dd-yyyy"
+        });
+    });
+</script>
 
-   
 <div class="page-content">
     <div class="row">
         <div class="col-md-12">
@@ -64,6 +155,10 @@
                                 You have some form errors. Please check below.
                             </div>
                             <div style="height:10px;"><span class="errmsg"></span></div>
+
+                      
+
+
                             <div class="form-group">
                                 <label class="control-label col-md-3">
                                     Select Outlet <span class="required">
@@ -78,6 +173,21 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Barcode
+                                </label>
+                                <div class="col-md-4">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+
+                                        <input type="text" class="form-control" id="barcode" autofocus />
+                                    </div>
+                                </div>
+                            </div>
+
+
                             <div class="from-group">
                                 <table id="tbloutletdetail" class="table table-bordered"></table>
                             </div>
@@ -102,9 +212,9 @@
                                 </label>
                                 <div class="col-md-4">
                                     <div class="input-icon right">
-                                        @Html.DropDownList("Category", ViewBag.CategoryList as List<SelectListItem>, "--Choose Your Category --", new { @class = "form-control" }) 
-                                       @*@Html.DropDownListFor(model => model.RawcategoryId, new SelectList(ViewBag.CategoryList, "Value", "Text"), "--Choose Your Category--", new { @class = "form-control", @id = "Category" })*@
-                                        
+                                        @Html.DropDownList("Category", ViewBag.CategoryList as List<SelectListItem>, "--Choose Your Category --", new { @class = "form-control" })
+                                        @*@Html.DropDownListFor(model => model.RawcategoryId, new SelectList(ViewBag.CategoryList, "Value", "Text"), "--Choose Your Category--", new { @class = "form-control", @id = "Category" })*@
+
                                     </div>
                                 </div>
                             </div>
@@ -118,9 +228,9 @@
                                 <div class="col-md-4">
                                     <div class="input-icon right">
                                         <i class="fa"></i>
-                                        @Html.DropDownList("RawMaterialId", new SelectList(string.Empty, "Value", "Text"), new { @class = "form-control", @id = "RawMaterialId" })  
+                                        @Html.DropDownList("RawMaterialId", new SelectList(string.Empty, "Value", "Text"), new { @class = "form-control", @id = "RawMaterialId" })
                                         @*@Html.DropDownListFor(model => model.RawMaterialId, new SelectList(ViewBag.itemlists, "Value", "Text"), "--Choose Your Item--", new { @class = "form-control" })*@
-                                       
+
                                     </div>
                                 </div>
                             </div>
@@ -190,20 +300,21 @@
                                 </div>
                             </div>
 
-                            @*<div class="form-group">
+                            <div class="form-group">
                                 <label class="control-label col-md-3">
-                                    Purchase Date <span class="required">
+                                    Transfer Date <span class="required">
                                         *
                                     </span>
                                 </label>
                                 <div class="col-md-4">
                                     <div class="input-icon right">
                                         <i class="fa"></i>
-                                        <input class="form-control form-control-inline input-medium date-picker" data-date-format="dd-mm-yyyy" size="16" type="text" value="" id="PurchaseDate" name="PurchaseDate" readonly="readonly" />
+
+                                        <input class="form-control form-control-inline input-medium date-picker" data-date-format="yyyy-mm-dd" size="16" type="text" value="" id="TransferDate" name="TransferDate" />
                                         <input type="hidden" name="" class="form-control" id="transferQtyVal" />
                                     </div>
                                 </div>
-                            </div>*@
+                            </div>
 
                             <div>
                                 <label id="errorlablegreter" style="color:red;margin-left:200px;font-size:12px;" hidden>Transfer Stock must be less than Available Stock</label>
@@ -257,7 +368,7 @@
 
             var itemname = $("#RawMaterialId :selected").text();
             var itemvalue = $("#RawMaterialId :selected").val();
-            //var purchaseDate = $("#PurchaseDate").val();
+            var transferDate = $("#TransferDate").val();
             var stockvalue = $("#stock").val();
             var Outletvalue = $("#stockoutlet :selected").val();
             var transfervalue = $("#transferstock").val();
@@ -283,7 +394,7 @@
                         stockvalue = stockvalue / 1000;
                     }
                     itemname = itemname.replace(/\s/g, "");;
-                    $("#table_Stocktransfer").append('<tbody><tr> <td><input type="hidden" value="' + Outletvalue + '"</td><td><input type="text" class="form-control"  id=' + itemvalue + ' value=' + itemname + '  readonly/></td>  <td><input type="text" class="form-control"  id=' + stockvalue + ' value=' + stockvalue + ' readonly/> </td><td><input type="text" class="form-control"  id=' + transfervalue + ' value=' + transfervalue + ' readonly/></td><td><input type="text" class="form-control"  id=' + trasferunit + ' value=' + trasferunit + ' readonly/> </td><td><input type="text" class="form-control"  id=' + Department + ' value=' + Department + ' readonly/></td><td><input type="hidden" value="' + remaingpurchase + '"</td><td><input type="button" class="btn green" value="Delete" id="btndelete"</td></tr></tbody>'); 
+                    $("#table_Stocktransfer").append('<tbody><tr> <td><input type="hidden" value="' + Outletvalue + '"</td><td><input type="text" class="form-control"  id=' + itemvalue + ' value=' + itemname + '  readonly/></td>  <td><input type="text" class="form-control"  id=' + stockvalue + ' value=' + stockvalue + ' readonly/> </td><td><input type="text" class="form-control"  id=' + transfervalue + ' value=' + transfervalue + ' readonly/></td><td><input type="text" class="form-control"  id=' + trasferunit + ' value=' + trasferunit + ' readonly/> </td><td><input type="text" class="form-control"  id=' + Department + ' value=' + Department + ' readonly/></td><td><input type="hidden" value="' + remaingpurchase + '"</td><td><input type="text" class="form-control"  id=' + transferDate + ' value=' + transferDate + ' readonly/></td><td><input type="button" class="btn green" value="Delete" id="btndelete"</td></tr></tbody>');
                     //<td><input type="text" class="form-control"  id=' + purchaseDate + ' value=' + purchaseDate + ' readonly/></td>
                     $("#errorlablegreter").hide();
                     $("#errorlableempty").hide();
@@ -302,12 +413,14 @@
                 $("#errorlablegreter").hide();
             }
 
-
+            $("#barcode").focus();
+            $("#barcode").val("");
         });
 
         $('#btnstocksubmit').on('click', function (e) {
             var IsValid = true;
             e.preventDefault();
+            //console.log($(this).serialize());
             var stockval = "";
             var reamin = "";
 
@@ -342,14 +455,14 @@
                     var remaingpurchase = $(this).find('td:eq(4) input').val();
                     reamin = reamin + remaingpurchase + "^";
 
-                    var remaingpurchase = $(this).find('td:eq(5) input').val();
+                    var remaingpurchase = $(this).find('td:eq(6) input').val();
                     reamin = reamin + remaingpurchase + "^";
 
-                    var dept = $(this).find('td:eq(6) input').val();
-                    reamin = reamin + dept + ";";
+                    var dept = $(this).find('td:eq(5) input').val();
+                    reamin = reamin + dept + "^";
 
-                    //var pdate = $(this).find('td:eq(7) input').val();
-                    //reamin = reamin + pdate + ";";
+                    var pdate = $(this).find('td:eq(7) input').val();
+                    reamin = reamin + pdate + ";";
 
                 }
                 else {
@@ -358,16 +471,40 @@
                 }
 
             });
+
+
             if (IsValid == true) {
                 stockval = stockval.substring(0, stockval.length - 1);
                 var items = { 'RawmaterialId': stockval };
+                //reamin = selctid + "^" + transferquantity + "^" + Outid + "^" + remaingpurchase + "^" + dept + "^" + pdate;
+
+                reamin = reamin.replace('.', 'dot');
+                reamin = reamin.replace('.', 'dot');
+                reamin = reamin.replace('.', 'dot');
+                reamin = reamin.replace('.', 'dot');
+                reamin = reamin.replace('.', 'dot');
+                reamin = reamin.replace('.', 'dot');
+                reamin = reamin.replace('.', 'dot');
+                reamin = reamin.replace('.', 'dot');
+                reamin = reamin.replace('.', 'dot');
+                reamin = reamin.replace('.', 'dot');
+                reamin = reamin.replace('.', 'dot');
+                reamin = reamin.replace('.', 'dot');
+                reamin = reamin.replace('.', 'dot');
+                reamin = reamin.replace('.', 'dot');
+                reamin = reamin.replace('.', 'dot');
+                reamin = reamin.replace('.', 'dot');
+                reamin = reamin.replace('.', 'dot');
+                reamin = reamin.replace('.', 'dot');
+                reamin = reamin.replace('.', 'dot');
+                reamin = reamin.replace('.', 'dot');
+                reamin = reamin.replace('.', 'dot');
+                reamin = reamin.replace('.', 'dot');
                 reamin = reamin.replace('.', 'dot');
                 reamin = reamin.replace('.', 'dot');
 
                 $("#Stocktransdata").val(stockval);
-                $.getJSON('/StockTransfer/purchaseavailablestock/' + reamin, function (data) {
-
-
+                $.getJSON('/StockTransfer/purchaseavailablestock/' + reamin, function (reamin) {
 
                 });
                 //$("#Updatedata").val(reamin);

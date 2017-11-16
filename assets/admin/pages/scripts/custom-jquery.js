@@ -334,7 +334,7 @@ $(document).ready(function () {
 
 
 
-    $("#table_Stocktransfer").append('<thead><th></th><th>Item Name</th><th>Available Stock</th><th>Transfer Stock</th><th>Transfer Unit</th><th>Department</th><th></th><th>Action</th></thead>');
+    $("#table_Stocktransfer").append('<thead><th></th><th>Item Name</th><th>Available Stock</th><th>Transfer Stock</th><th>Transfer Unit</th><th>Department</th><th></th><th>Transfer Date</th><th>Action</th></thead>');
     //var stk = $("#stock").val();
     //alert("hi");
     //var tstk = $("#transferstock").val();

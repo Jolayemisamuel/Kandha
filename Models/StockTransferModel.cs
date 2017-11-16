@@ -31,7 +31,7 @@ namespace NibsMVC.Models
         public int ReturnSenderOutId { get; set; }
         public int ReturnReciverOutId { get; set; }
       
-        //public string Updatedata { get; set; }
+        public string Updatedata { get; set; }
     }
     public class OutletStockTransferModel
     {

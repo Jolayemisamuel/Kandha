@@ -31,82 +31,99 @@
 
                         <div class="col-md-offset-1 col-md-9">
                         </div>
-
-                        <table class="table table-bordered table-hover table-full-width" id="sample_2">
-                            <thead>
-                                <tr>
-                                    <th>Item Code</th>
-                                    <th>Item Description</th>
-                                    <th>Unit</th>
-                                    <th>Quantity</th>
-                                    <th>Total Amount</th>
-                                    <th>Tax</th>
-
-                                </tr>
-
-                            </thead>
-
-                            <tbody>
-                                @{
-                       
-                        var counter = 1;
-                        decimal totval = 0;
-                        NIBSEntities db = new NIBSEntities();
-
+                        var po = "";
+                        int p = 0;
+                        DateTime invdate = DateTime.Now;
                         foreach (var item in ViewBag.model)
                         {
-                            totval = totval + @item[4];
-                            <tr>
+                            p = item[8];
+                            po = item[1];
+                            invdate = item[9];
 
-                                <td>
-                                    @item[0]
-                                </td>
-                                <td>
-                                    @item[1]
-                                </td>
-                                <td>
-                                    @item[2]
-                                </td>
-                                <td>
-                                    @item[3]
-                                </td>
-                                <td>
-                                    @item[4].ToString("0.00")
-                                </td>
-                                <td>
-                                    @item[5]%
-                                </td>
-
-                            </tr>
-                                    
-                                        
-                                        counter = counter + 1;
                         }
+                        <div class="col-md-10"></div>
 
-                                }
-                            </tbody>
-                            <tfoot>
-                                @{
-                       
-                            <tr>
-                               
-                                        <td><strong>Total</strong></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>
-                                            <strong>@totval.ToString("0.00") </strong>
-                                        </td>
-                                        <td></td>
-                                    
-                            </tr>
-                            
-                                }
-                            </tfoot>
+                        @*<div class="col-md-1">
+                            <a href="@Url.Action("printexcel", "Purchase", new { PurchaseId = p })">Excel</a>
+                        </div>*@
+                        <div class="col-md-1">
+                            <a href="@Url.Action("printpdf", "Purchase", new { PurchaseId = p })">PDF</a>
+                        </div>
+                            <table class="table table-bordered table-hover table-full-width">
+                                <thead>
+                                    <tr>
+                                        <th>Item Code</th>
+                                        <th>Item Description</th>
+                                        <th>Unit</th>
+                                        <th>Quantity</th>
+                                        <th>Total Amount</th>
+                                        <th>Tax</th>
+
+                                    </tr>
+
+                                </thead>
+
+                                <tbody>
+                                    @{
+
+                                        var counter = 1;
+                                        decimal totval = 0;
+                                        NIBSEntities db = new NIBSEntities();
+
+                                        foreach (var item in ViewBag.model)
+                                        {
+                                            totval = totval + @item[4];
+                                            <tr>
+
+                                                <td>
+                                                    @item[0]
+                                                </td>
+                                                <td>
+                                                    @item[1]
+                                                </td>
+                                                <td>
+                                                    @item[2]
+                                                </td>
+                                                <td>
+                                                    @item[3]
+                                                </td>
+                                                <td>
+                                                    @item[4].ToString("0.00")
+                                                </td>
+                                                <td>
+                                                    @item[5]%
+                                                </td>
+
+                                            </tr>
 
 
-                        </table>
-                    }
+                                            counter = counter + 1;
+                                        }
+
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    @{
+
+                                        <tr>
+
+                                            <td><strong>Total</strong></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>
+                                                <strong>@totval.ToString("0.00") </strong>
+                                            </td>
+                                            <td></td>
+
+                                        </tr>
+
+                                    }
+                                </tfoot>
+
+
+                            </table>
+                                        }
                 </div>
             </div>
         </div>

@@ -89,40 +89,42 @@ namespace NibsMVC.Controllers
         }
         public ActionResult genBarcode()
         {
-            List<RawMaterialsModel> List = new List<RawMaterialsModel>();
-            var data = db.tbl_RawMaterials.ToList();
-            foreach (var item in data)
+            try
             {
-                //tbl_RawMaterials tb = new tbl_RawMaterials();
-                //tb.RawMaterialId = item.RawMaterialId;
-                string barcode = item.RawCategory.Name.Substring(0, 1) + item.Name.Substring(0, 1) + item.rawcategoryId + item.RawMaterialId;
-                //tb.barcodeImage  = obj.GenerateBarcode(tb.barcode);
-                //tb.Name = item.Name;
-                //tb.rawcategoryId = item.rawcategoryId;
-                //tb.reorder = item.reorder;
+                List<RawMaterialsModel> List = new List<RawMaterialsModel>();
+                var data = (from q in db.tbl_RawMaterials where (q.barcode.Trim() == "" || q.barcode == null) select q).ToList();
+                foreach (var item in data)
+                {
 
-                MemoryStream ms = new MemoryStream(obj.GenerateBarcode(barcode));
-                Image returnImage = Image.FromStream(ms);
+                    string barcode = item.RawCategory.Name.Substring(0, 1) + item.Name.Substring(0, 1) + item.rawcategoryId + item.RawMaterialId;
 
-                returnImage.Save(Server.MapPath("~/Barcodes/")+barcode +".png");
+                    MemoryStream ms = new MemoryStream(obj.GenerateBarcode(barcode));
+                    Image returnImage = Image.FromStream(ms);
+
+                    returnImage.Save(Server.MapPath("~/Barcodes/") + barcode + ".png");
 
 
-                string webconnection = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
-                SqlConnection  con = new SqlConnection(webconnection);
-                SqlCommand cmd = new SqlCommand("Update tbl_RawMaterials set barcode = '"+ barcode + "'  where RawMaterialId = " + item.RawMaterialId  , con);
-                cmd.CommandType = CommandType.Text;
-                con.Open();
-                cmd.ExecuteNonQuery();
-                con.Close();
-                //System.Web.HttpContext.Current.Response.ContentType = "image/png";
-                //System.Web.HttpContext.Current.Response.BinaryWrite(obj.GenerateBarcode(tb.barcode));
+                    string webconnection = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
+                    SqlConnection con = new SqlConnection(webconnection);
+                    SqlCommand cmd = new SqlCommand("Update tbl_RawMaterials set barcode = '" + barcode + "'  where RawMaterialId = " + item.RawMaterialId, con);
+                    cmd.CommandType = CommandType.Text;
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    //System.Web.HttpContext.Current.Response.ContentType = "image/png";
+                    //System.Web.HttpContext.Current.Response.BinaryWrite(obj.GenerateBarcode(tb.barcode));
 
+
+                }
+                TempData["Error"] = "Baecode Update Successfully";
 
             }
-
-
-            //var data = obj.GenerateBarcode();
-            TempData["Error"] = data;
+            catch 
+            {
+                TempData["Error"] = "Something went wrong";
+            }
+            
+            
             return RedirectToAction("Index");
         }
 
