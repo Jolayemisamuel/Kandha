@@ -1,4 +1,4 @@
-﻿@model List<NibsMVC.Models.ListOfKitchenRawIndent>
+﻿@model List<NibsMVC.Models.ListOfSubItemRawIndent>
 @{
     ViewBag.Title = "KitchenRawList";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -18,11 +18,11 @@
                     <i class="fa fa-angle-right"></i>
                 </li>
                 <li>
-                    <a href="@Url.Action("AddIndent","Kitchen")">Add Menu Ingredient</a>
+                    <a href="@Url.Action("AddSubMenuIndent","Kitchen")">Add Sub Item Ingredient</a>
                     <i class="fa fa-angle-right"></i>
                 </li>
                 <li>
-                    Ingredient Reports
+                    SubItem Ingredient Reports
                 </li>
             </ul>
 
@@ -32,7 +32,7 @@
             <div class="portlet box yellow">
                 <div class="portlet-title">
                     <div class="caption">
-                        <i class="fa fa-coffee"></i>Menu Item Ingredient Report
+                        <i class="fa fa-coffee"></i>Sub Menu Item Ingredient Report
                     </div>
 
                 </div>
@@ -43,12 +43,15 @@
                                 <th>
                                     S.NO
                                 </th>
-                                <th>
-                                    Category Name
-                                </th>
+
                                 <th>
                                     Item Name
                                 </th>
+
+                                <th>
+                                    Portion
+                                </th>
+
                                 <th>View Raw Materials</th>
                                 <th>Action</th>
 
@@ -64,11 +67,12 @@
                                         <td>
                                             @counter
                                         </td>
+
                                         <td>
-                                            @item.RawCategoryId
+                                            @item.SubItemId
                                         </td>
                                         <td>
-                                            @item.ItemId
+                                            @item.Portion
                                         </td>
                                         <td>
                                             <a class="btn default" data-toggle="modal" href="#@("responsive"+counter)">View Items</a>
@@ -76,16 +80,16 @@
 
                                                 <div class="modal-header">
                                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                    <h4 class="modal-title">Raw Material List Of @item.ItemId</h4>
+                                                    <h4 class="modal-title">Raw Material List Of @item.SubItemId</h4>
                                                 </div>
                                                 <div class="modal-body">
                                                     <div class="scroller" style="height:300px" data-always-visible="1" data-rail-visible1="1">
                                                         <div class="row">
                                                             <div class="col-md-12">
-                                                                @foreach (var list in item.ListOfInnerMaterial)
+                                                                @foreach (var list in item.ListOfSubInnerMaterial)
                                                                 {
                                                                     <label class="col-md-4 bold">@list.RawMaterialId</label> <label class="col-md-3">@list.Quantity &nbsp; @list.Unit</label>
-                                                                    <div class="clearfix"></div>
+                                                                            <div class="clearfix"></div>
                                                                 }
                                                             </div>
                                                         </div>
@@ -99,7 +103,7 @@
                                             </div>
                                         </td>
 
-                                        <td><a href="@Url.Action("DeleteIndent","Kitchen", new { @id = item.Item })"><span class="fa fa-trash-o"></span></a></td>
+                                        <td><a href="@Url.Action("DeleteSubIndent","Kitchen", new { @id = item.SubItem })"><span class="fa fa-trash-o"></span></a></td>
 
                                     </tr>
                                     counter = counter + 1;
@@ -116,3 +120,4 @@
     </div>
     <!-- END PAGE CONTENT-->
 </div>
+

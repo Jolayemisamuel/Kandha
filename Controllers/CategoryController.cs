@@ -149,8 +149,26 @@ namespace NibsMVC.Controllers
         #endregion
         #region Items
 
-       
 
+        public ActionResult SubItemDetails()
+        {
+            
+            var data = (from p in db.tblSubItems  where p.Active == true select p).ToList();
+            
+            List<AddSubItemModel> List = new List<AddSubItemModel>();
+            foreach (var item in data)
+            {
+                AddSubItemModel model = new AddSubItemModel();
+                
+                model.Name = item.Name;
+                model.Description = item.Description;
+                model.subItemId = item.SubItemId;
+                model.Name = item.Name;
+                List.Add(model);
+            }
+            return View(List);
+
+        }
 
 
         public ActionResult ItemDetails()
@@ -215,6 +233,8 @@ namespace NibsMVC.Controllers
             return View(List);
 
         }
+
+
         [HttpPost]
         public ActionResult ItemDetails(AddItemModel model)
         {
@@ -343,6 +363,76 @@ namespace NibsMVC.Controllers
 
 
         }
+
+
+        public ActionResult AddSubItem(int id = 0)
+        {
+            
+            AddSubItemModel model = new AddSubItemModel();
+            if (id > 0)
+            {
+                var data = (from p in db.tblSubItems  where p.SubItemId == id select p).SingleOrDefault();
+                model.Description = data.Description;
+                model.subItemId = data.SubItemId;
+                model.Name = data.Name;
+                return View(model);
+            }
+            else
+            {
+                return View(model);
+            }
+            
+
+
+
+        }
+        [HttpPost]
+        public ActionResult AddSubItem(AddSubItemModel model)
+        {
+            tblSubItem tb = new tblSubItem();
+            var subitemcheck = (from p in db.tblSubItems where p.Name == model.Name && p.Active == true  select p).SingleOrDefault();
+            if (subitemcheck == null)
+            {
+                try
+                {
+
+                    if (model.subItemId > 0)
+                    {
+                        tb = (from p in db.tblSubItems where p.SubItemId == model.subItemId select p).SingleOrDefault();
+                    }
+                    
+                    tb.Description = model.Description;
+                    tb.Name = model.Name;
+                    tb.Active = model.Active;
+                    
+                    if (model.subItemId > 0)
+                    {
+                        db.SaveChanges();
+                        TempData["item"] = "Edit Successfully..!";
+                        return RedirectToAction("SubItemDetails");
+                    }
+                    else
+                    {
+                        db.tblSubItems.Add(tb);
+                        db.SaveChanges();
+                        TempData["item"] = "Record Insert Successfully..!";
+                        return RedirectToAction("SubItemDetails");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    TempData["item"] = ex.Message;
+                    return RedirectToAction("SubItemDetails");
+                }
+            }
+            else
+            {
+                TempData["itemCreate"] = "This Item is already exist ";
+                return RedirectToAction("AddSubItem");
+            }
+
+
+        }
         public ActionResult EditItem(int id = 0)
         {
             AddItemModel model = new AddItemModel();
@@ -412,7 +502,83 @@ namespace NibsMVC.Controllers
             return RedirectToAction("ItemDetails");
         }
 
+
+        public ActionResult DeleteSubitem(int id)
+        {
+            try
+            {
+                //if ((from p in db.tbl_SubItemRawIndent where p.SubItemId.Equals(id) select p ).Count() == 0)
+                    //{
+                    //    
+                    tblSubItem tb = (from p in db.tblSubItems where p.SubItemId == id select p).SingleOrDefault();
+                    tb.Active = false;
+                    db.SaveChanges();
+                    TempData["Message"] = "Delete Successfully !!";
+                //}
+                //else
+                //    TempData["Message"] = "Used in Sub Menu Item Ingrediant !!";
+            }
+            catch
+            {
+                ModelState.AddModelError("", "Error Occured !");
+            }
+            return RedirectToAction("SubItemDetails");
+        }
+
         //code for add/edit/ delete items in Category
+        public ActionResult BlockedSubItem()
+        {
+            List<lstOfBlockSubItems> lst = new List<lstOfBlockSubItems>();
+            AdminBlockSubItemModel mo = new AdminBlockSubItemModel();
+            try
+            {
+
+                foreach (var item in db.tblSubItems.Where(x => x.Active == false).ToList())
+                {
+                    lstOfBlockSubItems model = new lstOfBlockSubItems();
+                    
+                    model.Name = item.Name;
+                    
+                    model.SubItemId = item.SubItemId;
+                    
+                    lst.Add(model);
+
+                }
+                mo.lstOfSubItems = lst;
+                return View(mo);
+            }
+            catch
+            {
+                return View(lst);
+            }
+        }
+        [HttpPost]
+        public ActionResult BlockedSubItem(int SubItemId = 0)
+        {
+            List<lstOfBlockSubItems> lst = new List<lstOfBlockSubItems>();
+            AdminBlockSubItemModel mo = new AdminBlockSubItemModel();
+            try
+            {
+
+                foreach (var item in db.tblSubItems.Where(x =>  x.Active == false).ToList())
+                {
+                    lstOfBlockSubItems model = new lstOfBlockSubItems();
+                    
+                    model.Name = item.Name;
+                    
+                    model.SubItemId = item.SubItemId;
+                    
+                    lst.Add(model);
+
+                }
+                mo.lstOfSubItems = lst;
+                return View(mo);
+            }
+            catch
+            {
+                return View(lst);
+            }
+        }
         public ActionResult BlockedItem()
         {
             List<lstOfBlockItems> lst = new List<lstOfBlockItems>();
@@ -444,6 +610,7 @@ namespace NibsMVC.Controllers
                 return View(lst);
             }
         }
+
         [HttpPost]
         public ActionResult BlockedItem(int CategoryId = 0)
         {
@@ -490,6 +657,22 @@ namespace NibsMVC.Controllers
             catch
             {
                 return RedirectToAction("BlockedItem");
+            }
+
+        }
+
+        public ActionResult UnblockSubItem(int id = 0)
+        {
+            try
+            {
+                var data = db.tblSubItems.Where(a => a.SubItemId == id).SingleOrDefault();
+                data.Active = true;
+                db.SaveChanges();
+                return RedirectToAction("BlockedSubItem");
+            }
+            catch
+            {
+                return RedirectToAction("BlockedSubItem");
             }
 
         }

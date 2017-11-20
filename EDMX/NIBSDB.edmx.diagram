@@ -135,6 +135,10 @@
         <AssociationConnector Association="NIBSModel.FK_tblItem_tblItem" />
         <EntityTypeShape EntityType="NIBSModel.tblGenBarcode" Width="1.5" PointX="5.25" PointY="18" />
         <AssociationConnector Association="NIBSModel.FK_tblGenBarcode_tblGenBarcode" />
+        <EntityTypeShape EntityType="NIBSModel.tblSubItem" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="NIBSModel.tbl_SubItemRawIndent" Width="1.5" PointX="10.625" PointY="12.625" />
+        <AssociationConnector Association="NIBSModel.FK_tbl_SubItemRawIndent_tbl_RawMaterials" />
+        <AssociationConnector Association="NIBSModel.FK_tbl_SubItemRawIndent_tblSubItem" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

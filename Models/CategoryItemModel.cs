@@ -36,6 +36,17 @@ namespace NibsMVC.Models
 
         public List<SelectListItem> lstofDepartment { get; set; }
     }
+
+    public class AddSubItemModel
+    {
+        public int subItemId { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public bool Active { get; set; }
+    }
+
+
+
     public class AdminBlockItemModel
     {
         public List<SelectListItem> lstofCategory { get; set; }
@@ -43,6 +54,21 @@ namespace NibsMVC.Models
         public List<lstOfBlockItems> lstOfItems { get; set; }
         public int CategoryId { get; set; }
     }
+    public class AdminBlockSubItemModel
+    {
+     
+        public List<lstOfBlockSubItems> lstOfSubItems { get; set; }
+      
+    }
+    public class lstOfBlockSubItems
+    {
+        public int SubItemId { get; set; }
+        public string Name { get; set; }
+        public bool Active { get; set; }
+       
+    }
+
+
     public class lstOfBlockItems
     {
         public int ItemId { get; set; }

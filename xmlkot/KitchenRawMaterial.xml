@@ -1,2 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Item />
+<Item>
+  <Items>
+    <UserId>99</UserId>
+    <RawCategoryId>88</RawCategoryId>
+    <ItemId>6</ItemId>
+    <RawMaterialId>421</RawMaterialId>
+    <Unit>Bag</Unit>
+    <Quantity>1</Quantity>
+  </Items>
+</Item>

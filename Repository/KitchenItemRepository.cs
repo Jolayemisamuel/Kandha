@@ -339,6 +339,42 @@ namespace NibsMVC.Repository
                 return "something Wrong try Agian !";
             }
         }
+        public string DeleteSubRawIndent(int Id,string path)
+        {
+            try
+            {
+
+                XDocument xd = XDocument.Load(path);
+                //var ids = Id.Split('_');
+                //int RawMaterialId = Convert.ToInt32(ids[1]);
+                
+                var result = (from item in xd.Descendants("SubItems")
+                              where item.Element("UserId").Value == "99" &&
+                              item.Element("SubItemId").Value == Id.ToString() 
+                              
+                              select item);
+                result.Remove();
+                xd.Save(path);
+
+
+                var data = _entities.tblSubItems.Where(x => x.SubItemId == Id).SingleOrDefault();
+
+                //_entities.tblSubItems.Remove(data);
+                var dataindent = (from p in _entities.tbl_SubItemRawIndent where p.SubItemId.Equals(Id) select p).ToList();
+                foreach (var item in dataindent)
+                {
+                    _entities.tbl_SubItemRawIndent.Remove(item);
+                    //_entities.SaveChanges();
+
+                }
+                _entities.SaveChanges();
+                return "Record deleted Successfully...";
+            }
+            catch
+            {
+                return "something Wrong try Agian !";
+            }
+        }
         public AddRawCategoryModel EditRawCategory(int Id)
         {
             AddRawCategoryModel model = new AddRawCategoryModel();
@@ -498,6 +534,14 @@ namespace NibsMVC.Repository
             model.lstofRawCategories = GetListofRawCategories();
             return model;
         }
+        public SubItemRawIndentModel AddSubMenuRawIndent()
+        {
+            SubItemRawIndentModel model = new SubItemRawIndentModel();
+            model.lstofsubItems  = GetListofSubItems ();
+          model.lstofUnits = GetListofUnits();
+            model.lstofRawCategories = GetListofRawCategories();
+            return model;
+        }
         public List<ListOfRawIndent> GetListOfRawIndents()
         {
             List<ListOfRawIndent> List = new List<ListOfRawIndent>();
@@ -610,6 +654,27 @@ namespace NibsMVC.Repository
             }
             return selList1;
         }
+
+        public List<SelectListItem> GetListofSubItems()
+        {
+
+            var selList1 = new List<SelectListItem>();
+            List<AddSubItemModel> lst1 = (from item1 in _entities.tblSubItems.Where(x => x.Active == true).ToList()
+                                     select new AddSubItemModel()
+                                     {
+                                         subItemId  = item1.SubItemId,
+                                         Name  = item1.Name 
+                                     }).ToList();
+            foreach (var item1 in lst1)
+            {
+                selList1.Add(new SelectListItem
+                {
+                    Text = item1.Name.ToString(),
+                    Value = item1.subItemId.ToString()
+                });
+            }
+            return selList1;
+        }
         public string UpdateKitchenRawMaterail(KitchenRawIndentModel model,string path)
         {
             int oulte = 99; //WebSecurity.CurrentUserId;
@@ -652,6 +717,95 @@ namespace NibsMVC.Repository
              //}
              return FillXmlData(path);
         }
+
+        public string UpdateSubItemRawMaterial(SubItemRawIndentModel model, string path)
+        {
+            int oulte = 99; 
+            int unitid = Convert.ToInt32(model.Unit);
+            XDocument xd = XDocument.Load(path);
+            var unit = _entities.Units.Where(x => x.UnitId == unitid).SingleOrDefault();
+
+           
+            var newElement = new XElement("SubItems",
+                    new XElement("UserId", oulte),
+                    new XElement("RawCategoryId", model.RawMaterialCategoryId),
+                    new XElement("SubItemId", model.SubItemId),
+                    new XElement("RawMaterialId", model.RawMaterialId),
+                    new XElement("Unit", unit.UnitName),
+                    new XElement("Quantity", model.Quantity),
+                    new XElement("Portion", model.Portion)
+                    );
+
+            xd.Element("SubItem").Add(newElement);
+            xd.Save(path);
+            //}
+            return FillSubItemXmlData(path);
+
+        }
+
+        public string UpdateSubItemRawMaterial(int  SubItemid, string path)
+        {
+           
+            XDocument xd = XDocument.Load(path);
+
+            int oulte = 99; //WebSecurity.CurrentUserId;
+            var result = from item in xd.Descendants("SubItems")
+                         where item.Element("UserId").Value == oulte.ToString() && item.Element("SubItemId").Value == SubItemid.ToString()
+                         select item;
+            StringBuilder sb = new StringBuilder();
+            int counter = 1;
+            sb.Append("<table class='table'><thead><tr><th>S.No</th><th>Sub Item</th><th>Portion</th><th>RawMaterial</th><th>Unit</th><th>Quantity</th><th>Remove</th></tr></thead>");
+            sb.Append("<tbody>");
+            foreach (var item in result)
+            {
+                int Id = Convert.ToInt32(item.Element("SubItemId").Value);
+                var data = (from p in _entities.tblSubItems where p.SubItemId == Id select new { ItemName = p.Name }).FirstOrDefault();
+                int RawId = Convert.ToInt32(item.Element("RawMaterialId").Value);
+                var Name = _entities.tbl_RawMaterials.Where(x => x.RawMaterialId == RawId).Select(x => x.Name).SingleOrDefault();
+                sb.Append("<tr>");
+                sb.Append("<td>" + counter + "</td><td>" + data.ItemName + "</td><td>" + item.Element("Portion").Value + "</td>");
+                sb.Append("<td>" + Name + "</td><td>" + item.Element("Unit").Value + "</td><td>" + item.Element("Quantity").Value + "</td>");
+                sb.Append("<td><a href='#' id=" + Id + "_" + RawId + " class='delete_raw'><span class='fa fa-trash-o'><span></a></td>");
+                sb.Append("</tr>");
+                counter++;
+
+            }
+            sb.Append("</tbody></table>");
+            return sb.ToString();
+
+        }
+        public string FillSubItemXmlData(string path)
+        {
+            XDocument xd = XDocument.Load(path);
+
+            int oulte = 99; //WebSecurity.CurrentUserId;
+            var result = from item in xd.Descendants("SubItems")
+                         where item.Element("UserId").Value == oulte.ToString()
+                         select item;
+            StringBuilder sb = new StringBuilder();
+            int counter = 1;
+            sb.Append("<table class='table'><thead><tr><th>S.No</th><th>Sub Item</th><th>Portion</th><th>RawMaterial</th><th>Unit</th><th>Quantity</th><th>Remove</th></tr></thead>");
+            sb.Append("<tbody>");
+            foreach (var item in result)
+            {
+                int Id = Convert.ToInt32(item.Element("SubItemId").Value);
+                var data = (from p in _entities.tblSubItems where p.SubItemId == Id select new { ItemName = p.Name }).FirstOrDefault();
+                int RawId = Convert.ToInt32(item.Element("RawMaterialId").Value);
+                var Name = _entities.tbl_RawMaterials.Where(x => x.RawMaterialId == RawId).Select(x => x.Name).SingleOrDefault();
+                sb.Append("<tr>");
+                sb.Append("<td>" + counter + "</td><td>" + data.ItemName + "</td><td>" + item.Element("Portion").Value + "</td>");
+                sb.Append("<td>" + Name + "</td><td>" + item.Element("Unit").Value + "</td><td>" + item.Element("Quantity").Value + "</td>");
+                sb.Append("<td><a href='#' id=" + Id + "_" + RawId + " class='delete_raw'><span class='fa fa-trash-o'><span></a></td>");
+                sb.Append("</tr>");
+                counter++;
+                
+            }
+            sb.Append("</tbody></table>");
+            return sb.ToString();
+        }
+
+
+
         public string FillXmlData(string path)
         {
             XDocument xd = XDocument.Load(path);
@@ -718,6 +872,57 @@ namespace NibsMVC.Repository
 
            
         }
+        
+        public string SaveSubItemRawMaterial(string path)
+        {
+            try
+            {
+                XDocument xd = XDocument.Load(path);
+
+                int oulte = 99; //WebSecurity.CurrentUserId;
+                var result = (from item in xd.Descendants("SubItems")
+                              where item.Element("UserId").Value == oulte.ToString()
+
+                              select item).ToList();
+                foreach (var item in result)
+                {
+                    int subItemId = Convert.ToInt32(item.Element("SubItemId").Value);
+                    int RawId = Convert.ToInt32(item.Element("RawMaterialId").Value);
+                    var checkItem = ( from p in _entities.tbl_SubItemRawIndent where p.SubItemId == subItemId && p.RawMaterialId ==RawId select p);
+                    tbl_SubItemRawIndent tb = new tbl_SubItemRawIndent();
+                    if (checkItem.Count() == 0)
+                    {
+                        
+                        tb.Portion = Convert.ToInt32(item.Element("Portion").Value);
+                        tb.SubItemId = Convert.ToInt32(item.Element("SubItemId").Value);
+                        tb.Qty = Convert.ToDecimal(item.Element("Quantity").Value);
+                        tb.RawMaterialId = Convert.ToInt32(item.Element("RawMaterialId").Value);
+                        tb.Unit = item.Element("Unit").Value;
+                        _entities.tbl_SubItemRawIndent.Add(tb);
+                    }
+                    else
+                    {
+                        tb.Portion = Convert.ToInt32(item.Element("Portion").Value);
+                        tb.Qty = Convert.ToDecimal(item.Element("Quantity").Value);
+                        tb.Unit = item.Element("Unit").Value;
+                    }
+                    _entities.SaveChanges();
+
+                }
+                //var items = (from item in xd.Descendants("Items")
+                //             where item.Element("UserId").Value == oulte.ToString()
+                //             select item);
+                //items.Remove();
+                //xd.Save(path);
+                return "Record Inserted Successfully...";
+            }
+            catch
+            {
+                return "something Wrong ! Try Agian ";
+            }
+
+
+        }
         public List<ListOfKitchenRawIndent> ListOfMaterial()
         {
             var data = _entities.tbl_KitchenRawIndent.GroupBy(x=>x.ItemId).ToList();
@@ -744,6 +949,35 @@ namespace NibsMVC.Repository
             }
             return List;
         }
+
+        public List<ListOfSubItemRawIndent> ListOfSubItemMaterial()
+        {
+            var data = _entities.tbl_SubItemRawIndent.GroupBy(x => x.SubItemId).ToList();
+            List<ListOfSubItemRawIndent> List = new List<ListOfSubItemRawIndent>();
+            foreach (var item in data)
+            {
+                ListOfSubItemRawIndent model = new ListOfSubItemRawIndent();
+                model.SubItemId = item.FirstOrDefault().tblSubItem.Name;
+                model.SubItem = item.FirstOrDefault().tblSubItem.SubItemId;
+                model.Portion = item.FirstOrDefault().Portion;
+                var items = _entities.tbl_SubItemRawIndent.Where(x => x.SubItemId == item.Key).ToList();
+                List<InnerSubItemRawIndent> l = new List<InnerSubItemRawIndent>();
+                foreach (var it in items)
+                {
+                    InnerSubItemRawIndent m = new InnerSubItemRawIndent();
+                    m.Quantity = it.Qty;
+                    m.RawMaterialId = it.tbl_RawMaterials.Name;
+                    m.Unit = it.tbl_RawMaterials.units;
+                    l.Add(m);
+                }
+                model.ListOfSubInnerMaterial = l;
+                List.Add(model);
+
+            }
+            return List;
+        }
+
+
         public string DeleteRaw(string Id,string path)
         {
             XDocument xd = XDocument.Load(path);
@@ -758,6 +992,37 @@ namespace NibsMVC.Repository
             result.Remove();
             xd.Save(path);
             return FillXmlData(path);
+        }
+
+        public string DeleteSubRaw(string Id, string path)
+        {
+           
+
+            XDocument xd = XDocument.Load(path);
+            var ids = Id.Split('_');
+            int RawMaterialId = Convert.ToInt32(ids[1]);
+            int SubItemId = Convert.ToInt32(ids[0]);
+            var result = (from item in xd.Descendants("SubItems")
+                          where item.Element("UserId").Value == "99" &&
+                          item.Element("SubItemId").Value == SubItemId.ToString() &&
+                          item.Element("RawMaterialId").Value == RawMaterialId.ToString()
+                          select item);
+            result.Remove();
+            xd.Save(path);
+
+            var itemCheck = (from p in _entities.tbl_SubItemRawIndent where p.RawMaterialId == RawMaterialId && p.SubItemId==SubItemId select p).SingleOrDefault();
+            if (itemCheck != null)
+            {
+                if (itemCheck.id > 0)
+                {
+                    //tbl_SubItemRawIndent tb = new tbl_SubItemRawIndent();
+                    //tb.id = itemCheck.id;
+                    _entities.tbl_SubItemRawIndent.Remove(itemCheck);
+                    _entities.SaveChanges();
+                }
+            }
+
+            return FillSubItemXmlData(path);
         }
         #endregion
     }

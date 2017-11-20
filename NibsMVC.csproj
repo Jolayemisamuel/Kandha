@@ -2005,6 +2005,9 @@
     <Compile Include="EDMX\tblServiceCharge.cs">
       <DependentUpon>NIBSDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="EDMX\tblSubItem.cs">
+      <DependentUpon>NIBSDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="EDMX\tblTableMaster.cs">
       <DependentUpon>NIBSDB.tt</DependentUpon>
     </Compile>
@@ -2033,6 +2036,9 @@
       <DependentUpon>NIBSDB.tt</DependentUpon>
     </Compile>
     <Compile Include="EDMX\tbl_ServiceTax.cs">
+      <DependentUpon>NIBSDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\tbl_SubItemRawIndent.cs">
       <DependentUpon>NIBSDB.tt</DependentUpon>
     </Compile>
     <Compile Include="EDMX\TBTran.cs">
@@ -2999,7 +3005,10 @@
     <Content Include="Scripts\knockout-3.3.0.js" />
     <Content Include="TakeAwayXML\Kot.xml" />
     <Content Include="TakeAwayXML\Takeaway.xml" />
-    <Content Include="xmlkot\KitchenRawMaterial.xml" />
+    <Content Include="xmlkot\SubItemRawMaterial.xml" />
+    <Content Include="xmlkot\KitchenRawMaterial.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="xmlkot\Kot.xml" />
     <Content Include="xmlkot\Split.xml" />
     <EntityDeploy Include="EDMX\NIBSDB.edmx">
@@ -3254,6 +3263,11 @@
     <Content Include="Views\Ledger\Index.cshtml" />
     <Content Include="Views\Ledgergroup\Index.cshtml" />
     <Content Include="Views\Ledgergroup\AddLegderGroup.cshtml" />
+    <Content Include="Views\Category\AddSubItem.cshtml" />
+    <Content Include="Views\Category\SubItemDetails.cshtml" />
+    <Content Include="Views\Kitchen\AddSubMenuIndent.cshtml" />
+    <Content Include="Views\Kitchen\SubItemRawList.cshtml" />
+    <Content Include="Views\Category\BlockedSubItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Barcodes\" />

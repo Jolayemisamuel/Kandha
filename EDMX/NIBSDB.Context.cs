@@ -15,7 +15,7 @@ namespace NibsMVC.EDMX
     using System.Data.Entity.Infrastructure;
     //using System.Data.Objects;
     //using System.Data.Objects.DataClasses;
-    using System.Linq;
+    //using System.Linq;
 
     public partial class NIBSEntities : DbContext
     {
@@ -82,6 +82,8 @@ namespace NibsMVC.EDMX
         public DbSet<tblGRNStock> tblGRNStocks { get; set; }
         public DbSet<tblTransferReturnReport> tblTransferReturnReports { get; set; }
         public DbSet<tblGenBarcode> tblGenBarcodes { get; set; }
+        public DbSet<tblSubItem> tblSubItems { get; set; }
+        public DbSet<tbl_SubItemRawIndent> tbl_SubItemRawIndent { get; set; }
     
         public virtual int BillReportGenerate(string orderType, string paymentType, Nullable<System.DateTime> datefrom, Nullable<System.DateTime> dateto, Nullable<int> billNo, string newsql)
         {

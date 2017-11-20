@@ -1,0 +1,99 @@
+﻿@model NibsMVC.Models.AddSubItemModel
+
+@{
+    ViewBag.Title = "Add Sub Item";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using NibsMVC.EDMX;
+<div class="page-content">
+    <div class="row">
+        <div class="col-md-12 margin-bottom-10">
+            <p style="color:red;">@TempData["itemCreate"]</p>
+        </div>
+        <div class="col-md-12">
+            <div class="portlet box blue">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-gift"></i>Add Sub Item
+                    </div>
+
+                </div>
+
+
+                <div class="portlet-body form">
+                    <!-- BEGIN FORM-->
+                    @using (Html.BeginForm("AddSubItem", "Category", FormMethod.Post, new { @id = "form_sample_4", @class = "form-horizontal", @enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        @Html.HiddenFor(model => model.subItemId)
+                        @*<input type="hidden" value="@Model.ItemId" na />*@
+
+                        <div class="form-body">
+                            <div class="alert alert-danger display-hide">
+                                <button class="close" data-close="alert"></button>
+                                You have some form errors. Please check below.
+                            </div>
+                            <div style="height:10px;"><span class="errmsg"></span></div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Name <span class="required">
+                                        *
+                                    </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Description <span class="required">
+                                        *
+                                    </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+
+                         
+                            
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Active <span class="required">
+                                        *
+                                    </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        @Html.CheckBoxFor(model => model.Active)
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-9">
+                                    <button type="submit" class="btn green">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -12,18 +12,16 @@ namespace NibsMVC.EDMX
     using System;
     using System.Collections.Generic;
     
-    public partial class tbl_KitchenRawIndent
+    public partial class tbl_SubItemRawIndent
     {
-        public int Id { get; set; }
-        public int CategoryId { get; set; }
-        public int ItemId { get; set; }
+        public int id { get; set; }
+        public int SubItemId { get; set; }
         public int RawMaterialId { get; set; }
-        public decimal Quantity { get; set; }
+        public decimal Qty { get; set; }
         public string Unit { get; set; }
-        public Nullable<int> Portion { get; set; }
+        public int Portion { get; set; }
     
         public virtual tbl_RawMaterials tbl_RawMaterials { get; set; }
-        public virtual tblCategory tblCategory { get; set; }
-        public virtual tblItem tblItem { get; set; }
+        public virtual tblSubItem tblSubItem { get; set; }
     }
 }

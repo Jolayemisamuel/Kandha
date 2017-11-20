@@ -1,0 +1,112 @@
+﻿@model IEnumerable<NibsMVC.Models.AddSubItemModel>
+
+@{
+    ViewBag.Title = "Sub Item Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using NibsMVC.EDMX;
+<div class="page-content">
+
+    <!-- BEGIN PAGE HEADER-->
+
+    <div class="page-bar">
+        <ul class="page-breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="@Url.Action("Index","Home")">Home</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <a href="@Url.Action("AddSubItem", "Category")">Add Sub Item</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+               Sub Items Details
+            </li>
+        </ul>
+
+    </div>
+    <!-- END PAGE HEADER-->
+    <!-- BEGIN PAGE CONTENT-->
+
+    <div class="row">
+        <p style="color:red; font-size:14px;">@TempData["Message"]</p>
+        <p style="color:red; font-size:14px;">@TempData["item"]</p>
+
+        <div class="col-md-12" style="padding-left:0px;padding-right:0px;">
+            <!-- BEGIN BORDERED TABLE PORTLET-->
+            <div class="portlet box yellow">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-coffee"></i>Items Details
+                    </div>
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse">
+                        </a>
+
+                        <a href="javascript:;" class="reload">
+                        </a>
+
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    @using (Html.BeginForm("SubItemDetails", "Category", FormMethod.Post, new { @id = "SearchRetrobill", @class = "form-horizontal" }))
+                    {
+                        
+                    }
+                    <table class="table table-bordered table-hover table-full-width" id="sample_2">
+                        <thead>
+                            <tr>
+                                <th>
+                                    S.NO
+                                </th>
+                                <th>
+                                   Sub Item Name
+                                </th>
+                                <th>
+                                    Description
+                                </th>
+                                
+                                <th>Action</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                NIBSEntities db = new NIBSEntities();
+                                var counter = 1;
+                                foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @counter
+                                        </td>
+                                        
+                                        <td>
+                                            @item.Name
+                                        </td>
+                                        <td>
+                                            @item.Description
+                                        </td>
+                                        
+                                        <td>
+                                            <a href="@Url.Action("AddSubItem", "Category", new { @id = item.subItemId })"><span class="fa fa-edit"></span></a>
+                                            <a href="@Url.Action("DeleteSubitem", "Category", new { @id = item.subItemId })" class="block_item"><span class="fa fa-trash-o"></span></a>
+                                        </td>
+
+                                    </tr>
+                                                    counter = counter + 1;
+                                                }
+
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- END BORDERED TABLE PORTLET-->
+
+        </div>
+    </div>
+    
+    <!-- END PAGE CONTENT-->
+</div>

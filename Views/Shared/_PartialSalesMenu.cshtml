@@ -62,6 +62,24 @@
         Add Items
     </a>
         </li>*@
+       <li class="">
+        <a href="@Url.Action("AddSubItem", "Category")">
+            Add Sub Items
+        </a>
+            </li>
+
+        <li class="">
+            <a href="@Url.Action("SubItemDetails","Category")">
+                Sub Items Report
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("BlockedSubItem", "Category")">
+                Blockes SubItem Reports
+            </a>
+        </li>
+
+
         <li class="">
             <a href="@Url.Action("ItemDetails","Category")">
                 Menu Items Report
@@ -95,6 +113,17 @@
         <li class="">
             <a href="@Url.Action("KitchenRawList", "Kitchen")">
                 Menu Item Ingredient Report
+            </a>
+        </li>
+
+        <li class="">
+            <a href="@Url.Action("AddSubMenuIndent", "Kitchen")">
+                Add Sub Item Ingredient
+            </a>
+        </li>
+        <li class="">
+            <a href="@Url.Action("SubItemRawList", "Kitchen")">
+                Sub Item Ingredient Report
             </a>
         </li>
 

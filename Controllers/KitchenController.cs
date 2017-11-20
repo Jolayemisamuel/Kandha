@@ -52,7 +52,13 @@ namespace NibsMVC.Controllers
             TempData["Error"] = data;
             return RedirectToAction("KitchenRawList");
         }
-
+        public ActionResult DeleteSubIndent(int Id = 0)
+        {
+            var Path = Server.MapPath("/xmlkot/SubItemRawMaterial.xml");
+            var data = obj.DeleteSubRawIndent(Id,Path);
+            TempData["Error"] = data;
+            return RedirectToAction("SubItemRawList");
+        }
         #endregion
 
         #region
@@ -138,6 +144,13 @@ namespace NibsMVC.Controllers
 
             return View(obj.AddKitchenRawIndent());
         }
+
+        public ActionResult AddSubMenuIndent()
+        {
+
+            return View(obj.AddSubMenuRawIndent ());
+        }
+
         public string ListOfItems(string Id)
         {
             int ItemId = Convert.ToInt32(Id);
@@ -152,10 +165,24 @@ namespace NibsMVC.Controllers
             return result;
 
         }
+        public string ListOfsubRawIndent(string Id)
+        {
+            int SubItemId = Convert.ToInt32(Id);
+            var Path = Server.MapPath("/xmlkot/SubItemRawMaterial.xml");
+            var Data = obj.UpdateSubItemRawMaterial(SubItemId, Path);
+            return Data;
+
+        }
         public string UpdateKitchenRawMaterial(KitchenRawIndentModel model)
         {
             var Path = Server.MapPath("/xmlkot/KitchenRawMaterial.xml");
             var Data = obj.UpdateKitchenRawMaterail(model, Path);
+            return Data;
+        }
+        public string UpdateSubItemRawMaterial(SubItemRawIndentModel model)
+        {
+            var Path = Server.MapPath("/xmlkot/SubItemRawMaterial.xml");
+            var Data = obj.UpdateSubItemRawMaterial(model,Path);
             return Data;
         }
         public ActionResult SaveKitchenRawMaterail()
@@ -164,14 +191,33 @@ namespace NibsMVC.Controllers
             var Data = obj.SaveRawMaterial(Path);
             return RedirectToAction("KitchenRawList");
         }
+
+        public ActionResult SaveSubItemRawMaterail()
+        {
+            var Path = Server.MapPath("/xmlkot/SubItemRawMaterial.xml");
+            var Data = obj.SaveSubItemRawMaterial(Path);
+            return RedirectToAction("SubItemRawList");
+        }
+
         public ActionResult KitchenRawList()
         {
             return View(obj.ListOfMaterial());
+        }
+        public ActionResult SubItemRawList()
+        {
+            return View(obj.ListOfSubItemMaterial());
         }
         public string deleteRaw(string Id)
         {
             var Path = Server.MapPath("/xmlkot/KitchenRawMaterial.xml");
             var Data = obj.DeleteRaw(Id, Path);
+            return Data;
+        }
+
+        public string deleteSubRaw(string Id)
+        {
+            var Path = Server.MapPath("/xmlkot/SubItemRawMaterial.xml");
+            var Data = obj.DeleteSubRaw(Id, Path);
             return Data;
         }
         #endregion
@@ -194,7 +240,7 @@ namespace NibsMVC.Controllers
         //        TempData["kitchenerror"] = ex.Message;
         //            return RedirectToAction("KitchenRawList");
         //        }
-            
+
         //}
     }
 }

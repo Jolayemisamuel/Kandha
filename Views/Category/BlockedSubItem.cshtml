@@ -1,0 +1,80 @@
+﻿@model NibsMVC.Models.AdminBlockSubItemModel
+
+@{
+    ViewBag.Title = "SubItem Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="page-content">
+    <div class="row">
+        <p style="color:red; font-size:14px;">@TempData["Message"]</p>
+        <p style="color:red; font-size:14px;">@TempData["item"]</p>
+
+        <div class="col-md-12" style="padding-left:0px;padding-right:0px;">
+            <div class="portlet box yellow">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-coffee"></i>Sub Items Details
+                    </div>
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse">
+                        </a>
+
+                        <a href="javascript:;" class="reload">
+                        </a>
+
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    @using (Html.BeginForm("BlockedSubItem", "Category", FormMethod.Post, new { @class = "form-horizontal" }))
+                    {
+                        <div class="form-body">
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)
+                            
+                        </div>
+                    }
+                    <table class="table table-bordered table-hover table-full-width" id="sample_2">
+                        <thead>
+                            <tr>
+
+                               
+                                <th>
+                                    Sub Item Name
+                                </th>
+                               
+                                <th>Action</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.lstOfSubItems != null)
+                            {
+                                foreach (var item in Model.lstOfSubItems)
+                                {
+                                    <tr>
+                                        
+                                        <td>@item.Name</td>
+                                        
+                                        
+                                        <td>
+                                            <a href="@Url.Action("UnblockSubItem", "Category", new { id = item.SubItemId })" class="unblock btn btn-danger">UnBlock</a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- END BORDERED TABLE PORTLET-->
+
+        </div>
+    </div>
+    <script>
+    $(document).on('click', '.unblock', function (e) {
+        if (!confirm("Do you want to unblobk")) {
+            return false;
+        }
+    });
+    </script>
+</div>
