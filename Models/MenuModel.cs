@@ -29,4 +29,15 @@ namespace NibsMVC.Models
         public decimal[] HalfPrice { get; set; }
         public int[] BasePriceId { get; set; }
     }
+
+    public class AssignRawSubItemModel
+    {
+        
+        public int SubItemId { get; set; }
+        public int Portion { get; set; }
+        public DateTime  DateTime { get; set; }
+        public int[] RawMaterialId { get; set; }
+        public decimal[] qty { get; set; }
+        
+    }
 }

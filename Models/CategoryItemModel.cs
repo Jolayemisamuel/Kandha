@@ -91,6 +91,19 @@ namespace NibsMVC.Models
         public bool Assigned { get; set; }
         public int BasePriceId { get; set; }
     }
+
+    public class SubItemAssignRawModel
+    {
+        public int RawMaterialId { get; set; }
+        public int SubItemId { get; set; }
+        public string RawMaterialName { get; set; }
+    
+        public decimal Qty { get; set; }
+        public string Unit { get; set; }
+        public decimal Portion { get; set; }
+        public bool Assigned { get; set; }
+       
+    }
     public class UnitModel1
     {
         public int Unitid { get; set; }

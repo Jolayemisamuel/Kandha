@@ -1945,6 +1945,12 @@
     <Compile Include="EDMX\TaxTypeMaster.cs">
       <DependentUpon>KOTDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="EDMX\tblAsgnRawSubItemDet.cs">
+      <DependentUpon>NIBSDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\tblAssignRawSubItemMst.cs">
+      <DependentUpon>NIBSDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="EDMX\tblBasePriceItem.cs">
       <DependentUpon>NIBSDB.tt</DependentUpon>
     </Compile>
@@ -3268,11 +3274,11 @@
     <Content Include="Views\Kitchen\AddSubMenuIndent.cshtml" />
     <Content Include="Views\Kitchen\SubItemRawList.cshtml" />
     <Content Include="Views\Category\BlockedSubItem.cshtml" />
+    <Content Include="Views\Kitchen\AssignRawSubItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Barcodes\" />
     <Folder Include="ItemImages\" />
-    <Folder Include="Views\NewFolder1\" />
     <Folder Include="Views\OutletReturn\" />
     <Folder Include="xmltables\" />
   </ItemGroup>

@@ -55,7 +55,7 @@ namespace NibsMVC.Controllers
         public ActionResult DeleteSubIndent(int Id = 0)
         {
             var Path = Server.MapPath("/xmlkot/SubItemRawMaterial.xml");
-            var data = obj.DeleteSubRawIndent(Id,Path);
+            var data = obj.DeleteSubRawIndent(Id, Path);
             TempData["Error"] = data;
             return RedirectToAction("SubItemRawList");
         }
@@ -64,7 +64,7 @@ namespace NibsMVC.Controllers
         #region
         public ActionResult Index()
         {
-          
+
 
             return View(obj.ShowAllRawMaterialsList());
         }
@@ -125,12 +125,12 @@ namespace NibsMVC.Controllers
                 TempData["Error"] = "Baecode Update Successfully";
 
             }
-            catch 
+            catch
             {
                 TempData["Error"] = "Something went wrong";
             }
-            
-            
+
+
             return RedirectToAction("Index");
         }
 
@@ -148,7 +148,7 @@ namespace NibsMVC.Controllers
         public ActionResult AddSubMenuIndent()
         {
 
-            return View(obj.AddSubMenuRawIndent ());
+            return View(obj.AddSubMenuRawIndent());
         }
 
         public string ListOfItems(string Id)
@@ -156,7 +156,7 @@ namespace NibsMVC.Controllers
             int ItemId = Convert.ToInt32(Id);
             string result = obj.GetListofItems(ItemId);
             return result;
-            
+
         }
         public string ListOfRawItems(string Id)
         {
@@ -182,7 +182,7 @@ namespace NibsMVC.Controllers
         public string UpdateSubItemRawMaterial(SubItemRawIndentModel model)
         {
             var Path = Server.MapPath("/xmlkot/SubItemRawMaterial.xml");
-            var Data = obj.UpdateSubItemRawMaterial(model,Path);
+            var Data = obj.UpdateSubItemRawMaterial(model, Path);
             return Data;
         }
         public ActionResult SaveKitchenRawMaterail()
@@ -242,5 +242,63 @@ namespace NibsMVC.Controllers
         //        }
 
         //}
+
+        [HttpPost]
+        public string Assign(int SubItemid=0)
+        {
+            AddItemRepository dis = new AddItemRepository();
+            List<SubItemAssignRawModel> assignsubitem = dis.subItemwise(SubItemid );
+            StringBuilder sb = new StringBuilder();
+            sb.Append("<table class='table table-bordered' id='tblsubRawitems'>");
+            sb.Append("<thead>");
+            sb.Append("<tr><th>Select</th><th>Qty</th><th>Unit</th>");
+            sb.Append("</thead>");
+            sb.Append("<tbody>");
+            string portion = "";
+            foreach (var item in assignsubitem)
+            {
+
+                if (item != null)
+                {
+                    if (item.Assigned == true)
+                    {
+                        sb.Append("<tr><td><input type='checkbox' id='" + item.RawMaterialId  + "' name='rawId' checked value='" + item.RawMaterialId  + "' class='checkbox'>" + item.RawMaterialName  + "</td>");
+                        sb.Append("<td><input type='textbox' class='form-control'name='Qty' style='margin:2px 6px'value='" + item.Qty  + "' id='" + item.RawMaterialId  + "' ></td>");
+                        sb.Append("<td> " + item.Unit +"</td>");
+
+                    }
+                    else
+                    {
+                        sb.Append("<tr><td><input type='checkbox' id='" + item.RawMaterialId + "' name='ItemId' value='" + item.RawMaterialId + "' class='checkbox'>" + item.RawMaterialName + "</td>");
+                        sb.Append("<td><input type='textbox' class='form-control'name='FullPrice' style='margin:2px 6px'value='" + item.Qty + "' id='" + item.RawMaterialId + "' ></td>");
+                        sb.Append("<td> " + item.Unit + "</td>");
+                    }
+
+                    //
+                }
+                portion = item.Portion.ToString();
+
+            }
+            sb.Append("</tbody>");
+            sb.Append("<table>");
+            sb.Append("~" + portion);
+            return sb.ToString();
+        }
+
+        public ActionResult AssignRawSubItem()
+        {
+
+            AssignView();
+
+            return View();
+        }
+        private void AssignView()
+        {
+
+
+            IEnumerable<SelectListItem> SubItemList = (from q in db.tblSubItems where q.Active == true select q).AsEnumerable().Select(q => new SelectListItem() { Text = q.Name, Value = q.SubItemId.ToString() });
+
+            ViewBag.SubItemList = new SelectList(SubItemList, "Value", "Text");
+        }
     }
 }

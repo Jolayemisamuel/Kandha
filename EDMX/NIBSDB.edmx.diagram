@@ -139,6 +139,10 @@
         <EntityTypeShape EntityType="NIBSModel.tbl_SubItemRawIndent" Width="1.5" PointX="10.625" PointY="12.625" />
         <AssociationConnector Association="NIBSModel.FK_tbl_SubItemRawIndent_tbl_RawMaterials" />
         <AssociationConnector Association="NIBSModel.FK_tbl_SubItemRawIndent_tblSubItem" />
+        <EntityTypeShape EntityType="NIBSModel.tblAsgnRawSubItemDet" Width="1.5" PointX="11.875" PointY="0.875" />
+        <EntityTypeShape EntityType="NIBSModel.tblAssignRawSubItemMst" Width="1.5" PointX="9.625" PointY="0.75" />
+        <AssociationConnector Association="NIBSModel.FK_tblAsgnRawSubItemDet_tblAssignRawSubItemMst" />
+        <AssociationConnector Association="NIBSModel.FK_tblAssignRawSubItemMst_tblSubItem" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

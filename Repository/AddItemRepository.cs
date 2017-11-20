@@ -188,6 +188,52 @@ namespace NibsMVC.Repository
 
             return lst;
         }
+        public List<SubItemAssignRawModel> subItemwise(int SubItemId)
+        {
+            List<SubItemAssignRawModel> lst = new List<SubItemAssignRawModel>();
+            var Raws = (from q in db.tblSubItems
+                         join p in db.tbl_SubItemRawIndent on q.SubItemId  equals p.SubItemId
+                         where q.SubItemId == SubItemId
+                             && q.Active == true
+                         select new
+                         {
+                             Rawmatid = p.RawMaterialId,
+                             RawName = p.tbl_RawMaterials.Name ,
+                            unit = p.Unit,
+                            portion =p.Portion,
+                             qty = p.Qty,
+                             
+                         }).ToList();
+            foreach (var raw in Raws)
+            {
+                var rawId = (from p in db.tblAsgnRawSubItemDets
+                             join q in db.tblAssignRawSubItemMsts on p.AsgnRawSubItemMstId equals q.Id
+                             where q.SubItemId == SubItemId
+                              && p.RawMaterialId == raw.Rawmatid 
+                              
+                             select p.RawMaterialId ).ToList();
+                SubItemAssignRawModel model = new SubItemAssignRawModel();
+                model.RawMaterialId  = raw.Rawmatid;
+                model.Qty = raw.qty;
+                model.Portion = raw.portion;
+                model.Unit = raw.unit;
+                model.SubItemId = SubItemId;
+                model.RawMaterialName = raw.RawName ;
+                if (rawId.Count > 0)
+                {
+                    model.Assigned = true;
+                }
+                else
+                {
+                    model.Assigned = false;
+                }
+               
+                lst.Add(model);
+            }
+
+
+            return lst;
+        }
         public List<tblOutlet> Outletwise(int id)
         {
             var outletdetails = (from q in db.tblOutlets where q.OutletId == id select q).ToList();

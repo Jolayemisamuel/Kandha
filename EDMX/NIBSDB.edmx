@@ -258,6 +258,24 @@
           <Property Name="Unit" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="Portion" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="tblAsgnRawSubItemDet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AsgnRawSubItemMstId" Type="int" Nullable="false" />
+          <Property Name="RawMaterialId" Type="int" Nullable="false" />
+          <Property Name="Qty" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblAssignRawSubItemMst">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubItemId" Type="int" Nullable="false" />
+          <Property Name="AssignDate" Type="datetime" Nullable="false" />
+          <Property Name="Portion" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="tblBasePriceItems">
           <Key>
             <PropertyRef Name="BasePriceId" />
@@ -1051,6 +1069,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblAsgnRawSubItemDet_tblAssignRawSubItemMst">
+          <End Role="tblAssignRawSubItemMst" Type="Self.tblAssignRawSubItemMst" Multiplicity="1" />
+          <End Role="tblAsgnRawSubItemDet" Type="Self.tblAsgnRawSubItemDet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAssignRawSubItemMst">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblAsgnRawSubItemDet">
+              <PropertyRef Name="AsgnRawSubItemMstId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblAssignRawSubItemMst_tblSubItem">
+          <End Role="tblSubItem" Type="Self.tblSubItem" Multiplicity="1" />
+          <End Role="tblAssignRawSubItemMst" Type="Self.tblAssignRawSubItemMst" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblSubItem">
+              <PropertyRef Name="SubItemId" />
+            </Principal>
+            <Dependent Role="tblAssignRawSubItemMst">
+              <PropertyRef Name="SubItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblBasePriceItems_tblCategory">
           <End Role="tblCategory" Type="Self.tblCategory" Multiplicity="1" />
           <End Role="tblBasePriceItems" Type="Self.tblBasePriceItems" Multiplicity="*" />
@@ -1565,6 +1607,8 @@
           <EntitySet Name="tbl_RawMaterials" EntityType="Self.tbl_RawMaterials" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_ServiceTax" EntityType="Self.tbl_ServiceTax" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_SubItemRawIndent" EntityType="Self.tbl_SubItemRawIndent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblAsgnRawSubItemDet" EntityType="Self.tblAsgnRawSubItemDet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblAssignRawSubItemMst" EntityType="Self.tblAssignRawSubItemMst" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblBasePriceItems" EntityType="Self.tblBasePriceItems" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblBillDetails" EntityType="Self.tblBillDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblBillMaster" EntityType="Self.tblBillMaster" Schema="dbo" store:Type="Tables" />
@@ -1722,6 +1766,14 @@
           <AssociationSet Name="FK_tbl_SubItemRawIndent_tblSubItem" Association="Self.FK_tbl_SubItemRawIndent_tblSubItem">
             <End Role="tblSubItem" EntitySet="tblSubItem" />
             <End Role="tbl_SubItemRawIndent" EntitySet="tbl_SubItemRawIndent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblAsgnRawSubItemDet_tblAssignRawSubItemMst" Association="Self.FK_tblAsgnRawSubItemDet_tblAssignRawSubItemMst">
+            <End Role="tblAssignRawSubItemMst" EntitySet="tblAssignRawSubItemMst" />
+            <End Role="tblAsgnRawSubItemDet" EntitySet="tblAsgnRawSubItemDet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblAssignRawSubItemMst_tblSubItem" Association="Self.FK_tblAssignRawSubItemMst_tblSubItem">
+            <End Role="tblSubItem" EntitySet="tblSubItem" />
+            <End Role="tblAssignRawSubItemMst" EntitySet="tblAssignRawSubItemMst" />
           </AssociationSet>
           <AssociationSet Name="FK_tblBasePriceItems_tblCategory" Association="Self.FK_tblBasePriceItems_tblCategory">
             <End Role="tblCategory" EntitySet="tblCategory" />
@@ -2267,6 +2319,16 @@
           <AssociationSet Name="FK_tbl_SubItemRawIndent_tblSubItem" Association="NIBSModel.FK_tbl_SubItemRawIndent_tblSubItem">
             <End Role="tblSubItem" EntitySet="tblSubItems" />
             <End Role="tbl_SubItemRawIndent" EntitySet="tbl_SubItemRawIndent" />
+          </AssociationSet>
+          <EntitySet Name="tblAsgnRawSubItemDets" EntityType="NIBSModel.tblAsgnRawSubItemDet" />
+          <EntitySet Name="tblAssignRawSubItemMsts" EntityType="NIBSModel.tblAssignRawSubItemMst" />
+          <AssociationSet Name="FK_tblAsgnRawSubItemDet_tblAssignRawSubItemMst" Association="NIBSModel.FK_tblAsgnRawSubItemDet_tblAssignRawSubItemMst">
+            <End Role="tblAssignRawSubItemMst" EntitySet="tblAssignRawSubItemMsts" />
+            <End Role="tblAsgnRawSubItemDet" EntitySet="tblAsgnRawSubItemDets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblAssignRawSubItemMst_tblSubItem" Association="NIBSModel.FK_tblAssignRawSubItemMst_tblSubItem">
+            <End Role="tblSubItem" EntitySet="tblSubItems" />
+            <End Role="tblAssignRawSubItemMst" EntitySet="tblAssignRawSubItemMsts" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="NIbs_AssignOffer">
@@ -3999,6 +4061,7 @@
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="tbl_SubItemRawIndent" Relationship="NIBSModel.FK_tbl_SubItemRawIndent_tblSubItem" FromRole="tblSubItem" ToRole="tbl_SubItemRawIndent" />
+          <NavigationProperty Name="tblAssignRawSubItemMsts" Relationship="NIBSModel.FK_tblAssignRawSubItemMst_tblSubItem" FromRole="tblSubItem" ToRole="tblAssignRawSubItemMst" />
         </EntityType>
         <EntityType Name="tbl_SubItemRawIndent">
           <Key>
@@ -4033,6 +4096,51 @@
               <PropertyRef Name="SubItemId" />
             </Principal>
             <Dependent Role="tbl_SubItemRawIndent">
+              <PropertyRef Name="SubItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblAsgnRawSubItemDet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AsgnRawSubItemMstId" Type="Int32" Nullable="false" />
+          <Property Name="RawMaterialId" Type="Int32" Nullable="false" />
+          <Property Name="Qty" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <NavigationProperty Name="tblAssignRawSubItemMst" Relationship="NIBSModel.FK_tblAsgnRawSubItemDet_tblAssignRawSubItemMst" FromRole="tblAsgnRawSubItemDet" ToRole="tblAssignRawSubItemMst" />
+        </EntityType>
+        <EntityType Name="tblAssignRawSubItemMst">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubItemId" Type="Int32" Nullable="false" />
+          <Property Name="AssignDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Portion" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblAsgnRawSubItemDets" Relationship="NIBSModel.FK_tblAsgnRawSubItemDet_tblAssignRawSubItemMst" FromRole="tblAssignRawSubItemMst" ToRole="tblAsgnRawSubItemDet" />
+          <NavigationProperty Name="tblSubItem" Relationship="NIBSModel.FK_tblAssignRawSubItemMst_tblSubItem" FromRole="tblAssignRawSubItemMst" ToRole="tblSubItem" />
+        </EntityType>
+        <Association Name="FK_tblAsgnRawSubItemDet_tblAssignRawSubItemMst">
+          <End Type="NIBSModel.tblAssignRawSubItemMst" Role="tblAssignRawSubItemMst" Multiplicity="1" />
+          <End Type="NIBSModel.tblAsgnRawSubItemDet" Role="tblAsgnRawSubItemDet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAssignRawSubItemMst">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblAsgnRawSubItemDet">
+              <PropertyRef Name="AsgnRawSubItemMstId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblAssignRawSubItemMst_tblSubItem">
+          <End Type="NIBSModel.tblSubItem" Role="tblSubItem" Multiplicity="1" />
+          <End Type="NIBSModel.tblAssignRawSubItemMst" Role="tblAssignRawSubItemMst" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblSubItem">
+              <PropertyRef Name="SubItemId" />
+            </Principal>
+            <Dependent Role="tblAssignRawSubItemMst">
               <PropertyRef Name="SubItemId" />
             </Dependent>
           </ReferentialConstraint>
@@ -4758,6 +4866,26 @@
                 <ScalarProperty Name="RawMaterialId" ColumnName="RawMaterialId" />
                 <ScalarProperty Name="SubItemId" ColumnName="SubItemId" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblAsgnRawSubItemDets">
+            <EntityTypeMapping TypeName="NIBSModel.tblAsgnRawSubItemDet">
+              <MappingFragment StoreEntitySet="tblAsgnRawSubItemDet">
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="RawMaterialId" ColumnName="RawMaterialId" />
+                <ScalarProperty Name="AsgnRawSubItemMstId" ColumnName="AsgnRawSubItemMstId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblAssignRawSubItemMsts">
+            <EntityTypeMapping TypeName="NIBSModel.tblAssignRawSubItemMst">
+              <MappingFragment StoreEntitySet="tblAssignRawSubItemMst">
+                <ScalarProperty Name="Portion" ColumnName="Portion" />
+                <ScalarProperty Name="AssignDate" ColumnName="AssignDate" />
+                <ScalarProperty Name="SubItemId" ColumnName="SubItemId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -12,20 +12,19 @@ namespace NibsMVC.EDMX
     using System;
     using System.Collections.Generic;
     
-    public partial class tblSubItem
+    public partial class tblAssignRawSubItemMst
     {
-        public tblSubItem()
+        public tblAssignRawSubItemMst()
         {
-            this.tbl_SubItemRawIndent = new HashSet<tbl_SubItemRawIndent>();
-            this.tblAssignRawSubItemMsts = new HashSet<tblAssignRawSubItemMst>();
+            this.tblAsgnRawSubItemDets = new HashSet<tblAsgnRawSubItemDet>();
         }
     
+        public int Id { get; set; }
         public int SubItemId { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public bool Active { get; set; }
+        public System.DateTime AssignDate { get; set; }
+        public int Portion { get; set; }
     
-        public virtual ICollection<tbl_SubItemRawIndent> tbl_SubItemRawIndent { get; set; }
-        public virtual ICollection<tblAssignRawSubItemMst> tblAssignRawSubItemMsts { get; set; }
+        public virtual ICollection<tblAsgnRawSubItemDet> tblAsgnRawSubItemDets { get; set; }
+        public virtual tblSubItem tblSubItem { get; set; }
     }
 }
