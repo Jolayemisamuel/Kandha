@@ -30,6 +30,7 @@ namespace NibsMVC.EDMX
             this.tblBillDetails = new HashSet<tblBillDetail>();
             this.Temp_VendorBilling = new HashSet<Temp_VendorBilling>();
             this.VendorBillingItems = new HashSet<VendorBillingItem>();
+            this.tblAssignSubMenuItems = new HashSet<tblAssignSubMenuItem>();
         }
     
         public int ItemId { get; set; }
@@ -60,5 +61,6 @@ namespace NibsMVC.EDMX
         public virtual tbl_Department tbl_Department { get; set; }
         public virtual tblItem tblItem1 { get; set; }
         public virtual tblItem tblItem2 { get; set; }
+        public virtual ICollection<tblAssignSubMenuItem> tblAssignSubMenuItems { get; set; }
     }
 }

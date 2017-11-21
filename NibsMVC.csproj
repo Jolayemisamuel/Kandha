@@ -294,6 +294,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AssignOfferController.cs" />
+    <Compile Include="Controllers\AssignSubMenuController.cs" />
     <Compile Include="Controllers\BarcodeController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BasePriceController.cs" />
@@ -1951,6 +1952,9 @@
     <Compile Include="EDMX\tblAssignRawSubItemMst.cs">
       <DependentUpon>NIBSDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="EDMX\tblAssignSubMenuItem.cs">
+      <DependentUpon>NIBSDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="EDMX\tblBasePriceItem.cs">
       <DependentUpon>NIBSDB.tt</DependentUpon>
     </Compile>
@@ -3276,6 +3280,9 @@
     <Content Include="Views\Category\BlockedSubItem.cshtml" />
     <Content Include="Views\Kitchen\AssignRawSubItem.cshtml" />
     <Content Include="Views\Kitchen\AssignedList.cshtml" />
+    <Content Include="Views\Kitchen\ListRawItem.cshtml" />
+    <Content Include="Views\AssignSubMenu\AssignSubMenuItem.cshtml" />
+    <Content Include="Views\AssignSubMenu\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Barcodes\" />

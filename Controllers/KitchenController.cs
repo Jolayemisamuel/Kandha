@@ -145,6 +145,11 @@ namespace NibsMVC.Controllers
             return View(obj.AddKitchenRawIndent());
         }
 
+        public ActionResult ListRawItem(int id = 0)
+        {
+
+            return View(obj.ListKitchenRawIndent(id));
+        }
         public ActionResult AddSubMenuIndent()
         {
 
@@ -207,6 +212,15 @@ namespace NibsMVC.Controllers
         {
             return View(obj.ListOfAssignedSubItemMaterial());
         }
+
+        public ActionResult DeleteAssignedSubItem(int Id)
+        {
+            var Data = obj.DeleteAssignedSubItem(Id);
+             TempData["Error"] = Data;
+            return RedirectToAction("AssignedList");
+        }
+
+
         public string deleteRaw(string Id)
         {
             var Path = Server.MapPath("/xmlkot/KitchenRawMaterial.xml");

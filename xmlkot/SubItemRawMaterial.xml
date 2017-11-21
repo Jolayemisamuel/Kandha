@@ -22,9 +22,9 @@
     <UserId>99</UserId>
     <RawCategoryId>736</RawCategoryId>
     <SubItemId>5</SubItemId>
-    <RawMaterialId>453</RawMaterialId>
-    <Unit>Gms</Unit>
-    <Quantity>500</Quantity>
+    <RawMaterialId>445</RawMaterialId>
+    <Unit>Kgs</Unit>
+    <Quantity>1</Quantity>
     <Portion>20</Portion>
   </SubItems>
   <SubItems>
@@ -32,6 +32,15 @@
     <RawCategoryId>749</RawCategoryId>
     <SubItemId>5</SubItemId>
     <RawMaterialId>643</RawMaterialId>
+    <Unit>Kgs</Unit>
+    <Quantity>1</Quantity>
+    <Portion>20</Portion>
+  </SubItems>
+  <SubItems>
+    <UserId>99</UserId>
+    <RawCategoryId>749</RawCategoryId>
+    <SubItemId>5</SubItemId>
+    <RawMaterialId>655</RawMaterialId>
     <Unit>Kgs</Unit>
     <Quantity>1</Quantity>
     <Portion>20</Portion>
@@ -67,25 +76,16 @@
     <UserId>99</UserId>
     <RawCategoryId>749</RawCategoryId>
     <SubItemId>5</SubItemId>
+    <RawMaterialId>646</RawMaterialId>
+    <Unit>Kgs</Unit>
+    <Quantity>1</Quantity>
+    <Portion>20</Portion>
+  </SubItems>
+  <SubItems>
+    <UserId>99</UserId>
+    <RawCategoryId>749</RawCategoryId>
+    <SubItemId>5</SubItemId>
     <RawMaterialId>664</RawMaterialId>
-    <Unit>Kgs</Unit>
-    <Quantity>1</Quantity>
-    <Portion>20</Portion>
-  </SubItems>
-  <SubItems>
-    <UserId>99</UserId>
-    <RawCategoryId>749</RawCategoryId>
-    <SubItemId>5</SubItemId>
-    <RawMaterialId>663</RawMaterialId>
-    <Unit>Kgs</Unit>
-    <Quantity>1</Quantity>
-    <Portion>20</Portion>
-  </SubItems>
-  <SubItems>
-    <UserId>99</UserId>
-    <RawCategoryId>749</RawCategoryId>
-    <SubItemId>5</SubItemId>
-    <RawMaterialId>693</RawMaterialId>
     <Unit>Kgs</Unit>
     <Quantity>1</Quantity>
     <Portion>20</Portion>

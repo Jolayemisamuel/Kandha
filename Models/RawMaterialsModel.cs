@@ -81,11 +81,13 @@ namespace NibsMVC.Models
         public string RawMaterialId { get; set; }
         public decimal Quantity { get; set; }
         public string Unit { get; set; }
+        public int Portion { get; set; }
         public List<SelectListItem> lstofCategorirs { get; set; }
         public List<ListOfRawIndent> GetListOfKitchenRawIndents { get; set; }
         public List<RawAutocompleteModel> GetAllAutocomplete { get; set; }
         public List<SelectListItem> lstofUnits { get; set; }
         public List<SelectListItem> lstofRawCategories { get; set; }
+        public List<ListofRawIndentItem> lstofrawitem { get; set; }
     }
 
     public class SubItemRawIndentModel
@@ -97,7 +99,7 @@ namespace NibsMVC.Models
         public string RawMaterialId { get; set; }
         public decimal Quantity { get; set; }
         public string Unit { get; set; }
-        public string Portion { get; set; }
+        public int Portion { get; set; }
         public List<SelectListItem> lstofUnits { get; set; }
         public List<SelectListItem> lstofRawCategories { get; set; }
         public List<SelectListItem> lstofsubItems { get; set; }
@@ -110,6 +112,7 @@ namespace NibsMVC.Models
         public int RawMaterialId { get; set; }
         public decimal Quantity { get; set; }
         public string Unit { get; set; }
+        public int Portion { get; set; }
     }
     public class RawAutocompleteModel
     {
@@ -117,11 +120,22 @@ namespace NibsMVC.Models
         public string Name { get; set; }
     }
 
+    public class ListofRawIndentItem
+    {
+        public int id { get; set; }
+        public string category { get; set; }
+        public string item { get; set; }
+        public string rawitem { get; set; }
+        public decimal quantity { get; set; }
+        public int portion { get; set; }
+        public string unit { get; set; }
+    }
     public class ListOfKitchenRawIndent
     {
         public string RawCategoryId { get; set; }
         public string ItemId { get; set; }
         public int Item { get; set; }
+        public int Portion { get; set; }
         public List<InnerKitchenRawIndent> ListOfInnerMaterial { get; set; }
     }
     public class ListOfSubItemRawIndent
@@ -146,7 +160,7 @@ namespace NibsMVC.Models
     }
     public class ListOfAssignedSubItemRaw
     {
-
+        public int Id { get; set; }
         public string SubItemId { get; set; }
         public int SubItem { get; set; }
         public int Portion { get; set; }
@@ -158,5 +172,15 @@ namespace NibsMVC.Models
         public string RawMaterialId { get; set; }
         public decimal Quantity { get; set; }
         public string Unit { get; set; }
+    }
+    public class AssignSubMenuModel
+    {
+        public int id { get; set; }
+        public int MenuCategoryId { get; set; }
+        public string MainItem { get; set; }
+        public int MainItemId { get; set; }
+        public string MainItemName { get; set; }
+        public int SubItem { get; set; }
+        public string SubItemName { get; set; }
     }
 }

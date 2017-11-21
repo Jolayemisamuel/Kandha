@@ -8,7 +8,7 @@
 
 <div class="page-content">
     <div class="row">
-        @*<p class="err" style="color:red">@TempData["menuerror"]</p>*@
+        <p class="err" style="color:red">@TempData["menuerror"] </p>
         <div class="col-md-12">
             <div class="portlet box blue">
                 <div class="portlet-title">
@@ -34,11 +34,13 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3">
-                                     Date
+                                     Date<span class="required">
+    *
+</span>
                                 </label>
                                 <div class="col-md-4">
                                     <div class="input-icon right">
-                                       
+                                        <i class="fa"></i>
                                         @Html.TextBoxFor(model => model.DateTime, new {   @class = "form-control form-control-inline input-medium date-picker", @id = "assignDate"})
                                         @*@Html.TextBoxFor(model => model.DateTime.ToString("dd-MMM-yyyy"), "assignDate", new { @class = "form-control form-control-inline input-medium date-picker", @value = DateTime.Today.ToString("dd-MMM-yyyy"), @id = "assignDate", @name = "assignDate"  })*@
                                         @*<input class="form-control form-control-inline input-medium date-picker" data-date-format="yyyy-mm-dd" size="16" type="text" value="" id="assignDate" name="assignDate" />*@

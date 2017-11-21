@@ -110,7 +110,7 @@
                                             </div>
                                         </td>
 
-                                        <td><a href="@Url.Action("DeleteSubIndent","Kitchen", new { @id = item.SubItem })"><span class="fa fa-trash-o"></span></a></td>
+                                        <td><a href="@Url.Action("DeleteAssignedSubItem", "Kitchen", new { @id = item.Id })"><span class="fa fa-trash-o"></span></a></td>
 
                                     </tr>
                                     counter = counter + 1;

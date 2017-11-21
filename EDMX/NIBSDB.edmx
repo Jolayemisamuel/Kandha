@@ -276,6 +276,14 @@
           <Property Name="AssignDate" Type="datetime" Nullable="false" />
           <Property Name="Portion" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="tblAssignSubMenuItem">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Mainitemid" Type="int" Nullable="false" />
+          <Property Name="subitemid" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="tblBasePriceItems">
           <Key>
             <PropertyRef Name="BasePriceId" />
@@ -1105,6 +1113,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblAssignSubMenuItem_tblItem">
+          <End Role="tblItem" Type="Self.tblItem" Multiplicity="1" />
+          <End Role="tblAssignSubMenuItem" Type="Self.tblAssignSubMenuItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblItem">
+              <PropertyRef Name="ItemId" />
+            </Principal>
+            <Dependent Role="tblAssignSubMenuItem">
+              <PropertyRef Name="Mainitemid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblAssignSubMenuItem_tblSubItem">
+          <End Role="tblSubItem" Type="Self.tblSubItem" Multiplicity="1" />
+          <End Role="tblAssignSubMenuItem" Type="Self.tblAssignSubMenuItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblSubItem">
+              <PropertyRef Name="SubItemId" />
+            </Principal>
+            <Dependent Role="tblAssignSubMenuItem">
+              <PropertyRef Name="subitemid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblBasePriceItems_tblCategory">
           <End Role="tblCategory" Type="Self.tblCategory" Multiplicity="1" />
           <End Role="tblBasePriceItems" Type="Self.tblBasePriceItems" Multiplicity="*" />
@@ -1621,6 +1653,7 @@
           <EntitySet Name="tbl_SubItemRawIndent" EntityType="Self.tbl_SubItemRawIndent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblAsgnRawSubItemDet" EntityType="Self.tblAsgnRawSubItemDet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblAssignRawSubItemMst" EntityType="Self.tblAssignRawSubItemMst" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblAssignSubMenuItem" EntityType="Self.tblAssignSubMenuItem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblBasePriceItems" EntityType="Self.tblBasePriceItems" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblBillDetails" EntityType="Self.tblBillDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblBillMaster" EntityType="Self.tblBillMaster" Schema="dbo" store:Type="Tables" />
@@ -1790,6 +1823,14 @@
           <AssociationSet Name="FK_tblAssignRawSubItemMst_tblSubItem" Association="Self.FK_tblAssignRawSubItemMst_tblSubItem">
             <End Role="tblSubItem" EntitySet="tblSubItem" />
             <End Role="tblAssignRawSubItemMst" EntitySet="tblAssignRawSubItemMst" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblAssignSubMenuItem_tblItem" Association="Self.FK_tblAssignSubMenuItem_tblItem">
+            <End Role="tblItem" EntitySet="tblItem" />
+            <End Role="tblAssignSubMenuItem" EntitySet="tblAssignSubMenuItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblAssignSubMenuItem_tblSubItem" Association="Self.FK_tblAssignSubMenuItem_tblSubItem">
+            <End Role="tblSubItem" EntitySet="tblSubItem" />
+            <End Role="tblAssignSubMenuItem" EntitySet="tblAssignSubMenuItem" />
           </AssociationSet>
           <AssociationSet Name="FK_tblBasePriceItems_tblCategory" Association="Self.FK_tblBasePriceItems_tblCategory">
             <End Role="tblCategory" EntitySet="tblCategory" />
@@ -2350,6 +2391,15 @@
             <End Role="tbl_RawMaterials" EntitySet="tbl_RawMaterials" />
             <End Role="tblAsgnRawSubItemDet" EntitySet="tblAsgnRawSubItemDets" />
           </AssociationSet>
+          <EntitySet Name="tblAssignSubMenuItems" EntityType="NIBSModel.tblAssignSubMenuItem" />
+          <AssociationSet Name="FK_tblAssignSubMenuItem_tblItem" Association="NIBSModel.FK_tblAssignSubMenuItem_tblItem">
+            <End Role="tblItem" EntitySet="tblItems" />
+            <End Role="tblAssignSubMenuItem" EntitySet="tblAssignSubMenuItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblAssignSubMenuItem_tblSubItem" Association="NIBSModel.FK_tblAssignSubMenuItem_tblSubItem">
+            <End Role="tblSubItem" EntitySet="tblSubItems" />
+            <End Role="tblAssignSubMenuItem" EntitySet="tblAssignSubMenuItems" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="NIbs_AssignOffer">
           <Key>
@@ -2686,6 +2736,7 @@
           <NavigationProperty Name="tbl_Department" Relationship="NIBSModel.FK_AddItem_Department" FromRole="tblItem" ToRole="tbl_Department" />
           <NavigationProperty Name="tblItem1" Relationship="NIBSModel.FK_tblItem_tblItem" FromRole="tblItem" ToRole="tblItem1" />
           <NavigationProperty Name="tblItem2" Relationship="NIBSModel.FK_tblItem_tblItem" FromRole="tblItem1" ToRole="tblItem" />
+          <NavigationProperty Name="tblAssignSubMenuItems" Relationship="NIBSModel.FK_tblAssignSubMenuItem_tblItem" FromRole="tblItem" ToRole="tblAssignSubMenuItem" />
         </EntityType>
         <EntityType Name="tblMenuOutlet">
           <Key>
@@ -4083,6 +4134,7 @@
           <Property Name="Active" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="tbl_SubItemRawIndent" Relationship="NIBSModel.FK_tbl_SubItemRawIndent_tblSubItem" FromRole="tblSubItem" ToRole="tbl_SubItemRawIndent" />
           <NavigationProperty Name="tblAssignRawSubItemMsts" Relationship="NIBSModel.FK_tblAssignRawSubItemMst_tblSubItem" FromRole="tblSubItem" ToRole="tblAssignRawSubItemMst" />
+          <NavigationProperty Name="tblAssignSubMenuItems" Relationship="NIBSModel.FK_tblAssignSubMenuItem_tblSubItem" FromRole="tblSubItem" ToRole="tblAssignSubMenuItem" />
         </EntityType>
         <EntityType Name="tbl_SubItemRawIndent">
           <Key>
@@ -4176,6 +4228,40 @@
             </Principal>
             <Dependent Role="tblAsgnRawSubItemDet">
               <PropertyRef Name="RawMaterialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblAssignSubMenuItem">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Mainitemid" Type="Int32" Nullable="false" />
+          <Property Name="subitemid" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblItem" Relationship="NIBSModel.FK_tblAssignSubMenuItem_tblItem" FromRole="tblAssignSubMenuItem" ToRole="tblItem" />
+          <NavigationProperty Name="tblSubItem" Relationship="NIBSModel.FK_tblAssignSubMenuItem_tblSubItem" FromRole="tblAssignSubMenuItem" ToRole="tblSubItem" />
+        </EntityType>
+        <Association Name="FK_tblAssignSubMenuItem_tblItem">
+          <End Type="NIBSModel.tblItem" Role="tblItem" Multiplicity="1" />
+          <End Type="NIBSModel.tblAssignSubMenuItem" Role="tblAssignSubMenuItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblItem">
+              <PropertyRef Name="ItemId" />
+            </Principal>
+            <Dependent Role="tblAssignSubMenuItem">
+              <PropertyRef Name="Mainitemid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblAssignSubMenuItem_tblSubItem">
+          <End Type="NIBSModel.tblSubItem" Role="tblSubItem" Multiplicity="1" />
+          <End Type="NIBSModel.tblAssignSubMenuItem" Role="tblAssignSubMenuItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblSubItem">
+              <PropertyRef Name="SubItemId" />
+            </Principal>
+            <Dependent Role="tblAssignSubMenuItem">
+              <PropertyRef Name="subitemid" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4920,6 +5006,15 @@
                 <ScalarProperty Name="AssignDate" ColumnName="AssignDate" />
                 <ScalarProperty Name="SubItemId" ColumnName="SubItemId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblAssignSubMenuItems">
+            <EntityTypeMapping TypeName="NIBSModel.tblAssignSubMenuItem">
+              <MappingFragment StoreEntitySet="tblAssignSubMenuItem">
+                <ScalarProperty Name="subitemid" ColumnName="subitemid" />
+                <ScalarProperty Name="Mainitemid" ColumnName="Mainitemid" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

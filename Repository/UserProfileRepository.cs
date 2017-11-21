@@ -199,5 +199,101 @@ namespace NibsMVC.Repository
         }
 
         #endregion
+        #region
+        public string AssignSubMenu(AssignSubMenuModel model)
+        {
+            tblAssignSubMenuItem tb = new tblAssignSubMenuItem();
+            var duplicate = entities.tblAssignSubMenuItems.Where(o => o.ID.Equals(model.id)).SingleOrDefault();
+            if (duplicate == null)
+            {
+                try
+                {
+                    if (model.id != 0)
+                    {
+                        tb = entities.tblAssignSubMenuItems.Where(x => x.ID == model.id).SingleOrDefault();
+                        tb.Mainitemid = Convert.ToInt32(model.MainItem);
+
+                        tb.subitemid = model.SubItem;
+
+                        entities.SaveChanges();
+                        return "Record Updated Successfully...";
+                    }
+                    else
+                    {
+                        tb.Mainitemid = Convert.ToInt32(model.MainItem);
+                        //tb.Category_name = model.CategoryName;
+                        tb.subitemid = model.SubItem;
+                        //tb.Vendor_name = model.VendorName;
+                        entities.tblAssignSubMenuItems.Add(tb);
+                        entities.SaveChanges();
+                        return "Record Saved Successfully...";
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    return "something Wrong try Agian !";
+
+                }
+
+            }
+            else
+            {
+                return " Already Exits";
+            }
+
+        }
+
+        public List<AssignSubMenuModel> ShowAllSubMenuList()
+        {
+            List<AssignSubMenuModel> List = new List<AssignSubMenuModel>();
+            var data = (from n in entities.tblAssignSubMenuItems select n).AsEnumerable(); //entities.AddCategoryVendors.ToList();
+
+            foreach (var item in data)
+            {
+                AssignSubMenuModel model = new AssignSubMenuModel();
+
+                model.id = item.ID;
+                model.MainItemName = item.tblItem.Name;
+                model.SubItemName = item.tblSubItem.Name;
+
+                List.Add(model);
+
+            }
+            return List;
+        }
+        public string DeleteSubMenu(int Id = 0)
+        {
+            try
+            {
+                var data = entities.tblAssignSubMenuItems.Where(x => x.ID == Id).SingleOrDefault();
+                entities.tblAssignSubMenuItems.Remove(data);
+                entities.SaveChanges();
+                return "Record deleted Successfully...";
+            }
+            catch
+            {
+                return "something Wrong try Agian !";
+            }
+        }
+        public AssignSubMenuModel EditSubMenu(int Id)
+        {
+            AssignSubMenuModel model = new AssignSubMenuModel();
+
+            if (Id != 0)
+            {
+                var data = entities.tblAssignSubMenuItems.Where(x => x.ID == Id).SingleOrDefault();
+
+                model.MainItem = data.tblItem.Name;
+                model.SubItem = data.subitemid;
+
+                return model;
+            }
+            else
+            {
+                return model;
+            }
+        }
+        #endregion
     }
 }

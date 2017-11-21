@@ -1,4 +1,4 @@
-﻿@model List<NibsMVC.Models.ListOfKitchenRawIndent>
+﻿@model List<NibsMVC.Models.ListofRawIndentItem>
 @{
     ViewBag.Title = "KitchenRawList";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -18,7 +18,7 @@
                     <i class="fa fa-angle-right"></i>
                 </li>
                 <li>
-                    <a href="@Url.Action("AddIndent","Kitchen")">Add Menu Ingredient</a>
+                    <a href="@Url.Action("AddIndent","Kitchen")">List Of Ingredient</a>
                     <i class="fa fa-angle-right"></i>
                 </li>
                 <li>
@@ -32,7 +32,7 @@
             <div class="portlet box yellow">
                 <div class="portlet-title">
                     <div class="caption">
-                        <i class="fa fa-coffee"></i>Menu Item Ingredient Report
+                        <i class="fa fa-coffee"></i>List Of Item Ingredient Report
                     </div>
 
                 </div>
@@ -50,9 +50,15 @@
                                     Item Name
                                 </th>
                                 <th>
+                                    Raw Material
+                                </th>
+                                <th>Quantity</th>
+                                <th>
+                                    Unit
+                                </th>
+                                <th>
                                     Portion
                                 </th>
-                                <th>View Raw Materials</th>
                                 <th>Action</th>
 
                             </tr>
@@ -65,54 +71,39 @@
                                 {
                                     <tr>
                                         <td>
-                                            @counter
+                                            @item.id
                                         </td>
                                         <td>
-                                            @item.RawCategoryId
+                                            @item.category
                                         </td>
                                         <td>
-                                            <a href="@Url.Action("ListRawItem", "Kitchen", new { id=item.Item})">@item.ItemId</a>
+                                            @item.item
+
                                         </td>
                                         <td>
-                                            @item.Portion
+                                            @item.rawitem
                                         </td>
                                         <td>
-                                            <a class="btn default" data-toggle="modal" href="#@("responsive"+counter)">View Items</a>
-                                            <div id="@("responsive"+counter)" class="modal fade" tabindex="-1" aria-hidden="true">
-
-                                                <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                    <h4 class="modal-title">Raw Material List Of @item.ItemId</h4>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <div class="scroller" style="height:300px" data-always-visible="1" data-rail-visible1="1">
-                                                        <div class="row">
-                                                            <div class="col-md-12">
-                                                                @foreach (var list in item.ListOfInnerMaterial)
-                                                                {
-                                                                    <label class="col-md-4 bold">@list.RawMaterialId</label> <label class="col-md-3">@list.Quantity &nbsp; @list.Unit</label>
-                                                                    <div class="clearfix"></div>
-                                                                }
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" data-dismiss="modal" class="btn default">Close</button>
-
-                                                </div>
-
-                                            </div>
+                                            @item.quantity
                                         </td>
+                                        <td>
+                                            @item.unit
+                                        </td>
+                                        <td>
+                                            @item.portion
+                                        </td>
+                                        <td>
+                                            @*<a href="@Url.Action("EditRawIndent", "Kitchen", new { id= item.id})"><span class="fa fa-edit"></span></a>*@
+                                        <a href="@Url.Action("DeleteIndentItem","Kitchen", new { @id = item.id })"><span class="fa fa-trash-o"></span></a>
+                                    </td>
 
-                                        <td><a href="@Url.Action("DeleteIndent","Kitchen", new { @id = item.Item })"><span class="fa fa-trash-o"></span></a></td>
-
-                                    </tr>
+                                </tr>
                                     counter = counter + 1;
                                 }
 
                             }
                         </tbody>
+
                     </table>
                 </div>
             </div>

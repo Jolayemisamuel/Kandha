@@ -144,6 +144,9 @@
         <AssociationConnector Association="NIBSModel.FK_tblAsgnRawSubItemDet_tblAssignRawSubItemMst" />
         <AssociationConnector Association="NIBSModel.FK_tblAssignRawSubItemMst_tblSubItem" />
         <AssociationConnector Association="NIBSModel.FK_tblAsgnRawSubItemDet_tbl_RawMaterials" />
+        <EntityTypeShape EntityType="NIBSModel.tblAssignSubMenuItem" Width="1.5" PointX="5.25" PointY="22.125" />
+        <AssociationConnector Association="NIBSModel.FK_tblAssignSubMenuItem_tblItem" />
+        <AssociationConnector Association="NIBSModel.FK_tblAssignSubMenuItem_tblSubItem" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

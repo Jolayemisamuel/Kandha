@@ -18,6 +18,7 @@ namespace NibsMVC.EDMX
         {
             this.tbl_SubItemRawIndent = new HashSet<tbl_SubItemRawIndent>();
             this.tblAssignRawSubItemMsts = new HashSet<tblAssignRawSubItemMst>();
+            this.tblAssignSubMenuItems = new HashSet<tblAssignSubMenuItem>();
         }
     
         public int SubItemId { get; set; }
@@ -27,5 +28,6 @@ namespace NibsMVC.EDMX
     
         public virtual ICollection<tbl_SubItemRawIndent> tbl_SubItemRawIndent { get; set; }
         public virtual ICollection<tblAssignRawSubItemMst> tblAssignRawSubItemMsts { get; set; }
+        public virtual ICollection<tblAssignSubMenuItem> tblAssignSubMenuItems { get; set; }
     }
 }

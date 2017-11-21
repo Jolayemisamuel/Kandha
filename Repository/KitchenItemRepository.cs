@@ -534,6 +534,35 @@ namespace NibsMVC.Repository
             model.lstofRawCategories = GetListofRawCategories();
             return model;
         }
+        public List<ListofRawIndentItem> ListKitchenRawIndent(int id = 0)
+        {
+            List<ListofRawIndentItem> List = new List<ListofRawIndentItem>();
+            List<ListofRawIndentItem> edit = (from n in _entities.tbl_KitchenRawIndent.Where(x => x.ItemId == id)
+                                              select n).AsEnumerable().Select(n => new ListofRawIndentItem()
+                                              {
+                                                  id = n.Id,
+                                                  unit = n.Unit,
+                                                  portion = Convert.ToInt32(n.Portion),
+                                                  quantity = Convert.ToDecimal(n.Quantity),
+                                                  category = n.tblCategory.Name,
+                                                  item = n.tblItem.Name,
+                                                  rawitem = n.tbl_RawMaterials.Name
+                                              }).ToList<ListofRawIndentItem>();
+            foreach (var item in edit)
+            {
+                ListofRawIndentItem model = new ListofRawIndentItem();
+                model.id = item.id;
+                model.category = item.category;
+                model.item = item.item;
+                model.quantity = item.quantity;
+                model.rawitem = item.rawitem;
+                model.unit = item.unit;
+                model.portion = item.portion;
+                List.Add(model);
+
+            }
+            return List;
+        }
         public SubItemRawIndentModel AddSubMenuRawIndent()
         {
             SubItemRawIndentModel model = new SubItemRawIndentModel();
@@ -554,6 +583,7 @@ namespace NibsMVC.Repository
                 model.Quantity = item.Quantity;
                 model.RawMaterialId = item.tbl_RawMaterials.RawMaterialId;
                 model.Unit = item.Unit;
+                model.Portion = Convert.ToInt32(item.Portion);
                 List.Add(model);
 
             }
@@ -933,6 +963,7 @@ namespace NibsMVC.Repository
                 model.ItemId = item.FirstOrDefault().tblItem.Name;
                 model.Item = item.FirstOrDefault().tblItem.ItemId;
                 model.RawCategoryId = item.FirstOrDefault().tblCategory.Name;
+                model.Portion = Convert.ToInt32(item.FirstOrDefault().Portion);
                 var items = _entities.tbl_KitchenRawIndent.Where(x=> x.ItemId == item.Key).ToList();
                 List<InnerKitchenRawIndent> l = new List<InnerKitchenRawIndent>();
                 foreach (var it in  items)
@@ -988,6 +1019,7 @@ namespace NibsMVC.Repository
                 model.SubItem = item.tblSubItem.SubItemId;
                 model.Portion = item.Portion;
                 model.Date = item.AssignDate;
+                model.Id = item.Id;
                 var items = _entities.tblAsgnRawSubItemDets.Where(x => x.AsgnRawSubItemMstId== item.Id).ToList();
                 List<InnerAssignedSubItemRaw> l = new List<InnerAssignedSubItemRaw>();
                 foreach (var it in items)
@@ -1053,6 +1085,39 @@ namespace NibsMVC.Repository
             }
 
             return FillSubItemXmlData(path);
+        }
+
+        public string DeleteAssignedSubItem(int Id)
+        {
+
+
+            
+
+            var itemCheck = (from p in _entities.tblAsgnRawSubItemDets where p.AsgnRawSubItemMstId.Equals(Id) select p).ToList();
+            if (itemCheck != null)
+            {
+                if (itemCheck.Count() > 0)
+                {
+                    foreach (var it in itemCheck)
+                    {
+                        _entities.tblAsgnRawSubItemDets.Remove(it);
+                        _entities.SaveChanges();
+                    }
+                }
+            }
+            var itemCheckMst = (from p in _entities.tblAssignRawSubItemMsts where p.Id.Equals(Id) select p).FirstOrDefault();
+            if (itemCheckMst != null)
+            {
+                if (itemCheckMst.Id > 0)
+                {
+                    
+                        _entities.tblAssignRawSubItemMsts.Remove(itemCheckMst);
+                        _entities.SaveChanges();
+                    
+                }
+            }
+
+            return "Deleted Successfully";
         }
         #endregion
     }
