@@ -20,5 +20,6 @@ namespace NibsMVC.EDMX
         public decimal Qty { get; set; }
     
         public virtual tblAssignRawSubItemMst tblAssignRawSubItemMst { get; set; }
+        public virtual tbl_RawMaterials tbl_RawMaterials { get; set; }
     }
 }

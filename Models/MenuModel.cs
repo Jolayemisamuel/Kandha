@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -35,7 +36,9 @@ namespace NibsMVC.Models
         
         public int SubItemId { get; set; }
         public int Portion { get; set; }
-        public DateTime  DateTime { get; set; }
+
+        
+        public string DateTime { get; set; }
         public int[] RawMaterialId { get; set; }
         public decimal[] qty { get; set; }
         

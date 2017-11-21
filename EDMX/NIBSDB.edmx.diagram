@@ -143,6 +143,7 @@
         <EntityTypeShape EntityType="NIBSModel.tblAssignRawSubItemMst" Width="1.5" PointX="9.625" PointY="0.75" />
         <AssociationConnector Association="NIBSModel.FK_tblAsgnRawSubItemDet_tblAssignRawSubItemMst" />
         <AssociationConnector Association="NIBSModel.FK_tblAssignRawSubItemMst_tblSubItem" />
+        <AssociationConnector Association="NIBSModel.FK_tblAsgnRawSubItemDet_tbl_RawMaterials" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

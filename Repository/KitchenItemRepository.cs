@@ -977,6 +977,36 @@ namespace NibsMVC.Repository
             return List;
         }
 
+        public List<ListOfAssignedSubItemRaw> ListOfAssignedSubItemMaterial()
+        {
+            var data = _entities.tblAssignRawSubItemMsts.ToList();
+            List<ListOfAssignedSubItemRaw> List = new List<ListOfAssignedSubItemRaw>();
+            foreach (var item in data)
+            {
+                ListOfAssignedSubItemRaw model = new ListOfAssignedSubItemRaw();
+                model.SubItemId = item.tblSubItem.Name;
+                model.SubItem = item.tblSubItem.SubItemId;
+                model.Portion = item.Portion;
+                model.Date = item.AssignDate;
+                var items = _entities.tblAsgnRawSubItemDets.Where(x => x.AsgnRawSubItemMstId== item.Id).ToList();
+                List<InnerAssignedSubItemRaw> l = new List<InnerAssignedSubItemRaw>();
+                foreach (var it in items)
+                {
+                    //List<InnerAssignedSubItemRaw> l = new List<InnerAssignedSubItemRaw>();
+                    InnerAssignedSubItemRaw m = new InnerAssignedSubItemRaw();
+                    m.Quantity = it.Qty;
+                    m.RawMaterialId = it.tbl_RawMaterials.Name;
+                    var unit = _entities.tbl_SubItemRawIndent.Where(p => p.SubItemId.Equals(item.SubItemId) && p.RawMaterialId.Equals(it.RawMaterialId)).FirstOrDefault();
+                    m.Unit = unit.Unit;
+                    l.Add(m);
+                }
+                model.ListOfAssgnedSubItemRaw = l;
+                List.Add(model);
+
+            }
+            return List;
+        }
+
 
         public string DeleteRaw(string Id,string path)
         {

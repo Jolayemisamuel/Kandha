@@ -3275,6 +3275,7 @@
     <Content Include="Views\Kitchen\SubItemRawList.cshtml" />
     <Content Include="Views\Category\BlockedSubItem.cshtml" />
     <Content Include="Views\Kitchen\AssignRawSubItem.cshtml" />
+    <Content Include="Views\Kitchen\AssignedList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Barcodes\" />

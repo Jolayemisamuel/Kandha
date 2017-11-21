@@ -144,4 +144,19 @@ namespace NibsMVC.Models
         public decimal Quantity { get; set; }
         public string Unit { get; set; }
     }
+    public class ListOfAssignedSubItemRaw
+    {
+
+        public string SubItemId { get; set; }
+        public int SubItem { get; set; }
+        public int Portion { get; set; }
+        public DateTime Date { get; set; }
+        public List<InnerAssignedSubItemRaw> ListOfAssgnedSubItemRaw { get; set; }
+    }
+    public class InnerAssignedSubItemRaw
+    {
+        public string RawMaterialId { get; set; }
+        public decimal Quantity { get; set; }
+        public string Unit { get; set; }
+    }
 }

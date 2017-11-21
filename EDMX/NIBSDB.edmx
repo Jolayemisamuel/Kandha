@@ -1069,6 +1069,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblAsgnRawSubItemDet_tbl_RawMaterials">
+          <End Role="tbl_RawMaterials" Type="Self.tbl_RawMaterials" Multiplicity="1" />
+          <End Role="tblAsgnRawSubItemDet" Type="Self.tblAsgnRawSubItemDet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_RawMaterials">
+              <PropertyRef Name="RawMaterialId" />
+            </Principal>
+            <Dependent Role="tblAsgnRawSubItemDet">
+              <PropertyRef Name="RawMaterialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblAsgnRawSubItemDet_tblAssignRawSubItemMst">
           <End Role="tblAssignRawSubItemMst" Type="Self.tblAssignRawSubItemMst" Multiplicity="1" />
           <End Role="tblAsgnRawSubItemDet" Type="Self.tblAsgnRawSubItemDet" Multiplicity="*" />
@@ -1767,6 +1779,10 @@
             <End Role="tblSubItem" EntitySet="tblSubItem" />
             <End Role="tbl_SubItemRawIndent" EntitySet="tbl_SubItemRawIndent" />
           </AssociationSet>
+          <AssociationSet Name="FK_tblAsgnRawSubItemDet_tbl_RawMaterials" Association="Self.FK_tblAsgnRawSubItemDet_tbl_RawMaterials">
+            <End Role="tbl_RawMaterials" EntitySet="tbl_RawMaterials" />
+            <End Role="tblAsgnRawSubItemDet" EntitySet="tblAsgnRawSubItemDet" />
+          </AssociationSet>
           <AssociationSet Name="FK_tblAsgnRawSubItemDet_tblAssignRawSubItemMst" Association="Self.FK_tblAsgnRawSubItemDet_tblAssignRawSubItemMst">
             <End Role="tblAssignRawSubItemMst" EntitySet="tblAssignRawSubItemMst" />
             <End Role="tblAsgnRawSubItemDet" EntitySet="tblAsgnRawSubItemDet" />
@@ -2330,6 +2346,10 @@
             <End Role="tblSubItem" EntitySet="tblSubItems" />
             <End Role="tblAssignRawSubItemMst" EntitySet="tblAssignRawSubItemMsts" />
           </AssociationSet>
+          <AssociationSet Name="FK_tblAsgnRawSubItemDet_tbl_RawMaterials" Association="NIBSModel.FK_tblAsgnRawSubItemDet_tbl_RawMaterials">
+            <End Role="tbl_RawMaterials" EntitySet="tbl_RawMaterials" />
+            <End Role="tblAsgnRawSubItemDet" EntitySet="tblAsgnRawSubItemDets" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="NIbs_AssignOffer">
           <Key>
@@ -2554,6 +2574,7 @@
           <Property Name="barcode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tblGenBarcodes" Relationship="NIBSModel.FK_tblGenBarcode_tblGenBarcode" FromRole="tbl_RawMaterials" ToRole="tblGenBarcode" />
           <NavigationProperty Name="tbl_SubItemRawIndent" Relationship="NIBSModel.FK_tbl_SubItemRawIndent_tbl_RawMaterials" FromRole="tbl_RawMaterials" ToRole="tbl_SubItemRawIndent" />
+          <NavigationProperty Name="tblAsgnRawSubItemDets" Relationship="NIBSModel.FK_tblAsgnRawSubItemDet_tbl_RawMaterials" FromRole="tbl_RawMaterials" ToRole="tblAsgnRawSubItemDet" />
         </EntityType>
         <EntityType Name="tbl_ServiceTax">
           <Key>
@@ -4109,6 +4130,7 @@
           <Property Name="RawMaterialId" Type="Int32" Nullable="false" />
           <Property Name="Qty" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <NavigationProperty Name="tblAssignRawSubItemMst" Relationship="NIBSModel.FK_tblAsgnRawSubItemDet_tblAssignRawSubItemMst" FromRole="tblAsgnRawSubItemDet" ToRole="tblAssignRawSubItemMst" />
+          <NavigationProperty Name="tbl_RawMaterials" Relationship="NIBSModel.FK_tblAsgnRawSubItemDet_tbl_RawMaterials" FromRole="tblAsgnRawSubItemDet" ToRole="tbl_RawMaterials" />
         </EntityType>
         <EntityType Name="tblAssignRawSubItemMst">
           <Key>
@@ -4142,6 +4164,18 @@
             </Principal>
             <Dependent Role="tblAssignRawSubItemMst">
               <PropertyRef Name="SubItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblAsgnRawSubItemDet_tbl_RawMaterials">
+          <End Type="NIBSModel.tbl_RawMaterials" Role="tbl_RawMaterials" Multiplicity="1" />
+          <End Type="NIBSModel.tblAsgnRawSubItemDet" Role="tblAsgnRawSubItemDet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_RawMaterials">
+              <PropertyRef Name="RawMaterialId" />
+            </Principal>
+            <Dependent Role="tblAsgnRawSubItemDet">
+              <PropertyRef Name="RawMaterialId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>

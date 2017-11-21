@@ -203,9 +203,9 @@ namespace NibsMVC.Controllers
         {
             return View(obj.ListOfMaterial());
         }
-        public ActionResult SubItemRawList()
+        public ActionResult AssignedList()
         {
-            return View(obj.ListOfSubItemMaterial());
+            return View(obj.ListOfAssignedSubItemMaterial());
         }
         public string deleteRaw(string Id)
         {
@@ -213,6 +213,12 @@ namespace NibsMVC.Controllers
             var Data = obj.DeleteRaw(Id, Path);
             return Data;
         }
+
+        public ActionResult SubItemRawList()
+        {
+            return View(obj.ListOfSubItemMaterial());
+        }
+
 
         public string deleteSubRaw(string Id)
         {
@@ -262,15 +268,15 @@ namespace NibsMVC.Controllers
                 {
                     if (item.Assigned == true)
                     {
-                        sb.Append("<tr><td><input type='checkbox' id='" + item.RawMaterialId  + "' name='rawId' checked value='" + item.RawMaterialId  + "' class='checkbox'>" + item.RawMaterialName  + "</td>");
+                        sb.Append("<tr><td><input type='checkbox' id='" + item.RawMaterialId  + "' name='RawMaterialId' checked value='" + item.RawMaterialId  + "' class='checkbox'>" + item.RawMaterialName  + "</td>");
                         sb.Append("<td><input type='textbox' class='form-control'name='Qty' style='margin:2px 6px'value='" + item.Qty  + "' id='" + item.RawMaterialId  + "' ></td>");
                         sb.Append("<td> " + item.Unit +"</td>");
 
                     }
                     else
                     {
-                        sb.Append("<tr><td><input type='checkbox' id='" + item.RawMaterialId + "' name='ItemId' value='" + item.RawMaterialId + "' class='checkbox'>" + item.RawMaterialName + "</td>");
-                        sb.Append("<td><input type='textbox' class='form-control'name='FullPrice' style='margin:2px 6px'value='" + item.Qty + "' id='" + item.RawMaterialId + "' ></td>");
+                        sb.Append("<tr><td><input type='checkbox' id='" + item.RawMaterialId + "' name='RawMaterialId' value='" + item.RawMaterialId + "' class='checkbox'>" + item.RawMaterialName + "</td>");
+                        sb.Append("<td><input type='textbox' class='form-control'name='Qty' style='margin:2px 6px'value='" + item.Qty + "' id='" + item.RawMaterialId + "' ></td>");
                         sb.Append("<td> " + item.Unit + "</td>");
                     }
 
@@ -299,6 +305,48 @@ namespace NibsMVC.Controllers
             IEnumerable<SelectListItem> SubItemList = (from q in db.tblSubItems where q.Active == true select q).AsEnumerable().Select(q => new SelectListItem() { Text = q.Name, Value = q.SubItemId.ToString() });
 
             ViewBag.SubItemList = new SelectList(SubItemList, "Value", "Text");
+        }
+
+        [HttpPost]
+        public ActionResult AssignRawSubItem(AssignRawSubItemModel model)
+        {
+            try
+            {
+                //var delete = (from p in db.tblMenuOutlets where p.CategoryId == model.CategoryId && p.OutletId == model.OutletId select p).ToList();
+                //foreach (var item in delete)
+                //{
+                //    db.tblMenuOutlets.Remove(item);
+                //    db.SaveChanges();
+                //}
+
+                tblAssignRawSubItemMst tbMst = new tblAssignRawSubItemMst();
+                tbMst.AssignDate = Convert.ToDateTime(model.DateTime); //DateTime.Today;
+                tbMst.Portion = (int)model.Portion;
+                tbMst.SubItemId = model.SubItemId;
+                db.tblAssignRawSubItemMsts.Add(tbMst);
+                db.SaveChanges();
+
+
+                tblAsgnRawSubItemDet tb = new tblAsgnRawSubItemDet();
+                for (int i = 0; i < model.RawMaterialId.Length; i++)
+                {
+                    
+
+                    tb.RawMaterialId  = model.RawMaterialId[i];
+                    tb.Qty = model.qty[i];
+                    tb.AsgnRawSubItemMstId = db.tblAssignRawSubItemMsts.Max(p=>p.Id);
+                    db.tblAsgnRawSubItemDets.Add(tb);
+                    db.SaveChanges();
+                }
+                TempData["menuerror"] = "Assigned Succesfully...";
+                return RedirectToAction("AssignRawSubItem");
+            }
+            catch
+            {
+                TempData["menuerror"] = "Try Agian !";
+                return RedirectToAction("AssignRawSubItem");
+            }
+
         }
     }
 }
