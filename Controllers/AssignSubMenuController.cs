@@ -35,10 +35,10 @@ namespace NibsMVC.Controllers
         SqlConnection con;
         SqlCommand cmd;
         UserProfileRepository user = new UserProfileRepository();
-        public ActionResult Index()
-        {
-            return View(user.ShowAllSubMenuList());
-        }
+        //public ActionResult Index()
+        //{
+        //    return View(user.ShowAllSubMenuList());
+        //}
 
         public JsonResult getMenuItem(int id)
         {
@@ -71,41 +71,63 @@ namespace NibsMVC.Controllers
 
             return View(user.EditSubMenu(id));
         }
-        [HttpPost]
-        public ActionResult AssignSubMenuItem(AssignSubMenuModel model,int id=0)
-        {
-            con = new SqlConnection(webconnection);
-            StringBuilder sb = new StringBuilder();
+        //[HttpPost]
+        //public ActionResult AssignSubMenuItem(AssignSubMenuModel model,int id=0)
+        //{
+        //    con = new SqlConnection(webconnection);
+        //    StringBuilder sb = new StringBuilder();
 
-            if (id==0)
-            {
-                sb.Append("insert into tblAssignSubMenuItem values('"+model.MainItem+",'"+model.SubItem+"')");
-            }
-            else if(id!=0)
-            {
-                sb.Append("update tblAssignSubMenuItem set subitemid='" + model.MainItem +"' where ID='"+id);
-            }
+        //    if (id==0)
+        //    {
+        //        sb.Append("insert into tblAssignSubMenuItem values('"+model.MainItem+",'"+model.SubItem+"')");
+        //    }
+        //    else if(id!=0)
+        //    {
+        //        sb.Append("update tblAssignSubMenuItem set subitemid='" + model.MainItem +"' where ID='"+id);
+        //    }
 
-            cmd = new SqlCommand(sb.ToString(), con);
-            cmd.CommandType = CommandType.Text;
+        //    cmd = new SqlCommand(sb.ToString(), con);
+        //    cmd.CommandType = CommandType.Text;
 
-            con.Open();
-            cmd.ExecuteNonQuery();
+        //    con.Open();
+        //    cmd.ExecuteNonQuery();
 
-            con.Close();
+        //    con.Close();
 
-            return RedirectToAction("Index");
+        //    return RedirectToAction("Index");
 
-            //var Data = user.AssignSubMenu(model);
-            //TempData["Error"] = Data;
+        //    //var Data = user.AssignSubMenu(model);
+        //    //TempData["Error"] = Data;
             
-            //return RedirectToAction("Index");
-        }
+        //    //return RedirectToAction("Index");
+        //}
         public ActionResult Delete(int id=0)
         {
             var data = user.DeleteSubMenu(id);
             TempData["Error"] = data;
             return RedirectToAction("Index");
+        }
+        public string UpdateSubMenu(AssignSubMenuModel model)
+        {
+            var Path = Server.MapPath("/xmlkot/AssignSubMenuItem.xml");
+            var Data = user.UpdateSubMenuItem(model, Path);
+            return Data;
+        }
+        public ActionResult SaveSubMenu()
+        {
+            var Path = Server.MapPath("/xmlkot/AssignSubMenuItem.xml");
+            var Data = user.SaveSubMenuItem(Path);
+            return RedirectToAction("Index");
+        }
+        public ActionResult Index()
+        {
+            return View(user.ListOfSubMenu());
+        }
+        public string deleteRaw(string Id)
+        {
+            var Path = Server.MapPath("/xmlkot/AssignSubMenuItem.xml");
+            var Data = user.DeleteRaw(Id, Path);
+            return Data;
         }
     }
 }

@@ -12,7 +12,7 @@
 
         $("#MenuCategory").change(function () {
             $("#MainMenuItem").empty();
-            
+
             $.ajax({
                 type: 'POST',
                 url: '@Url.Action("getMenuItem")',
@@ -20,18 +20,18 @@
                 dataType: 'json',
 
                 data: { id: $("#MenuCategory").val() },
-                
+
 
                 success: function (items) {
-                    
+
                     $("#MainMenuItem").append('<option value="--Select Item--">--Select Item--</option>');
                     $.each(items, function (i, item) {
-                        $("#MainMenuItem").append('<option value=' + item.Value + "'>" + item.Text + "</option>");
+                        $("#MainMenuItem").append('<option value=' + item.Value + ">" + item.Text + "</option>");
 
                     });
-                        
-                        //alert("Hello");
-                    
+
+                    //alert("Hello");
+
                 },
                 error: function (ex) {
                     alert('Failed to retrieve Category and Item.' + ex);
@@ -56,7 +56,8 @@
                 </div>
                 <div class="portlet-body form">
                     <!-- BEGIN FORM-->
-                    @using (Html.BeginForm("AssignSubMenuItem", "AssignSubMenu", FormMethod.Post, new { @id = "form_sample_14", @class = "form-horizontal", @enctype = "multipart/form-data" }))
+                    @*@using (Html.BeginForm("UpdateSubMenu", "AssignSubMenu", FormMethod.Post, new { @id = "form_sample_14", @class = "form-horizontal", @enctype = "multipart/form-data" }))*@
+                    @using (Html.BeginForm("UpdateSubMenu", "AssignSubMenu", FormMethod.Post, new { @id = "ID", @class = "form-horizontal" }))
                     {
                         @Html.AntiForgeryToken()
                         @Html.ValidationSummary(true)
@@ -73,7 +74,7 @@
 
                             <div class="form-group">
                                 <label class="control-label col-md-3">
-                                    Main Menu Category 
+                                    Main Menu Category
                                 </label>
                                 <div class="col-md-4">
                                     <div class="input-icon right">
@@ -86,34 +87,34 @@
 
                             <div class="form-group">
                                 <label class="control-label col-md-3">
-                                    Main Menu Item 
+                                    Main Menu Item
                                 </label>
                                 <div class="col-md-4">
                                     <div class="input-icon right">
-                                        @Html.DropDownListFor(model => model.MainItem , new SelectList(string.Empty, "Value", "Text"), "--Choose Your Menu Item --", new { @class = "form-control", @id = "MainMenuItem" })
-                                       
+                                        @Html.DropDownListFor(model => model.MainItem, new SelectList(string.Empty, "Value", "Text"), "--Choose Your Menu Item --", new { @class = "form-control", @id = "MainMenuItem" })
+
                                     </div>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="control-label col-md-3">
-                                    Sub Menu Item 
+                                    Sub Menu Item
                                 </label>
                                 <div class="col-md-4">
                                     <div class="input-icon right">
                                         <i class="fa"></i>
                                         @Html.DropDownListFor(model => model.SubItem, new SelectList(ViewBag.SubMenu, "Value", "Text"), "--Choose Your Sub Item --", new { @class = "form-control" })
-                                        
+
                                     </div>
                                 </div>
-                            </div>                         
-                            
+                            </div>
+
                         </div>
                         <div class="form-actions">
                             <div class="row">
                                 <div class="col-md-offset-3 col-md-9">
-                                    <button type="submit" class="btn green">Submit</button>
+                                    <button type="button" class="btn green" id="btn_Add_Sub">Add</button>
                                 </div>
                             </div>
                         </div>
@@ -122,6 +123,29 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-12" id="RawSub_Data">
+
+        </div>
+        <div class="col-md-6 col-md-offset-3">
+            <a href="@Url.Action("SaveSubMenu", "AssignSubMenu")" class="btn btn-danger" id="btn-FinalSub_Save" style="display:none;">Save</a>
+        </div>
     </div>
-    
+
 </div>
+<script>
+    $(document).on('click', '#btn_Add_Sub', function () {
+        var url = $('#ID').attr("action");
+        var FormData = $('#ID').serialize();
+        $.post(url, FormData, function (data) {
+            $('#btn-FinalSub_Save').show();
+            $('#RawSub_Data').html(data);
+        });
+
+    });
+    $(document).on('click', '.delete_raw', function () {
+        var FormData = { Id: $(this).attr("sid") };
+        $.post("/AssignSubMenu/deleteRaw", FormData, function (data) {
+            $('#RawSub_Data').html(data);
+        });
+    });
+</script>

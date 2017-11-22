@@ -182,5 +182,11 @@ namespace NibsMVC.Models
         public string MainItemName { get; set; }
         public int SubItem { get; set; }
         public string SubItemName { get; set; }
+        public List<InnerSubMenuItem> ListOfInnerSubMenuItem { get; set; }
+    }
+    public class InnerSubMenuItem
+    {
+        public string SubMenuNames { get; set; }
+
     }
 }

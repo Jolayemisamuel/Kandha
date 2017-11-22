@@ -72,13 +72,41 @@
                                             @item.MainItemName
                                         </td>
                                         <td>
-                                            @item.SubItemName
+                                            <a class="btn default" data-toggle="modal" href="#@("responsive"+counter)">View Items</a>
+                                            <div id="@("responsive"+counter)" class="modal fade" tabindex="-1" aria-hidden="true">
+
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                    <h4 class="modal-title">Sub Menu Items of @item.MainItemName</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="scroller" style="height:300px" data-always-visible="1" data-rail-visible1="1">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                @foreach (var list in item.ListOfInnerSubMenuItem)
+                                                                {
+                                                                    <label class="col-md-4 bold">@list.SubMenuNames</label>
+                                                                            <div class="clearfix"></div>
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" data-dismiss="modal" class="btn default">Close</button>
+
+                                                </div>
+
+                                            </div>
                                         </td>
+
+
+
 
 
                                         <td>
                                             @*<a href="@Url.Action("AssignSubMenuItem", "AssignSubMenu", new { @id = item.id })"><span class="fa fa-edit"></span></a>*@
-                                            <a href="@Url.Action("Delete", "AssignSubMenu", new { @id = item.id })" class="block_Category"><span class="fa fa-trash-o"></span></a>
+                                            <a href="@Url.Action("Delete", "AssignSubMenu", new { @id = item.MainItemId })" class="block_Category"><span class="fa fa-trash-o"></span></a>
                                         </td>
 
                                     </tr>

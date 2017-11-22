@@ -3015,6 +3015,7 @@
     <Content Include="Scripts\knockout-3.3.0.js" />
     <Content Include="TakeAwayXML\Kot.xml" />
     <Content Include="TakeAwayXML\Takeaway.xml" />
+    <Content Include="xmlkot\AssignSubMenuItem.xml" />
     <Content Include="xmlkot\SubItemRawMaterial.xml" />
     <Content Include="xmlkot\KitchenRawMaterial.xml">
       <SubType>Designer</SubType>
