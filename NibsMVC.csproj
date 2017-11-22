@@ -2420,6 +2420,7 @@
     <Compile Include="Models\KitchenStockModel.cs" />
     <Compile Include="Models\LedgerModel.cs" />
     <Compile Include="Models\MenuModel.cs" />
+    <Compile Include="Models\MovementAnalysisReport.cs" />
     <Compile Include="Models\OfferCreationModel.cs" />
     <Compile Include="Models\OperatorModel.cs" />
     <Compile Include="Models\OutletModel.cs" />
@@ -3284,6 +3285,7 @@
     <Content Include="Views\Kitchen\ListRawItem.cshtml" />
     <Content Include="Views\AssignSubMenu\AssignSubMenuItem.cshtml" />
     <Content Include="Views\AssignSubMenu\Index.cshtml" />
+    <Content Include="Views\Reports\MovementAnalysisReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Barcodes\" />

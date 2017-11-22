@@ -1,0 +1,287 @@
+﻿@model NibsMVC.Models.MovementAnalysisReport
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using System.Web.UI.WebControls;
+<script src="~/Scripts/json-to-table.js"></script>
+<style>
+    <style type="text/css" > .webGrid {
+        margin: 4px;
+        border-collapse: collapse;
+        width: 500px;
+        background-color: #FCFCFC;
+    }
+
+    .header {
+        background-color: #C1D4E6;
+        font-weight: bold;
+        color: #FFF;
+    }
+
+    .webGrid th, .webGrid td {
+        border: 1px solid #C0C0C0;
+        padding: 5px;
+    }
+
+    .alt {
+        background-color: #E4E9F5;
+        color: #000;
+    }
+
+    .gridHead a:hover {
+        text-decoration: underline;
+    }
+
+    .description {
+        width: auto;
+    }
+
+    .select {
+        background-color: #389DF5;
+    }
+
+    #ToolTables_sample_2_3 {
+        display: none;
+    }
+</style>
+</style>
+<div class="page-content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="portlet  box blue">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-gift"></i>Bill Report
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    @using (Html.BeginForm("printexcel", "Reports", FormMethod.Post, new { @class = "form-horizontal", @id = "form_sample_report_search" }))
+                    {
+
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label class="col-md-3">From Date<span class="required"> *</span></label>
+                                <div class="col-md-9">
+                                    @Html.TextBoxFor(a => a.DateFrom, new { @class = "form-control date-picker", @readonly = "readonly", @placeholder = "date from" })
+                                    @*@Html.DropDownList("Vendor", ViewBag.VendorList as List<SelectListItem>, "--Choose Your Vendor --", new { @class = "form-control", @id="Vendor" })*@
+                                    @*<select id="Vendor" class="form-control Keys" name="VendorName"></select>*@
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label class="col-md-3">To Date<span class="required"> *</span></label>
+                                <div class="col-md-9">
+                                    @Html.TextBoxFor(a => a.DateTo, new { @class = "form-control date-picker", @readonly = "readonly", @placeholder = "date to" })
+                                    @*@Html.DropDownList("Vendor", ViewBag.VendorList as List<SelectListItem>, "--Choose Your Vendor --", new { @class = "form-control", @id="Vendor" })*@
+                                    @*<select id="Vendor" class="form-control Keys" name="VendorName"></select>*@
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label class="col-md-3">Raw Materials<span class="required"> *</span></label>
+                                <div class="col-md-6">
+                                    @Html.DropDownListFor(a => a.RawMaterialId, (SelectList)ViewBag.RawId, "--Raw Materials--", new { @class = "form-control" })
+                                    @*@Html.DropDownList("Vendor", ViewBag.VendorList as List<SelectListItem>, "--Choose Your Vendor --", new { @class = "form-control", @id="Vendor" })*@
+                                    @*<select id="Vendor" class="form-control Keys" name="VendorName"></select>*@
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label class="col-md-3">Departments<span class="required"> *</span></label>
+                                <div class="col-md-6">
+                                    @Html.DropDownListFor(a => a.DepartmentId, (SelectList)ViewBag.Deprtmnt, "--Departments--", new { @class = "form-control" })
+                                    @*@Html.DropDownList("Vendor", ViewBag.VendorList as List<SelectListItem>, "--Choose Your Vendor --", new { @class = "form-control", @id="Vendor" })*@
+                                    @*<select id="Vendor" class="form-control Keys" name="VendorName"></select>*@
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-9">
+                                <input type="submit" value="Export" id="export" class="btn btn-primary" />
+                                @*<button id="myButtonControlID" style="display:none;" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Export Report to Excel"><i class="fa fa-file-excel-o"></i> Export Report</button>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div id="resultList"></div>
+                                    </div>
+                                    <div class="row margin-bottom-20">
+                                        <div class="col-md-12" id="getTotals">
+
+                                        </div>
+                                    </div>
+                                </div>*@
+                            </div>
+                        </div>
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    @*@if (Model.RawMaterialId == null)
+        {
+            <script>
+                var data = @Html.Raw(Model.DateFrom);
+                var jsonResultData = ConvertJsonToTable(data, 'sample_2', 'table table-bordered table-hover table-full-width', '');
+                $("#resultList").html(jsonResultData);
+                $('#Div_table').show();
+                $('#myButtonControlID').show();
+                var $tbale=$('#sample_2');
+                var $idDecimal=false;
+                var tds =  $('#sample_2 thead tr').children('th').length;
+                var remaingtds=parseInt(tds)-5;
+                // for button format
+
+                for (var i = 5; i < tds; i++) {
+                    var totalvat=0;
+                    var classname=ChangeButtonClass(i);
+                    var vat1=   $('#sample_2 thead tr').find('th').eq(i).html();
+                    $idDecimal=checkDecimal(vat1);
+                    if ($idDecimal) {
+                        $('#sample_2 tbody tr').each(function() {
+                            var customerId = $(this).find("td").eq(i).html();
+                            if (customerId!="<i>NULL</i>"&& customerId!="<i>0</i>") {
+                                totalvat=parseFloat(totalvat)+parseFloat(customerId);
+                            }
+                        });
+                        var str='  <div class="col-md-2 margin-bottom-10"><label>Vat('+vat1+'%)</label><div class="clear"></div><button type="button" class="btn '+classname+'">'+totalvat.toFixed(2)+'</button></div>';
+                        $('#getTotals').append(str);
+                    }
+                    else{
+                        $('#sample_2 tbody tr').each(function() {
+                            var customerId = $(this).find("td").eq(i).html();
+                            if (customerId != "<i>0</i>")
+                            {
+                                totalvat=parseFloat(totalvat)+parseFloat(customerId);
+                            }
+                        });
+                        var str='  <div class="col-md-2 margin-bottom-10"><label>'+vat1+'</label><div class="clear"></div><button type="button" class="btn '+classname+'">'+totalvat.toFixed(2)+'</button></div>';
+                        $('#getTotals').append(str);
+                    }
+                }
+                function checkDecimal(value)
+                {
+                    var str='/^\-?([0-9]+(\.[0-9]+)?|Infinity)$/';
+                    if(/^\-?([0-9]+(\.[0-9]+)?|Infinity)$/.test(value))
+                    {
+                        return true
+                    }
+                    else{
+                        return false;
+                    }
+                }
+                function ChangeButtonClass(position)
+                {
+                    var name="";
+                    if (position=="5") {
+                        name="default";
+                    }
+                    else if (position=="6") {
+                        name="red";
+                    }
+                    else if (position=="7") {
+                        name="blue";
+                    }
+                    else if (position=="8") {
+                        name="green";
+                    }
+                    else if (position=="9") {
+                        name="yellow";
+                    }
+                    else if (position=="10") {
+                        name="purple";
+                    }
+                    else if (position=="11") {
+                        name="green";
+                    }
+                    else if (position=="12") {
+                        name="grey-cascade";
+                    }
+                    else if (position=="13") {
+                        name="yellow";
+                    }
+                    else if (position=="14") {
+                        name="yellow-cascade";
+                    }
+                    return name;
+                }
+            </script>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-md-12">
+                    <p> No record found</p>
+                </div>
+            </div>
+        }*@
+    <script>
+        $(document).ready(function () {
+            var bool = detectIE();
+            if (bool == "False") {
+                $('#DateFrom').attr('data-date-format', 'dd/MM/yyyy');
+                $('#DateTo').attr('data-date-format', 'dd/MM/yyyy');
+            }
+        });
+        //function msieversion() {
+        //    var ua = window.navigator.userAgent;
+        //    var msie = ua.indexOf("MSIE ");
+
+        //    if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))
+        //    {
+
+        //    }
+        //    else
+        //    {
+        //
+        //
+        //    }
+
+        //    return false;
+        //}
+        function detectIE() {
+            var ua = window.navigator.userAgent;
+            var msie = ua.indexOf('MSIE ');
+            if (msie > 0) {
+                // IE 10 or older => return version number
+                return parseInt(ua.substring(msie + 5, ua.indexOf('.', msie)), 10);
+            }
+
+            var trident = ua.indexOf('Trident/');
+            if (trident > 0) {
+                // IE 11 => return version number
+                var rv = ua.indexOf('rv:');
+                return parseInt(ua.substring(rv + 3, ua.indexOf('.', rv)), 10);
+            }
+
+            var edge = ua.indexOf('Edge/');
+            if (edge > 0) {
+                // IE 12 => return version number
+                return parseInt(ua.substring(edge + 5, ua.indexOf('.', edge)), 10);
+            }
+
+            // other browser
+            return false;
+        }
+        //$(document).ready(function () {
+
+        //});
+    </script>
+    <script>
+        $("[id$=export]").click(function (e) {
+            var $form = $('#form_sample_report_search');
+            var Data = $form.serialize();
+
+            window.location = '/Reports/printexcel?' + Data;
+
+        });
+    </script>
+</div>
