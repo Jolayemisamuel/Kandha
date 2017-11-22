@@ -190,7 +190,7 @@ namespace NibsMVC.Controllers
             var Data = obj.UpdateSubItemRawMaterial(model, Path);
             return Data;
         }
-        public ActionResult SaveKitchenRawMaterail()
+        public ActionResult SaveKitchenRawMaterail() 
         {
             var Path = Server.MapPath("/xmlkot/KitchenRawMaterial.xml");
             var Data = obj.SaveRawMaterial(Path);
