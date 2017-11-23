@@ -1982,6 +1982,15 @@
     <Compile Include="EDMX\tblItem.cs">
       <DependentUpon>NIBSDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="EDMX\tblLedgerCategory.cs">
+      <DependentUpon>NIBSDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\tblLedgerGroup.cs">
+      <DependentUpon>NIBSDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\tblLedgerMaster.cs">
+      <DependentUpon>NIBSDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="EDMX\tblMenuOutlet.cs">
       <DependentUpon>NIBSDB.tt</DependentUpon>
     </Compile>
@@ -2420,6 +2429,7 @@
     <Compile Include="Models\KitchenStockModel.cs" />
     <Compile Include="Models\LedgerModel.cs" />
     <Compile Include="Models\MenuModel.cs" />
+    <Compile Include="Models\MovementAnalysisReport.cs" />
     <Compile Include="Models\OfferCreationModel.cs" />
     <Compile Include="Models\OperatorModel.cs" />
     <Compile Include="Models\OutletModel.cs" />
@@ -2459,6 +2469,7 @@
     <Compile Include="Repository\HappyHourRepository.cs" />
     <Compile Include="Repository\HomeDeliveryRepository.cs" />
     <Compile Include="Repository\KitchenItemRepository.cs" />
+    <Compile Include="Repository\LedgerRepository.cs" />
     <Compile Include="Repository\NIbsBillingRepository.cs" />
     <Compile Include="Repository\NibsHomeDeliveryRepository.cs" />
     <Compile Include="Repository\NIbsTakeAwayRepository.cs" />
@@ -3284,6 +3295,7 @@
     <Content Include="Views\Kitchen\ListRawItem.cshtml" />
     <Content Include="Views\AssignSubMenu\AssignSubMenuItem.cshtml" />
     <Content Include="Views\AssignSubMenu\Index.cshtml" />
+    <Content Include="Views\Reports\MovementAnalysisReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Barcodes\" />

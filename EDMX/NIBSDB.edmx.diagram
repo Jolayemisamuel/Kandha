@@ -147,6 +147,11 @@
         <EntityTypeShape EntityType="NIBSModel.tblAssignSubMenuItem" Width="1.5" PointX="5.25" PointY="22.125" />
         <AssociationConnector Association="NIBSModel.FK_tblAssignSubMenuItem_tblItem" />
         <AssociationConnector Association="NIBSModel.FK_tblAssignSubMenuItem_tblSubItem" />
+        <EntityTypeShape EntityType="NIBSModel.tblLedgerCategory" Width="1.5" PointX="14.375" PointY="1.375" />
+        <EntityTypeShape EntityType="NIBSModel.tblLedgerGroup" Width="1.5" PointX="16.625" PointY="1.25" />
+        <EntityTypeShape EntityType="NIBSModel.tblLedgerMaster" Width="1.5" PointX="18.875" PointY="1" />
+        <AssociationConnector Association="NIBSModel.FK_tblLedgerGroup_tblLedgerCategory" />
+        <AssociationConnector Association="NIBSModel.FK_tblLedgerMaster_tblLedgerGroup" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

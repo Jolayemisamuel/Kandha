@@ -1,8 +1,100 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@model List<NibsMVC.Models.LedgerModel>
+<div class="page-content">
 
-<h2>Index</h2>
+    <!-- BEGIN PAGE HEADER-->
+    <div class="page-bar">
+        <ul class="page-breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="@Url.Action("Index","Home")">Home</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <a href="@Url.Action("AddLegderGroup","Ledgergroup")">Add Ledger Group</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                List Of Ledger Group
+            </li>
+        </ul>
 
+    </div>
+    <!-- END PAGE HEADER-->
+    <!-- BEGIN PAGE CONTENT-->
+
+    <div class="row">
+        <div class="col-md-12">
+            <p style="color:red">@TempData["Error"]</p>
+        </div>
+        <div class="col-md-12" style="padding-left:0px;padding-right:0px;">
+            <!-- BEGIN BORDERED TABLE PORTLET-->
+            <div class="portlet box yellow">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-coffee"></i> Ledger Group Report
+                    </div>
+
+                </div>
+                <div class="portlet-body">
+                    <table class="table table-bordered table-hover table-full-width" id="sample_2">
+                        <thead>
+                            <tr>
+                                <th>
+                                    S.NO
+                                </th>
+                                <th>
+                                    Ledger Category
+                                </th>
+                                <th>
+                                    Ledger Group Name
+                                </th>
+                                <th>Action</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+
+                                var counter = 1;
+                                foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @counter
+                                        </td>
+                                        <td>
+                                            @item.CategoryName
+                                        </td>
+                                        <td>
+                                            @item.GroupName
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("AddLegderGroup", "Ledgergroup", new { @id = item.RecordId })"><span class="fa fa-edit"></span></a>
+                                            <a href="@Url.Action("Delete", "Ledgergroup", new { @id = item.RecordId })" class="block_Category"><span class="fa fa-trash-o"></span></a>
+                                        </td>
+
+                                    </tr>
+                                    counter = counter + 1;
+                                }
+
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- END BORDERED TABLE PORTLET-->
+            <script>
+                $(document).on('click', '.block_Category', function (e) {
+                    if (!confirm("Do you want to delete")) {
+                        return false;
+                    }
+                });
+            </script>
+        </div>
+    </div>
+    <!-- END PAGE CONTENT-->
+</div>
