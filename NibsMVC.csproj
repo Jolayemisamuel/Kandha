@@ -2225,6 +2225,12 @@
     <Compile Include="EDMX\VM_VendorsDetails.cs">
       <DependentUpon>KOTDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="EDMX\Voucher_Entry_Credit.cs">
+      <DependentUpon>NIBSDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\Voucher_Entry_Debit.cs">
+      <DependentUpon>NIBSDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="EDMX\VT_BillAccounting.cs">
       <DependentUpon>KOTDB.tt</DependentUpon>
     </Compile>

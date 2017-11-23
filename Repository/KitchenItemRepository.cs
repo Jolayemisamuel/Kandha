@@ -321,9 +321,9 @@ namespace NibsMVC.Repository
         {
             try
             {
-                var data = _entities.tblItems.Where(x => x.ItemId == Id).SingleOrDefault();         
+                //var data = _entities.tblItems.Where(x => x.ItemId == Id).SingleOrDefault();         
                 
-                _entities.tblItems.Remove(data);
+                //_entities.tblItems.Remove(data);
                 var dataindent = (from p in _entities.tbl_KitchenRawIndent where p.ItemId.Equals(Id) select p).ToList();
                 foreach (var item in dataindent)
                 {
@@ -741,6 +741,7 @@ namespace NibsMVC.Repository
                          new XElement("ItemId", model.ItemId),
                          new XElement("RawMaterialId", model.RawMaterialId ),
                          new XElement("Unit", unit.UnitName ),
+                         new XElement("Portion", model.Portion),
                          new XElement("Quantity", model.Quantity));
                  xd.Element("Item").Add(newElement);
                  xd.Save(path);
@@ -846,7 +847,7 @@ namespace NibsMVC.Repository
                          select item;
             StringBuilder sb = new StringBuilder();
             int counter = 1;
-            sb.Append("<table class='table'><thead><tr><th>S.No</th><th>Category Name</th><th>ItemName</th><th>RawMaterial Name</th><th>Unit</th><th>Quantity</th></tr></thead>");
+            sb.Append("<table class='table'><thead><tr><th>S.No</th><th>Category Name</th><th>ItemName</th><th>Portion</th><th>RawMaterial Name</th><th>Unit</th><th>Quantity</th></tr></thead>");
             sb.Append("<tbody>");
             foreach (var item in result)
             {
@@ -855,7 +856,7 @@ namespace NibsMVC.Repository
                 int RawId=Convert.ToInt32(item.Element("RawMaterialId").Value);
                 var Name = _entities.tbl_RawMaterials.Where(x => x.RawMaterialId == RawId).Select(x => x.Name).SingleOrDefault();
                 sb.Append("<tr>");
-                sb.Append("<td>" + counter + "</td><td>" + data.CategoryName+ "</td><td>" + data.ItemName + "</td>");
+                sb.Append("<td>" + counter + "</td><td>" + data.CategoryName+ "</td><td>" + data.ItemName + "</td><td>" + item.Element("Portion").Value + "</td>");
                 sb.Append("<td>" + Name + "</td><td>" + item.Element("Unit").Value + "</td><td>" + item.Element("Quantity").Value + "</td>");
                 sb.Append("<td><a href='#' id=" + Id + "_" + RawId + " class='delete_raw'><span class='fa fa-trash-o'><span></a></td>");
                 sb.Append("</tr>");

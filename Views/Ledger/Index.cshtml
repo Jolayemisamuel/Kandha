@@ -14,7 +14,7 @@
                 <i class="fa fa-angle-right"></i>
             </li>
             <li>
-                <a href="@Url.Action("AddLegderGroup","Ledgergroup")">Add Ledger Group</a>
+                <a href="@Url.Action("AddLedger","Ledger")">Add Ledger</a>
                 <i class="fa fa-angle-right"></i>
             </li>
             <li>
@@ -35,7 +35,7 @@
             <div class="portlet box yellow">
                 <div class="portlet-title">
                     <div class="caption">
-                        <i class="fa fa-coffee"></i> Ledger Group Report
+                        <i class="fa fa-coffee"></i> Ledger Report
                     </div>
 
                 </div>
@@ -46,11 +46,24 @@
                                 <th>
                                     S.NO
                                 </th>
+                                
                                 <th>
-                                    Ledger Category
+                                    Ledger Name
                                 </th>
                                 <th>
                                     Ledger Group Name
+                                </th>
+                                <th>
+                                    Date
+                                </th>
+                                <th>
+                                    Opening Baalance
+                                </th>
+                                <th>
+                                    Percentage
+                                </th>
+                                <th>
+                                    Transfer Type
                                 </th>
                                 <th>Action</th>
 
@@ -66,15 +79,28 @@
                                         <td>
                                             @counter
                                         </td>
+                                        
                                         <td>
-                                            @item.CategoryName
+                                            @item.LedgerName
                                         </td>
                                         <td>
-                                            @item.GroupName
+                                            @item.LedgerGroupName
                                         </td>
                                         <td>
-                                            <a href="@Url.Action("AddLegderGroup", "Ledgergroup", new { @id = item.RecordId })"><span class="fa fa-edit"></span></a>
-                                            <a href="@Url.Action("Delete", "Ledgergroup", new { @id = item.RecordId })" class="block_Category"><span class="fa fa-trash-o"></span></a>
+                                            @item.Date.ToString("dd-MM-yyyy")
+                                        </td>
+                                        <td>
+                                            @item.OpeningBalance
+                                        </td>
+                                        <td>
+                                            @item.Percentage
+                                        </td>
+                                        <td>
+                                            @item.TransferType
+                                        </td>                                        
+                                        <td>
+                                            <a href="@Url.Action("AddLedger", "Ledger", new { @id = item.Id })"><span class="fa fa-edit"></span></a>
+                                            <a href="@Url.Action("Delete", "Ledger", new { @id = item.Id })" class="block_Category"><span class="fa fa-trash-o"></span></a>
                                         </td>
 
                                     </tr>

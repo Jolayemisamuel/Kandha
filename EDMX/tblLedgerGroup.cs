@@ -19,9 +19,9 @@ namespace NibsMVC.EDMX
             this.tblLedgerMasters = new HashSet<tblLedgerMaster>();
         }
     
-        public int Record_Id { get; set; }
+        public int LedgerGroupId { get; set; }
         public string LedgerGroupName { get; set; }
-        public int Category { get; set; }
+        public int CategoryId { get; set; }
     
         public virtual tblLedgerCategory tblLedgerCategory { get; set; }
         public virtual ICollection<tblLedgerMaster> tblLedgerMasters { get; set; }

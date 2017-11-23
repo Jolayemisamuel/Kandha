@@ -18,7 +18,7 @@
                 </div>
                 <div class="portlet-body form">
                     <!-- BEGIN FORM-->
-                    @using (Html.BeginForm("AddLedger", "Ledger", FormMethod.Post, new { @id = "GroupName", @class = "form-horizontal" }))
+                    @using (Html.BeginForm("AddLedger", "Ledger", FormMethod.Post, new { @id = "form_sample_6", @class = "form-horizontal" }))
                     {
                         @Html.AntiForgeryToken()
                         @Html.ValidationSummary(true)
@@ -30,7 +30,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3">
-                                    Select Category <span class="required">
+                                    Ledger Name <span class="required">
                                         *
                                     </span>
                                 </label>
@@ -38,43 +38,43 @@
                                     <div class="input-icon right">
                                         <i class="fa"></i>
                                         @Html.TextBoxFor(model => model.LedgerName, new { @class = "form-control" })
-
+                                        @Html.ValidationMessageFor(model=>model.LedgerName)
                                         <input type="hidden" id="hidcategoryId" />
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3">
-                                    Name <span class="required">
+                                    Legder Group <span class="required">
                                         *
                                     </span>
                                 </label>
                                 <div class="col-md-4">
                                     <div class="input-icon right">
                                         <i class="fa"></i>
-                                        @Html.DropDownListFor(model => model.LedgerGroupId, new SelectList(ViewBag.LedgerCat, "Value", "Text"), "--Choose Your Ledger Category--", new { @class = "form-control" })
+                                        @Html.DropDownListFor(model => model.LedgerGroupId, new SelectList(ViewBag.LedgerCat, "Value", "Text"), "--Choose Ledger Group--", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.LedgerGroupId)
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3">
-                                    Name <span class="required">
-                                        *
-                                    </span>
+                                    Date 
                                 </label>
                                 <div class="col-md-4">
                                     <div class="input-icon right">
                                         <i class="fa"></i>
-                                        @Html.TextBoxFor(model => model.Date, new { @class = "form-control" })
-
+                                        @*@Html.TextBoxFor(model => model.Date, new { @class = "form-control" })*@
+                                        @*@Html.TextBoxFor(model => model.Date, new { @class = "form-control date-picker", @readonly = "readonly", @placeholder = "date" })*@
+                                        @*<input id="Date" class="form-control form-control-inline input-medium date-picker" data-date-format="dd-mm-yyyy" size="16" type="text" value=@Model.Date name="Date" readonly="readonly" />*@
+                                        @Html.TextBoxFor(model => model.Date, new { @Value = " ", id = "datepicker", @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Date)
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3">
-                                    Name <span class="required">
-                                        *
-                                    </span>
+                                    Opening Balance
                                 </label>
                                 <div class="col-md-4">
                                     <div class="input-icon right">
@@ -86,7 +86,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3">
-                                    Name <span class="required">
+                                    Percentage <span class="required">
                                         *
                                     </span>
                                 </label>
@@ -100,15 +100,20 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3">
-                                    Name <span class="required">
-                                        *
-                                    </span>
+                                    Transfer Type 
                                 </label>
                                 <div class="col-md-4">
                                     <div class="input-icon right">
                                         <i class="fa"></i>
-                                        @Html.DropDownListFor(model => model.TransferType, new SelectList(ViewBag.LedgerCat, "Value", "Text"), "--Choose Your Ledger Category--", new { @class = "form-control" })
+                                        @*@Html.DropDownListFor(model => model.TransferType, new SelectList(ViewBag.LedgerCat, "Value", "Text"), "--Choose Your Ledger Category--", new { @class = "form-control" })*@
+                                        @{
+                                            var listItems = new List<SelectListItem>();
+                                            listItems.Add(new SelectListItem { Text = "Select", Value = "0" });
+                                            listItems.Add(new SelectListItem { Text = "Credit", Value = "Credit" });
+                                            listItems.Add(new SelectListItem { Text = "Debit", Value = "Debit" });
+                                        }
 
+                                        @Html.DropDownListFor(model => model.TransferType, listItems, new { @class = "form-control" })
                                     </div>
                                 </div>
                             </div>
@@ -121,15 +126,18 @@
                                 </div>
                             </div>
                         </div>
-                    }
+                                            }
 
-                        
 
-                    </div>
+
                 </div>
-
             </div>
-        </div>
 
+        </div>
     </div>
+
+</div>
+<script type="text/javascript">
+    $(document).ready(function () { $("#datepicker").datepicker({ dateFormat: 'dd/mm/yy' }); });
+</script>
 

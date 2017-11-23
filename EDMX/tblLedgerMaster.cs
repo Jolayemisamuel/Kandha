@@ -14,14 +14,23 @@ namespace NibsMVC.EDMX
     
     public partial class tblLedgerMaster
     {
-        public int Id { get; set; }
+        public tblLedgerMaster()
+        {
+            this.Voucher_Entry_Credit = new HashSet<Voucher_Entry_Credit>();
+            this.Voucher_Entry_Debit = new HashSet<Voucher_Entry_Debit>();
+        }
+    
+        public int LedgerMasterId { get; set; }
+        public int RecordId { get; set; }
         public string LedgerName { get; set; }
         public int LedgerGroup { get; set; }
         public System.DateTime Date { get; set; }
-        public decimal Opening_Balance { get; set; }
+        public decimal OPBalance { get; set; }
         public decimal Percentage { get; set; }
         public string Transfer_Type { get; set; }
     
         public virtual tblLedgerGroup tblLedgerGroup { get; set; }
+        public virtual ICollection<Voucher_Entry_Credit> Voucher_Entry_Credit { get; set; }
+        public virtual ICollection<Voucher_Entry_Debit> Voucher_Entry_Debit { get; set; }
     }
 }

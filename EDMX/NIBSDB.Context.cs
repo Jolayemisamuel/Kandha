@@ -90,6 +90,8 @@ namespace NibsMVC.EDMX
         public DbSet<tblLedgerCategory> tblLedgerCategories { get; set; }
         public DbSet<tblLedgerGroup> tblLedgerGroups { get; set; }
         public DbSet<tblLedgerMaster> tblLedgerMasters { get; set; }
+        public DbSet<Voucher_Entry_Credit> Voucher_Entry_Credit { get; set; }
+        public DbSet<Voucher_Entry_Debit> Voucher_Entry_Debit { get; set; }
     
         public virtual int BillReportGenerate(string orderType, string paymentType, Nullable<System.DateTime> datefrom, Nullable<System.DateTime> dateto, Nullable<int> billNo, string newsql)
         {
