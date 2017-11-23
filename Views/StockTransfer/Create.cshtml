@@ -128,7 +128,7 @@
             startDate: '-1d',
             endDate: '0d',
             autoclose: true,
-            format: "mm-dd-yyyy"
+            format: "dd-M-yyyy"
         });
     });
 </script>
@@ -310,7 +310,7 @@
                                     <div class="input-icon right">
                                         <i class="fa"></i>
 
-                                        <input class="form-control form-control-inline input-medium date-picker" data-date-format="yyyy-mm-dd" size="16" type="text" value="" id="TransferDate" name="TransferDate" />
+                                        <input class="form-control form-control-inline input-medium date-picker" size="16" type="text" value="" id="TransferDate" name="TransferDate" />
                                         <input type="hidden" name="" class="form-control" id="transferQtyVal" />
                                     </div>
                                 </div>
@@ -477,36 +477,35 @@
                 stockval = stockval.substring(0, stockval.length - 1);
                 var items = { 'RawmaterialId': stockval };
                 //reamin = selctid + "^" + transferquantity + "^" + Outid + "^" + remaingpurchase + "^" + dept + "^" + pdate;
-
-                reamin = reamin.replace('.', 'dot');
-                reamin = reamin.replace('.', 'dot');
-                reamin = reamin.replace('.', 'dot');
-                reamin = reamin.replace('.', 'dot');
-                reamin = reamin.replace('.', 'dot');
-                reamin = reamin.replace('.', 'dot');
-                reamin = reamin.replace('.', 'dot');
-                reamin = reamin.replace('.', 'dot');
-                reamin = reamin.replace('.', 'dot');
-                reamin = reamin.replace('.', 'dot');
-                reamin = reamin.replace('.', 'dot');
-                reamin = reamin.replace('.', 'dot');
-                reamin = reamin.replace('.', 'dot');
-                reamin = reamin.replace('.', 'dot');
-                reamin = reamin.replace('.', 'dot');
-                reamin = reamin.replace('.', 'dot');
-                reamin = reamin.replace('.', 'dot');
-                reamin = reamin.replace('.', 'dot');
-                reamin = reamin.replace('.', 'dot');
-                reamin = reamin.replace('.', 'dot');
-                reamin = reamin.replace('.', 'dot');
-                reamin = reamin.replace('.', 'dot');
-                reamin = reamin.replace('.', 'dot');
-                reamin = reamin.replace('.', 'dot');
-
                 $("#Stocktransdata").val(stockval);
-                $.getJSON('/StockTransfer/purchaseavailablestock/' + reamin, function (reamin) {
 
+
+                reamin = reamin.replace(/\./g, 'dot');
+               
+
+            
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("purchaseavailablestock")',
+
+                    dataType: 'json',
+
+                    data: { id: reamin },
+
+
+                    success: function (items) {
+
+                    },
+                    error: function (ex) {
+                        
+                    }
                 });
+
+
+               
+                //$.getJSON('/StockTransfer/purchaseavailablestock/' + reamin, function (reamin) {
+
+                //});
                 //$("#Updatedata").val(reamin);
                 $("#form_sample_14").submit();
             }

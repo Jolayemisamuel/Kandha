@@ -72,8 +72,8 @@ namespace NibsMVC.Controllers
         public JsonResult purchaseavailablestock(string Id)
         {
 
-            Id = Id.Replace("dot", ".");
-            string[] remaingdata =Id.Split(';');
+             Id = Id.Replace("dot", ".");
+            string[] remaingdata = Id.Split(';');
             string[] remaingdatas;
             if (remaingdata.ToString() != string.Empty)
             {
