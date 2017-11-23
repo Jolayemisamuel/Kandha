@@ -770,7 +770,7 @@ namespace NibsMVC.Repository
             xd.Element("SubItem").Add(newElement);
             xd.Save(path);
             //}
-            return FillSubItemXmlData(path);
+            return UpdateSubItemRawMaterial(model.SubItemId,path);
 
         }
 
@@ -1085,7 +1085,7 @@ namespace NibsMVC.Repository
                 }
             }
 
-            return FillSubItemXmlData(path);
+            return UpdateSubItemRawMaterial(SubItemId,path);
         }
 
         public string DeleteAssignedSubItem(int Id)

@@ -214,7 +214,7 @@ namespace NibsMVC.Controllers
             model.OutletId = obj.getOutletId();
             model.Quantity = ReturnData.Quantity;
             model.Type = ReturnType(ReturnData.Unit);
-            //model.VendorId = ReturnData.tblPurchaseMaster.VendorId;
+            model.VendorId = purchasdetailId;
             model.RowMaterialId = ReturnData.RawMaterialId;
             //model.VenderName = ReturnData.tblPurchaseMaster.tblVendor.Name;
             model.RowMaterialName = ReturnData.tbl_RawMaterials.Name;
@@ -236,7 +236,7 @@ namespace NibsMVC.Controllers
             tb.ReturnDate = DateTime.Now.Date;
             tb.ReturnDescription = model.Reasion;
             tb.ReturnQuantity = model.ReturnQuantity;
-            tb.vendorId = model.VendorId;
+            tb.vendorId = model.Purchasedetailid;
             tb.ReturnStatuss = "Success";
             db.tblPurchaseReturns.Add(tb);
             //db.SaveChanges();
@@ -246,7 +246,9 @@ namespace NibsMVC.Controllers
 
             tbl_KitchenStock DataStock = (from p in db.tbl_KitchenStock where p.RawMaterialId == model.RowMaterialId && p.OutletId == Outlet select p).SingleOrDefault();
             tblPurchasedItem datastockpurchase = (from q in db.tblPurchasedItems where q.PurchaseDetailId == model.Purchasedetailid select q).SingleOrDefault();
-            tblGRNStock datastockgrn = (from r in db.tblGRNStocks where r.Id == model.Purchasedetailid select r).SingleOrDefault();
+            tblPurchaseMaster datastockpurchaseMst = (from q in db.tblPurchaseMasters where q.PurchaseId == model.Purchaseid select q).SingleOrDefault();
+            DateTime grnStckdate = Convert.ToDateTime(datastockpurchaseMst.Date.ToShortDateString());
+            tblGRNStock datastockgrn = (from r in db.tblGRNStocks where r.MaterialId == model.RowMaterialId && r.Date== grnStckdate && r.Qty== datastockpurchase.Quantity select r).SingleOrDefault();
             tblPurchaseMaster datastockmaster = (from s in db.tblPurchaseMasters where s.PurchaseId == model.Purchaseid select s).SingleOrDefault();
             DataStock.Quantity = DataStock.Quantity - model.ReturnQuantity;
             datastockpurchase.Quantity = remaingquantity;

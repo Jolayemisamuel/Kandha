@@ -72,8 +72,8 @@ namespace NibsMVC.Controllers
         public JsonResult purchaseavailablestock(string Id)
         {
 
-            Id = Id.Replace("dot", ".");
-            string[] remaingdata =Id.Split(';');
+             Id = Id.Replace("dot", ".");
+            string[] remaingdata = Id.Split(';');
             string[] remaingdatas;
             if (remaingdata.ToString() != string.Empty)
             {
@@ -549,15 +549,15 @@ namespace NibsMVC.Controllers
             tb.ReturnDate = DateTime.Now.Date;
             tb.ReturnDescription = model.Reasion;
             tb.ReturnQuantity = model.ReturnQuantity;
-            
+            tb.transferid = model.TransferId;
             db.tblTransferReturnReports.Add(tb);
             db.SaveChanges();
 
             if (model.TransferQuantity==model.ReturnQuantity)
             {
-                qry = " delete from tblTransByStock where TransferId  =  " + model.TransferId;
-                qry = qry + " delete from tblTransfer where TransferId =   " + model.TransferId;
-
+                //qry = " delete from tblTransByStock where TransferId  =  " + model.TransferId;
+                //qry = qry + " delete from tblTransfer where TransferId =   " + model.TransferId;
+                qry = "";
                 qry = qry + " update  tbl_KitchenStock set quantity = quantity + " + model.ReturnQuantity + " where RawMaterialId = " + model.RawMaterialId;
                 con = new SqlConnection(webconnection);
                 con.Open();
@@ -567,10 +567,10 @@ namespace NibsMVC.Controllers
             }
             else if(model.TransferQuantity>=model.ReturnQuantity)
             {
-                qry = " update tblTransByStock set qty = qty - " + model.ReturnQuantity + " where TransferId = " + model.TransferId;
+                //qry = " update tblTransByStock set qty = qty - " + model.ReturnQuantity + " where TransferId = " + model.TransferId;
 
-                qry = qry + " update tblTransfer set TransferQuantity = TransferQuantity - " + model.ReturnQuantity + " where TransferId = " + model.TransferId;
-
+                //qry = qry + " update tblTransfer set TransferQuantity = TransferQuantity - " + model.ReturnQuantity + " where TransferId = " + model.TransferId;
+                qry = "";
                 qry = qry + " update  tbl_KitchenStock set quantity = quantity + " + model.ReturnQuantity + " where RawMaterialId = " + model.RawMaterialId;
                 con = new SqlConnection(webconnection);
                 con.Open();

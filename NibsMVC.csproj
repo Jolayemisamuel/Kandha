@@ -1982,15 +1982,6 @@
     <Compile Include="EDMX\tblItem.cs">
       <DependentUpon>NIBSDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="EDMX\tblLedgerCategory.cs">
-      <DependentUpon>NIBSDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EDMX\tblLedgerGroup.cs">
-      <DependentUpon>NIBSDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EDMX\tblLedgerMaster.cs">
-      <DependentUpon>NIBSDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="EDMX\tblMenuOutlet.cs">
       <DependentUpon>NIBSDB.tt</DependentUpon>
     </Compile>
