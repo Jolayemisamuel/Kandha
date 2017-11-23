@@ -321,9 +321,9 @@ namespace NibsMVC.Repository
         {
             try
             {
-                var data = _entities.tblItems.Where(x => x.ItemId == Id).SingleOrDefault();         
+                //var data = _entities.tblItems.Where(x => x.ItemId == Id).SingleOrDefault();         
                 
-                _entities.tblItems.Remove(data);
+                //_entities.tblItems.Remove(data);
                 var dataindent = (from p in _entities.tbl_KitchenRawIndent where p.ItemId.Equals(Id) select p).ToList();
                 foreach (var item in dataindent)
                 {

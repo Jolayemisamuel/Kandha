@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="NIBSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="NIBSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AddCategoryVendor">
           <Key>
             <PropertyRef Name="id" />
@@ -420,33 +420,6 @@
           <Property Name="Active" Type="bit" Nullable="false" />
           <Property Name="DepartmentId" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="tblLedgerCategory">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="LedgerCategoryName" Type="nvarchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <EntityType Name="tblLedgerGroup">
-          <Key>
-            <PropertyRef Name="Record_Id" />
-          </Key>
-          <Property Name="Record_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="LedgerGroupName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Category" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="tblLedgerMaster">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="LedgerName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="LedgerGroup" Type="int" Nullable="false" />
-          <Property Name="Date" Type="datetime" Nullable="false" />
-          <Property Name="Opening_Balance" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Percentage" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Transfer_Type" Type="nvarchar" MaxLength="50" Nullable="false" />
-        </EntityType>
         <EntityType Name="tblMenuOutlet">
           <Key>
             <PropertyRef Name="MenuOutletId" />
@@ -632,6 +605,7 @@
           <Property Name="ReturnDescription" Type="nvarchar(max)" Nullable="false" />
           <Property Name="ReturnDate" Type="date" Nullable="false" />
           <Property Name="OutletId" Type="int" Nullable="false" />
+          <Property Name="transferid" Type="int" />
         </EntityType>
         <EntityType Name="tblVendor">
           <Key>
@@ -1284,30 +1258,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tblLedgerGroup_tblLedgerCategory">
-          <End Role="tblLedgerCategory" Type="Self.tblLedgerCategory" Multiplicity="1" />
-          <End Role="tblLedgerGroup" Type="Self.tblLedgerGroup" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblLedgerCategory">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="tblLedgerGroup">
-              <PropertyRef Name="Category" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tblLedgerMaster_tblLedgerGroup">
-          <End Role="tblLedgerGroup" Type="Self.tblLedgerGroup" Multiplicity="1" />
-          <End Role="tblLedgerMaster" Type="Self.tblLedgerMaster" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblLedgerGroup">
-              <PropertyRef Name="Record_Id" />
-            </Principal>
-            <Dependent Role="tblLedgerMaster">
-              <PropertyRef Name="LedgerGroup" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_tblMenuOutlet_tblBasePriceItems">
           <End Role="tblBasePriceItems" Type="Self.tblBasePriceItems" Multiplicity="0..1" />
           <End Role="tblMenuOutlet" Type="Self.tblMenuOutlet" Multiplicity="*" />
@@ -1714,9 +1664,6 @@
           <EntitySet Name="tblGenBarcode" EntityType="Self.tblGenBarcode" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblGRNStock" EntityType="Self.tblGRNStock" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblItem" EntityType="Self.tblItem" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tblLedgerCategory" EntityType="Self.tblLedgerCategory" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tblLedgerGroup" EntityType="Self.tblLedgerGroup" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tblLedgerMaster" EntityType="Self.tblLedgerMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblMenuOutlet" EntityType="Self.tblMenuOutlet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblOperator" EntityType="Self.tblOperator" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblOpStckRate" EntityType="Self.tblOpStckRate" Schema="dbo" store:Type="Tables" />
@@ -1925,14 +1872,6 @@
           <AssociationSet Name="FK_tblItem_tblItem" Association="Self.FK_tblItem_tblItem">
             <End Role="tblItem" EntitySet="tblItem" />
             <End Role="tblItem1" EntitySet="tblItem" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblLedgerGroup_tblLedgerCategory" Association="Self.FK_tblLedgerGroup_tblLedgerCategory">
-            <End Role="tblLedgerCategory" EntitySet="tblLedgerCategory" />
-            <End Role="tblLedgerGroup" EntitySet="tblLedgerGroup" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblLedgerMaster_tblLedgerGroup" Association="Self.FK_tblLedgerMaster_tblLedgerGroup">
-            <End Role="tblLedgerGroup" EntitySet="tblLedgerGroup" />
-            <End Role="tblLedgerMaster" EntitySet="tblLedgerMaster" />
           </AssociationSet>
           <AssociationSet Name="FK_tblMenuOutlet_tblBasePriceItems" Association="Self.FK_tblMenuOutlet_tblBasePriceItems">
             <End Role="tblBasePriceItems" EntitySet="tblBasePriceItems" />
@@ -2461,17 +2400,6 @@
           <AssociationSet Name="FK_tblAssignSubMenuItem_tblSubItem" Association="NIBSModel.FK_tblAssignSubMenuItem_tblSubItem">
             <End Role="tblSubItem" EntitySet="tblSubItems" />
             <End Role="tblAssignSubMenuItem" EntitySet="tblAssignSubMenuItems" />
-          </AssociationSet>
-          <EntitySet Name="tblLedgerCategories" EntityType="NIBSModel.tblLedgerCategory" />
-          <EntitySet Name="tblLedgerGroups" EntityType="NIBSModel.tblLedgerGroup" />
-          <EntitySet Name="tblLedgerMasters" EntityType="NIBSModel.tblLedgerMaster" />
-          <AssociationSet Name="FK_tblLedgerGroup_tblLedgerCategory" Association="NIBSModel.FK_tblLedgerGroup_tblLedgerCategory">
-            <End Role="tblLedgerCategory" EntitySet="tblLedgerCategories" />
-            <End Role="tblLedgerGroup" EntitySet="tblLedgerGroups" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblLedgerMaster_tblLedgerGroup" Association="NIBSModel.FK_tblLedgerMaster_tblLedgerGroup">
-            <End Role="tblLedgerGroup" EntitySet="tblLedgerGroups" />
-            <End Role="tblLedgerMaster" EntitySet="tblLedgerMasters" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="NIbs_AssignOffer">
@@ -4125,6 +4053,7 @@
           <Property Name="OutletId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tbl_RawMaterials" Relationship="NIBSModel.FK_tblTransferReturnReport_tbl_RawMaterials" FromRole="tblTransferReturnReport" ToRole="tbl_RawMaterials" />
           <NavigationProperty Name="tblOutlet" Relationship="NIBSModel.FK_tblTransferReturnReport_tblOutlet" FromRole="tblTransferReturnReport" ToRole="tblOutlet" />
+          <Property Name="transferid" Type="Int32" />
         </EntityType>
         <Association Name="FK_tblTransferReturnReport_tbl_RawMaterials">
           <End Type="NIBSModel.tbl_RawMaterials" Role="tbl_RawMaterials" Multiplicity="1" />
@@ -4335,61 +4264,6 @@
             </Principal>
             <Dependent Role="tblAssignSubMenuItem">
               <PropertyRef Name="subitemid" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="tblLedgerCategory">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="LedgerCategoryName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="tblLedgerGroups" Relationship="NIBSModel.FK_tblLedgerGroup_tblLedgerCategory" FromRole="tblLedgerCategory" ToRole="tblLedgerGroup" />
-        </EntityType>
-        <EntityType Name="tblLedgerGroup">
-          <Key>
-            <PropertyRef Name="Record_Id" />
-          </Key>
-          <Property Name="Record_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="LedgerGroupName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Category" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="tblLedgerCategory" Relationship="NIBSModel.FK_tblLedgerGroup_tblLedgerCategory" FromRole="tblLedgerGroup" ToRole="tblLedgerCategory" />
-          <NavigationProperty Name="tblLedgerMasters" Relationship="NIBSModel.FK_tblLedgerMaster_tblLedgerGroup" FromRole="tblLedgerGroup" ToRole="tblLedgerMaster" />
-        </EntityType>
-        <EntityType Name="tblLedgerMaster">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="LedgerName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LedgerGroup" Type="Int32" Nullable="false" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Opening_Balance" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Percentage" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Transfer_Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="tblLedgerGroup" Relationship="NIBSModel.FK_tblLedgerMaster_tblLedgerGroup" FromRole="tblLedgerMaster" ToRole="tblLedgerGroup" />
-        </EntityType>
-        <Association Name="FK_tblLedgerGroup_tblLedgerCategory">
-          <End Type="NIBSModel.tblLedgerCategory" Role="tblLedgerCategory" Multiplicity="1" />
-          <End Type="NIBSModel.tblLedgerGroup" Role="tblLedgerGroup" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblLedgerCategory">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="tblLedgerGroup">
-              <PropertyRef Name="Category" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tblLedgerMaster_tblLedgerGroup">
-          <End Type="NIBSModel.tblLedgerGroup" Role="tblLedgerGroup" Multiplicity="1" />
-          <End Type="NIBSModel.tblLedgerMaster" Role="tblLedgerMaster" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblLedgerGroup">
-              <PropertyRef Name="Record_Id" />
-            </Principal>
-            <Dependent Role="tblLedgerMaster">
-              <PropertyRef Name="LedgerGroup" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5075,6 +4949,7 @@
           <EntitySetMapping Name="tblTransferReturnReports">
             <EntityTypeMapping TypeName="NIBSModel.tblTransferReturnReport">
               <MappingFragment StoreEntitySet="tblTransferReturnReport">
+                <ScalarProperty Name="transferid" ColumnName="transferid" />
                 <ScalarProperty Name="OutletId" ColumnName="OutletId" />
                 <ScalarProperty Name="ReturnDate" ColumnName="ReturnDate" />
                 <ScalarProperty Name="ReturnDescription" ColumnName="ReturnDescription" />
@@ -5146,36 +5021,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tblLedgerCategories">
-            <EntityTypeMapping TypeName="NIBSModel.tblLedgerCategory">
-              <MappingFragment StoreEntitySet="tblLedgerCategory">
-                <ScalarProperty Name="LedgerCategoryName" ColumnName="LedgerCategoryName" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tblLedgerGroups">
-            <EntityTypeMapping TypeName="NIBSModel.tblLedgerGroup">
-              <MappingFragment StoreEntitySet="tblLedgerGroup">
-                <ScalarProperty Name="Category" ColumnName="Category" />
-                <ScalarProperty Name="LedgerGroupName" ColumnName="LedgerGroupName" />
-                <ScalarProperty Name="Record_Id" ColumnName="Record_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tblLedgerMasters">
-            <EntityTypeMapping TypeName="NIBSModel.tblLedgerMaster">
-              <MappingFragment StoreEntitySet="tblLedgerMaster">
-                <ScalarProperty Name="Transfer_Type" ColumnName="Transfer_Type" />
-                <ScalarProperty Name="Percentage" ColumnName="Percentage" />
-                <ScalarProperty Name="Opening_Balance" ColumnName="Opening_Balance" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="LedgerGroup" ColumnName="LedgerGroup" />
-                <ScalarProperty Name="LedgerName" ColumnName="LedgerName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -5192,7 +5037,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>

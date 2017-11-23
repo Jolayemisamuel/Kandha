@@ -56,7 +56,7 @@ namespace NibsMVC.Models
         public decimal currentvalue { get; set; }
 
      [DisplayFormat(ApplyFormatInEditMode = true,  DataFormatString = "{0:dd-MMM-yyyy}")]
-        public DateTime  stockDate { get; set; }
+        public string  stockDate { get; set; }
     }
     public class OutletStockTransferIndexModel
     {

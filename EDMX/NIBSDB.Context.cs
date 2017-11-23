@@ -15,7 +15,7 @@ namespace NibsMVC.EDMX
     using System.Data.Entity.Infrastructure;
     //using System.Data.Objects;
     //using System.Data.Objects.DataClasses;
-    using System.Linq;
+    //using System.Linq;
 
     public partial class NIBSEntities : DbContext
     {
@@ -87,9 +87,6 @@ namespace NibsMVC.EDMX
         public DbSet<tblAsgnRawSubItemDet> tblAsgnRawSubItemDets { get; set; }
         public DbSet<tblAssignRawSubItemMst> tblAssignRawSubItemMsts { get; set; }
         public DbSet<tblAssignSubMenuItem> tblAssignSubMenuItems { get; set; }
-        public DbSet<tblLedgerCategory> tblLedgerCategories { get; set; }
-        public DbSet<tblLedgerGroup> tblLedgerGroups { get; set; }
-        public DbSet<tblLedgerMaster> tblLedgerMasters { get; set; }
     
         public virtual int BillReportGenerate(string orderType, string paymentType, Nullable<System.DateTime> datefrom, Nullable<System.DateTime> dateto, Nullable<int> billNo, string newsql)
         {

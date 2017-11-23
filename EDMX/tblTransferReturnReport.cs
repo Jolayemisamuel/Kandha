@@ -20,6 +20,7 @@ namespace NibsMVC.EDMX
         public string ReturnDescription { get; set; }
         public System.DateTime ReturnDate { get; set; }
         public int OutletId { get; set; }
+        public Nullable<int> transferid { get; set; }
     
         public virtual tbl_RawMaterials tbl_RawMaterials { get; set; }
         public virtual tblOutlet tblOutlet { get; set; }
