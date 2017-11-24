@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="NIBSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="NIBSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AddCategoryVendor">
           <Key>
             <PropertyRef Name="id" />
@@ -633,6 +633,7 @@
           <Property Name="ReturnDescription" Type="nvarchar(max)" Nullable="false" />
           <Property Name="ReturnDate" Type="date" Nullable="false" />
           <Property Name="OutletId" Type="int" Nullable="false" />
+          <Property Name="transferid" Type="int" />
         </EntityType>
         <EntityType Name="tblVendor">
           <Key>
@@ -4220,6 +4221,7 @@
           <Property Name="OutletId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tbl_RawMaterials" Relationship="NIBSModel.FK_tblTransferReturnReport_tbl_RawMaterials" FromRole="tblTransferReturnReport" ToRole="tbl_RawMaterials" />
           <NavigationProperty Name="tblOutlet" Relationship="NIBSModel.FK_tblTransferReturnReport_tblOutlet" FromRole="tblTransferReturnReport" ToRole="tblOutlet" />
+          <Property Name="transferid" Type="Int32" />
         </EntityType>
         <Association Name="FK_tblTransferReturnReport_tbl_RawMaterials">
           <End Type="NIBSModel.tbl_RawMaterials" Role="tbl_RawMaterials" Multiplicity="1" />
@@ -5249,6 +5251,7 @@
           <EntitySetMapping Name="tblTransferReturnReports">
             <EntityTypeMapping TypeName="NIBSModel.tblTransferReturnReport">
               <MappingFragment StoreEntitySet="tblTransferReturnReport">
+                <ScalarProperty Name="transferid" ColumnName="transferid" />
                 <ScalarProperty Name="OutletId" ColumnName="OutletId" />
                 <ScalarProperty Name="ReturnDate" ColumnName="ReturnDate" />
                 <ScalarProperty Name="ReturnDescription" ColumnName="ReturnDescription" />
@@ -5419,7 +5422,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>

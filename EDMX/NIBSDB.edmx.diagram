@@ -147,11 +147,11 @@
         <EntityTypeShape EntityType="NIBSModel.tblAssignSubMenuItem" Width="1.5" PointX="5.25" PointY="22.125" />
         <AssociationConnector Association="NIBSModel.FK_tblAssignSubMenuItem_tblItem" />
         <AssociationConnector Association="NIBSModel.FK_tblAssignSubMenuItem_tblSubItem" />
-        <EntityTypeShape EntityType="NIBSModel.tblLedgerCategory" Width="1.5" PointX="14.375" PointY="1.375" />
-        <EntityTypeShape EntityType="NIBSModel.tblLedgerGroup" Width="1.5" PointX="16.625" PointY="40.375" />
-        <EntityTypeShape EntityType="NIBSModel.tblLedgerMaster" Width="1.5" PointX="18.875" PointY="39.75" />
-        <EntityTypeShape EntityType="NIBSModel.Voucher_Entry_Credit" Width="1.5" PointX="21.125" PointY="35.875" />
-        <EntityTypeShape EntityType="NIBSModel.Voucher_Entry_Debit" Width="1.5" PointX="21.125" PointY="41.75" />
+        <EntityTypeShape EntityType="NIBSModel.tblLedgerCategory" Width="1.5" PointX="21.375" PointY="6" />
+        <EntityTypeShape EntityType="NIBSModel.tblLedgerGroup" Width="1.5" PointX="23.625" PointY="5.75" />
+        <EntityTypeShape EntityType="NIBSModel.tblLedgerMaster" Width="1.5" PointX="25.875" PointY="5.25" />
+        <EntityTypeShape EntityType="NIBSModel.Voucher_Entry_Credit" Width="1.5" PointX="28.125" PointY="1.375" />
+        <EntityTypeShape EntityType="NIBSModel.Voucher_Entry_Debit" Width="1.5" PointX="28.125" PointY="7.125" />
         <AssociationConnector Association="NIBSModel.FK_tblLedgerGroup_tblLedgerCategory" />
         <AssociationConnector Association="NIBSModel.FK_tblLedgerMaster_tblLedgerGroup" />
         <AssociationConnector Association="NIBSModel.FK_Voucher_Entry_Credit_tblLedgerMaster" />
