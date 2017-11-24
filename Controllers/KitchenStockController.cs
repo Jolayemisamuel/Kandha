@@ -466,12 +466,17 @@ namespace NibsMVC.Controllers
 
             con = new SqlConnection(webconnection);
             StringBuilder sb = new StringBuilder();
-
+            int rawid = Convert.ToInt32(Model1.RawMaterial);
             if (Model1.currentstock != null && Model1.currentvalue != null)
             {
                 sb.Append("update tbl_KitchenStock set Quantity=" + Model1.currentstock + " where  RawMaterialId=" + Model1.RawMaterial);
-                sb.Append(" update tblOpStckRate set Qty= " + Model1.currentstock + ", Rate=" + Model1.currentvalue + " , Date = '" + Model1.stockDate + "' where  MaterialId=" + Model1.RawMaterial);
+                if (db.tblOpStckRates.Where(p => p.MaterialId.Equals(rawid)).Count() > 0)
+                    sb.Append(" update tblOpStckRate set Qty= " + Model1.currentstock + ", Rate=" + Model1.currentvalue + " , Date = '" + Model1.stockDate + "' where  MaterialId=" + Model1.RawMaterial);
+                else
+                    sb.Append(" insert into tblOpStckRate values("+ Model1.RawMaterial + ", " + Model1.currentvalue + " ,'" + Model1.stockDate + "'," + Model1.currentstock + " , 0,0)");
             }
+            
+
 
             cmd = new SqlCommand(sb.ToString(), con);
             cmd.CommandType = CommandType.Text;
