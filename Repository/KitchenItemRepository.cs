@@ -234,6 +234,20 @@ namespace NibsMVC.Repository
                 return "something Wrong try Agian !";
             }
         }
+        public string DeleteRawIngridentsItem(int Id)
+        {
+            try
+            {
+                var data = _entities.tbl_KitchenRawIndent.Where(x => x.Id == Id).SingleOrDefault();                
+                _entities.tbl_KitchenRawIndent.Remove(data);                
+                _entities.SaveChanges();
+                return "Record deleted Successfully...";
+            }
+            catch
+            {
+                return "something Wrong try Agian !";
+            }
+        }
 
         public string DeleteBarcodeGen(int Id)
         {
@@ -885,6 +899,7 @@ namespace NibsMVC.Repository
                     tb.Quantity = Convert.ToDecimal(item.Element("Quantity").Value);
                     tb.RawMaterialId = Convert.ToInt32(item.Element("RawMaterialId").Value);
                     tb.Unit = item.Element("Unit").Value;
+                    tb.Portion = Convert.ToInt32(item.Element("Portion").Value);
                     _entities.tbl_KitchenRawIndent.Add(tb);
                     _entities.SaveChanges();
                    
@@ -972,7 +987,7 @@ namespace NibsMVC.Repository
                     InnerKitchenRawIndent m = new InnerKitchenRawIndent();
                     m.Quantity = it.Quantity;
                     m.RawMaterialId = it.tbl_RawMaterials.Name;
-                    m.Unit = it.tbl_RawMaterials.units;
+                    m.Unit = it.Unit;
                     l.Add(m);
                 }
                 model.ListOfInnerMaterial = l;
@@ -1120,6 +1135,27 @@ namespace NibsMVC.Repository
 
             return "Deleted Successfully";
         }
+
         #endregion
+        //public RawMaterialsModel EditAssignList(int Id)
+        //{
+        //    RawMaterialsModel model = new RawMaterialsModel();
+
+        //    if (Id != 0)
+        //    {
+        //        var data = _entities.tbl_RawMaterials.Where(x => x.RawMaterialId == Id).SingleOrDefault();
+        //        model.RawMaterialId = data.RawMaterialId;
+        //        model.Name = data.Name;
+        //        model.RawCategoryName = data.RawCategory.Name;
+        //        model.RawCategoryId = data.rawcategoryId;
+        //        model.Units = data.units;
+        //        model.reorder = Convert.ToDecimal(data.reorder);
+        //        return model;
+        //    }
+        //    else
+        //    {
+        //        return model;
+        //    }
+        //}
     }
 }
