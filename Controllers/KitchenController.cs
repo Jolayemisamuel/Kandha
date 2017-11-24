@@ -93,6 +93,12 @@ namespace NibsMVC.Controllers
             TempData["Error"] = data;
             return RedirectToAction("Index");
         }
+        public ActionResult DeleteIndentItem(int id=0)
+        {
+            var data = obj.DeleteRawIngridentsItem(id);
+            TempData["Error"] = data;
+            return RedirectToAction("ListRawItem");
+        }
         public ActionResult genBarcode()
         {
             try
@@ -150,6 +156,10 @@ namespace NibsMVC.Controllers
 
             return View(obj.ListKitchenRawIndent(id));
         }
+        //public ActionResult EditRawIndent(int id=0)
+        //{
+        //    return View(obj.EditAssignList(id));
+        //}
         public ActionResult AddSubMenuIndent()
         {
 
