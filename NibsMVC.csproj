@@ -1967,6 +1967,9 @@
     <Compile Include="EDMX\tblCategory.cs">
       <DependentUpon>NIBSDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="EDMX\tblConsumption.cs">
+      <DependentUpon>NIBSDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="EDMX\tblDeleteBillMaster.cs">
       <DependentUpon>NIBSDB.tt</DependentUpon>
     </Compile>
@@ -2030,10 +2033,16 @@
     <Compile Include="EDMX\tblTableMaster.cs">
       <DependentUpon>NIBSDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="EDMX\tblTransByStock.cs">
+      <DependentUpon>NIBSDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="EDMX\tblTransfer.cs">
       <DependentUpon>NIBSDB.tt</DependentUpon>
     </Compile>
     <Compile Include="EDMX\tblTransferReturnReport.cs">
+      <DependentUpon>NIBSDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\tblTransRetRateDet.cs">
       <DependentUpon>NIBSDB.tt</DependentUpon>
     </Compile>
     <Compile Include="EDMX\tblVendor.cs">

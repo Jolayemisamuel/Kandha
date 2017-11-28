@@ -255,7 +255,8 @@ namespace NibsMVC.Controllers
                 //tblPurchasedItem datastockpurchase = (from q in db.tblPurchasedItems where q.PurchaseDetailId == model.Purchasedetailid select q).SingleOrDefault();
                 //tblPurchaseMaster datastockpurchaseMst = (from q in db.tblPurchaseMasters where q.PurchaseId == model.Purchaseid select q).SingleOrDefault();
                 //DateTime grnStckdate = Convert.ToDateTime(datastockpurchaseMst.Date.ToShortDateString());
-                //tblGRNStock datastockgrn = (from r in db.tblGRNStocks where r.MaterialId == model.RowMaterialId && r.Date== grnStckdate && r.Qty== datastockpurchase.Quantity select r).SingleOrDefault();
+                //tblGRNStock datastockgrn = (from r in db.tblGRNStocks where r.MaterialId == model.RowMaterialId && r.Date== grnStckdate && r.Qty== datastockpurchase.Quantity && (r.Qty + r.RetfrIss - r.RetToVen - r.IssQty)>=model.ReturnQuantity select r).SingleOrDefault();
+                //datastockgrn.RetToVen = datastockgrn.RetToVen + model.ReturnQuantity;
                 //tblPurchaseMaster datastockmaster = (from s in db.tblPurchaseMasters where s.PurchaseId == model.Purchaseid select s).SingleOrDefault();
                 DataStock.Quantity = DataStock.Quantity - model.ReturnQuantity;
                 // datastockpurchase.Quantity = remaingquantity;
@@ -266,6 +267,8 @@ namespace NibsMVC.Controllers
                 // datastockmaster.NetAmount = datastockmaster.TotalAmount + datastockmaster.Tax;
 
                 //datastockgrn.Qty = remaingquantity;
+
+
                 db.SaveChanges();
                 TempData["Prerror"] = "Returned Successfully";
             }

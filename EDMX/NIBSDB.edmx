@@ -345,6 +345,16 @@
           <Property Name="Color" Type="nvarchar" MaxLength="10" />
           <Property Name="TextColor" Type="nvarchar" MaxLength="10" />
         </EntityType>
+        <EntityType Name="tblConsumption">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BillDetailId" Type="int" Nullable="false" />
+          <Property Name="RawMaterialId" Type="int" Nullable="false" />
+          <Property Name="Qty" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Value" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
         <EntityType Name="tblDeleteBillMaster">
           <Key>
             <PropertyRef Name="DeleteId" />
@@ -405,6 +415,7 @@
           <Property Name="Date" Type="date" Nullable="false" />
           <Property Name="Qty" Type="numeric" Precision="18" Scale="2" />
           <Property Name="IssQty" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="ConsumptionQty" Type="decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="tblItem">
           <Key>
@@ -482,6 +493,7 @@
           <Property Name="Date" Type="date" Nullable="false" />
           <Property Name="Qty" Type="numeric" Precision="18" Scale="2" />
           <Property Name="IssQty" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="ConsumptionQty" Type="decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="tblOutlet">
           <Key>
@@ -609,6 +621,16 @@
           <Property Name="OutletId" Type="int" Nullable="false" />
           <Property Name="AcType" Type="varchar" MaxLength="10" Nullable="false" />
         </EntityType>
+        <EntityType Name="tblTransByStock">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TransferId" Type="int" Nullable="false" />
+          <Property Name="stockid" Type="int" Nullable="false" />
+          <Property Name="qty" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="stockType" Type="varchar" MaxLength="5" Nullable="false" />
+        </EntityType>
         <EntityType Name="tblTransfer">
           <Key>
             <PropertyRef Name="TransferId" />
@@ -634,6 +656,16 @@
           <Property Name="ReturnDate" Type="date" Nullable="false" />
           <Property Name="OutletId" Type="int" Nullable="false" />
           <Property Name="transferid" Type="int" />
+        </EntityType>
+        <EntityType Name="tblTransRetRateDet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TransferReturnId" Type="int" Nullable="false" />
+          <Property Name="MaterialId" Type="int" Nullable="false" />
+          <Property Name="qty" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Rate" Type="decimal" Precision="18" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="tblVendor">
           <Key>
@@ -731,19 +763,19 @@
           <Property Name="Voucher_date" Type="datetime" Nullable="false" />
           <Property Name="record_no" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="record_date" Type="datetime" Nullable="false" />
-          <Property Name="voucher_sno" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="voucher_tb" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="voucher_sno" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="voucher_tb" Type="varchar" MaxLength="10" />
           <Property Name="voucher_ledger_accout_id" Type="int" Nullable="false" />
-          <Property Name="voucher_cr_amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="voucher_type" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="voucher_cr_amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="voucher_type" Type="nvarchar" MaxLength="20" />
           <Property Name="voucher_year" Type="nvarchar" MaxLength="20" />
           <Property Name="check_no" Type="nvarchar" MaxLength="10" />
-          <Property Name="check_date" Type="nvarchar" MaxLength="20" />
+          <Property Name="check_date" Type="datetime" />
           <Property Name="bank_date" Type="datetime" />
           <Property Name="create_date" Type="datetime" Nullable="false" />
-          <Property Name="userid" Type="int" Nullable="false" />
-          <Property Name="from_form_name" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="from_form_id" Type="int" Nullable="false" />
+          <Property Name="userid" Type="int" />
+          <Property Name="from_form_name" Type="nvarchar" MaxLength="100" />
+          <Property Name="from_form_id" Type="int" />
           <Property Name="voucher_narration" Type="nvarchar" MaxLength="500" />
           <Property Name="account_type" Type="nvarchar" MaxLength="100" />
         </EntityType>
@@ -756,19 +788,19 @@
           <Property Name="voucher_date" Type="datetime" Nullable="false" />
           <Property Name="record_no" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="record_date" Type="datetime" Nullable="false" />
-          <Property Name="voucher_sno" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="voucher_tb" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="voucher_sno" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="voucher_tb" Type="varchar" MaxLength="10" />
           <Property Name="voucher_ledger_accout_id" Type="int" Nullable="false" />
-          <Property Name="voucher_dbt_amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="voucher_type" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="voucher_dbt_amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="voucher_type" Type="nvarchar" MaxLength="20" />
           <Property Name="voucher_year" Type="nvarchar" MaxLength="20" />
           <Property Name="check_no" Type="nvarchar" MaxLength="10" />
           <Property Name="check_date" Type="datetime" />
           <Property Name="bank_date" Type="datetime" />
           <Property Name="create_date" Type="datetime" Nullable="false" />
-          <Property Name="userid" Type="int" Nullable="false" />
-          <Property Name="from_form_name" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="from_form_id" Type="int" Nullable="false" />
+          <Property Name="userid" Type="int" />
+          <Property Name="from_form_name" Type="nvarchar" MaxLength="100" />
+          <Property Name="from_form_id" Type="int" />
           <Property Name="voucher_narration" Type="nvarchar" MaxLength="500" />
           <Property Name="account_type" Type="nvarchar" MaxLength="10" />
         </EntityType>
@@ -1276,6 +1308,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblConsumption_tbl_RawMaterials1">
+          <End Role="tbl_RawMaterials" Type="Self.tbl_RawMaterials" Multiplicity="1" />
+          <End Role="tblConsumption" Type="Self.tblConsumption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_RawMaterials">
+              <PropertyRef Name="RawMaterialId" />
+            </Principal>
+            <Dependent Role="tblConsumption">
+              <PropertyRef Name="RawMaterialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblConsumption_tblBillDetails">
+          <End Role="tblBillDetails" Type="Self.tblBillDetails" Multiplicity="1" />
+          <End Role="tblConsumption" Type="Self.tblConsumption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblBillDetails">
+              <PropertyRef Name="BillDetailsId" />
+            </Principal>
+            <Dependent Role="tblConsumption">
+              <PropertyRef Name="BillDetailId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblDeleteBillMaster_tblOutlet">
           <End Role="tblOutlet" Type="Self.tblOutlet" Multiplicity="1" />
           <End Role="tblDeleteBillMaster" Type="Self.tblDeleteBillMaster" Multiplicity="*" />
@@ -1516,6 +1572,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblTransByStock_tblTransfer">
+          <End Role="tblTransfer" Type="Self.tblTransfer" Multiplicity="1" />
+          <End Role="tblTransByStock" Type="Self.tblTransByStock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTransfer">
+              <PropertyRef Name="TransferId" />
+            </Principal>
+            <Dependent Role="tblTransByStock">
+              <PropertyRef Name="TransferId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblTransfer_tbl_Department">
           <End Role="tbl_Department" Type="Self.tbl_Department" Multiplicity="1" />
           <End Role="tblTransfer" Type="Self.tblTransfer" Multiplicity="*" />
@@ -1573,6 +1641,30 @@
             </Principal>
             <Dependent Role="tblTransferReturnReport">
               <PropertyRef Name="OutletId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTransRetRateDet_tbl_RawMaterials">
+          <End Role="tbl_RawMaterials" Type="Self.tbl_RawMaterials" Multiplicity="1" />
+          <End Role="tblTransRetRateDet" Type="Self.tblTransRetRateDet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_RawMaterials">
+              <PropertyRef Name="RawMaterialId" />
+            </Principal>
+            <Dependent Role="tblTransRetRateDet">
+              <PropertyRef Name="MaterialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTransRetRateDet_tblTransferReturnReport">
+          <End Role="tblTransferReturnReport" Type="Self.tblTransferReturnReport" Multiplicity="1" />
+          <End Role="tblTransRetRateDet" Type="Self.tblTransRetRateDet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTransferReturnReport">
+              <PropertyRef Name="TransferReturnId" />
+            </Principal>
+            <Dependent Role="tblTransRetRateDet">
+              <PropertyRef Name="TransferReturnId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1785,6 +1877,7 @@
           <EntitySet Name="tblBillDetails" EntityType="Self.tblBillDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblBillMaster" EntityType="Self.tblBillMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblCategory" EntityType="Self.tblCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblConsumption" EntityType="Self.tblConsumption" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblDeleteBillMaster" EntityType="Self.tblDeleteBillMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblDeletedetails" EntityType="Self.tblDeletedetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblGenBarcode" EntityType="Self.tblGenBarcode" Schema="dbo" store:Type="Tables" />
@@ -1806,8 +1899,10 @@
           <EntitySet Name="tblServiceCharges" EntityType="Self.tblServiceCharges" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblSubItem" EntityType="Self.tblSubItem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblTableMaster" EntityType="Self.tblTableMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblTransByStock" EntityType="Self.tblTransByStock" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblTransfer" EntityType="Self.tblTransfer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblTransferReturnReport" EntityType="Self.tblTransferReturnReport" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblTransRetRateDet" EntityType="Self.tblTransRetRateDet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblVendor" EntityType="Self.tblVendor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Temp_VendorBilling" EntityType="Self.Temp_VendorBilling" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Units" EntityType="Self.Units" Schema="dbo" store:Type="Tables" />
@@ -1984,6 +2079,14 @@
             <End Role="tblOutlet" EntitySet="tblOutlet" />
             <End Role="tblBillMaster" EntitySet="tblBillMaster" />
           </AssociationSet>
+          <AssociationSet Name="FK_tblConsumption_tbl_RawMaterials1" Association="Self.FK_tblConsumption_tbl_RawMaterials1">
+            <End Role="tbl_RawMaterials" EntitySet="tbl_RawMaterials" />
+            <End Role="tblConsumption" EntitySet="tblConsumption" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblConsumption_tblBillDetails" Association="Self.FK_tblConsumption_tblBillDetails">
+            <End Role="tblBillDetails" EntitySet="tblBillDetails" />
+            <End Role="tblConsumption" EntitySet="tblConsumption" />
+          </AssociationSet>
           <AssociationSet Name="FK_tblDeleteBillMaster_tblOutlet" Association="Self.FK_tblDeleteBillMaster_tblOutlet">
             <End Role="tblOutlet" EntitySet="tblOutlet" />
             <End Role="tblDeleteBillMaster" EntitySet="tblDeleteBillMaster" />
@@ -2064,6 +2167,10 @@
             <End Role="tblOutlet" EntitySet="tblOutlet" />
             <End Role="tblTableMaster" EntitySet="tblTableMaster" />
           </AssociationSet>
+          <AssociationSet Name="FK_tblTransByStock_tblTransfer" Association="Self.FK_tblTransByStock_tblTransfer">
+            <End Role="tblTransfer" EntitySet="tblTransfer" />
+            <End Role="tblTransByStock" EntitySet="tblTransByStock" />
+          </AssociationSet>
           <AssociationSet Name="FK_tblTransfer_tbl_Department" Association="Self.FK_tblTransfer_tbl_Department">
             <End Role="tbl_Department" EntitySet="tbl_Department" />
             <End Role="tblTransfer" EntitySet="tblTransfer" />
@@ -2083,6 +2190,14 @@
           <AssociationSet Name="FK_tblTransferReturnReport_tblOutlet" Association="Self.FK_tblTransferReturnReport_tblOutlet">
             <End Role="tblOutlet" EntitySet="tblOutlet" />
             <End Role="tblTransferReturnReport" EntitySet="tblTransferReturnReport" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTransRetRateDet_tbl_RawMaterials" Association="Self.FK_tblTransRetRateDet_tbl_RawMaterials">
+            <End Role="tbl_RawMaterials" EntitySet="tbl_RawMaterials" />
+            <End Role="tblTransRetRateDet" EntitySet="tblTransRetRateDet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTransRetRateDet_tblTransferReturnReport" Association="Self.FK_tblTransRetRateDet_tblTransferReturnReport">
+            <End Role="tblTransferReturnReport" EntitySet="tblTransferReturnReport" />
+            <End Role="tblTransRetRateDet" EntitySet="tblTransRetRateDet" />
           </AssociationSet>
           <AssociationSet Name="FK_tblVendor_tblOutlet" Association="Self.FK_tblVendor_tblOutlet">
             <End Role="tblOutlet" EntitySet="tblOutlet" />
@@ -2569,6 +2684,29 @@
             <End Role="tblLedgerMaster" EntitySet="tblLedgerMasters" />
             <End Role="Voucher_Entry_Debit" EntitySet="Voucher_Entry_Debit" />
           </AssociationSet>
+          <EntitySet Name="tblTransByStocks" EntityType="NIBSModel.tblTransByStock" />
+          <EntitySet Name="tblTransRetRateDets" EntityType="NIBSModel.tblTransRetRateDet" />
+          <AssociationSet Name="FK_tblTransRetRateDet_tbl_RawMaterials" Association="NIBSModel.FK_tblTransRetRateDet_tbl_RawMaterials">
+            <End Role="tbl_RawMaterials" EntitySet="tbl_RawMaterials" />
+            <End Role="tblTransRetRateDet" EntitySet="tblTransRetRateDets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTransByStock_tblTransfer" Association="NIBSModel.FK_tblTransByStock_tblTransfer">
+            <End Role="tblTransfer" EntitySet="tblTransfers" />
+            <End Role="tblTransByStock" EntitySet="tblTransByStocks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTransRetRateDet_tblTransferReturnReport" Association="NIBSModel.FK_tblTransRetRateDet_tblTransferReturnReport">
+            <End Role="tblTransferReturnReport" EntitySet="tblTransferReturnReports" />
+            <End Role="tblTransRetRateDet" EntitySet="tblTransRetRateDets" />
+          </AssociationSet>
+          <EntitySet Name="tblConsumptions" EntityType="NIBSModel.tblConsumption" />
+          <AssociationSet Name="FK_tblConsumption_tbl_RawMaterials1" Association="NIBSModel.FK_tblConsumption_tbl_RawMaterials1">
+            <End Role="tbl_RawMaterials" EntitySet="tbl_RawMaterials" />
+            <End Role="tblConsumption" EntitySet="tblConsumptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblConsumption_tblBillDetails" Association="NIBSModel.FK_tblConsumption_tblBillDetails">
+            <End Role="tblBillDetail" EntitySet="tblBillDetails" />
+            <End Role="tblConsumption" EntitySet="tblConsumptions" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="NIbs_AssignOffer">
           <Key>
@@ -2794,6 +2932,8 @@
           <NavigationProperty Name="tblGenBarcodes" Relationship="NIBSModel.FK_tblGenBarcode_tblGenBarcode" FromRole="tbl_RawMaterials" ToRole="tblGenBarcode" />
           <NavigationProperty Name="tbl_SubItemRawIndent" Relationship="NIBSModel.FK_tbl_SubItemRawIndent_tbl_RawMaterials" FromRole="tbl_RawMaterials" ToRole="tbl_SubItemRawIndent" />
           <NavigationProperty Name="tblAsgnRawSubItemDets" Relationship="NIBSModel.FK_tblAsgnRawSubItemDet_tbl_RawMaterials" FromRole="tbl_RawMaterials" ToRole="tblAsgnRawSubItemDet" />
+          <NavigationProperty Name="tblTransRetRateDets" Relationship="NIBSModel.FK_tblTransRetRateDet_tbl_RawMaterials" FromRole="tbl_RawMaterials" ToRole="tblTransRetRateDet" />
+          <NavigationProperty Name="tblConsumptions" Relationship="NIBSModel.FK_tblConsumption_tbl_RawMaterials1" FromRole="tbl_RawMaterials" ToRole="tblConsumption" />
         </EntityType>
         <EntityType Name="tbl_ServiceTax">
           <Key>
@@ -3047,6 +3187,7 @@
           <Property Name="DepartmentId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tbl_Department" Relationship="NIBSModel.FK_tblTransfer_tbl_Department" FromRole="tblTransfer" ToRole="tbl_Department" />
           <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="tblTransByStocks" Relationship="NIBSModel.FK_tblTransByStock_tblTransfer" FromRole="tblTransfer" ToRole="tblTransByStock" />
         </EntityType>
         <EntityType Name="tblVendor">
           <Key>
@@ -3578,6 +3719,7 @@
           <Property Name="Vat" Type="Decimal" Precision="18" Scale="2" />
           <NavigationProperty Name="tblBillMaster" Relationship="NIBSModel.FK_tblBillDetails_tblBillDetails" FromRole="tblBillDetail" ToRole="tblBillMaster" />
           <NavigationProperty Name="tblItem" Relationship="NIBSModel.FK_tblBillDetails_tblItem" FromRole="tblBillDetail" ToRole="tblItem" />
+          <NavigationProperty Name="tblConsumptions" Relationship="NIBSModel.FK_tblConsumption_tblBillDetails" FromRole="tblBillDetail" ToRole="tblConsumption" />
         </EntityType>
         <EntityType Name="tblBillMaster">
           <Key>
@@ -4033,6 +4175,7 @@
           <NavigationProperty Name="tbl_RawMaterials" Relationship="NIBSModel.FK_tblOpStckRate_tbl_RawMaterials" FromRole="tblOpStckRate" ToRole="tbl_RawMaterials" />
           <Property Name="Qty" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="IssQty" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ConsumptionQty" Type="Decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="Unit">
           <Key>
@@ -4196,6 +4339,7 @@
           <Property Name="Qty" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="IssQty" Type="Decimal" Precision="18" Scale="2" />
           <NavigationProperty Name="tbl_RawMaterials" Relationship="NIBSModel.FK_tblGRNStock_tbl_RawMaterials" FromRole="tblGRNStock" ToRole="tbl_RawMaterials" />
+          <Property Name="ConsumptionQty" Type="Decimal" Precision="18" Scale="2" />
         </EntityType>
         <Association Name="FK_tblGRNStock_tbl_RawMaterials">
           <End Type="NIBSModel.tbl_RawMaterials" Role="tbl_RawMaterials" Multiplicity="1" />
@@ -4222,6 +4366,7 @@
           <NavigationProperty Name="tbl_RawMaterials" Relationship="NIBSModel.FK_tblTransferReturnReport_tbl_RawMaterials" FromRole="tblTransferReturnReport" ToRole="tbl_RawMaterials" />
           <NavigationProperty Name="tblOutlet" Relationship="NIBSModel.FK_tblTransferReturnReport_tblOutlet" FromRole="tblTransferReturnReport" ToRole="tblOutlet" />
           <Property Name="transferid" Type="Int32" />
+          <NavigationProperty Name="tblTransRetRateDets" Relationship="NIBSModel.FK_tblTransRetRateDet_tblTransferReturnReport" FromRole="tblTransferReturnReport" ToRole="tblTransRetRateDet" />
         </EntityType>
         <Association Name="FK_tblTransferReturnReport_tbl_RawMaterials">
           <End Type="NIBSModel.tbl_RawMaterials" Role="tbl_RawMaterials" Multiplicity="1" />
@@ -4478,19 +4623,19 @@
           <Property Name="Voucher_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="record_no" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="record_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="voucher_sno" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="voucher_tb" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="voucher_sno" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="voucher_tb" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="voucher_ledger_accout_id" Type="Int32" Nullable="false" />
-          <Property Name="voucher_cr_amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="voucher_type" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="voucher_cr_amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="voucher_type" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="voucher_year" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="check_no" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="check_date" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="check_date" Type="String" />
           <Property Name="bank_date" Type="DateTime" Precision="3" />
           <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="userid" Type="Int32" Nullable="false" />
-          <Property Name="from_form_name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="from_form_id" Type="Int32" Nullable="false" />
+          <Property Name="userid" Type="Int32" />
+          <Property Name="from_form_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="from_form_id" Type="Int32" />
           <Property Name="voucher_narration" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="account_type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tblLedgerMaster" Relationship="NIBSModel.FK_Voucher_Entry_Credit_tblLedgerMaster" FromRole="Voucher_Entry_Credit" ToRole="tblLedgerMaster" />
@@ -4504,19 +4649,19 @@
           <Property Name="voucher_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="record_no" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="record_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="voucher_sno" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="voucher_tb" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="voucher_sno" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="voucher_tb" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="voucher_ledger_accout_id" Type="Int32" Nullable="false" />
-          <Property Name="voucher_dbt_amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="voucher_type" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="voucher_dbt_amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="voucher_type" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="voucher_year" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="check_no" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="check_date" Type="DateTime" Precision="3" />
           <Property Name="bank_date" Type="DateTime" Precision="3" />
           <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="userid" Type="Int32" Nullable="false" />
-          <Property Name="from_form_name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="from_form_id" Type="Int32" Nullable="false" />
+          <Property Name="userid" Type="Int32" />
+          <Property Name="from_form_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="from_form_id" Type="Int32" />
           <Property Name="voucher_narration" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="account_type" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tblLedgerMaster" Relationship="NIBSModel.FK_Voucher_Entry_Debit_tblLedgerMaster" FromRole="Voucher_Entry_Debit" ToRole="tblLedgerMaster" />
@@ -4566,6 +4711,101 @@
             </Principal>
             <Dependent Role="Voucher_Entry_Debit">
               <PropertyRef Name="voucher_ledger_accout_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblTransByStock">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TransferId" Type="Int32" Nullable="false" />
+          <Property Name="stockid" Type="Int32" Nullable="false" />
+          <Property Name="qty" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="stockType" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblTransfer" Relationship="NIBSModel.FK_tblTransByStock_tblTransfer" FromRole="tblTransByStock" ToRole="tblTransfer" />
+        </EntityType>
+        <EntityType Name="tblTransRetRateDet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TransferReturnId" Type="Int32" Nullable="false" />
+          <Property Name="MaterialId" Type="Int32" Nullable="false" />
+          <Property Name="qty" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Rate" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <NavigationProperty Name="tbl_RawMaterials" Relationship="NIBSModel.FK_tblTransRetRateDet_tbl_RawMaterials" FromRole="tblTransRetRateDet" ToRole="tbl_RawMaterials" />
+          <NavigationProperty Name="tblTransferReturnReport" Relationship="NIBSModel.FK_tblTransRetRateDet_tblTransferReturnReport" FromRole="tblTransRetRateDet" ToRole="tblTransferReturnReport" />
+        </EntityType>
+        <Association Name="FK_tblTransRetRateDet_tbl_RawMaterials">
+          <End Type="NIBSModel.tbl_RawMaterials" Role="tbl_RawMaterials" Multiplicity="1" />
+          <End Type="NIBSModel.tblTransRetRateDet" Role="tblTransRetRateDet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_RawMaterials">
+              <PropertyRef Name="RawMaterialId" />
+            </Principal>
+            <Dependent Role="tblTransRetRateDet">
+              <PropertyRef Name="MaterialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTransByStock_tblTransfer">
+          <End Type="NIBSModel.tblTransfer" Role="tblTransfer" Multiplicity="1" />
+          <End Type="NIBSModel.tblTransByStock" Role="tblTransByStock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTransfer">
+              <PropertyRef Name="TransferId" />
+            </Principal>
+            <Dependent Role="tblTransByStock">
+              <PropertyRef Name="TransferId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTransRetRateDet_tblTransferReturnReport">
+          <End Type="NIBSModel.tblTransferReturnReport" Role="tblTransferReturnReport" Multiplicity="1" />
+          <End Type="NIBSModel.tblTransRetRateDet" Role="tblTransRetRateDet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTransferReturnReport">
+              <PropertyRef Name="TransferReturnId" />
+            </Principal>
+            <Dependent Role="tblTransRetRateDet">
+              <PropertyRef Name="TransferReturnId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblConsumption">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BillDetailId" Type="Int32" Nullable="false" />
+          <Property Name="RawMaterialId" Type="Int32" Nullable="false" />
+          <Property Name="Qty" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Value" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <NavigationProperty Name="tbl_RawMaterials" Relationship="NIBSModel.FK_tblConsumption_tbl_RawMaterials1" FromRole="tblConsumption" ToRole="tbl_RawMaterials" />
+          <NavigationProperty Name="tblBillDetail" Relationship="NIBSModel.FK_tblConsumption_tblBillDetails" FromRole="tblConsumption" ToRole="tblBillDetail" />
+        </EntityType>
+        <Association Name="FK_tblConsumption_tbl_RawMaterials1">
+          <End Type="NIBSModel.tbl_RawMaterials" Role="tbl_RawMaterials" Multiplicity="1" />
+          <End Type="NIBSModel.tblConsumption" Role="tblConsumption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_RawMaterials">
+              <PropertyRef Name="RawMaterialId" />
+            </Principal>
+            <Dependent Role="tblConsumption">
+              <PropertyRef Name="RawMaterialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblConsumption_tblBillDetails">
+          <End Type="NIBSModel.tblBillDetail" Role="tblBillDetail" Multiplicity="1" />
+          <End Type="NIBSModel.tblConsumption" Role="tblConsumption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblBillDetail">
+              <PropertyRef Name="BillDetailsId" />
+            </Principal>
+            <Dependent Role="tblConsumption">
+              <PropertyRef Name="BillDetailId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5186,6 +5426,7 @@
           <EntitySetMapping Name="tblOpStckRates">
             <EntityTypeMapping TypeName="NIBSModel.tblOpStckRate">
               <MappingFragment StoreEntitySet="tblOpStckRate">
+                <ScalarProperty Name="ConsumptionQty" ColumnName="ConsumptionQty" />
                 <ScalarProperty Name="IssQty" ColumnName="IssQty" />
                 <ScalarProperty Name="Qty" ColumnName="Qty" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
@@ -5239,6 +5480,7 @@
           <EntitySetMapping Name="tblGRNStocks">
             <EntityTypeMapping TypeName="NIBSModel.tblGRNStock">
               <MappingFragment StoreEntitySet="tblGRNStock">
+                <ScalarProperty Name="ConsumptionQty" ColumnName="ConsumptionQty" />
                 <ScalarProperty Name="IssQty" ColumnName="IssQty" />
                 <ScalarProperty Name="Qty" ColumnName="Qty" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
@@ -5403,6 +5645,39 @@
                 <ScalarProperty Name="voucher_date" ColumnName="voucher_date" />
                 <ScalarProperty Name="voucher_no" ColumnName="voucher_no" />
                 <ScalarProperty Name="voucher_entry_id" ColumnName="voucher_entry_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblTransByStocks">
+            <EntityTypeMapping TypeName="NIBSModel.tblTransByStock">
+              <MappingFragment StoreEntitySet="tblTransByStock">
+                <ScalarProperty Name="stockType" ColumnName="stockType" />
+                <ScalarProperty Name="qty" ColumnName="qty" />
+                <ScalarProperty Name="stockid" ColumnName="stockid" />
+                <ScalarProperty Name="TransferId" ColumnName="TransferId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblTransRetRateDets">
+            <EntityTypeMapping TypeName="NIBSModel.tblTransRetRateDet">
+              <MappingFragment StoreEntitySet="tblTransRetRateDet">
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="qty" ColumnName="qty" />
+                <ScalarProperty Name="MaterialId" ColumnName="MaterialId" />
+                <ScalarProperty Name="TransferReturnId" ColumnName="TransferReturnId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblConsumptions">
+            <EntityTypeMapping TypeName="NIBSModel.tblConsumption">
+              <MappingFragment StoreEntitySet="tblConsumption">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="RawMaterialId" ColumnName="RawMaterialId" />
+                <ScalarProperty Name="BillDetailId" ColumnName="BillDetailId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

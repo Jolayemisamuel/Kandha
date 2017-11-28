@@ -14,6 +14,11 @@ namespace NibsMVC.EDMX
     
     public partial class tblTransferReturnReport
     {
+        public tblTransferReturnReport()
+        {
+            this.tblTransRetRateDets = new HashSet<tblTransRetRateDet>();
+        }
+    
         public int TransferReturnId { get; set; }
         public int RawMaterialId { get; set; }
         public decimal ReturnQuantity { get; set; }
@@ -24,5 +29,6 @@ namespace NibsMVC.EDMX
     
         public virtual tbl_RawMaterials tbl_RawMaterials { get; set; }
         public virtual tblOutlet tblOutlet { get; set; }
+        public virtual ICollection<tblTransRetRateDet> tblTransRetRateDets { get; set; }
     }
 }

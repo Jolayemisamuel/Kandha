@@ -12,16 +12,14 @@ namespace NibsMVC.EDMX
     using System;
     using System.Collections.Generic;
     
-    public partial class tblGRNStock
+    public partial class tblTransByStock
     {
-        public int Id { get; set; }
-        public int MaterialId { get; set; }
-        public decimal Rate { get; set; }
-        public System.DateTime Date { get; set; }
-        public Nullable<decimal> Qty { get; set; }
-        public Nullable<decimal> IssQty { get; set; }
-        public Nullable<decimal> ConsumptionQty { get; set; }
+        public int id { get; set; }
+        public int TransferId { get; set; }
+        public int stockid { get; set; }
+        public decimal qty { get; set; }
+        public string stockType { get; set; }
     
-        public virtual tbl_RawMaterials tbl_RawMaterials { get; set; }
+        public virtual tblTransfer tblTransfer { get; set; }
     }
 }

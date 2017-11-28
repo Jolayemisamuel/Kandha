@@ -557,8 +557,8 @@ namespace NibsMVC.Controllers
 
                 if (model.TransferQuantity == model.ReturnQuantity)
                 {
-                    //qry = " delete from tblTransByStock where TransferId  =  " + model.TransferId;
-                    //qry = qry + " delete from tblTransfer where TransferId =   " + model.TransferId;
+                    qry = " delete from tblTransByStock where TransferId  =  " + model.TransferId;
+                    qry = qry + " delete from tblTransfer where TransferId =   " + model.TransferId;
                     qry = "";
                     qry = qry + " update  tbl_KitchenStock set quantity = quantity + " + model.ReturnQuantity + " where RawMaterialId = " + model.RawMaterialId;
                     con = new SqlConnection(webconnection);
@@ -569,9 +569,9 @@ namespace NibsMVC.Controllers
                 }
                 else if (model.TransferQuantity >= model.ReturnQuantity)
                 {
-                    //qry = " update tblTransByStock set qty = qty - " + model.ReturnQuantity + " where TransferId = " + model.TransferId;
+                    qry = " update tblTransByStock set qty = qty - " + model.ReturnQuantity + " where TransferId = " + model.TransferId;
 
-                    //qry = qry + " update tblTransfer set TransferQuantity = TransferQuantity - " + model.ReturnQuantity + " where TransferId = " + model.TransferId;
+                    qry = qry + " update tblTransfer set TransferQuantity = TransferQuantity - " + model.ReturnQuantity + " where TransferId = " + model.TransferId;
                     qry = "";
                     qry = qry + " update  tbl_KitchenStock set quantity = quantity + " + model.ReturnQuantity + " where RawMaterialId = " + model.RawMaterialId;
                     con = new SqlConnection(webconnection);
@@ -582,10 +582,9 @@ namespace NibsMVC.Controllers
                 }
 
 
-
-                qry = " select id,MaterialId,Rate,Date,Qty,IssQty,RetfrIss=isnull(RetfrIss,0),table1='gs' from tblGRNStock where IssQty <> 0   and MaterialId = " + model.RawMaterialId;
+                qry = " select *,table1='gs' from tblGRNStock where IssQty <> 0   and MaterialId = " + model.RawMaterialId;
                 qry = qry + " union all ";
-                qry = qry + "  select id,MaterialId,Rate,Date,Qty,IssQty,RetfrIss=isnull(RetfrIss,0),table1='os' from tblOpStckRate where IssQty <> 0   and MaterialId = " + model.RawMaterialId + " order by date desc";
+                qry = qry + "  select *,table1='os' from tblOpStckRate where IssQty <> 0   and MaterialId = " + model.RawMaterialId + " order by date desc";
 
                 con = new SqlConnection(webconnection);
                 cmd = new SqlCommand(qry, con);
@@ -595,33 +594,42 @@ namespace NibsMVC.Controllers
                 qry = "";
                 foreach (DataRow dr in dt.Rows)
                 {
+
+                    int retId = db.tblTransferReturnReports.Max(p => p.TransferReturnId);
                     if (model.ReturnQuantity > 0)
                     {
                         if (dr["table1"].ToString() == "os")
                         {
-                            if (model.ReturnQuantity <= (Convert.ToDecimal(dr["IssQty"])- Convert.ToDecimal(dr["RetfrIss"])) )
+                            if (model.ReturnQuantity <= Convert.ToDecimal(dr["IssQty"]))
                             {
-                                qry = qry + " update tblOpStckRate  set RetfrIss = RetfrIss + " + model.ReturnQuantity + " where MaterialId = " + model.RawMaterialId + " and id=" + dr["id"];
+                                qry = qry + " update tblOpStckRate  set IssQty = IssQty - " + model.ReturnQuantity + " where MaterialId = " + model.RawMaterialId + " and id=" + dr["id"];
+                                qry = qry + " insert into  tblTransRetRatedet values( "+retId+", '"+model.RawMaterialId+"', "+model.ReturnQuantity+","+dr["Rate"].ToString()+" ) ";
                                 model.ReturnQuantity -= model.ReturnQuantity;
+
+                                
+
                             }
                             else
                             {
-                                qry = qry + " update tblOpStckRate  set RetfrIss = RetfrIss + " + (Convert.ToDecimal(dr["IssQty"]) - Convert.ToDecimal(dr["RetfrIss"])) + " where MaterialId = " + model.RawMaterialId + " and id=" + dr["id"];
-                                model.ReturnQuantity -= (Convert.ToDecimal(dr["IssQty"]) - Convert.ToDecimal(dr["RetfrIss"]));
+                                qry = qry + " update tblOpStckRate  set IssQty = IssQty - " + Convert.ToDecimal(dr["IssQty"]) + " where MaterialId = " + model.RawMaterialId + " and id=" + dr["id"];
+                                qry = qry + " insert into  tblTransRetRatedet values( " + retId + ", '" + model.RawMaterialId + "', " + Convert.ToDecimal(dr["IssQty"]) + "," + dr["Rate"].ToString() + " ) ";
+                                model.ReturnQuantity -= Convert.ToDecimal(dr["IssQty"]);
                             }
 
                         }
                         else
                         {
-                            if (model.ReturnQuantity <= (Convert.ToDecimal(dr["IssQty"]) - Convert.ToDecimal(dr["RetfrIss"])))
+                            if (model.ReturnQuantity <= Convert.ToDecimal(dr["IssQty"]))
                             {
-                                qry = qry + " update tblGRNStock  set RetfrIss = RetfrIss + " + model.ReturnQuantity + " where MaterialId = " + model.RawMaterialId + " and id=" + dr["id"];
+                                qry = qry + " update tblGRNStock  set IssQty = IssQty - " + model.ReturnQuantity + " where MaterialId = " + model.RawMaterialId + " and id=" + dr["id"];
+                                qry = qry + " insert into  tblTransRetRatedet values( " + retId + ", '" + model.RawMaterialId + "', " + model.ReturnQuantity + "," + dr["Rate"].ToString() + " ) ";
                                 model.ReturnQuantity -= model.ReturnQuantity;
                             }
                             else
                             {
-                                qry = qry + " update tblGRNStock  set RetfrIss = RetfrIss - " + (Convert.ToDecimal(dr["IssQty"]) - Convert.ToDecimal(dr["RetfrIss"])) + " where MaterialId = " + model.RawMaterialId + " and id=" + dr["id"];
-                                model.ReturnQuantity -= (Convert.ToDecimal(dr["IssQty"]) - Convert.ToDecimal(dr["RetfrIss"]));
+                                qry = qry + " update tblGRNStock  set IssQty = IssQty - " + Convert.ToDecimal(dr["IssQty"]) + " where MaterialId = " + model.RawMaterialId + " and id=" + dr["id"];
+                                qry = qry + " insert into  tblTransRetRatedet values( " + retId + ", '" + model.RawMaterialId + "', " + Convert.ToDecimal(dr["IssQty"]) + "," + dr["Rate"].ToString() + " ) ";
+                                model.ReturnQuantity -= Convert.ToDecimal(dr["IssQty"]);
                             }
 
 
