@@ -14,6 +14,11 @@ namespace NibsMVC.EDMX
     
     public partial class tblBillDetail
     {
+        public tblBillDetail()
+        {
+            this.tblConsumptions = new HashSet<tblConsumption>();
+        }
+    
         public int BillId { get; set; }
         public int BillDetailsId { get; set; }
         public Nullable<int> ItemId { get; set; }
@@ -25,5 +30,6 @@ namespace NibsMVC.EDMX
     
         public virtual tblBillMaster tblBillMaster { get; set; }
         public virtual tblItem tblItem { get; set; }
+        public virtual ICollection<tblConsumption> tblConsumptions { get; set; }
     }
 }

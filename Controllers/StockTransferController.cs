@@ -541,110 +541,123 @@ namespace NibsMVC.Controllers
         [HttpPost]
         public ActionResult TransferReturn(outeltStockReturnModel model)
         {
-            string qry="";
-                        
-            tblTransferReturnReport tb = new tblTransferReturnReport();
-            tb.OutletId = obj.getOutletId();
-            tb.RawMaterialId = model.RawMaterialId;
-            tb.ReturnDate = DateTime.Now.Date;
-            tb.ReturnDescription = model.Reasion;
-            tb.ReturnQuantity = model.ReturnQuantity;
-            tb.transferid = model.TransferId;
-            db.tblTransferReturnReports.Add(tb);
-            db.SaveChanges();
-
-            if (model.TransferQuantity==model.ReturnQuantity)
+            if (model.TransferQuantity >= model.ReturnQuantity)
             {
-                //qry = " delete from tblTransByStock where TransferId  =  " + model.TransferId;
-                //qry = qry + " delete from tblTransfer where TransferId =   " + model.TransferId;
-                qry = "";
-                qry = qry + " update  tbl_KitchenStock set quantity = quantity + " + model.ReturnQuantity + " where RawMaterialId = " + model.RawMaterialId;
-                con = new SqlConnection(webconnection);
-                con.Open();
-                cmd = new SqlCommand(qry, con);
-                cmd.ExecuteNonQuery();
-                con.Close();
-            }
-            else if(model.TransferQuantity>=model.ReturnQuantity)
-            {
-                //qry = " update tblTransByStock set qty = qty - " + model.ReturnQuantity + " where TransferId = " + model.TransferId;
+                string qry = "";
 
-                //qry = qry + " update tblTransfer set TransferQuantity = TransferQuantity - " + model.ReturnQuantity + " where TransferId = " + model.TransferId;
-                qry = "";
-                qry = qry + " update  tbl_KitchenStock set quantity = quantity + " + model.ReturnQuantity + " where RawMaterialId = " + model.RawMaterialId;
-                con = new SqlConnection(webconnection);
-                con.Open();
-                cmd = new SqlCommand(qry, con);
-                cmd.ExecuteNonQuery();
-                con.Close();
-            }
-            
+                tblTransferReturnReport tb = new tblTransferReturnReport();
+                tb.OutletId = obj.getOutletId();
+                tb.RawMaterialId = model.RawMaterialId;
+                tb.ReturnDate = DateTime.Now.Date;
+                tb.ReturnDescription = model.Reasion;
+                tb.ReturnQuantity = model.ReturnQuantity;
+                tb.transferid = model.TransferId;
+                db.tblTransferReturnReports.Add(tb);
+                db.SaveChanges();
 
-
-            qry = " select *,table1='gs' from tblGRNStock where IssQty <> 0   and MaterialId = " +model.RawMaterialId;
-            qry = qry + " union all ";
-            qry = qry + "  select *,table1='os' from tblOpStckRate where IssQty <> 0   and MaterialId = " + model.RawMaterialId + " order by date desc";
-
-            con = new SqlConnection(webconnection);
-            cmd = new SqlCommand(qry, con);
-            DataTable dt = new DataTable();
-            SqlDataAdapter sda = new SqlDataAdapter(cmd);
-            sda.Fill(dt);
-            qry = "";
-            foreach (DataRow dr in dt.Rows)
-            {
-                if (model.ReturnQuantity > 0)
+                if (model.TransferQuantity == model.ReturnQuantity)
                 {
-                    if (dr["table1"].ToString() == "os")
+                    qry = " delete from tblTransByStock where TransferId  =  " + model.TransferId;
+                    qry = qry + " delete from tblTransfer where TransferId =   " + model.TransferId;
+                    qry = "";
+                    qry = qry + " update  tbl_KitchenStock set quantity = quantity + " + model.ReturnQuantity + " where RawMaterialId = " + model.RawMaterialId;
+                    con = new SqlConnection(webconnection);
+                    con.Open();
+                    cmd = new SqlCommand(qry, con);
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                }
+                else if (model.TransferQuantity >= model.ReturnQuantity)
+                {
+                    qry = " update tblTransByStock set qty = qty - " + model.ReturnQuantity + " where TransferId = " + model.TransferId;
+
+                    qry = qry + " update tblTransfer set TransferQuantity = TransferQuantity - " + model.ReturnQuantity + " where TransferId = " + model.TransferId;
+                    qry = "";
+                    qry = qry + " update  tbl_KitchenStock set quantity = quantity + " + model.ReturnQuantity + " where RawMaterialId = " + model.RawMaterialId;
+                    con = new SqlConnection(webconnection);
+                    con.Open();
+                    cmd = new SqlCommand(qry, con);
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                }
+
+
+                qry = " select *,table1='gs' from tblGRNStock where IssQty <> 0   and MaterialId = " + model.RawMaterialId;
+                qry = qry + " union all ";
+                qry = qry + "  select *,table1='os' from tblOpStckRate where IssQty <> 0   and MaterialId = " + model.RawMaterialId + " order by date desc";
+
+                con = new SqlConnection(webconnection);
+                cmd = new SqlCommand(qry, con);
+                DataTable dt = new DataTable();
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                sda.Fill(dt);
+                qry = "";
+                foreach (DataRow dr in dt.Rows)
+                {
+
+                    int retId = db.tblTransferReturnReports.Max(p => p.TransferReturnId);
+                    if (model.ReturnQuantity > 0)
                     {
-                        if (model.ReturnQuantity <= Convert.ToDecimal(dr["IssQty"]))
+                        if (dr["table1"].ToString() == "os")
                         {
-                            qry = qry + " update tblOpStckRate  set IssQty = IssQty - " + model.ReturnQuantity + " where MaterialId = " + model.RawMaterialId + " and id=" + dr["id"];
-                            model.ReturnQuantity -= model.ReturnQuantity;
+                            if (model.ReturnQuantity <= Convert.ToDecimal(dr["IssQty"]))
+                            {
+                                qry = qry + " update tblOpStckRate  set IssQty = IssQty - " + model.ReturnQuantity + " where MaterialId = " + model.RawMaterialId + " and id=" + dr["id"];
+                                qry = qry + " insert into  tblTransRetRatedet values( "+retId+", '"+model.RawMaterialId+"', "+model.ReturnQuantity+","+dr["Rate"].ToString()+" ) ";
+                                model.ReturnQuantity -= model.ReturnQuantity;
+
+                                
+
+                            }
+                            else
+                            {
+                                qry = qry + " update tblOpStckRate  set IssQty = IssQty - " + Convert.ToDecimal(dr["IssQty"]) + " where MaterialId = " + model.RawMaterialId + " and id=" + dr["id"];
+                                qry = qry + " insert into  tblTransRetRatedet values( " + retId + ", '" + model.RawMaterialId + "', " + Convert.ToDecimal(dr["IssQty"]) + "," + dr["Rate"].ToString() + " ) ";
+                                model.ReturnQuantity -= Convert.ToDecimal(dr["IssQty"]);
+                            }
+
                         }
                         else
                         {
-                            qry = qry + " update tblOpStckRate  set IssQty = IssQty - " + Convert.ToDecimal(dr["IssQty"]) + " where MaterialId = " + model.RawMaterialId + " and id=" + dr["id"];
-                            model.ReturnQuantity -= Convert.ToDecimal(dr["IssQty"]);
+                            if (model.ReturnQuantity <= Convert.ToDecimal(dr["IssQty"]))
+                            {
+                                qry = qry + " update tblGRNStock  set IssQty = IssQty - " + model.ReturnQuantity + " where MaterialId = " + model.RawMaterialId + " and id=" + dr["id"];
+                                qry = qry + " insert into  tblTransRetRatedet values( " + retId + ", '" + model.RawMaterialId + "', " + model.ReturnQuantity + "," + dr["Rate"].ToString() + " ) ";
+                                model.ReturnQuantity -= model.ReturnQuantity;
+                            }
+                            else
+                            {
+                                qry = qry + " update tblGRNStock  set IssQty = IssQty - " + Convert.ToDecimal(dr["IssQty"]) + " where MaterialId = " + model.RawMaterialId + " and id=" + dr["id"];
+                                qry = qry + " insert into  tblTransRetRatedet values( " + retId + ", '" + model.RawMaterialId + "', " + Convert.ToDecimal(dr["IssQty"]) + "," + dr["Rate"].ToString() + " ) ";
+                                model.ReturnQuantity -= Convert.ToDecimal(dr["IssQty"]);
+                            }
+
+
+
                         }
-
-                    }
-                    else
-                    {
-                        if (model.ReturnQuantity <= Convert.ToDecimal(dr["IssQty"]))
-                        {
-                            qry = qry + " update tblGRNStock  set IssQty = IssQty - " + model.ReturnQuantity + " where MaterialId = " + model.RawMaterialId + " and id=" + dr["id"];
-                            model.ReturnQuantity -= model.ReturnQuantity;
-                        }
-                        else
-                        {
-                            qry = qry + " update tblGRNStock  set IssQty = IssQty - " + Convert.ToDecimal(dr["IssQty"]) + " where MaterialId = " + model.RawMaterialId + " and id=" + dr["id"];
-                            model.ReturnQuantity -= Convert.ToDecimal(dr["IssQty"]);
-                        }
-
-
-
                     }
                 }
+                con = new SqlConnection(webconnection);
+                con.Open();
+                cmd = new SqlCommand(qry, con);
+                cmd.ExecuteNonQuery();
+                con.Close();
+
+
+                //con = new SqlConnection(webconnection);
+                //con.Open();
+                //cmd = new SqlCommand("StockReturn", con);
+                //cmd.CommandType = CommandType.StoredProcedure;
+                //cmd.Parameters.Add("@transferid", Transferid);
+                //cmd.Parameters.Add("@rawmaterialid", RawMaterialId);
+                //cmd.Parameters.Add("@item", Quantity);
+                //SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                //cmd.ExecuteNonQuery();
+                //con.Close();
+                TempData["Perror"] = "Stock Returned Successfully !!";
             }
-            con = new SqlConnection(webconnection);
-            con.Open();
-            cmd = new SqlCommand(qry, con);
-            cmd.ExecuteNonQuery();
-            con.Close();
-
-
-            //con = new SqlConnection(webconnection);
-            //con.Open();
-            //cmd = new SqlCommand("StockReturn", con);
-            //cmd.CommandType = CommandType.StoredProcedure;
-            //cmd.Parameters.Add("@transferid", Transferid);
-            //cmd.Parameters.Add("@rawmaterialid", RawMaterialId);
-            //cmd.Parameters.Add("@item", Quantity);
-            //SqlDataAdapter sda = new SqlDataAdapter(cmd);
-            //cmd.ExecuteNonQuery();
-            //con.Close();
-            TempData["Perror"] = "Stock Returned Successfully !!";
+            else
+                TempData["Perror"] = "Unsuccessful! Return Qty Exceeds";
 
 
             return RedirectToAction("TransferStockReport", "StockTransfer");

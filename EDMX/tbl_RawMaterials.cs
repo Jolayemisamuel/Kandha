@@ -29,6 +29,8 @@ namespace NibsMVC.EDMX
             this.tblGenBarcodes = new HashSet<tblGenBarcode>();
             this.tbl_SubItemRawIndent = new HashSet<tbl_SubItemRawIndent>();
             this.tblAsgnRawSubItemDets = new HashSet<tblAsgnRawSubItemDet>();
+            this.tblTransRetRateDets = new HashSet<tblTransRetRateDet>();
+            this.tblConsumptions = new HashSet<tblConsumption>();
         }
     
         public int RawMaterialId { get; set; }
@@ -58,5 +60,7 @@ namespace NibsMVC.EDMX
         public virtual ICollection<tblGenBarcode> tblGenBarcodes { get; set; }
         public virtual ICollection<tbl_SubItemRawIndent> tbl_SubItemRawIndent { get; set; }
         public virtual ICollection<tblAsgnRawSubItemDet> tblAsgnRawSubItemDets { get; set; }
+        public virtual ICollection<tblTransRetRateDet> tblTransRetRateDets { get; set; }
+        public virtual ICollection<tblConsumption> tblConsumptions { get; set; }
     }
 }

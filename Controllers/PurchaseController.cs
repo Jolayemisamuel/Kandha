@@ -204,15 +204,21 @@ namespace NibsMVC.Controllers
 
         public ActionResult PurchaseReturn(int purchaseid = 0, int itemid = 0, int purchasdetailId = 0)
         {
+           
             var ReturnData = (from p in db.tblPurchasedItems
                               where p.PurchaseDetailId == purchasdetailId
                               select p).SingleOrDefault();
+
+            decimal Returned = (from q in db.tblPurchaseReturns
+                                where (q.vendorId == purchasdetailId && q.RawMaterialId == ReturnData.RawMaterialId)
+                                select (decimal?)q.ReturnQuantity).Sum() ?? 0;
+
             OutletPurchageReturnModel model = new OutletPurchageReturnModel();
             model.Amount = ReturnData.Amount;
             model.Purchasedetailid = ReturnData.PurchaseDetailId;
             model.Purchaseid = ReturnData.PurchaseId;
             model.OutletId = obj.getOutletId();
-            model.Quantity = ReturnData.Quantity;
+            model.Quantity = ReturnData.Quantity- Returned;
             model.Type = ReturnType(ReturnData.Unit);
             model.VendorId = purchasdetailId;
             model.RowMaterialId = ReturnData.RawMaterialId;
@@ -224,42 +230,52 @@ namespace NibsMVC.Controllers
         [HttpPost]
         public ActionResult PurchaseReturn(OutletPurchageReturnModel model)
         {
+            if (model.Quantity >= model.ReturnQuantity)
+            {
+                var Data = (from p in db.tblPurchasedItems
+                            where p.PurchaseDetailId == model.Purchasedetailid
+                            select p).SingleOrDefault();
+                decimal perticularAmount = Data.Amount / Data.Quantity;
+                decimal returnAmount = perticularAmount * model.ReturnQuantity;
+                tblPurchaseReturn tb = new tblPurchaseReturn();
+                tb.OutletId = obj.getOutletId();
+                tb.RawMaterialId = model.RowMaterialId;
+                tb.ReturnDate = DateTime.Now.Date;
+                tb.ReturnDescription = model.Reasion;
+                tb.ReturnQuantity = model.ReturnQuantity;
+                tb.vendorId = model.Purchasedetailid;
+                tb.ReturnStatuss = "Success";
+                db.tblPurchaseReturns.Add(tb);
+                //db.SaveChanges();
+                //remaining stock
+                int Outlet = obj.getOutletId();
+                decimal remaingquantity = model.Quantity - model.ReturnQuantity;
 
-            var Data = (from p in db.tblPurchasedItems
-                        where p.PurchaseDetailId == model.Purchasedetailid
-                        select p).SingleOrDefault();
-            decimal perticularAmount = Data.Amount / Data.Quantity;
-            decimal returnAmount = perticularAmount * model.ReturnQuantity;
-            tblPurchaseReturn tb = new tblPurchaseReturn();
-            tb.OutletId = obj.getOutletId();
-            tb.RawMaterialId = model.RowMaterialId;
-            tb.ReturnDate = DateTime.Now.Date;
-            tb.ReturnDescription = model.Reasion;
-            tb.ReturnQuantity = model.ReturnQuantity;
-            tb.vendorId = model.Purchasedetailid;
-            tb.ReturnStatuss = "Success";
-            db.tblPurchaseReturns.Add(tb);
-            //db.SaveChanges();
-            //remaining stock
-            int Outlet = obj.getOutletId();
-            decimal remaingquantity = model.Quantity - model.ReturnQuantity;
+                tbl_KitchenStock DataStock = (from p in db.tbl_KitchenStock where p.RawMaterialId == model.RowMaterialId && p.OutletId == Outlet select p).SingleOrDefault();
+                //tblPurchasedItem datastockpurchase = (from q in db.tblPurchasedItems where q.PurchaseDetailId == model.Purchasedetailid select q).SingleOrDefault();
+                //tblPurchaseMaster datastockpurchaseMst = (from q in db.tblPurchaseMasters where q.PurchaseId == model.Purchaseid select q).SingleOrDefault();
+                //DateTime grnStckdate = Convert.ToDateTime(datastockpurchaseMst.Date.ToShortDateString());
+                //tblGRNStock datastockgrn = (from r in db.tblGRNStocks where r.MaterialId == model.RowMaterialId && r.Date== grnStckdate && r.Qty== datastockpurchase.Quantity && (r.Qty + r.RetfrIss - r.RetToVen - r.IssQty)>=model.ReturnQuantity select r).SingleOrDefault();
+                //datastockgrn.RetToVen = datastockgrn.RetToVen + model.ReturnQuantity;
+                //tblPurchaseMaster datastockmaster = (from s in db.tblPurchaseMasters where s.PurchaseId == model.Purchaseid select s).SingleOrDefault();
+                DataStock.Quantity = DataStock.Quantity - model.ReturnQuantity;
+                // datastockpurchase.Quantity = remaingquantity;
+                // datastockpurchase.Amount = datastockpurchase.Amount - returnAmount;
+                // datastockmaster.TotalAmount = datastockmaster.TotalAmount - returnAmount;
+                // decimal taxrate = returnAmount / datastockpurchase.TaxPer;
+                // datastockmaster.Tax = datastockmaster.Tax - taxrate;
+                // datastockmaster.NetAmount = datastockmaster.TotalAmount + datastockmaster.Tax;
 
-            tbl_KitchenStock DataStock = (from p in db.tbl_KitchenStock where p.RawMaterialId == model.RowMaterialId && p.OutletId == Outlet select p).SingleOrDefault();
-            tblPurchasedItem datastockpurchase = (from q in db.tblPurchasedItems where q.PurchaseDetailId == model.Purchasedetailid select q).SingleOrDefault();
-            tblPurchaseMaster datastockpurchaseMst = (from q in db.tblPurchaseMasters where q.PurchaseId == model.Purchaseid select q).SingleOrDefault();
-            DateTime grnStckdate = Convert.ToDateTime(datastockpurchaseMst.Date.ToShortDateString());
-            tblGRNStock datastockgrn = (from r in db.tblGRNStocks where r.MaterialId == model.RowMaterialId && r.Date== grnStckdate && r.Qty== datastockpurchase.Quantity select r).SingleOrDefault();
-            tblPurchaseMaster datastockmaster = (from s in db.tblPurchaseMasters where s.PurchaseId == model.Purchaseid select s).SingleOrDefault();
-            DataStock.Quantity = DataStock.Quantity - model.ReturnQuantity;
-            datastockpurchase.Quantity = remaingquantity;
-            datastockpurchase.Amount = datastockpurchase.Amount - returnAmount;
-            datastockmaster.TotalAmount = datastockmaster.TotalAmount - returnAmount;
-            decimal taxrate = returnAmount / datastockpurchase.TaxPer;
-            datastockmaster.Tax = datastockmaster.Tax - taxrate;
-            datastockmaster.NetAmount = datastockmaster.TotalAmount + datastockmaster.Tax;
+                //datastockgrn.Qty = remaingquantity;
 
-            datastockgrn.Qty = remaingquantity;
-            db.SaveChanges();
+
+                db.SaveChanges();
+                TempData["Prerror"] = "Returned Successfully";
+            }
+
+            else
+                TempData["Prerror"] = "UnSuccessful ! Return Qty Exceeds";
+
             return RedirectToAction("ReturnPurchaseReport");
         }
         [Authorize]

@@ -13,6 +13,9 @@ using System.Xml.Linq;
 using System.Drawing;
 using System.IO;
 using System.Drawing.Imaging;
+using System.Data.SqlClient;
+using System.Data;
+using System.Configuration;
 
 namespace NibsMVC.Controllers
 {
@@ -79,17 +82,100 @@ namespace NibsMVC.Controllers
                             tbDet.Amount = itemDet.Value;
 
                             if (item.Description == "Ac Hall")
-                                tbDet.VatAmount = itemDet.Value + (itemDet.Value * (decimal)0.18);
+                                tbDet.VatAmount = itemDet.Value + (itemDet.Value * (decimal)0.5);
                             else
-                                tbDet.VatAmount = itemDet.Value + (itemDet.Value * (decimal)0.12);
+                                tbDet.VatAmount = itemDet.Value + (itemDet.Value * (decimal)0.5);
 
                             if (item.Description == "Ac Hall")
-                                tbDet.Vat = Convert.ToDecimal("18");
+                                tbDet.Vat = Convert.ToDecimal("5");
                             else
-                                tbDet.Vat = Convert.ToDecimal("12");
+                                tbDet.Vat = Convert.ToDecimal("5");
 
                             entities.tblBillDetails.Add(tbDet);
                             entities.SaveChanges();
+
+
+                            var RawList = (from p in entities.tbl_KitchenRawIndent where p.ItemId.Equals(tbDet.ItemId) select p).ToList();
+                            if (RawList != null)
+                            {
+                                if(RawList.Count >0)
+                                {
+                                    foreach (var li in RawList)
+                                    {
+                                        decimal qty = Convert.ToDecimal (li.Quantity /li.Portion);
+                                        string pUnit = li.tbl_RawMaterials.units;
+                                        string cUnit = li.Unit;
+                                        // Convert cUnit (Consumption Unit)  from pUnit (Purchase Unit) 
+
+
+
+                                        string qry = "  select Id,MaterialId,Rate,Date,Qty,IssQty,ConsumptionQty=isnull(ConsumptionQty,0),table1='os' from tblOpStckRate where issueQty > ConsumptionQty   and MaterialId = " + li.RawMaterialId  ;  
+                                        qry = qry + " union all ";
+                                        qry = qry + " select Id,MaterialId,Rate,Date,Qty,IssQty,ConsumptionQty=isnull(ConsumptionQty,0),table1='gs' from tblGRNStock where issueQty > ConsumptionQty   and MaterialId = " + li.RawMaterialId + " order by date ";
+                                        string webconnection = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
+                                        SqlConnection con = new SqlConnection(webconnection);
+                                        SqlCommand cmd = new SqlCommand(qry, con);
+                                        DataTable dt1 = new DataTable();
+                                        SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                                        sda.Fill(dt1);
+                                        qry = "";
+                                        foreach (DataRow dr in dt1.Rows)
+                                        {
+                                           
+
+                                            if (qty > 0)
+                                            {
+                                                if (dr["table1"].ToString() == "os")
+                                                {
+                                                    if (qty <= Convert.ToDecimal(dr["ConsumptionQty"]))
+                                                    {
+                                                        qry = qry + " update tblOpStckRate  set ConsumptionQty = isnull(ConsumptionQty,0) + " + qty+ " where MaterialId = " + li.RawMaterialId + " and id=" + dr["id"];
+                                                        qry = qry + " insert into  tblConsumption values( " + tbDet.BillDetailsId + ", '" + li.RawMaterialId + "', " + qty+ "," + dr["Rate"].ToString() + " ) ";
+                                                        qty-= qty;
+
+
+
+                                                    }
+                                                    else
+                                                    {
+                                                        qry = qry + " update tblOpStckRate  set ConsumptionQty = isnull(ConsumptionQty,0) + " + Convert.ToDecimal(dr["ConsumptionQty"]) + " where MaterialId = " + li.RawMaterialId + " and id=" + dr["id"];
+                                                        qry = qry + " insert into  tblConsumption values( " + tbDet.BillDetailsId + ", '" + li.RawMaterialId + "', " + Convert.ToDecimal(dr["ConsumptionQty"]) + "," + dr["Rate"].ToString() + " ) ";
+                                                        qty-= Convert.ToDecimal(dr["ConsumptionQty"]);
+                                                    }
+
+                                                }
+                                                else
+                                                {
+                                                    if (qty<= Convert.ToDecimal(dr["ConsumptionQty"]))
+                                                    {
+                                                        qry = qry + " update tblGRNStock  set ConsumptionQty = isnull(ConsumptionQty,0) + " + qty+ " where MaterialId = " + li.RawMaterialId + " and id=" + dr["id"];
+                                                        qry = qry + " insert into  tblConsumption values( " + tbDet.BillDetailsId + ", '" + li.RawMaterialId + "', " + qty+ "," + dr["Rate"].ToString() + " ) ";
+                                                        qty-= qty;
+                                                    }
+                                                    else
+                                                    {
+                                                        qry = qry + " update tblGRNStock  set ConsumptionQty = isnull(ConsumptionQty,0) + " + Convert.ToDecimal(dr["ConsumptionQty"]) + " where MaterialId = " + li.RawMaterialId + " and id=" + dr["id"];
+                                                        qry = qry + " insert into  tblConsumption values( " + tbDet.BillDetailsId + ", '" + li.RawMaterialId + "', " + Convert.ToDecimal(dr["ConsumptionQty"]) + "," + dr["Rate"].ToString() + " ) ";
+                                                        qty-= Convert.ToDecimal(dr["ConsumptionQty"]);
+                                                    }
+
+
+
+                                                }
+                                            }
+                                        }
+                                        con = new SqlConnection(webconnection);
+                                        con.Open();
+                                        cmd = new SqlCommand(qry, con);
+                                        cmd.ExecuteNonQuery();
+                                        con.Close();
+
+                                    }
+
+                                }
+                            }
+
+
 
                         }
 
