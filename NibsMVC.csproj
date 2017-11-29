@@ -303,6 +303,7 @@
     <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\DateController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
+    <Compile Include="Controllers\FinanceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HomeDeliveryController.cs" />
     <Compile Include="Controllers\item.cs" />
@@ -2439,6 +2440,7 @@
     <Compile Include="Models\CategoryItemModel.cs" />
     <Compile Include="Models\CategoryWiseReportModel.cs" />
     <Compile Include="Models\DeleteModel.cs" />
+    <Compile Include="Models\Finance.cs" />
     <Compile Include="Models\HomeDeliveryModel.cs" />
     <Compile Include="Models\KitchenAlertsModel.cs" />
     <Compile Include="Models\KitchenStockModel.cs" />
@@ -3059,6 +3061,8 @@
     <Content Include="TakeAwayXML\Kot.xml" />
     <Content Include="TakeAwayXML\Takeaway.xml" />
     <Content Include="xmlkot\AssignSubMenuItem.xml" />
+    <Content Include="xmlkot\ReceiptCreditAccount.xml" />
+    <Content Include="xmlkot\ReceiptDebitAccount.xml" />
     <Content Include="xmlkot\SubItemRawMaterial.xml" />
     <Content Include="xmlkot\KitchenRawMaterial.xml">
       <SubType>Designer</SubType>
@@ -3311,6 +3315,8 @@
     <Content Include="Views\AssignSubMenu\AssignSubMenuItem.cshtml" />
     <Content Include="Views\AssignSubMenu\Index.cshtml" />
     <Content Include="Views\Reports\MovementAnalysisReport.cshtml" />
+    <Content Include="Views\Finance\Receipt.cshtml" />
+    <Content Include="Views\Finance\CashReceipt.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Barcodes\" />
