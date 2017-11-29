@@ -1,0 +1,252 @@
+﻿@model NibsMVC.Models.CashReceipt
+
+@{
+    ViewBag.Title = "Receipt";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-content">
+    <div class="row">
+        <p style="color:red">@TempData["Perror"]</p>
+        <div class="col-md-12">
+            <div class="portlet box blue">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-gift"></i>Create Receipt
+                    </div>
+                </div>
+                <div class="portlet-body form">
+                    <!-- BEGIN FORM-->
+                    @using (Html.BeginForm("CashReceiptPost", "Finance", FormMethod.Post, new { @id = "form_sample_6", @class = "form-horizontal" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        @Html.HiddenFor(model => model.VoucherEntryId)
+                        <input type="hidden" name="itemsdata" id="itemsdata" value="" />
+                        <div class="form-body">
+                            <div class="alert alert-danger display-hide">
+                                <button class="close" data-close="alert"></button>
+                                You have some form errors. Please check below.
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="col-md-4">Voucher No</label>
+                                    <div class="col-md-8">
+                                        @Html.TextBoxFor(model => model.VoucherNo, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.VoucherNo)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="col-md-5">Voucher Date<span class="required"> *</span></label>
+                                    <div class="col-md-7">
+                                        @Html.TextBoxFor(model => model.Date, new { @Value = " ", id = "datepicker", @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Date)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="col-md-4">Record No</label>
+                                    <div class="col-md-4">
+                                        @Html.TextBoxFor(model => model.RecordNo, new { @class = "form-control" , @readonly="readonly"})
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="portlet">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="fa fa-gift"></i>Credit
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <table id="tableRoutingData" class="table table-striped table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Ledger Account</th>
+                                                <th>Credit Amount</th>                                                
+                                                <th>Narration</th>
+                                                <th>Action</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr menuid="-1">
+                                                <td>
+                                                    <select id="cat_0" class="form-control Keys" name="LedgerAccId"></select>
+                                                    @Html.ValidationMessageFor(model => model.LedgerAccId)
+                                                </td>
+                                                <td>
+                                                    <input id="Item_0" type="text" class="form-control Keys" name="CreditAmount" />
+                                                    @Html.ValidationMessageFor(model => model.CreditAmount)
+                                                </td>                                                
+                                                <td>
+                                                    <input id="Narration_0" type="text" class="form-control" name="CrNarration" />
+
+                                                </td>
+                                                <td>
+
+                                                    <button type="button" id="btnadd" class="btn btn-success btn-sm defaults">
+                                                        <span class="fa fa-plus"></span>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        <tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="portlet">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="fa fa-gift"></i>Debit
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <table id="tableRoutingDataDebit" class="table table-striped table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>By Account</th>
+                                                <th>Debit Amount</th>
+                                                <th>Narration</th>
+                                                <th>Action</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr menuidd="-1">
+                                                <td>
+                                                    <select id="By_0" class="form-control Keys" name="ByAccount"></select>
+                                                    @Html.ValidationMessageFor(model => model.ByAccount)
+                                                </td>
+                                                <td>
+                                                    <input id="Dr_0" type="text" class="form-control Keys" name="DrAmount" />
+                                                    @Html.ValidationMessageFor(model => model.DrAmount)
+                                                </td>
+                                                <td>
+                                                    <input id="NarrationD_0" type="text" class="form-control" name="DrNarration" />
+
+                                                </td>
+                                                <td>
+
+                                                    <button type="button" id="btnaddd" class="btn btn-success btn-sm defaults">
+                                                        <span class="fa fa-plus"></span>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        <tbody>
+                                    </table>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-offset-3 col-md-9">
+                                        <button type="submit" class="btn green">Submit</button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+
+
+        $.ajax({
+            type: 'POST',
+            url: '/Finance/getCategories',
+
+            dataType: 'json',
+
+            success: function (items) {
+
+                $("#cat_0").append('<option value="--Select Item--">--Select Category--</option>');
+                $.each(items, function (i, item) {
+                    $("#cat_0").append('<option value="' + item.Value + '">' + item.Text + '</option>');
+
+                });
+            },
+
+            error: function (ex) {
+                alert('Failed to retrieve Category and Item.' + ex);
+            }
+        });
+        return false;
+    });
+    $(document).ready(function () {
+
+
+        $.ajax({
+            type: 'POST',
+            url: '/Finance/getByAccCash',
+
+            dataType: 'json',
+         
+            success: function (items) {
+
+                $("#By_0").append('<option value="--Select Item--">--Select Category--</option>');
+                $.each(items, function (i, item) {
+                    $("#By_0").append('<option value="' + item.Value + '">' + item.Text + '</option>');
+
+                });
+            },
+
+            error: function (ex) {
+                alert('Failed to retrieve Category and Item.' + ex);
+            }
+        });
+        return false;
+    });
+
+       
+</script>
+<script>
+    $(document).ready(function () {
+
+        
+
+        var counter = 1;
+        $(document).on("click", ".minus", function (e) {
+            var id = $(this).attr('id');
+
+            $(this).parent("td").parent("tr").remove();
+            counter--;
+        });
+
+       
+        $('#btnadd').on('click', function () {
+            $('#tableRoutingData').append('<tr MenuID="-1" class="trEdit" id="tr_' + counter + '"><td><select id="cat_' + counter + '" name="LedgerAccId" class="form-control Keys"/></td><td><input id="Item_' + counter + '" type="text" name="CreditAmount" class="form-control Keys"/></td>' +                
+                 ' <td><input id="Narration_' + counter + '" type="CrNarration" name="CrNarration" ' +
+                 ' class="form-control input-md"/></td><td>' +
+                  '<button data-val="' + counter + '"' +
+                 ' style="margin-top:10px;" type="button" id="btnminus_' + counter + '" ' +
+                 'class="minus btn btn-danger btn-sm defaults"><span class="fa fa-minus"></span></button></td></tr>');
+            $('#cat_0 option').clone().appendTo('#cat_' + counter);
+            $('#Item_0 option').clone().appendTo('#Item_' + counter);            
+            $('#Narration_0 option').clone().appendTo('#Narration_' + counter);            
+            counter++;
+        });
+        $('#btnaddd').on('click', function () {
+            $('#tableRoutingDataDebit').append('<tr MenuIDD="-1" class="trEditD" id="tr_' + counter + '"><td><select id="By_' + counter + '" name="ByAccount" class="form-control Keys"/></td><td><input id="Dr_' + counter + '" type="text" name="DrAmount" class="form-control Keys"/></td>' +
+                 ' <td><input id="NarrationD_' + counter + '" type="DrNarration" name="DrNarration" ' +
+                 ' class="form-control input-md"/></td><td>' +
+                  '<button data-val="' + counter + '"' +
+                 ' style="margin-top:10px;" type="button" id="btnminus_' + counter + '" ' +
+                 'class="minus btn btn-danger btn-sm defaults"><span class="fa fa-minus"></span></button></td></tr>');
+            $('#By_0 option').clone().appendTo('#By_' + counter);
+            $('#Dr_0 option').clone().appendTo('#Dr_' + counter);
+            $('#NarrationD_0 option').clone().appendTo('#NarrationD_' + counter);
+            counter++;
+        });
+    });
+
+
+</script>
+<script type="text/javascript">
+    $(document).ready(function () { $("#datepicker").datepicker({ dateFormat: 'dd/mm/yy' }); });    
+</script>

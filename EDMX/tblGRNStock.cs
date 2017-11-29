@@ -20,6 +20,7 @@ namespace NibsMVC.EDMX
         public System.DateTime Date { get; set; }
         public Nullable<decimal> Qty { get; set; }
         public Nullable<decimal> IssQty { get; set; }
+        public Nullable<decimal> ConsumptionQty { get; set; }
     
         public virtual tbl_RawMaterials tbl_RawMaterials { get; set; }
     }

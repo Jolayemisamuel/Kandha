@@ -150,10 +150,10 @@
         <EntityTypeShape EntityType="NIBSModel.tblLedgerCategory" Width="1.5" PointX="21.375" PointY="6" />
         <EntityTypeShape EntityType="NIBSModel.tblLedgerGroup" Width="1.5" PointX="23.625" PointY="5.75" />
         <EntityTypeShape EntityType="NIBSModel.tblLedgerMaster" Width="1.5" PointX="25.875" PointY="5.25" />
-        <EntityTypeShape EntityType="NIBSModel.Voucher_Entry_Credit" Width="1.5" PointX="28.125" PointY="7.125" />
-        <EntityTypeShape EntityType="NIBSModel.Voucher_Entry_Debit" Width="1.5" PointX="28.125" PointY="1.375" />
         <AssociationConnector Association="NIBSModel.FK_tblLedgerGroup_tblLedgerCategory" />
         <AssociationConnector Association="NIBSModel.FK_tblLedgerMaster_tblLedgerGroup" />
+        <EntityTypeShape EntityType="NIBSModel.Voucher_Entry_Credit" Width="1.5" PointX="28.125" PointY="1.375" />
+        <EntityTypeShape EntityType="NIBSModel.Voucher_Entry_Debit" Width="1.5" PointX="28.125" PointY="7.25" />
         <AssociationConnector Association="NIBSModel.FK_Voucher_Entry_Credit_tblLedgerMaster" />
         <AssociationConnector Association="NIBSModel.FK_Voucher_Entry_Debit_tblLedgerMaster" />
         </Diagram>

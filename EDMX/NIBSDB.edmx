@@ -405,6 +405,7 @@
           <Property Name="Date" Type="date" Nullable="false" />
           <Property Name="Qty" Type="numeric" Precision="18" Scale="2" />
           <Property Name="IssQty" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="ConsumptionQty" Type="decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="tblItem">
           <Key>
@@ -482,6 +483,7 @@
           <Property Name="Date" Type="date" Nullable="false" />
           <Property Name="Qty" Type="numeric" Precision="18" Scale="2" />
           <Property Name="IssQty" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="ConsumptionQty" Type="decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="tblOutlet">
           <Key>
@@ -727,50 +729,50 @@
             <PropertyRef Name="voucher_entry_id" />
           </Key>
           <Property Name="voucher_entry_id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="voucher_no" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="Voucher_date" Type="datetime" Nullable="false" />
-          <Property Name="record_no" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="record_date" Type="datetime" Nullable="false" />
-          <Property Name="voucher_sno" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="voucher_tb" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="voucher_ledger_accout_id" Type="int" Nullable="false" />
-          <Property Name="voucher_cr_amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="voucher_type" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="voucher_no" Type="varchar" MaxLength="10" />
+          <Property Name="Voucher_date" Type="datetime" />
+          <Property Name="record_no" Type="varchar" MaxLength="10" />
+          <Property Name="record_date" Type="datetime" />
+          <Property Name="voucher_sno" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="voucher_tb" Type="varchar" MaxLength="10" />
+          <Property Name="voucher_ledger_accout_id" Type="int" />
+          <Property Name="voucher_cr_amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="voucher_type" Type="nvarchar" MaxLength="20" />
           <Property Name="voucher_year" Type="nvarchar" MaxLength="20" />
           <Property Name="check_no" Type="nvarchar" MaxLength="10" />
-          <Property Name="check_date" Type="nvarchar" MaxLength="20" />
+          <Property Name="check_date" Type="datetime" />
           <Property Name="bank_date" Type="datetime" />
-          <Property Name="create_date" Type="datetime" Nullable="false" />
-          <Property Name="userid" Type="int" Nullable="false" />
-          <Property Name="from_form_name" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="from_form_id" Type="int" Nullable="false" />
+          <Property Name="create_date" Type="datetime" />
+          <Property Name="userid" Type="int" />
+          <Property Name="from_form_name" Type="nvarchar" MaxLength="100" />
+          <Property Name="from_form_id" Type="int" />
           <Property Name="voucher_narration" Type="nvarchar" MaxLength="500" />
-          <Property Name="account_type" Type="nvarchar" MaxLength="100" />
+          <Property Name="account_type" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="Voucher_Entry_Debit">
           <Key>
             <PropertyRef Name="voucher_entry_id" />
           </Key>
           <Property Name="voucher_entry_id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="voucher_no" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="voucher_date" Type="datetime" Nullable="false" />
-          <Property Name="record_no" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="record_date" Type="datetime" Nullable="false" />
-          <Property Name="voucher_sno" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="voucher_tb" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="voucher_ledger_accout_id" Type="int" Nullable="false" />
-          <Property Name="voucher_dbt_amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="voucher_type" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="voucher_no" Type="varchar" MaxLength="10" />
+          <Property Name="voucher_date" Type="datetime" />
+          <Property Name="record_no" Type="varchar" MaxLength="10" />
+          <Property Name="record_date" Type="datetime" />
+          <Property Name="voucher_sno" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="voucher_tb" Type="varchar" MaxLength="10" />
+          <Property Name="voucher_ledger_accout_id" Type="int" />
+          <Property Name="voucher_dbt_amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="voucher_type" Type="nvarchar" MaxLength="20" />
           <Property Name="voucher_year" Type="nvarchar" MaxLength="20" />
           <Property Name="check_no" Type="nvarchar" MaxLength="10" />
           <Property Name="check_date" Type="datetime" />
           <Property Name="bank_date" Type="datetime" />
-          <Property Name="create_date" Type="datetime" Nullable="false" />
-          <Property Name="userid" Type="int" Nullable="false" />
-          <Property Name="from_form_name" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="from_form_id" Type="int" Nullable="false" />
+          <Property Name="create_date" Type="datetime" />
+          <Property Name="userid" Type="int" />
+          <Property Name="from_form_name" Type="nvarchar" MaxLength="100" />
+          <Property Name="from_form_id" Type="int" />
           <Property Name="voucher_narration" Type="nvarchar" MaxLength="500" />
-          <Property Name="account_type" Type="nvarchar" MaxLength="10" />
+          <Property Name="account_type" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <Association Name="FK_AddCategoryVendor_RawCategory">
           <End Role="RawCategory" Type="Self.RawCategory" Multiplicity="1" />
@@ -1721,7 +1723,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Voucher_Entry_Credit_tblLedgerMaster">
-          <End Role="tblLedgerMaster" Type="Self.tblLedgerMaster" Multiplicity="1" />
+          <End Role="tblLedgerMaster" Type="Self.tblLedgerMaster" Multiplicity="0..1" />
           <End Role="Voucher_Entry_Credit" Type="Self.Voucher_Entry_Credit" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblLedgerMaster">
@@ -1733,7 +1735,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Voucher_Entry_Debit_tblLedgerMaster">
-          <End Role="tblLedgerMaster" Type="Self.tblLedgerMaster" Multiplicity="1" />
+          <End Role="tblLedgerMaster" Type="Self.tblLedgerMaster" Multiplicity="0..1" />
           <End Role="Voucher_Entry_Debit" Type="Self.Voucher_Entry_Debit" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblLedgerMaster">
@@ -2551,8 +2553,6 @@
           <EntitySet Name="tblLedgerCategories" EntityType="NIBSModel.tblLedgerCategory" />
           <EntitySet Name="tblLedgerGroups" EntityType="NIBSModel.tblLedgerGroup" />
           <EntitySet Name="tblLedgerMasters" EntityType="NIBSModel.tblLedgerMaster" />
-          <EntitySet Name="Voucher_Entry_Credit" EntityType="NIBSModel.Voucher_Entry_Credit" />
-          <EntitySet Name="Voucher_Entry_Debit" EntityType="NIBSModel.Voucher_Entry_Debit" />
           <AssociationSet Name="FK_tblLedgerGroup_tblLedgerCategory" Association="NIBSModel.FK_tblLedgerGroup_tblLedgerCategory">
             <End Role="tblLedgerCategory" EntitySet="tblLedgerCategories" />
             <End Role="tblLedgerGroup" EntitySet="tblLedgerGroups" />
@@ -2561,6 +2561,8 @@
             <End Role="tblLedgerGroup" EntitySet="tblLedgerGroups" />
             <End Role="tblLedgerMaster" EntitySet="tblLedgerMasters" />
           </AssociationSet>
+          <EntitySet Name="Voucher_Entry_Credit" EntityType="NIBSModel.Voucher_Entry_Credit" />
+          <EntitySet Name="Voucher_Entry_Debit" EntityType="NIBSModel.Voucher_Entry_Debit" />
           <AssociationSet Name="FK_Voucher_Entry_Credit_tblLedgerMaster" Association="NIBSModel.FK_Voucher_Entry_Credit_tblLedgerMaster">
             <End Role="tblLedgerMaster" EntitySet="tblLedgerMasters" />
             <End Role="Voucher_Entry_Credit" EntitySet="Voucher_Entry_Credit" />
@@ -4033,6 +4035,7 @@
           <NavigationProperty Name="tbl_RawMaterials" Relationship="NIBSModel.FK_tblOpStckRate_tbl_RawMaterials" FromRole="tblOpStckRate" ToRole="tbl_RawMaterials" />
           <Property Name="Qty" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="IssQty" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ConsumptionQty" Type="Decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="Unit">
           <Key>
@@ -4196,6 +4199,7 @@
           <Property Name="Qty" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="IssQty" Type="Decimal" Precision="18" Scale="2" />
           <NavigationProperty Name="tbl_RawMaterials" Relationship="NIBSModel.FK_tblGRNStock_tbl_RawMaterials" FromRole="tblGRNStock" ToRole="tbl_RawMaterials" />
+          <Property Name="ConsumptionQty" Type="Decimal" Precision="18" Scale="2" />
         </EntityType>
         <Association Name="FK_tblGRNStock_tbl_RawMaterials">
           <End Type="NIBSModel.tbl_RawMaterials" Role="tbl_RawMaterials" Multiplicity="1" />
@@ -4469,58 +4473,6 @@
           <NavigationProperty Name="Voucher_Entry_Credit" Relationship="NIBSModel.FK_Voucher_Entry_Credit_tblLedgerMaster" FromRole="tblLedgerMaster" ToRole="Voucher_Entry_Credit" />
           <NavigationProperty Name="Voucher_Entry_Debit" Relationship="NIBSModel.FK_Voucher_Entry_Debit_tblLedgerMaster" FromRole="tblLedgerMaster" ToRole="Voucher_Entry_Debit" />
         </EntityType>
-        <EntityType Name="Voucher_Entry_Credit">
-          <Key>
-            <PropertyRef Name="voucher_entry_id" />
-          </Key>
-          <Property Name="voucher_entry_id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="voucher_no" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Voucher_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="record_no" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="record_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="voucher_sno" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="voucher_tb" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="voucher_ledger_accout_id" Type="Int32" Nullable="false" />
-          <Property Name="voucher_cr_amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="voucher_type" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="voucher_year" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="check_no" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="check_date" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="bank_date" Type="DateTime" Precision="3" />
-          <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="userid" Type="Int32" Nullable="false" />
-          <Property Name="from_form_name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="from_form_id" Type="Int32" Nullable="false" />
-          <Property Name="voucher_narration" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="account_type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="tblLedgerMaster" Relationship="NIBSModel.FK_Voucher_Entry_Credit_tblLedgerMaster" FromRole="Voucher_Entry_Credit" ToRole="tblLedgerMaster" />
-        </EntityType>
-        <EntityType Name="Voucher_Entry_Debit">
-          <Key>
-            <PropertyRef Name="voucher_entry_id" />
-          </Key>
-          <Property Name="voucher_entry_id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="voucher_no" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="voucher_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="record_no" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="record_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="voucher_sno" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="voucher_tb" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="voucher_ledger_accout_id" Type="Int32" Nullable="false" />
-          <Property Name="voucher_dbt_amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="voucher_type" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="voucher_year" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="check_no" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="check_date" Type="DateTime" Precision="3" />
-          <Property Name="bank_date" Type="DateTime" Precision="3" />
-          <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="userid" Type="Int32" Nullable="false" />
-          <Property Name="from_form_name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="from_form_id" Type="Int32" Nullable="false" />
-          <Property Name="voucher_narration" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="account_type" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="tblLedgerMaster" Relationship="NIBSModel.FK_Voucher_Entry_Debit_tblLedgerMaster" FromRole="Voucher_Entry_Debit" ToRole="tblLedgerMaster" />
-        </EntityType>
         <Association Name="FK_tblLedgerGroup_tblLedgerCategory">
           <End Type="NIBSModel.tblLedgerCategory" Role="tblLedgerCategory" Multiplicity="1" />
           <End Type="NIBSModel.tblLedgerGroup" Role="tblLedgerGroup" Multiplicity="*" />
@@ -4545,8 +4497,60 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Voucher_Entry_Credit">
+          <Key>
+            <PropertyRef Name="voucher_entry_id" />
+          </Key>
+          <Property Name="voucher_entry_id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="voucher_no" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Voucher_date" Type="DateTime" Precision="3" />
+          <Property Name="record_no" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="record_date" Type="DateTime" Precision="3" />
+          <Property Name="voucher_sno" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="voucher_tb" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="voucher_ledger_accout_id" Type="Int32" />
+          <Property Name="voucher_cr_amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="voucher_type" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="voucher_year" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="check_no" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="check_date" Type="DateTime" Precision="3" />
+          <Property Name="bank_date" Type="DateTime" Precision="3" />
+          <Property Name="create_date" Type="DateTime" Precision="3" />
+          <Property Name="userid" Type="Int32" />
+          <Property Name="from_form_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="from_form_id" Type="Int32" />
+          <Property Name="voucher_narration" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="account_type" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblLedgerMaster" Relationship="NIBSModel.FK_Voucher_Entry_Credit_tblLedgerMaster" FromRole="Voucher_Entry_Credit" ToRole="tblLedgerMaster" />
+        </EntityType>
+        <EntityType Name="Voucher_Entry_Debit">
+          <Key>
+            <PropertyRef Name="voucher_entry_id" />
+          </Key>
+          <Property Name="voucher_entry_id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="voucher_no" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="voucher_date" Type="DateTime" Precision="3" />
+          <Property Name="record_no" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="record_date" Type="DateTime" Precision="3" />
+          <Property Name="voucher_sno" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="voucher_tb" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="voucher_ledger_accout_id" Type="Int32" />
+          <Property Name="voucher_dbt_amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="voucher_type" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="voucher_year" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="check_no" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="check_date" Type="DateTime" Precision="3" />
+          <Property Name="bank_date" Type="DateTime" Precision="3" />
+          <Property Name="create_date" Type="DateTime" Precision="3" />
+          <Property Name="userid" Type="Int32" />
+          <Property Name="from_form_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="from_form_id" Type="Int32" />
+          <Property Name="voucher_narration" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="account_type" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblLedgerMaster" Relationship="NIBSModel.FK_Voucher_Entry_Debit_tblLedgerMaster" FromRole="Voucher_Entry_Debit" ToRole="tblLedgerMaster" />
+        </EntityType>
         <Association Name="FK_Voucher_Entry_Credit_tblLedgerMaster">
-          <End Type="NIBSModel.tblLedgerMaster" Role="tblLedgerMaster" Multiplicity="1" />
+          <End Type="NIBSModel.tblLedgerMaster" Role="tblLedgerMaster" Multiplicity="0..1" />
           <End Type="NIBSModel.Voucher_Entry_Credit" Role="Voucher_Entry_Credit" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblLedgerMaster">
@@ -4558,7 +4562,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Voucher_Entry_Debit_tblLedgerMaster">
-          <End Type="NIBSModel.tblLedgerMaster" Role="tblLedgerMaster" Multiplicity="1" />
+          <End Type="NIBSModel.tblLedgerMaster" Role="tblLedgerMaster" Multiplicity="0..1" />
           <End Type="NIBSModel.Voucher_Entry_Debit" Role="Voucher_Entry_Debit" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblLedgerMaster">
@@ -5186,6 +5190,7 @@
           <EntitySetMapping Name="tblOpStckRates">
             <EntityTypeMapping TypeName="NIBSModel.tblOpStckRate">
               <MappingFragment StoreEntitySet="tblOpStckRate">
+                <ScalarProperty Name="ConsumptionQty" ColumnName="ConsumptionQty" />
                 <ScalarProperty Name="IssQty" ColumnName="IssQty" />
                 <ScalarProperty Name="Qty" ColumnName="Qty" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
@@ -5239,6 +5244,7 @@
           <EntitySetMapping Name="tblGRNStocks">
             <EntityTypeMapping TypeName="NIBSModel.tblGRNStock">
               <MappingFragment StoreEntitySet="tblGRNStock">
+                <ScalarProperty Name="ConsumptionQty" ColumnName="ConsumptionQty" />
                 <ScalarProperty Name="IssQty" ColumnName="IssQty" />
                 <ScalarProperty Name="Qty" ColumnName="Qty" />
                 <ScalarProperty Name="Date" ColumnName="Date" />

@@ -16,22 +16,22 @@ namespace NibsMVC.EDMX
     {
         public decimal voucher_entry_id { get; set; }
         public string voucher_no { get; set; }
-        public System.DateTime Voucher_date { get; set; }
+        public Nullable<System.DateTime> Voucher_date { get; set; }
         public string record_no { get; set; }
-        public System.DateTime record_date { get; set; }
-        public decimal voucher_sno { get; set; }
+        public Nullable<System.DateTime> record_date { get; set; }
+        public Nullable<decimal> voucher_sno { get; set; }
         public string voucher_tb { get; set; }
-        public int voucher_ledger_accout_id { get; set; }
-        public decimal voucher_cr_amount { get; set; }
+        public Nullable<int> voucher_ledger_accout_id { get; set; }
+        public Nullable<decimal> voucher_cr_amount { get; set; }
         public string voucher_type { get; set; }
         public string voucher_year { get; set; }
         public string check_no { get; set; }
-        public string check_date { get; set; }
+        public Nullable<System.DateTime> check_date { get; set; }
         public Nullable<System.DateTime> bank_date { get; set; }
-        public System.DateTime create_date { get; set; }
-        public int userid { get; set; }
+        public Nullable<System.DateTime> create_date { get; set; }
+        public Nullable<int> userid { get; set; }
         public string from_form_name { get; set; }
-        public int from_form_id { get; set; }
+        public Nullable<int> from_form_id { get; set; }
         public string voucher_narration { get; set; }
         public string account_type { get; set; }
     
