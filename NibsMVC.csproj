@@ -1140,6 +1140,12 @@
     <Compile Include="EDMX\MonthlyTaxPaidChallanDetail.cs">
       <DependentUpon>KOTDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="EDMX\MovementAnalysisKitchen_Result.cs">
+      <DependentUpon>NIBSDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\MovementAnalysisStore_Result.cs">
+      <DependentUpon>NIBSDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="EDMX\MultiTemplateLink.cs">
       <DependentUpon>KOTDB.tt</DependentUpon>
     </Compile>
@@ -2309,6 +2315,12 @@
     </Compile>
     <Compile Include="EDMX\VwRawMaterialItemGroup.cs">
       <DependentUpon>KOTDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\vwStockTransaction.cs">
+      <DependentUpon>NIBSDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\vwStockTransactionsKitchen.cs">
+      <DependentUpon>NIBSDB.tt</DependentUpon>
     </Compile>
     <Compile Include="EDMX\Vw_BillPendingDelivery.cs">
       <DependentUpon>KOTDB.tt</DependentUpon>

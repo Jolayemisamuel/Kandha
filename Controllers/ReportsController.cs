@@ -356,17 +356,18 @@ namespace NibsMVC.Controllers
         public ActionResult printexcel(MovementAnalysisReport Report)
         {
 
-            GenerateExcelReport(Report);
-            return RedirectToAction("MovementAnalysisReport", "Reports");
+            string filename= GenerateExcelReport(Report);
+            return File(Path.Combine( Server.MapPath("~/Report/"), filename), "application/xls");
+            //return RedirectToAction("MovementAnalysisReport", "Reports");
         }
 
-        public void GenerateExcelReport(MovementAnalysisReport Report)
+        public string GenerateExcelReport(MovementAnalysisReport Report)
         {
 
             Workbook book = new Workbook();
 
             string str_excelfilename = "MovementReport" + ".xls";
-            string str_excelpath = Server.MapPath("~/Reports/") + "\\" + str_excelfilename;
+            string str_excelpath = Server.MapPath("~/Report/") + "\\" + str_excelfilename;
 
 
             book.Properties.Author = "KS";
@@ -385,6 +386,9 @@ namespace NibsMVC.Controllers
 
 
             book.Save(str_excelpath);
+
+            return str_excelfilename;
+
 
         }
         private void GenerateStyles(WorksheetStyleCollection styles)
@@ -439,10 +443,10 @@ namespace NibsMVC.Controllers
                 WorksheetStyle s45 = styles.Add("s45");
                 s45.Font.FontName = "Verdana";
                 s45.Font.Color = "#000000";
-                s45.Borders.Add(StylePosition.Bottom, LineStyleOption.Continuous, 1);
-                s45.Borders.Add(StylePosition.Left, LineStyleOption.Continuous, 1);
-                s45.Borders.Add(StylePosition.Right, LineStyleOption.Continuous, 1);
-                s45.Borders.Add(StylePosition.Top, LineStyleOption.Continuous, 1);
+                //s45.Borders.Add(StylePosition.Bottom, LineStyleOption.Continuous, 1);
+                //s45.Borders.Add(StylePosition.Left, LineStyleOption.Continuous, 1);
+                //s45.Borders.Add(StylePosition.Right, LineStyleOption.Continuous, 1);
+                //s45.Borders.Add(StylePosition.Top, LineStyleOption.Continuous, 1);
                 s45.NumberFormat = "0";
                 s45.Alignment.Horizontal = StyleHorizontalAlignment.Right;
 
@@ -453,12 +457,12 @@ namespace NibsMVC.Controllers
                 WorksheetStyle s46 = styles.Add("s46");
                 s46.Font.FontName = "Verdana";
                 s46.Font.Color = "#000000";
-                s46.Alignment.Horizontal = StyleHorizontalAlignment.Center;
+                s46.Alignment.Horizontal = StyleHorizontalAlignment.Left;
                 s46.Alignment.Vertical = StyleVerticalAlignment.Bottom;
-                s46.Borders.Add(StylePosition.Bottom, LineStyleOption.Continuous, 1);
-                s46.Borders.Add(StylePosition.Left, LineStyleOption.Continuous, 1);
-                s46.Borders.Add(StylePosition.Right, LineStyleOption.Continuous, 1);
-                s46.Borders.Add(StylePosition.Top, LineStyleOption.Continuous, 1);
+                //s46.Borders.Add(StylePosition.Bottom, LineStyleOption.Continuous, 1);
+                //s46.Borders.Add(StylePosition.Left, LineStyleOption.Continuous, 1);
+                //s46.Borders.Add(StylePosition.Right, LineStyleOption.Continuous, 1);
+                //s46.Borders.Add(StylePosition.Top, LineStyleOption.Continuous, 1);
                 s46.NumberFormat = "0";
                 // -----------------------------------------------
                 //  s47
@@ -542,10 +546,10 @@ namespace NibsMVC.Controllers
                 s55.Font.Color = "#000000";
                 s55.Alignment.Horizontal = StyleHorizontalAlignment.Left;
                 s55.Alignment.Vertical = StyleVerticalAlignment.Bottom;
-                s55.Borders.Add(StylePosition.Bottom, LineStyleOption.Continuous, 1);
-                s55.Borders.Add(StylePosition.Left, LineStyleOption.Continuous, 1);
-                s55.Borders.Add(StylePosition.Right, LineStyleOption.Continuous, 1);
-                s55.Borders.Add(StylePosition.Top, LineStyleOption.Continuous, 1);
+                //s55.Borders.Add(StylePosition.Bottom, LineStyleOption.Continuous, 1);
+                //s55.Borders.Add(StylePosition.Left, LineStyleOption.Continuous, 1);
+                //s55.Borders.Add(StylePosition.Right, LineStyleOption.Continuous, 1);
+                //s55.Borders.Add(StylePosition.Top, LineStyleOption.Continuous, 1);
                 // -----------------------------------------------
                 //  s56
                 // -----------------------------------------------
@@ -557,10 +561,10 @@ namespace NibsMVC.Controllers
                 s56.Alignment.WrapText = true;
                 s56.Alignment.Horizontal = StyleHorizontalAlignment.Center;
                 s56.Alignment.Vertical = StyleVerticalAlignment.Bottom;
-                s56.Borders.Add(StylePosition.Bottom, LineStyleOption.Continuous, 1);
-                s56.Borders.Add(StylePosition.Left, LineStyleOption.Continuous, 1);
-                s56.Borders.Add(StylePosition.Right, LineStyleOption.Continuous, 1);
-                s56.Borders.Add(StylePosition.Top, LineStyleOption.Continuous, 1);
+                //s56.Borders.Add(StylePosition.Bottom, LineStyleOption.Continuous, 1);
+                //s56.Borders.Add(StylePosition.Left, LineStyleOption.Continuous, 1);
+                //s56.Borders.Add(StylePosition.Right, LineStyleOption.Continuous, 1);
+                //s56.Borders.Add(StylePosition.Top, LineStyleOption.Continuous, 1);
 
             }
             catch (Exception ex)
@@ -571,30 +575,19 @@ namespace NibsMVC.Controllers
 
         private void GenerateWorksheet_printregister(WorksheetCollection sheets, MovementAnalysisReport Report)
         {
-
-            con = new SqlConnection(webconnection);
-            StringBuilder sb = new StringBuilder();
-            con.Open();
-
-            var RawName = (from p in db.tbl_RawMaterials where p.RawMaterialId.Equals(Report.RawMaterialId) select p).ToList();
-            //var DepartmentName = (from p in db.tbl_Department where p.DepartmentID.Equals(Report.DepartmentId) select p).ToList();
-
-            Report.RawMaterialName = RawName.FirstOrDefault().Name;
-            //Report.DepartmentName = DepartmentName.FirstOrDefault().Department;
-
-            Worksheet sheet = sheets.Add("EFiling");
+            var dataListStore = new List<MovementAnalysisStore_Result>();
+            var dataListKitchen = new List<MovementAnalysisKitchen_Result>();
+            if (Report.Type == "Store")
+                dataListStore = db.MovementAnalysisStore(Report.DateFrom, Report.DateTo, Report.RawMaterialId).ToList();
+            else
+                dataListKitchen = db.MovementAnalysisKitchen(Report.DateFrom, Report.DateTo, Report.RawMaterialId).ToList();
 
 
 
-            //sheet.Table.Columns.Add(430);
-            //sheet.Table.Columns.Add(300);
-            //sheet.Table.Columns.Add(300);
+            Worksheet sheet = sheets.Add("MA");
 
-            //WorksheetRow Row1 = sheet.Table.Rows.Add();
 
-            //Row1.Cells.Add("", DataType.String, "s56");
-            //Row1.Cells.Add("STORES", DataType.String, "s56");
-            //Row1.Cells.Add("KITCHEN", DataType.String, "s56");
+
 
             sheet.Table.Columns.Add(150);
             sheet.Table.Columns.Add(200);
@@ -604,104 +597,78 @@ namespace NibsMVC.Controllers
             sheet.Table.Columns.Add(100);
             sheet.Table.Columns.Add(100);
             sheet.Table.Columns.Add(100);
-            sheet.Table.Columns.Add(100);
-            //sheet.Table.Columns.Add(150);
-            //sheet.Table.Columns.Add(100);
+            sheet.Table.Columns.Add(80);
+            sheet.Table.Columns.Add(200);
 
             WorksheetRow Row = sheet.Table.Rows.Add();
 
-            //Int64 serial_no = 0;
-            Row.Cells.Add("InvoiceDate", DataType.String, "s56");
-            Row.Cells.Add("Item Name", DataType.String, "s56");
-            Row.Cells.Add("InvoiceNo", DataType.String, "s56");
-            Row.Cells.Add("Store Opening Stock", DataType.String, "s56");
-            Row.Cells.Add("Store Inward", DataType.String, "s56");
-            Row.Cells.Add("Store Outward", DataType.String, "s56");
-            Row.Cells.Add("Store Closing_Stock", DataType.String, "s56");
-            Row.Cells.Add("kitchen Opening Stock", DataType.String, "s56");
-            Row.Cells.Add("kitchen Inward", DataType.String, "s56");
+            Row.Cells.Add("Date", DataType.String, "s56");
+            Row.Cells.Add("Name", DataType.String, "s56");
+            Row.Cells.Add("Op Stock", DataType.String, "s56");
+            Row.Cells.Add("In Qty", DataType.String, "s56");
+            Row.Cells.Add("In Value", DataType.String, "s56");
+            Row.Cells.Add("Out Qty", DataType.String, "s56");
+            Row.Cells.Add("Out value", DataType.String, "s56");
+            Row.Cells.Add("Cls Stock", DataType.String, "s56");
+            Row.Cells.Add("Remarks", DataType.String, "s56");
 
 
 
-            if (Report.DateFrom != null && Report.DateTo != null)
+            if (dataListStore.Count > 0)
             {
-                DateTime from;
-
-                for (from = Report.DateFrom; from <= Report.DateTo; from = from.AddDays(1.0))
+                foreach (var li in dataListStore)
                 {
-                    sb.Append("with tempMoveAnal   as (  select  m.InvoiceDate ,r.Name,m.InvoiceNo,");
-                    sb.Append("Opening_Stock= (select ((op.Qty-op.IssQty)+(gs.Qty-gs.IssQty)) from tbl_RawMaterials rm inner join tblGRNStock gs on ");
-                    sb.Append("gs.MaterialId=rm.RawMaterialId inner join tblOpStckRate op on op.MaterialId=rm.RawMaterialId ");
-                    sb.Append("where rm.RawMaterialId='" + Report.RawMaterialId + "' and gs.Date='" + from.ToString("yyyy-MM-dd") + "'),");
-                    sb.Append("Inward=(select Qty from tblGRNStock where MaterialId='" + Report.RawMaterialId + "' and Date='" + from.ToString("yyyy-MM-dd") + "'),");
-                    sb.Append("outward=(select sum(TransferQuantity) from tblTransfer where RawMaterialId='" + Report.RawMaterialId + "' and TransferDate='" + from.ToString("yyyy-MM-dd") + "'),");
-                    sb.Append("kitchen_op=(select sum(TransferQuantity) from tblTransfer where RawMaterialId='" + Report.RawMaterialId + "' and TransferDate='" + from.ToString("yyyy-MM-dd") + "'),");
-                    sb.Append("kitchen_In=(select sum(TransferQuantity) from tblTransfer where RawMaterialId='" + Report.RawMaterialId + "' and TransferDate='" + from.ToString("yyyy-MM-dd") + "')");
-                    sb.Append("from   tblPurchaseMaster m inner join tblPurchasedItem c on c.PurchaseId = m.PurchaseId inner join tbl_RawMaterials r on c.RawMaterialId=r.RawMaterialId  ");
-                    sb.Append("where r.RawMaterialId='" + Report.RawMaterialId + "' and m.InvoiceDate='" + from.ToString("yyyy-MM-dd") + "')  ");
-                    sb.Append("select InvoiceDate,name ,InvoiceNo,Opening_Stock,Inward,outward,closing_stock=Opening_Stock-(Inward+outward),kitchen_op,kitchen_In from tempMoveAnal ");
+                    Row = sheet.Table.Rows.Add();
+                    Row.Cells.Add(li.Date, DataType.String, "s46");
+                    Row.Cells.Add(li.Name, DataType.String, "s46");
+                    Row.Cells.Add("0", DataType.String, "s45");
+                    Row.Cells.Add(li.inQty.ToString(), DataType.String, "s45");
+                    Row.Cells.Add(li.inVal.ToString(), DataType.String, "s45");
+                    Row.Cells.Add(li.outQty.ToString(), DataType.String, "s45");
+                    Row.Cells.Add(li.outVal.ToString(), DataType.String, "s45");
+                    Row.Cells.Add("0", DataType.String, "s45");
+                    Row.Cells.Add(li.Remarks.ToString(), DataType.String, "s46");
 
-
-                    cmd = new SqlCommand(sb.ToString(), con);
-                    cmd.CommandType = CommandType.Text;
-                    DataTable dt = new DataTable();
-
-                    SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                    var data = sda.Fill(dt);
-                    List<DataRow> list = dt.AsEnumerable().ToList();
-
-                    foreach (DataRow dr in dt.Rows)
-                    {
-                        Row = sheet.Table.Rows.Add();
-                        //serial_no = serial_no + 1;
-                        //Row.Cells.Add(serial_no.ToString(), DataType.String, "s44");
-                        Row.Cells.Add(Convert.ToString(from), DataType.String, "s45");
-                        Row.Cells.Add(Report.RawMaterialName, DataType.String, "s45");
-                        Row.Cells.Add(dr["InvoiceNo"].ToString(), DataType.String, "s49");
-                        Row.Cells.Add(dr["Opening_Stock"].ToString(), DataType.String, "s45");
-                        Row.Cells.Add(dr["Inward"].ToString(), DataType.String, "s45");
-                        Row.Cells.Add(dr["outward"].ToString(), DataType.String, "s45");
-                        Row.Cells.Add(dr["closing_stock"].ToString(), DataType.String, "s45");
-                        Row.Cells.Add(dr["kitchen_op"].ToString(), DataType.String, "s45");
-                        Row.Cells.Add(dr["kitchen_In"].ToString(), DataType.String, "s45");
-                        //Row.Cells.Add(dr["Inward"].ToString(), DataType.String, "s45");
-                        //Row.Cells.Add(dr["Inward"].ToString(), DataType.String, "s45");
-                    }
-                    dt = null;
                 }
-                sheet.Options.Selected = true;
-                sheet.Options.ProtectObjects = false;
-                sheet.Options.ProtectScenarios = false;
-                sheet.Options.PageSetup.Layout.Orientation = CarlosAg.ExcelXmlWriter.Orientation.Landscape;
-                sheet.Options.PageSetup.PageMargins.Bottom = 1F;
-                sheet.Options.PageSetup.PageMargins.Left = 1F;
-                sheet.Options.PageSetup.PageMargins.Right = 1F;
-                sheet.Options.PageSetup.PageMargins.Top = 1F;
-                sheet.Options.Print.PaperSizeIndex = 9;
-                sheet.Options.Print.HorizontalResolution = 120;
-                sheet.Options.Print.VerticalResolution = 72;
-                sheet.Options.Print.ValidPrinterInfo = true;
-
-                Response.ClearContent();
-                Response.Buffer = true;
-                Response.AddHeader("content-disposition", "attachment; filename=NibsReport.xls");
-                Response.ContentType = "application/ms-excel";
-                Response.Charset = "";
-                Response.Flush();
-                Response.Write(sheet);
-                //Response.Write(Row1);
-                Response.End();
-
-                con.Close();
 
             }
+            if (dataListKitchen.Count > 0)
+            {
+                foreach (var li in dataListKitchen)
+                {
+                    Row = sheet.Table.Rows.Add();
+                    Row.Cells.Add(li.Date, DataType.String, "s46");
+                    Row.Cells.Add(li.Name, DataType.String, "s46");
+                    Row.Cells.Add("0", DataType.String, "s45");
+                    Row.Cells.Add(li.inQty.ToString(), DataType.String, "s45");
+                    Row.Cells.Add(li.inVal.ToString(), DataType.String, "s45");
+                    Row.Cells.Add(li.outQty.ToString(), DataType.String, "s45");
+                    Row.Cells.Add(li.outVal.ToString(), DataType.String, "s45");
+                    Row.Cells.Add("0", DataType.String, "s45");
+                    Row.Cells.Add(li.Remarks.ToString(), DataType.String, "s46");
 
+                }
 
-            //Row.Cells.Add("Total Taxable Value", DataType.String, "s56");
-            //Row.Cells.Add("Total Cess", DataType.String, "s56");
+            }
+            sheet.Options.Selected = true;
+            sheet.Options.ProtectObjects = false;
+            sheet.Options.ProtectScenarios = false;
+            sheet.Options.PageSetup.Layout.Orientation = CarlosAg.ExcelXmlWriter.Orientation.Landscape;
+            sheet.Options.PageSetup.PageMargins.Bottom = 1F;
+            sheet.Options.PageSetup.PageMargins.Left = 1F;
+            sheet.Options.PageSetup.PageMargins.Right = 1F;
+            sheet.Options.PageSetup.PageMargins.Top = 1F;
+            sheet.Options.Print.PaperSizeIndex = 9;
+            sheet.Options.Print.HorizontalResolution = 120;
+            sheet.Options.Print.VerticalResolution = 72;
+            sheet.Options.Print.ValidPrinterInfo = true;
 
+          
 
+            
 
         }
+        
     }
+
 }

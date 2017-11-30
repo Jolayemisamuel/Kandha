@@ -10,9 +10,10 @@ namespace NibsMVC.Models
         public int id { get; set; }
         public int RawMaterialId { get; set; }
         public string RawMaterialName { get; set; }
-        public int DepartmentId { get; set; }
-        public string DepartmentName { get; set; }
-        public DateTime DateFrom { get; set; }
-        public DateTime DateTo { get; set; }
+    
+        public string DateFrom { get; set; }
+        public string DateTo { get; set; }
+
+        public string Type { get; set; }
     }
 }

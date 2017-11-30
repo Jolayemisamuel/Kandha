@@ -455,9 +455,9 @@
           <Property Name="LedgerName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="LedgerGroup" Type="int" Nullable="false" />
           <Property Name="Date" Type="datetime" Nullable="false" />
-          <Property Name="OPBalance" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Percentage" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Transfer_Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="OPBalance" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Percentage" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Transfer_Type" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="tblMenuOutlet">
           <Key>
@@ -803,6 +803,44 @@
           <Property Name="from_form_id" Type="int" />
           <Property Name="voucher_narration" Type="nvarchar" MaxLength="500" />
           <Property Name="account_type" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Kandha.dbo.vwStockTransactions' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwStockTransactions">
+          <Key>
+            <PropertyRef Name="MaterialId" />
+            <PropertyRef Name="outQty" />
+            <PropertyRef Name="Remarks" />
+            <PropertyRef Name="ord" />
+          </Key>
+          <Property Name="Date" Type="datetime" />
+          <Property Name="MaterialId" Type="int" Nullable="false" />
+          <Property Name="inQty" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="inVal" Type="numeric" Precision="38" Scale="5" />
+          <Property Name="outQty" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="outVal" Type="decimal" Precision="38" Scale="5" />
+          <Property Name="Remarks" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ord" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Kandha.dbo.vwStockTransactionsKitchen' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwStockTransactionsKitchen">
+          <Key>
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="MaterialId" />
+            <PropertyRef Name="inQty" />
+            <PropertyRef Name="outQty" />
+            <PropertyRef Name="Remarks" />
+            <PropertyRef Name="ord" />
+          </Key>
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="MaterialId" Type="int" Nullable="false" />
+          <Property Name="inQty" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="inVal" Type="numeric" Precision="37" Scale="4" />
+          <Property Name="outQty" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="outVal" Type="decimal" Precision="37" Scale="4" />
+          <Property Name="Remarks" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ord" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_AddCategoryVendor_RawCategory">
           <End Role="RawCategory" Type="Self.RawCategory" Multiplicity="1" />
@@ -1844,6 +1882,21 @@
           <Parameter Name="BillNo" Type="int" Mode="In" />
           <Parameter Name="newsql" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="MovementAnalysisKitchen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="frDate" Type="varchar" Mode="In" />
+          <Parameter Name="toDate" Type="varchar" Mode="In" />
+          <Parameter Name="rawMaterialId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="MovementAnalysisStore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="frDate" Type="varchar" Mode="In" />
+          <Parameter Name="toDate" Type="varchar" Mode="In" />
+          <Parameter Name="rawMaterialId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="StockReturn" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="transferid" Type="int" Mode="In" />
+          <Parameter Name="rawmaterialid" Type="int" Mode="In" />
+          <Parameter Name="item" Type="decimal" Mode="In" />
+        </Function>
         <EntityContainer Name="NIBSModelStoreContainer">
           <EntitySet Name="AddCategoryVendor" EntityType="Self.AddCategoryVendor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AutoInventory" EntityType="Self.AutoInventory" Schema="dbo" store:Type="Tables" />
@@ -1911,6 +1964,30 @@
           <EntitySet Name="VendorPrice" EntityType="Self.VendorPrice" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Voucher_Entry_Credit" EntityType="Self.Voucher_Entry_Credit" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Voucher_Entry_Debit" EntityType="Self.Voucher_Entry_Debit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vwStockTransactions" EntityType="Self.vwStockTransactions" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwStockTransactions].[Date] AS [Date], 
+    [vwStockTransactions].[MaterialId] AS [MaterialId], 
+    [vwStockTransactions].[inQty] AS [inQty], 
+    [vwStockTransactions].[inVal] AS [inVal], 
+    [vwStockTransactions].[outQty] AS [outQty], 
+    [vwStockTransactions].[outVal] AS [outVal], 
+    [vwStockTransactions].[Remarks] AS [Remarks], 
+    [vwStockTransactions].[ord] AS [ord]
+    FROM [dbo].[vwStockTransactions] AS [vwStockTransactions]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwStockTransactionsKitchen" EntityType="Self.vwStockTransactionsKitchen" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwStockTransactionsKitchen].[Date] AS [Date], 
+    [vwStockTransactionsKitchen].[MaterialId] AS [MaterialId], 
+    [vwStockTransactionsKitchen].[inQty] AS [inQty], 
+    [vwStockTransactionsKitchen].[inVal] AS [inVal], 
+    [vwStockTransactionsKitchen].[outQty] AS [outQty], 
+    [vwStockTransactionsKitchen].[outVal] AS [outVal], 
+    [vwStockTransactionsKitchen].[Remarks] AS [Remarks], 
+    [vwStockTransactionsKitchen].[ord] AS [ord]
+    FROM [dbo].[vwStockTransactionsKitchen] AS [vwStockTransactionsKitchen]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_AddCategoryVendor_RawCategory" Association="Self.FK_AddCategoryVendor_RawCategory">
             <End Role="RawCategory" EntitySet="RawCategory" />
             <End Role="AddCategoryVendor" EntitySet="AddCategoryVendor" />
@@ -2692,6 +2769,23 @@
             <End Role="tblBillDetail" EntitySet="tblBillDetails" />
             <End Role="tblConsumption" EntitySet="tblConsumptions" />
           </AssociationSet>
+          <EntitySet Name="vwStockTransactions" EntityType="NIBSModel.vwStockTransaction" />
+          <EntitySet Name="vwStockTransactionsKitchens" EntityType="NIBSModel.vwStockTransactionsKitchen" />
+          <FunctionImport Name="MovementAnalysisKitchen" ReturnType="Collection(NIBSModel.MovementAnalysisKitchen_Result)">
+            <Parameter Name="frDate" Mode="In" Type="String" />
+            <Parameter Name="toDate" Mode="In" Type="String" />
+            <Parameter Name="rawMaterialId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="MovementAnalysisStore" ReturnType="Collection(NIBSModel.MovementAnalysisStore_Result)">
+            <Parameter Name="frDate" Mode="In" Type="String" />
+            <Parameter Name="toDate" Mode="In" Type="String" />
+            <Parameter Name="rawMaterialId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="StockReturn">
+            <Parameter Name="transferid" Mode="In" Type="Int32" />
+            <Parameter Name="rawmaterialid" Mode="In" Type="Int32" />
+            <Parameter Name="item" Mode="In" Type="Decimal" />
+          </FunctionImport>
           <EntitySet Name="tblLedgerMasters" EntityType="NIBSModel.tblLedgerMaster" />
           <EntitySet Name="Voucher_Entry_Credit" EntityType="NIBSModel.Voucher_Entry_Credit" />
           <EntitySet Name="Voucher_Entry_Debit" EntityType="NIBSModel.Voucher_Entry_Debit" />
@@ -4705,6 +4799,60 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="vwStockTransaction">
+          <Key>
+            <PropertyRef Name="MaterialId" />
+            <PropertyRef Name="outQty" />
+            <PropertyRef Name="Remarks" />
+            <PropertyRef Name="ord" />
+          </Key>
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="MaterialId" Type="Int32" Nullable="false" />
+          <Property Name="inQty" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="inVal" Type="Decimal" Precision="38" Scale="5" />
+          <Property Name="outQty" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="outVal" Type="Decimal" Precision="38" Scale="5" />
+          <Property Name="Remarks" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ord" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vwStockTransactionsKitchen">
+          <Key>
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="MaterialId" />
+            <PropertyRef Name="inQty" />
+            <PropertyRef Name="outQty" />
+            <PropertyRef Name="Remarks" />
+            <PropertyRef Name="ord" />
+          </Key>
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MaterialId" Type="Int32" Nullable="false" />
+          <Property Name="inQty" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="inVal" Type="Decimal" Precision="37" Scale="4" />
+          <Property Name="outQty" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="outVal" Type="Decimal" Precision="37" Scale="4" />
+          <Property Name="Remarks" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ord" Type="Int32" Nullable="false" />
+        </EntityType>
+        <ComplexType Name="MovementAnalysisKitchen_Result">
+          <Property Type="String" Name="Date" Nullable="true" MaxLength="8000" />
+          <Property Type="Int32" Name="MaterialId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="inQty" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="inVal" Nullable="true" Precision="38" Scale="4" />
+          <Property Type="Decimal" Name="outQty" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="outVal" Nullable="true" Precision="38" Scale="4" />
+          <Property Type="String" Name="Remarks" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="MovementAnalysisStore_Result">
+          <Property Type="String" Name="Date" Nullable="true" MaxLength="8000" />
+          <Property Type="Int32" Name="MaterialId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="inQty" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="inVal" Nullable="true" Precision="38" Scale="5" />
+          <Property Type="Decimal" Name="outQty" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="outVal" Nullable="true" Precision="38" Scale="5" />
+          <Property Type="String" Name="Remarks" Nullable="false" />
+        </ComplexType>
         <EntityType Name="tblLedgerMaster">
           <Key>
             <PropertyRef Name="LedgerMasterId" />
@@ -4714,9 +4862,9 @@
           <Property Name="LedgerName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LedgerGroup" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="OPBalance" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Percentage" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Transfer_Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OPBalance" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Percentage" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Transfer_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tblLedgerGroup" Relationship="NIBSModel.FK_tblLedgerMaster_tblLedgerGroup" FromRole="tblLedgerMaster" ToRole="tblLedgerGroup" />
           <NavigationProperty Name="Voucher_Entry_Credit" Relationship="NIBSModel.FK_Voucher_Entry_Credit_tblLedgerMaster" FromRole="tblLedgerMaster" ToRole="Voucher_Entry_Credit" />
           <NavigationProperty Name="Voucher_Entry_Debit" Relationship="NIBSModel.FK_Voucher_Entry_Debit_tblLedgerMaster" FromRole="tblLedgerMaster" ToRole="Voucher_Entry_Debit" />
@@ -5615,6 +5763,63 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="vwStockTransactions">
+            <EntityTypeMapping TypeName="NIBSModel.vwStockTransaction">
+              <MappingFragment StoreEntitySet="vwStockTransactions">
+                <ScalarProperty Name="ord" ColumnName="ord" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="outVal" ColumnName="outVal" />
+                <ScalarProperty Name="outQty" ColumnName="outQty" />
+                <ScalarProperty Name="inVal" ColumnName="inVal" />
+                <ScalarProperty Name="inQty" ColumnName="inQty" />
+                <ScalarProperty Name="MaterialId" ColumnName="MaterialId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwStockTransactionsKitchens">
+            <EntityTypeMapping TypeName="NIBSModel.vwStockTransactionsKitchen">
+              <MappingFragment StoreEntitySet="vwStockTransactionsKitchen">
+                <ScalarProperty Name="ord" ColumnName="ord" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="outVal" ColumnName="outVal" />
+                <ScalarProperty Name="outQty" ColumnName="outQty" />
+                <ScalarProperty Name="inVal" ColumnName="inVal" />
+                <ScalarProperty Name="inQty" ColumnName="inQty" />
+                <ScalarProperty Name="MaterialId" ColumnName="MaterialId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="MovementAnalysisKitchen" FunctionName="NIBSModel.Store.MovementAnalysisKitchen">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NIBSModel.MovementAnalysisKitchen_Result">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="MaterialId" ColumnName="MaterialId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="inQty" ColumnName="inQty" />
+                <ScalarProperty Name="inVal" ColumnName="inVal" />
+                <ScalarProperty Name="outQty" ColumnName="outQty" />
+                <ScalarProperty Name="outVal" ColumnName="outVal" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="MovementAnalysisStore" FunctionName="NIBSModel.Store.MovementAnalysisStore">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NIBSModel.MovementAnalysisStore_Result">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="MaterialId" ColumnName="MaterialId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="inQty" ColumnName="inQty" />
+                <ScalarProperty Name="inVal" ColumnName="inVal" />
+                <ScalarProperty Name="outQty" ColumnName="outQty" />
+                <ScalarProperty Name="outVal" ColumnName="outVal" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="StockReturn" FunctionName="NIBSModel.Store.StockReturn" />
           <EntitySetMapping Name="tblLedgerMasters">
             <EntityTypeMapping TypeName="NIBSModel.tblLedgerMaster">
               <MappingFragment StoreEntitySet="tblLedgerMaster">

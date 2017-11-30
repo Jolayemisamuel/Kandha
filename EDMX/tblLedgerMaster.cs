@@ -25,8 +25,8 @@ namespace NibsMVC.EDMX
         public string LedgerName { get; set; }
         public int LedgerGroup { get; set; }
         public System.DateTime Date { get; set; }
-        public decimal OPBalance { get; set; }
-        public decimal Percentage { get; set; }
+        public Nullable<decimal> OPBalance { get; set; }
+        public Nullable<decimal> Percentage { get; set; }
         public string Transfer_Type { get; set; }
     
         public virtual tblLedgerGroup tblLedgerGroup { get; set; }
