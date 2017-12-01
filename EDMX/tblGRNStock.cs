@@ -21,7 +21,6 @@ namespace NibsMVC.EDMX
         public Nullable<decimal> Qty { get; set; }
         public Nullable<decimal> IssQty { get; set; }
         public Nullable<decimal> ConsumptionQty { get; set; }
-    
-        public virtual tbl_RawMaterials tbl_RawMaterials { get; set; }
+        public int purchsedDetId { get; set; }
     }
 }

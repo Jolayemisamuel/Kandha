@@ -32,7 +32,7 @@ namespace NibsMVC.Controllers
            
 
 
-                DateTime dt = Convert.ToDateTime("29-Nov-2017");
+                DateTime dt = Convert.ToDateTime(DateTime.Today.ToString("dd-MMM-yyyy"));
             var billsKOT = (from p in kot_entities.vwBillMsts where p.BillDate >= dt select p).ToList();
             var billsCount = (from p in entities.tblBillMasters where p.BillDate>=dt select p).ToList().Count;
             if (billsKOT.Count > billsCount)

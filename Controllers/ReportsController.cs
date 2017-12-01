@@ -357,7 +357,7 @@ namespace NibsMVC.Controllers
         {
 
             string filename= GenerateExcelReport(Report);
-            return File(Path.Combine( Server.MapPath("~/Report/"), filename), "application/xls");
+            return File(Path.Combine( Server.MapPath("~/Report/"), filename), "application/xlsx");
             //return RedirectToAction("MovementAnalysisReport", "Reports");
         }
 
@@ -605,28 +605,58 @@ namespace NibsMVC.Controllers
             Row.Cells.Add("Date", DataType.String, "s56");
             Row.Cells.Add("Name", DataType.String, "s56");
             Row.Cells.Add("Op Stock", DataType.String, "s56");
+            Row.Cells.Add("Op Value", DataType.String, "s56");
             Row.Cells.Add("In Qty", DataType.String, "s56");
             Row.Cells.Add("In Value", DataType.String, "s56");
             Row.Cells.Add("Out Qty", DataType.String, "s56");
             Row.Cells.Add("Out value", DataType.String, "s56");
             Row.Cells.Add("Cls Stock", DataType.String, "s56");
+            Row.Cells.Add("Cls Value", DataType.String, "s56");
             Row.Cells.Add("Remarks", DataType.String, "s56");
 
-
+            DateTime frDate = Convert.ToDateTime(Report.DateFrom);
+            decimal opStck = 0, clsStck = 0;
+            decimal opStckVal = 0, clsStckVal = 0;
+            int chkRawMatId = 0;
 
             if (dataListStore.Count > 0)
             {
+
                 foreach (var li in dataListStore)
                 {
+                    if(chkRawMatId==0 || chkRawMatId!=li.MaterialId)
+                    {
+                        if (db.vwStockTransactions.Where(p => p.Date < frDate && p.MaterialId == li.MaterialId).Count() > 0)
+                        {
+                            opStck = Convert.ToDecimal(db.vwStockTransactions.Where(p => p.Date < frDate && p.MaterialId == li.MaterialId).Sum(p => p.inQty)) - Convert.ToDecimal(db.vwStockTransactions.Where(p => p.Date < frDate && p.MaterialId == li.MaterialId).Sum(p => p.outQty));
+                            opStckVal = Convert.ToDecimal(db.vwStockTransactions.Where(p => p.Date < frDate && p.MaterialId == li.MaterialId).Sum(p => p.inVal)) - Convert.ToDecimal(db.vwStockTransactions.Where(p => p.Date < frDate && p.MaterialId == li.MaterialId).Sum(p => p.outVal));
+                        }
+                        else
+                        {
+                            opStck = 0;
+                            opStckVal = 0;
+                        }
+
+                        chkRawMatId = li.MaterialId;
+                    }
+
                     Row = sheet.Table.Rows.Add();
                     Row.Cells.Add(li.Date, DataType.String, "s46");
                     Row.Cells.Add(li.Name, DataType.String, "s46");
-                    Row.Cells.Add("0", DataType.String, "s45");
+                    Row.Cells.Add(opStck.ToString("0.00"), DataType.String, "s45");
+                    Row.Cells.Add(opStckVal.ToString("0.00"), DataType.String, "s45");
                     Row.Cells.Add(li.inQty.ToString(), DataType.String, "s45");
                     Row.Cells.Add(li.inVal.ToString(), DataType.String, "s45");
                     Row.Cells.Add(li.outQty.ToString(), DataType.String, "s45");
                     Row.Cells.Add(li.outVal.ToString(), DataType.String, "s45");
-                    Row.Cells.Add("0", DataType.String, "s45");
+
+                    clsStck = Convert.ToDecimal(opStck + li.inQty - li.outQty);
+                    opStck = clsStck;
+                    clsStckVal = Convert.ToDecimal(opStckVal + li.inVal - li.outVal);
+                    opStckVal = clsStckVal;
+
+                    Row.Cells.Add(clsStck.ToString("0.00"), DataType.String, "s45");
+                    Row.Cells.Add(clsStckVal.ToString("0.00"), DataType.String, "s45");
                     Row.Cells.Add(li.Remarks.ToString(), DataType.String, "s46");
 
                 }
@@ -636,15 +666,39 @@ namespace NibsMVC.Controllers
             {
                 foreach (var li in dataListKitchen)
                 {
+                    if (chkRawMatId == 0 || chkRawMatId != li.MaterialId)
+                    {
+                        if (db.vwStockTransactions.Where(p => p.Date < frDate && p.MaterialId == li.MaterialId).Count() > 0)
+                        {
+                            opStck = Convert.ToDecimal(db.vwStockTransactionsKitchens.Where(p => p.Date < frDate && p.MaterialId == li.MaterialId).Sum(p => p.inQty)) - Convert.ToDecimal(db.vwStockTransactionsKitchens.Where(p => p.Date < frDate && p.MaterialId == li.MaterialId).Sum(p => p.outQty));
+                            opStckVal = Convert.ToDecimal(db.vwStockTransactionsKitchens.Where(p => p.Date < frDate && p.MaterialId == li.MaterialId).Sum(p => p.inVal)) - Convert.ToDecimal(db.vwStockTransactionsKitchens.Where(p => p.Date < frDate && p.MaterialId == li.MaterialId).Sum(p => p.outVal));
+                        }
+                        else
+                        {
+                            opStck = 0;
+                            opStckVal = 0;
+                        }
+
+                        chkRawMatId = li.MaterialId;
+                    }
+
                     Row = sheet.Table.Rows.Add();
                     Row.Cells.Add(li.Date, DataType.String, "s46");
                     Row.Cells.Add(li.Name, DataType.String, "s46");
-                    Row.Cells.Add("0", DataType.String, "s45");
+                    Row.Cells.Add(opStck.ToString("0.00"), DataType.String, "s45");
+                    Row.Cells.Add(opStckVal.ToString("0.00"), DataType.String, "s45");
                     Row.Cells.Add(li.inQty.ToString(), DataType.String, "s45");
                     Row.Cells.Add(li.inVal.ToString(), DataType.String, "s45");
                     Row.Cells.Add(li.outQty.ToString(), DataType.String, "s45");
                     Row.Cells.Add(li.outVal.ToString(), DataType.String, "s45");
-                    Row.Cells.Add("0", DataType.String, "s45");
+
+                    clsStck = Convert.ToDecimal(opStck + li.inQty - li.outQty);
+                    opStck = clsStck;
+                    clsStckVal = Convert.ToDecimal(opStckVal + li.inVal - li.outVal);
+                    opStckVal = clsStckVal;
+
+                    Row.Cells.Add(clsStck.ToString("0.00"), DataType.String, "s45");
+                    Row.Cells.Add(clsStckVal.ToString("0.00"), DataType.String, "s45");
                     Row.Cells.Add(li.Remarks.ToString(), DataType.String, "s46");
 
                 }

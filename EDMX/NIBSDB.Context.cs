@@ -14,7 +14,6 @@ namespace NibsMVC.EDMX
     using System.Data.Entity.Core.Objects;
     using System.Data.Entity.Infrastructure;
 
-
     public partial class NIBSEntities : DbContext
     {
         public NIBSEntities()
@@ -61,7 +60,6 @@ namespace NibsMVC.EDMX
         public DbSet<tblVendor> tblVendors { get; set; }
         public DbSet<AutoInventory> AutoInventories { get; set; }
         public DbSet<tblBillDetail> tblBillDetails { get; set; }
-
         public DbSet<tblBillMaster> tblBillMasters { get; set; }
         public DbSet<VendorPrice> VendorPrices { get; set; }
         public DbSet<Temp_VendorBilling> Temp_VendorBilling { get; set; }
@@ -78,7 +76,6 @@ namespace NibsMVC.EDMX
         public DbSet<Unit> Units { get; set; }
         public DbSet<AddCategoryVendor> AddCategoryVendors { get; set; }
         public DbSet<tblPurchaseMaster> tblPurchaseMasters { get; set; }
-        public DbSet<tblGRNStock> tblGRNStocks { get; set; }
         public DbSet<tblTransferReturnReport> tblTransferReturnReports { get; set; }
         public DbSet<tblGenBarcode> tblGenBarcodes { get; set; }
         public DbSet<tblSubItem> tblSubItems { get; set; }
@@ -96,6 +93,7 @@ namespace NibsMVC.EDMX
         public DbSet<tblLedgerMaster> tblLedgerMasters { get; set; }
         public DbSet<Voucher_Entry_Credit> Voucher_Entry_Credit { get; set; }
         public DbSet<Voucher_Entry_Debit> Voucher_Entry_Debit { get; set; }
+        public DbSet<tblGRNStock> tblGRNStocks { get; set; }
     
         public virtual int BillReportGenerate(string orderType, string paymentType, Nullable<System.DateTime> datefrom, Nullable<System.DateTime> dateto, Nullable<int> billNo, string newsql)
         {

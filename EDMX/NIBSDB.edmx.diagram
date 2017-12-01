@@ -126,8 +126,6 @@
         <EntityTypeShape EntityType="NIBSModel.tblPurchaseMaster" Width="1.5" PointX="15.75" PointY="30.625" />
         <AssociationConnector Association="NIBSModel.FK_tblPurchaseMaster_tblVendor" />
         <AssociationConnector Association="NIBSModel.FK_tblPurchasedItem_tblPurchasedItem" />
-        <EntityTypeShape EntityType="NIBSModel.tblGRNStock" Width="1.5" PointX="5.25" PointY="44.25" />
-        <AssociationConnector Association="NIBSModel.FK_tblGRNStock_tbl_RawMaterials" />
         <EntityTypeShape EntityType="NIBSModel.tblTransferReturnReport" Width="2.875" PointX="21.5" PointY="16" />
         <AssociationConnector Association="NIBSModel.FK_tblTransferReturnReport_tbl_RawMaterials" />
         <AssociationConnector Association="NIBSModel.FK_tblTransferReturnReport_tblOutlet" />
@@ -166,6 +164,7 @@
         <AssociationConnector Association="NIBSModel.FK_tblLedgerMaster_tblLedgerGroup" />
         <AssociationConnector Association="NIBSModel.FK_Voucher_Entry_Credit_tblLedgerMaster" />
         <AssociationConnector Association="NIBSModel.FK_Voucher_Entry_Debit_tblLedgerMaster" />
+        <EntityTypeShape EntityType="NIBSModel.tblGRNStock" Width="1.5" PointX="0.75" PointY="9.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

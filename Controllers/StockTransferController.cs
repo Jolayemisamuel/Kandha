@@ -455,9 +455,9 @@ namespace NibsMVC.Controllers
 
 
 
-            string qry = " select *,table1='gs' from tblGRNStock where IssQty <> 0   and MaterialId = " + RawMaterialId;
+            string qry = " select id,MaterialId,Rate,Date,Qty,IssQty=isnull(IssQty,0),table1='gs' from tblGRNStock where IssQty <> 0   and MaterialId = " + RawMaterialId;
             qry = qry + " union all ";
-            qry = qry + "  select *,table1='os' from tblOpStckRate where IssQty <> 0   and MaterialId = " + RawMaterialId + " order by date desc";
+            qry = qry + "  select id,MaterialId,Rate,Date,Qty,IssQty=isnull(IssQty,0),table1='os' from tblOpStckRate where IssQty <> 0   and MaterialId = " + RawMaterialId + " order by date desc";
 
             con = new SqlConnection(webconnection);
             cmd = new SqlCommand(qry, con);
@@ -567,7 +567,7 @@ namespace NibsMVC.Controllers
                 {
                     qry = " delete from tblTransByStock where TransferId  =  " + model.TransferId;
                     qry = qry + " delete from tblTransfer where TransferId =   " + model.TransferId;
-                    qry = "";
+                 
                     qry = qry + " update  tbl_KitchenStock set quantity = quantity + " + model.ReturnQuantity + " where RawMaterialId = " + model.RawMaterialId;
                     con = new SqlConnection(webconnection);
                     con.Open();
@@ -580,7 +580,7 @@ namespace NibsMVC.Controllers
                     qry = " update tblTransByStock set qty = qty - " + model.ReturnQuantity + " where TransferId = " + model.TransferId;
 
                     qry = qry + " update tblTransfer set TransferQuantity = TransferQuantity - " + model.ReturnQuantity + " where TransferId = " + model.TransferId;
-                    qry = "";
+                   
                     qry = qry + " update  tbl_KitchenStock set quantity = quantity + " + model.ReturnQuantity + " where RawMaterialId = " + model.RawMaterialId;
                     con = new SqlConnection(webconnection);
                     con.Open();
@@ -590,9 +590,9 @@ namespace NibsMVC.Controllers
                 }
 
 
-                qry = " select *,table1='gs' from tblGRNStock where IssQty <> 0   and MaterialId = " + model.RawMaterialId;
+                qry = " select id,MaterialId,Rate,Date,Qty,IssQty=isnull(IssQty,0),table1='gs' from tblGRNStock where IssQty <> 0   and MaterialId = " + model.RawMaterialId;
                 qry = qry + " union all ";
-                qry = qry + "  select *,table1='os' from tblOpStckRate where IssQty <> 0   and MaterialId = " + model.RawMaterialId + " order by date desc";
+                qry = qry + "  select id,MaterialId,Rate,Date,Qty,IssQty=isnull(IssQty,0),table1='os' from tblOpStckRate where IssQty <> 0   and MaterialId = " + model.RawMaterialId + " order by date desc";
 
                 con = new SqlConnection(webconnection);
                 cmd = new SqlCommand(qry, con);

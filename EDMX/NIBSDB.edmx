@@ -416,6 +416,7 @@
           <Property Name="Qty" Type="numeric" Precision="18" Scale="2" />
           <Property Name="IssQty" Type="numeric" Precision="18" Scale="2" />
           <Property Name="ConsumptionQty" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="purchsedDetId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tblItem">
           <Key>
@@ -453,6 +454,7 @@
           <Property Name="LedgerMasterId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RecordId" Type="int" Nullable="false" />
           <Property Name="LedgerName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="VendorId" Type="int" />
           <Property Name="LedgerGroup" Type="int" Nullable="false" />
           <Property Name="Date" Type="datetime" Nullable="false" />
           <Property Name="OPBalance" Type="decimal" Precision="18" Scale="2" />
@@ -2680,11 +2682,6 @@ warning 6002: The table/view 'Kandha.dbo.vwStockTransactionsKitchen' does not ha
             <End Role="tblPurchasedItem" EntitySet="tblPurchasedItems" />
             <End Role="tblPurchasedItem1" EntitySet="tblPurchasedItems" />
           </AssociationSet>
-          <EntitySet Name="tblGRNStocks" EntityType="NIBSModel.tblGRNStock" />
-          <AssociationSet Name="FK_tblGRNStock_tbl_RawMaterials" Association="NIBSModel.FK_tblGRNStock_tbl_RawMaterials">
-            <End Role="tbl_RawMaterials" EntitySet="tbl_RawMaterials" />
-            <End Role="tblGRNStock" EntitySet="tblGRNStocks" />
-          </AssociationSet>
           <EntitySet Name="tblTransferReturnReports" EntityType="NIBSModel.tblTransferReturnReport" />
           <AssociationSet Name="FK_tblTransferReturnReport_tbl_RawMaterials" Association="NIBSModel.FK_tblTransferReturnReport_tbl_RawMaterials">
             <End Role="tbl_RawMaterials" EntitySet="tbl_RawMaterials" />
@@ -2801,6 +2798,7 @@ warning 6002: The table/view 'Kandha.dbo.vwStockTransactionsKitchen' does not ha
             <End Role="tblLedgerMaster" EntitySet="tblLedgerMasters" />
             <End Role="Voucher_Entry_Debit" EntitySet="Voucher_Entry_Debit" />
           </AssociationSet>
+          <EntitySet Name="tblGRNStocks" EntityType="NIBSModel.tblGRNStock" />
           </EntityContainer>
         <EntityType Name="NIbs_AssignOffer">
           <Key>
@@ -3020,7 +3018,6 @@ warning 6002: The table/view 'Kandha.dbo.vwStockTransactionsKitchen' does not ha
           <NavigationProperty Name="tbl_RawMaterials3" Relationship="NIBSModel.FK_tbl_RawMaterials_tbl_RawMaterials1" FromRole="tbl_RawMaterials1" ToRole="tbl_RawMaterials" />
           <NavigationProperty Name="tbl_RawMaterials12" Relationship="NIBSModel.FK_tbl_RawMaterials_tbl_RawMaterials4" FromRole="tbl_RawMaterials" ToRole="tbl_RawMaterials1" />
           <NavigationProperty Name="tbl_RawMaterials4" Relationship="NIBSModel.FK_tbl_RawMaterials_tbl_RawMaterials4" FromRole="tbl_RawMaterials1" ToRole="tbl_RawMaterials" />
-          <NavigationProperty Name="tblGRNStocks" Relationship="NIBSModel.FK_tblGRNStock_tbl_RawMaterials" FromRole="tbl_RawMaterials" ToRole="tblGRNStock" />
           <NavigationProperty Name="tblTransferReturnReports" Relationship="NIBSModel.FK_tblTransferReturnReport_tbl_RawMaterials" FromRole="tbl_RawMaterials" ToRole="tblTransferReturnReport" />
           <Property Name="barcode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tblGenBarcodes" Relationship="NIBSModel.FK_tblGenBarcode_tblGenBarcode" FromRole="tbl_RawMaterials" ToRole="tblGenBarcode" />
@@ -4422,31 +4419,6 @@ warning 6002: The table/view 'Kandha.dbo.vwStockTransactionsKitchen' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="tblGRNStock">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MaterialId" Type="Int32" Nullable="false" />
-          <Property Name="Rate" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Qty" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="IssQty" Type="Decimal" Precision="18" Scale="2" />
-          <NavigationProperty Name="tbl_RawMaterials" Relationship="NIBSModel.FK_tblGRNStock_tbl_RawMaterials" FromRole="tblGRNStock" ToRole="tbl_RawMaterials" />
-          <Property Name="ConsumptionQty" Type="Decimal" Precision="18" Scale="2" />
-        </EntityType>
-        <Association Name="FK_tblGRNStock_tbl_RawMaterials">
-          <End Type="NIBSModel.tbl_RawMaterials" Role="tbl_RawMaterials" Multiplicity="1" />
-          <End Type="NIBSModel.tblGRNStock" Role="tblGRNStock" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbl_RawMaterials">
-              <PropertyRef Name="RawMaterialId" />
-            </Principal>
-            <Dependent Role="tblGRNStock">
-              <PropertyRef Name="MaterialId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="tblTransferReturnReport">
           <Key>
             <PropertyRef Name="TransferReturnId" />
@@ -4868,6 +4840,7 @@ warning 6002: The table/view 'Kandha.dbo.vwStockTransactionsKitchen' does not ha
           <NavigationProperty Name="tblLedgerGroup" Relationship="NIBSModel.FK_tblLedgerMaster_tblLedgerGroup" FromRole="tblLedgerMaster" ToRole="tblLedgerGroup" />
           <NavigationProperty Name="Voucher_Entry_Credit" Relationship="NIBSModel.FK_Voucher_Entry_Credit_tblLedgerMaster" FromRole="tblLedgerMaster" ToRole="Voucher_Entry_Credit" />
           <NavigationProperty Name="Voucher_Entry_Debit" Relationship="NIBSModel.FK_Voucher_Entry_Debit_tblLedgerMaster" FromRole="tblLedgerMaster" ToRole="Voucher_Entry_Debit" />
+          <Property Name="VendorId" Type="Int32" />
         </EntityType>
         <EntityType Name="Voucher_Entry_Credit">
           <Key>
@@ -4957,6 +4930,19 @@ warning 6002: The table/view 'Kandha.dbo.vwStockTransactionsKitchen' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="tblGRNStock">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaterialId" Type="Int32" Nullable="false" />
+          <Property Name="Rate" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Qty" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IssQty" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ConsumptionQty" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="purchsedDetId" Type="Int32" Nullable="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5625,19 +5611,6 @@ warning 6002: The table/view 'Kandha.dbo.vwStockTransactionsKitchen' does not ha
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tblGRNStocks">
-            <EntityTypeMapping TypeName="NIBSModel.tblGRNStock">
-              <MappingFragment StoreEntitySet="tblGRNStock">
-                <ScalarProperty Name="ConsumptionQty" ColumnName="ConsumptionQty" />
-                <ScalarProperty Name="IssQty" ColumnName="IssQty" />
-                <ScalarProperty Name="Qty" ColumnName="Qty" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="Rate" ColumnName="Rate" />
-                <ScalarProperty Name="MaterialId" ColumnName="MaterialId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tblTransferReturnReports">
             <EntityTypeMapping TypeName="NIBSModel.tblTransferReturnReport">
               <MappingFragment StoreEntitySet="tblTransferReturnReport">
@@ -5823,6 +5796,7 @@ warning 6002: The table/view 'Kandha.dbo.vwStockTransactionsKitchen' does not ha
           <EntitySetMapping Name="tblLedgerMasters">
             <EntityTypeMapping TypeName="NIBSModel.tblLedgerMaster">
               <MappingFragment StoreEntitySet="tblLedgerMaster">
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
                 <ScalarProperty Name="Transfer_Type" ColumnName="Transfer_Type" />
                 <ScalarProperty Name="Percentage" ColumnName="Percentage" />
                 <ScalarProperty Name="OPBalance" ColumnName="OPBalance" />
@@ -5883,6 +5857,20 @@ warning 6002: The table/view 'Kandha.dbo.vwStockTransactionsKitchen' does not ha
                 <ScalarProperty Name="voucher_date" ColumnName="voucher_date" />
                 <ScalarProperty Name="voucher_no" ColumnName="voucher_no" />
                 <ScalarProperty Name="voucher_entry_id" ColumnName="voucher_entry_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblGRNStocks">
+            <EntityTypeMapping TypeName="NIBSModel.tblGRNStock">
+              <MappingFragment StoreEntitySet="tblGRNStock">
+                <ScalarProperty Name="purchsedDetId" ColumnName="purchsedDetId" />
+                <ScalarProperty Name="ConsumptionQty" ColumnName="ConsumptionQty" />
+                <ScalarProperty Name="IssQty" ColumnName="IssQty" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="MaterialId" ColumnName="MaterialId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
