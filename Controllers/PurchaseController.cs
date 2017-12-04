@@ -92,16 +92,53 @@ namespace NibsMVC.Controllers
             {
                 var deletepurchasedata = (from p in db.tblPurchasedItems where p.PurchaseId.Equals(id) select p).ToList();
                 var deletepurchasemain = (from p in db.tblPurchaseMasters where p.PurchaseId.Equals(id) select p).FirstOrDefault();
+
                 foreach (var item in deletepurchasedata)
                 {
-                    db.tblPurchasedItems.Remove(item);
-                    db.SaveChanges();
-                    int OutletId = obj.getOutletId();
-                    foreach (var items in db.tbl_KitchenStock.Where(a => a.OutletId == OutletId && a.RawMaterialId == item.RawMaterialId).ToList())
+                    var grnStck = (from p in db.tblGRNStocks where p.purchsedDetId == item.PurchaseDetailId && (p.Qty - p.IssQty) >= item.Quantity select p).ToList();
+                    if (grnStck.Count == 0)
                     {
+                        //TempData["Perror"] = "Cant Delete!! Items Transfered !! Use Return";
+                        //return RedirectToAction("Report", "Purchase");
+                    }
+                    else
+                    {
+                        foreach (var li in grnStck)
+                        {
 
-                        string qry = "update tbl_KitchenStock set Quantity  = Quantity - " + item.Quantity + " where  RawMaterialId=" + item.RawMaterialId;
-                        qry = qry + " delete from  tblGRNStock where qty  = " + item.Quantity + " and  MaterialId=" + item.RawMaterialId + " and date='" + deletepurchasemain.InvoiceDate.ToString("dd-MMM-yyyy") + "'";
+                            var lst = (from p in db.tblTransByStocks where p.stockid == li.Id && p.stockType == "gs" select p).ToList();
+                            if (lst.Count > 0)
+                            {
+                                var transByStck = (from p in db.tblTransByStocks where p.stockid == li.Id && p.stockType == "gs" select ((decimal?)p.qty) ?? 0).Sum();
+                                if (transByStck > 0)
+                                {
+                                    TempData["Perror"] = "Cant Delete!! Items Transfered !! Use Return";
+                                    return RedirectToAction("Report", "Purchase");
+                                }
+                            }
+                        }
+
+                       
+                    }
+                }
+
+
+
+
+                 foreach (var item in deletepurchasedata)
+                {
+                    
+
+                        db.tblPurchasedItems.Remove(item);
+                        db.SaveChanges();
+                    
+
+                    int OutletId = obj.getOutletId();
+                   
+
+                        string qry = "update tbl_KitchenStock set Quantity  = case when (Quantity - " + item.Quantity + ")<0 then 0 else (Quantity - " + item.Quantity + ") end  where  RawMaterialId=" + item.RawMaterialId;
+                        //qry = qry + " delete from  tblGRNStock where qty  = " + item.Quantity + " and  MaterialId=" + item.RawMaterialId + " and date='" + deletepurchasemain.InvoiceDate.ToString("dd-MMM-yyyy") + "'";
+                        qry = qry + " delete from  tblGRNStock where purchsedDetId = " + item.PurchaseDetailId;
 
                         con = new SqlConnection(webconnection);
                         cmd = new SqlCommand(qry, con);
@@ -110,15 +147,16 @@ namespace NibsMVC.Controllers
                         con.Open();
                         cmd.ExecuteNonQuery();
                         con.Close();
-                        //db.tbl_KitchenStock.Remove(items);
-                        //db.SaveChanges();
-                    }
+
                 }
 
 
+
                 db.tblPurchaseMasters.Remove(deletepurchasemain);
-                db.SaveChanges();
-                TempData["Perror"] = "Delete Successfully !!";
+                  db.SaveChanges();
+               TempData["Perror"] = "Delete Successfully !!";
+
+               
             }
 
 
@@ -252,10 +290,10 @@ namespace NibsMVC.Controllers
                 decimal remaingquantity = model.Quantity - model.ReturnQuantity;
 
                 tbl_KitchenStock DataStock = (from p in db.tbl_KitchenStock where p.RawMaterialId == model.RowMaterialId && p.OutletId == Outlet select p).SingleOrDefault();
-                //tblPurchasedItem datastockpurchase = (from q in db.tblPurchasedItems where q.PurchaseDetailId == model.Purchasedetailid select q).SingleOrDefault();
-                //tblPurchaseMaster datastockpurchaseMst = (from q in db.tblPurchaseMasters where q.PurchaseId == model.Purchaseid select q).SingleOrDefault();
-                //DateTime grnStckdate = Convert.ToDateTime(datastockpurchaseMst.Date.ToShortDateString());
-                //tblGRNStock datastockgrn = (from r in db.tblGRNStocks where r.MaterialId == model.RowMaterialId && r.Date== grnStckdate && r.Qty== datastockpurchase.Quantity && (r.Qty + r.RetfrIss - r.RetToVen - r.IssQty)>=model.ReturnQuantity select r).SingleOrDefault();
+                tblPurchasedItem datastockpurchase = (from q in db.tblPurchasedItems where q.PurchaseDetailId == model.Purchasedetailid select q).SingleOrDefault();
+                tblPurchaseMaster datastockpurchaseMst = (from q in db.tblPurchaseMasters where q.PurchaseId == model.Purchaseid select q).SingleOrDefault();
+                DateTime grnStckdate = Convert.ToDateTime(datastockpurchaseMst.Date.ToShortDateString());
+                tblGRNStock datastockgrn = (from r in db.tblGRNStocks where  (r.Qty  - r.IssQty)>=model.ReturnQuantity && r.purchsedDetId== datastockpurchase.PurchaseDetailId select r).SingleOrDefault();
                 //datastockgrn.RetToVen = datastockgrn.RetToVen + model.ReturnQuantity;
                 //tblPurchaseMaster datastockmaster = (from s in db.tblPurchaseMasters where s.PurchaseId == model.Purchaseid select s).SingleOrDefault();
                 DataStock.Quantity = DataStock.Quantity - model.ReturnQuantity;
@@ -265,12 +303,33 @@ namespace NibsMVC.Controllers
                 // decimal taxrate = returnAmount / datastockpurchase.TaxPer;
                 // datastockmaster.Tax = datastockmaster.Tax - taxrate;
                 // datastockmaster.NetAmount = datastockmaster.TotalAmount + datastockmaster.Tax;
+                if (datastockgrn == null)
+                {
+                    TempData["Prerror"] = "Cant Delete!! Items Transfered !! Use Return from kitchen";
+                    return RedirectToAction("ReturnPurchaseReport");
+                    
+                }
+                else
+                {
 
-                //datastockgrn.Qty = remaingquantity;
+                    datastockgrn.Qty = remaingquantity;
 
+                    var lst = (from p in db.tblTransByStocks where p.stockid == datastockgrn.Id && p.stockType == "gs" select p).ToList();
+                    if (lst.Count > 0)
+                    {
+                        var transByStck = (from p in db.tblTransByStocks where p.stockid == datastockgrn.Id && p.stockType == "gs" select ((decimal?)p.qty) ?? 0).Sum();
 
-                db.SaveChanges();
-                TempData["Prerror"] = "Returned Successfully";
+                        if (transByStck > 0)
+                        {
+                            TempData["Prerror"] = "Cant Delete!! Items Transfered !! Use Return from kitchen";
+                            return RedirectToAction("ReturnPurchaseReport");
+                        }
+                    }
+                    db.SaveChanges();
+                    TempData["Prerror"] = "Returned Successfully";
+
+                }
+               
             }
 
             else
@@ -436,7 +495,7 @@ namespace NibsMVC.Controllers
                     tb.RemainingAmount = model.RemainingAmount;
                     tb.Tax = model.Tax;
                     tb.VendorId = model.VendorId;
-                    ;
+                    
                     tb.PurchaseOrderId = model.PurchaseOrderId;
                     tb.Remarks = model.Remarks;
                     db.tblPurchaseMasters.Add(tb);
@@ -476,8 +535,12 @@ namespace NibsMVC.Controllers
 
                         tblGrn.Rate = (tbl.Amount + (tbl.Amount * (tbl.TaxPer / 100))) / tbl.Quantity;
 
-                        db.tblGRNStocks.Add(tblGrn);
+                       
                         db.tblPurchasedItems.Add(tbl);
+                        db.SaveChanges();
+
+                        tblGrn.purchsedDetId = db.tblPurchasedItems.Max(p => p.PurchaseDetailId);
+                        db.tblGRNStocks.Add(tblGrn);
                         db.SaveChanges();
                         tbl_KitchenStock stock = new tbl_KitchenStock();
                         var stockdata = (from l in db.tbl_KitchenStock where l.OutletId == OutletId select new { l.RawMaterialId, l.Quantity }).ToList();

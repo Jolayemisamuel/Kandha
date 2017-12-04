@@ -473,7 +473,7 @@ namespace NibsMVC.Controllers
                 if (db.tblOpStckRates.Where(p => p.MaterialId.Equals(rawid)).Count() > 0)
                     sb.Append(" update tblOpStckRate set Qty= " + Model1.currentstock + ", Rate=" + Model1.currentvalue + " , Date = '" + Model1.stockDate + "' where  MaterialId=" + Model1.RawMaterial);
                 else
-                    sb.Append(" insert into tblOpStckRate values("+ Model1.RawMaterial + ", " + Model1.currentvalue + " ,'" + Model1.stockDate + "'," + Model1.currentstock + " , 0)");
+                    sb.Append(" insert into tblOpStckRate values("+ Model1.RawMaterial + ", " + Model1.currentvalue + " ,'" + Model1.stockDate + "'," + Model1.currentstock + " , 0,0)");
             }
             
 

@@ -10,17 +10,16 @@
 namespace NibsMVC.EDMX
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class tblGRNStock
+    public partial class MovementAnalysisStore_Result
     {
-        public int Id { get; set; }
+        public string Date { get; set; }
         public int MaterialId { get; set; }
-        public decimal Rate { get; set; }
-        public System.DateTime Date { get; set; }
-        public Nullable<decimal> Qty { get; set; }
-        public Nullable<decimal> IssQty { get; set; }
-        public Nullable<decimal> ConsumptionQty { get; set; }
-        public int purchsedDetId { get; set; }
+        public string Name { get; set; }
+        public Nullable<decimal> inQty { get; set; }
+        public Nullable<decimal> inVal { get; set; }
+        public Nullable<decimal> outQty { get; set; }
+        public Nullable<decimal> outVal { get; set; }
+        public string Remarks { get; set; }
     }
 }

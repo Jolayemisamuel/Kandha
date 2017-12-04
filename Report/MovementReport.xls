@@ -1,0 +1,909 @@
+﻿<?xml version='1.0'?>
+<?mso-application progid='Excel.Sheet'?>
+<s:Workbook xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:s="urn:schemas-microsoft-com:office:spreadsheet">
+  <o:DocumentProperties>
+    <o:Author>KS</o:Author>
+    <o:LastAuthor>Admin</o:LastAuthor>
+  </o:DocumentProperties>
+  <x:ExcelWorkbook>
+    <x:WindowHeight>4815</x:WindowHeight>
+    <x:WindowTopX>120</x:WindowTopX>
+    <x:WindowTopY>105</x:WindowTopY>
+    <x:WindowWidth>11295</x:WindowWidth>
+    <x:ProtectStructure>False</x:ProtectStructure>
+    <x:ProtectWindows>False</x:ProtectWindows>
+  </x:ExcelWorkbook>
+  <s:Styles>
+    <s:Style s:ID="Default" s:Name="Normal">
+      <s:Alignment s:Vertical="Bottom" />
+      <s:Font s:FontName="Calibri" s:Size="11" s:Color="#000000" />
+    </s:Style>
+    <s:Style s:ID="s21">
+      <s:Alignment s:Horizontal="Center" s:Vertical="Bottom" />
+    </s:Style>
+    <s:Style s:ID="s22">
+      <s:Alignment s:Horizontal="Right" s:Vertical="Bottom" />
+    </s:Style>
+    <s:Style s:ID="s34">
+      <s:Alignment s:Horizontal="Center" s:Vertical="Bottom" />
+      <s:NumberFormat s:Format="0" />
+    </s:Style>
+    <s:Style s:ID="s44">
+      <s:Alignment s:Horizontal="Center" s:Vertical="Bottom" />
+      <s:Borders>
+        <s:Border s:Position="Bottom" s:LineStyle="Continuous" s:Weight="1" />
+        <s:Border s:Position="Left" s:LineStyle="Continuous" s:Weight="1" />
+        <s:Border s:Position="Right" s:LineStyle="Continuous" s:Weight="1" />
+        <s:Border s:Position="Top" s:LineStyle="Continuous" s:Weight="1" />
+      </s:Borders>
+      <s:Font s:FontName="Verdana" s:Color="#000000" />
+    </s:Style>
+    <s:Style s:ID="s45">
+      <s:Alignment s:Horizontal="Right" />
+      <s:Font s:FontName="Verdana" s:Color="#000000" />
+      <s:NumberFormat s:Format="0" />
+    </s:Style>
+    <s:Style s:ID="s46">
+      <s:Alignment s:Horizontal="Left" s:Vertical="Bottom" />
+      <s:Font s:FontName="Verdana" s:Color="#000000" />
+      <s:NumberFormat s:Format="0" />
+    </s:Style>
+    <s:Style s:ID="s47">
+      <s:Alignment s:Horizontal="Center" s:Vertical="Bottom" />
+      <s:Font s:FontName="Verdana" s:Color="#000000" />
+      <s:NumberFormat s:Format="0" />
+    </s:Style>
+    <s:Style s:ID="s48">
+      <s:Alignment s:Horizontal="Right" s:Vertical="Bottom" />
+      <s:Borders>
+        <s:Border s:Position="Bottom" s:LineStyle="Continuous" s:Weight="1" />
+        <s:Border s:Position="Left" s:LineStyle="Continuous" s:Weight="1" />
+        <s:Border s:Position="Right" s:LineStyle="Continuous" s:Weight="1" />
+        <s:Border s:Position="Top" s:LineStyle="Continuous" s:Weight="1" />
+      </s:Borders>
+      <s:Font s:FontName="Verdana" />
+      <s:Interior s:Color="#FFFFFF" s:Pattern="Solid" />
+    </s:Style>
+    <s:Style s:ID="s49">
+      <s:Alignment s:Horizontal="Right" s:Vertical="Bottom" />
+      <s:Font s:FontName="Verdana" s:Color="#000000" />
+      <s:NumberFormat s:Format="0" />
+    </s:Style>
+    <s:Style s:ID="s50">
+      <s:Font s:FontName="Verdana" s:Color="#000000" />
+      <s:NumberFormat s:Format="0" />
+    </s:Style>
+    <s:Style s:ID="s51">
+      <s:Alignment s:Horizontal="Right" s:Vertical="Bottom" />
+      <s:Font s:FontName="Verdana" s:Color="RED" />
+      <s:NumberFormat s:Format="Fixed" />
+    </s:Style>
+    <s:Style s:ID="s52">
+      <s:Alignment s:Horizontal="Center" s:Vertical="Bottom" />
+      <s:Borders>
+        <s:Border s:Position="Bottom" s:LineStyle="Continuous" s:Weight="1" />
+        <s:Border s:Position="Left" s:LineStyle="Continuous" s:Weight="1" />
+        <s:Border s:Position="Right" s:LineStyle="Continuous" s:Weight="1" />
+        <s:Border s:Position="Top" s:LineStyle="Continuous" s:Weight="1" />
+      </s:Borders>
+      <s:Font s:FontName="Verdana" />
+    </s:Style>
+    <s:Style s:ID="s54">
+      <s:Alignment s:Horizontal="Center" s:Vertical="Bottom" />
+      <s:Borders>
+        <s:Border s:Position="Bottom" s:LineStyle="Continuous" s:Weight="1" />
+        <s:Border s:Position="Left" s:LineStyle="Continuous" s:Weight="1" />
+        <s:Border s:Position="Right" s:LineStyle="Continuous" s:Weight="1" />
+        <s:Border s:Position="Top" s:LineStyle="Continuous" s:Weight="1" />
+      </s:Borders>
+      <s:Font s:Bold="1" s:FontName="Verdana" s:Size="11" s:Color="#000000" />
+    </s:Style>
+    <s:Style s:ID="s55">
+      <s:Alignment s:Horizontal="Left" s:Vertical="Bottom" />
+      <s:Font s:Bold="1" s:FontName="Verdana" s:Size="10" s:Color="#000000" />
+    </s:Style>
+    <s:Style s:ID="s56">
+      <s:Alignment s:Horizontal="Center" s:Vertical="Bottom" s:WrapText="1" />
+      <s:Font s:Bold="1" s:FontName="Verdana" s:Size="10" s:Color="#000000" />
+    </s:Style>
+  </s:Styles>
+  <s:Worksheet s:Name="MA">
+    <s:Table>
+      <s:Column s:Width="150" />
+      <s:Column s:Width="200" />
+      <s:Column s:Width="80" />
+      <s:Column s:Width="100" />
+      <s:Column s:Width="100" />
+      <s:Column s:Width="100" />
+      <s:Column s:Width="100" />
+      <s:Column s:Width="100" />
+      <s:Column s:Width="80" />
+      <s:Column s:Width="200" />
+      <s:Row>
+        <s:Cell s:StyleID="s56">
+          <s:Data s:Type="String">Date</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s56">
+          <s:Data s:Type="String">Name</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s56">
+          <s:Data s:Type="String">Op Stock</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s56">
+          <s:Data s:Type="String">Op Value</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s56">
+          <s:Data s:Type="String">In Qty</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s56">
+          <s:Data s:Type="String">In Value</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s56">
+          <s:Data s:Type="String">Out Qty</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s56">
+          <s:Data s:Type="String">Out value</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s56">
+          <s:Data s:Type="String">Cls Stock</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s56">
+          <s:Data s:Type="String">Cls Value</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s56">
+          <s:Data s:Type="String">Remarks</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">01-Nov-2017</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Sunflower Oil (80.6)</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">1.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">100.0000</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.0000</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">1.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">100.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Transfer to Chinese</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">29-Nov-2017</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Sunflower Oil (80.6)</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">1.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">100.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.0000</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.17</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">17.0000</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.83</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">83.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">consumption</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">29-Nov-2017</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Red Chilli Powder</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.0000</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.04</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">2.4000</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">-0.04</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">-2.40</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">consumption</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">29-Nov-2017</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Cumin Powder</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.0000</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.01</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.5000</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">-0.01</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">-0.50</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">consumption</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">29-Nov-2017</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Chicken Masala Powder</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.0000</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.01</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">1.0000</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">-0.01</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">-1.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">consumption</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">29-Nov-2017</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Black Pepper Powder</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.0000</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.01</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">1.5000</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">-0.01</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">-1.50</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">consumption</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">01-Nov-2017</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Rice Powder</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">1.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">250.0000</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.0000</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">1.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">250.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Transfer to Chinese</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">29-Nov-2017</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Rice Powder</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">1.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">250.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.0000</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.01</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.5000</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.99</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">249.50</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">consumption</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">01-Nov-2017</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Maidha</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">1.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">400.0000</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.0000</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">1.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">400.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Transfer to Chinese</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">29-Nov-2017</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Maidha</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">1.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">400.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.0000</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.02</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">1.0000</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.98</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">399.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">consumption</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">29-Nov-2017</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Corn Flower Powder</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.0000</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.07</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">2.1000</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">-0.07</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">-2.10</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">consumption</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">01-Nov-2017</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Table Salt</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">1.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">50.0000</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.0000</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">1.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">50.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Transfer to Chinese</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">29-Nov-2017</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Table Salt</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">1.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">50.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.0000</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.01</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.4000</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.99</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">49.60</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">consumption</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">01-Nov-2017</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Raw Egg</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">5.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">26.2500</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.0000</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">5.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">26.25</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Transfer to Chinese</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">29-Nov-2017</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Raw Egg</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">5.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">26.25</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.0000</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.50</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">3.1500</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">4.50</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">23.10</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">consumption</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">01-Nov-2017</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Garlic Mala</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">1.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">50.0000</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.0000</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">1.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">50.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Transfer to Chinese</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">29-Nov-2017</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Garlic Mala</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">1.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">50.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.0000</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.02</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">1.0500</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.98</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">48.95</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">consumption</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">01-Nov-2017</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Ginger</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">1.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">42.0000</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.0000</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">1.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">42.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Transfer to Chinese</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">29-Nov-2017</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Ginger</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">1.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">42.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.0000</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.01</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.2625</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.99</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">41.74</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">consumption</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">01-Nov-2017</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Cauliflower</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">3.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">126.0000</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.0000</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">3.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">126.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Transfer to Chinese</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">29-Nov-2017</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Cauliflower</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">3.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">126.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.0000</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">0.17</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">5.3550</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">2.83</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">120.65</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">consumption</s:Data>
+        </s:Cell>
+      </s:Row>
+    </s:Table>
+    <x:WorksheetOptions>
+      <x:Selected />
+      <x:ProtectObjects>False</x:ProtectObjects>
+      <x:ProtectScenarios>False</x:ProtectScenarios>
+      <x:PageSetup>
+        <x:Layout x:Orientation="Landscape" />
+        <x:PageMargins x:Bottom="1" x:Left="1" x:Right="1" x:Top="1" />
+      </x:PageSetup>
+      <x:Print>
+        <x:PaperSizeIndex>9</x:PaperSizeIndex>
+        <x:HorizontalResolution>120</x:HorizontalResolution>
+        <x:VerticalResolution>72</x:VerticalResolution>
+        <x:ValidPrinterInfo />
+      </x:Print>
+    </x:WorksheetOptions>
+  </s:Worksheet>
+</s:Workbook>

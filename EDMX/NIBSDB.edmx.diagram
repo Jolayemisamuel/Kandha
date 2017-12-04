@@ -126,8 +126,6 @@
         <EntityTypeShape EntityType="NIBSModel.tblPurchaseMaster" Width="1.5" PointX="15.75" PointY="30.625" />
         <AssociationConnector Association="NIBSModel.FK_tblPurchaseMaster_tblVendor" />
         <AssociationConnector Association="NIBSModel.FK_tblPurchasedItem_tblPurchasedItem" />
-        <EntityTypeShape EntityType="NIBSModel.tblGRNStock" Width="1.5" PointX="5.25" PointY="44.25" />
-        <AssociationConnector Association="NIBSModel.FK_tblGRNStock_tbl_RawMaterials" />
         <EntityTypeShape EntityType="NIBSModel.tblTransferReturnReport" Width="2.875" PointX="21.5" PointY="16" />
         <AssociationConnector Association="NIBSModel.FK_tblTransferReturnReport_tbl_RawMaterials" />
         <AssociationConnector Association="NIBSModel.FK_tblTransferReturnReport_tblOutlet" />
@@ -158,12 +156,15 @@
         <EntityTypeShape EntityType="NIBSModel.tblConsumption" Width="1.5" PointX="21" PointY="23.5" FillColor="0, 122, 204" />
         <AssociationConnector Association="NIBSModel.FK_tblConsumption_tbl_RawMaterials1" />
         <AssociationConnector Association="NIBSModel.FK_tblConsumption_tblBillDetails" />
+        <EntityTypeShape EntityType="NIBSModel.vwStockTransaction" Width="1.5" PointX="7.375" PointY="4.75" />
+        <EntityTypeShape EntityType="NIBSModel.vwStockTransactionsKitchen" Width="1.5" PointX="7.375" PointY="8.75" />
         <EntityTypeShape EntityType="NIBSModel.tblLedgerMaster" Width="1.5" PointX="25.875" PointY="5.125" />
         <EntityTypeShape EntityType="NIBSModel.Voucher_Entry_Credit" Width="1.5" PointX="28.125" PointY="7.125" />
         <EntityTypeShape EntityType="NIBSModel.Voucher_Entry_Debit" Width="1.5" PointX="28.125" PointY="1.25" />
         <AssociationConnector Association="NIBSModel.FK_tblLedgerMaster_tblLedgerGroup" />
         <AssociationConnector Association="NIBSModel.FK_Voucher_Entry_Credit_tblLedgerMaster" />
         <AssociationConnector Association="NIBSModel.FK_Voucher_Entry_Debit_tblLedgerMaster" />
+        <EntityTypeShape EntityType="NIBSModel.tblGRNStock" Width="1.5" PointX="0.75" PointY="9.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

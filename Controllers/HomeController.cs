@@ -32,9 +32,9 @@ namespace NibsMVC.Controllers
            
 
 
-                DateTime dt = Convert.ToDateTime("01-Oct-2017");
+                DateTime dt = Convert.ToDateTime(DateTime.Today.ToString("dd-MMM-yyyy"));
             var billsKOT = (from p in kot_entities.vwBillMsts where p.BillDate >= dt select p).ToList();
-            var billsCount = (from p in entities.tblBillMasters select p).ToList().Count;
+            var billsCount = (from p in entities.tblBillMasters where p.BillDate>=dt select p).ToList().Count;
             if (billsKOT.Count > billsCount)
             {
                 foreach (var item in billsKOT)
@@ -82,9 +82,9 @@ namespace NibsMVC.Controllers
                             tbDet.Amount = itemDet.Value;
 
                             if (item.Description == "Ac Hall")
-                                tbDet.VatAmount = itemDet.Value + (itemDet.Value * (decimal)0.5);
+                                tbDet.VatAmount = itemDet.Value + (itemDet.Value * (decimal)0.05);
                             else
-                                tbDet.VatAmount = itemDet.Value + (itemDet.Value * (decimal)0.5);
+                                tbDet.VatAmount = itemDet.Value + (itemDet.Value * (decimal)0.05);
 
                             if (item.Description == "Ac Hall")
                                 tbDet.Vat = Convert.ToDecimal("5");
@@ -95,7 +95,7 @@ namespace NibsMVC.Controllers
                             entities.SaveChanges();
 
 
-                            var RawList = (from p in entities.tbl_KitchenRawIndent where p.ItemId == (tbDet.ItemId) select p).ToList();
+                            var RawList = (from p in entities.tbl_KitchenRawIndent where p.ItemId==tbDet.ItemId select p).ToList();
                             if (RawList != null)
                             {
                                 if(RawList.Count >0)
@@ -106,12 +106,15 @@ namespace NibsMVC.Controllers
                                         string pUnit = li.tbl_RawMaterials.units;
                                         string cUnit = li.Unit;
                                         // Convert cUnit (Consumption Unit)  from pUnit (Purchase Unit) 
-
-
-
-                                        string qry = "  select Id,MaterialId,Rate,Date,Qty,IssQty,ConsumptionQty=isnull(ConsumptionQty,0),table1='os' from tblOpStckRate where issueQty > ConsumptionQty   and MaterialId = " + li.RawMaterialId  ;  
+                                        if (pUnit!=cUnit)
+                                        {
+                                            qty=unitConvert(qty, cUnit, pUnit);
+                                        }
+                                        qty = Math.Round(qty, 2, MidpointRounding.AwayFromZero);
+                                        if (qty == 0) qty = (decimal)0.01;
+                                        string qry = "  select Id,MaterialId,Rate,Date,Qty,IssQty,ConsumptionQty=isnull(ConsumptionQty,0),table1='os' from tblOpStckRate where IssQty > isnull(ConsumptionQty,0)   and MaterialId = " + li.RawMaterialId  ;  
                                         qry = qry + " union all ";
-                                        qry = qry + " select Id,MaterialId,Rate,Date,Qty,IssQty,ConsumptionQty=isnull(ConsumptionQty,0),table1='gs' from tblGRNStock where issueQty > ConsumptionQty   and MaterialId = " + li.RawMaterialId + " order by date ";
+                                        qry = qry + " select Id,MaterialId,Rate,Date,Qty,IssQty,ConsumptionQty=isnull(ConsumptionQty,0),table1='gs' from tblGRNStock where IssQty > isnull(ConsumptionQty,0)   and MaterialId = " + li.RawMaterialId + " order by date ";
                                         string webconnection = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
                                         SqlConnection con = new SqlConnection(webconnection);
                                         SqlCommand cmd = new SqlCommand(qry, con);
@@ -127,7 +130,7 @@ namespace NibsMVC.Controllers
                                             {
                                                 if (dr["table1"].ToString() == "os")
                                                 {
-                                                    if (qty <= Convert.ToDecimal(dr["ConsumptionQty"]))
+                                                    if (qty <= Convert.ToDecimal(dr["IssQty"]) - Convert.ToDecimal(dr["ConsumptionQty"]))
                                                     {
                                                         qry = qry + " update tblOpStckRate  set ConsumptionQty = isnull(ConsumptionQty,0) + " + qty+ " where MaterialId = " + li.RawMaterialId + " and id=" + dr["id"];
                                                         qry = qry + " insert into  tblConsumption values( " + tbDet.BillDetailsId + ", '" + li.RawMaterialId + "', " + qty+ "," + dr["Rate"].ToString() + " ) ";
@@ -138,7 +141,7 @@ namespace NibsMVC.Controllers
                                                     }
                                                     else
                                                     {
-                                                        qry = qry + " update tblOpStckRate  set ConsumptionQty = isnull(ConsumptionQty,0) + " + Convert.ToDecimal(dr["ConsumptionQty"]) + " where MaterialId = " + li.RawMaterialId + " and id=" + dr["id"];
+                                                        qry = qry + " update tblOpStckRate  set ConsumptionQty = isnull(ConsumptionQty,0) + " + (Convert.ToDecimal(dr["IssQty"]) - Convert.ToDecimal(dr["ConsumptionQty"])) + " where MaterialId = " + li.RawMaterialId + " and id=" + dr["id"];
                                                         qry = qry + " insert into  tblConsumption values( " + tbDet.BillDetailsId + ", '" + li.RawMaterialId + "', " + Convert.ToDecimal(dr["ConsumptionQty"]) + "," + dr["Rate"].ToString() + " ) ";
                                                         qty-= Convert.ToDecimal(dr["ConsumptionQty"]);
                                                     }
@@ -146,7 +149,7 @@ namespace NibsMVC.Controllers
                                                 }
                                                 else
                                                 {
-                                                    if (qty<= Convert.ToDecimal(dr["ConsumptionQty"]))
+                                                    if (qty<= Convert.ToDecimal(dr["IssQty"]) - Convert.ToDecimal(dr["ConsumptionQty"]))
                                                     {
                                                         qry = qry + " update tblGRNStock  set ConsumptionQty = isnull(ConsumptionQty,0) + " + qty+ " where MaterialId = " + li.RawMaterialId + " and id=" + dr["id"];
                                                         qry = qry + " insert into  tblConsumption values( " + tbDet.BillDetailsId + ", '" + li.RawMaterialId + "', " + qty+ "," + dr["Rate"].ToString() + " ) ";
@@ -154,7 +157,7 @@ namespace NibsMVC.Controllers
                                                     }
                                                     else
                                                     {
-                                                        qry = qry + " update tblGRNStock  set ConsumptionQty = isnull(ConsumptionQty,0) + " + Convert.ToDecimal(dr["ConsumptionQty"]) + " where MaterialId = " + li.RawMaterialId + " and id=" + dr["id"];
+                                                        qry = qry + " update tblGRNStock  set ConsumptionQty = isnull(ConsumptionQty,0) + " + (Convert.ToDecimal(dr["IssQty"]) - Convert.ToDecimal(dr["ConsumptionQty"])) + " where MaterialId = " + li.RawMaterialId + " and id=" + dr["id"];
                                                         qry = qry + " insert into  tblConsumption values( " + tbDet.BillDetailsId + ", '" + li.RawMaterialId + "', " + Convert.ToDecimal(dr["ConsumptionQty"]) + "," + dr["Rate"].ToString() + " ) ";
                                                         qty-= Convert.ToDecimal(dr["ConsumptionQty"]);
                                                     }
@@ -208,7 +211,22 @@ namespace NibsMVC.Controllers
 
         }
 
-
+        public decimal unitConvert(decimal val, string frUnit, string toUnit)
+        {
+            if((frUnit=="Gms"|| frUnit == "ML") && (toUnit == "Kgs"|| toUnit == "Ltr"))
+            {
+                return (val / 1000);
+            }
+            else if ((frUnit == "Kgs" || frUnit == "Ltr") && (toUnit == "Gms" || toUnit == "ML"))
+            {
+                return (val * 1000);
+            }
+            else
+            {
+                return val;
+            }
+            
+        }
         public List<GetRunningTable> getRunningTable()
         {
             List<GetRunningTable> lst = new List<GetRunningTable>();

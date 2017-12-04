@@ -13,9 +13,6 @@ namespace NibsMVC.EDMX
     using System.Data.Entity;
     using System.Data.Entity.Core.Objects;
     using System.Data.Entity.Infrastructure;
-    //using System.Data.Objects;
-    //using System.Data.Objects.DataClasses;
-    using System.Linq;
 
     public partial class NIBSEntities : DbContext
     {
@@ -79,7 +76,6 @@ namespace NibsMVC.EDMX
         public DbSet<Unit> Units { get; set; }
         public DbSet<AddCategoryVendor> AddCategoryVendors { get; set; }
         public DbSet<tblPurchaseMaster> tblPurchaseMasters { get; set; }
-        public DbSet<tblGRNStock> tblGRNStocks { get; set; }
         public DbSet<tblTransferReturnReport> tblTransferReturnReports { get; set; }
         public DbSet<tblGenBarcode> tblGenBarcodes { get; set; }
         public DbSet<tblSubItem> tblSubItems { get; set; }
@@ -89,9 +85,15 @@ namespace NibsMVC.EDMX
         public DbSet<tblAssignSubMenuItem> tblAssignSubMenuItems { get; set; }
         public DbSet<tblLedgerCategory> tblLedgerCategories { get; set; }
         public DbSet<tblLedgerGroup> tblLedgerGroups { get; set; }
+        public DbSet<tblTransByStock> tblTransByStocks { get; set; }
+        public DbSet<tblTransRetRateDet> tblTransRetRateDets { get; set; }
+        public DbSet<tblConsumption> tblConsumptions { get; set; }
+        public DbSet<vwStockTransaction> vwStockTransactions { get; set; }
+        public DbSet<vwStockTransactionsKitchen> vwStockTransactionsKitchens { get; set; }
         public DbSet<tblLedgerMaster> tblLedgerMasters { get; set; }
         public DbSet<Voucher_Entry_Credit> Voucher_Entry_Credit { get; set; }
         public DbSet<Voucher_Entry_Debit> Voucher_Entry_Debit { get; set; }
+        public DbSet<tblGRNStock> tblGRNStocks { get; set; }
     
         public virtual int BillReportGenerate(string orderType, string paymentType, Nullable<System.DateTime> datefrom, Nullable<System.DateTime> dateto, Nullable<int> billNo, string newsql)
         {
@@ -120,6 +122,57 @@ namespace NibsMVC.EDMX
                 new ObjectParameter("newsql", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BillReportGenerate", orderTypeParameter, paymentTypeParameter, datefromParameter, datetoParameter, billNoParameter, newsqlParameter);
+        }
+    
+        public virtual ObjectResult<MovementAnalysisKitchen_Result> MovementAnalysisKitchen(string frDate, string toDate, Nullable<int> rawMaterialId)
+        {
+            var frDateParameter = frDate != null ?
+                new ObjectParameter("frDate", frDate) :
+                new ObjectParameter("frDate", typeof(string));
+    
+            var toDateParameter = toDate != null ?
+                new ObjectParameter("toDate", toDate) :
+                new ObjectParameter("toDate", typeof(string));
+    
+            var rawMaterialIdParameter = rawMaterialId.HasValue ?
+                new ObjectParameter("rawMaterialId", rawMaterialId) :
+                new ObjectParameter("rawMaterialId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<MovementAnalysisKitchen_Result>("MovementAnalysisKitchen", frDateParameter, toDateParameter, rawMaterialIdParameter);
+        }
+    
+        public virtual ObjectResult<MovementAnalysisStore_Result> MovementAnalysisStore(string frDate, string toDate, Nullable<int> rawMaterialId)
+        {
+            var frDateParameter = frDate != null ?
+                new ObjectParameter("frDate", frDate) :
+                new ObjectParameter("frDate", typeof(string));
+    
+            var toDateParameter = toDate != null ?
+                new ObjectParameter("toDate", toDate) :
+                new ObjectParameter("toDate", typeof(string));
+    
+            var rawMaterialIdParameter = rawMaterialId.HasValue ?
+                new ObjectParameter("rawMaterialId", rawMaterialId) :
+                new ObjectParameter("rawMaterialId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<MovementAnalysisStore_Result>("MovementAnalysisStore", frDateParameter, toDateParameter, rawMaterialIdParameter);
+        }
+    
+        public virtual int StockReturn(Nullable<int> transferid, Nullable<int> rawmaterialid, Nullable<decimal> item)
+        {
+            var transferidParameter = transferid.HasValue ?
+                new ObjectParameter("transferid", transferid) :
+                new ObjectParameter("transferid", typeof(int));
+    
+            var rawmaterialidParameter = rawmaterialid.HasValue ?
+                new ObjectParameter("rawmaterialid", rawmaterialid) :
+                new ObjectParameter("rawmaterialid", typeof(int));
+    
+            var itemParameter = item.HasValue ?
+                new ObjectParameter("item", item) :
+                new ObjectParameter("item", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("StockReturn", transferidParameter, rawmaterialidParameter, itemParameter);
         }
     }
 }

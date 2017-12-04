@@ -12,15 +12,15 @@ namespace NibsMVC.EDMX
     using System;
     using System.Collections.Generic;
     
-    public partial class tblGRNStock
+    public partial class vwStockTransaction
     {
-        public int Id { get; set; }
+        public Nullable<System.DateTime> Date { get; set; }
         public int MaterialId { get; set; }
-        public decimal Rate { get; set; }
-        public System.DateTime Date { get; set; }
-        public Nullable<decimal> Qty { get; set; }
-        public Nullable<decimal> IssQty { get; set; }
-        public Nullable<decimal> ConsumptionQty { get; set; }
-        public int purchsedDetId { get; set; }
+        public Nullable<decimal> inQty { get; set; }
+        public Nullable<decimal> inVal { get; set; }
+        public decimal outQty { get; set; }
+        public Nullable<decimal> outVal { get; set; }
+        public string Remarks { get; set; }
+        public int ord { get; set; }
     }
 }
