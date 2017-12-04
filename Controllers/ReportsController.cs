@@ -357,8 +357,15 @@ namespace NibsMVC.Controllers
         {
 
             string filename= GenerateExcelReport(Report);
-            return File(Path.Combine( Server.MapPath("~/Report/"), filename), "application/xlsx");
-            //return RedirectToAction("MovementAnalysisReport", "Reports");
+            var f=  File(Path.Combine( Server.MapPath("~/Report/"), filename), "application/vnd.ms-excel");
+            f.FileDownloadName = "MovementAnalysis.xls";
+            //string ext = System.IO.Path.GetExtension(filename).ToLower();
+            //Microsoft.Win32.RegistryKey regKey = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey(ext);
+            //string mimeType = "";
+            //if (regKey != null && regKey.GetValue("Content Type") != null)
+            //    mimeType = regKey.GetValue("Content Type").ToString();
+            return f;
+           // return RedirectToAction("MovementAnalysisReport", "Reports");
         }
 
         public string GenerateExcelReport(MovementAnalysisReport Report)
@@ -592,6 +599,7 @@ namespace NibsMVC.Controllers
             sheet.Table.Columns.Add(150);
             sheet.Table.Columns.Add(200);
             sheet.Table.Columns.Add(80);
+            sheet.Table.Columns.Add(100);
             sheet.Table.Columns.Add(100);
             sheet.Table.Columns.Add(100);
             sheet.Table.Columns.Add(100);
