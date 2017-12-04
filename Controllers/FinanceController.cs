@@ -278,11 +278,11 @@ namespace NibsMVC.Controllers
                 return RedirectToAction("CashReceipt");
             }
         }
-        public ActionResult PaymentToBank(Payment model)
+        [HttpPost]
+        public ActionResult Payment(Payment model)
         {
             try
             {
-
                 int CurrentYear = DateTime.Today.Year;
                 int PreviousYear = DateTime.Today.Year - 1;
                 int NextYear = DateTime.Today.Year + 1;
@@ -324,8 +324,6 @@ namespace NibsMVC.Controllers
                     tb1.account_type = "Payment";
 
 
-
-
                     tb1.from_form_id = 0;
 
                     tb1.check_no = model.ChequeNo[i];
@@ -338,7 +336,7 @@ namespace NibsMVC.Controllers
                     tb1.voucher_ledger_accout_id = Convert.ToInt32(idl);
                     tb1.voucher_dbt_amount = model.DrAmount[i];
                     tb1.voucher_narration = model.DrNarration[i];
-
+                    tb1.purchase_id = model.PurchaseId[i];
                     tb1.create_date = DateTime.Now;
 
                     db.Voucher_Entry_Debit.Add(tb1);
@@ -366,6 +364,7 @@ namespace NibsMVC.Controllers
                     tb.voucher_ledger_accout_id = Convert.ToInt32(id);
                     tb.voucher_cr_amount = model.CreditAmount[j];
                     tb.voucher_narration = model.CrNarration[j];
+                    tb.purchase_id = model.PurchaseId[j];
                     tb.create_date = DateTime.Now;
 
                     db.Voucher_Entry_Credit.Add(tb);
@@ -374,8 +373,8 @@ namespace NibsMVC.Controllers
 
                 TempData["Perror"] = "Inserted Successfully !";
                 return View("Payment");
-            }
 
+            }
             catch (Exception e)
             {
                 TempData["Perror"] = "Please Enter the Details Correctlly !";
@@ -537,25 +536,27 @@ namespace NibsMVC.Controllers
             for (int i = 0; i < id.Length; i++)
             {
                 PoId[i] = int.Parse(id[i]);
-                var vendor = (from t in db.tblPurchaseMasters where PoId.Contains(t.InvoiceNo) select t.VendorId).FirstOrDefault();
+                var purchaseid = (from t in db.tblPurchaseMasters where PoId.Contains(t.PurchaseId) select t.PurchaseId).FirstOrDefault();
                 var Balance = (from q in db.Voucher_Entry_Debit
                                join s in db.Voucher_Entry_Credit
                                      on new { q.voucher_no, q.record_no } equals new { s.voucher_no, s.record_no }
-                               join r in db.tblLedgerMasters on q.voucher_ledger_accout_id equals r.LedgerMasterId
-                               where (r.VendorId == vendor && q.voucher_type == "Payment")
-                               select (decimal?)q.voucher_dbt_amount - s.voucher_cr_amount).Sum() ?? 0;
+                               join r in db.tblPurchaseMasters on q.purchase_id equals r.PurchaseId
+                               where (r.PurchaseId == purchaseid)
+                               select r.NetAmount - q.voucher_dbt_amount).Sum() ?? 0;
 
                 if (Balance != 0)
                 {
 
                     var result = (from p in db.tblPurchaseMasters
-                                  where (PoId.Contains(p.InvoiceNo))
+                                  where (PoId.Contains(p.PurchaseId))
                                   select
                                   new
                                   {
                                       p.tblVendor.Name,
 
-                                      Total = Balance
+                                      Total = Balance,
+
+                                       p.PurchaseId
 
 
                                   }
@@ -565,48 +566,56 @@ namespace NibsMVC.Controllers
                 else
                 {
                     var result = (from p in db.tblPurchaseMasters
-                                  where (PoId.Contains(p.InvoiceNo))
+                                  where (PoId.Contains(p.PurchaseId))
                                   select
                                   new
                                   {
                                       p.tblVendor.Name,
 
-                                      Total = p.NetAmount
+                                      Total = p.NetAmount,
 
-
+                                      p.PurchaseId
                                   }
                      ).ToList();
                     json = jsonSerialiser.Serialize(result);
+
                 }
-                vendor = null;
+                purchaseid = 0;
             }
 
             return json;
 
         }
-        public JsonResult CreditDebitValidation(string model,string model1)
-        {
-            
+        //public JsonResult CreditDebitValidation(string model,string model1)
+        //{
 
-            decimal credit = 0;
-            decimal debit = 0;
+        //    getvalue();
 
-            foreach(var cr in model)
-            {
-                credit = credit + cr;
-            }
-            foreach (var dr in model1)
-            {
-                debit = debit + dr;
-            }
+        //    decimal credit = 0;
+        //    decimal debit = 0;
 
-            if(credit!=debit)
-            {
-                TempData["Perror"] = " Your Credit and Debit Amount is Having Some Variation ,Please Check That and insert Correct Amount !";
-                //return RedirectToRouteResult("PaymentToBank");
-            }
+        //    foreach(var cr in model)
+        //    {
+        //        credit = credit + cr;
+        //    }
+        //    foreach (var dr in model1)
+        //    {
+        //        debit = debit + dr;
+        //    }
 
-            return Json(JsonRequestBehavior.AllowGet);
-        }
+        //    if(credit!=debit)
+        //    {
+        //        TempData["Perror"] = " Your Credit and Debit Amount is Having Some Variation ,Please Check That and insert Correct Amount !";
+        //        //return RedirectToRouteResult("PaymentToBank");
+        //    }
+
+        //    return Json(JsonRequestBehavior.AllowGet);
+        //}
+        //public Payment getvalue()
+        //{
+        //    Payment model= new Payment();
+
+        //    return model;
+        //}
     }
 }

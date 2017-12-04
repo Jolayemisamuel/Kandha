@@ -50,8 +50,8 @@ namespace NibsMVC.Models
         [Required]
         [Display(Name = "Please Select Ledger")]
         public string[] LedgerAccId { get; set; }
-        [Required]
-        [Display(Name = "Enter the Credit Amount")]
+        
+        [Required(ErrorMessage = "Password is required.")]
         public decimal[] CreditAmount { get; set; }        
         [Required]
         [Display(Name = "Select Date")]
@@ -59,8 +59,8 @@ namespace NibsMVC.Models
         [Required]
         [Display(Name = "PLEASE SELECT Ledger Account")]
         public string[] ByAccount { get; set; }
-        [Required]
-        [Display(Name = "Enter Debit Amount")]
+        [Required(ErrorMessage = "Confirmation Password is required.")]
+        [Compare("CreditAmount", ErrorMessage = "Password and Confirmation Password must match.")]
         public decimal[] DrAmount { get; set; }
         public string[] CrNarration { get; set; }
         public string[] DrNarration { get; set; }
@@ -93,6 +93,7 @@ namespace NibsMVC.Models
         public decimal[] DrAmount { get; set; }
         public string[] CrNarration { get; set; }
         public string[] DrNarration { get; set; }
+        public int[] PurchaseId { get; set; }
     }
     public class CashPayement
     {

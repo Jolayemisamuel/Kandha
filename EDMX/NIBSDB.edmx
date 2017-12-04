@@ -780,6 +780,7 @@
           <Property Name="from_form_id" Type="int" />
           <Property Name="voucher_narration" Type="nvarchar" MaxLength="500" />
           <Property Name="account_type" Type="nvarchar" MaxLength="500" />
+          <Property Name="purchase_id" Type="int" />
         </EntityType>
         <EntityType Name="Voucher_Entry_Debit">
           <Key>
@@ -805,6 +806,7 @@
           <Property Name="from_form_id" Type="int" />
           <Property Name="voucher_narration" Type="nvarchar" MaxLength="500" />
           <Property Name="account_type" Type="nvarchar" MaxLength="500" />
+          <Property Name="purchase_id" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Kandha.dbo.vwStockTransactions' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -2743,6 +2745,49 @@ warning 6002: The table/view 'Kandha.dbo.vwStockTransactionsKitchen' does not ha
             <End Role="tblLedgerCategory" EntitySet="tblLedgerCategories" />
             <End Role="tblLedgerGroup" EntitySet="tblLedgerGroups" />
           </AssociationSet>
+          <EntitySet Name="tblTransByStocks" EntityType="NIBSModel.tblTransByStock" />
+          <EntitySet Name="tblTransRetRateDets" EntityType="NIBSModel.tblTransRetRateDet" />
+          <AssociationSet Name="FK_tblTransRetRateDet_tbl_RawMaterials" Association="NIBSModel.FK_tblTransRetRateDet_tbl_RawMaterials">
+            <End Role="tbl_RawMaterials" EntitySet="tbl_RawMaterials" />
+            <End Role="tblTransRetRateDet" EntitySet="tblTransRetRateDets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTransByStock_tblTransfer" Association="NIBSModel.FK_tblTransByStock_tblTransfer">
+            <End Role="tblTransfer" EntitySet="tblTransfers" />
+            <End Role="tblTransByStock" EntitySet="tblTransByStocks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTransRetRateDet_tblTransferReturnReport" Association="NIBSModel.FK_tblTransRetRateDet_tblTransferReturnReport">
+            <End Role="tblTransferReturnReport" EntitySet="tblTransferReturnReports" />
+            <End Role="tblTransRetRateDet" EntitySet="tblTransRetRateDets" />
+          </AssociationSet>
+          <EntitySet Name="tblConsumptions" EntityType="NIBSModel.tblConsumption" />
+          <AssociationSet Name="FK_tblConsumption_tbl_RawMaterials1" Association="NIBSModel.FK_tblConsumption_tbl_RawMaterials1">
+            <End Role="tbl_RawMaterials" EntitySet="tbl_RawMaterials" />
+            <End Role="tblConsumption" EntitySet="tblConsumptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblConsumption_tblBillDetails" Association="NIBSModel.FK_tblConsumption_tblBillDetails">
+            <End Role="tblBillDetail" EntitySet="tblBillDetails" />
+            <End Role="tblConsumption" EntitySet="tblConsumptions" />
+          </AssociationSet>
+          <EntitySet Name="vwStockTransactions" EntityType="NIBSModel.vwStockTransaction" />
+          <EntitySet Name="vwStockTransactionsKitchens" EntityType="NIBSModel.vwStockTransactionsKitchen" />
+          <FunctionImport Name="MovementAnalysisKitchen" ReturnType="Collection(NIBSModel.MovementAnalysisKitchen_Result)">
+            <Parameter Name="frDate" Mode="In" Type="String" />
+            <Parameter Name="toDate" Mode="In" Type="String" />
+            <Parameter Name="rawMaterialId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="MovementAnalysisStore" ReturnType="Collection(NIBSModel.MovementAnalysisStore_Result)">
+            <Parameter Name="frDate" Mode="In" Type="String" />
+            <Parameter Name="toDate" Mode="In" Type="String" />
+            <Parameter Name="rawMaterialId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="StockReturn">
+            <Parameter Name="transferid" Mode="In" Type="Int32" />
+            <Parameter Name="rawmaterialid" Mode="In" Type="Int32" />
+            <Parameter Name="item" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <EntitySet Name="tblLedgerMasters" EntityType="NIBSModel.tblLedgerMaster" />
+          <EntitySet Name="Voucher_Entry_Credit" EntityType="NIBSModel.Voucher_Entry_Credit" />
+          <EntitySet Name="Voucher_Entry_Debit" EntityType="NIBSModel.Voucher_Entry_Debit" />
           <AssociationSet Name="FK_tblLedgerMaster_tblLedgerGroup" Association="NIBSModel.FK_tblLedgerMaster_tblLedgerGroup">
             <End Role="tblLedgerGroup" EntitySet="tblLedgerGroups" />
             <End Role="tblLedgerMaster" EntitySet="tblLedgerMasters" />
@@ -4621,22 +4666,6 @@ warning 6002: The table/view 'Kandha.dbo.vwStockTransactionsKitchen' does not ha
           <NavigationProperty Name="tblLedgerCategory" Relationship="NIBSModel.FK_tblLedgerGroup_tblLedgerCategory" FromRole="tblLedgerGroup" ToRole="tblLedgerCategory" />
           <NavigationProperty Name="tblLedgerMasters" Relationship="NIBSModel.FK_tblLedgerMaster_tblLedgerGroup" FromRole="tblLedgerGroup" ToRole="tblLedgerMaster" />
         </EntityType>
-        <EntityType Name="tblLedgerMaster">
-          <Key>
-            <PropertyRef Name="LedgerMasterId" />
-          </Key>
-          <Property Name="LedgerMasterId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RecordId" Type="Int32" Nullable="false" />
-          <Property Name="LedgerName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LedgerGroup" Type="Int32" Nullable="false" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="OPBalance" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Percentage" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Transfer_Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="tblLedgerGroup" Relationship="NIBSModel.FK_tblLedgerMaster_tblLedgerGroup" FromRole="tblLedgerMaster" ToRole="tblLedgerGroup" />
-          <NavigationProperty Name="Voucher_Entry_Credit" Relationship="NIBSModel.FK_Voucher_Entry_Credit_tblLedgerMaster" FromRole="tblLedgerMaster" ToRole="Voucher_Entry_Credit" />
-          <NavigationProperty Name="Voucher_Entry_Debit" Relationship="NIBSModel.FK_Voucher_Entry_Debit_tblLedgerMaster" FromRole="tblLedgerMaster" ToRole="Voucher_Entry_Debit" />
-        </EntityType>
         <Association Name="FK_tblLedgerGroup_tblLedgerCategory">
           <End Type="NIBSModel.tblLedgerCategory" Role="tblLedgerCategory" Multiplicity="1" />
           <End Type="NIBSModel.tblLedgerGroup" Role="tblLedgerGroup" Multiplicity="*" />
@@ -4649,18 +4678,172 @@ warning 6002: The table/view 'Kandha.dbo.vwStockTransactionsKitchen' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tblLedgerMaster_tblLedgerGroup">
-          <End Type="NIBSModel.tblLedgerGroup" Role="tblLedgerGroup" Multiplicity="1" />
-          <End Type="NIBSModel.tblLedgerMaster" Role="tblLedgerMaster" Multiplicity="*" />
+        <EntityType Name="tblTransByStock">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TransferId" Type="Int32" Nullable="false" />
+          <Property Name="stockid" Type="Int32" Nullable="false" />
+          <Property Name="qty" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="stockType" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblTransfer" Relationship="NIBSModel.FK_tblTransByStock_tblTransfer" FromRole="tblTransByStock" ToRole="tblTransfer" />
+        </EntityType>
+        <EntityType Name="tblTransRetRateDet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TransferReturnId" Type="Int32" Nullable="false" />
+          <Property Name="MaterialId" Type="Int32" Nullable="false" />
+          <Property Name="qty" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Rate" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <NavigationProperty Name="tbl_RawMaterials" Relationship="NIBSModel.FK_tblTransRetRateDet_tbl_RawMaterials" FromRole="tblTransRetRateDet" ToRole="tbl_RawMaterials" />
+          <NavigationProperty Name="tblTransferReturnReport" Relationship="NIBSModel.FK_tblTransRetRateDet_tblTransferReturnReport" FromRole="tblTransRetRateDet" ToRole="tblTransferReturnReport" />
+        </EntityType>
+        <Association Name="FK_tblTransRetRateDet_tbl_RawMaterials">
+          <End Type="NIBSModel.tbl_RawMaterials" Role="tbl_RawMaterials" Multiplicity="1" />
+          <End Type="NIBSModel.tblTransRetRateDet" Role="tblTransRetRateDet" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tblLedgerGroup">
-              <PropertyRef Name="LedgerGroupId" />
+            <Principal Role="tbl_RawMaterials">
+              <PropertyRef Name="RawMaterialId" />
             </Principal>
-            <Dependent Role="tblLedgerMaster">
-              <PropertyRef Name="LedgerGroup" />
+            <Dependent Role="tblTransRetRateDet">
+              <PropertyRef Name="MaterialId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblTransByStock_tblTransfer">
+          <End Type="NIBSModel.tblTransfer" Role="tblTransfer" Multiplicity="1" />
+          <End Type="NIBSModel.tblTransByStock" Role="tblTransByStock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTransfer">
+              <PropertyRef Name="TransferId" />
+            </Principal>
+            <Dependent Role="tblTransByStock">
+              <PropertyRef Name="TransferId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTransRetRateDet_tblTransferReturnReport">
+          <End Type="NIBSModel.tblTransferReturnReport" Role="tblTransferReturnReport" Multiplicity="1" />
+          <End Type="NIBSModel.tblTransRetRateDet" Role="tblTransRetRateDet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTransferReturnReport">
+              <PropertyRef Name="TransferReturnId" />
+            </Principal>
+            <Dependent Role="tblTransRetRateDet">
+              <PropertyRef Name="TransferReturnId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblConsumption">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BillDetailId" Type="Int32" Nullable="false" />
+          <Property Name="RawMaterialId" Type="Int32" Nullable="false" />
+          <Property Name="Qty" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Value" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <NavigationProperty Name="tbl_RawMaterials" Relationship="NIBSModel.FK_tblConsumption_tbl_RawMaterials1" FromRole="tblConsumption" ToRole="tbl_RawMaterials" />
+          <NavigationProperty Name="tblBillDetail" Relationship="NIBSModel.FK_tblConsumption_tblBillDetails" FromRole="tblConsumption" ToRole="tblBillDetail" />
+        </EntityType>
+        <Association Name="FK_tblConsumption_tbl_RawMaterials1">
+          <End Type="NIBSModel.tbl_RawMaterials" Role="tbl_RawMaterials" Multiplicity="1" />
+          <End Type="NIBSModel.tblConsumption" Role="tblConsumption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_RawMaterials">
+              <PropertyRef Name="RawMaterialId" />
+            </Principal>
+            <Dependent Role="tblConsumption">
+              <PropertyRef Name="RawMaterialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblConsumption_tblBillDetails">
+          <End Type="NIBSModel.tblBillDetail" Role="tblBillDetail" Multiplicity="1" />
+          <End Type="NIBSModel.tblConsumption" Role="tblConsumption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblBillDetail">
+              <PropertyRef Name="BillDetailsId" />
+            </Principal>
+            <Dependent Role="tblConsumption">
+              <PropertyRef Name="BillDetailId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="vwStockTransaction">
+          <Key>
+            <PropertyRef Name="MaterialId" />
+            <PropertyRef Name="outQty" />
+            <PropertyRef Name="Remarks" />
+            <PropertyRef Name="ord" />
+          </Key>
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="MaterialId" Type="Int32" Nullable="false" />
+          <Property Name="inQty" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="inVal" Type="Decimal" Precision="38" Scale="5" />
+          <Property Name="outQty" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="outVal" Type="Decimal" Precision="38" Scale="5" />
+          <Property Name="Remarks" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ord" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vwStockTransactionsKitchen">
+          <Key>
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="MaterialId" />
+            <PropertyRef Name="inQty" />
+            <PropertyRef Name="outQty" />
+            <PropertyRef Name="Remarks" />
+            <PropertyRef Name="ord" />
+          </Key>
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MaterialId" Type="Int32" Nullable="false" />
+          <Property Name="inQty" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="inVal" Type="Decimal" Precision="37" Scale="4" />
+          <Property Name="outQty" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="outVal" Type="Decimal" Precision="37" Scale="4" />
+          <Property Name="Remarks" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ord" Type="Int32" Nullable="false" />
+        </EntityType>
+        <ComplexType Name="MovementAnalysisKitchen_Result">
+          <Property Type="String" Name="Date" Nullable="true" MaxLength="8000" />
+          <Property Type="Int32" Name="MaterialId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="inQty" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="inVal" Nullable="true" Precision="38" Scale="4" />
+          <Property Type="Decimal" Name="outQty" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="outVal" Nullable="true" Precision="38" Scale="4" />
+          <Property Type="String" Name="Remarks" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="MovementAnalysisStore_Result">
+          <Property Type="String" Name="Date" Nullable="true" MaxLength="8000" />
+          <Property Type="Int32" Name="MaterialId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="inQty" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="inVal" Nullable="true" Precision="38" Scale="5" />
+          <Property Type="Decimal" Name="outQty" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="outVal" Nullable="true" Precision="38" Scale="5" />
+          <Property Type="String" Name="Remarks" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="tblLedgerMaster">
+          <Key>
+            <PropertyRef Name="LedgerMasterId" />
+          </Key>
+          <Property Name="LedgerMasterId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RecordId" Type="Int32" Nullable="false" />
+          <Property Name="LedgerName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LedgerGroup" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="OPBalance" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Percentage" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Transfer_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblLedgerGroup" Relationship="NIBSModel.FK_tblLedgerMaster_tblLedgerGroup" FromRole="tblLedgerMaster" ToRole="tblLedgerGroup" />
+          <NavigationProperty Name="Voucher_Entry_Credit" Relationship="NIBSModel.FK_Voucher_Entry_Credit_tblLedgerMaster" FromRole="tblLedgerMaster" ToRole="Voucher_Entry_Credit" />
+          <NavigationProperty Name="Voucher_Entry_Debit" Relationship="NIBSModel.FK_Voucher_Entry_Debit_tblLedgerMaster" FromRole="tblLedgerMaster" ToRole="Voucher_Entry_Debit" />
+          <Property Name="VendorId" Type="Int32" />
+        </EntityType>
         <EntityType Name="Voucher_Entry_Credit">
           <Key>
             <PropertyRef Name="voucher_entry_id" />
@@ -4686,6 +4869,7 @@ warning 6002: The table/view 'Kandha.dbo.vwStockTransactionsKitchen' does not ha
           <Property Name="voucher_narration" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="account_type" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tblLedgerMaster" Relationship="NIBSModel.FK_Voucher_Entry_Credit_tblLedgerMaster" FromRole="Voucher_Entry_Credit" ToRole="tblLedgerMaster" />
+          <Property Name="purchase_id" Type="Int32" />
         </EntityType>
         <EntityType Name="Voucher_Entry_Debit">
           <Key>
@@ -4712,6 +4896,7 @@ warning 6002: The table/view 'Kandha.dbo.vwStockTransactionsKitchen' does not ha
           <Property Name="voucher_narration" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="account_type" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tblLedgerMaster" Relationship="NIBSModel.FK_Voucher_Entry_Debit_tblLedgerMaster" FromRole="Voucher_Entry_Debit" ToRole="tblLedgerMaster" />
+          <Property Name="purchase_id" Type="Int32" />
         </EntityType>
         <Association Name="FK_tblLedgerMaster_tblLedgerGroup">
           <End Type="NIBSModel.tblLedgerGroup" Role="tblLedgerGroup" Multiplicity="1" />
@@ -5630,6 +5815,7 @@ warning 6002: The table/view 'Kandha.dbo.vwStockTransactionsKitchen' does not ha
           <EntitySetMapping Name="Voucher_Entry_Credit">
             <EntityTypeMapping TypeName="NIBSModel.Voucher_Entry_Credit">
               <MappingFragment StoreEntitySet="Voucher_Entry_Credit">
+                <ScalarProperty Name="purchase_id" ColumnName="purchase_id" />
                 <ScalarProperty Name="account_type" ColumnName="account_type" />
                 <ScalarProperty Name="voucher_narration" ColumnName="voucher_narration" />
                 <ScalarProperty Name="from_form_id" ColumnName="from_form_id" />
@@ -5656,6 +5842,7 @@ warning 6002: The table/view 'Kandha.dbo.vwStockTransactionsKitchen' does not ha
           <EntitySetMapping Name="Voucher_Entry_Debit">
             <EntityTypeMapping TypeName="NIBSModel.Voucher_Entry_Debit">
               <MappingFragment StoreEntitySet="Voucher_Entry_Debit">
+                <ScalarProperty Name="purchase_id" ColumnName="purchase_id" />
                 <ScalarProperty Name="account_type" ColumnName="account_type" />
                 <ScalarProperty Name="voucher_narration" ColumnName="voucher_narration" />
                 <ScalarProperty Name="from_form_id" ColumnName="from_form_id" />

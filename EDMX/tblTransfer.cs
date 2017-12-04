@@ -14,6 +14,11 @@ namespace NibsMVC.EDMX
     
     public partial class tblTransfer
     {
+        public tblTransfer()
+        {
+            this.tblTransByStocks = new HashSet<tblTransByStock>();
+        }
+    
         public int TransferId { get; set; }
         public int SenderOutletId { get; set; }
         public int RawMaterialId { get; set; }
@@ -27,5 +32,6 @@ namespace NibsMVC.EDMX
         public virtual tbl_RawMaterials tbl_RawMaterials { get; set; }
         public virtual tblOutlet tblOutlet { get; set; }
         public virtual tbl_Department tbl_Department { get; set; }
+        public virtual ICollection<tblTransByStock> tblTransByStocks { get; set; }
     }
 }

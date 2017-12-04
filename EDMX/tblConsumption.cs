@@ -12,23 +12,15 @@ namespace NibsMVC.EDMX
     using System;
     using System.Collections.Generic;
     
-    public partial class tblTransferReturnReport
+    public partial class tblConsumption
     {
-        public tblTransferReturnReport()
-        {
-            this.tblTransRetRateDets = new HashSet<tblTransRetRateDet>();
-        }
-    
-        public int TransferReturnId { get; set; }
+        public int Id { get; set; }
+        public int BillDetailId { get; set; }
         public int RawMaterialId { get; set; }
-        public decimal ReturnQuantity { get; set; }
-        public string ReturnDescription { get; set; }
-        public System.DateTime ReturnDate { get; set; }
-        public int OutletId { get; set; }
-        public Nullable<int> transferid { get; set; }
+        public decimal Qty { get; set; }
+        public decimal Value { get; set; }
     
         public virtual tbl_RawMaterials tbl_RawMaterials { get; set; }
-        public virtual tblOutlet tblOutlet { get; set; }
-        public virtual ICollection<tblTransRetRateDet> tblTransRetRateDets { get; set; }
+        public virtual tblBillDetail tblBillDetail { get; set; }
     }
 }
