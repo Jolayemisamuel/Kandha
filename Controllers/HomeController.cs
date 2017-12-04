@@ -95,7 +95,7 @@ namespace NibsMVC.Controllers
                             entities.SaveChanges();
 
 
-                            var RawList = (from p in entities.tbl_KitchenRawIndent where p.ItemId.Equals(tbDet.ItemId) select p).ToList();
+                            var RawList = (from p in entities.tbl_KitchenRawIndent where p.ItemId == (tbDet.ItemId) select p).ToList();
                             if (RawList != null)
                             {
                                 if(RawList.Count >0)

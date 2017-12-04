@@ -27,10 +27,12 @@ namespace NibsMVC.Controllers
         [HttpGet]
         public ActionResult AddLedger(int id = 0)
         {
+            LedgerModel model = new LedgerModel();
 
             IEnumerable<SelectListItem> LedgerCat = (from z in db.tblLedgerGroups select z).AsEnumerable().Select(z => new SelectListItem() { Text = z.LedgerGroupName, Value = z.LedgerGroupId.ToString() });
 
             ViewBag.LedgerCat = new SelectList(LedgerCat, "Value", "Text");
+                      
 
             return View(obj.EditLedgerModel(id));
 

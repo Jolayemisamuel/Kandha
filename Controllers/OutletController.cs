@@ -319,6 +319,8 @@ namespace NibsMVC.Controllers
             {
 
                 tblVendor tb = new tblVendor();
+                tblLedgerMaster tbl = new tblLedgerMaster();
+
                 int Uname = getOutletId();
 
                 if (model.VendorId > 0)
@@ -346,6 +348,20 @@ namespace NibsMVC.Controllers
                 tb.Paymentcycle = model.Paymentcycle;
 
                 tb.Active = model.Active;
+
+                
+                if (db.tblLedgerMasters.Select(p => p.RecordId).Count() > 0)
+                {
+                    tbl.RecordId = db.tblLedgerMasters.Select(p => p.RecordId).Max() + 1;
+                }
+                else
+                {
+                    tbl.RecordId = 1;
+                }
+                tbl.LedgerName = model.Name;
+                tbl.LedgerGroup = 3;
+                tbl.Date = DateTime.Now;
+
                 if (model.VendorId > 0)
                 {
                     db.SaveChanges();
@@ -354,6 +370,9 @@ namespace NibsMVC.Controllers
                 else
                 {
                     db.tblVendors.Add(tb);
+                    db.SaveChanges();
+                    tbl.VendorId = tb.VendorId;
+                    db.tblLedgerMasters.Add(tbl);
                     db.SaveChanges();
                     TempData["Message"] = "Insert Successfully !";
                 }
@@ -370,7 +389,9 @@ namespace NibsMVC.Controllers
             try
             {
                 var data = (from p in db.tblVendors where p.VendorId == id select p).SingleOrDefault();
+                var name = (from q in db.tblLedgerMasters where q.LedgerName == data.Name select q).SingleOrDefault();
                 data.Active = false;
+                db.tblLedgerMasters.Remove(name);
                 db.SaveChanges();
                 TempData["Message"] = "Delete Successfully !!";
 
