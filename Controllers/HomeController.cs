@@ -102,7 +102,7 @@ namespace NibsMVC.Controllers
                                 {
                                     foreach (var li in RawList)
                                     {
-                                        decimal qty = Convert.ToDecimal (li.Quantity /li.Portion);
+                                        decimal qty = itemDet.Qty * Convert.ToDecimal (li.Quantity /li.Portion);
                                         string pUnit = li.tbl_RawMaterials.units;
                                         string cUnit = li.Unit;
                                         // Convert cUnit (Consumption Unit)  from pUnit (Purchase Unit) 
