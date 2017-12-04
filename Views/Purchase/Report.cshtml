@@ -96,8 +96,8 @@
                                     <th>Extra Charge</th>
                                     <th>Description</th>
                                     <th>Net Amount</th>
-                                    <th>Deposite Amount</th>
-                                    <th>Remaining Amount</th>
+                                    @*<th>Deposite Amount</th>
+                                    <th>Remaining Amount</th>*@
                                     <th>Remark</th>
                                     <th>Item Details</th>
                                     <th>Action</th>
@@ -140,12 +140,12 @@
                                             <td>
                                                 @item[8].ToString("0.00")
                                             </td>
-                                            <td>
-                                                @item[9].ToString("0.00")
+                                            @*<td>
+                                                @item[9]
                                             </td>
                                             <td>
-                                                @item[10].ToString("0.00")
-                                            </td>
+                                                @item[10]
+                                            </td>*@
                                             <td>
                                                 @item[11]
                                             </td>
@@ -185,7 +185,7 @@
                                                                     {
                                                                         decimal Returned = (from q in db.tblPurchaseReturns
                                                                                             where (q.vendorId == i.PurchaseDetailId && q.RawMaterialId == i.RawMaterialId)
-                                                                                            select (decimal?) q.ReturnQuantity).Sum() ?? 0;
+                                                                                            select (decimal?)q.ReturnQuantity).Sum() ?? 0;
                                                                         <tr>
 
                                                                             <td>@i.tbl_RawMaterials.Name</td>

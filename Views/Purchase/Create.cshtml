@@ -157,7 +157,7 @@
                                         <input type="text" name="ExtraCharge" class="form-control number" id="extchrg" value="0" />
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" >
                                     <label class="col-md-5">Extra Charge Description</label>
                                     <div class="col-md-7">
                                         <textarea name="ExtraChargeDetail" class="form-control"></textarea>
@@ -171,10 +171,17 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class=" col-md-5">
+                                    <label class="col-md-5">Remarks</label>
+                                    <div class="col-md-7">
+                                        <textarea name="Remarks" class="form-control"></textarea>
+
+                                    </div>
+                                </div>
+                                <div class="form-group" style="visibility:hidden">
+                                    <label class="col-md-5">
                                         Payment Mode
                                     </label>
-                                    <div class="radio-list col-md-7">
+                                    <div class="radio-list col-md-7" >
                                         <label class="radio-inline">
                                             <input type="radio" name="PaymentMode" id="rbtcash" value="Cash" class="radio-item" checked> Cash
                                         </label>
@@ -187,7 +194,7 @@
 
                                     </div>
                                 </div>
-                                <div id="CashDiv">
+                                <div id="CashDiv" style="visibility:hidden">
                                     <div class="form-group">
                                         <label class=" col-md-5">
                                             Deposit Amount
@@ -213,7 +220,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div id="ChequeDiv" style="display:none">
+                                <div id="ChequeDiv" style="display:none" style="visibility:hidden">
                                     <div class="form-group">
                                         <label class=" col-md-5">
                                             Cheque No
@@ -228,7 +235,7 @@
                                     </div>
 
                                 </div>
-                                <div id="CreditDiv" style="display:none">
+                                <div id="CreditDiv" style="display:none;visibility:hidden" >
                                     <div class="form-group">
                                         <label class=" col-md-5">
                                             Remaining Amount
@@ -244,13 +251,7 @@
 
                                 </div>
 
-                                <div class="form-group">
-                                    <label class="col-md-5">Remarks</label>
-                                    <div class="col-md-7">
-                                        <textarea name="Remarks" class="form-control"></textarea>
-
-                                    </div>
-                                </div>
+                                
 
                             </div>
                             <div class="row">

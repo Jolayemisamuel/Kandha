@@ -110,13 +110,13 @@ namespace NibsMVC.Repository
         #region
         public LedgerModel EditLedgerModel(int Id)
         {
-            LedgerModel model = new LedgerModel();
+            LedgerModel model = new LedgerModel();            
 
             if (Id != 0)
             {
                 var data = _entities.tblLedgerMasters.Where(x => x.LedgerMasterId == Id).SingleOrDefault();
                 model.Id = data.LedgerMasterId;
-                model.Record_Id = data.RecordId;
+                
                 model.LedgerName = data.LedgerName;
                 model.LedgerGroupId = data.tblLedgerGroup.LedgerGroupId;
                 model.LedgerGroupName = data.tblLedgerGroup.LedgerGroupName;
@@ -135,7 +135,7 @@ namespace NibsMVC.Repository
         public string SaveLedger(LedgerModel model)
         {
             tblLedgerMaster tb = new tblLedgerMaster();
-
+            
             int CurrentYear = DateTime.Today.Year;
             int PreviousYear = DateTime.Today.Year - 1;
             int NextYear = DateTime.Today.Year + 1;
@@ -150,7 +150,7 @@ namespace NibsMVC.Repository
                 FinYear = PreYear + "-" + CurYear;
             
 
-            var duplicate = _entities.tblLedgerMasters.Where(o => o.LedgerName.Equals(model.LedgerName) && o.tblLedgerGroup.LedgerGroupId.Equals(model.LedgerGroupId)).SingleOrDefault();
+            var duplicate = _entities.tblLedgerMasters.Where(o => o.LedgerName.Equals(model.LedgerName) && o.tblLedgerGroup.LedgerGroupId.Equals(model.LedgerGroupId) && o.OPBalance.Equals(model.OpeningBalance) && o.Percentage.Equals(model.Percentage) && o.Transfer_Type.Equals(model.TransferType)).SingleOrDefault();
             if (duplicate == null)
             {
                 try
@@ -159,14 +159,112 @@ namespace NibsMVC.Repository
                     {
                         tb = _entities.tblLedgerMasters.Where(x => x.LedgerMasterId == model.Id).SingleOrDefault();
 
-                        tb.LedgerName = model.LedgerName;
-                        tb.LedgerMasterId = 1;
+                        tb.LedgerName = model.LedgerName;                        
                         tb.LedgerGroup = model.LedgerGroupId;
                         tb.Date = model.Date;
                         tb.OPBalance = model.OpeningBalance;
                         tb.Percentage = model.Percentage;
+                        tb.RecordId = model.Record_Id;
                         tb.Transfer_Type = model.TransferType;
                         _entities.SaveChanges();
+
+                        int id = tb.LedgerMasterId;
+
+                        if (model.TransferType == "Credit")
+                        {
+                            Voucher_Entry_Credit tb1 = new Voucher_Entry_Credit();
+
+                            if (_entities.Voucher_Entry_Credit.Where(x => x.voucher_ledger_accout_id == id) != null)
+                            {
+
+                                tb1 = _entities.Voucher_Entry_Credit.Where(x => x.voucher_ledger_accout_id == id && x.voucher_type=="OB").SingleOrDefault();
+
+                                tb1.voucher_no = tb.RecordId.ToString();
+                                tb1.Voucher_date = model.Date;
+                                tb1.record_no = tb.RecordId.ToString();
+                                tb1.record_date = model.Date;
+                                tb1.voucher_sno = 1;
+                                tb1.voucher_tb = "To";
+                                tb1.voucher_cr_amount = model.OpeningBalance;
+                                
+                                tb1.voucher_year = FinYear.Trim();
+                                tb1.create_date = DateTime.Now;
+                                tb1.from_form_name = "Ledger_master";
+                                tb1.from_form_id = id;
+                                tb1.account_type = "OB";
+                                tb1.userid = WebSecurity.CurrentUserId;
+                                _entities.Voucher_Entry_Credit.Add(tb1);
+                                _entities.SaveChanges();
+                            }
+                            else
+                            {
+                                tb1.voucher_no = tb.RecordId.ToString();
+                                tb1.Voucher_date = model.Date;
+                                tb1.record_no = tb.RecordId.ToString();
+                                tb1.record_date = model.Date;
+                                tb1.voucher_sno = 1;
+                                tb1.voucher_tb = "To";
+                                tb1.voucher_ledger_accout_id = id;
+                                tb1.voucher_cr_amount = model.OpeningBalance;
+                                tb1.voucher_type = "OB";
+                                tb1.voucher_year = FinYear.Trim();
+                                tb1.create_date = DateTime.Now;
+                                tb1.from_form_name = "Ledger_master";
+                                tb1.from_form_id = id;
+                                tb1.account_type = "OB";
+                                tb1.userid = WebSecurity.CurrentUserId;
+                                _entities.Voucher_Entry_Credit.Add(tb1);
+                                _entities.SaveChanges();
+                            }
+                        }
+                        else if (model.TransferType == "Debit")
+                        {
+                            Voucher_Entry_Debit tb2 = new Voucher_Entry_Debit();
+
+                            if (_entities.Voucher_Entry_Debit.Where(x => x.voucher_ledger_accout_id == id) != null)
+                            {
+
+                                tb2 = _entities.Voucher_Entry_Debit.Where(x => x.voucher_ledger_accout_id == id && x.voucher_type=="OB").SingleOrDefault();
+
+                                tb2.voucher_no = tb.RecordId.ToString();
+                                tb2.voucher_date = model.Date;
+                                tb2.record_no = tb.RecordId.ToString();
+                                tb2.record_date = model.Date;
+                                tb2.voucher_sno = 1;
+                                tb2.voucher_tb = "To";
+                                tb2.voucher_dbt_amount = model.OpeningBalance;
+                                
+                                tb2.voucher_year = DateTime.Now.ToFinancialYear();//FinYear.Trim();
+                                tb2.create_date = DateTime.Now;
+                                tb2.from_form_name = "Ledger_master";
+                                tb2.from_form_id = model.Id;
+                                tb2.account_type = "OB";
+                                tb2.userid = WebSecurity.CurrentUserId;
+                                _entities.Voucher_Entry_Debit.Add(tb2);
+                                _entities.SaveChanges();
+                            }
+                            else
+                            {
+                                tb2.voucher_no = tb.RecordId.ToString();
+                                tb2.voucher_date = model.Date;
+                                tb2.record_no = tb.RecordId.ToString();
+                                tb2.record_date = model.Date;
+                                tb2.voucher_sno = 1;
+                                tb2.voucher_tb = "To";
+                                tb2.voucher_ledger_accout_id = id;
+                                tb2.voucher_dbt_amount = model.OpeningBalance;
+                                tb2.voucher_type = "OB";
+                                tb2.voucher_year = DateTime.Now.ToFinancialYear();//FinYear.Trim();
+                                tb2.create_date = DateTime.Now;
+                                tb2.from_form_name = "Ledger_master";
+                                tb2.from_form_id = model.Id;
+                                tb2.account_type = "OB";
+                                tb2.userid = WebSecurity.CurrentUserId;
+                                _entities.Voucher_Entry_Debit.Add(tb2);
+                                _entities.SaveChanges();
+                            }
+
+                        }
                         return "Record Updated Successfully...";
                     }
                     else
