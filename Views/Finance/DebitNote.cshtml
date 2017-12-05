@@ -1,10 +1,10 @@
-﻿@model NibsMVC.Models.CashReceipt
+﻿@model NibsMVC.Models.DebitNote
 
 @{
-    ViewBag.Title = "Receipt";
+    ViewBag.Title = "DebitNote";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+@using NibsMVC.EDMX;
 <div class="page-content">
     <div class="row">
         <p style="color:red">@TempData["Perror"]</p>
@@ -12,13 +12,14 @@
             <div class="portlet box blue">
                 <div class="portlet-title">
                     <div class="caption">
-                        <i class="fa fa-gift"></i>Cash Receipt
+                        <i class="fa fa-gift"></i>Debit Note
                     </div>
                 </div>
                 <div class="portlet-body form">
                     <!-- BEGIN FORM-->
-                    @using (Html.BeginForm("CashReceiptPost", "Finance", FormMethod.Post, new { @id = "form_sample_6", @class = "form-horizontal" }))
+                    @using (Html.BeginForm("DebitNoteBill", "Finance", FormMethod.Post, new { @id = "form_sample_6", @class = "form-horizontal" }))
                     {
+
                         @Html.AntiForgeryToken()
                         @Html.ValidationSummary(true)
                         @Html.HiddenFor(model => model.VoucherEntryId)
@@ -28,45 +29,48 @@
                                 <button class="close" data-close="alert"></button>
                                 You have some form errors. Please check below.
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
-                                    <label class="col-md-4">Voucher No</label>
-                                    <div class="col-md-8">
-                                        @Html.TextBoxFor(model => model.VoucherNo, new { @class = "form-control" })
+                                    <label class="col-md-6">Voucher No</label>
+                                    <div class="col-md-6">
+                                        @Html.TextBoxFor(model => model.VoucherNo, new { @class = "form-control", @id = "vouch" })
                                         @Html.ValidationMessageFor(model => model.VoucherNo)
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label class="col-md-5">Voucher Date<span class="required"> *</span></label>
-                                    <div class="col-md-7">
+                                    <label class="col-md-4">Voucher Date</label>
+                                    <div class="col-md-6">
                                         @Html.TextBoxFor(model => model.Date, new { @Value = " ", id = "datepicker", @class = "form-control" })
                                         @Html.ValidationMessageFor(model => model.Date)
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
-                                    <label class="col-md-4">Record No</label>
-                                    <div class="col-md-4">
-                                        @Html.TextBoxFor(model => model.RecordNo, new { @class = "form-control" , @readonly="readonly"})
-                                        
+                                    <label class="col-md-5">Record No</label>
+                                    <div class="col-md-5">
+                                        @Html.TextBoxFor(model => model.RecordNo, new { @class = "form-control", @readonly = "readonly", @id = "Recor" })
+
                                     </div>
                                 </div>
                             </div>
-                            <div class="portlet">
-                                <div class="portlet-title">
-                                    <div class="caption">
-                                        <i class="fa fa-gift"></i>To Details
+                           
+                            <div class="col-md-12">
+                                <div class="portlet">
+                                    <div class="portlet-title">
+                                        <div class="caption">
+                                            <i class="fa fa-gift"></i>By Details
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-12">
                                     <table id="tableRoutingData" class="table table-striped table-bordered">
                                         <thead>
                                             <tr>
-                                                <th>Ledger Account</th>
-                                                <th>Credit Amount</th>                                                
+                                                <th>By Account</th>
+                                                <th>Dr Amount</th>
+                                                <th>Cheque No</th>
+                                                <th>Cheque Date</th>
                                                 <th>Narration</th>
                                                 <th>Action</th>
 
@@ -75,15 +79,22 @@
                                         <tbody>
                                             <tr menuid="-1">
                                                 <td>
-                                                    <select id="cat_0" class="form-control Keys" name="LedgerAccId"></select>
-                                                    @Html.ValidationMessageFor(model => model.LedgerAccId)
+                                                    <select id="cat_0" class="form-control Keys" name="ByAccount"></select>
+                                                    <input id="hcat_0" type="hidden" class="form-control Keys" name="PurchaseId" />
                                                 </td>
                                                 <td>
-                                                    <input id="Item_0" type="text" class="form-control Keys" name="CreditAmount" />
-                                                    @Html.ValidationMessageFor(model => model.CreditAmount)
-                                                </td>                                                
+                                                    <input id="Item_0" type="text" class="dramnt form-control Keys" name="DrAmount" />
+                                                    @Html.ValidationMessageFor(model => model.DrAmount, "", new { @class = "error" })
+                                                </td>
                                                 <td>
-                                                    <input id="Narration_0" type="text" class="form-control" name="CrNarration" />
+                                                    <input id="txtQty_0" type="text" class="form-control Keys" name="ChequeNo" />
+                                                </td>
+                                                <td>
+                                                    <input id="Type_0" type="text" class="form-control Keys" name="ChequeDate" />
+
+                                                </td>
+                                                <td>
+                                                    <input id="Narration_0" type="text" class="form-control Keys" name="DrNarration" />
 
                                                 </td>
                                                 <td>
@@ -97,18 +108,19 @@
                                     </table>
                                 </div>
                             </div>
+
                             <div class="portlet">
                                 <div class="portlet-title">
                                     <div class="caption">
-                                        <i class="fa fa-gift"></i>By Details
+                                        <i class="fa fa-gift"></i>To Details
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <table id="tableRoutingDataDebit" class="table table-striped table-bordered">
                                         <thead>
                                             <tr>
-                                                <th>By Account</th>
-                                                <th>Debit Amount</th>
+                                                <th>To Account</th>
+                                                <th>Credit Amount</th>
                                                 <th>Narration</th>
                                                 <th>Action</th>
 
@@ -117,15 +129,15 @@
                                         <tbody>
                                             <tr menuidd="-1">
                                                 <td>
-                                                    <select id="By_0" class="form-control Keys" name="ByAccount"></select>
-                                                    @Html.ValidationMessageFor(model => model.ByAccount)
+                                                    <select id="By_0" class="form-control Keys" name="LedgerAccId"></select>
+
                                                 </td>
                                                 <td>
-                                                    <input id="Dr_0" type="text" class="form-control Keys" name="DrAmount" />
-                                                    @Html.ValidationMessageFor(model => model.DrAmount)
+                                                    <input id="Dr_0" type="text" class="creamnt form-control Keys" name="CreditAmount" />
+                                                    @Html.ValidationMessageFor(model => model.CreditAmount, "", new { @class = "error" })
                                                 </td>
                                                 <td>
-                                                    <input id="NarrationD_0" type="text" class="form-control" name="DrNarration" />
+                                                    <input id="NarrationD_0" type="text" class="form-control" name="CrNarration" />
 
                                                 </td>
                                                 <td>
@@ -146,7 +158,8 @@
                                 </div>
                             </div>
                         </div>
-                    }
+
+                                                        }
 
                 </div>
             </div>
@@ -162,6 +175,9 @@
             url: '/Finance/getCategories',
 
             dataType: 'json',
+
+            //data: { LedgerMasterId: $("#Vendor").val() },
+
 
             success: function (items) {
 
@@ -183,10 +199,13 @@
 
         $.ajax({
             type: 'POST',
-            url: '/Finance/getByAccCash',
+            url: '/Finance/getByAcc',
 
             dataType: 'json',
-         
+
+            //data: { LedgerMasterId: $("#Vendor").val() },
+
+
             success: function (items) {
 
                 $("#By_0").append('<option value="--Select Item--">--Select Category--</option>');
@@ -203,12 +222,11 @@
         return false;
     });
 
-       
+
 </script>
 <script>
     $(document).ready(function () {
 
-        
 
         var counter = 1;
         $(document).on("click", ".minus", function (e) {
@@ -218,22 +236,28 @@
             counter--;
         });
 
-       
+
+
         $('#btnadd').on('click', function () {
-            $('#tableRoutingData').append('<tr MenuID="-1" class="trEdit" id="tr_' + counter + '"><td><select id="cat_' + counter + '" name="LedgerAccId" class="form-control Keys"/></td><td><input id="Item_' + counter + '" type="text" name="CreditAmount" class="form-control Keys"/></td>' +                
-                 ' <td><input id="Narration_' + counter + '" type="CrNarration" name="CrNarration" ' +
+            $('#tableRoutingData').append('<tr MenuID="-1" class="trEdit" id="tr_' + counter + '"><td><select id="cat_' + counter + '" name="ByAccount" class="form-control Keys"/><input id="hcat_' + counter + '" type="hidden" name="purchaseid" class="form-control"/></td><td><input id="Item_' + counter + '" type="text" name="DrAmount" class="form-control Keys"/></td><td>' +
+                '<input id="txtQty_' + counter + '" type="text" name="ChequeNo" class="form-control input-md"  /></td><td><input id="Type_' + counter + '" type="text" name="ChequeDate" ' +
+                 ' class="form-control input-md"/></td><td><input id="Narration_' + counter + '" type="DrNarration" name="DrNarration" ' +
                  ' class="form-control input-md"/></td><td>' +
                   '<button data-val="' + counter + '"' +
                  ' style="margin-top:10px;" type="button" id="btnminus_' + counter + '" ' +
                  'class="minus btn btn-danger btn-sm defaults"><span class="fa fa-minus"></span></button></td></tr>');
             $('#cat_0 option').clone().appendTo('#cat_' + counter);
-            $('#Item_0 option').clone().appendTo('#Item_' + counter);            
-            $('#Narration_0 option').clone().appendTo('#Narration_' + counter);            
+            $('#hcat_0 option').clone().appendTo('#hcat_' + counter);
+            $('#Item_0 option').clone().appendTo('#Item_' + counter);
+            $('#txtQty_0 option').clone().appendTo('#txtQty_' + counter);
+            $('#Type_0 option').clone().appendTo('#Type_' + counter);
+            $('#Narration_0 option').clone().appendTo('#Narration_' + counter);
+            $("#Type_" + counter).datepicker({ dateFormat: 'dd/mm/yy' });
             counter++;
         });
         $('#btnaddd').on('click', function () {
-            $('#tableRoutingDataDebit').append('<tr MenuIDD="-1" class="trEditD" id="tr_' + counter + '"><td><select id="By_' + counter + '" name="ByAccount" class="form-control Keys"/></td><td><input id="Dr_' + counter + '" type="text" name="DrAmount" class="form-control Keys"/></td>' +
-                 ' <td><input id="NarrationD_' + counter + '" type="DrNarration" name="DrNarration" ' +
+            $('#tableRoutingDataDebit').append('<tr MenuIDD="-1" class="trEditD" id="tr_' + counter + '"><td><select id="By_' + counter + '" name="LedgerAccId" class="form-control Keys"/></td><td><input id="Dr_' + counter + '" type="text" name="CreditAmount" class="form-control Keys"/></td>' +
+                 ' <td><input id="NarrationD_' + counter + '" type="CrNarration" name="CrNarration" ' +
                  ' class="form-control input-md"/></td><td>' +
                   '<button data-val="' + counter + '"' +
                  ' style="margin-top:10px;" type="button" id="btnminus_' + counter + '" ' +
@@ -244,7 +268,7 @@
             counter++;
         });
     });
-
+    
     $('#submitgrn').on('click', function (e) {
 
         cr = 0;
@@ -275,5 +299,6 @@
 
 </script>
 <script type="text/javascript">
-    $(document).ready(function () { $("#datepicker").datepicker({ dateFormat: 'dd/mm/yy' }); });    
+    $(document).ready(function () { $("#datepicker").datepicker({ dateFormat: 'dd/mm/yy' }); });
+    $(document).ready(function () { $("#Type_0").datepicker({ dateFormat: 'dd/mm/yy' }); });
 </script>

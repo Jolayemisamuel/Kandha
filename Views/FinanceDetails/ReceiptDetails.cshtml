@@ -1,0 +1,229 @@
+﻿@model IEnumerable<NibsMVC.Models.ReceiptDetails>
+
+
+@{
+    ViewBag.Title = "Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using NibsMVC.EDMX;
+<div class="page-content">
+    <p style="color:red">@TempData["Perror"]</p>
+    <!-- BEGIN PAGE HEADER-->
+    <div class="page-bar">
+        <ul class="page-breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="@Url.Action("Index","Home")">Home</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+
+            <li>
+                Purchase Details
+            </li>
+        </ul>
+
+    </div>
+    <!-- END PAGE HEADER-->
+    <!-- BEGIN PAGE CONTENT-->
+
+    <div class="row">
+        <div class="col-md-12" style="padding-left:0px;padding-right:0px;">
+            <!-- BEGIN BORDERED TABLE PORTLET-->
+            <div class="portlet box yellow">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-coffee"></i>Receipt Details
+                    </div>
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse">
+                        </a>
+
+                        <a href="javascript:;" class="reload">
+                        </a>
+
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    @using (Html.BeginForm("ReportDetails", "FinanceDetails", FormMethod.Post, new { @id = "form_sample_6", @class = "form-horizontal" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+
+                        <input type="hidden" name="itemsdata" id="itemsdata" value="" />
+                        <div class="form-body">
+                            <div class="alert alert-danger display-hide">
+                                <button class="close" data-close="alert"></button>
+                                You have some form errors. Please check below.
+                            </div>
+                        </div>
+                        @*<div class="form-group">
+                            <label class="col-md-1">From Date</label>
+                            <div class="col-md-3">
+                                <input class="form-control form-control-inline input-medium date-picker" data-date-format="mm-dd-yyyy" size="10" type="text" name="FromDate" readonly="readonly" />
+                                @*<input type="text" name="InvoiceDate" class="form-control" />*@
+
+                        @*</div>
+
+                            <label class="col-md-1">To Date</label>
+                            <div class="col-md-3">
+                                <input class="form-control form-control-inline input-medium date-picker" data-date-format="mm-dd-yyyy" size=" 10" type="text" name="ToDate" readonly="readonly" />*@
+                        @*<input type="text" name="InvoiceDate" class="form-control" />*@
+
+                        @*</div>
+
+                                <label class=" col-md-1">Vendor</label>
+                                <div class="col-md-2">
+                                    @Html.DropDownListFor(model => model.Vendorname, (SelectList)ViewBag.vend, "--Choose Vendor--", new { @class = "form-control" })
+                                </div>
+
+
+                                <div class="col-md-1"><button type="submit" class="btn green">Search</button></div>
+
+                            </div>*@
+
+                        <div class="col-md-offset-1 col-md-9">
+
+
+                        </div>
+                        <table class="table table-bordered table-hover table-full-width" id="sample_2">
+                            <thead>
+                                <tr>
+                                    <th>Voucher No</th>
+                                    <th>Voucher Date</th>
+                                    <th>Account Name</th>
+                                    <th>Account Details</th>
+                                    <th>Action</th>
+
+
+
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+
+                                    var counter = 1;
+                                    NIBSEntities db = new NIBSEntities();
+                                    foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @item.voucherno
+                                            </td>
+                                            <td>
+                                                @item.voucherdate
+                                            </td>
+                                            <td>
+                                                @item.ledgername
+                                            </td>                                          
+                                            
+                                            <td>
+                                                <a class="btn default" data-toggle="modal" href="#@item.voucherno">
+                                                    Account Details
+                                                </a>
+                                                <div class="modal fade" id="@item.voucherno" tabindex="-1" role="basic" aria-hidden="true">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                        <h4 class="modal-title">Account Details</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <label class="col-md-2">Voucher No</label>
+                                                                <label class="col-md-1" style="font-weight:bold">@item.voucherno</label>
+                                                                <label class="col-md-3">Voucher Date</label>
+                                                                <label class="col-md-2" style="font-weight:bold">@item.voucherdate</label>
+                                                                <label class="col-md-2">Record No</label>
+                                                                <label class="col-md-2" style="font-weight:bold">@item.recordno</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row" style="padding-left:15px">
+                                                           <strong>To Details</strong> 
+                                                        </div>
+                                                        <table class="table table-bordered">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Credit Name</th>                                                                    
+                                                                    <th>Credit Amount</th>
+                                                                    <th>Cheque No</th>
+                                                                    <th>Cheque Date</th>
+                                                                    <th>Narration</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @{
+                                                                    var Itemdetails = (from p in db.Voucher_Entry_Credit where p.record_no == item.recordno.ToString() && p.voucher_type == "Bank Receipt" select p).ToList();
+
+                                                                    foreach (var i in Itemdetails)
+                                                                    {
+                                                                        <tr>
+
+                                                                            <td>@i.tblLedgerMaster.LedgerName</td>
+                                                                            <td>@i.voucher_cr_amount</td>
+                                                                            <td>@i.check_no</td>
+                                                                            <td>@i.check_date</td>
+                                                                            <td>@i.voucher_narration</td>
+                                                                        </tr>
+                                                                    }
+                                                                }
+                                                            </tbody>
+                                                        </table>
+                                                        <div class="row" style="padding-left:15px">
+                                                            <strong>By Details</strong> 
+                                                        </div>
+                                                        <table class="table table-bordered">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Debit Name</th>
+                                                                    <th>Debit Amount</th>                                                                    
+                                                                    <th>Narration</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @{
+                                                                    var Itemdetailsdr = (from p in db.Voucher_Entry_Debit where p.record_no == item.recordno.ToString() && p.voucher_type == "Bank Receipt" select p).ToList();
+
+                                                                    foreach (var i in Itemdetailsdr)
+                                                                    {
+                                                                        <tr>
+
+                                                                            <td>@i.tblLedgerMaster.LedgerName</td>
+                                                                            <td>@i.voucher_dbt_amount</td>                                                                            
+                                                                            <td>@i.voucher_narration</td>
+                                                                        </tr>
+                                                                    }
+                                                                }
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <a href="@Url.Action("Deletepurchase", "Purchase", new { @id=item.voucherno })" class="block_Category"><span class="fa fa-trash-o"></span></a>
+                                            </td>
+
+                                        </tr>
+                                                                        counter = counter + 1;
+                                                                    }
+
+                                }
+                            </tbody>
+                        </table>
+                                                                    }
+                </div>
+            </div>
+            <!-- END BORDERED TABLE PORTLET-->
+            <script>
+                $(document).on('click', '.block_Category', function (e) {
+                    if (!confirm("Do you want to delete")) {
+                        return false;
+                    }
+                });
+            </script>
+        </div>
+    </div>
+    <!-- END PAGE CONTENT-->
+</div>

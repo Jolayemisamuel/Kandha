@@ -12,7 +12,7 @@
             <div class="portlet box blue">
                 <div class="portlet-title">
                     <div class="caption">
-                        <i class="fa fa-gift"></i>Create Receipt
+                        <i class="fa fa-gift"></i>Payment
                     </div>
                 </div>
                 <div class="portlet-body form">
@@ -86,7 +86,7 @@
                                                     @{
                                                         NIBSEntities db = new NIBSEntities();
 
-                                                        var Itemdetails = (from p in db.tblPurchaseMasters where !db.Voucher_Entry_Debit.Any(Voucher_Entry_Debit => Voucher_Entry_Debit.purchase_id == p.PurchaseId  && Voucher_Entry_Debit.voucher_dbt_amount==p.NetAmount) select p).ToList();
+                                                        var Itemdetails = (from p in db.tblPurchaseMasters where !db.Voucher_Entry_Debit.Any(Voucher_Entry_Debit => Voucher_Entry_Debit.purchase_id == p.PurchaseId && Voucher_Entry_Debit.voucher_dbt_amount == p.NetAmount) select p).ToList();
 
 
                                                         foreach (var i in Itemdetails)
@@ -95,26 +95,36 @@
                                                                                 join p in db.Voucher_Entry_Credit
                                                on new { q.voucher_no, q.record_no } equals new { p.voucher_no, p.record_no }
                                                                                 join r in db.tblPurchaseMasters on q.purchase_id equals r.PurchaseId
-                                                                                where (r.PurchaseId == i.PurchaseId)
+                                                                                where r.PurchaseId == i.PurchaseId
                                                                                 select r.NetAmount - q.voucher_dbt_amount).Sum() ?? 0;
-                                                            <tr>
-                                                                <td><input name="checkGRN" type="checkbox" class="check" value="@i.PurchaseId" /></td>
-                                                                <td>@i.InvoiceNo</td>
-                                                                <td>@i.InvoiceDate.ToString("dd-MM-yyyy")</td>
-                                                                <td>@i.tblVendor.Name</td>
-                                                                <td>@i.TotalAmount.ToString("0.00")</td>
-                                                                <td>@i.Tax.ToString("0.00")</td>
-                                                                <td>@i.NetAmount.ToString("0.00")</td>
-                                                                @if (Returned != 0)
-                                                                {
-                                                                    <td>@Returned.ToString("0.00")</td>
-                                                                }
-                                                                else
-                                                                {
+
+                                                            var sumTotal = (from od in db.Voucher_Entry_Debit
+                                                                            where od.purchase_id == i.PurchaseId
+                                                                            select od.voucher_dbt_amount).Sum();
+
+                                                            decimal j = i.NetAmount - Convert.ToDecimal(sumTotal);
+
+                                                            if (j != 0)
+                                                            {
+                                                                <tr>
+                                                                    <td><input name="checkGRN" type="checkbox" class="check" value="@i.PurchaseId" /></td>
+                                                                    <td>@i.InvoiceNo</td>
+                                                                    <td>@i.InvoiceDate.ToString("dd-MM-yyyy")</td>
+                                                                    <td>@i.tblVendor.Name</td>
+                                                                    <td>@i.TotalAmount.ToString("0.00")</td>
+                                                                    <td>@i.Tax.ToString("0.00")</td>
                                                                     <td>@i.NetAmount.ToString("0.00")</td>
-                                                                }
-                                                                @*<td><a href="@Url.Action("PurchaseReturn", "Purchase", new { purchaseid = i.PurchaseId, purchasdetailId = i.PurchaseDetailId })"><span class="fa fa-repeat"></span></a></td>*@
-                                                            </tr>
+                                                                    @if (Returned != 0)
+                                                                    {
+                                                                        <td>@Returned.ToString("0.00")</td>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <td>@i.NetAmount.ToString("0.00")</td>
+                                                                    }
+                                                                    @*<td><a href="@Url.Action("PurchaseReturn", "Purchase", new { purchaseid = i.PurchaseId, purchasdetailId = i.PurchaseDetailId })"><span class="fa fa-repeat"></span></a></td>*@
+                                                                </tr>
+                                                            }
                                                         }
                                                     }
                                                 </tbody>
@@ -154,7 +164,7 @@
                                                 </td>
                                                 <td>
                                                     <input id="Item_0" type="text" class="dramnt form-control Keys" name="DrAmount" />
-                                                    @Html.ValidationMessageFor(model=>model.DrAmount, "", new { @class = "error" })
+                                                    @Html.ValidationMessageFor(model => model.DrAmount, "", new { @class = "error" })
                                                 </td>
                                                 <td>
                                                     <input id="txtQty_0" type="text" class="form-control Keys" name="ChequeNo" />
@@ -178,6 +188,7 @@
                                     </table>
                                 </div>
                             </div>
+
                             <div class="portlet">
                                 <div class="portlet-title">
                                     <div class="caption">
@@ -227,6 +238,7 @@
                                 </div>
                             </div>
                         </div>
+
                                                         }
 
                 </div>
@@ -290,7 +302,7 @@
         return false;
     });
 
-    
+
 </script>
 <script>
     $(document).ready(function () {
@@ -304,7 +316,7 @@
             counter--;
         });
 
-       
+
 
         $('#btnadd').on('click', function () {
             $('#tableRoutingData').append('<tr MenuID="-1" class="trEdit" id="tr_' + counter + '"><td><select id="cat_' + counter + '" name="ByAccount" class="form-control Keys"/><input id="hcat_' + counter + '" type="hidden" name="purchaseid" class="form-control"/></td><td><input id="Item_' + counter + '" type="text" name="DrAmount" class="form-control Keys"/></td><td>' +
@@ -344,7 +356,7 @@
 
         $(':checkbox:checked').each(function (i) {
 
-            FormData[i] = ($(this).val()) ;
+            FormData[i] = ($(this).val());
 
 
         });
@@ -411,12 +423,12 @@
             }
         });
 
-      
+
     });
 
-     
+
     @*$('#submitgrn').on('click', function (e) {
-        
+
             //var credit=[];
             //var debit=[];
 
@@ -430,12 +442,12 @@
             {
                 debit[i]=($(this).val());
             });*@
-            //var model =@Html.Raw(Json.Encode(Model))
-            
-            @*var model = @Html.Raw(Json.Encode(Model.CreditAmount))
+    //var model =@Html.Raw(Json.Encode(Model))
+
+    @*var model = @Html.Raw(Json.Encode(Model.CreditAmount))
         var model1 = @Html.Raw(Json.Encode(Model.DrAmount))*@
 
-            @*$.ajax({
+    @*$.ajax({
                 type: 'POST',
                 url: '@Url.Action("CreditDebitValidation")',
 
@@ -452,8 +464,8 @@
                 }
             });
         });*@
-    
-    
+
+
 
 
     //$('#submitgrn').click(function () {
@@ -479,15 +491,15 @@
             var graded = $(item).val();
             dr += parseInt(graded);
         });
-              
-       
-        if (cr==dr) {
-           
+
+
+        if (cr == dr) {
+
             return true;
         }
         else {
-            alert("Your Credit and Debit Amount is Having Some Variation ,Please Check That and insert Correct Amount !");
-            
+            alert("Your Credit and Debit Amount is Having Some Variation ,Please Check and insert Correct Amount !");
+
             return false;
         }
     });

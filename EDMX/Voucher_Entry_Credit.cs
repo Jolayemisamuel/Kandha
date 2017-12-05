@@ -35,6 +35,7 @@ namespace NibsMVC.EDMX
         public string voucher_narration { get; set; }
         public string account_type { get; set; }
         public Nullable<int> purchase_id { get; set; }
+        public Nullable<int> Refrenceno { get; set; }
     
         public virtual tblLedgerMaster tblLedgerMaster { get; set; }
     }

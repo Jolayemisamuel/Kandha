@@ -781,6 +781,7 @@
           <Property Name="voucher_narration" Type="nvarchar" MaxLength="500" />
           <Property Name="account_type" Type="nvarchar" MaxLength="500" />
           <Property Name="purchase_id" Type="int" />
+          <Property Name="Refrenceno" Type="int" />
         </EntityType>
         <EntityType Name="Voucher_Entry_Debit">
           <Key>
@@ -807,6 +808,7 @@
           <Property Name="voucher_narration" Type="nvarchar" MaxLength="500" />
           <Property Name="account_type" Type="nvarchar" MaxLength="500" />
           <Property Name="purchase_id" Type="int" />
+          <Property Name="Refrenceno" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Kandha.dbo.vwStockTransactions' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -4870,6 +4872,7 @@ warning 6002: The table/view 'Kandha.dbo.vwStockTransactionsKitchen' does not ha
           <Property Name="account_type" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tblLedgerMaster" Relationship="NIBSModel.FK_Voucher_Entry_Credit_tblLedgerMaster" FromRole="Voucher_Entry_Credit" ToRole="tblLedgerMaster" />
           <Property Name="purchase_id" Type="Int32" />
+          <Property Name="Refrenceno" Type="Int32" />
         </EntityType>
         <EntityType Name="Voucher_Entry_Debit">
           <Key>
@@ -4897,6 +4900,7 @@ warning 6002: The table/view 'Kandha.dbo.vwStockTransactionsKitchen' does not ha
           <Property Name="account_type" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tblLedgerMaster" Relationship="NIBSModel.FK_Voucher_Entry_Debit_tblLedgerMaster" FromRole="Voucher_Entry_Debit" ToRole="tblLedgerMaster" />
           <Property Name="purchase_id" Type="Int32" />
+          <Property Name="Refrenceno" Type="Int32" />
         </EntityType>
         <Association Name="FK_tblLedgerMaster_tblLedgerGroup">
           <End Type="NIBSModel.tblLedgerGroup" Role="tblLedgerGroup" Multiplicity="1" />
@@ -5815,6 +5819,7 @@ warning 6002: The table/view 'Kandha.dbo.vwStockTransactionsKitchen' does not ha
           <EntitySetMapping Name="Voucher_Entry_Credit">
             <EntityTypeMapping TypeName="NIBSModel.Voucher_Entry_Credit">
               <MappingFragment StoreEntitySet="Voucher_Entry_Credit">
+                <ScalarProperty Name="Refrenceno" ColumnName="Refrenceno" />
                 <ScalarProperty Name="purchase_id" ColumnName="purchase_id" />
                 <ScalarProperty Name="account_type" ColumnName="account_type" />
                 <ScalarProperty Name="voucher_narration" ColumnName="voucher_narration" />
@@ -5842,6 +5847,7 @@ warning 6002: The table/view 'Kandha.dbo.vwStockTransactionsKitchen' does not ha
           <EntitySetMapping Name="Voucher_Entry_Debit">
             <EntityTypeMapping TypeName="NIBSModel.Voucher_Entry_Debit">
               <MappingFragment StoreEntitySet="Voucher_Entry_Debit">
+                <ScalarProperty Name="Refrenceno" ColumnName="Refrenceno" />
                 <ScalarProperty Name="purchase_id" ColumnName="purchase_id" />
                 <ScalarProperty Name="account_type" ColumnName="account_type" />
                 <ScalarProperty Name="voucher_narration" ColumnName="voucher_narration" />

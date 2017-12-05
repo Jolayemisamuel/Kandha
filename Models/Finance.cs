@@ -120,5 +120,122 @@ namespace NibsMVC.Models
         public decimal[] DrAmount { get; set; }
         public string[] CrNarration { get; set; }
         public string[] DrNarration { get; set; }
+        public int[] PurchaseId { get; set; }
+    }
+    public class DebitNote
+    {
+        public int VoucherEntryId { get; set; }
+        [Required]
+        [Display(Name = "Enter Voucher No")]
+        public string VoucherNo { get; set; }
+
+        public string RecordNo { get; set; }
+        [Required]
+        [Display(Name = "Please Select Ledger")]
+        public string[] LedgerAccId { get; set; }
+        [Required]
+        [Display(Name = "Enter the Credit Amount")]
+        public decimal[] CreditAmount { get; set; }
+        public string[] ChequeNo { get; set; }
+        [Required]
+        [Display(Name = "Select Date")]
+        public DateTime Date { get; set; }
+        public DateTime[] ChequeDate { get; set; }
+        [Required]
+        [Display(Name = "PLEASE SELECT Ledger Account")]
+        public string[] ByAccount { get; set; }
+        [Required]
+        [Display(Name = "Enter Debit Amount")]
+        public decimal[] DrAmount { get; set; }
+        public string[] CrNarration { get; set; }
+        public string[] DrNarration { get; set; }
+        public int[] PurchaseId { get; set; }
+
+    }
+    public class CreditNote
+    {
+        public int VoucherEntryId { get; set; }
+        [Required]
+        [Display(Name = "Enter Voucher No")]
+        public string VoucherNo { get; set; }
+
+        public string RecordNo { get; set; }
+        [Required]
+        [Display(Name = "Please Select Ledger")]
+        public string[] LedgerAccId { get; set; }
+        [Required]
+        [Display(Name = "Enter the Credit Amount")]
+        public decimal[] CreditAmount { get; set; }
+        public string[] ChequeNo { get; set; }
+        [Required]
+        [Display(Name = "Select Date")]
+        public DateTime Date { get; set; }
+        public DateTime[] ChequeDate { get; set; }
+        [Required]
+        [Display(Name = "PLEASE SELECT Ledger Account")]
+        public string[] ByAccount { get; set; }
+        [Required]
+        [Display(Name = "Enter Debit Amount")]
+        public decimal[] DrAmount { get; set; }
+        public string[] CrNarration { get; set; }
+        public string[] DrNarration { get; set; }
+
+    }
+    public class Contra
+    {
+        public int VoucherEntryId { get; set; }
+        [Required]
+        [Display(Name = "Enter Voucher No")]
+        public string VoucherNo { get; set; }
+
+        public string RecordNo { get; set; }
+        [Required]
+        [Display(Name = "Please Select Ledger")]
+        public string[] LedgerAccId { get; set; }
+        [Required]
+        [Display(Name = "Enter the Credit Amount")]
+        public decimal[] CreditAmount { get; set; }
+        [Required]
+        [Display(Name = "Select Date")]
+        public DateTime Date { get; set; }
+        [Required]
+        [Display(Name = "PLEASE SELECT Ledger Account")]
+        public string[] ByAccount { get; set; }
+        [Required]
+        [Display(Name = "Enter Debit Amount")]
+        public decimal[] DrAmount { get; set; }
+        public string[] CrNarration { get; set; }
+        public string[] DrNarration { get; set; }
+        public int[] Refrenceno { get; set; }
+    }
+    public class Journal
+    {
+        public int VoucherEntryId { get; set; }
+        [Required]
+        [Display(Name = "Enter Voucher No")]
+        public string VoucherNo { get; set; }
+
+        public string RecordNo { get; set; }
+        [Required]
+        [Display(Name = "Please Select Ledger")]
+        public string[] LedgerAccId { get; set; }
+        [Required]
+        [Display(Name = "Enter the Credit Amount")]
+        public decimal[] CreditAmount { get; set; }
+        public string[] ChequeNo { get; set; }
+        [Required]
+        [Display(Name = "Select Date")]
+        public DateTime Date { get; set; }
+        public DateTime[] ChequeDate { get; set; }
+        [Required]
+        [Display(Name = "PLEASE SELECT Ledger Account")]
+        public string[] ByAccount { get; set; }
+        [Required]
+        [Display(Name = "Enter Debit Amount")]
+        public decimal[] DrAmount { get; set; }
+        public string[] CrNarration { get; set; }
+        public string[] DrNarration { get; set; }
+        public int[] PurchaseId { get; set; }
+
     }
 }
