@@ -95,6 +95,8 @@ namespace NibsMVC.EDMX
         public DbSet<Voucher_Entry_Credit> Voucher_Entry_Credit { get; set; }
         public DbSet<Voucher_Entry_Debit> Voucher_Entry_Debit { get; set; }
         public DbSet<tblGRNStock> tblGRNStocks { get; set; }
+        public DbSet<vwItemIndentDetail> vwItemIndentDetails { get; set; }
+        public DbSet<vwSubItemIndentDetail> vwSubItemIndentDetails { get; set; }
     
         public virtual int BillReportGenerate(string orderType, string paymentType, Nullable<System.DateTime> datefrom, Nullable<System.DateTime> dateto, Nullable<int> billNo, string newsql)
         {
@@ -174,6 +176,52 @@ namespace NibsMVC.EDMX
                 new ObjectParameter("item", typeof(decimal));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("StockReturn", transferidParameter, rawmaterialidParameter, itemParameter);
+        }
+    
+        public virtual ObjectResult<ItemIndentDetails_Result> ItemIndentDetails(Nullable<int> menuCategoryID, Nullable<int> itemId, Nullable<int> rawCatId, Nullable<int> rawMaterialId)
+        {
+            var menuCategoryIDParameter = menuCategoryID.HasValue ?
+                new ObjectParameter("MenuCategoryID", menuCategoryID) :
+                new ObjectParameter("MenuCategoryID", typeof(int));
+    
+            var itemIdParameter = itemId.HasValue ?
+                new ObjectParameter("ItemId", itemId) :
+                new ObjectParameter("ItemId", typeof(int));
+    
+            var rawCatIdParameter = rawCatId.HasValue ?
+                new ObjectParameter("RawCatId", rawCatId) :
+                new ObjectParameter("RawCatId", typeof(int));
+    
+            var rawMaterialIdParameter = rawMaterialId.HasValue ?
+                new ObjectParameter("RawMaterialId", rawMaterialId) :
+                new ObjectParameter("RawMaterialId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ItemIndentDetails_Result>("ItemIndentDetails", menuCategoryIDParameter, itemIdParameter, rawCatIdParameter, rawMaterialIdParameter);
+        }
+    
+        public virtual ObjectResult<SubItemIndentDetails_Result> SubItemIndentDetails(Nullable<int> menuCategoryID, Nullable<int> itemId, Nullable<int> subItemId, Nullable<int> rawCatId, Nullable<int> rawMaterialId)
+        {
+            var menuCategoryIDParameter = menuCategoryID.HasValue ?
+                new ObjectParameter("MenuCategoryID", menuCategoryID) :
+                new ObjectParameter("MenuCategoryID", typeof(int));
+    
+            var itemIdParameter = itemId.HasValue ?
+                new ObjectParameter("ItemId", itemId) :
+                new ObjectParameter("ItemId", typeof(int));
+    
+            var subItemIdParameter = subItemId.HasValue ?
+                new ObjectParameter("subItemId", subItemId) :
+                new ObjectParameter("subItemId", typeof(int));
+    
+            var rawCatIdParameter = rawCatId.HasValue ?
+                new ObjectParameter("RawCatId", rawCatId) :
+                new ObjectParameter("RawCatId", typeof(int));
+    
+            var rawMaterialIdParameter = rawMaterialId.HasValue ?
+                new ObjectParameter("RawMaterialId", rawMaterialId) :
+                new ObjectParameter("RawMaterialId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SubItemIndentDetails_Result>("SubItemIndentDetails", menuCategoryIDParameter, itemIdParameter, subItemIdParameter, rawCatIdParameter, rawMaterialIdParameter);
         }
     }
 }

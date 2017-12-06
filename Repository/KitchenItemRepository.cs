@@ -626,6 +626,12 @@ namespace NibsMVC.Repository
             }
             return sb.ToString();
         }
+        public string getUnit(int Id)
+        {
+            var data = _entities.tbl_RawMaterials.Where(x => x.RawMaterialId == Id).Select(x=>x.units).SingleOrDefault();
+            
+            return data.ToString();
+        }
         public string GetListofRawItems(int Id)
         {
             var data = _entities.tbl_RawMaterials.Where(x => x.RawCategory.RawCategoryID == Id).ToList();
@@ -722,9 +728,9 @@ namespace NibsMVC.Repository
         public string UpdateKitchenRawMaterail(KitchenRawIndentModel model,string path)
         {
             int oulte = 99; //WebSecurity.CurrentUserId;
-            int unitid = Convert.ToInt32(model.Unit);
+            //int unitid = Convert.ToInt32(model.Unit);
             XDocument xd = XDocument.Load(path);
-            var unit = _entities.Units.Where(x => x.UnitId == unitid ).SingleOrDefault();
+            //var unit = _entities.Units.Where(x => x.UnitId == unitid ).SingleOrDefault();
  
             //var items = from item in xd.Descendants("Items")
             //            where item.Element("UserId").Value == oulte.ToString() 
@@ -754,7 +760,7 @@ namespace NibsMVC.Repository
                          new XElement("RawCategoryId", model.RawCategoryId),
                          new XElement("ItemId", model.ItemId),
                          new XElement("RawMaterialId", model.RawMaterialId ),
-                         new XElement("Unit", unit.UnitName ),
+                         new XElement("Unit", model.Unit ),
                          new XElement("Portion", model.Portion),
                          new XElement("Quantity", model.Quantity));
                  xd.Element("Item").Add(newElement);
@@ -766,9 +772,9 @@ namespace NibsMVC.Repository
         public string UpdateSubItemRawMaterial(SubItemRawIndentModel model, string path)
         {
             int oulte = 99; 
-            int unitid = Convert.ToInt32(model.Unit);
+            //int unitid = Convert.ToInt32(model.Unit);
             XDocument xd = XDocument.Load(path);
-            var unit = _entities.Units.Where(x => x.UnitId == unitid).SingleOrDefault();
+            //var unit = _entities.Units.Where(x => x.UnitId == unitid).SingleOrDefault();
 
            
             var newElement = new XElement("SubItems",
@@ -776,7 +782,7 @@ namespace NibsMVC.Repository
                     new XElement("RawCategoryId", model.RawMaterialCategoryId),
                     new XElement("SubItemId", model.SubItemId),
                     new XElement("RawMaterialId", model.RawMaterialId),
-                    new XElement("Unit", unit.UnitName),
+                    new XElement("Unit", model.Unit ),
                     new XElement("Quantity", model.Quantity),
                     new XElement("Portion", model.Portion)
                     );
@@ -1014,7 +1020,7 @@ namespace NibsMVC.Repository
                     InnerSubItemRawIndent m = new InnerSubItemRawIndent();
                     m.Quantity = it.Qty;
                     m.RawMaterialId = it.tbl_RawMaterials.Name;
-                    m.Unit = it.tbl_RawMaterials.units;
+                    m.Unit = it.Unit;
                     l.Add(m);
                 }
                 model.ListOfSubInnerMaterial = l;

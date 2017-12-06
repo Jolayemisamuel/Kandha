@@ -996,6 +996,9 @@
     <Compile Include="EDMX\ItemGroupVATMapping.cs">
       <DependentUpon>KOTDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="EDMX\ItemIndentDetails_Result.cs">
+      <DependentUpon>NIBSDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="EDMX\ItemPriceMapping.cs">
       <DependentUpon>KOTDB.tt</DependentUpon>
     </Compile>
@@ -1707,6 +1710,9 @@
     <Compile Include="EDMX\SubGroup_ImageMapping.cs">
       <DependentUpon>KOTDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="EDMX\SubItemIndentDetails_Result.cs">
+      <DependentUpon>NIBSDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="EDMX\SurchargeM.cs">
       <DependentUpon>KOTDB.tt</DependentUpon>
     </Compile>
@@ -2301,6 +2307,9 @@
     <Compile Include="EDMX\vwBillMst.cs">
       <DependentUpon>KOTDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="EDMX\vwItemIndentDetail.cs">
+      <DependentUpon>NIBSDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="EDMX\vwMasters_Documents.cs">
       <DependentUpon>KOTDB.tt</DependentUpon>
     </Compile>
@@ -2320,6 +2329,9 @@
       <DependentUpon>NIBSDB.tt</DependentUpon>
     </Compile>
     <Compile Include="EDMX\vwStockTransactionsKitchen.cs">
+      <DependentUpon>NIBSDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\vwSubItemIndentDetail.cs">
       <DependentUpon>NIBSDB.tt</DependentUpon>
     </Compile>
     <Compile Include="EDMX\Vw_BillPendingDelivery.cs">
@@ -3331,6 +3343,7 @@
     <Content Include="Views\Finance\CashReceipt.cshtml" />
     <Content Include="Views\Finance\Payment.cshtml" />
     <Content Include="Views\Finance\CashPayment.cshtml" />
+    <Content Include="Views\Reports\IngrediantReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Barcodes\" />

@@ -165,6 +165,8 @@
         <AssociationConnector Association="NIBSModel.FK_Voucher_Entry_Credit_tblLedgerMaster" />
         <AssociationConnector Association="NIBSModel.FK_Voucher_Entry_Debit_tblLedgerMaster" />
         <EntityTypeShape EntityType="NIBSModel.tblGRNStock" Width="1.5" PointX="0.75" PointY="9.75" />
+        <EntityTypeShape EntityType="NIBSModel.vwItemIndentDetail" Width="1.5" PointX="9.375" PointY="4.75" />
+        <EntityTypeShape EntityType="NIBSModel.vwSubItemIndentDetail" Width="1.5" PointX="14.375" PointY="0.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

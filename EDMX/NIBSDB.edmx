@@ -780,6 +780,8 @@
           <Property Name="from_form_id" Type="int" />
           <Property Name="voucher_narration" Type="nvarchar" MaxLength="500" />
           <Property Name="account_type" Type="nvarchar" MaxLength="500" />
+          <Property Name="purchase_id" Type="int" />
+          <Property Name="Refrenceno" Type="int" />
         </EntityType>
         <EntityType Name="Voucher_Entry_Debit">
           <Key>
@@ -805,6 +807,35 @@
           <Property Name="from_form_id" Type="int" />
           <Property Name="voucher_narration" Type="nvarchar" MaxLength="500" />
           <Property Name="account_type" Type="nvarchar" MaxLength="500" />
+          <Property Name="purchase_id" Type="int" />
+          <Property Name="Refrenceno" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Kandha.dbo.vwItemIndentDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwItemIndentDetails">
+          <Key>
+            <PropertyRef Name="MenuCategoryID" />
+            <PropertyRef Name="MenuCategory" />
+            <PropertyRef Name="ItemId" />
+            <PropertyRef Name="Item" />
+            <PropertyRef Name="RawCategoryID" />
+            <PropertyRef Name="RawCategory" />
+            <PropertyRef Name="RawMaterialId" />
+            <PropertyRef Name="RawMaterial" />
+            <PropertyRef Name="Quantity" />
+            <PropertyRef Name="Unit" />
+          </Key>
+          <Property Name="MenuCategoryID" Type="int" Nullable="false" />
+          <Property Name="MenuCategory" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ItemId" Type="int" Nullable="false" />
+          <Property Name="Item" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Portion" Type="int" />
+          <Property Name="RawCategoryID" Type="int" Nullable="false" />
+          <Property Name="RawCategory" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="RawMaterialId" Type="int" Nullable="false" />
+          <Property Name="RawMaterial" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Quantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Unit" Type="nvarchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Kandha.dbo.vwStockTransactions' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -843,6 +874,38 @@ warning 6002: The table/view 'Kandha.dbo.vwStockTransactionsKitchen' does not ha
           <Property Name="outVal" Type="decimal" Precision="37" Scale="4" />
           <Property Name="Remarks" Type="nvarchar(max)" Nullable="false" />
           <Property Name="ord" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Kandha.dbo.vwSubItemIndentDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwSubItemIndentDetails">
+          <Key>
+            <PropertyRef Name="MenuCategoryID" />
+            <PropertyRef Name="MenuCategory" />
+            <PropertyRef Name="ItemId" />
+            <PropertyRef Name="Item" />
+            <PropertyRef Name="subitemid" />
+            <PropertyRef Name="SubItem" />
+            <PropertyRef Name="Portion" />
+            <PropertyRef Name="RawCategoryID" />
+            <PropertyRef Name="RawCategory" />
+            <PropertyRef Name="RawMaterialId" />
+            <PropertyRef Name="RawMaterial" />
+            <PropertyRef Name="Qty" />
+            <PropertyRef Name="Unit" />
+          </Key>
+          <Property Name="MenuCategoryID" Type="int" Nullable="false" />
+          <Property Name="MenuCategory" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ItemId" Type="int" Nullable="false" />
+          <Property Name="Item" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="subitemid" Type="int" Nullable="false" />
+          <Property Name="SubItem" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Portion" Type="int" Nullable="false" />
+          <Property Name="RawCategoryID" Type="int" Nullable="false" />
+          <Property Name="RawCategory" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="RawMaterialId" Type="int" Nullable="false" />
+          <Property Name="RawMaterial" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Qty" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Unit" Type="nvarchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <Association Name="FK_AddCategoryVendor_RawCategory">
           <End Role="RawCategory" Type="Self.RawCategory" Multiplicity="1" />
@@ -1884,6 +1947,12 @@ warning 6002: The table/view 'Kandha.dbo.vwStockTransactionsKitchen' does not ha
           <Parameter Name="BillNo" Type="int" Mode="In" />
           <Parameter Name="newsql" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="ItemIndentDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MenuCategoryID" Type="int" Mode="In" />
+          <Parameter Name="ItemId" Type="int" Mode="In" />
+          <Parameter Name="RawCatId" Type="int" Mode="In" />
+          <Parameter Name="RawMaterialId" Type="int" Mode="In" />
+        </Function>
         <Function Name="MovementAnalysisKitchen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="frDate" Type="varchar" Mode="In" />
           <Parameter Name="toDate" Type="varchar" Mode="In" />
@@ -1898,6 +1967,13 @@ warning 6002: The table/view 'Kandha.dbo.vwStockTransactionsKitchen' does not ha
           <Parameter Name="transferid" Type="int" Mode="In" />
           <Parameter Name="rawmaterialid" Type="int" Mode="In" />
           <Parameter Name="item" Type="decimal" Mode="In" />
+        </Function>
+        <Function Name="SubItemIndentDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MenuCategoryID" Type="int" Mode="In" />
+          <Parameter Name="ItemId" Type="int" Mode="In" />
+          <Parameter Name="subItemId" Type="int" Mode="In" />
+          <Parameter Name="RawCatId" Type="int" Mode="In" />
+          <Parameter Name="RawMaterialId" Type="int" Mode="In" />
         </Function>
         <EntityContainer Name="NIBSModelStoreContainer">
           <EntitySet Name="AddCategoryVendor" EntityType="Self.AddCategoryVendor" Schema="dbo" store:Type="Tables" />
@@ -1966,6 +2042,21 @@ warning 6002: The table/view 'Kandha.dbo.vwStockTransactionsKitchen' does not ha
           <EntitySet Name="VendorPrice" EntityType="Self.VendorPrice" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Voucher_Entry_Credit" EntityType="Self.Voucher_Entry_Credit" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Voucher_Entry_Debit" EntityType="Self.Voucher_Entry_Debit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vwItemIndentDetails" EntityType="Self.vwItemIndentDetails" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwItemIndentDetails].[MenuCategoryID] AS [MenuCategoryID], 
+    [vwItemIndentDetails].[MenuCategory] AS [MenuCategory], 
+    [vwItemIndentDetails].[ItemId] AS [ItemId], 
+    [vwItemIndentDetails].[Item] AS [Item], 
+    [vwItemIndentDetails].[Portion] AS [Portion], 
+    [vwItemIndentDetails].[RawCategoryID] AS [RawCategoryID], 
+    [vwItemIndentDetails].[RawCategory] AS [RawCategory], 
+    [vwItemIndentDetails].[RawMaterialId] AS [RawMaterialId], 
+    [vwItemIndentDetails].[RawMaterial] AS [RawMaterial], 
+    [vwItemIndentDetails].[Quantity] AS [Quantity], 
+    [vwItemIndentDetails].[Unit] AS [Unit]
+    FROM [dbo].[vwItemIndentDetails] AS [vwItemIndentDetails]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="vwStockTransactions" EntityType="Self.vwStockTransactions" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vwStockTransactions].[Date] AS [Date], 
@@ -1989,6 +2080,23 @@ warning 6002: The table/view 'Kandha.dbo.vwStockTransactionsKitchen' does not ha
     [vwStockTransactionsKitchen].[Remarks] AS [Remarks], 
     [vwStockTransactionsKitchen].[ord] AS [ord]
     FROM [dbo].[vwStockTransactionsKitchen] AS [vwStockTransactionsKitchen]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwSubItemIndentDetails" EntityType="Self.vwSubItemIndentDetails" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwSubItemIndentDetails].[MenuCategoryID] AS [MenuCategoryID], 
+    [vwSubItemIndentDetails].[MenuCategory] AS [MenuCategory], 
+    [vwSubItemIndentDetails].[ItemId] AS [ItemId], 
+    [vwSubItemIndentDetails].[Item] AS [Item], 
+    [vwSubItemIndentDetails].[subitemid] AS [subitemid], 
+    [vwSubItemIndentDetails].[SubItem] AS [SubItem], 
+    [vwSubItemIndentDetails].[Portion] AS [Portion], 
+    [vwSubItemIndentDetails].[RawCategoryID] AS [RawCategoryID], 
+    [vwSubItemIndentDetails].[RawCategory] AS [RawCategory], 
+    [vwSubItemIndentDetails].[RawMaterialId] AS [RawMaterialId], 
+    [vwSubItemIndentDetails].[RawMaterial] AS [RawMaterial], 
+    [vwSubItemIndentDetails].[Qty] AS [Qty], 
+    [vwSubItemIndentDetails].[Unit] AS [Unit]
+    FROM [dbo].[vwSubItemIndentDetails] AS [vwSubItemIndentDetails]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_AddCategoryVendor_RawCategory" Association="Self.FK_AddCategoryVendor_RawCategory">
             <End Role="RawCategory" EntitySet="RawCategory" />
@@ -2799,6 +2907,21 @@ warning 6002: The table/view 'Kandha.dbo.vwStockTransactionsKitchen' does not ha
             <End Role="Voucher_Entry_Debit" EntitySet="Voucher_Entry_Debit" />
           </AssociationSet>
           <EntitySet Name="tblGRNStocks" EntityType="NIBSModel.tblGRNStock" />
+          <EntitySet Name="vwItemIndentDetails" EntityType="NIBSModel.vwItemIndentDetail" />
+          <EntitySet Name="vwSubItemIndentDetails" EntityType="NIBSModel.vwSubItemIndentDetail" />
+          <FunctionImport Name="ItemIndentDetails" ReturnType="Collection(NIBSModel.ItemIndentDetails_Result)">
+            <Parameter Name="MenuCategoryID" Mode="In" Type="Int32" />
+            <Parameter Name="ItemId" Mode="In" Type="Int32" />
+            <Parameter Name="RawCatId" Mode="In" Type="Int32" />
+            <Parameter Name="RawMaterialId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SubItemIndentDetails" ReturnType="Collection(NIBSModel.SubItemIndentDetails_Result)">
+            <Parameter Name="MenuCategoryID" Mode="In" Type="Int32" />
+            <Parameter Name="ItemId" Mode="In" Type="Int32" />
+            <Parameter Name="subItemId" Mode="In" Type="Int32" />
+            <Parameter Name="RawCatId" Mode="In" Type="Int32" />
+            <Parameter Name="RawMaterialId" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="NIbs_AssignOffer">
           <Key>
@@ -4867,6 +4990,8 @@ warning 6002: The table/view 'Kandha.dbo.vwStockTransactionsKitchen' does not ha
           <Property Name="voucher_narration" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="account_type" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tblLedgerMaster" Relationship="NIBSModel.FK_Voucher_Entry_Credit_tblLedgerMaster" FromRole="Voucher_Entry_Credit" ToRole="tblLedgerMaster" />
+          <Property Name="purchase_id" Type="Int32" />
+          <Property Name="Refrenceno" Type="Int32" />
         </EntityType>
         <EntityType Name="Voucher_Entry_Debit">
           <Key>
@@ -4893,6 +5018,8 @@ warning 6002: The table/view 'Kandha.dbo.vwStockTransactionsKitchen' does not ha
           <Property Name="voucher_narration" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="account_type" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tblLedgerMaster" Relationship="NIBSModel.FK_Voucher_Entry_Debit_tblLedgerMaster" FromRole="Voucher_Entry_Debit" ToRole="tblLedgerMaster" />
+          <Property Name="purchase_id" Type="Int32" />
+          <Property Name="Refrenceno" Type="Int32" />
         </EntityType>
         <Association Name="FK_tblLedgerMaster_tblLedgerGroup">
           <End Type="NIBSModel.tblLedgerGroup" Role="tblLedgerGroup" Multiplicity="1" />
@@ -4943,6 +5070,89 @@ warning 6002: The table/view 'Kandha.dbo.vwStockTransactionsKitchen' does not ha
           <Property Name="ConsumptionQty" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="purchsedDetId" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="vwItemIndentDetail">
+          <Key>
+            <PropertyRef Name="MenuCategoryID" />
+            <PropertyRef Name="MenuCategory" />
+            <PropertyRef Name="ItemId" />
+            <PropertyRef Name="Item" />
+            <PropertyRef Name="RawCategoryID" />
+            <PropertyRef Name="RawCategory" />
+            <PropertyRef Name="RawMaterialId" />
+            <PropertyRef Name="RawMaterial" />
+            <PropertyRef Name="Quantity" />
+            <PropertyRef Name="Unit" />
+          </Key>
+          <Property Name="MenuCategoryID" Type="Int32" Nullable="false" />
+          <Property Name="MenuCategory" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ItemId" Type="Int32" Nullable="false" />
+          <Property Name="Item" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Portion" Type="Int32" />
+          <Property Name="RawCategoryID" Type="Int32" Nullable="false" />
+          <Property Name="RawCategory" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="RawMaterialId" Type="Int32" Nullable="false" />
+          <Property Name="RawMaterial" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Unit" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="vwSubItemIndentDetail">
+          <Key>
+            <PropertyRef Name="MenuCategoryID" />
+            <PropertyRef Name="MenuCategory" />
+            <PropertyRef Name="ItemId" />
+            <PropertyRef Name="Item" />
+            <PropertyRef Name="subitemid" />
+            <PropertyRef Name="SubItem" />
+            <PropertyRef Name="Portion" />
+            <PropertyRef Name="RawCategoryID" />
+            <PropertyRef Name="RawCategory" />
+            <PropertyRef Name="RawMaterialId" />
+            <PropertyRef Name="RawMaterial" />
+            <PropertyRef Name="Qty" />
+            <PropertyRef Name="Unit" />
+          </Key>
+          <Property Name="MenuCategoryID" Type="Int32" Nullable="false" />
+          <Property Name="MenuCategory" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ItemId" Type="Int32" Nullable="false" />
+          <Property Name="Item" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="subitemid" Type="Int32" Nullable="false" />
+          <Property Name="SubItem" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Portion" Type="Int32" Nullable="false" />
+          <Property Name="RawCategoryID" Type="Int32" Nullable="false" />
+          <Property Name="RawCategory" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="RawMaterialId" Type="Int32" Nullable="false" />
+          <Property Name="RawMaterial" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Qty" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Unit" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <ComplexType Name="ItemIndentDetails_Result">
+          <Property Type="Int32" Name="MenuCategoryID" Nullable="false" />
+          <Property Type="String" Name="MenuCategory" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="ItemId" Nullable="false" />
+          <Property Type="String" Name="Item" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="Portion" Nullable="true" />
+          <Property Type="Int32" Name="RawCategoryID" Nullable="false" />
+          <Property Type="String" Name="RawCategory" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="RawMaterialId" Nullable="false" />
+          <Property Type="String" Name="RawMaterial" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="Quantity" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="String" Name="Unit" Nullable="false" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="SubItemIndentDetails_Result">
+          <Property Type="Int32" Name="MenuCategoryID" Nullable="false" />
+          <Property Type="String" Name="MenuCategory" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="ItemId" Nullable="false" />
+          <Property Type="String" Name="Item" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="subitemid" Nullable="false" />
+          <Property Type="String" Name="SubItem" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Portion" Nullable="false" />
+          <Property Type="Int32" Name="RawCategoryID" Nullable="false" />
+          <Property Type="String" Name="RawCategory" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="RawMaterialId" Nullable="false" />
+          <Property Type="String" Name="RawMaterial" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="Qty" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="String" Name="Unit" Nullable="false" MaxLength="20" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5811,6 +6021,8 @@ warning 6002: The table/view 'Kandha.dbo.vwStockTransactionsKitchen' does not ha
           <EntitySetMapping Name="Voucher_Entry_Credit">
             <EntityTypeMapping TypeName="NIBSModel.Voucher_Entry_Credit">
               <MappingFragment StoreEntitySet="Voucher_Entry_Credit">
+                <ScalarProperty Name="Refrenceno" ColumnName="Refrenceno" />
+                <ScalarProperty Name="purchase_id" ColumnName="purchase_id" />
                 <ScalarProperty Name="account_type" ColumnName="account_type" />
                 <ScalarProperty Name="voucher_narration" ColumnName="voucher_narration" />
                 <ScalarProperty Name="from_form_id" ColumnName="from_form_id" />
@@ -5837,6 +6049,8 @@ warning 6002: The table/view 'Kandha.dbo.vwStockTransactionsKitchen' does not ha
           <EntitySetMapping Name="Voucher_Entry_Debit">
             <EntityTypeMapping TypeName="NIBSModel.Voucher_Entry_Debit">
               <MappingFragment StoreEntitySet="Voucher_Entry_Debit">
+                <ScalarProperty Name="Refrenceno" ColumnName="Refrenceno" />
+                <ScalarProperty Name="purchase_id" ColumnName="purchase_id" />
                 <ScalarProperty Name="account_type" ColumnName="account_type" />
                 <ScalarProperty Name="voucher_narration" ColumnName="voucher_narration" />
                 <ScalarProperty Name="from_form_id" ColumnName="from_form_id" />
@@ -5874,6 +6088,78 @@ warning 6002: The table/view 'Kandha.dbo.vwStockTransactionsKitchen' does not ha
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="vwItemIndentDetails">
+            <EntityTypeMapping TypeName="NIBSModel.vwItemIndentDetail">
+              <MappingFragment StoreEntitySet="vwItemIndentDetails">
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="RawMaterial" ColumnName="RawMaterial" />
+                <ScalarProperty Name="RawMaterialId" ColumnName="RawMaterialId" />
+                <ScalarProperty Name="RawCategory" ColumnName="RawCategory" />
+                <ScalarProperty Name="RawCategoryID" ColumnName="RawCategoryID" />
+                <ScalarProperty Name="Portion" ColumnName="Portion" />
+                <ScalarProperty Name="Item" ColumnName="Item" />
+                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+                <ScalarProperty Name="MenuCategory" ColumnName="MenuCategory" />
+                <ScalarProperty Name="MenuCategoryID" ColumnName="MenuCategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwSubItemIndentDetails">
+            <EntityTypeMapping TypeName="NIBSModel.vwSubItemIndentDetail">
+              <MappingFragment StoreEntitySet="vwSubItemIndentDetails">
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="RawMaterial" ColumnName="RawMaterial" />
+                <ScalarProperty Name="RawMaterialId" ColumnName="RawMaterialId" />
+                <ScalarProperty Name="RawCategory" ColumnName="RawCategory" />
+                <ScalarProperty Name="RawCategoryID" ColumnName="RawCategoryID" />
+                <ScalarProperty Name="Portion" ColumnName="Portion" />
+                <ScalarProperty Name="SubItem" ColumnName="SubItem" />
+                <ScalarProperty Name="subitemid" ColumnName="subitemid" />
+                <ScalarProperty Name="Item" ColumnName="Item" />
+                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+                <ScalarProperty Name="MenuCategory" ColumnName="MenuCategory" />
+                <ScalarProperty Name="MenuCategoryID" ColumnName="MenuCategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ItemIndentDetails" FunctionName="NIBSModel.Store.ItemIndentDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NIBSModel.ItemIndentDetails_Result">
+                <ScalarProperty Name="MenuCategoryID" ColumnName="MenuCategoryID" />
+                <ScalarProperty Name="MenuCategory" ColumnName="MenuCategory" />
+                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+                <ScalarProperty Name="Item" ColumnName="Item" />
+                <ScalarProperty Name="Portion" ColumnName="Portion" />
+                <ScalarProperty Name="RawCategoryID" ColumnName="RawCategoryID" />
+                <ScalarProperty Name="RawCategory" ColumnName="RawCategory" />
+                <ScalarProperty Name="RawMaterialId" ColumnName="RawMaterialId" />
+                <ScalarProperty Name="RawMaterial" ColumnName="RawMaterial" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SubItemIndentDetails" FunctionName="NIBSModel.Store.SubItemIndentDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NIBSModel.SubItemIndentDetails_Result">
+                <ScalarProperty Name="MenuCategoryID" ColumnName="MenuCategoryID" />
+                <ScalarProperty Name="MenuCategory" ColumnName="MenuCategory" />
+                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+                <ScalarProperty Name="Item" ColumnName="Item" />
+                <ScalarProperty Name="subitemid" ColumnName="subitemid" />
+                <ScalarProperty Name="SubItem" ColumnName="SubItem" />
+                <ScalarProperty Name="Portion" ColumnName="Portion" />
+                <ScalarProperty Name="RawCategoryID" ColumnName="RawCategoryID" />
+                <ScalarProperty Name="RawCategory" ColumnName="RawCategory" />
+                <ScalarProperty Name="RawMaterialId" ColumnName="RawMaterialId" />
+                <ScalarProperty Name="RawMaterial" ColumnName="RawMaterial" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
