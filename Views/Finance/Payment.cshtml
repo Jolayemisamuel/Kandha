@@ -12,12 +12,12 @@
             <div class="portlet box blue">
                 <div class="portlet-title">
                     <div class="caption">
-                        <i class="fa fa-gift"></i>Create Receipt
+                        <i class="fa fa-gift"></i>Payment
                     </div>
                 </div>
                 <div class="portlet-body form">
                     <!-- BEGIN FORM-->
-                    @using (Html.BeginForm("PaymentToBank", "Finance", FormMethod.Post, new { @id = "form_sample_6", @class = "form-horizontal" }))
+                    @using (Html.BeginForm("Payment", "Finance", FormMethod.Post, new { @id = "form_sample_6", @class = "form-horizontal" }))
                     {
 
                         @Html.AntiForgeryToken()
@@ -51,7 +51,7 @@
                                 <div class="form-group">
                                     <label class="col-md-5">Record No</label>
                                     <div class="col-md-5">
-                                        @Html.TextBoxFor(model => model.RecordNo, new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.TextBoxFor(model => model.RecordNo, new { @class = "form-control", @readonly = "readonly", @id="Recor" })
 
                                     </div>
                                 </div>
@@ -86,34 +86,45 @@
                                                     @{
                                                         NIBSEntities db = new NIBSEntities();
 
-                                                        var Itemdetails = (from q in db.tblPurchaseMasters select q).ToList();
+                                                        var Itemdetails = (from p in db.tblPurchaseMasters where !db.Voucher_Entry_Debit.Any(Voucher_Entry_Debit => Voucher_Entry_Debit.purchase_id == p.PurchaseId && Voucher_Entry_Debit.voucher_dbt_amount == p.NetAmount) select p).ToList();
+
 
                                                         foreach (var i in Itemdetails)
                                                         {
                                                             decimal Returned = (from q in db.Voucher_Entry_Debit
                                                                                 join p in db.Voucher_Entry_Credit
                                                on new { q.voucher_no, q.record_no } equals new { p.voucher_no, p.record_no }
-                                                                                join r in db.tblLedgerMasters on q.voucher_ledger_accout_id equals r.LedgerMasterId
-                                                                                where (r.VendorId == i.tblVendor.VendorId)
-                                                                                select (decimal?)q.voucher_dbt_amount - p.voucher_cr_amount).Sum() ?? 0;
-                                                            <tr>
-                                                                <td><input name="checkGRN" type="checkbox" class="check" value="@i.InvoiceNo" /></td>
-                                                                <td>@i.InvoiceNo</td>
-                                                                <td>@i.InvoiceDate.ToString("dd-MM-yyyy")</td>
-                                                                <td>@i.tblVendor.Name</td>
-                                                                <td>@i.TotalAmount.ToString("0.00")</td>
-                                                                <td>@i.Tax.ToString("0.00")</td>
-                                                                <td>@i.NetAmount.ToString("0.00")</td>
-                                                                @if (Returned != 0)
-                                                                {
-                                                                    <td>@Returned</td>
-                                                                }
-                                                                else
-                                                                {
+                                                                                join r in db.tblPurchaseMasters on q.purchase_id equals r.PurchaseId
+                                                                                where r.PurchaseId == i.PurchaseId
+                                                                                select r.NetAmount - q.voucher_dbt_amount).Sum() ?? 0;
+
+                                                            var sumTotal = (from od in db.Voucher_Entry_Debit
+                                                                            where od.purchase_id == i.PurchaseId
+                                                                            select od.voucher_dbt_amount).Sum();
+
+                                                            decimal j = i.NetAmount - Convert.ToDecimal(sumTotal);
+
+                                                            if (j != 0)
+                                                            {
+                                                                <tr>
+                                                                    <td><input name="checkGRN" type="checkbox" class="check" value="@i.PurchaseId" /></td>
+                                                                    <td>@i.InvoiceNo</td>
+                                                                    <td>@i.InvoiceDate.ToString("dd-MM-yyyy")</td>
+                                                                    <td>@i.tblVendor.Name</td>
+                                                                    <td>@i.TotalAmount.ToString("0.00")</td>
+                                                                    <td>@i.Tax.ToString("0.00")</td>
                                                                     <td>@i.NetAmount.ToString("0.00")</td>
-                                                                }
-                                                                @*<td><a href="@Url.Action("PurchaseReturn", "Purchase", new { purchaseid = i.PurchaseId, purchasdetailId = i.PurchaseDetailId })"><span class="fa fa-repeat"></span></a></td>*@
-                                                            </tr>
+                                                                    @if (Returned != 0)
+                                                                    {
+                                                                        <td>@Returned.ToString("0.00")</td>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <td>@i.NetAmount.ToString("0.00")</td>
+                                                                    }
+                                                                    @*<td><a href="@Url.Action("PurchaseReturn", "Purchase", new { purchaseid = i.PurchaseId, purchasdetailId = i.PurchaseDetailId })"><span class="fa fa-repeat"></span></a></td>*@
+                                                                </tr>
+                                                            }
                                                         }
                                                     }
                                                 </tbody>
@@ -149,11 +160,11 @@
                                             <tr menuid="-1">
                                                 <td>
                                                     <select id="cat_0" class="form-control Keys" name="ByAccount"></select>
-
+                                                    <input id="hcat_0" type="hidden" class="form-control Keys" name="PurchaseId" />
                                                 </td>
                                                 <td>
-                                                    <input id="Item_0" type="text" class="form-control Keys" name="DrAmount" />
-
+                                                    <input id="Item_0" type="text" class="dramnt form-control Keys" name="DrAmount" />
+                                                    @Html.ValidationMessageFor(model => model.DrAmount, "", new { @class = "error" })
                                                 </td>
                                                 <td>
                                                     <input id="txtQty_0" type="text" class="form-control Keys" name="ChequeNo" />
@@ -177,6 +188,7 @@
                                     </table>
                                 </div>
                             </div>
+
                             <div class="portlet">
                                 <div class="portlet-title">
                                     <div class="caption">
@@ -201,8 +213,8 @@
 
                                                 </td>
                                                 <td>
-                                                    <input id="Dr_0" type="text" class="form-control Keys" name="CreditAmount" />
-
+                                                    <input id="Dr_0" type="text" class="creamnt form-control Keys" name="CreditAmount" />
+                                                    @Html.ValidationMessageFor(model => model.CreditAmount, "", new { @class = "error" })
                                                 </td>
                                                 <td>
                                                     <input id="NarrationD_0" type="text" class="form-control" name="CrNarration" />
@@ -226,6 +238,7 @@
                                 </div>
                             </div>
                         </div>
+
                                                         }
 
                 </div>
@@ -289,105 +302,10 @@
         return false;
     });
 
-    //$(document).on('load', function () {
-
-    //    $.get("/Finance/getCategories", function (data) {
-
-    //        $("#cat_0").append(data);
-
-
-
-    //    });
-    //$(document).ready(function () {
-    //    $.ajax({
-    //        url: "/Finance/getCategories",
-    //        datatype: "JSON",
-    //        type: "POST",
-    //        success: function (data) {
-    //            $("#cat_0").append(data);
-    //        }
-
-    //    });
-
-    //var id = $("vendor").attr('id');
-    //var venId = $('#' + id).val();
-    //var FormData = { VendorId: venId };
-    //$.get('/Purchase/FillDropDownCategories', FormData,
-    //        function (data) {
-
-    //            $("#cat_0").append(data);
-    //        });
-
-
-    //});
-
-    //$(document).on('change', 'select[name="RowMaterialId"]', function () {
-    //    var id = $(this).attr('id');
-    //    var matid = $('#' + id).val();
-    //    var FormData = { MaterialId: matid };
-    //    var unit = "";
-    //    $.get("/StockTransfer/getTransferMaterialUnit", FormData, function (data) {
-    //        unit = data;
-    //        var row = id.split('_');
-
-    //        $("#Type_" + row[1]).val(unit);
-    //    });
-
-
-    //});
-
-
-    //});
-
 
 </script>
 <script>
     $(document).ready(function () {
-
-        //    $("#Vendor").change(function () {
-        //        $("#cat_0").empty();
-
-        //        $.ajax({
-        //            type: 'POST',
-        //            url: '/Purchase/FillDropDownCategories',
-
-        //            dataType: 'json',
-
-        //            data: { VendorId: $("#Vendor").val() },
-
-
-        //            success: function (items) {
-
-        //                $("#cat_0").append('<option value="--Select Item--">--Select Category--</option>');
-        //                $.each(items, function (i, item) {
-        //                    $("#cat_0").append('<option value="' + item.Value + '">' + item.Text + '</option>');
-
-        //                });
-        //            },
-
-        //            error: function (ex) {
-        //                alert('Failed to retrieve Category and Item.' + ex);
-        //            }
-        //        });
-        //        return false;
-        //    })
-
-
-
-        //$(document).on('change', 'select[name="VendorId"]', function () {
-        //    var id = $(Vendor).attr('id');
-        //    var vendid = $('#' + id).val();
-        //    var FormData = { VendorId: vendid };
-        //    var unit = "";
-        //    $.get('/Purchase/FillDropDownCategories', FormData, function (data) {
-        //        unit = data;
-        //        var row = id.split('_');
-
-        //        $("#cat_" + row[1]).val(unit);
-        //    });
-
-
-        //});
 
 
         var counter = 1;
@@ -398,90 +316,10 @@
             counter--;
         });
 
-        @*$("#Vendor").change(function () {
-                $("#cycledays").empty();
 
-                $.ajax({
-                    type: 'POST',
-
-                    url: '@Url.Action("getPCD")',
-
-                    dataType: 'json',
-
-                    data: { VendorId: $("#Vendor").val() },
-
-                    success: function (items) {
-
-                        $('#cycledays').val(items);
-
-                    },
-
-                    error: function (ex) {
-                        alert('Failed to retrieve Cycle');
-                    }
-                });
-                return false;
-            })*@
-
-        //$(document).on('change', 'select[name="VendorId"]', function () {
-
-        //    var id = $(Vendor).attr('id');
-        //    var venId = $('#' + id).val();
-        //    var FormData = { VendorId: venId };
-        //    var pcd = "";
-        //    $.get("/PurchaseOrder/getPCD", FormData, function (data) {
-        //        pcd = data;
-        //        $("#txtPCD").val(pcd);
-        //    });
-
-
-        //});
-
-        //$(document).on('change', 'select[name="VendorId"]', function () {
-        //    var id = $(this).attr('id');
-        //    var venId = $('#' + id).val();
-        //    var FormData = { VendorId: venId };
-        //    var pcd = "";
-        //    $.get("/PurchaseOrder/getPCD", FormData, function (data) {
-        //        pcd = data;
-        //        $("#txtPCD").val(pcd);
-        //    });
-
-
-        //});
-
-        //$(document).on('change', 'select[name="CreditAmt"]', function () {
-        //    var id = $(this).attr('id');
-        //    var matid = $('#' + id).val();
-        //    var FormData = { MaterialId: matid };
-        //    var unit = "";
-        //    $.get("/StockTransfer/getTransferMaterialUnit", FormData, function (data) {
-        //        unit = data;
-        //        var row = id.split('_');
-
-        //        $("#Type_" + row[1]).val(unit);
-        //    });
-
-
-        //});
-
-        //$(document).on('change', 'select[name="LedgerAcc"]', function () {
-        //    var id = $(this).attr('id');
-        //    var catid = $('#' + id).val();
-        //    var FormData = { CategoryId: catid };
-        //    var unit = "";
-
-        //    $.get('/Purchase/FillDropDownKeysByCategory', FormData,
-        //            function (data) {
-        //                var row = id.split('_');
-        //                $("#Item_" + row[1]).find('option').remove().end().append(data);
-        //            });
-
-
-        //});
 
         $('#btnadd').on('click', function () {
-            $('#tableRoutingData').append('<tr MenuID="-1" class="trEdit" id="tr_' + counter + '"><td><select id="cat_' + counter + '" name="ByAccount" class="form-control Keys"/></td><td><input id="Item_' + counter + '" type="text" name="DrAmount" class="form-control Keys"/></td><td>' +
+            $('#tableRoutingData').append('<tr MenuID="-1" class="trEdit" id="tr_' + counter + '"><td><select id="cat_' + counter + '" name="ByAccount" class="form-control Keys"/><input id="hcat_' + counter + '" type="hidden" name="purchaseid" class="form-control"/></td><td><input id="Item_' + counter + '" type="text" name="DrAmount" class="form-control Keys"/></td><td>' +
                 '<input id="txtQty_' + counter + '" type="text" name="ChequeNo" class="form-control input-md"  /></td><td><input id="Type_' + counter + '" type="text" name="ChequeDate" ' +
                  ' class="form-control input-md"/></td><td><input id="Narration_' + counter + '" type="DrNarration" name="DrNarration" ' +
                  ' class="form-control input-md"/></td><td>' +
@@ -489,6 +327,7 @@
                  ' style="margin-top:10px;" type="button" id="btnminus_' + counter + '" ' +
                  'class="minus btn btn-danger btn-sm defaults"><span class="fa fa-minus"></span></button></td></tr>');
             $('#cat_0 option').clone().appendTo('#cat_' + counter);
+            $('#hcat_0 option').clone().appendTo('#hcat_' + counter);
             $('#Item_0 option').clone().appendTo('#Item_' + counter);
             $('#txtQty_0 option').clone().appendTo('#txtQty_' + counter);
             $('#Type_0 option').clone().appendTo('#Type_' + counter);
@@ -517,7 +356,7 @@
 
         $(':checkbox:checked').each(function (i) {
 
-            FormData[i] = ($(this).val()) ;
+            FormData[i] = ($(this).val());
 
 
         });
@@ -541,7 +380,7 @@
 
                     if (count == 0) {
                         $("#cat_0").val(value.Name);
-                        $("#cat_0").val = value.Name;
+                        $("#hcat_0").val(value.PurchaseId);
                         $("#Item_0").val(value.Total);
                         $("#txtQty_0").val();
                         $("#Type_0").val();
@@ -551,7 +390,7 @@
 
                     else {
 
-                        $('#tableRoutingData').append('<tr MenuID="-1" class="trEdit" id="tr_' + count + '"><td><select id="cat_' + count + '" name="ByAccount" class="form-control Keys"/></td><td><input id="Item_' + count + '" type="text" name="DrAmount" class="form-control Keys"/></td><td>' +
+                        $('#tableRoutingData').append('<tr MenuID="-1" class="trEdit" id="tr_' + count + '"><td><select id="cat_' + count + '" name="ByAccount" class="form-control Keys"/><input id="hcat_' + count + '" type="hidden" name="purchaseid" class="form-control"/></td><td><input id="Item_' + count + '" type="text" name="DrAmount" class="form-control Keys"/></td><td>' +
                 '<input id="txtQty_' + count + '" type="text" name="ChequeNo" class="form-control input-md"  /></td><td><input id="Type_' + count + '" type="text" name="ChequeDate" ' +
                  ' class="form-control input-md"/></td><td><input id="Narration_' + count + '" type="DrNarration" name="DrNarration" ' +
                  ' class="form-control input-md"/></td><td>' +
@@ -559,6 +398,7 @@
                  ' style="margin-top:10px;" type="button" id="btnminus_' + count + '" ' +
                  'class="minus btn btn-danger btn-sm defaults"><span class="fa fa-minus"></span></button></td></tr>');
                         $('#cat_0 option').clone().appendTo('#cat_' + count);
+                        $('#hcat_0 option').clone().appendTo('#hcat_' + count);
                         $('#Item_0 option').clone().appendTo('#Item_' + count);
                         $('#txtQty_0 option').clone().appendTo('#txtQty_' + count);
                         $('#Type_0 option').clone().appendTo('#Type_' + count);
@@ -567,6 +407,7 @@
                         //alert(value.Name);
 
                         $("#cat_" + count).val(value.Name);
+                        $("#hcat_" + count).val(value.PurchaseId);
                         $("#Item_" + count).val(value.Total);
                         $("#txtQty_" + count).val();
                         $("#Type_" + count).val();
@@ -582,71 +423,85 @@
             }
         });
 
-        //$.post("/Finance/getGRNInvoice", '0', function (data) {
-
-
-        //    });
 
     });
 
 
-    //$('#submitgrn').on('click', function () {
-    //    var sum = 0;
-    //    var sum1 = 0;
-    //    var count = 0;
-    //    var num = 0;
-    //    var $cramount ;
-    //    var $dramount ;
-    //    $(".item_"+num+"").each(function () {
-    //        sum += +$(this).val();
-    //        $('#Item_0 option').clone().appendTo('#Item_' + count);
-    //    });
-    //    $(".Dr_"+num+"").each(function () {
-    //        sum1 += +$(this).val();
-    //        $('#Dr_0 option').clone().appendTo('#Dr_' + count);
-    //    });
-    //    $cramount.val(sum);
-    //    $dramount.val(sum1);
-    //    if ($cramount.val() == $dramount.val()) {
-    //        alert("Matching");
-    //    } else
-    //        alert("not matching");
-    //});
-    $('#submitgrn').on('click', function (e) {
+    @*$('#submitgrn').on('click', function (e) {
 
-        var credit=[];
-        var debit=[];
+            //var credit=[];
+            //var debit=[];
 
-        
+            //alert(Item_0);
 
-            $('#@Html.IdFor(m => m.CreditAmount)').each(function(i)
+            @*$('#@Html.IdFor(m => m.CreditAmount)').each(function(i)
             {
                 credit[i]=($(this).val());
             });
             $('#@Html.IdFor(m => m.DrAmount)').each(function(i)
             {
                 debit[i]=($(this).val());
+            });*@
+    //var model =@Html.Raw(Json.Encode(Model))
+
+    @*var model = @Html.Raw(Json.Encode(Model.CreditAmount))
+        var model1 = @Html.Raw(Json.Encode(Model.DrAmount))*@
+
+    @*$.ajax({
+                type: 'POST',
+                url: '@Url.Action("CreditDebitValidation")',
+
+                dataType: 'json',
+
+                data: { id: model,model1 },
+
+
+                success: function (items) {
+
+                },
+                error: function (ex) {
+
+                }
             });
-        
-        var model = @Html.Raw(Json.Encode(Model.CreditAmount))
-        var model1 = @Html.Raw(Json.Encode(Model.DrAmount))
-
-        $.ajax({
-            type: 'POST',
-            url: '@Url.Action("CreditDebitValidation")',
-
-        dataType: 'json',
-
-        data: { id: model,model1 },
+        });*@
 
 
-        success: function (items) {
 
-        },
-        error: function (ex) {
 
+    //$('#submitgrn').click(function () {
+    //    $('[id^=Item_').each(function (i, item) {
+    //        var grade = $(item).val();
+    //        alert(grade);
+    //    });
+    //});
+
+
+    $('#submitgrn').on('click', function (e) {
+
+        cr = 0;
+        dr = 0;
+
+        $('[id^=Item_').each(function (i, item) {
+            var gradec = $(item).val();
+            cr += parseInt(gradec);
+            //total += parseInt($(this).val());
+        });
+
+        $('[id^=Dr_').each(function (i, item) {
+            var graded = $(item).val();
+            dr += parseInt(graded);
+        });
+
+
+        if (cr == dr) {
+
+            return true;
         }
-    });
+        else {
+            alert("Your Credit and Debit Amount is Having Some Variation ,Please Check and insert Correct Amount !");
+
+            return false;
+        }
     });
 </script>
 <script type="text/javascript">

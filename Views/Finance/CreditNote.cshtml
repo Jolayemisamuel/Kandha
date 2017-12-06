@@ -1,4 +1,4 @@
-﻿@model NibsMVC.Models.CashReceipt
+﻿@model NibsMVC.Models.CreditNote
 
 @{
     ViewBag.Title = "Receipt";
@@ -12,12 +12,12 @@
             <div class="portlet box blue">
                 <div class="portlet-title">
                     <div class="caption">
-                        <i class="fa fa-gift"></i>Cash Receipt
+                        <i class="fa fa-gift"></i>Receipt
                     </div>
                 </div>
                 <div class="portlet-body form">
                     <!-- BEGIN FORM-->
-                    @using (Html.BeginForm("CashReceiptPost", "Finance", FormMethod.Post, new { @id = "form_sample_6", @class = "form-horizontal" }))
+                    @using (Html.BeginForm("CreditNoteBill", "Finance", FormMethod.Post, new { @id = "form_sample_6", @class = "form-horizontal" }))
                     {
                         @Html.AntiForgeryToken()
                         @Html.ValidationSummary(true)
@@ -50,8 +50,8 @@
                                 <div class="form-group">
                                     <label class="col-md-4">Record No</label>
                                     <div class="col-md-4">
-                                        @Html.TextBoxFor(model => model.RecordNo, new { @class = "form-control" , @readonly="readonly"})
-                                        
+                                        @Html.TextBoxFor(model => model.RecordNo, new { @class = "form-control", @readonly = "readonly" })
+
                                     </div>
                                 </div>
                             </div>
@@ -66,7 +66,9 @@
                                         <thead>
                                             <tr>
                                                 <th>Ledger Account</th>
-                                                <th>Credit Amount</th>                                                
+                                                <th>Credit Amount</th>
+                                                <th>Cheque No</th>
+                                                <th>Cheque Date</th>
                                                 <th>Narration</th>
                                                 <th>Action</th>
 
@@ -76,12 +78,19 @@
                                             <tr menuid="-1">
                                                 <td>
                                                     <select id="cat_0" class="form-control Keys" name="LedgerAccId"></select>
-                                                    @Html.ValidationMessageFor(model => model.LedgerAccId)
+
                                                 </td>
                                                 <td>
                                                     <input id="Item_0" type="text" class="form-control Keys" name="CreditAmount" />
-                                                    @Html.ValidationMessageFor(model => model.CreditAmount)
-                                                </td>                                                
+
+                                                </td>
+                                                <td>
+                                                    <input id="txtQty_0" type="text" class="form-control" name="ChequeNo" />
+                                                </td>
+                                                <td>
+                                                    <input id="Type_0" type="text" class="form-control" name="ChequeDate" />
+
+                                                </td>
                                                 <td>
                                                     <input id="Narration_0" type="text" class="form-control" name="CrNarration" />
 
@@ -118,11 +127,11 @@
                                             <tr menuidd="-1">
                                                 <td>
                                                     <select id="By_0" class="form-control Keys" name="ByAccount"></select>
-                                                    @Html.ValidationMessageFor(model => model.ByAccount)
+
                                                 </td>
                                                 <td>
                                                     <input id="Dr_0" type="text" class="form-control Keys" name="DrAmount" />
-                                                    @Html.ValidationMessageFor(model => model.DrAmount)
+
                                                 </td>
                                                 <td>
                                                     <input id="NarrationD_0" type="text" class="form-control" name="DrNarration" />
@@ -163,6 +172,9 @@
 
             dataType: 'json',
 
+            //data: { LedgerMasterId: $("#Vendor").val() },
+
+
             success: function (items) {
 
                 $("#cat_0").append('<option value="--Select Item--">--Select Category--</option>');
@@ -183,10 +195,13 @@
 
         $.ajax({
             type: 'POST',
-            url: '/Finance/getByAccCash',
+            url: '/Finance/getByAcc',
 
             dataType: 'json',
-         
+
+            //data: { LedgerMasterId: $("#Vendor").val() },
+
+
             success: function (items) {
 
                 $("#By_0").append('<option value="--Select Item--">--Select Category--</option>');
@@ -203,12 +218,106 @@
         return false;
     });
 
-       
+        //$(document).on('load', function () {
+
+        //    $.get("/Finance/getCategories", function (data) {
+
+        //        $("#cat_0").append(data);
+
+
+
+        //    });
+        //$(document).ready(function () {
+        //    $.ajax({
+        //        url: "/Finance/getCategories",
+        //        datatype: "JSON",
+        //        type: "POST",
+        //        success: function (data) {
+        //            $("#cat_0").append(data);
+        //        }
+
+        //    });
+
+            //var id = $("vendor").attr('id');
+            //var venId = $('#' + id).val();
+            //var FormData = { VendorId: venId };
+            //$.get('/Purchase/FillDropDownCategories', FormData,
+            //        function (data) {
+
+            //            $("#cat_0").append(data);
+            //        });
+
+
+        //});
+
+        //$(document).on('change', 'select[name="RowMaterialId"]', function () {
+        //    var id = $(this).attr('id');
+        //    var matid = $('#' + id).val();
+        //    var FormData = { MaterialId: matid };
+        //    var unit = "";
+        //    $.get("/StockTransfer/getTransferMaterialUnit", FormData, function (data) {
+        //        unit = data;
+        //        var row = id.split('_');
+
+        //        $("#Type_" + row[1]).val(unit);
+        //    });
+
+
+        //});
+
+
+    //});
+
+
 </script>
 <script>
     $(document).ready(function () {
 
-        
+        //    $("#Vendor").change(function () {
+        //        $("#cat_0").empty();
+
+        //        $.ajax({
+        //            type: 'POST',
+        //            url: '/Purchase/FillDropDownCategories',
+
+        //            dataType: 'json',
+
+        //            data: { VendorId: $("#Vendor").val() },
+
+
+        //            success: function (items) {
+
+        //                $("#cat_0").append('<option value="--Select Item--">--Select Category--</option>');
+        //                $.each(items, function (i, item) {
+        //                    $("#cat_0").append('<option value="' + item.Value + '">' + item.Text + '</option>');
+
+        //                });
+        //            },
+
+        //            error: function (ex) {
+        //                alert('Failed to retrieve Category and Item.' + ex);
+        //            }
+        //        });
+        //        return false;
+        //    })
+
+
+
+        //$(document).on('change', 'select[name="VendorId"]', function () {
+        //    var id = $(Vendor).attr('id');
+        //    var vendid = $('#' + id).val();
+        //    var FormData = { VendorId: vendid };
+        //    var unit = "";
+        //    $.get('/Purchase/FillDropDownCategories', FormData, function (data) {
+        //        unit = data;
+        //        var row = id.split('_');
+
+        //        $("#cat_" + row[1]).val(unit);
+        //    });
+
+
+        //});
+
 
         var counter = 1;
         $(document).on("click", ".minus", function (e) {
@@ -218,17 +327,102 @@
             counter--;
         });
 
-       
+        @*$("#Vendor").change(function () {
+                $("#cycledays").empty();
+
+                $.ajax({
+                    type: 'POST',
+
+                    url: '@Url.Action("getPCD")',
+
+                    dataType: 'json',
+
+                    data: { VendorId: $("#Vendor").val() },
+
+                    success: function (items) {
+
+                        $('#cycledays').val(items);
+
+                    },
+
+                    error: function (ex) {
+                        alert('Failed to retrieve Cycle');
+                    }
+                });
+                return false;
+            })*@
+
+        //$(document).on('change', 'select[name="VendorId"]', function () {
+
+        //    var id = $(Vendor).attr('id');
+        //    var venId = $('#' + id).val();
+        //    var FormData = { VendorId: venId };
+        //    var pcd = "";
+        //    $.get("/PurchaseOrder/getPCD", FormData, function (data) {
+        //        pcd = data;
+        //        $("#txtPCD").val(pcd);
+        //    });
+
+
+        //});
+
+        //$(document).on('change', 'select[name="VendorId"]', function () {
+        //    var id = $(this).attr('id');
+        //    var venId = $('#' + id).val();
+        //    var FormData = { VendorId: venId };
+        //    var pcd = "";
+        //    $.get("/PurchaseOrder/getPCD", FormData, function (data) {
+        //        pcd = data;
+        //        $("#txtPCD").val(pcd);
+        //    });
+
+
+        //});
+
+        //$(document).on('change', 'select[name="CreditAmt"]', function () {
+        //    var id = $(this).attr('id');
+        //    var matid = $('#' + id).val();
+        //    var FormData = { MaterialId: matid };
+        //    var unit = "";
+        //    $.get("/StockTransfer/getTransferMaterialUnit", FormData, function (data) {
+        //        unit = data;
+        //        var row = id.split('_');
+
+        //        $("#Type_" + row[1]).val(unit);
+        //    });
+
+
+        //});
+
+        //$(document).on('change', 'select[name="LedgerAcc"]', function () {
+        //    var id = $(this).attr('id');
+        //    var catid = $('#' + id).val();
+        //    var FormData = { CategoryId: catid };
+        //    var unit = "";
+
+        //    $.get('/Purchase/FillDropDownKeysByCategory', FormData,
+        //            function (data) {
+        //                var row = id.split('_');
+        //                $("#Item_" + row[1]).find('option').remove().end().append(data);
+        //            });
+
+
+        //});
+
         $('#btnadd').on('click', function () {
-            $('#tableRoutingData').append('<tr MenuID="-1" class="trEdit" id="tr_' + counter + '"><td><select id="cat_' + counter + '" name="LedgerAccId" class="form-control Keys"/></td><td><input id="Item_' + counter + '" type="text" name="CreditAmount" class="form-control Keys"/></td>' +                
-                 ' <td><input id="Narration_' + counter + '" type="CrNarration" name="CrNarration" ' +
+            $('#tableRoutingData').append('<tr MenuID="-1" class="trEdit" id="tr_' + counter + '"><td><select id="cat_' + counter + '" name="LedgerAccId" class="form-control Keys"/></td><td><input id="Item_' + counter + '" type="text" name="CreditAmount" class="form-control Keys"/></td><td>' +
+                '<input id="txtQty_' + counter + '" type="text" name="ChequeNo" class="form-control input-md"  /></td><td><input id="Type_' + counter + '" type="text" name="ChequeDate" ' +
+                 ' class="form-control input-md"/></td><td><input id="Narration_' + counter + '" type="CrNarration" name="CrNarration" ' +
                  ' class="form-control input-md"/></td><td>' +
                   '<button data-val="' + counter + '"' +
                  ' style="margin-top:10px;" type="button" id="btnminus_' + counter + '" ' +
                  'class="minus btn btn-danger btn-sm defaults"><span class="fa fa-minus"></span></button></td></tr>');
             $('#cat_0 option').clone().appendTo('#cat_' + counter);
-            $('#Item_0 option').clone().appendTo('#Item_' + counter);            
-            $('#Narration_0 option').clone().appendTo('#Narration_' + counter);            
+            $('#Item_0 option').clone().appendTo('#Item_' + counter);
+            $('#txtQty_0 option').clone().appendTo('#txtQty_' + counter);
+            $('#Type_0 option').clone().appendTo('#Type_' + counter);
+            $('#Narration_0 option').clone().appendTo('#Narration_' + counter);
+            $("#Type_"+counter).datepicker({ dateFormat: 'dd/mm/yy' });
             counter++;
         });
         $('#btnaddd').on('click', function () {
@@ -275,5 +469,6 @@
 
 </script>
 <script type="text/javascript">
-    $(document).ready(function () { $("#datepicker").datepicker({ dateFormat: 'dd/mm/yy' }); });    
+    $(document).ready(function () { $("#datepicker").datepicker({ dateFormat: 'dd/mm/yy' }); });
+    $(document).ready(function () { $("#Type_0").datepicker({ dateFormat: 'dd/mm/yy' }); });
 </script>
