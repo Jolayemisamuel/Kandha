@@ -1947,6 +1947,9 @@ warning 6002: The table/view 'Kandha.dbo.vwSubItemIndentDetails' does not have a
           <Parameter Name="BillNo" Type="int" Mode="In" />
           <Parameter Name="newsql" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="getSubItemsRaw" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="itemId" Type="int" Mode="In" />
+        </Function>
         <Function Name="ItemIndentDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="MenuCategoryID" Type="int" Mode="In" />
           <Parameter Name="ItemId" Type="int" Mode="In" />
@@ -2921,6 +2924,9 @@ warning 6002: The table/view 'Kandha.dbo.vwSubItemIndentDetails' does not have a
             <Parameter Name="subItemId" Mode="In" Type="Int32" />
             <Parameter Name="RawCatId" Mode="In" Type="Int32" />
             <Parameter Name="RawMaterialId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getSubItemsRaw" ReturnType="Collection(NIBSModel.getSubItemsRaw_Result)">
+            <Parameter Name="itemId" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <EntityType Name="NIbs_AssignOffer">
@@ -5153,6 +5159,14 @@ warning 6002: The table/view 'Kandha.dbo.vwSubItemIndentDetails' does not have a
           <Property Type="Decimal" Name="Qty" Nullable="false" Precision="18" Scale="2" />
           <Property Type="String" Name="Unit" Nullable="false" MaxLength="20" />
         </ComplexType>
+        <ComplexType Name="getSubItemsRaw_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Int32" Name="SubItemId" Nullable="false" />
+          <Property Type="Int32" Name="RawMaterialId" Nullable="false" />
+          <Property Type="Decimal" Name="Qty" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="String" Name="Unit" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="Portion" Nullable="false" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -6157,6 +6171,18 @@ warning 6002: The table/view 'Kandha.dbo.vwSubItemIndentDetails' does not have a
                 <ScalarProperty Name="RawMaterial" ColumnName="RawMaterial" />
                 <ScalarProperty Name="Qty" ColumnName="Qty" />
                 <ScalarProperty Name="Unit" ColumnName="Unit" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getSubItemsRaw" FunctionName="NIBSModel.Store.getSubItemsRaw">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NIBSModel.getSubItemsRaw_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="SubItemId" ColumnName="SubItemId" />
+                <ScalarProperty Name="RawMaterialId" ColumnName="RawMaterialId" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="Portion" ColumnName="Portion" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

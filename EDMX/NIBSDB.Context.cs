@@ -225,5 +225,14 @@ namespace NibsMVC.EDMX
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SubItemIndentDetails_Result>("SubItemIndentDetails", menuCategoryIDParameter, itemIdParameter, subItemIdParameter, rawCatIdParameter, rawMaterialIdParameter);
         }
+    
+        public virtual ObjectResult<getSubItemsRaw_Result> getSubItemsRaw(Nullable<int> itemId)
+        {
+            var itemIdParameter = itemId.HasValue ?
+                new ObjectParameter("itemId", itemId) :
+                new ObjectParameter("itemId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getSubItemsRaw_Result>("getSubItemsRaw", itemIdParameter);
+        }
     }
 }

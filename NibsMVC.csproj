@@ -930,6 +930,9 @@
     <Compile Include="EDMX\FreeIssueTransList.cs">
       <DependentUpon>KOTDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="EDMX\getSubItemsRaw_Result.cs">
+      <DependentUpon>NIBSDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="EDMX\GSTSplitPercentage.cs">
       <DependentUpon>KOTDB.tt</DependentUpon>
     </Compile>
