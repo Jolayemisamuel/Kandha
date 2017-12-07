@@ -1279,7 +1279,7 @@ namespace NibsMVC.Controllers
             iTextSharp.text.Font Font15A = FontFactory.GetFont("Verdana", 10, Font.BOLD);
 
             string str_pdffilename = DateTime.Now.ToString().Replace("/","_").Replace(":", "_").Replace(" ", "_") + " GRNOrder.pdf";
-            string str_pdfpath = Server.MapPath("~/Reports/") +  str_pdffilename; //"D:\\CDS\\MainProject\\NibsMVC\\Reports" + "\\" + str_pdffilename;//
+            string str_pdfpath = Server.MapPath("~/Report/") +  str_pdffilename; //"D:\\CDS\\MainProject\\NibsMVC\\Reports" + "\\" + str_pdffilename;//
             //System.IO.FileStream fs = new FileStream(str_pdfpath, FileMode.OpenOrCreate,FileAccess.Read);
             Document doc = new Document(PageSize.A4, 80, 80, 55, 25);
 

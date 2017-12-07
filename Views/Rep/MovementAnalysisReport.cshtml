@@ -59,7 +59,7 @@
                     </div>
                 </div>
                 <div class="portlet-body">
-                    @using (Html.BeginForm("exportMovementAnalysis", "Reports", FormMethod.Post, new { @class = "form-horizontal", @id = "form_sample_report_search" }))
+                    @using (Html.BeginForm("exportMovementAnalysis", "Rep", FormMethod.Post, new { @class = "form-horizontal", @id = "form_sample_report_search" }))
                     {
 
                         <div class="col-md-5">
@@ -168,7 +168,7 @@
             var $form = $('#form_sample_report_search');
             var Data = $form.serialize();
 
-            window.location = '/Reports/exportMovementAnalysis?' + Data;
+            window.location = '/Rep/exportMovementAnalysis?' + Data;
 
         });
     </script>

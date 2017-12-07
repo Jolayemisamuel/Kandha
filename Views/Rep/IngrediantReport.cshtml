@@ -59,7 +59,7 @@
                     </div>
                 </div>
                 <div class="portlet-body">
-                    @using (Html.BeginForm("exportIngrediants", "Reports", FormMethod.Post, new { @class = "form-horizontal", @id = "form_sample_report_search" }))
+                    @using (Html.BeginForm("exportIngrediants", "Rep", FormMethod.Post, new { @class = "form-horizontal", @id = "form_sample_report_search" }))
                     {
                         <div class="col-md-5">
                             <div class="form-group">
@@ -187,7 +187,7 @@
             var $form = $('#form_sample_report_search');
             var Data = $form.serialize();
 
-            window.location = '/Reports/exportIngrediants?' + Data;
+            window.location = '/Rep/exportIngrediants?' + Data;
 
         });
     </script>

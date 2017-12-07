@@ -322,7 +322,7 @@
     <Compile Include="Controllers\OutletOfferController.cs" />
     <Compile Include="Controllers\PurchaseController.cs" />
     <Compile Include="Controllers\PurchaseOrderController.cs" />
-    <Compile Include="Controllers\ReportsController.cs" />
+    <Compile Include="Controllers\RepController.cs" />
     <Compile Include="Controllers\ServicChargesController.cs" />
     <Compile Include="Controllers\ServicTaxController.cs" />
     <Compile Include="Controllers\ShiftTableController.cs" />
@@ -3070,6 +3070,8 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>NIBSDB.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="Report\IngerediantReport.xls" />
+    <Content Include="Report\MovementReport.xls" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
@@ -3205,17 +3207,17 @@
     <Content Include="Views\Billing\Index.cshtml" />
     <Content Include="Views\Billing\PrintView.cshtml" />
     <Content Include="Views\Billing\SmallPrint.cshtml" />
-    <Content Include="Views\Reports\Report.cshtml" />
+    <Content Include="Views\Rep\Report.cshtml" />
     <Content Include="Views\Operator\Create.cshtml" />
     <Content Include="Views\Operator\Index.cshtml" />
     <Content Include="Views\Billing\TakeAway.cshtml" />
     <Content Include="Views\Billing\TakeAwayReport.cshtml" />
     <Content Include="Views\Billing\TakePrint.cshtml" />
-    <Content Include="Views\Reports\STakeAwayBill.cshtml" />
+    <Content Include="Views\Rep\STakeAwayBill.cshtml" />
     <Content Include="Views\Billing\HomeDelivery.cshtml" />
     <Content Include="Views\Billing\HomeDeliveryReport.cshtml" />
     <Content Include="Views\Billing\HomeDeliveryPrint.cshtml" />
-    <Content Include="Views\Reports\ShomedelvrBill.cshtml" />
+    <Content Include="Views\Rep\ShomedelvrBill.cshtml" />
     <Content Include="Views\Admin\VenderReport.cshtml" />
     <Content Include="Views\Admin\MenuReport.cshtml" />
     <Content Include="Views\Admin\RestroBill.cshtml" />
@@ -3286,10 +3288,10 @@
     <Content Include="Views\HomeDelivery\_printData.cshtml" />
     <Content Include="Views\HomeDelivery\Home.cshtml" />
     <Content Include="Views\Home\ChangeInventory.cshtml" />
-    <Content Include="Views\Reports\Index.cshtml" />
-    <Content Include="Views\Reports\BillingItem.cshtml" />
-    <Content Include="Views\Reports\ViewBillDetail.cshtml" />
-    <Content Include="Views\Reports\PrintAgainBill.cshtml" />
+    <Content Include="Views\Rep\Index.cshtml" />
+    <Content Include="Views\Rep\BillingItem.cshtml" />
+    <Content Include="Views\Rep\ViewBillDetail.cshtml" />
+    <Content Include="Views\Rep\PrintAgainBill.cshtml" />
     <Content Include="Views\Vendor\Index.cshtml" />
     <Content Include="Views\Vendor\Create.cshtml" />
     <Content Include="Views\Vendor\setPrice.cshtml" />
@@ -3341,12 +3343,12 @@
     <Content Include="Views\Kitchen\ListRawItem.cshtml" />
     <Content Include="Views\AssignSubMenu\AssignSubMenuItem.cshtml" />
     <Content Include="Views\AssignSubMenu\Index.cshtml" />
-    <Content Include="Views\Reports\MovementAnalysisReport.cshtml" />
+    <Content Include="Views\Rep\MovementAnalysisReport.cshtml" />
     <Content Include="Views\Finance\Receipt.cshtml" />
     <Content Include="Views\Finance\CashReceipt.cshtml" />
     <Content Include="Views\Finance\Payment.cshtml" />
     <Content Include="Views\Finance\CashPayment.cshtml" />
-    <Content Include="Views\Reports\IngrediantReport.cshtml" />
+    <Content Include="Views\Rep\IngrediantReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Barcodes\" />

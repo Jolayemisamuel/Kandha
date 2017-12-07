@@ -27,7 +27,7 @@ using System.Text;
 
 namespace NibsMVC.Controllers
 {
-    public class ReportsController : Controller
+    public class RepController : Controller
     {
         //
         // GET: /Reports/
@@ -284,7 +284,7 @@ namespace NibsMVC.Controllers
                 TempData["error"] = ex.Message;
             }
 
-            return RedirectToAction("ShomedelvrBill", "Reports");
+            return RedirectToAction("ShomedelvrBill", "Rep");
         }
         public ActionResult CategoryWise()
         {

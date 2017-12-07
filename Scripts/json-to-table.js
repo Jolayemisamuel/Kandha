@@ -121,7 +121,7 @@ function ConvertJsonToTable(parsedJson, tableId, tableClassName, linkText)
                             	}
                             	else if (j==4) {
                             	    var billId = value;
-                            	    value = '<a target="_blank" class="btn purple" href="/Reports/ViewBillDetail?BillId=' + billId + '" data-toggle="tooltip" title="View bill no :' + billId + ' details" data-placement="top"> <i class="fa fa-desktop"></i> Detail(' + billId + ')</a>';
+                            	    value = '<a target="_blank" class="btn purple" href="/Rep/ViewBillDetail?BillId=' + billId + '" data-toggle="tooltip" title="View bill no :' + billId + ' details" data-placement="top"> <i class="fa fa-desktop"></i> Detail(' + billId + ')</a>';
                             	    tbCon += tdRow.format(value);
                             	}
 
