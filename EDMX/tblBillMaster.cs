@@ -41,6 +41,8 @@ namespace NibsMVC.EDMX
         public Nullable<decimal> ServiceTax { get; set; }
         public Nullable<bool> Isprinted { get; set; }
         public Nullable<decimal> NetAmountWithoutDiscount { get; set; }
+        public string Waiter { get; set; }
+        public Nullable<System.DateTime> CreateDateTime { get; set; }
     
         public virtual ICollection<tblBillDetail> tblBillDetails { get; set; }
         public virtual tblOutlet tblOutlet { get; set; }

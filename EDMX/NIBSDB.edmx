@@ -334,6 +334,8 @@
           <Property Name="ServiceTax" Type="numeric" Precision="18" Scale="2" />
           <Property Name="Isprinted" Type="bit" />
           <Property Name="NetAmountWithoutDiscount" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Waiter" Type="varchar" MaxLength="30" />
+          <Property Name="CreateDateTime" Type="datetime" />
         </EntityType>
         <EntityType Name="tblCategory">
           <Key>
@@ -2926,7 +2928,7 @@ warning 6002: The table/view 'Kandha.dbo.vwSubItemIndentDetails' does not have a
             <Parameter Name="RawMaterialId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="getSubItemsRaw" ReturnType="Collection(NIBSModel.getSubItemsRaw_Result)">
-            <Parameter Name="itemId" Mode="In" Type="Int32" />
+          <Parameter Name="itemId" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <EntityType Name="NIbs_AssignOffer">
@@ -3969,6 +3971,8 @@ warning 6002: The table/view 'Kandha.dbo.vwSubItemIndentDetails' does not have a
           <Property Name="NetAmountWithoutDiscount" Type="Decimal" Precision="18" Scale="2" />
           <NavigationProperty Name="tblBillDetails" Relationship="NIBSModel.FK_tblBillDetails_tblBillDetails" FromRole="tblBillMaster" ToRole="tblBillDetail" />
           <NavigationProperty Name="tblOutlet" Relationship="NIBSModel.FK_tblBillMaster_tblOutlet" FromRole="tblBillMaster" ToRole="tblOutlet" />
+          <Property Name="Waiter" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="CreateDateTime" Type="DateTime" Precision="3" />
         </EntityType>
         <Association Name="FK_tblBillDetails_tblBillDetails">
           <End Type="NIBSModel.tblBillMaster" Role="tblBillMaster" Multiplicity="1" />
@@ -5623,6 +5627,8 @@ warning 6002: The table/view 'Kandha.dbo.vwSubItemIndentDetails' does not have a
           <EntitySetMapping Name="tblBillMasters">
             <EntityTypeMapping TypeName="NIBSModel.tblBillMaster">
               <MappingFragment StoreEntitySet="tblBillMaster">
+                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+                <ScalarProperty Name="Waiter" ColumnName="Waiter" />
                 <ScalarProperty Name="TableNo" ColumnName="TableNo" />
                 <ScalarProperty Name="NetAmountWithoutDiscount" ColumnName="NetAmountWithoutDiscount" />
                 <ScalarProperty Name="Isprinted" ColumnName="Isprinted" />

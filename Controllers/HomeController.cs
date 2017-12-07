@@ -44,6 +44,8 @@ namespace NibsMVC.Controllers
                     
                     if (itemcheck == null)
                     {
+                        var waiterid = (from p in kot_entities.BillTrans where p.UID >= item.UID select p).FirstOrDefault();
+                        var waiter = (from p in kot_entities.VW_GetEmployee where p.AccountM_UID >= waiterid.Waiter_UID select p.EmployeeName).FirstOrDefault();
                         tblBillMaster tb = new tblBillMaster();
                         tb.BillDate = item.BillDate;
                         tb.TotalAmount = item.Total;
@@ -66,6 +68,8 @@ namespace NibsMVC.Controllers
                         tb.ServiceTax = item.Servicetax;
                         tb.Isprinted = Convert.ToBoolean (item.isprnt);
                         tb.NetAmountWithoutDiscount = item.befDisc;
+                        tb.CreateDateTime = waiterid.CreatedDate;
+                        tb.Waiter = waiter;
                         entities.tblBillMasters.Add(tb);
                         entities.SaveChanges();
 
@@ -74,7 +78,7 @@ namespace NibsMVC.Controllers
                         {
                             tblBillDetail tbDet = new tblBillDetail();
                             int billid = (from p in entities.tblBillMasters select p.BillId).Max();
-                            var itemid = (from p in entities.tblItems where p.Name == itemDet .ItemName  && p.ItemCode  == itemDet.ItemCode  select p.ItemId ).SingleOrDefault();
+                            var itemid = (from p in entities.tblItems where p.Name == itemDet.ItemName  && p.ItemCode  == itemDet.ItemCode  select p.ItemId ).SingleOrDefault();
                             tbDet.BillId = billid;
                             tbDet.ItemId = itemid;
                             tbDet.FullQty = (Int32)itemDet.Qty;
