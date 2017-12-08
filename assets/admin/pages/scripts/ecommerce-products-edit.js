@@ -98,10 +98,10 @@ var EcommerceProductsEdit = function () {
                 "columnDefs": [{ // define columns sorting options(by default all columns are sortable extept the first checkbox column)
                     'orderable': true,
                     'targets': [0]
-                }],
-                "order": [
-                    [0, "asc"]
-                ] // set first column as a default sort by asc
+                }]
+                //"order": [
+                //    [0, "asc"]
+                //] // set first column as a default sort by asc
             }
         });
     }

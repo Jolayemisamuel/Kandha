@@ -49,18 +49,15 @@ namespace NibsMVC.Models
         public string RecordNo { get; set; }
         [Required]
         [Display(Name = "Please Select Ledger")]
-        public string[] LedgerAccId { get; set; }
+        public string[] LedgerAccId { get; set; }        
         
-        [Required(ErrorMessage = "Password is required.")]
         public decimal[] CreditAmount { get; set; }        
         [Required]
         [Display(Name = "Select Date")]
         public DateTime Date { get; set; }       
         [Required]
         [Display(Name = "PLEASE SELECT Ledger Account")]
-        public string[] ByAccount { get; set; }
-        [Required(ErrorMessage = "Confirmation Password is required.")]
-        [Compare("CreditAmount", ErrorMessage = "Password and Confirmation Password must match.")]
+        public string[] ByAccount { get; set; }        
         public decimal[] DrAmount { get; set; }
         public string[] CrNarration { get; set; }
         public string[] DrNarration { get; set; }

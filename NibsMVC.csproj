@@ -304,6 +304,8 @@
     <Compile Include="Controllers\DateController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\FinanceController.cs" />
+    <Compile Include="Controllers\FinanceDetailsController.cs" />
+    <Compile Include="Controllers\FinanceReportController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HomeDeliveryController.cs" />
     <Compile Include="Controllers\item.cs" />
@@ -322,7 +324,7 @@
     <Compile Include="Controllers\OutletOfferController.cs" />
     <Compile Include="Controllers\PurchaseController.cs" />
     <Compile Include="Controllers\PurchaseOrderController.cs" />
-    <Compile Include="Controllers\RepController.cs" />
+    <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\ServicChargesController.cs" />
     <Compile Include="Controllers\ServicTaxController.cs" />
     <Compile Include="Controllers\ShiftTableController.cs" />
@@ -930,9 +932,6 @@
     <Compile Include="EDMX\FreeIssueTransList.cs">
       <DependentUpon>KOTDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="EDMX\getSubItemsRaw_Result.cs">
-      <DependentUpon>NIBSDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="EDMX\GSTSplitPercentage.cs">
       <DependentUpon>KOTDB.tt</DependentUpon>
     </Compile>
@@ -998,9 +997,6 @@
     </Compile>
     <Compile Include="EDMX\ItemGroupVATMapping.cs">
       <DependentUpon>KOTDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EDMX\ItemIndentDetails_Result.cs">
-      <DependentUpon>NIBSDB.tt</DependentUpon>
     </Compile>
     <Compile Include="EDMX\ItemPriceMapping.cs">
       <DependentUpon>KOTDB.tt</DependentUpon>
@@ -1713,9 +1709,6 @@
     <Compile Include="EDMX\SubGroup_ImageMapping.cs">
       <DependentUpon>KOTDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="EDMX\SubItemIndentDetails_Result.cs">
-      <DependentUpon>NIBSDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="EDMX\SurchargeM.cs">
       <DependentUpon>KOTDB.tt</DependentUpon>
     </Compile>
@@ -2310,9 +2303,6 @@
     <Compile Include="EDMX\vwBillMst.cs">
       <DependentUpon>KOTDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="EDMX\vwItemIndentDetail.cs">
-      <DependentUpon>NIBSDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="EDMX\vwMasters_Documents.cs">
       <DependentUpon>KOTDB.tt</DependentUpon>
     </Compile>
@@ -2332,9 +2322,6 @@
       <DependentUpon>NIBSDB.tt</DependentUpon>
     </Compile>
     <Compile Include="EDMX\vwStockTransactionsKitchen.cs">
-      <DependentUpon>NIBSDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EDMX\vwSubItemIndentDetail.cs">
       <DependentUpon>NIBSDB.tt</DependentUpon>
     </Compile>
     <Compile Include="EDMX\Vw_BillPendingDelivery.cs">
@@ -2468,6 +2455,8 @@
     <Compile Include="Models\CategoryWiseReportModel.cs" />
     <Compile Include="Models\DeleteModel.cs" />
     <Compile Include="Models\Finance.cs" />
+    <Compile Include="Models\FinanceDetailsModel.cs" />
+    <Compile Include="Models\FinanceReportModel.cs" />
     <Compile Include="Models\HomeDeliveryModel.cs" />
     <Compile Include="Models\KitchenAlertsModel.cs" />
     <Compile Include="Models\KitchenStockModel.cs" />
@@ -3070,8 +3059,6 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>NIBSDB.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Report\IngerediantReport.xls" />
-    <Content Include="Report\MovementReport.xls" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
@@ -3207,17 +3194,17 @@
     <Content Include="Views\Billing\Index.cshtml" />
     <Content Include="Views\Billing\PrintView.cshtml" />
     <Content Include="Views\Billing\SmallPrint.cshtml" />
-    <Content Include="Views\Rep\Report.cshtml" />
+    <Content Include="Views\Reports\Report.cshtml" />
     <Content Include="Views\Operator\Create.cshtml" />
     <Content Include="Views\Operator\Index.cshtml" />
     <Content Include="Views\Billing\TakeAway.cshtml" />
     <Content Include="Views\Billing\TakeAwayReport.cshtml" />
     <Content Include="Views\Billing\TakePrint.cshtml" />
-    <Content Include="Views\Rep\STakeAwayBill.cshtml" />
+    <Content Include="Views\Reports\STakeAwayBill.cshtml" />
     <Content Include="Views\Billing\HomeDelivery.cshtml" />
     <Content Include="Views\Billing\HomeDeliveryReport.cshtml" />
     <Content Include="Views\Billing\HomeDeliveryPrint.cshtml" />
-    <Content Include="Views\Rep\ShomedelvrBill.cshtml" />
+    <Content Include="Views\Reports\ShomedelvrBill.cshtml" />
     <Content Include="Views\Admin\VenderReport.cshtml" />
     <Content Include="Views\Admin\MenuReport.cshtml" />
     <Content Include="Views\Admin\RestroBill.cshtml" />
@@ -3288,10 +3275,10 @@
     <Content Include="Views\HomeDelivery\_printData.cshtml" />
     <Content Include="Views\HomeDelivery\Home.cshtml" />
     <Content Include="Views\Home\ChangeInventory.cshtml" />
-    <Content Include="Views\Rep\Index.cshtml" />
-    <Content Include="Views\Rep\BillingItem.cshtml" />
-    <Content Include="Views\Rep\ViewBillDetail.cshtml" />
-    <Content Include="Views\Rep\PrintAgainBill.cshtml" />
+    <Content Include="Views\Reports\Index.cshtml" />
+    <Content Include="Views\Reports\BillingItem.cshtml" />
+    <Content Include="Views\Reports\ViewBillDetail.cshtml" />
+    <Content Include="Views\Reports\PrintAgainBill.cshtml" />
     <Content Include="Views\Vendor\Index.cshtml" />
     <Content Include="Views\Vendor\Create.cshtml" />
     <Content Include="Views\Vendor\setPrice.cshtml" />
@@ -3343,12 +3330,24 @@
     <Content Include="Views\Kitchen\ListRawItem.cshtml" />
     <Content Include="Views\AssignSubMenu\AssignSubMenuItem.cshtml" />
     <Content Include="Views\AssignSubMenu\Index.cshtml" />
-    <Content Include="Views\Rep\MovementAnalysisReport.cshtml" />
+    <Content Include="Views\Reports\MovementAnalysisReport.cshtml" />
     <Content Include="Views\Finance\Receipt.cshtml" />
     <Content Include="Views\Finance\CashReceipt.cshtml" />
     <Content Include="Views\Finance\Payment.cshtml" />
     <Content Include="Views\Finance\CashPayment.cshtml" />
-    <Content Include="Views\Rep\IngrediantReport.cshtml" />
+    <Content Include="Views\Finance\DebitNote.cshtml" />
+    <Content Include="Views\Finance\CreditNote.cshtml" />
+    <Content Include="Views\Finance\Contra.cshtml" />
+    <Content Include="Views\Finance\Journal.cshtml" />
+    <Content Include="Views\FinanceDetails\ReceiptDetails.cshtml" />
+    <Content Include="Views\FinanceDetails\CashReceiptDetails.cshtml" />
+    <Content Include="Views\FinanceDetails\PaymentDetails.cshtml" />
+    <Content Include="Views\FinanceDetails\CashPaymentDetails.cshtml" />
+    <Content Include="Views\FinanceDetails\DebitNoteDetails.cshtml" />
+    <Content Include="Views\FinanceDetails\CreditNoteDetails.cshtml" />
+    <Content Include="Views\FinanceDetails\ContraDetails.cshtml" />
+    <Content Include="Views\FinanceDetails\JournalDetails.cshtml" />
+    <Content Include="Views\FinanceReport\LedgerDetailsReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Barcodes\" />

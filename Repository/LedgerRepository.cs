@@ -150,7 +150,7 @@ namespace NibsMVC.Repository
                 FinYear = PreYear + "-" + CurYear;
             
 
-            var duplicate = _entities.tblLedgerMasters.Where(o => o.LedgerName.Equals(model.LedgerName) && o.tblLedgerGroup.LedgerGroupId.Equals(model.LedgerGroupId) && o.OPBalance.Equals(model.OpeningBalance) && o.Percentage.Equals(model.Percentage) && o.Transfer_Type.Equals(model.TransferType)).SingleOrDefault();
+            var duplicate = _entities.tblLedgerMasters.Where(o => o.LedgerName == model.LedgerName && o.tblLedgerGroup.LedgerGroupId == model.LedgerGroupId && o.OPBalance == model.OpeningBalance && o.Percentage == model.Percentage && o.Transfer_Type == model.TransferType).SingleOrDefault();
             if (duplicate == null)
             {
                 try
