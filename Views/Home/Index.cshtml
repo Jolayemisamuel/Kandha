@@ -3,10 +3,17 @@
 }
 
 <div class="page-content">
+    
+@using (Html.BeginForm("index", "home", FormMethod.Post, new { @id = "form_sample_14", @class = "form-horizontal", @enctype = "multipart/form-data" }))
+{
     <h3 class="page-title">
 
         Dashboard <small>Hotel Kandha</small>
+
+        <button type="submit" class="btn green" id="btnSyncKot">Sync KOT</button>
     </h3>
+}
+    
     @if (User.IsInRole("admin"))
     {
         @Html.Partial("_PartialAdminIndex")
@@ -22,3 +29,17 @@
     }
     
 </div>
+<script>
+    $('#btnSyncKot').on('click', function (e) {
+
+
+        $.getJSON('/home/syncKot/', function (data) {
+           
+           
+            
+
+
+        });
+        $("#form_sample_14").submit();
+    });
+</script>
