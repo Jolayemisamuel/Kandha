@@ -193,6 +193,7 @@ var TableAdvanced = function () {
         });
 
         var oTable = table.dataTable({
+            ordering:false,
             "order": [
                 [0, 'asc']
             ],
@@ -294,6 +295,68 @@ var TableAdvanced = function () {
         var tableWrapper = $('#sample_2_wrapper'); // datatable creates the table wrapper by adding with id {your_table_jd}_wrapper
         tableWrapper.find('.dataTables_length select').select2(); // initialize select2 dropdown
     }
+
+    //var initTable2 = function () {
+    //    var table = $('#sample_25');
+
+    //    /* Table tools samples: https://www.datatables.net/release-datatables/extras/TableTools/ */
+
+    //    /* Set tabletools buttons and button container */
+
+    //    $.extend(true, $.fn.DataTable.TableTools.classes, {
+    //        "container": "btn-group tabletools-btn-group pull-right",
+    //        "buttons": {
+    //            "normal": "btn btn-sm default",
+    //            "disabled": "btn btn-sm default disabled"
+    //        }
+    //    });
+
+    //    var oTable = table.dataTable({            
+    //        "order": [
+    //            [0, 'asc']
+    //        ],
+    //        "lengthMenu": [
+    //            [10, 15, 20, -1],
+    //            [10, 15, 20, "All"] // change per page values here
+    //        ],
+
+    //        // set the initial value
+    //        "pageLength": 20,
+    //        "dom": "<'row' <'col-md-12'T>><'row'<'col-md-12 col-sm-12'l><'col-md-12 col-sm-12'f>r><'table-scrollable't><'row'<'col-md-12 col-sm-12'i><'col-md-12 col-sm-12'p>>", // horizobtal scrollable datatable
+
+    //        "tableTools": {
+    //            "sSwfPath": "../../assets/global/plugins/datatables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
+    //            "aButtons": [{
+    //                "sExtends": "pdf",
+    //                "sButtonText": "PDF"
+
+
+    //            }, {
+    //                "sExtends": "csv",
+    //                "sButtonText": "CSV",
+
+    //            }, {
+    //                "sExtends": "xls",
+    //                "sButtonText": "Excel",
+
+    //            }, {
+    //                "sExtends": "print",
+    //                "sButtonText": "Print",
+    //                "sInfo": 'Please press "CTRL+P" to print or "ESC" to quit',
+    //                "sMessage": "<p style='position:absolute;right:10px'><img src='../../Content/Logo/Kandha-Logo-200x87.png' ></p>434,Trichy Rd, <br> Agraharam, <br> Singanallur, <br> Coimbatore, <br> Tamil Nadu, 641005."
+
+
+    //            }, {
+    //                "sExtends": "copy",
+    //                "sButtonText": "Copy",
+
+    //            }]
+    //        }
+    //    });
+
+    //    var tableWrapper = $('#sample_25_wrapper'); // datatable creates the table wrapper by adding with id {your_table_jd}_wrapper
+    //    tableWrapper.find('.dataTables_length select').select2(); // initialize select2 dropdown
+    //}
 
     var initTable21 = function () {
         var table = $('#sample_21');

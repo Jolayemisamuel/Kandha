@@ -305,6 +305,7 @@
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\FinanceController.cs" />
     <Compile Include="Controllers\FinanceDetailsController.cs" />
+    <Compile Include="Controllers\FinanceReportController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HomeDeliveryController.cs" />
     <Compile Include="Controllers\item.cs" />
@@ -2455,6 +2456,7 @@
     <Compile Include="Models\DeleteModel.cs" />
     <Compile Include="Models\Finance.cs" />
     <Compile Include="Models\FinanceDetailsModel.cs" />
+    <Compile Include="Models\FinanceReportModel.cs" />
     <Compile Include="Models\HomeDeliveryModel.cs" />
     <Compile Include="Models\KitchenAlertsModel.cs" />
     <Compile Include="Models\KitchenStockModel.cs" />
@@ -3345,6 +3347,7 @@
     <Content Include="Views\FinanceDetails\CreditNoteDetails.cshtml" />
     <Content Include="Views\FinanceDetails\ContraDetails.cshtml" />
     <Content Include="Views\FinanceDetails\JournalDetails.cshtml" />
+    <Content Include="Views\FinanceReport\LedgerDetailsReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Barcodes\" />

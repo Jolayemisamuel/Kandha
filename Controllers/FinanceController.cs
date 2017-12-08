@@ -27,11 +27,11 @@ namespace NibsMVC.Controllers
         {
             Receipt model = new Receipt();
 
-            bool Exists = db.Voucher_Entry_Credit.Any(c => c.voucher_type.Equals("Bank Receipt"));
+            bool Exists = db.Voucher_Entry_Credit.Any(c => c.voucher_type.Equals("BankReceipt"));
 
             if (Exists == true && db.Voucher_Entry_Credit.Select(p => p.record_no).Count() > 0)
             {
-                var id = (from n in db.Voucher_Entry_Credit.Where(x => x.voucher_type == "Bank Receipt") select n.record_no).Max();
+                var id = (from n in db.Voucher_Entry_Credit.Where(x => x.voucher_type == "BankReceipt") select n.record_no).Max();
 
                 int recno = Convert.ToInt32(id) + 1;
 
@@ -91,11 +91,11 @@ namespace NibsMVC.Controllers
         {
             CashPayement model = new CashPayement();
 
-            bool Exists = db.Voucher_Entry_Credit.Any(c => c.voucher_type.Equals("Cash Payment"));
+            bool Exists = db.Voucher_Entry_Credit.Any(c => c.voucher_type.Equals("CashPayment"));
 
             if (Exists == true && db.Voucher_Entry_Credit.Select(p => p.record_no).Count() > 0)
             {
-                var id = (from n in db.Voucher_Entry_Credit.Where(x => x.voucher_type == "Cash Payment") select n.record_no).Max();
+                var id = (from n in db.Voucher_Entry_Credit.Where(x => x.voucher_type == "CashPayment") select n.record_no).Max();
 
                 int recno = Convert.ToInt32(id) + 1;
 
@@ -213,59 +213,79 @@ namespace NibsMVC.Controllers
                     FinYear = CurYear + "-" + NexYear;
                 else
                     FinYear = PreYear + "-" + CurYear;
-
-                //int Pid = (from p in db.tblPurchaseOrderMasters where p.OutletId == OutletId select p.PurchaseOrderId).Max();
+                           
                 for (int i = 0; i < model.LedgerAccId.Length; i++)
                 {
                     Voucher_Entry_Credit tb = new Voucher_Entry_Credit();
-                    Voucher_Entry_Debit tb1 = new Voucher_Entry_Debit();
+                    
                     tb.voucher_no = model.VoucherNo;
                     tb.Voucher_date = model.Date;
-                    tb1.voucher_no = model.VoucherNo;
-                    tb1.voucher_date = model.Date;
+                    
                     tb.record_no = model.RecordNo.ToString();
-                    tb1.record_no = model.RecordNo.ToString();
+                    
                     tb.record_date = model.Date;
-                    tb1.record_date = model.Date;
+                    
                     tb.voucher_sno = i + 1;
-                    tb1.voucher_sno = i + 1;
+                    
                     tb.voucher_tb = "To";
-                    tb1.voucher_tb = "By";
-                    tb.voucher_type = "Bank Receipt";
-                    tb1.voucher_type = "Bank Receipt";
+                    
+                    tb.voucher_type = "BankReceipt";
+                    
                     tb.voucher_year = FinYear;
-                    tb1.voucher_year = FinYear;
-                    tb.from_form_name = "Bank Receipt";
-                    tb1.from_form_name = "Bank Receipt";
+                    
+                    tb.from_form_name = "BankReceipt";
+                    
                     tb.userid = WebSecurity.CurrentUserId;
-                    tb1.userid = WebSecurity.CurrentUserId;
-                    tb.account_type = "Bank Receipt";
-                    tb1.account_type = "Bank Receipt";
+                    
+                    tb.account_type = "BankReceipt";
+                    
 
                     string name = model.LedgerAccId[i];
                     var id = (from n in db.tblLedgerMasters.Where(x => x.LedgerName == name) select n.LedgerMasterId).SingleOrDefault();
 
                     tb.from_form_id = 0;
-                    tb1.from_form_id = 0;
+                    
                     tb.voucher_ledger_accout_id = Convert.ToInt32(id);
                     tb.voucher_cr_amount = model.CreditAmount[i];
                     tb.check_no = model.ChequeNo[i];
                     tb.check_date = model.ChequeDate[i];
                     tb.voucher_narration = model.CrNarration[i];
 
-                    string accountname = model.ByAccount[i];
-                    var idl = (from n in db.tblLedgerMasters.Where(x => x.LedgerName == accountname) select n.LedgerMasterId).SingleOrDefault();
-
-                    tb1.voucher_ledger_accout_id = Convert.ToInt32(idl);
-                    tb1.voucher_dbt_amount = model.DrAmount[i];
-                    tb1.voucher_narration = model.DrNarration[i];
+                    
                     tb.create_date = DateTime.Now;
-                    tb1.create_date = DateTime.Now;
+                    
                     db.Voucher_Entry_Credit.Add(tb);
-                    db.Voucher_Entry_Debit.Add(tb1);
+                    
                     db.SaveChanges();
 
                 }
+                for(int j=0;j<model.ByAccount.Length;j++)
+                {
+                    Voucher_Entry_Debit tb1 = new Voucher_Entry_Debit();
+
+                    tb1.voucher_no = model.VoucherNo;
+                    tb1.voucher_date = model.Date;
+                    tb1.record_no = model.RecordNo.ToString();
+                    tb1.record_date = model.Date;
+                    tb1.voucher_sno = j + 1;
+                    tb1.voucher_tb = "By";
+                    tb1.voucher_type = "BankReceipt";
+                    tb1.voucher_year = FinYear;
+                    tb1.from_form_name = "BankReceipt";
+                    tb1.userid = WebSecurity.CurrentUserId;
+                    tb1.account_type = "BankReceipt";
+                    tb1.from_form_id = 0;
+                    string accountname = model.ByAccount[j];
+                    var idl = (from n in db.tblLedgerMasters.Where(x => x.LedgerName == accountname) select n.LedgerMasterId).SingleOrDefault();
+
+                    tb1.voucher_ledger_accout_id = Convert.ToInt32(idl);
+                    tb1.voucher_dbt_amount = model.DrAmount[j];
+                    tb1.voucher_narration = model.DrNarration[j];
+                    tb1.create_date = DateTime.Now;
+                    db.Voucher_Entry_Debit.Add(tb1);
+                    db.SaveChanges();
+                }
+
 
                 TempData["Perror"] = "Inserted Successfully !";
                 return View("Receipt");
@@ -301,56 +321,75 @@ namespace NibsMVC.Controllers
                 else
                     FinYear = PreYear + "-" + CurYear;
 
-                //int Pid = (from p in db.tblPurchaseOrderMasters where p.OutletId == OutletId select p.PurchaseOrderId).Max();
                 for (int i = 0; i < model.LedgerAccId.Length; i++)
                 {
                     Voucher_Entry_Credit tb = new Voucher_Entry_Credit();
-                    Voucher_Entry_Debit tb1 = new Voucher_Entry_Debit();
+
                     tb.voucher_no = model.VoucherNo;
                     tb.Voucher_date = model.Date;
-                    tb1.voucher_no = model.VoucherNo;
-                    tb1.voucher_date = model.Date;
+
                     tb.record_no = model.RecordNo.ToString();
-                    tb1.record_no = model.RecordNo.ToString();
+
                     tb.record_date = model.Date;
-                    tb1.record_date = model.Date;
+
                     tb.voucher_sno = i + 1;
-                    tb1.voucher_sno = i + 1;
+
                     tb.voucher_tb = "To";
-                    tb1.voucher_tb = "By";
+
                     tb.voucher_type = "CashReceipt";
-                    tb1.voucher_type = "CashReceipt";
+
                     tb.voucher_year = FinYear;
-                    tb1.voucher_year = FinYear;
+
                     tb.from_form_name = "CashReceipt";
-                    tb1.from_form_name = "CashReceipt";
+
                     tb.userid = WebSecurity.CurrentUserId;
-                    tb1.userid = WebSecurity.CurrentUserId;
-                    tb.account_type = "Cash Receipt";
-                    tb1.account_type = "Cash Receipt";
+
+                    tb.account_type = "CashReceipt";
+
 
                     string name = model.LedgerAccId[i];
                     var id = (from n in db.tblLedgerMasters.Where(x => x.LedgerName == name) select n.LedgerMasterId).SingleOrDefault();
 
                     tb.from_form_id = 0;
-                    tb1.from_form_id = 0;
+
                     tb.voucher_ledger_accout_id = Convert.ToInt32(id);
                     tb.voucher_cr_amount = model.CreditAmount[i];
-
+                    
                     tb.voucher_narration = model.CrNarration[i];
 
-                    string accountname = model.ByAccount[i];
+
+                    tb.create_date = DateTime.Now;
+
+                    db.Voucher_Entry_Credit.Add(tb);
+
+                    db.SaveChanges();
+
+                }
+                for (int j = 0; j < model.ByAccount.Length; j++)
+                {
+                    Voucher_Entry_Debit tb1 = new Voucher_Entry_Debit();
+
+                    tb1.voucher_no = model.VoucherNo;
+                    tb1.voucher_date = model.Date;
+                    tb1.record_no = model.RecordNo.ToString();
+                    tb1.record_date = model.Date;
+                    tb1.voucher_sno = j + 1;
+                    tb1.voucher_tb = "By";
+                    tb1.voucher_type = "CashReceipt";
+                    tb1.voucher_year = FinYear;
+                    tb1.from_form_name = "CashReceipt";
+                    tb1.userid = WebSecurity.CurrentUserId;
+                    tb1.account_type = "CashReceipt";
+                    tb1.from_form_id = 0;
+                    string accountname = model.ByAccount[j];
                     var idl = (from n in db.tblLedgerMasters.Where(x => x.LedgerName == accountname) select n.LedgerMasterId).SingleOrDefault();
 
                     tb1.voucher_ledger_accout_id = Convert.ToInt32(idl);
-                    tb1.voucher_dbt_amount = model.DrAmount[i];
-                    tb1.voucher_narration = model.DrNarration[i];
-                    tb.create_date = DateTime.Now;
+                    tb1.voucher_dbt_amount = model.DrAmount[j];
+                    tb1.voucher_narration = model.DrNarration[j];
                     tb1.create_date = DateTime.Now;
-                    db.Voucher_Entry_Credit.Add(tb);
                     db.Voucher_Entry_Debit.Add(tb1);
                     db.SaveChanges();
-
                 }
 
                 TempData["Perror"] = "Inserted Successfully !";
@@ -452,7 +491,7 @@ namespace NibsMVC.Controllers
                     tb.voucher_ledger_accout_id = Convert.ToInt32(id);
                     tb.voucher_cr_amount = model.CreditAmount[j];
                     tb.voucher_narration = model.CrNarration[j];
-                    tb.purchase_id = model.PurchaseId[j];
+                    
                     tb.create_date = DateTime.Now;
 
                     db.Voucher_Entry_Credit.Add(tb);
@@ -493,45 +532,34 @@ namespace NibsMVC.Controllers
                 else
                     FinYear = PreYear + "-" + CurYear;
 
-                //int Pid = (from p in db.tblPurchaseOrderMasters where p.OutletId == OutletId select p.PurchaseOrderId).Max();
-                for (int i = 0; i < model.LedgerAccId.Length; i++)
+                for (int i = 0; i < model.ByAccount.Length; i++)
                 {
-                    Voucher_Entry_Credit tb = new Voucher_Entry_Credit();
+
                     Voucher_Entry_Debit tb1 = new Voucher_Entry_Debit();
-                    tb.voucher_no = model.VoucherNo;
-                    tb.Voucher_date = model.Date;
+
                     tb1.voucher_no = model.VoucherNo;
                     tb1.voucher_date = model.Date;
-                    tb.record_no = model.RecordNo.ToString();
+
                     tb1.record_no = model.RecordNo.ToString();
-                    tb.record_date = model.Date;
+
                     tb1.record_date = model.Date;
-                    tb.voucher_sno = i + 1;
+
                     tb1.voucher_sno = i + 1;
-                    tb.voucher_tb = "To";
+
                     tb1.voucher_tb = "By";
-                    tb.voucher_type = "Cash Payment";
-                    tb1.voucher_type = "Cash Payment";
-                    tb.voucher_year = FinYear;
+
+                    tb1.voucher_type = "CashPayment";
+
                     tb1.voucher_year = FinYear;
-                    tb.from_form_name = "Cash Payment";
-                    tb1.from_form_name = "Cash Payment";
-                    tb.userid = WebSecurity.CurrentUserId;
+
+                    tb1.from_form_name = "CashPayment";
+
                     tb1.userid = WebSecurity.CurrentUserId;
-                    tb.account_type = "Cash Payment";
-                    tb1.account_type = "Cash Payment";
 
-                    string name = model.LedgerAccId[i];
-                    var id = (from n in db.tblLedgerMasters.Where(x => x.LedgerName == name) select n.LedgerMasterId).SingleOrDefault();
+                    tb1.account_type = "CashPayment";
 
-                    tb.from_form_id = 0;
+
                     tb1.from_form_id = 0;
-
-                    tb.voucher_ledger_accout_id = Convert.ToInt32(id);
-                    tb.voucher_cr_amount = model.CreditAmount[i];
-                    tb.purchase_id = model.PurchaseId[i];
-
-                    tb.voucher_narration = model.CrNarration[i];
 
                     string accountname = model.ByAccount[i];
                     var idl = (from n in db.tblLedgerMasters.Where(x => x.LedgerName == accountname) select n.LedgerMasterId).SingleOrDefault();
@@ -539,13 +567,39 @@ namespace NibsMVC.Controllers
                     tb1.voucher_ledger_accout_id = Convert.ToInt32(idl);
                     tb1.voucher_dbt_amount = model.DrAmount[i];
                     tb1.voucher_narration = model.DrNarration[i];
-                    tb.create_date = DateTime.Now;
-                    tb1.create_date = DateTime.Now;
                     tb1.purchase_id = model.PurchaseId[i];
-                    db.Voucher_Entry_Credit.Add(tb);
+                    tb1.create_date = DateTime.Now;
+
                     db.Voucher_Entry_Debit.Add(tb1);
                     db.SaveChanges();
 
+                }
+                for (int j = 0; j < model.LedgerAccId.Length; j++)
+                {
+                    Voucher_Entry_Credit tb = new Voucher_Entry_Credit();
+
+                    tb.voucher_no = model.VoucherNo;
+                    tb.Voucher_date = model.Date;
+                    tb.record_no = model.RecordNo.ToString();
+                    tb.record_date = model.Date;
+                    tb.voucher_sno = j + 1;
+                    tb.voucher_tb = "To";
+                    tb.voucher_type = "CashPayment";
+                    tb.voucher_year = FinYear;
+                    tb.from_form_name = "CashPayment";
+                    tb.userid = WebSecurity.CurrentUserId;
+                    tb.account_type = "CashPayment";
+                    tb.from_form_id = 0;
+                    string name = model.LedgerAccId[j];
+                    var id = (from n in db.tblLedgerMasters.Where(x => x.LedgerName == name) select n.LedgerMasterId).SingleOrDefault();
+                    tb.voucher_ledger_accout_id = Convert.ToInt32(id);
+                    tb.voucher_cr_amount = model.CreditAmount[j];
+                    tb.voucher_narration = model.CrNarration[j];
+                    //tb.purchase_id = model.PurchaseId[j];
+                    tb.create_date = DateTime.Now;
+
+                    db.Voucher_Entry_Credit.Add(tb);
+                    db.SaveChanges();
                 }
 
                 TempData["Perror"] = "Inserted Successfully !";
@@ -692,56 +746,74 @@ namespace NibsMVC.Controllers
                 for (int i = 0; i < model.LedgerAccId.Length; i++)
                 {
                     Voucher_Entry_Credit tb = new Voucher_Entry_Credit();
-                    Voucher_Entry_Debit tb1 = new Voucher_Entry_Debit();
+                    
                     tb.voucher_no = model.VoucherNo;
-                    tb.Voucher_date = model.Date;
-                    tb1.voucher_no = model.VoucherNo;
-                    tb1.voucher_date = model.Date;
-                    tb.record_no = model.RecordNo.ToString();
-                    tb1.record_no = model.RecordNo.ToString();
+                    tb.Voucher_date = model.Date;                    
+                    tb.record_no = model.RecordNo.ToString();                    
                     tb.record_date = model.Date;
-                    tb1.record_date = model.Date;
+                    
                     tb.voucher_sno = i + 1;
-                    tb1.voucher_sno = i + 1;
+                    
                     tb.voucher_tb = "To";
-                    tb1.voucher_tb = "By";
+                    
                     tb.voucher_type = "CreditNote";
-                    tb1.voucher_type = "CreditNote";
+                    
                     tb.voucher_year = FinYear;
-                    tb1.voucher_year = FinYear;
+                    
                     tb.from_form_name = "CreditNote";
-                    tb1.from_form_name = "CreditNote";
+                   
                     tb.userid = WebSecurity.CurrentUserId;
-                    tb1.userid = WebSecurity.CurrentUserId;
+                    
                     tb.account_type = "CreditNote";
-                    tb1.account_type = "CreditNote";
+                   
 
                     string name = model.LedgerAccId[i];
                     var id = (from n in db.tblLedgerMasters.Where(x => x.LedgerName == name) select n.LedgerMasterId).SingleOrDefault();
 
                     tb.from_form_id = 0;
-                    tb1.from_form_id = 0;
+                    
                     tb.voucher_ledger_accout_id = Convert.ToInt32(id);
                     tb.voucher_cr_amount = model.CreditAmount[i];
                     tb.check_no = model.ChequeNo[i];
                     tb.check_date = model.ChequeDate[i];
                     tb.voucher_narration = model.CrNarration[i];
 
-                    string accountname = model.ByAccount[i];
-                    var idl = (from n in db.tblLedgerMasters.Where(x => x.LedgerName == accountname) select n.LedgerMasterId).SingleOrDefault();
-
-                    tb1.voucher_ledger_accout_id = Convert.ToInt32(idl);
-                    tb1.voucher_dbt_amount = model.DrAmount[i];
-                    tb1.voucher_narration = model.DrNarration[i];
+                    
                     tb.create_date = DateTime.Now;
-                    tb1.create_date = DateTime.Now;
+                    
                     db.Voucher_Entry_Credit.Add(tb);
-                    db.Voucher_Entry_Debit.Add(tb1);
+                    
                     db.SaveChanges();
 
                 }
+                for(int j = 0; j < model.ByAccount.Length; j++)
+                {
+                    Voucher_Entry_Debit tb1 = new Voucher_Entry_Debit();
 
-                TempData["Perror"] = "Inserted Successfully !";
+                    tb1.voucher_no = model.VoucherNo;
+                    tb1.voucher_date = model.Date;
+                    tb1.record_no = model.RecordNo.ToString();
+                    tb1.record_date = model.Date;
+                    tb1.voucher_sno = j + 1;
+                    tb1.voucher_tb = "By";
+                    tb1.voucher_type = "CreditNote";
+                    tb1.voucher_year = FinYear;
+                    tb1.from_form_name = "CreditNote";
+                    tb1.userid = WebSecurity.CurrentUserId;
+                    tb1.account_type = "CreditNote";
+                    tb1.from_form_id = 0;
+                    string accountname = model.ByAccount[j];
+                    var idl = (from n in db.tblLedgerMasters.Where(x => x.LedgerName == accountname) select n.LedgerMasterId).SingleOrDefault();
+
+                    tb1.voucher_ledger_accout_id = Convert.ToInt32(idl);
+                    tb1.voucher_dbt_amount = model.DrAmount[j];
+                    tb1.voucher_narration = model.DrNarration[j];
+                    tb1.create_date = DateTime.Now;
+                    db.Voucher_Entry_Debit.Add(tb1);
+                    db.SaveChanges();
+                }
+
+                    TempData["Perror"] = "Inserted Successfully !";
                 return View("CreditNote");
             }
 
@@ -777,59 +849,85 @@ namespace NibsMVC.Controllers
                 for (int i = 0; i < model.LedgerAccId.Length; i++)
                 {
                     Voucher_Entry_Credit tb = new Voucher_Entry_Credit();
-                    Voucher_Entry_Debit tb1 = new Voucher_Entry_Debit();
+                   
                     tb.voucher_no = model.VoucherNo;
                     tb.Voucher_date = model.Date;
-                    tb1.voucher_no = model.VoucherNo;
-                    tb1.voucher_date = model.Date;
+                    
                     tb.record_no = model.RecordNo.ToString();
-                    tb1.record_no = model.RecordNo.ToString();
+                    
                     tb.record_date = model.Date;
-                    tb1.record_date = model.Date;
+                    
                     tb.voucher_sno = i + 1;
-                    tb1.voucher_sno = i + 1;
+                   
                     tb.voucher_tb = "To";
-                    tb1.voucher_tb = "By";
+                    
                     tb.voucher_type = "Contra";
-                    tb1.voucher_type = "Contra";
+                    
                     tb.voucher_year = FinYear;
-                    tb1.voucher_year = FinYear;
+                    
                     tb.from_form_name = "Contra";
-                    tb1.from_form_name = "Contra";
+                    
                     tb.userid = WebSecurity.CurrentUserId;
-                    tb1.userid = WebSecurity.CurrentUserId;
+                    
                     tb.account_type = "Contra";
-                    tb1.account_type = "Contra";
-                    tb.Refrenceno = model.Refrenceno[i];
-                    tb1.Refrenceno = model.Refrenceno[i];
+                    
+                    //tb.Refrenceno = model.Refrenceno[i];
+                    
 
                     string name = model.LedgerAccId[i];
                     var id = (from n in db.tblLedgerMasters.Where(x => x.LedgerName == name) select n.LedgerMasterId).SingleOrDefault();
 
                     tb.from_form_id = 0;
-                    tb1.from_form_id = 0;
+                    
 
                     tb.voucher_ledger_accout_id = Convert.ToInt32(id);
                     tb.voucher_cr_amount = model.CreditAmount[i];
                     
                     tb.voucher_narration = model.CrNarration[i];
 
-                    string accountname = model.ByAccount[i];
-                    var idl = (from n in db.tblLedgerMasters.Where(x => x.LedgerName == accountname) select n.LedgerMasterId).SingleOrDefault();
-
-                    tb1.voucher_ledger_accout_id = Convert.ToInt32(idl);
-                    tb1.voucher_dbt_amount = model.DrAmount[i];
-                    tb1.voucher_narration = model.DrNarration[i];
+                    
                     tb.create_date = DateTime.Now;
-                    tb1.create_date = DateTime.Now;
+                   
                     
                     db.Voucher_Entry_Credit.Add(tb);
-                    db.Voucher_Entry_Debit.Add(tb1);
+                    
                     db.SaveChanges();
 
                 }
+                for (int j = 0; j < model.ByAccount.Length; j++)
+                {
+                    Voucher_Entry_Debit tb1 = new Voucher_Entry_Debit();
 
-                TempData["Perror"] = "Inserted Successfully !";
+                    tb1.voucher_no = model.VoucherNo;
+                    tb1.voucher_date = model.Date;
+                    tb1.record_no = model.RecordNo.ToString();
+                    tb1.record_date = model.Date;
+                    tb1.voucher_sno = j + 1;
+                    tb1.voucher_tb = "By";
+                    tb1.voucher_type = "Contra";
+                    tb1.voucher_year = FinYear;
+                    tb1.from_form_name = "Contra";
+                    tb1.userid = WebSecurity.CurrentUserId;
+                    tb1.account_type = "Contra";
+                    tb1.Refrenceno = model.Refrenceno[j];
+                    tb1.from_form_id = 0;
+
+                    string accountname = model.ByAccount[j];
+                    var idl = (from n in db.tblLedgerMasters.Where(x => x.LedgerName == accountname) select n.LedgerMasterId).SingleOrDefault();
+
+                    tb1.voucher_ledger_accout_id = Convert.ToInt32(idl);
+                    tb1.voucher_dbt_amount = model.DrAmount[j];
+                    tb1.voucher_narration = model.DrNarration[j];
+                    tb1.create_date = DateTime.Now;
+                    db.Voucher_Entry_Debit.Add(tb1);
+                    db.SaveChanges();
+
+
+
+                }
+
+
+                    TempData["Perror"] = "Inserted Successfully !";
                 return View("Contra");
             }
 

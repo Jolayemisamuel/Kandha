@@ -1,4 +1,4 @@
-﻿@model IEnumerable<NibsMVC.Models.ReceiptDetails>
+﻿@model IEnumerable<NibsMVC.Models.ReceiptDetailsModel>
 
 
 @{
@@ -18,7 +18,7 @@
             </li>
 
             <li>
-                Purchase Details
+                Receipt Details
             </li>
         </ul>
 
@@ -111,7 +111,7 @@
                                                 @item.voucherno
                                             </td>
                                             <td>
-                                                @item.voucherdate
+                                                @item.voucherdate.Value.ToString("dd-MM-yyyy")
                                             </td>
                                             <td>
                                                 @item.ledgername
@@ -129,12 +129,12 @@
                                                     <div class="modal-body">
                                                         <div class="row">
                                                             <div class="col-md-12">
-                                                                <label class="col-md-2">Voucher No</label>
-                                                                <label class="col-md-1" style="font-weight:bold">@item.voucherno</label>
-                                                                <label class="col-md-3">Voucher Date</label>
-                                                                <label class="col-md-2" style="font-weight:bold">@item.voucherdate</label>
-                                                                <label class="col-md-2">Record No</label>
-                                                                <label class="col-md-2" style="font-weight:bold">@item.recordno</label>
+                                                                <label class="col-md-4">Voucher No: <strong> @item.voucherno </strong></label>
+                                                                
+                                                                <label class="col-md-4">Voucher Date: <strong> @item.voucherdate.Value.ToString("dd-MM-yyyy")</strong></label>
+                                                                
+                                                                <label class="col-md-4">Record No: <strong> @item.recordno</strong></label>
+                                                                
                                                             </div>
                                                         </div>
                                                         <div class="row" style="padding-left:15px">
@@ -152,7 +152,7 @@
                                                             </thead>
                                                             <tbody>
                                                                 @{
-                                                                    var Itemdetails = (from p in db.Voucher_Entry_Credit where p.record_no == item.recordno.ToString() && p.voucher_type == "Bank Receipt" select p).ToList();
+                                                                    var Itemdetails = (from p in db.Voucher_Entry_Credit where p.record_no == item.recordno.ToString() && p.voucher_type == "BankReceipt" select p).ToList();
 
                                                                     foreach (var i in Itemdetails)
                                                                     {
@@ -161,7 +161,7 @@
                                                                             <td>@i.tblLedgerMaster.LedgerName</td>
                                                                             <td>@i.voucher_cr_amount</td>
                                                                             <td>@i.check_no</td>
-                                                                            <td>@i.check_date</td>
+                                                                            <td>@i.check_date.Value.ToString("dd-MM-yyyy")</td>
                                                                             <td>@i.voucher_narration</td>
                                                                         </tr>
                                                                     }
@@ -181,7 +181,7 @@
                                                             </thead>
                                                             <tbody>
                                                                 @{
-                                                                    var Itemdetailsdr = (from p in db.Voucher_Entry_Debit where p.record_no == item.recordno.ToString() && p.voucher_type == "Bank Receipt" select p).ToList();
+                                                                    var Itemdetailsdr = (from p in db.Voucher_Entry_Debit where p.record_no == item.recordno.ToString() && p.voucher_type == "BankReceipt" select p).ToList();
 
                                                                     foreach (var i in Itemdetailsdr)
                                                                     {
@@ -202,7 +202,7 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <a href="@Url.Action("Deletepurchase", "Purchase", new { @id=item.voucherno })" class="block_Category"><span class="fa fa-trash-o"></span></a>
+                                                <a href="@Url.Action("DeleteReceipt", "FinanceDetails", new { @id=item.recordno })" class="block_Category"><span class="fa fa-trash-o"></span></a>
                                             </td>
 
                                         </tr>
