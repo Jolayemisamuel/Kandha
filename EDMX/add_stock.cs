@@ -1,5 +1,5 @@
 ﻿
-namespace NibsMVC.EDMX
+namespace NibsMVC.EDMX 
 {
     using System;
     using System.Collections.Generic;
