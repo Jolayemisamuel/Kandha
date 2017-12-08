@@ -322,9 +322,10 @@
     <Compile Include="Controllers\OperatorController.cs" />
     <Compile Include="Controllers\OutletController.cs" />
     <Compile Include="Controllers\OutletOfferController.cs" />
+    <Compile Include="Controllers\OutletStockReturnController.cs" />
     <Compile Include="Controllers\PurchaseController.cs" />
     <Compile Include="Controllers\PurchaseOrderController.cs" />
-    <Compile Include="Controllers\ReportsController.cs" />
+    <Compile Include="Controllers\RepController.cs" />
     <Compile Include="Controllers\ServicChargesController.cs" />
     <Compile Include="Controllers\ServicTaxController.cs" />
     <Compile Include="Controllers\ShiftTableController.cs" />
@@ -485,6 +486,7 @@
     <Compile Include="EDMX\AddCategoryVendor.cs">
       <DependentUpon>NIBSDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="EDMX\add_stock.cs" />
     <Compile Include="EDMX\AreaMaster.cs">
       <DependentUpon>KOTDB.tt</DependentUpon>
     </Compile>
@@ -932,6 +934,7 @@
     <Compile Include="EDMX\FreeIssueTransList.cs">
       <DependentUpon>KOTDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="EDMX\getSubItemsRaw_Result.cs" />
     <Compile Include="EDMX\GSTSplitPercentage.cs">
       <DependentUpon>KOTDB.tt</DependentUpon>
     </Compile>
@@ -998,6 +1001,7 @@
     <Compile Include="EDMX\ItemGroupVATMapping.cs">
       <DependentUpon>KOTDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="EDMX\ItemIndentDetails_Result.cs" />
     <Compile Include="EDMX\ItemPriceMapping.cs">
       <DependentUpon>KOTDB.tt</DependentUpon>
     </Compile>
@@ -1709,6 +1713,7 @@
     <Compile Include="EDMX\SubGroup_ImageMapping.cs">
       <DependentUpon>KOTDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="EDMX\SubItemIndentDetails_Result.cs" />
     <Compile Include="EDMX\SurchargeM.cs">
       <DependentUpon>KOTDB.tt</DependentUpon>
     </Compile>
@@ -2006,6 +2011,7 @@
     <Compile Include="EDMX\tblMenuOutlet.cs">
       <DependentUpon>NIBSDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="EDMX\tblOffer.cs" />
     <Compile Include="EDMX\tblOperator.cs">
       <DependentUpon>NIBSDB.tt</DependentUpon>
     </Compile>
@@ -2303,6 +2309,7 @@
     <Compile Include="EDMX\vwBillMst.cs">
       <DependentUpon>KOTDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="EDMX\vwItemIndentDetail.cs" />
     <Compile Include="EDMX\vwMasters_Documents.cs">
       <DependentUpon>KOTDB.tt</DependentUpon>
     </Compile>
@@ -2324,6 +2331,7 @@
     <Compile Include="EDMX\vwStockTransactionsKitchen.cs">
       <DependentUpon>NIBSDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="EDMX\vwSubItemIndentDetail.cs" />
     <Compile Include="EDMX\Vw_BillPendingDelivery.cs">
       <DependentUpon>KOTDB.tt</DependentUpon>
     </Compile>
@@ -2978,6 +2986,7 @@
     <Content Include="assets\Vendor.js" />
     <Content Include="404.html" />
     <Content Include="500.html" />
+    <Content Include="CDS\DBCleareQry.sql" />
     <Content Include="Content\Logo\Kandha-Logo-100x44.png" />
     <Content Include="Content\Logo\Kandha-Logo-200x87.png" />
     <Content Include="Content\Logo\Kandha-Logo-resize.png" />
@@ -3059,6 +3068,8 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>NIBSDB.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="Report\IngerediantReport.xls" />
+    <Content Include="Report\MovementReport.xls" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
@@ -3348,6 +3359,15 @@
     <Content Include="Views\FinanceDetails\ContraDetails.cshtml" />
     <Content Include="Views\FinanceDetails\JournalDetails.cshtml" />
     <Content Include="Views\FinanceReport\LedgerDetailsReport.cshtml" />
+    <Content Include="Views\Rep\BillingItem.cshtml" />
+    <Content Include="Views\Rep\Index.cshtml" />
+    <Content Include="Views\Rep\IngrediantReport.cshtml" />
+    <Content Include="Views\Rep\MovementAnalysisReport.cshtml" />
+    <Content Include="Views\Rep\PrintAgainBill.cshtml" />
+    <Content Include="Views\Rep\Report.cshtml" />
+    <Content Include="Views\Rep\ShomedelvrBill.cshtml" />
+    <Content Include="Views\Rep\STakeAwayBill.cshtml" />
+    <Content Include="Views\Rep\ViewBillDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Barcodes\" />
