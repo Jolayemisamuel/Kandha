@@ -1,0 +1,223 @@
+﻿@model IEnumerable<NibsMVC.Models.DayBook>
+
+@{
+    ViewBag.Title = "Ledger Detail Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using NibsMVC.EDMX;
+<div class="page-content">
+
+    <!-- BEGIN PAGE HEADER-->
+    <div class="page-bar">
+        <ul class="page-breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="@Url.Action("Index","Home")">Home</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <a href="@Url.Action("LedgerMaster","Finance")">Add GRN Details</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                GRN Details
+            </li>
+        </ul>
+
+    </div>
+    <!-- END PAGE HEADER-->
+    <!-- BEGIN PAGE CONTENT-->
+
+    <div class="row">
+        <p style="color:red">@TempData["Perror"]</p>
+        <div class="col-md-12" style="padding-left:0px;padding-right:0px;">
+            <!-- BEGIN BORDERED TABLE PORTLET-->
+            <div class="portlet box yellow">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-coffee"></i>Ledger Details Report
+                    </div>
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse">
+                        </a>
+
+                        <a href="javascript:;" class="reload">
+                        </a>
+
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    @using (Html.BeginForm("LedgerDetailsReport", "FinanceReport", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+
+                        <input type="hidden" name="itemsdata" id="itemsdata" value="" />
+                        <div class="form-body">
+                            <div class="alert alert-danger display-hide">
+                                <button class="close" data-close="alert"></button>
+                                You have some form errors. Please check below.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2">From Date</label>
+                            <div class="col-md-4">
+                                <input class="form-control form-control-inline input-medium date-picker" data-date-format="dd-M-yyyy" size="16" type="text" value=FromDate name="FromDate" readonly="readonly" />
+                                @*<input type="text" name="InvoiceDate" class="form-control" />*@
+
+                            </div>
+
+                            <label class="col-md-1">To Date</label>
+                            <div class="col-md-3">
+                                <input class="form-control form-control-inline input-medium date-picker" data-date-format="dd-M-yyyy" size="16" type="text" value=ToDate name="ToDate" readonly="readonly" />
+                                @*<input type="text" name="InvoiceDate" class="form-control" />*@
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-2"></div>
+                            <label class="col-md-2">Ledger Name</label>
+                            <div class="col-md-4">
+                                @Html.DropDownList("LedgerDetails", new SelectList(ViewBag.LedgerName, "Value", "Text"), "--Choose Vendor--", new { @class = "form-control", onchange = "btnsubmit" })
+
+                            </div>
+                            <div><div class="col-md-1"><button type="submit" id="btnsubmit" class="btn green">Search</button></div></div>
+                        </div>
+                        <div class="col-md-offset-1 col-md-9">
+
+                        </div>
+                        //if (Model.Count()>0)
+                        //{
+                        <table class="table table-bordered table-hover table-full-width" id="sample_12">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Voucher No</th>
+                                    <th>Account Description</th>
+                                    <th>Voucher Type</th>
+                                    <th>Debit</th>
+                                    <th>Credit</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    NIBSEntities db = new NIBSEntities();
+
+                                    //var count = 1;
+
+                                    foreach (var item in Model)
+                                    {
+                                        decimal creditamount = 0;
+                                        decimal debitamount = 0;
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td><strong>@item.LedgerName</strong></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+
+                                        </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td>Opening Balance</td>
+                                                <td></td>
+                                                @if (item.TransferType == "Debit")
+                                                {
+                                                    <td>@item.OpeningBalance</td>
+                                                    <td>0</td>
+                                                }
+                                                else
+                                                {
+                                                    <td>0</td>
+                                                    <td>@item.OpeningBalance</td>
+                                                }
+
+
+                                            </tr>
+
+                                        var Itemdetails = (from q in db.Voucher_Entry_Credit where q.voucher_ledger_accout_id == item.LedgerMasterId select q).ToList();
+                                        if (Itemdetails.Count > 0)
+                                        {
+                                            foreach (var i in Itemdetails)
+                                            {
+                                                if (i.voucher_type != "OB")
+                                                {
+                                                    <tr>
+                                                        <td>@i.Voucher_date.Value.ToString("dd-MM-yyyy")</td>
+                                                        <td>@i.voucher_no</td>
+                                                        <td>@i.voucher_narration</td>
+                                                        <td>@i.voucher_type</td>
+                                                        <td></td>
+                                                        <td>@i.voucher_cr_amount</td>
+
+                                                    </tr>
+                                                }
+                                                creditamount = creditamount + i.voucher_cr_amount.Value;
+                                            }
+                                        }
+                                        else
+                                        {
+
+                                        }
+                                        var Itemdetailsdebit = (from q in db.Voucher_Entry_Debit where q.voucher_ledger_accout_id == item.LedgerMasterId select q).ToList();
+                                        if (Itemdetailsdebit.Count > 0)
+                                        {
+                                            foreach (var i in Itemdetailsdebit)
+                                            {
+                                                if (i.voucher_type != "OB")
+                                                {
+                                                    <tr>
+                                                        <td>@i.voucher_date.Value.ToString("dd-MM-yyyy")</td>
+                                                        <td>@i.voucher_no</td>
+                                                        <td>@i.voucher_narration</td>
+                                                        <td>@i.voucher_type</td>
+                                                        <td>@i.voucher_dbt_amount</td>
+                                                        <td></td>
+
+                                                    </tr>
+                                                }
+                                                debitamount = debitamount + i.voucher_dbt_amount.Value;
+                                            }
+                                        }
+                                        else
+                                        {
+
+                                        }
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td><strong>Closing Balance</strong></td>
+                                            @if (debitamount > creditamount)
+                                            {
+                                                var deb = @debitamount - @creditamount;
+                                                <td><strong>@deb</strong></td>
+                                                <td></td>
+                                            }
+                                            else
+                                            {
+                                                <td></td>
+                                                var crd = @creditamount - @debitamount;
+                                                <td><strong>@crd</strong></td>
+                                            }
+
+                                        </tr>
+                                    }
+
+                                }
+                            </tbody>
+                        </table>
+                                    }
+                    @*}*@
+                </div>
+            </div>
+            <!-- END BORDERED TABLE PORTLET-->
+
+        </div>
+    </div>
+    <!-- END PAGE CONTENT-->
+</div>
