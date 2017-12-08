@@ -3348,6 +3348,7 @@
     <Content Include="Views\FinanceDetails\ContraDetails.cshtml" />
     <Content Include="Views\FinanceDetails\JournalDetails.cshtml" />
     <Content Include="Views\FinanceReport\LedgerDetailsReport.cshtml" />
+    <Content Include="Views\FinanceReport\DayBook.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Barcodes\" />
