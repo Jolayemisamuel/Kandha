@@ -30,7 +30,7 @@
                     </div>
                 </div>
                 <div class="portlet-body">
-                    @using (Html.BeginForm("Index", "Reports", FormMethod.Post, new { @class = "form-horizontal" ,@id="form_sample_report_search"}))
+                    @using (Html.BeginForm("Index", "Rep", FormMethod.Post, new { @class = "form-horizontal" ,@id="form_sample_report_search"}))
                     {
                     <div class="form-body">
                         <div class="form-group">
@@ -232,7 +232,7 @@
             var $form=$('#form_sample_report_search');
             var Data=$form.serialize();
            
-            window.location= '/Reports/ExportToexcel?'+Data;
+            window.location= '/Rep/ExportToexcel?'+Data;
             
         });
     </script>

@@ -16,4 +16,18 @@ namespace NibsMVC.Models
 
         public string Type { get; set; }
     }
+
+    public class ingrediantReport
+    {
+        public int id { get; set; }
+        public int MenuCategoryId { get; set; }
+        public int MenuItemId { get; set; }
+
+        public int SubItemId { get; set; }
+        public int RawCategoryId { get; set; }
+        public int RawMaterialId { get; set; }
+        public string RawMaterialName { get; set; }
+        
+        public string Type { get; set; }
+    }
 }

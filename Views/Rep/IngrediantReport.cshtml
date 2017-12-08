@@ -1,14 +1,14 @@
-﻿@model NibsMVC.Models.MovementAnalysisReport
+﻿@model NibsMVC.Models.ingrediantReport
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Ingrediants Report";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @using System.Web.UI.WebControls;
 <script src="~/Scripts/json-to-table.js"></script>
 
-<style type="text/css" > 
+<style type="text/css">
     .webGrid {
         margin: 4px;
         border-collapse: collapse;
@@ -55,58 +55,83 @@
             <div class="portlet  box blue">
                 <div class="portlet-title">
                     <div class="caption">
-                        <i class="fa fa-gift"></i>Bill Report
+                        <i class="fa fa-gift"></i>Ingrediants Report
                     </div>
                 </div>
                 <div class="portlet-body">
-                    @using (Html.BeginForm("printexcel", "Reports", FormMethod.Post, new { @class = "form-horizontal", @id = "form_sample_report_search" }))
+                    @using (Html.BeginForm("exportIngrediants", "Rep", FormMethod.Post, new { @class = "form-horizontal", @id = "form_sample_report_search" }))
                     {
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label class="col-md-3">Menu Category</label>
+                                <div class="col-md-6">
+                                    @Html.DropDownListFor(a => a.MenuCategoryId, (SelectList)ViewBag.MenuCategoryId, "--Menu Category--", new { @class = "form-control" })
+
+                                </div>
+                            </div>
+                        </div>
+                       
+                         <div class="col-md-5">
+                            <div class="form-group">
+                                <label class="col-md-3">Menu Item</label>
+                                <div class="col-md-6">
+                                    @Html.DropDownListFor(a => a.MenuItemId, (SelectList)ViewBag.MenuItemId, "--Menu Item--", new { @class = "form-control" })
+
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="col-md-5">
                             <div class="form-group">
-                                <label class="col-md-3">From Date<span class="required"> *</span></label>
+                                <label class="col-md-3">Sub Item</label>
                                 <div class="col-md-6">
-                                    @Html.TextBoxFor(a => a.DateFrom, new { @class = "form-control date-picker", @readonly = "readonly", @placeholder = "date from" })
-                                
+                                    @Html.DropDownListFor(a => a.SubItemId, (SelectList)ViewBag.SubItemId, "--Sub Item--", new { @class = "form-control" })
+
                                 </div>
                             </div>
                         </div>
+
                         <div class="col-md-5">
                             <div class="form-group">
-                                <label class="col-md-3">To Date<span class="required"> *</span></label>
+                                <label class="col-md-3">Raw Category</label>
                                 <div class="col-md-6">
-                                    @Html.TextBoxFor(a => a.DateTo, new { @class = "form-control date-picker", @readonly = "readonly", @placeholder = "date to" })
-                                   
+                                    @Html.DropDownListFor(a => a.RawCategoryId, (SelectList)ViewBag.RawCategoryId, "--Raw Category--", new { @class = "form-control" })
+
                                 </div>
                             </div>
                         </div>
+
+
+
                         <div class="col-md-5">
                             <div class="form-group">
-                                <label class="col-md-3">Raw Materials<span class="required"> *</span></label>
+                                <label class="col-md-3">Raw Materials</label>
                                 <div class="col-md-6">
                                     @Html.DropDownListFor(a => a.RawMaterialId, (SelectList)ViewBag.RawId, "--Raw Materials--", new { @class = "form-control" })
-                                  
+
                                 </div>
                             </div>
                         </div>
+
+
                         <div class="col-md-5">
                             <div class="form-group">
                                 <label class="col-md-3">Stock In<span class="required"> *</span></label>
                                 <div class="col-md-6">
-                                    
-                                    @{ 
+
+                                    @{
                                         var stockIn = new SelectList(
                                         new List<SelectListItem>
                                             {
-                                        
-                                        new SelectListItem { Selected = false, Text = "Store", Value = "Store"},
-                                        new SelectListItem { Selected = false, Text = "Kitchen", Value = "Kitchen"},
+
+                                        new SelectListItem { Selected = false, Text = "Menu Items", Value = "Menu Items"},
+                                        new SelectListItem { Selected = false, Text = "Sub Items", Value = "Sub Items"},
                                             }, "Value", "Text", 1);
                                     }
-                                     
-                                       @Html.DropDownListFor(a => a.Type, stockIn , "--Stock In--", new { @class = "form-control" })
 
-</div>
+                                    @Html.DropDownListFor(a => a.Type, stockIn, "--Stock In--", new { @class = "form-control" })
+
+                                </div>
                             </div>
                         </div>
 
@@ -114,27 +139,21 @@
                         <div class="row">
                             <div class="col-md-offset-3 col-md-9">
                                 <input type="submit" value="Export" id="export" class="btn btn-primary" />
-                              
+
                             </div>
                         </div>
 
-                    }
+                                        }
                 </div>
             </div>
         </div>
     </div>
 
-    
-  
+
+
     <script>
-        $(document).ready(function () {
-            var bool = detectIE();
-            if (bool == "False") {
-                $('#DateFrom').attr('data-date-format', 'dd/MM/yyyy');
-                $('#DateTo').attr('data-date-format', 'dd/MM/yyyy');
-            }
-        });
       
+
         function detectIE() {
             var ua = window.navigator.userAgent;
             var msie = ua.indexOf('MSIE ');
@@ -168,7 +187,7 @@
             var $form = $('#form_sample_report_search');
             var Data = $form.serialize();
 
-            window.location = '/Reports/printexcel?' + Data;
+            window.location = '/Rep/exportIngrediants?' + Data;
 
         });
     </script>

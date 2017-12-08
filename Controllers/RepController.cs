@@ -27,7 +27,7 @@ using System.Text;
 
 namespace NibsMVC.Controllers
 {
-    public class ReportsController : Controller
+    public class RepController : Controller
     {
         //
         // GET: /Reports/
@@ -284,7 +284,7 @@ namespace NibsMVC.Controllers
                 TempData["error"] = ex.Message;
             }
 
-            return RedirectToAction("ShomedelvrBill", "Reports");
+            return RedirectToAction("ShomedelvrBill", "Rep");
         }
         public ActionResult CategoryWise()
         {
@@ -353,51 +353,7 @@ namespace NibsMVC.Controllers
             return View();
         }
 
-        public ActionResult printexcel(MovementAnalysisReport Report)
-        {
 
-            string filename= GenerateExcelReport(Report);
-            var f=  File(Path.Combine( Server.MapPath("~/Report/"), filename), "application/vnd.ms-excel");
-            f.FileDownloadName = "MovementAnalysis.xls";
-            //string ext = System.IO.Path.GetExtension(filename).ToLower();
-            //Microsoft.Win32.RegistryKey regKey = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey(ext);
-            //string mimeType = "";
-            //if (regKey != null && regKey.GetValue("Content Type") != null)
-            //    mimeType = regKey.GetValue("Content Type").ToString();
-            return f;
-           // return RedirectToAction("MovementAnalysisReport", "Reports");
-        }
-
-        public string GenerateExcelReport(MovementAnalysisReport Report)
-        {
-
-            Workbook book = new Workbook();
-
-            string str_excelfilename = "MovementReport" + ".xls";
-            string str_excelpath = Server.MapPath("~/Report/") + "\\" + str_excelfilename;
-
-
-            book.Properties.Author = "KS";
-            book.Properties.LastAuthor = "Admin";
-            book.ExcelWorkbook.WindowHeight = 4815;
-            book.ExcelWorkbook.WindowWidth = 11295;
-            book.ExcelWorkbook.WindowTopX = 120;
-            book.ExcelWorkbook.WindowTopY = 105;
-
-            GenerateStyles(book.Styles);
-
-
-
-
-            GenerateWorksheet_printregister(book.Worksheets, Report);
-
-
-            book.Save(str_excelpath);
-
-            return str_excelfilename;
-
-
-        }
         private void GenerateStyles(WorksheetStyleCollection styles)
         {
             try
@@ -579,6 +535,54 @@ namespace NibsMVC.Controllers
 
             }
         }
+        public ActionResult exportMovementAnalysis(MovementAnalysisReport Report)
+        {
+
+            string filename= GenerateExcelReport(Report);
+            var f=  File(Path.Combine( Server.MapPath("~/Report/"), filename), "application/vnd.ms-excel");
+            f.FileDownloadName = "MovementAnalysis.xls";
+            return f;
+
+            //string ext = System.IO.Path.GetExtension(filename).ToLower();
+            //Microsoft.Win32.RegistryKey regKey = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey(ext);
+            //string mimeType = "";
+            //if (regKey != null && regKey.GetValue("Content Type") != null)
+            //    mimeType = regKey.GetValue("Content Type").ToString();
+
+            // return RedirectToAction("MovementAnalysisReport", "Reports");
+        }
+
+        public string GenerateExcelReport(MovementAnalysisReport Report)
+        {
+
+            Workbook book = new Workbook();
+
+            string str_excelfilename = "MovementReport" + ".xls";
+            string str_excelpath = Server.MapPath("~/Report/") + "\\" + str_excelfilename;
+
+
+            book.Properties.Author = "KS";
+            book.Properties.LastAuthor = "Admin";
+            book.ExcelWorkbook.WindowHeight = 4815;
+            book.ExcelWorkbook.WindowWidth = 11295;
+            book.ExcelWorkbook.WindowTopX = 120;
+            book.ExcelWorkbook.WindowTopY = 105;
+
+            GenerateStyles(book.Styles);
+
+
+
+
+            GenerateWorksheet_printregister(book.Worksheets, Report);
+
+
+            book.Save(str_excelpath);
+
+            return str_excelfilename;
+
+
+        }
+        
 
         private void GenerateWorksheet_printregister(WorksheetCollection sheets, MovementAnalysisReport Report)
         {
@@ -730,7 +734,225 @@ namespace NibsMVC.Controllers
             
 
         }
-        
+
+
+        public ActionResult IngrediantReport()
+        {
+            IEnumerable<SelectListItem> RawId = (from n in db.tbl_RawMaterials select n).AsEnumerable().Select(n => new SelectListItem() { Text = n.Name, Value = n.RawMaterialId.ToString() });
+            ViewBag.RawId = new SelectList(RawId, "Value", "Text", "RawId");
+
+            IEnumerable<SelectListItem> RawCategoryId = (from n in db.RawCategories select n).AsEnumerable().Select(n => new SelectListItem() { Text = n.Name, Value = n.RawCategoryID.ToString() });
+            ViewBag.RawCategoryId = new SelectList(RawCategoryId, "Value", "Text", "RawCategoryId");
+
+            IEnumerable<SelectListItem> MenuCategoryId = (from n in db.tblCategories select n).AsEnumerable().Select(n => new SelectListItem() { Text = n.Name, Value = n.CategoryId.ToString() });
+            ViewBag.MenuCategoryId = new SelectList(MenuCategoryId, "Value", "Text", "MenuCategoryId");
+
+            IEnumerable<SelectListItem> MenuItemId = (from n in db.tblItems select n).AsEnumerable().Select(n => new SelectListItem() { Text = n.Name, Value = n.ItemId.ToString() });
+            ViewBag.MenuItemId = new SelectList(MenuItemId, "Value", "Text", "MenuItemId");
+
+            IEnumerable<SelectListItem> SubItemId = (from n in db.tblSubItems select n).AsEnumerable().Select(n => new SelectListItem() { Text = n.Name, Value = n.SubItemId.ToString() });
+            ViewBag.SubItemId = new SelectList(SubItemId, "Value", "Text", "SubItemId");
+
+            return View();
+        }
+        public ActionResult exportIngrediants(ingrediantReport Report)
+        {
+
+            string filename = GenerateExcelReport(Report);
+            var f = File(Path.Combine(Server.MapPath("~/Report/"), filename), "application/vnd.ms-excel");
+            f.FileDownloadName = "Ingrediants.xls";
+            return f;
+
+            //string ext = System.IO.Path.GetExtension(filename).ToLower();
+            //Microsoft.Win32.RegistryKey regKey = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey(ext);
+            //string mimeType = "";
+            //if (regKey != null && regKey.GetValue("Content Type") != null)
+            //    mimeType = regKey.GetValue("Content Type").ToString();
+
+            // return RedirectToAction("MovementAnalysisReport", "Reports");
+        }
+        public string GenerateExcelReport(ingrediantReport Report)
+        {
+
+            Workbook book = new Workbook();
+
+            string str_excelfilename = "IngerediantReport" + ".xls";
+            string str_excelpath = Server.MapPath("~/Report/") + "\\" + str_excelfilename;
+
+
+            book.Properties.Author = "KS";
+            book.Properties.LastAuthor = "Admin";
+            book.ExcelWorkbook.WindowHeight = 4815;
+            book.ExcelWorkbook.WindowWidth = 11295;
+            book.ExcelWorkbook.WindowTopX = 120;
+            book.ExcelWorkbook.WindowTopY = 105;
+
+            GenerateStyles(book.Styles);
+
+
+
+
+            GenerateWorksheet_printregister(book.Worksheets, Report);
+
+
+            book.Save(str_excelpath);
+
+            return str_excelfilename;
+
+
+        }
+
+
+        private void GenerateWorksheet_printregister(WorksheetCollection sheets, ingrediantReport Report)
+        {
+            var dataListMain = new List<ItemIndentDetails_Result>();
+            var dataListSub = new List<SubItemIndentDetails_Result>();
+            if (Report.Type == "Menu Items")
+                dataListMain = db.ItemIndentDetails(Report.MenuCategoryId, Report.MenuItemId,Report.RawCategoryId, Report.RawMaterialId).ToList();
+            else
+                dataListSub = db.SubItemIndentDetails(Report.MenuCategoryId, Report.MenuItemId,Report.SubItemId, Report.RawCategoryId, Report.RawMaterialId).ToList();
+
+
+
+            Worksheet sheet = sheets.Add("ing1");
+
+            WorksheetRow Row; 
+
+            if (Report.Type == "Menu Items")
+            {
+                sheet.Table.Columns.Add(200);
+                sheet.Table.Columns.Add(200);
+                sheet.Table.Columns.Add(80);
+                sheet.Table.Columns.Add(200);
+                sheet.Table.Columns.Add(200);
+                sheet.Table.Columns.Add(100);
+                sheet.Table.Columns.Add(100);
+             
+
+                Row = sheet.Table.Rows.Add();
+
+                Row.Cells.Add("Menu Category", DataType.String, "s56");
+                Row.Cells.Add("Menu Item", DataType.String, "s56");
+                Row.Cells.Add("Portion", DataType.String, "s56");
+                Row.Cells.Add("Raw Category", DataType.String, "s56");
+                Row.Cells.Add("Raw Material", DataType.String, "s56");
+                Row.Cells.Add("Quantity", DataType.String, "s56");
+                Row.Cells.Add("Unit", DataType.String, "s56");
+               
+            }
+            else
+            {
+                sheet.Table.Columns.Add(200);
+                sheet.Table.Columns.Add(200);
+                sheet.Table.Columns.Add(200);
+                sheet.Table.Columns.Add(80);
+                sheet.Table.Columns.Add(200);
+                sheet.Table.Columns.Add(200);
+                sheet.Table.Columns.Add(100);
+                sheet.Table.Columns.Add(100);
+
+
+                Row = sheet.Table.Rows.Add();
+
+                Row.Cells.Add("Menu Category", DataType.String, "s56");
+                Row.Cells.Add("Menu Item", DataType.String, "s56");
+                Row.Cells.Add("Sub Item", DataType.String, "s56");
+                Row.Cells.Add("Portion", DataType.String, "s56");
+                Row.Cells.Add("Raw Category", DataType.String, "s56");
+                Row.Cells.Add("Raw Material", DataType.String, "s56");
+                Row.Cells.Add("Quantity", DataType.String, "s56");
+                Row.Cells.Add("Unit", DataType.String, "s56");
+
+            }
+
+           
+            int chkItemId = 0;
+
+            if (dataListMain.Count > 0)
+            {
+
+                foreach (var li in dataListMain)
+                {
+                    Row = sheet.Table.Rows.Add();
+                    if (chkItemId == 0 || chkItemId != li.ItemId)
+                    {
+                        Row.Cells.Add(li.MenuCategory, DataType.String, "s46");
+                        Row.Cells.Add(li.Item, DataType.String, "s46");
+                        Row.Cells.Add(li.Portion.ToString(), DataType.String, "s45");
+                        chkItemId = li.ItemId;
+                    }
+                    else
+                    {
+                        Row.Cells.Add("", DataType.String, "s46");
+                        Row.Cells.Add("", DataType.String, "s46");
+                        Row.Cells.Add("", DataType.String, "s45");
+                    }
+
+                    //Row.Cells.Add(li.MenuCategory, DataType.String, "s46");
+                    //Row.Cells.Add(li.Item, DataType.String, "s46");
+                    //Row.Cells.Add(li.Portion.ToString(), DataType.String, "s45");
+                    Row.Cells.Add(li.RawCategory, DataType.String, "s46");
+                    Row.Cells.Add(li.RawMaterial, DataType.String, "s46");
+                    Row.Cells.Add(li.Quantity.ToString("0.00"), DataType.String, "s45");
+                    Row.Cells.Add(li.Unit, DataType.String, "s46");
+                    
+                }
+
+            }
+            int chkSubItemId = 0;
+            if (dataListSub.Count > 0)
+            {
+                foreach (var li in dataListSub)
+                {
+                    Row = sheet.Table.Rows.Add();
+
+                    if (chkSubItemId == 0 || chkSubItemId != li.subitemid)
+                    {
+                        Row.Cells.Add(li.MenuCategory, DataType.String, "s46");
+                        Row.Cells.Add(li.Item, DataType.String, "s46");
+                        Row.Cells.Add(li.SubItem, DataType.String, "s46");
+                        Row.Cells.Add(li.Portion.ToString(), DataType.String, "s45");
+                        chkSubItemId = li.subitemid;
+                    }
+                    else
+                    {
+                        Row.Cells.Add("", DataType.String, "s46");
+                        Row.Cells.Add("", DataType.String, "s46");
+                        Row.Cells.Add("", DataType.String, "s46");
+                        Row.Cells.Add("", DataType.String, "s45");
+                    }
+
+
+                    //Row.Cells.Add(li.MenuCategory, DataType.String, "s46");
+                    //Row.Cells.Add(li.Item, DataType.String, "s46");
+                    //Row.Cells.Add(li.SubItem, DataType.String, "s46");
+                    //Row.Cells.Add(li.Portion.ToString("0"), DataType.String, "s45");
+                    Row.Cells.Add(li.RawCategory, DataType.String, "s46");
+                    Row.Cells.Add(li.RawMaterial, DataType.String, "s46");
+                    Row.Cells.Add(li.Qty.ToString("0.00"), DataType.String, "s45");
+                    Row.Cells.Add(li.Unit, DataType.String, "s46");
+
+                }
+
+            }
+            sheet.Options.Selected = true;
+            sheet.Options.ProtectObjects = false;
+            sheet.Options.ProtectScenarios = false;
+            sheet.Options.PageSetup.Layout.Orientation = CarlosAg.ExcelXmlWriter.Orientation.Landscape;
+            sheet.Options.PageSetup.PageMargins.Bottom = 1F;
+            sheet.Options.PageSetup.PageMargins.Left = 1F;
+            sheet.Options.PageSetup.PageMargins.Right = 1F;
+            sheet.Options.PageSetup.PageMargins.Top = 1F;
+            sheet.Options.Print.PaperSizeIndex = 9;
+            sheet.Options.Print.HorizontalResolution = 120;
+            sheet.Options.Print.VerticalResolution = 72;
+            sheet.Options.Print.ValidPrinterInfo = true;
+
+
+
+
+
+        }
     }
 
 }

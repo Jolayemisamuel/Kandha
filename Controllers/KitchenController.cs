@@ -173,6 +173,13 @@ namespace NibsMVC.Controllers
             return result;
 
         }
+        public string getUnit(string Id)
+        {
+            int ItemId = Convert.ToInt32(Id);
+            string result = obj.getUnit(ItemId);
+            return result;
+
+        }
         public string ListOfRawItems(string Id)
         {
             int ItemId = Convert.ToInt32(Id);
@@ -281,7 +288,7 @@ namespace NibsMVC.Controllers
             StringBuilder sb = new StringBuilder();
             sb.Append("<table class='table table-bordered' id='tblsubRawitems'>");
             sb.Append("<thead>");
-            sb.Append("<tr><th>Select</th><th>Qty</th><th>Unit</th>");
+            sb.Append("<tr><th>  <input type=\"checkbox\" id=\"chkAll\" /> Select </th><th>Qty</th><th>Unit</th>");
             sb.Append("</thead>");
             sb.Append("<tbody>");
             string portion = "";

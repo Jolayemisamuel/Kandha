@@ -495,7 +495,7 @@ namespace NibsMVC.Controllers
             Workbook book = new Workbook();
 
             string str_excelfilename = "EFiling" + ".xls";
-            string str_excelpath = Server.MapPath("~/Reports/") + "\\" + str_excelfilename;
+            string str_excelpath = Server.MapPath("~/Report/") + "\\" + str_excelfilename;
 
 
             book.Properties.Author = "KS";
@@ -861,7 +861,7 @@ namespace NibsMVC.Controllers
 
 
 
-            string str_pdfpath = Server.MapPath("~/Reports/") + str_pdffilename; //"D:\\CDS\\MainProject\\NibsMVC\\Reports" + "\\" + str_pdffilename;//
+            string str_pdfpath = Server.MapPath("~/Report/") + str_pdffilename; //"D:\\CDS\\MainProject\\NibsMVC\\Reports" + "\\" + str_pdffilename;//
             //System.IO.FileStream fs = new FileStream(str_pdfpath, FileMode.OpenOrCreate,FileAccess.Write);
             //System.IO.FileStream fs1 = new FileStream(str_pdfpath, FileMode.Open, FileAccess.Read);
             Document doc = new Document(PageSize.A4, 80, 80, 55, 25);

@@ -1,0 +1,1177 @@
+﻿<?xml version='1.0'?>
+<?mso-application progid='Excel.Sheet'?>
+<s:Workbook xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:s="urn:schemas-microsoft-com:office:spreadsheet">
+  <o:DocumentProperties>
+    <o:Author>KS</o:Author>
+    <o:LastAuthor>Admin</o:LastAuthor>
+  </o:DocumentProperties>
+  <x:ExcelWorkbook>
+    <x:WindowHeight>4815</x:WindowHeight>
+    <x:WindowTopX>120</x:WindowTopX>
+    <x:WindowTopY>105</x:WindowTopY>
+    <x:WindowWidth>11295</x:WindowWidth>
+    <x:ProtectStructure>False</x:ProtectStructure>
+    <x:ProtectWindows>False</x:ProtectWindows>
+  </x:ExcelWorkbook>
+  <s:Styles>
+    <s:Style s:ID="Default" s:Name="Normal">
+      <s:Alignment s:Vertical="Bottom" />
+      <s:Font s:FontName="Calibri" s:Size="11" s:Color="#000000" />
+    </s:Style>
+    <s:Style s:ID="s21">
+      <s:Alignment s:Horizontal="Center" s:Vertical="Bottom" />
+    </s:Style>
+    <s:Style s:ID="s22">
+      <s:Alignment s:Horizontal="Right" s:Vertical="Bottom" />
+    </s:Style>
+    <s:Style s:ID="s34">
+      <s:Alignment s:Horizontal="Center" s:Vertical="Bottom" />
+      <s:NumberFormat s:Format="0" />
+    </s:Style>
+    <s:Style s:ID="s44">
+      <s:Alignment s:Horizontal="Center" s:Vertical="Bottom" />
+      <s:Borders>
+        <s:Border s:Position="Bottom" s:LineStyle="Continuous" s:Weight="1" />
+        <s:Border s:Position="Left" s:LineStyle="Continuous" s:Weight="1" />
+        <s:Border s:Position="Right" s:LineStyle="Continuous" s:Weight="1" />
+        <s:Border s:Position="Top" s:LineStyle="Continuous" s:Weight="1" />
+      </s:Borders>
+      <s:Font s:FontName="Verdana" s:Color="#000000" />
+    </s:Style>
+    <s:Style s:ID="s45">
+      <s:Alignment s:Horizontal="Right" />
+      <s:Font s:FontName="Verdana" s:Color="#000000" />
+      <s:NumberFormat s:Format="0" />
+    </s:Style>
+    <s:Style s:ID="s46">
+      <s:Alignment s:Horizontal="Left" s:Vertical="Bottom" />
+      <s:Font s:FontName="Verdana" s:Color="#000000" />
+      <s:NumberFormat s:Format="0" />
+    </s:Style>
+    <s:Style s:ID="s47">
+      <s:Alignment s:Horizontal="Center" s:Vertical="Bottom" />
+      <s:Font s:FontName="Verdana" s:Color="#000000" />
+      <s:NumberFormat s:Format="0" />
+    </s:Style>
+    <s:Style s:ID="s48">
+      <s:Alignment s:Horizontal="Right" s:Vertical="Bottom" />
+      <s:Borders>
+        <s:Border s:Position="Bottom" s:LineStyle="Continuous" s:Weight="1" />
+        <s:Border s:Position="Left" s:LineStyle="Continuous" s:Weight="1" />
+        <s:Border s:Position="Right" s:LineStyle="Continuous" s:Weight="1" />
+        <s:Border s:Position="Top" s:LineStyle="Continuous" s:Weight="1" />
+      </s:Borders>
+      <s:Font s:FontName="Verdana" />
+      <s:Interior s:Color="#FFFFFF" s:Pattern="Solid" />
+    </s:Style>
+    <s:Style s:ID="s49">
+      <s:Alignment s:Horizontal="Right" s:Vertical="Bottom" />
+      <s:Font s:FontName="Verdana" s:Color="#000000" />
+      <s:NumberFormat s:Format="0" />
+    </s:Style>
+    <s:Style s:ID="s50">
+      <s:Font s:FontName="Verdana" s:Color="#000000" />
+      <s:NumberFormat s:Format="0" />
+    </s:Style>
+    <s:Style s:ID="s51">
+      <s:Alignment s:Horizontal="Right" s:Vertical="Bottom" />
+      <s:Font s:FontName="Verdana" s:Color="RED" />
+      <s:NumberFormat s:Format="Fixed" />
+    </s:Style>
+    <s:Style s:ID="s52">
+      <s:Alignment s:Horizontal="Center" s:Vertical="Bottom" />
+      <s:Borders>
+        <s:Border s:Position="Bottom" s:LineStyle="Continuous" s:Weight="1" />
+        <s:Border s:Position="Left" s:LineStyle="Continuous" s:Weight="1" />
+        <s:Border s:Position="Right" s:LineStyle="Continuous" s:Weight="1" />
+        <s:Border s:Position="Top" s:LineStyle="Continuous" s:Weight="1" />
+      </s:Borders>
+      <s:Font s:FontName="Verdana" />
+    </s:Style>
+    <s:Style s:ID="s54">
+      <s:Alignment s:Horizontal="Center" s:Vertical="Bottom" />
+      <s:Borders>
+        <s:Border s:Position="Bottom" s:LineStyle="Continuous" s:Weight="1" />
+        <s:Border s:Position="Left" s:LineStyle="Continuous" s:Weight="1" />
+        <s:Border s:Position="Right" s:LineStyle="Continuous" s:Weight="1" />
+        <s:Border s:Position="Top" s:LineStyle="Continuous" s:Weight="1" />
+      </s:Borders>
+      <s:Font s:Bold="1" s:FontName="Verdana" s:Size="11" s:Color="#000000" />
+    </s:Style>
+    <s:Style s:ID="s55">
+      <s:Alignment s:Horizontal="Left" s:Vertical="Bottom" />
+      <s:Font s:Bold="1" s:FontName="Verdana" s:Size="10" s:Color="#000000" />
+    </s:Style>
+    <s:Style s:ID="s56">
+      <s:Alignment s:Horizontal="Center" s:Vertical="Bottom" s:WrapText="1" />
+      <s:Font s:Bold="1" s:FontName="Verdana" s:Size="10" s:Color="#000000" />
+    </s:Style>
+  </s:Styles>
+  <s:Worksheet s:Name="ing1">
+    <s:Table>
+      <s:Column s:Width="200" />
+      <s:Column s:Width="200" />
+      <s:Column s:Width="200" />
+      <s:Column s:Width="80" />
+      <s:Column s:Width="200" />
+      <s:Column s:Width="200" />
+      <s:Column s:Width="100" />
+      <s:Column s:Width="100" />
+      <s:Row>
+        <s:Cell s:StyleID="s56">
+          <s:Data s:Type="String">Menu Category</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s56">
+          <s:Data s:Type="String">Menu Item</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s56">
+          <s:Data s:Type="String">Sub Item</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s56">
+          <s:Data s:Type="String">Portion</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s56">
+          <s:Data s:Type="String">Raw Category</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s56">
+          <s:Data s:Type="String">Raw Material</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s56">
+          <s:Data s:Type="String">Quantity</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s56">
+          <s:Data s:Type="String">Unit</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Meals</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String"> Veg Meals</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Appalam</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">130</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">OIL</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Sunflower Oil (80.6)</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">1.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Ltr</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">VATHAL</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Appalam</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">1.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Kgs</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Steam &amp; Tawa</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Idly-3 Nos</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Tiffin Sambar</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">40</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">OIL</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Sunflower Oil (80.6)</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">200.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">ML</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">OIL</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Ghee</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">150.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Gms</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">DHALL</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Toor Dhal</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">500.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Gms</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">DHALL</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Moong Dhal</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">500.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Gms</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">SPICES</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Mustard</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">10.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Gms</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">SPICES</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Jeera-Cumin Seeds</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">10.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Gms</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">MASALA</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Turmeric Powder</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">5.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Gms</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">MASALA</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Dry Red Chilli</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">10.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Gms</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">SALT</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Table Salt</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">50.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Gms</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">VEGETABLES</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Small Onion</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">500.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Gms</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">VEGETABLES</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Garlic Mala</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">30.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Gms</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">VEGETABLES</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Red Pumpkin</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">500.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Gms</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Steam &amp; Tawa</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Idly-3 Nos</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Coconut Chutney</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">35</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">OIL</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Sunflower Oil (80.6)</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">50.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Ltr</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">DHALL</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Chana Dhal[White]</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">250.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Gms</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">DHALL</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Urad Dhal</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">20.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Gms</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">SPICES</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Mustard</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">15.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Gms</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">MASALA</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Dry Red Chilli</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">10.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Gms</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">MASALA</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Tamarind stickhilli</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">10.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Gms</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">SALT</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Rock Salt</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">50.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Gms</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">VEGETABLES</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Garlic Mala</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">30.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Gms</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">VEGETABLES</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Green chilly</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">50.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Gms</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">VEGETABLES</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Curry Leaves</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">10.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Gms</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">VEGETABLES</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Coconut</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">4.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Nos</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Steam &amp; Tawa</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Idly-3 Nos</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Mint Chutney</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">35</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">DHALL</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Chana Dhal[White]</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">200.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Gms</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">SPICES</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Mustard</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">10.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Gms</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">MASALA</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Dry Red Chilli</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">10.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Gms</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">VEGETABLES</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Garlic Mala</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">30.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Gms</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">VEGETABLES</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Green chilly</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">50.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Gms</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">VEGETABLES</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Coconut</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">2.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Nos</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">VEGETABLES</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Mint</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">500.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Kgs</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Steam &amp; Tawa</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Idly-3 Nos</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Tomato Chutney</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">35</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">DHALL</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Chana Dhal[White]</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">200.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Gms</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">DHALL</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Urad Dhal</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">10.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Gms</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">SPICES</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Mustard</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">10.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Gms</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">MASALA</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Dry Red Chilli</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">50.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Gms</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">VEGETABLES</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Big Onion</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">500.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Gms</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">VEGETABLES</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Tomato Nadu</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">500.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Gms</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">VEGETABLES</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Garlic Mala</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s45">
+          <s:Data s:Type="String">50.00</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="s46">
+          <s:Data s:Type="String">Gms</s:Data>
+        </s:Cell>
+      </s:Row>
+    </s:Table>
+    <x:WorksheetOptions>
+      <x:Selected />
+      <x:ProtectObjects>False</x:ProtectObjects>
+      <x:ProtectScenarios>False</x:ProtectScenarios>
+      <x:PageSetup>
+        <x:Layout x:Orientation="Landscape" />
+        <x:PageMargins x:Bottom="1" x:Left="1" x:Right="1" x:Top="1" />
+      </x:PageSetup>
+      <x:Print>
+        <x:PaperSizeIndex>9</x:PaperSizeIndex>
+        <x:HorizontalResolution>120</x:HorizontalResolution>
+        <x:VerticalResolution>72</x:VerticalResolution>
+        <x:ValidPrinterInfo />
+      </x:Print>
+    </x:WorksheetOptions>
+  </s:Worksheet>
+</s:Workbook>

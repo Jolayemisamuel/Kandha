@@ -1,26 +1,27 @@
 ﻿@model NibsMVC.Models.SearchReportsModel
 
+
 @{
-    ViewBag.Title = "Report";
+    ViewBag.Title = "ShomedelvrBill";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @using NibsMVC.EDMX;
 <div class="page-content">
     <div class="row">
-        <p style="color:red">@TempData["billerror"]</p>
+        <p class="err" style="color:red">@TempData["takerror"]</p>
         <div class="col-md-12">
             <div class="portlet box blue">
                 <div class="portlet-title">
                     <div class="caption">
-                        <i class="fa fa-gift"></i>Bill Search Report
+                        <i class="fa fa-gift"></i>Home Delivery Bill Search Report
                     </div>
                 </div>
                 <div class="portlet-body form">
                     <!-- BEGIN FORM-->
-                    @using (Html.BeginForm("Report", "Reports", FormMethod.Post, new { @class = "form-horizontal" }))
+                    @using (Html.BeginForm("ShomedelvrBill", "Rep", FormMethod.Post, new { @id = "form_sample_21", @class = "form-horizontal" }))
                     {
-                        
+                        @Html.AntiForgeryToken()
                         @Html.ValidationSummary(true)
 
                         <div class="form-body">
@@ -29,6 +30,8 @@
                                 You have some form errors. Please check below.
                             </div>
                             <div style="height:10px;"><span class="errmsg"></span></div>
+
+
                             <div class="form-group">
                                 <label class="control-label col-md-3">
                                     From <span class="required">
@@ -38,7 +41,7 @@
                                 <div class="col-md-4">
                                     <div class="input-icon right">
                                         <i class="fa"></i>
-                                       @Html.TextBoxFor(a => a.FromDate, new { @class = "form-control form-control-inline date-picker", @size = "16", @readonly = "readonly" })
+                                        @Html.TextBoxFor(a => a.FromDate, new { @class = "form-control form-control-inline date-picker", @size = "16", @readonly = "readonly" })
                                         @Html.ValidationMessageFor(a => a.FromDate)
                                     </div>
                                 </div>
@@ -53,33 +56,51 @@
                                     <div class="input-icon right">
                                         <i class="fa"></i>
                                         @Html.TextBoxFor(a => a.ToDate, new { @class = "form-control form-control-inline date-picker", @size = "16", @readonly = "readonly" })
-                                        @Html.ValidationMessageFor(a=>a.ToDate)
-                                        @*<input class="form-control form-control-inline date-picker" data-date-format="mm-dd-yyyy" size="16" type="text" name="ToDate" readonly="readonly" />*@
+                                        @Html.ValidationMessageFor(a => a.ToDate)
                                     </div>
                                 </div>
-                                <div class="col-md-3">
-                                    <button type="submit" class="btn green">Show</button>
+
+                            </div>
+
+
+                            <div class="form-group">
+                                @*<label class="control-label col-md-3">
+                                    Token no 
+                                </label>
+                                <div class="col-md-4">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        @Html.TextBoxFor(a => a.TokenNo, new { @class = "form-control" })
+                                    </div>
+                                </div>*@
+                                <div class="col-md-offset-3">
+                                    <div class="col-md-12">
+                                        <button type="submit" class="btn green">Show</button>
+                                    </div>
                                 </div>
                             </div>
 
+
                             @{
-                        if (Model!=null)
+                        if (Model != null)
                         {
                             var counter = 1;
-                            <table class="table table-bordered" id="sample_2">
+
+                            <table class="table table-bordered">
                                 <thead>
                                     <tr>
                                         <th>Sr</th>
-                                        <th>Date<br />(mm/dd/yyyy)</th>
-                                        <th>Table No</th>
+                                        <th>Customer Name</th>
+                                        <th>Address</th>
+                                        <th>Date</th>
                                         <th>Vat Amount</th>
+                                        <th>Token no</th>
                                         <th>Servic Charges</th>
-                                        <th>Servic Tax</th>
                                         <th>Discount</th>
                                         <th>Total</th>
                                         <th>Net Amount</th>
                                         <th>Items</th>
-                                        <th>Delete</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
 
@@ -88,14 +109,15 @@
 
                                     <tr>
                                         <td>@counter</td>
+                                        <td>@item.CustomerName</td>
+                                        <td>@item.Address</td>
                                         <td>@item.BillDate.ToShortDateString()</td>
-                                        <td>@item.TableNo</td>
-                                        <td>@item.VatAmount</td>
-                                        <td>@item.ServicChargesAmount</td>
-                                        <td>@item.ServiceTax</td>
-                                        <td>@item.DiscountAmount</td>
-                                        <td>@item.TotalAmount</td>
-                                        <td>@item.NetAmount</td>
+                                        <td>@Math.Round(item.VatAmount, 2)</td>
+                                        <td>@item.TokenNo</td>
+                                        <td>@Math.Round(item.ServicChargesAmount, 2)</td>
+                                        <td>@Math.Round(item.DiscountAmount, 2)</td>
+                                        <td>@Math.Round(item.TotalAmount, 2)</td>
+                                        <td>@Math.Round(item.NetAmount, 2)</td>
                                         <td>
                                             <a class="btn default" data-toggle="modal" href="#@item.BillId">
                                                 Items
@@ -107,7 +129,7 @@
                                                             <h4 class="modal-title">Item Details</h4>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <table class="table table-bordered table-overflow">
+                                                            <table class="table table-bordered">
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Item Name</th>
@@ -119,11 +141,14 @@
                                                                 <tbody>
                                                                     @foreach (var items in item.tblBillDetails)
                                                                     {
-                                                                        
+
                                                                         <tr>
                                                                             <td>
-                                                                               
-                                                                                @items.tblItem.Name
+                                                                                @{
+                                                                        NIBSEntities db = new NIBSEntities();
+                                                                        var Name = db.tblItems.Find(items.ItemId).Name;
+                                                                                }
+                                                                                @Name
                                                                             </td>
                                                                             <td>
                                                                                 @items.FullQty
@@ -132,7 +157,7 @@
                                                                                 @items.HalfQty
                                                                             </td>
                                                                             <td>
-                                                                                @items.Amount
+                                                                                @Math.Round(items.Amount, 2)
                                                                             </td>
                                                                         </tr>
                                                                     }
@@ -149,7 +174,7 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <a data-href="@Url.Action("Delete", "Reports", new { id = item.BillId })" data-toggle="confirmation" data-placement="top"><span class="fa fa-trash-o" style="cursor:pointer"></span></a>
+                                            <a data-href="@Url.Action("Delete", "Rep", new { id = item.BillId })" data-toggle="confirmation" data-placement="top"><span class="fa fa-trash-o" style="cursor:pointer"></span></a>
                                         </td>
                                     </tr>
                                     counter++;
@@ -157,21 +182,28 @@
                             </table>
                         }
 
-}
+                            }
 
                         </div>
-                        
+                        @*<div class="form-actions">
+                                <div class="row">
+                                    <div class="col-md-offset-3 col-md-9">
+                                        <button type="submit" class="btn green">Show</button>
+
+                                    </div>
+                                </div>
+                            </div>*@
                     }
 
                 </div>
             </div>
         </div>
     </div>
-
-    @*<script>
+    <script>
         $(document).ready(function () {
             $('#FromDate').attr("data-date-format", "dd-mm-yyyy");
             $('#ToDate').attr("data-date-format", "dd-mm-yyyy");
         });
-    </script>*@
+    </script>
+
 </div>
